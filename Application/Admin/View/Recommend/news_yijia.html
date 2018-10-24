@@ -1,0 +1,56 @@
+<style>
+	.table-config tr{
+		height: 35px;
+	}
+	.table-config td{
+		text-align: center;
+		padding-right: 10px;
+	}
+</style>
+<div class="pageContent">
+
+	<form method="post" action="__URL__/news_yijia" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+
+			<div class="unit">
+				<label>意甲资讯手动推荐：</label>
+				<table class="table-config">
+					<tr>
+						<td style="font-weight: bold;">序号</td>
+						<td style="font-weight: bold;">资讯标题<font color="red">（长度不能超过输入框）</font></td>
+						<td style="font-weight: bold;">资讯id</td>
+					</tr>
+					<notempty name="config">
+						<volist name="config" id="item" offset="0" length="3">
+							<tr>
+								<td>{$i}</td>
+								<td><input type="text" class="required" name="param[{$i}][title]" value="{$item.title}" style="width: 290px; font-size: 18px; font-weight: bold;"  ></td>
+								<td><input type="text" class="required" name="param[{$i}][id]" value="{$item.id}" size="10"></td>
+							</tr>
+						</volist>
+						<else/>
+						<for start="1" end="4">
+							<tr>
+								<td>{$i}</td>
+								<td><input type="text" class="required" name="param[{$i}][title]" value="{$item.title}" style="width: 290px; font-size: 18px; font-weight: bold;"  ></td>
+								<td><input type="text" class="required" name="param[{$i}][id]" value="{$item.id}" size="10"></td>
+							</tr>
+						</for>
+					</notempty>
+				</table>
+			</div>
+
+		</div>
+				<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+
+

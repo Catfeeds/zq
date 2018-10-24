@@ -1,0 +1,53 @@
+<style>
+	.table_video td,.table_video th{
+		text-align: center;
+		padding: 5px;
+		border: 1px solid #ddd
+	}
+</style>
+<div class="pageContent">
+	<table class="table_video" width="100%" layoutH="22" style="border: 1px solid #ddd">
+		<thead>
+		<tr>
+			<th width="6%">时间</th>
+			<th width="42%">主队</th>
+			<th width="10%">比分</th>
+			<th width="42%">客队</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty>
+			<volist name="list" id="vo">
+			<if condition="$vo[1] eq 3">
+				<tr>
+					<td width="100%" colSpan = '4'>     {$vo[4]}</td>
+				</tr>
+				<else/>
+				<tr>
+					<td width="6%">{$vo[0]}</td>
+					<if condition="$vo[1] eq 1">
+						<td width="42%">{$vo[4]}</td>
+						<else/>
+						<td width="42%"></td>
+					</if>
+					<td width="10%">{$vo[2]} - {$vo[3]}</td>
+					<if condition="$vo[1] eq 2">
+						<td width="42%">{$vo[4]}</td>
+						<else/>
+						<td width="42%"></td>
+					</if>
+				</tr>
+			</if>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>共{:count($list)}条</span>
+		</div>
+	</div>
+
+</div>
+
+

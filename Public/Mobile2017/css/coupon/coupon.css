@@ -1,0 +1,59 @@
+/**
+ * coupon-css
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2017-05-04
+**/
+
+
+html,body{ height: 100%; width: 100%; background: #f2f3f7;}
+#other_header .buy{ float: right; display: block; color: #fff;}
+.n_module{ background: #fff; line-height: 1rem; height: 1rem;}
+.nav_num_2 { width: 100%; border-bottom: 1px solid #e5e5e5; padding: 0;}
+.nav_num_2 .nav-item{ display: block; position: relative; text-align: center; margin: 0; width: 50%; height: 1rem; font-size: .34rem;}
+.nav_list a.on{ border-bottom: 3px solid #01af63; color: #01af63;}
+
+.conBlock{ width: 100%; overflow: hidden; background-color: none; position: relative;}
+.conBlock ul{ width: 200%;  position: relative; overflow: hidden;}
+.conBlock ul li{ width: 50%; float: left; margin: 0px; position: relative;}
+.couponBox,.buyBox{ padding: .2rem;}
+.couponBox .item,.buyBox .item{ display: block; position: relative; border-radius: 6px; margin-bottom: .2rem; background: #fff; box-shadow: 2px 6px 10px rgba(172,156,120,0.26); -webkit-box-shadow: 2px 6px 10px rgba(172,156,120,0.26);}
+.itemLeft { width: 2.6rem; padding: .4rem 0; border-right: 1px dashed #e5e5e5; text-align: center;}
+.itemRight{ padding: .5rem .2rem;}
+.itemRight p{ margin-bottom: .1rem;}
+.useNoice{ border: 1px solid #f67426; color: #f67426; margin-left: .1rem; padding: 2px 4px; border-radius: 3px;}
+.overNoice{ border: 1px solid #999; color: #999; margin-left: .1rem; padding: 2px 4px; border-radius: 3px;}
+.ponOn{ background: url(../../images/coupon/pon-on.png) no-repeat 0 0; background-size: auto 100%;}
+.ponDet{ background: url(../../images/coupon/pon-det.png) no-repeat 0 0; background-size: auto 100%;}
+.ponUsed{ width: 1rem; height: 1rem; position: absolute; right: 0; top: 0; background: url(../../images/coupon/pon-used.png) no-repeat 0 0; background-size: auto 100%;}
+.ponWill{ width: 1rem; height: 1rem; position: absolute; right: 0; top: 0; background: url(../../images/coupon/pon-will.png) no-repeat 0 0; background-size: auto 100%;}
+.ponOver{ width: 1rem; height: 1rem; position: absolute; right: 0; top: 0; background: url(../../images/coupon/pon-over.png) no-repeat 0 0; background-size: auto 100%;}
+.ponOn p:nth-child(1){ font-size: .26rem; color: #f67426;}
+.itemLeft p:nth-child(1) span{ font-size: .7rem;}
+.ponDet p:nth-child(1){ font-size: .26rem; color: #808080;}
+.itemLeft p:nth-child(2){ font-size: .26rem; color: #999999;}
+.noPonCon .noPon{ display: block; width: 2.4rem; height: 1.5rem; margin: 1rem auto 0 auto; background: url(../../images/coupon/no-pon.png) no-repeat 0 0; background-size: 100% 100%;}
+.noPonCon p{ margin: .3rem 0;}
+.noPonCon a{ display: block; margin:0 auto; width: 2rem; text-align: center; border: 1px solid #999999; border-radius: 4px; padding: .2rem 0; color: #999;}
+
+.buyItemR { width: 2.6rem; padding: .4rem 0; border-left: 1px dashed #e5e5e5; text-align: center; position: relative;}
+.buyItemR .halfTop{ width: .5rem; height: .25rem; background: #f2f3f7; position: absolute; border-radius: 0 0 .25rem .25rem; -webkit-border-radius: 0 0 .25rem .25rem;left: -.25rem; top: 0;}
+.buyItemR p:nth-child(1){ color: #808080;}
+.buyItemR p:nth-child(2){ font-size: .44rem; color: #4c4c4c;}
+.buyItemR p:nth-child(2) span{ color: #f67426;}
+.buyItemR p:nth-child(3){ font-size: .26rem; color: #999999;}
+.buyItemR p:nth-child(3) .buyBtn{ display: block; margin: 0 auto; width: 1.1rem; height: .38rem; line-height: .38rem; border-radius: .19rem;}
+.buyItemR p:nth-child(3) .buyBtnOn{ background: #f67426; color: #fff;}
+.buyItemR p:nth-child(3) .buyBtnDet{ background: #bdbdbd; color: #fff;}
+.noneBuy{ background: #f8f8f8;}
+.noneBuy p:nth-child(1){ color: #bdbdbd;}
+.noneBuy p:nth-child(2){ color: #bdbdbd;}
+.noneBuy p:nth-child(2) span{ color: #bdbdbd;}
+.buyItemL{ padding: .4rem .2rem;}
+.buyItemL .textLeft{ color: #f67426; text-align: center}
+.buyItemL .textLeft p span{ font-size: .6rem;}
+.buyItemL .textLeft .mark{ font-size: .22rem; border: 1px solid #f67426; border-radius: 4px; font-style: normal; padding: 2px 3px;}
+.textRight{ padding-left: .2rem; padding-top: .1rem;}
+.textRight p:nth-child(1){ color: #4c4c4c; margin-bottom: .1rem;}
+.textRight p:nth-child(2){ color: #808080;}

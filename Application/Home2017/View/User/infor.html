@@ -1,0 +1,128 @@
+<include file='Public:header'/>
+
+<body>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/login/infor.css">
+    <!-- 注册头部开始 -->
+    <include file="Public:top" />
+    <!-- 注册头部结束 -->
+    <div class="home">
+        <!-- 注册表单内容开始 -->
+        <div class="form-main">
+            <div class="form-nav">
+                <ul class="clearfix">
+                    <li class="li1">
+                        手机注册
+                    </li>
+                    <li class="ml li2 cur2">
+                        输入用户信息
+                    </li>
+                    <li class="ml li3">
+                        完成注册
+                    </li>
+                </ul>
+            </div>
+            <div class="form-con">
+                <div class="con clearfix">
+                    <div class="pull-left form">
+                         <form  action="#" autocomplete="off">
+                            <div class="form-in clearfix"> 
+                                <div class="pull-left input-name">用户昵称：</div>
+                                <div class="pull-left input-con">
+                                    <input type="password" class="hidden"/>
+                                    <input id="txtUserName" class="form-control required" autocomplete="off" name="nick_name" type="text" placeholder="用户昵称" data-msg-required="请输入用户昵称"/>
+                                </div>
+                            </div>
+                            <div class="form-in clearfix"> 
+                                <div class="pull-left input-name">设置密码：</div>
+                                <div class="pull-left input-con">
+                                    <input id="txtPassword" class="form-control checkpass" autocomplete="off" name="password" type="password" placeholder="请输入密码"/>
+                                </div>
+                            </div>
+                            <div class="form-in clearfix"> 
+                                <div class="pull-left input-name">确认密码：</div>
+                                <div class="pull-left input-con">
+                                    <input id="pwdOk" class="form-control" autocomplete="off" name="repassword" type="password" placeholder="请确认密码"/>
+                                </div>
+                            </div>
+                            <div class="reg-btn clearfix form-in"> 
+                                <input type="submit" class="btn btn-orange pull-right" value="下一步" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="pull-right clearfix">
+                        <div class="ew-ma"><img src="__PUBLIC__/Home/images/login/ew-ma.jpg" width="264" height="264"></div>
+                        <div class="ew-nioce">
+                            <p>扫二维码，下载全球体育APP<br/>随时获取最新信息！</p>
+                        </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- 注册表单内容结束 -->
+    </div>
+
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+</body>
+</html>
+<script>
+    $(function(){
+        $("form").validate({
+            onkeyup:false,
+            rules: {
+               nick_name : {
+                  rangelength:[2,10],
+                  remote: {
+                    url: "/User/checkNickname.html",
+                    type: "post",
+                    data: {
+                      fieldValue: function() {
+                      return $( "#txtUserName" ).val();
+                      },
+                    }
+                  }
+                },
+               password: {
+                required: true,
+                minlength: 6
+               },
+               repassword: {
+                required: true,
+                equalTo: "#txtPassword"
+               }
+              },
+                messages: {
+               nick_name : {
+                  rangelength: "用户昵称为2-10个字符",
+                  remote : '该用户名已经存在 或 存在关键字'
+                },
+               password: {
+                required: "请输入密码",
+                minlength: "密码不能小于6个字符"
+               },
+               repassword: {
+                required: "请输入确认密码",
+                equalTo: "两次密码输入不一致"
+               },
+              },
+            submitHandler:function(form){
+                var form = $(form);
+                var data = form.serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "/User/infor.html",
+                    data: data,
+                    success: function(data){
+                      if(data.status){
+                        window.location.href="/User/complete.html";
+                      }else{
+                        showMsg(data.info,0,'error');
+                      }
+                    }
+                });
+            }
+        })
+    })
+</script>

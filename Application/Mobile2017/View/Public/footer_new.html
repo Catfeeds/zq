@@ -1,0 +1,42 @@
+<!-- 底部 s -->
+<footer id="footer">
+    <aside class="version clearfix">
+        <a href="javascript:;" id="load_btn" target='_blank'>客户端</a>
+        <span>|</span>
+        <a href="javascript:;" class="touch">触屏版</a>
+        <span>|</span>
+        <a href="//www.qqty.com/?from=m" target='_blank'>电脑版</a>
+    </aside>
+    <aside class="copyright clearfix">广东全彩科技有限公司©2015-2017 粤ICP备17118302号-5</aside>
+    <aside class="tel clearfix">客服热线：177-2768-9063 </aside>
+</footer>
+<!-- 底部 e -->
+<!-- 返回顶部开始 -->
+<div class="return-top">
+    <a href="#">
+        <span class="ft_bg"></span>
+        <span>回顶部</span>
+    </a>
+</div>
+<div class="bNav clearfix">
+    <a href="{:U('Index/index')}" class="<eq name="footer_nav" value="index">on</eq>">
+    <i></i>
+    <span>首页</span>
+    </a>
+    <a href="{:U('Guess/new_put')}" class="<eq name="footer_nav" value="guess">on</eq>">
+    <i></i>
+    <span>推荐王</span>
+    </a>
+    <a href="{:U('Intro/index')}" class="<eq name="footer_nav" value="intro">on</eq>">
+    <i class=""></i>
+    <span>球王</span>
+    </a>
+    <a href="http://a.app.qq.com/o/simple.jsp?pkgname=cn.qqw.app" class="<eq name="footer_nav" value="h5">on</eq>">
+    <i></i>
+    <span>下载APP</span>
+    </a>
+    <a href="<if condition="$is_log == 1">{:U('User/index')}<else/>{:U('User/login')}</if>" class="<eq name="footer_nav" value="user">on</eq>">
+    <i></i>
+    <span>我的</span>
+    </a>
+</div>

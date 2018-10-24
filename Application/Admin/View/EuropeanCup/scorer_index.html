@@ -1,0 +1,67 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>球员名称：</label>
+				<input type="text" name="player" value="{$_REQUEST.player}"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/euro_edit/type/1" target="dialog" mask="true"><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/euro_del/id/{sid_record}/type/1" target="ajaxTodo" title="你确定要删除吗？" warn="请选择球员"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/euro_edit/id/{sid_record}/type/1" target="dialog" mask="true" warn="请选择球员"><span>编辑</span></a></li>
+			<li><a class="add" href="__URL__/EuroScorer" target="navTab" mask="true" title="射手榜"><span>刷新</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="30" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="60">球员名称</th>
+			<th width="200">国家图片地址</th>
+			<th width="50">国家名称</th>
+			<th width="50">进球数</th>
+			<th width="50">点球数</th>
+			<th width="50">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['player']}</td>
+					<td>{$vo['img_url']}</td>
+					<td>{$vo['country_name']}</td>
+					<td>{$vo['score']}</td>
+					<td>{$vo['penalty']}</td>
+					<td>
+						<a href="__URL__/euro_edit/id/{$vo.id}/type/1" target="dialog" mask="true" title="编辑" rel="editPage">编辑</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

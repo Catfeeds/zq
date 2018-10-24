@@ -1,0 +1,139 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/saveUser/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone);" target="callbackframe">
+		<input type="hidden" name="id" value="{$vo.id}" />
+		<div class="pageFormContent" layoutH="58">
+			<if condition="$vo.is_robot eq 1">
+			<div class="unit">
+				<label>昵称：</label>
+				<input type="text" class="required" name="nick_name" rangelength="2,10" value="{$vo.nick_name}" placeholder="用户昵称" size="40">
+			</div>
+			</if>
+			<div class="unit">
+				<label>擅长联赛：</label>
+				<input type="text" class="" name="be_good_at" value="{$vo.be_good_at}" placeholder="擅长联赛" size="40">
+			</div>
+			<div class="unit">
+				<label>个人简介：</label>
+				<textarea name="descript" rows="2" cols="50" maxlength="20" placeholder="个人简介">{$vo.descript}</textarea>
+			</div>
+			<div class="unit">
+				<label>专家广告语：</label>
+				<textarea name="avder" rows="1" maxlength="12" cols="50" placeholder="广告语">{$vo.avder}</textarea>
+			</div>
+			<div class="unit">
+				<label>排序：</label>
+				<input type="text" class="digits" name="sort" value="{$vo.sort}"  placeholder="专家排序">
+			</div>
+			<div class="unit">
+				<label>邀请好友状态：</label>
+				<select class="small bLeft"  name="invite_status">
+					<option <eq name="vo.invite_status" value="1" >selected</eq> value="1">可用</option>
+					<option <eq name="vo.invite_status" value="0" >selected</eq> value="0">禁用</option>
+				</select>
+			</div>
+			<div class="unit">
+				<label>屏蔽资讯评论：</label>
+                <input type="radio" name="is_gag"  value="0" <eq name="vo.is_gag" value="0">checked</eq> />正常
+                <input type="radio" name="is_gag"  value="1" <eq name="vo.is_gag" value="1">checked</eq> />屏蔽
+			</div>
+			<div class="unit" style="padding-top:10px;">
+			    <label>屏蔽帖子评论：</label>
+			    <input name="community_status" type="radio" value="0" <if condition="$vo['community_status'] eq 0 or $vo['community_status'] lt time()">checked</if> />否
+			    <input name="community_status" type="radio" value="1" <if condition="!in_array($vo['community_status'],[0,2]) and $vo['community_status'] gt time()">checked</if> />禁言一天
+			    <input name="community_status" type="radio" value="2" <if condition="$vo.community_status eq 2">checked</if> />永久
+			</div>
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft" name="status" id="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+				</select>
+			</div>
+			<div id="status_desc" class="unit" <if condition="$vo.status eq 1">style="display: none;"</if>>
+				<label>禁用原因：</label>
+				<textarea name="status_desc" rows="1" maxlength="12" cols="50" placeholder="禁用原因">{$vo.status_desc}</textarea>
+			</div>
+			<div class="unit">
+				<label>头像：</label>
+				<ul class="tabImg">
+					<li>
+						<input id="viewUploadInput_555" name="fileInput" type="file" onChange="previewImage(555)" style="display:none;" />
+						<a href="javascript:void(0);">
+							 <span id="viewUploadDiv_555">
+								<empty name="vo.face">
+									<img src="__PUBLIC__/Home/images/common/face.png" width="80" height="80" id="viewUploadImg_555"/>
+								<else/>
+									<img id="viewUploadImg_555" width='80' height='80' border=0 src="{$vo.face}">
+								</empty>
+							 </span>
+						</a>
+						<div id="poiter_555" class="poiter">
+							<empty name="vo.face">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_555')">添加图片</a>
+							<else/>
+								<a title="删除" onclick="delPic({$vo.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_555')">重传</a>
+							</empty>
+						</div>
+					</li>
+				</ul>
+				<span class="inputInfo">（提示：请尽量上传正方形图片）</span>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+	$(function(){
+		$('.tabImg li').hover(function(e) {
+			$(this).children('div').stop().animate({'top':'0'},300);
+		},function(){
+			$(this).children('div').stop().animate({'top':'80px'},300);
+		});
+	});
+	function delPic(id){
+		if(confirm("确认要删除吗？") == false){
+			return false;
+		}
+		//异步执行删除
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/FrontUser/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                	$("#viewUploadInput_555").val("");
+					$("#viewUploadImg_555").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+					var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_555')\">添加图片</a>";
+					$("#poiter_555").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+	$("#status").on('change',function(){
+		var status = $(this).val();
+		if(status == 0){
+			$('#status_desc').show();
+		}else{
+			$('#status_desc').hide();
+		}
+	})
+</script>
+

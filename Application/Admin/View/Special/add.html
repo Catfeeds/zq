@@ -1,0 +1,56 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="{$vo.id}" />
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>赛程ID：</label>
+				<input type="text" class="required" name="game_id" value="{$vo.game_id}">
+			</div>
+
+			<div class="unit">
+				<label>类型：</label>
+				<select class="small bLeft"  name="type">
+					<option <eq name="vo.type" value="1" >selected</eq> value="1">1/4决赛</option>
+					<option <eq name="vo.type" value="2" >selected</eq> value="2">半决赛</option>
+					<option <eq name="vo.type" value="3" >selected</eq> value="3">决赛</option>
+				</select>
+			</div>
+
+			<div class="unit">
+				<label>集锦ID：</label>
+				<input type="text" name="highlights" value="{$vo.highlights}">
+				<span class="inputInfo">（请输入集锦ID）</span>
+			</div>
+
+			<div class="unit">
+				<label>图库ID：</label>
+				<input type="text" name="photo" value="{$vo.photo}">
+				<span class="inputInfo">（请输入图库ID）</span>
+			</div>
+
+			<div class="unit">
+				<label>战报/资讯ID：</label>
+				<input type="text" name="battle" value="{$vo.battle}">
+				<span class="inputInfo">（请输入资讯ID）</span>
+			</div>
+
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft"  name="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+				</select>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

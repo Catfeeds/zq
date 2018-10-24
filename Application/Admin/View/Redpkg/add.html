@@ -1,0 +1,50 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			<div class="unit">
+				<label>活动标题：</label>
+				<!--<textarea maxlength="255" class="large bLeft" name="title"  rows="2" cols="50">{$vo.title}</textarea>-->
+				<textarea maxlength="255" class="large bLeft" name="title"  rows="2" cols="50">红包标题test</textarea>
+			</div>
+			<div class="unit">
+				<label>红包总金额：</label>
+				<!--<input type="text" class="required digits" maxlength="6" name="value" value="{$vo.value}"/>-->
+				<input type="text" class="required digits" maxlength="6" name="value" value="200"/>
+			</div>
+			<div class="unit">
+				<label>红包个数：</label>
+				<!--<input type="text" class="required digits" name="count" value="{$vo.count}"/>-->
+				<input type="text" class="required digits" name="count" value="20"/>
+			</div>
+			<div class="unit">
+				<label>主播昵称：</label>
+				<input type="hidden" name="room.user_id">
+				<input class="required textInput" name="room.nick_name" value="{$vo.nick_name}" readonly/>
+				<a width="800" height='600' lookupgroup="room" href="{:U('__URL__/findRoom')}" class="btnLook" rel="addRoomNum">选择房间号</a>
+			</div>
+			<div class="unit">
+				<label>发放开始时间：</label>
+				<!--<input class="date textInput readonly valid" type="text" <notempty name="vo.start_time">value="{$vo.start_time|date='Y-m-d H:i',###}"</notempty> readonly datefmt="yyyy-MM-dd HH:mm" name="start_time">-->
+				<input class="date textInput readonly valid" type="text" readonly datefmt="yyyy-MM-dd HH:mm" name="start_time" value="<?php echo date('Y-m-d H:i',time() + 60);?>">
+				<a class="inputDateButton" href="javascript:;">选择</a>
+			</div>
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft"  name="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+				</select>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+
+

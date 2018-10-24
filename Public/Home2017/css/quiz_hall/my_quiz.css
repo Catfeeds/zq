@@ -1,0 +1,88 @@
+/**
+ * 全彩竞猜大厅首页css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-28
+**/
+/* 主体内容 */
+.main-box{ margin: 10px auto ; width: 1000px; border: 1px solid #e5e5e5; padding: 12px; background: #fff; min-height: 683px;}
+/* 足球竞猜 */
+.record .data ul li.w_65{ width:70px;}
+.record .data ul li.w_55{ width:65px;}
+.record .data ul li.w_45{ width:55px;}
+.main-right .data-graph .nav-tabs>li>a{ display: inline-block; padding: 5px 10px; border-radius: 0; font-size: 16px; border: 1px solid #e5e5e5; border-bottom:none;}
+.main-right .data-graph .nav-tabs>li>a.current{ border-top: 2px solid #10af63; border-bottom-color: #fff; background: #fff; color: #10af63; font-weight: 700;}
+.main-right .data-graph .nav-tabs>li>a:hover{ border-bottom-color: #fff; background: #fff; color: #10af63;}
+.nav-tabs > li > a{ margin-left: -1px; margin-right:0;}
+.main-right .tab-content{ margin-top: 15px;}
+.main-right .record .re-li{ padding: 10px 0 5px 16px; margin-bottom: 2px;}
+.main-right .data-graph .nav-tabs>li a.reset-data:hover{ color: #fff; background: #c9302c;}
+.main-right .record .even02{ margin-left: 20px;}
+.main-right .record .even02 em,.record .even01 em{ padding: 0 5px;}
+.main-right .record .ten{ margin-bottom: 10px;}
+.main-right .record .ten span{ padding-right: 10px;}
+.main-right .record .ten em{ margin-left: 12px; display: inline-block; width: 32px; height: 32px; line-height: 30px; text-align: center; border: 1px solid #e5e5e5; border-radius: 50%; background: url(../../images/quiz_hall/em-bg.png)\9; border: none\9;}
+.main-right .record .week,.record .month,.record .season{ margin-bottom: 10px;}
+.main-right .record .data ul li{ float: left; margin-left: 20px; border-bottom: 1px dashed #dddddd; padding-bottom: 5px;}
+.main-right .record-list .table .table-header th{ text-align: center; background: #fff;}
+.main-right .record-list .table .one{ text-align: center; background: #ffffff;}
+.main-right .record-list .table .two{ text-align: center; background: #f7f7f7;}
+.main-right .record-list .table .light-blue{ background: #54d9ff; color: #fff;}
+.main-right .record-list .table .begin-time em{ margin-left: 10px;}
+.main-right .table{ margin-top: 10px;}
+.main-right .table > tr{ display: table-row;  vertical-align: inherit;}
+.main-right .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .main-right .table-bordered > tfoot > tr > td { padding: 10px 3px;}
+.main-right .record-list .my-see td{ display: table-cell; vertical-align: inherit;}
+.main-right .record-list .my-see .see{ display: inline-block; width: 70px; height: 24px; line-height: 24px; text-align: center; border-radius: 3px;}
+.main-right .record-list .seal-star{ position: relative; background: url(../../images/personal_index/star.png) no-repeat 98% 8%;}
+.main-right .record-list .seal-star .point{ position: absolute; left: 100%; top: 10%; width: 66px; height: 25px; line-height: 25px; background: url(../../images/personal_index/point-bg.png) no-repeat;}
+.main-right .record-list .my-seal{ position: relative;}
+.main-right .record-list .detail-btn{ width: 60px; height: 22px; line-height: 18px; border: 1px solid #ff7e00; padding: 0; background: #fffae9; color: #ff7e00;border-radius: 10px;font-size: 12px!important;}
+
+.main-right .record-list .my-seal .seal-win,.main-right .record-list .my-seal .seal-lose,.main-right .record-list .my-seal .seal-tie{ position: absolute; left: 75%; top: 10%; z-index: 1;}
+
+/* 模态窗口 */
+/* modal-header */
+.modal-header .close{ color: #10af63; opacity: 1;}
+.modal-header .close:hover{ color: #ccc; opacity: 1;}
+.modal-header h4{ color: #10af63;}
+.modal-header .modal-title .mach_name{ font-size: 12px; margin-right: 10px;}
+.modal-header .modal-title em{ font-size: 16px; color: #333;}
+
+/* modal-body */
+.ditai01{ width: 430px;}
+.ditai04{ width: 490px;}
+.modal-body .dl_list{ margin-bottom: 10px;}
+.modal-body .dl_list dt{ font-weight: normal; width: 70px; color: #999; text-align: right;}
+.modal-body .dl_list dd{ width: 314px; padding-left: 5px;}
+.modal-body .dl_list .mach_name{ font-size: 12px; margin-right: 10px;}
+
+.modal-body .radio-con label{ margin: 0 auto;}
+.modal-body .radio-con .selet-m{ margin-left: 10px;}
+.modal-body .radio-con input{ vertical-align: -2px;}
+.textarea_wap{ border: 1px solid #e5e5e5; border-radius: 5px; padding: 10px; background: #fff;}
+.textarea_wap .textarea{ height: 36px; border: none 0; outline: none; width: 100%; font-family: "Times New Roman",Times,sans-serif; resize:none;outline:0;-webkit-appearance:none;white-space:pre-wrap;word-wrap:break-word;background:#fff}
+
+.price_ul li{ float: left; width: 80px; text-align: center; margin: 0 3px 10px 3px;}
+.price_ul a{ display: inline-block;  width: 80px; height: 30px; line-height: 28px; text-align: center; border: 1px solid #e5e5e5; border-radius: 15px; position: relative; background: #fff;}
+.price_ul a em{ width: 16px; height: 16px; background: url(../../images/login/icon-tick-red.png) no-repeat 0 0; position: absolute; right: 0; top: 0; display: none;}
+.price_ul .on em{ display: block;}
+.price_ul .on{ color: #eb0000; border-color: #eb0000; background: #fff1f1;}
+
+/* modal-btn */
+.modal-body .btn-con{  text-align: center; margin-top: 15px;}
+.modal-body .btn-con button{ width: 100px; border-radius: 3px; margin: 0 10px;}
+
+.top_nav{height: 60px;border-bottom: 1px solid #ddd;line-height: 60px;}
+.top_nav ul{width: 300px;margin:0 auto;}
+.top_nav ul li{float: left;text-align: center;margin-right: 10px;margin-top: -2px;padding: 0 10px}
+.top_nav ul li.on{ border-bottom: 2px solid #336699;}
+.top_nav ul li.on a{ color: #336699}
+.top_nav ul li a{font-size: 14px;font-weight: bold; }
+.top_nav ul li a:hover{color: #336699; }
+.top_nav ul .center_li{border-bottom: 0} 
+
+.g_history{margin:20px 0;margin-bottom: 10px}
+.g_history .gh_con{width: 127px;height: 32px;background: url(../../images/personal_index/guess_history.png) no-repeat right bottom; text-align: center;color: #fff;line-height: 30px;font-weight: bold;}
+.g_history .data_reset{background: #dc4242;width: 90px;height: 32px;line-height: 30px;text-align: center;}
+.g_history .data_reset a{color: #fff;font-weight: bold;display: block;}

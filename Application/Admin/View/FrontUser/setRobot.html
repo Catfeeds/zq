@@ -1,0 +1,168 @@
+<style>
+	.table-config tr{
+		height: 35px;
+	}
+	.table-config td{
+		text-align: center;
+		padding-right: 10px;
+	}
+</style>
+<div class="pageContent">
+	<form method="post" action="__URL__/setRobot" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="user_id" value="{$_REQUEST.user_id}">
+			<div class="unit">
+				<label>机器人规则设置</label>
+				<table class="table-config" style="float: left;">
+					<tr>
+						<td colspan="2" style="font-weight: bold;">足球亚盘</td>
+					</tr>
+					<tr>
+						<td>自动竞猜：</td>
+						<td>
+							<select name="fb_config[is_quiz]" class="combox">
+								<option value="0" <eq name="vo[fb_config][is_quiz]" value="0">selected</eq>>是</option>
+								<option value="1" <eq name="vo[fb_config][is_quiz]" value="1">selected</eq>>否</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>时间段</td>
+						<td>发布数量</td>
+					</tr>
+					<tr>
+						<td>周一：</td>
+						<td><input type="text" size="7" name="fb_config[1]" value="{$vo[fb_config][1]}"></td>
+					</tr>
+					<tr>
+						<td>周二：</td>
+						<td><input type="text" size="7" name="fb_config[2]" value="{$vo[fb_config][2]}"></td>
+					</tr>
+					<tr>
+						<td>周三：</td>
+						<td><input type="text" size="7" name="fb_config[3]" value="{$vo[fb_config][3]}"></td>
+					</tr>
+					<tr>
+						<td>周四：</td>
+						<td><input type="text" size="7" name="fb_config[4]" value="{$vo[fb_config][4]}"></td>
+					</tr>
+					<tr>
+						<td>周五：</td>
+						<td><input type="text" size="7" name="fb_config[5]" value="{$vo[fb_config][5]}"></td>
+					</tr>
+					<tr>
+						<td>周六：</td>
+						<td><input type="text" size="7" name="fb_config[6]" value="{$vo[fb_config][6]}"></td>
+					</tr>
+					<tr>
+						<td>周日：</td>
+						<td><input type="text" size="7" name="fb_config[7]" value="{$vo[fb_config][7]}"></td>
+					</tr>
+				</table>
+				<table class="table-config" style="float: left;margin-left: 30px;">
+					<tr>
+						<td colspan="2" style="font-weight: bold;">足球竞彩</td>
+					</tr>
+					<tr>
+						<td>自动竞猜：</td>
+						<td>
+							<select name="fbet_config[is_quiz]" class="combox">
+								<option value="0" <eq name="vo[fbet_config][is_quiz]" value="0">selected</eq>>是</option>
+								<option value="1" <eq name="vo[fbet_config][is_quiz]" value="1">selected</eq>>否</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>时间段</td>
+						<td>发布数量</td>
+					</tr>
+					<tr>
+						<td>周一：</td>
+						<td><input type="text" size="7" name="fbet_config[1]" value="{$vo[fbet_config][1]}"></td>
+					</tr>
+					<tr>
+						<td>周二：</td>
+						<td><input type="text" size="7" name="fbet_config[2]" value="{$vo[fbet_config][2]}"></td>
+					</tr>
+					<tr>
+						<td>周三：</td>
+						<td><input type="text" size="7" name="fbet_config[3]" value="{$vo[fbet_config][3]}"></td>
+					</tr>
+					<tr>
+						<td>周四：</td>
+						<td><input type="text" size="7" name="fbet_config[4]" value="{$vo[fbet_config][4]}"></td>
+					</tr>
+					<tr>
+						<td>周五：</td>
+						<td><input type="text" size="7" name="fbet_config[5]" value="{$vo[fbet_config][5]}"></td>
+					</tr>
+					<tr>
+						<td>周六：</td>
+						<td><input type="text" size="7" name="fbet_config[6]" value="{$vo[fbet_config][6]}"></td>
+					</tr>
+					<tr>
+						<td>周日：</td>
+						<td><input type="text" size="7" name="fbet_config[7]" value="{$vo[fbet_config][7]}"></td>
+					</tr>
+				</table>
+				<table class="table-config" style="float: left;margin-left: 30px;">
+					<tr>
+						<td colspan="2" style="font-weight: bold;">篮球亚盘</td>
+					</tr>
+					<tr>
+						<td>自动竞猜：</td>
+						<td>
+							<select name="bk_config[is_quiz]" class="combox">
+								<option value="0" <eq name="vo[bk_config][is_quiz]" value="0">selected</eq>>是</option>
+								<option value="1" <eq name="vo[bk_config][is_quiz]" value="1">selected</eq>>否</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>时间段</td>
+						<td>发布数量</td>
+					</tr>
+					<tr>
+						<td>周一：</td>
+						<td><input type="text" size="7" name="bk_config[1]" value="{$vo[bk_config][1]}"></td>
+					</tr>
+					<tr>
+						<td>周二：</td>
+						<td><input type="text" size="7" name="bk_config[2]" value="{$vo[bk_config][2]}"></td>
+					</tr>
+					<tr>
+						<td>周三：</td>
+						<td><input type="text" size="7" name="bk_config[3]" value="{$vo[bk_config][3]}"></td>
+					</tr>
+					<tr>
+						<td>周四：</td>
+						<td><input type="text" size="7" name="bk_config[4]" value="{$vo[bk_config][4]}"></td>
+					</tr>
+					<tr>
+						<td>周五：</td>
+						<td><input type="text" size="7" name="bk_config[5]" value="{$vo[bk_config][5]}"></td>
+					</tr>
+					<tr>
+						<td>周六：</td>
+						<td><input type="text" size="7" name="bk_config[6]" value="{$vo[bk_config][6]}"></td>
+					</tr>
+					<tr>
+						<td>周日：</td>
+						<td><input type="text" size="7" name="bk_config[7]" value="{$vo[bk_config][7]}"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+
+
+

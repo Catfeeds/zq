@@ -1,0 +1,128 @@
+<div class="pageContent">
+    <form method="post" action="__URL__/save" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)" target="callbackframe">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>分类名称：</label>
+                <input name="name" value="{$data.name}" type="text" size="30" class="required"/>
+            </div>
+
+            <div class="unit">
+                <label>分类说明：</label>
+                <input name="remark" value="{$data.remark}" type="text" size="50" class="required"/>
+            </div>
+
+            <div class="unit">
+                <label>标识：</label>
+                <input name="sign" value="{$data.sign}" type="text" class="required" size="20" />
+                （外链写1）
+            </div>
+
+            <div class="unit">
+                <label>图片：</label>
+                <ul class="tabImg">
+                    <li>
+                        <input id="viewUploadInput_555" name="fileInput" type="file" onChange="previewImage(555)" style="display:none;" />
+                        <a href="javascript:void(0);">
+                             <span id="viewUploadDiv_555">
+                                <empty name="data.img">
+                                    <img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_555"/>
+                                    <else/>
+                                    <img id="viewUploadImg_555" width='80' height='80' border=0 src="{$data['img']}">
+                                </empty>
+                             </span>
+                        </a>
+                        <div id="poiter_555" class="poiter">
+                            <empty name="data.img">
+                                <a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_555')">添加图片</a>
+                                <else/>
+                                <a title="删除" onclick="delPic({$data.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_555')">重传</a>
+                            </empty>
+                        </div>
+                    </li>
+                </ul>
+                <span class="inputInfo">（提示：请尽量上传正方形图片）</span>
+            </div>
+
+            <div class="unit">
+                <label>URL：</label>
+                <input type="text"  name="url" value="{$data.url}"  size="50">
+            </div>
+
+            <div class="unit">
+                <label>排序：</label>
+                <input type="text" class="required digits" name="sort" value="{$data.sort}" min="1" >
+            </div>
+
+            <div class="unit">
+                <label>是否需求登录：</label>
+                <select class="small bLeft"  name="isLogin">
+                    <option <eq name="data.isLogin" value="1" >selected</eq> value="1">需要</option>
+                    <option <eq name="data.isLogin" value="0" >selected</eq> value="0">不需要</option>
+                </select>
+            </div>
+
+            <div class="unit">
+                <label>状态：</label>
+                <select class="small bLeft"  name="status">
+                    <option <eq name="data.status" value="1" >selected</eq> value="1">启用</option>
+                    <option <eq name="data.status" value="0" >selected</eq> value="0">禁用</option>
+                </select>
+            </div>
+
+            <div class="unit">
+                <label>分类描述：<font color="red">（分段请加英文字符下的 |）</font></label>
+                <textarea name="description" cols="50" rows="10">{$data.description}</textarea>
+            </div>
+
+        </div>
+        <div class="formBar">
+            <ul>
+                 <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+<style type="text/css">
+    .tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+    .poiter a:hover{color:red;}
+    .tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+    .tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+    $(function(){
+        $('.tabImg li').hover(function(e) {
+            $(this).children('div').stop().animate({'top':'0'},300);
+        },function(){
+            $(this).children('div').stop().animate({'top':'80px'},300);
+        });
+    });
+    function delPic(id){
+        if(confirm("确认要删除吗？") == false){
+            return false;
+        }
+        //异步执行删除
+        $.ajax({
+            type: "POST",
+            url: "__ADMIN__/BigData/delPic.html",
+            data: {'id':id, 'type': 1},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                    $("#viewUploadInput_555").val("");
+                    $("#viewUploadImg_555").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+                    var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_555')\">添加图片</a>";
+                    $("#poiter_555").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+    }
+</script>

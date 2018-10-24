@@ -1,0 +1,31 @@
+
+<style>
+    .wrapCon{padding-top: 0px;}
+</style>
+<eq name="_GET['header']" value="showTitle">
+    <style>
+        .wrapCon{padding-top: 1.5rem;}
+    </style>
+    <header class="top">
+        <ul class="head-top">
+            <li class="f-h">
+                <a class="back" href="<if condition='$goback eq 1'>javascript:history.back(-1)<else/>{:U('/2018worldcup')}<eq name="_GET['header']" value="no">?header=no</eq></if>"><img src="__IMAGES__/worldcup/common/back.png"></a>
+            </li>
+            <li class="l-g">
+                <span class="nba"><img src="__IMAGES__/worldcup/common/wordcup.png"></span>
+                <span class="photo">世界杯</span>
+            </li>
+        </ul>
+    </header>
+<else/>
+</eq>
+<eq name="_GET['header']" value="no">
+    <include file="Public:go_back_pack"/>
+<else/>
+    <if condition="$nav_id eq 1 or $nav_id eq 3">
+        <link rel="stylesheet" type="text/css" href="__CSS__/special/index.css?201806221839">
+        <div class="backtop clearfix">
+            <a><img src="__IMAGES__/index/backtop.png"></a>
+        </div>
+    </if>
+</eq>

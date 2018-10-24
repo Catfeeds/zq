@@ -1,0 +1,154 @@
+<extend name="Public/base" />
+<!-- 本页需要引用的css -->
+<block name='append'>
+    <link rel="stylesheet" href="__CSS__/login/login.css">
+
+    <style type="text/css"> 
+        .u-input{ display: -webkit-box;}
+        .inputbox .ne_name_input,.yh_infor{ -webkit-box-flex:2;color: #999}
+        .yh_infor{ padding: .1rem 0;}
+        .inputbox .s-label{ margin-top: 0; top: 0; height: .9rem; line-height: .9rem; -webkit-box-flex:1; position: relative;}
+        .p_nioce{ height: .9rem; padding-top: .2rem; background: #f7f7f7; padding-left: .1rem;}
+        .p_content{ font-size: .24rem; color: #999; padding: 0 .2rem;margin-top: .2rem}
+        .p_content p{ padding: .05rem 0;}
+        .form-group{ text-align: center; }
+        .form-group a{ color: #10af63;}
+        .login_panel .loginbox{padding-bottom: 0}
+        .fixBoxIn .tip{line-height: 150%;height: auto}
+        .fixBoxIn .tip p:nth-child(1){height: .6rem;padding-top:.2rem;color: #e90000}
+        .fixBoxIn .tip p:nth-child(2){padding-top:.1rem;padding-bottom:.3rem;color: #656565;font-size: .26rem}
+        .inputbox input, .inputbox select{color: #999;}
+        .inputbox .ne_name_input {padding-left: 1.7rem;}
+    </style>
+</block>
+<!-- 二级头部 s -->
+<block name='header'>
+    <header id="other_header">
+        <a href="{:U('User/index')}"></a>提款
+    </header>
+</block>
+<!-- 二级头部 e -->
+<block name='nav'></block>
+<block name='content'>
+    <div class="login_panel">
+        <form id="login-form" action="" method="post">
+            <div class="login-container">
+                <div class="inputbox inputUser">
+                    <div class="u-input">
+                        <label class="u-label ne_name">帐户类型</label>
+                        <input readonly="true" class="dlemail ne_name_input" type="text"   value="<eq name='user.type' value='alipay'>支付宝<else/>{$user.bank_name}</eq>" autocomplete="off">
+                    </div>
+                </div>
+                <div class="inputbox inputUser" style="border-bottom: 0">
+                    <div class="u-input">
+                        <label class="u-label ne_name">提款账户</label>
+                        <input readonly="true" class="dlemail ne_name_input" type="text"  autocomplete="off" value="<eq name='user.type' value='alipay'>{$user.alipay_id}<else/>{$user.bank_card_id}</eq>">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="login-container">
+                <div class="inputbox inputUser" id="account-box">
+                    <div class="u-input">
+                        <label class="u-label ne_name">提款金额</label>
+                        <input id='rmb' class="dlemail ne_name_input" type="number" min='{$minMoney}' max='10000' style="color: #333"  placeholder="当前可提取{$user.coin}元" autocomplete="off">
+                    </div>
+                </div>
+                <div class="inputbox inputPasswd" style="border-top:1px solid #e5e5e5">
+                    <div class="u-input">
+                        <label class="u-label ne_name">提款密码</label>
+                        <input id='js-pwd' name="password" class="ycpwd ne_name_input" type="password"  placeholder="6位阿拉伯数字">
+                        <input  class="xspwd ne_name_input" type="text" id="text" placeholder="6位阿拉伯数字">
+                        <a href="javascript:;" class="ne_btn no-pw"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loginbox">
+                <a href='javascript:;' id="dologin">确认提交</a>
+            </div>
+
+            <div class="form-group">
+                <label>
+                  <input type="checkbox" checked="" id="agree">我已阅读并接受<a target="_blank" href="//www.qqty.com/Copyright/service.html" class="text-green">《全球体育服务协议》</a>
+                </label>
+            </div>
+
+            <div class="p_content">
+                <p>温馨提示：</p>
+                <p>1、用户每日只能提款一次，金额最低为{$minMoney}元，最高为10000元。</p>
+                <p>2、您的提款申请将会在工作日处理，法定节假日除外。</p>
+                <p>3、我司收到申请后，24小时内进行审核，审核通过后会在3天内将款项汇入您的账户。</p>
+            </div>
+            
+        </form>
+    </div>
+    <div id='tips_bg'></div> 
+    <!--<div class="fixBox" style="display: none;">-->
+            <!--<div class="fixBoxIn">-->
+                <!--<div class="tip"><p>您的申请已经提交成功！</p><p>我司工作人员会尽快处理</p></div> -->
+                <!--<a href="javascript:;" class="tip_btn fs30">确定</a>-->
+            <!--</div>-->
+    <!--</div>-->
+    <div id="dailogFixBox" class="fixBox" style="display: none">
+        <div class="fixBoxIn clearfix">
+            <div class="tip" style="line-height: 0.8rem; "><p>您的申请已经提交成功！</p><p>我司工作人员会尽快处理</p></div>
+            <a id="yesDailog" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+        </div>
+    </div>
+</block>
+<block name='scripts'>
+    <script>
+        var minMoney = "{$minMoney}";
+
+        $(function () {
+            $('#yesDailog').on('click',function () {
+                $('#dailogFixBox').css('display','none');
+            });
+        });
+        $(document).on('click','#dologin',function(){
+            var rmb = $('#rmb').val();
+            var pwd = $('#js-pwd').val();
+            if(rmb=='' ||pwd==''){
+                $('#tips_bg').html('请填写完整信息!').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                return false;
+            }
+            if(parseInt(rmb)<parseInt(minMoney) || parseInt(rmb)>10000){
+                $('#tips_bg').html('提款金额必须在'+minMoney+'到10000元之间!').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                return false;
+            }
+            if(!/^\d{6}$/.test(pwd)){
+                $('#tips_bg').html('请输入6位数字的提款密码!').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                return false;
+            }
+            if($('#agree').is(':checked')==false) {
+                $('#tips_bg').html('请已阅读并接受《全球体育服务协议》').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                return;
+            }
+            var params={
+                rmb:rmb,
+                pwd:pwd,
+            };
+            $.ajax({
+                    type: "POST",
+                    url: "",
+                    data: params,
+                    dataType: "json",
+                    success: function (data) {
+                        if(data.status==1){
+                            $('#dailogFixBox').css('display','block');
+                            //alert(data.info);
+                            //location.href=data.url;
+                        }else{ 
+                            $('#tips_bg').html(data.info).stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                        }
+                    }
+                });
+        });
+        //确定按钮
+        $('#yesDailog').click(function(e) {
+            location.href="{:U('User/index')}";
+            $('#dailogFixBox').css('display','none');
+        });
+    </script>
+</block>

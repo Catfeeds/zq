@@ -1,0 +1,22 @@
+<a class="bts_backToTop bts_moveTop customer_button" cust-url="{$liveChatUrl}" href="javascript:void(0);">
+	<i class="toolsIcon"></i>
+	<span>在线客服</span>
+</a>
+
+<script>
+	$(function(){
+		$('.customer_button').click(function(){
+			var url = $(this).attr('cust-url');
+			window.open(url,'','width=610,height=760,left='+($(document).width() - 610 )/2+',top=100,resizable=yes,menubar=no,location=no,status=yes,scrollbars=yes');
+			
+			/* console.log('url='+url);
+			if(url.indexOf("&tel") == -1){
+				_alert('提示', '请您先登录', "window.location.href = 'https://www.qqty.com/User/login.html'");
+				
+			}else{
+				window.open("{$liveChatUrl}",'','width=610,height=760,left='+($(document).width() - 610 )/2+',top=100,resizable=yes,menubar=no,location=no,status=yes,scrollbars=yes');
+			} */
+		});
+		
+	})
+</script>

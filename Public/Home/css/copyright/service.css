@@ -1,0 +1,27 @@
+/**
+ * 全彩关于我们css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-12-25
+**/
+/* 主体内容 */
+.home,.main{ width: 1000px; margin: 0 auto; margin-top: 12px\9; margin-bottom: 12px\9}
+.main{ margin: 12px 0; display: block}
+.home h2{ margin: 38px 0 50px 0;}
+.main h2{ margin: 38px 0 50px 0;}
+.main h2 img{ display: block}
+.list-con{ padding: 0 10px;}
+.list-con .listCon-in{ border-left: 1px solid #e5e5e5; padding-left: 32px;}
+.list-con .listCon-in dl{ margin-bottom: 32px;}
+.list-con .listCon-in dt{ margin-bottom: 10px; position: relative;}
+.list-con .listCon-in dt span{ position: absolute; width: 24px; height: 24px; background: url(../../images/copyright/dl-list.png) no-repeat 0 0; left: -44px; top: 50%; margin-top: -12px;}
+.list-con .listCon-in .dt02 span{ background-position: -41px 0;}
+.list-con .listCon-in .dt03 span{ background-position: -82px 0;}
+.list-con .listCon-in .dt04 span{ background-position: -123px 0;}
+.list-con .listCon-in .dt05 span{ background-position: -172px 0;}
+.list-con .listCon-in .dt06 span{ background-position: -221px 0;}
+.list-con .listCon-in .dt07 span{ background-position: -268px 0;}
+.list-con .listCon-in .dt08 span{ background-position: -309px 0;}
+.list-con .listCon-in dd{ color: #8a8a8a; line-height: 24px; word-break: break-all;}
+.list-con .listCon-in .t-i{ text-indent: 18px;}
+

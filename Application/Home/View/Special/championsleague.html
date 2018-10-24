@@ -1,0 +1,311 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/special/fb_theme.css">
+</block>
+<block name="content">
+    <!-- dj-theme -->
+    <div class="themeBox ogTheme" type="championsleague">
+    	<div class="themeNavBox">
+            <div class="clearfix themeNavIn">
+                <div class="pull-left themeLogo"><a href="{:U('/')}" title="全球体育"><img src="__IMAGES__/special/theme-logo.png" alt="全球体育logo" width="142" height="35"></a></div>
+                <div class="pull-left themeNav">
+                    <ul class="clearfix">
+                        <volist name="nav" id="vo">
+                            <li class="pull-left"><a target="_blank" href="{$vo.url}" title="{$vo.name}"><span>{$vo.name}</span> </a></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div>   
+        <!-- main -->
+        <div class="main">
+            <div class="position">
+            	当前位置：<span class="now"><a href="{:U('/')}" title="全球体育首页">全球体育首页</a></span> &gt; 欧冠
+            </div>
+            <!-- matLiveLi -->
+            <div class="matLiveLi clearfix">
+                <div id="" class="liveLiCon xzLive ttLive">
+                    <a class="leftBtn xzLeftBtn" href="javascript:;"><i class="glyphicon glyphicon-triangle-left"></i></a>
+                    <a class="rightBtn xzRightBtn" href="javascript:;"><i class="glyphicon glyphicon-triangle-right"></i></a>
+                    <a class="leftBtn ttLeftBtn hide" href="javascript:;"><i class="glyphicon glyphicon-triangle-left"></i></a>
+                    <a class="rightBtn ttRightBtn hide" href="javascript:;"><i class="glyphicon glyphicon-triangle-right"></i></a>
+                    <div class="chaTab">
+                        <a href="javascript:;" class="xzMatch on" id="xzMatch">
+                            <div>小组赛</div>
+                            <div class="rou">第1轮</div>
+                        </a>
+                        <a href="javascript:;" class="ttMatch" id="ttMatch">
+                            淘汰赛
+                        </a>
+                    </div>
+                    <div class="liveInner">
+                        <ul class="clearfix xzUl" style="display: block;"></ul>
+                        <ul class="clearfix ttUl" style="display: none;"></ul>
+                    </div>
+                </div>
+            </div>
+            <!-- matLiveLi -->
+            <div class="themeFocus clearfix">
+            	<div class="pull-left themeNews">
+                    <volist name="shouxie" id="vo">
+                        <h2><a target="_blank" href="{$vo.0.href}" title="{$vo.0.title}">{$vo.0.title}</a></h2>
+                        <ul class="dlNews">
+                            <volist name="vo.newList" id="vo2">
+                                <li><a target="_blank" href="{$vo2.href}" title="{$vo2.title}">{$vo2.title}</a></li>
+                            </volist>
+                        </ul>
+                    </volist>
+                </div>
+            	<div class="pull-left themeMedia">
+                	<!-- banner -->
+                	<div id="myCarousel" class="carousel slide banner" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <volist name="banner" id="vo">
+                                <li data-target="#myCarousel" data-slide-to="{$key}" <if condition="$key eq 0">class="active"</if>></li>
+                            </volist>
+                        </ol>
+                        <div class="carousel-inner">
+                            <volist name="banner" id="vo">
+                                <div class="<if condition="$key eq 0">active</if> item">
+                                <a href="{$vo.url}" target="_blank">
+                                    <img src="{$vo.img}" alt="{$vo.title}">
+                                    <div class="fbanner-title">{$vo.title}</div>
+                                </a>
+                            </div>
+                            </volist>
+                        </div>
+                        <a class="carousel-control left" href="#myCarousel" data-slide="prev" style="display: none; opacity: 0.3;"><span></span></a>
+                        <a class="carousel-control right" href="#myCarousel" data-slide="next" style="display: none; opacity: 0.3;"><span></span></a>
+                    </div>
+                    <!-- banner -->
+                    <!-- live media-->
+                    <div class="liveList">
+                    	<div class="clearfix listTitle"><div class="pull-left videoTit ogVideoTit"><h2 class="">热点视频</h2></div><a href="{:U('/championsleague@video')}" class="text-666 pull-right moreTit">更多<span class="rightIcon"><i class="glyphicon glyphicon-menu-right"></i></span></a></div>
+                        <ul>
+                            <volist name="highlights" id="vo">
+                                <li class="clearfix">
+                                    <a target="_blank" href="{$vo.href}" title="{$vo.title}" class="pull-left liveListImg"><img class="lazy" data-original="{$vo.img}" width="140" height="96" alt="{$vo.title}"><i class="coverMask"></i><i class="playBtn"></i></a>
+                                    <div class="pull-left liveListArt">
+                                        <article><a href="{$vo.href}" title="{$vo.title}"><span class="video-icon"></span>{$vo.title}</a></article>
+                                        <div class="clearfix author">
+                                            <a target="_blank" href="{:U('/expuser/'.$vo['user_id'].'')}" title="{$vo.nick_name}" class="pull-left text-999 leftUser"><img class="img-circle" src="{$vo.head}" width="28" height="28">{$vo.nick_name}</a>
+                                            <span class="pull-right text-999 rightEye">{$vo.click_num}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <!-- live media-->
+                </div>
+                <div class="pull-right mainRight">
+                	<div class="shoTable">
+                        <div class="shoTitle">
+                            <div class="clearfix listTitle">
+                            	<div class="pull-left nav">
+                                	<a href="javascript:;" class="active">射手榜</a>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="shoTableCon">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th width="50">排名</th>
+                                        <th width="90">球员 </th>
+                                        <th width="88">球队</th>
+                                        <th width="50">进球</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <notempty name="archerRank">
+                                <volist name="archerRank" id="v" key="k" >
+                                    <switch name="v.rank" >
+                                        <case value="1">
+                                            <tr bgcolor="#fafafa">
+                                            <td><span class="noRank ogredRank">{$v['rank']}</span></td>
+                                            <td title="{$v['player_name']}"><div class="playerLogo"><img src="{$v['player_logo']}" width="48" height="48" alt="{$v['player_name']}"></div>
+                                                <p class="playerName text-hidden">
+                                                    <a target="_blank" title="{$v.player_name}" href="{:U('/player/' . $v['player_id'] . '@data', '', 'html')}">{$v['player_name']}</a>
+                                                </p>
+                                            </td>
+                                            <td title="{$v['team_name']}">
+                                                <div class="matchLogo"><img src="{$v['team_logo']}" width="48" height="48" alt="{$v['team_name']}"></div>
+                                                <p class="teamName">
+                                                    <a target="_blank" title="{$v.team_name}" href="{:U('/team/' . $v['team_id'] . '@data', '', 'html')}">{$v['team_name']}</a>
+                                                </p>
+                                            </td>
+                                            <td class="strong"> {$v['val']}</td>
+                                        </tr>
+                                        </case>
+                                        <case value="2">
+                                            <tr>
+                                                <td><span class="noRank ogblueRank">{$v['rank']}</span></td>
+                                                <td title="{$v['player_name']}">
+                                                    <p class="playerName text-hidden">
+                                                        <a target="_blank" title="{$v.player_name}" href="{:U('/player/' . $v['player_id'] . '@data', '', 'html')}">{$v['player_name']}</a>
+                                                    </p>
+                                                </td>
+                                                <td title="{$v['team_name']}"><p class="teamName text-hidden"><a target="_blank" title="{$v.team_name}" href="{:U('/team/' . $v['team_id'] . '@data', '', 'html')}">{$v['team_name']}</a></p></td>
+                                                <td class="strong"> {$v['val']}</td>
+                                            </tr>
+                                        </case>
+                                        <case value="3">
+                                            <tr>
+                                            <td><span class="noRank ogblueRank">{$v['rank']}</span></td>
+                                            <td title="{$v['player_name']}">
+                                                <p class="playerName text-hidden">
+                                                    <a target="_blank" title="{$v.player_name}" href="{:U('/player/' . $v['player_id'] . '@data', '', 'html')}">{$v['player_name']}</a>
+                                                </p>
+                                            </td>
+                                            <td title="{$v['team_name']}"><p class="teamName text-hidden"><a target="_blank" title="{$v.team_name}" href="{:U('/team/' . $v['team_id'] . '@data', '', 'html')}">{$v['team_name']}</a></p></td>
+                                            <td class="strong">{$v['val']}</td>
+                                            </tr>
+                                        </case>
+                                        <case value="4">
+                                            <tr>
+                                            <td><span class="noRank ogblueRank">{$v['rank']}</span></td>
+                                            <td title="{$v['player_name']}">
+                                                <p class="playerName text-hidden">
+                                                    <a target="_blank" title="{$v.player_name}" href="{:U('/player/' . $v['player_id'] . '@data', '', 'html')}">{$v['player_name']}</a>
+                                                </p>
+                                            </td>
+                                            <td title="{$v['team_name']}"><p class="teamName text-hidden"><a target="_blank" title="{$v.team_name}" href="{:U('/team/' . $v['team_id'] . '@data', '', 'html')}">{$v['team_name']}</a></p></td>
+                                            <td class="strong">{$v['val']}</td>
+                                            </tr>
+                                        </case>
+                                        <default/>
+                                        <tr>
+                                        <td><span class="noRank grayRank">{$v['rank']}</span></td>
+                                        <td title="{$v['player_name']}">
+                                            <p class="playerName text-hidden">
+                                                <a target="_blank" title="{$v.player_name}" href="{:U('/player/' . $v['player_id'] . '@data', '', 'html')}">{$v['player_name']}</a>
+                                            </p>
+                                        </td>
+                                        <td title="{$v['team_name']}"><p class="teamName text-hidden"><a target="_blank" title="{$v.team_name}" href="{:U('/team/' . $v['team_id'] . '@data', '', 'html')}">{$v['team_name']}</a></p></td>
+                                        <td class="strong"> {$v['val']}</td>
+                                        </tr>
+                                    </switch>
+                                </volist>
+                                    <else />
+                                    <tr><td colspan="4">暂时没有数据哦！</td></tr>
+                                </notempty>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a target="_blank" href="{$adver1.url}" class="ad" style=" display: block; margin-bottom: 24px;"><img class="lazy" data-original="{$adver1.img}" width="1024" height="110"></a>
+            <div class="matListCon clearfix">
+            	<!-- 资讯模版 -->
+                <include file="Special:newsList" />
+                
+            	<div class="pull-right mainRight">
+                	<div class="poiTable">
+                        <div class="poiTitle"><div class="clearfix listTitle"><h2 class="pull-left"><i></i>积分榜</h2></div></div>
+                        <div class="groupList text-uppercase" unionId="103" data-type="ouguan">
+                            <a href="javascript:;" title="A组" class="on">A</a>
+                            <a href="javascript:;" title="B组">B</a> 
+                            <a href="javascript:;" title="C组">C</a> 
+                            <a href="javascript:;" title="D组">D</a>
+                            <a href="javascript:;" title="E组">E</a>
+                            <a href="javascript:;" title="F组">F</a>
+                            <a href="javascript:;" title="G组">G</a>
+                            <a href="javascript:;" title="H组">H</a>
+                        </div>
+                        <div class="poiTableCon">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th width="50">排名</th>
+                                        <th width="100">球队</th>
+                                        <th width="78">胜/平/负</th>
+                                        <th width="50">积分</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-ouguan-A"></tbody>
+                                <tbody id="tbody-ouguan-B"></tbody>
+                                <tbody id="tbody-ouguan-C"></tbody>
+                                <tbody id="tbody-ouguan-D"></tbody>
+                                <tbody id="tbody-ouguan-E"></tbody>
+                                <tbody id="tbody-ouguan-F"></tbody>
+                                <tbody id="tbody-ouguan-G"></tbody>
+                                <tbody id="tbody-ouguan-H"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- ad -->
+                    <a target="_blank" href="{$adver2.url}" title="{$adver2.title}" class="actAd" style=" display: block; margin-bottom: 20px;"><img class="lazy" alt="{$adver2.title}" data-original="{$adver2.img}" width="100%" height="190"></a>
+                    <!-- ad -->
+                    <div class="fxInfor">
+                        <div class="clearfix listTitle"><h2 class="pull-left fxTit ogFxTit">竞彩分析</h2><a href="{:U('/dujia@sporttery')}?filter=103" target="_blank" class="text-666 pull-right moreTit">更多<span class="rightIcon"><i class="glyphicon glyphicon-menu-right"></i></span></a></div>
+                        <ul class="fxUl">
+                            <volist name="dujia" id="vo" offset="0" length='4'>
+                                <li class="listIma clearfix">
+                                    <a target="_blank" href="{$vo.href}" title="{$vo.title}" class="pull-left leftIma"><img class="lazy" data-original="{$vo.img}" width="96" height="67" alt="{$vo.title}"></a>
+                                    <a target="_blank" href="{$vo.href}" title="{$vo.title}" class="pull-left rigthText">
+                                        <p>{$vo.title}</p>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                        <ul class="fxUl">
+                            <volist name="dujia" id="vo" offset="4">
+                                <li class="listText"><a target="_blank" href="{$vo.href}" title="{$vo.title}" class="text-hidden">{$vo.title}</a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <if condition="$prospect_report">
+                        <!-- 情报分析 -->
+                        <div class="information">
+                            <h2>情报分析<a target="_blank" href="{:U('/roll')}">更多</a></h2>
+                            <ul class="inAnaly">
+                                <if condition="$report">
+                                    <volist name="report" id="vo">
+                                        <li>
+                                            <span class="headline">战报</span>
+                                            <div class="matter"><a target="_blank" href="{$vo.href}" title="{$vo.title}">{$vo.title}</a></div>
+                                        </li>
+                                    </volist>
+                                </if>
+                                <if condition="$prospect">
+                                    <volist name="prospect" id="vo">
+                                        <li>
+                                            <span class="headline">前瞻</span>
+                                            <div class="matter"><a target="_blank" href="{$vo.href}" title="{$vo.title}">{$vo.title}</a></div>
+                                        </li>
+                                    </volist>
+                                </if>
+                            </ul>
+                        </div>
+                    </if>
+                </div>
+            </div>
+        </div>
+        <!-- main -->
+    </div>
+    <!-- dj-theme -->
+</block>
+<block name="friendBox">
+<notempty name="linkArr">
+<div class="friendBox">
+    <div class="friBoxMain">
+        <h4><span>友情链接</span></h4>
+        <p class="friLinkLi">
+            <foreach name="linkArr" item="v" key="k">
+                <a href="{$v['url']}" target="_blank">{$v['name']}</a>
+            </foreach>
+        </p>
+    </div>
+</div>
+</notempty>
+</block>
+<block name="js">
+    <script>
+        var unionId = '{$unionId|default=0}';
+        var dataType = 'ouguan';
+    </script>
+    <script type="text/javascript" src="__JS__/special/fb_theme.js"></script>
+    <script type="text/javascript" src="__JS__/special/fb_leagueData.js"></script>
+</block>

@@ -1,0 +1,57 @@
+/**
+ * 交易css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2017-08-28
+ *
+**/
+.odd_nav ul li{ width: auto;}
+.odd_nav ul li a{ padding: 0 35px;}
+.tradeCon{ background: #fff; padding: 20px;}
+.tradeCon .tb_data_fenxi tbody  tr th{ background: #3f697e; color: #fff; font-size: 18px;}
+.tradeCon .tb_data_fenxi tbody  tr th span{ float: left; margin-left: 20px;}
+/* 页码 */
+.page-con {
+    width: 100%;
+    margin-top: 20px;
+	font-size: 12px;
+}
+
+.page-con nav {
+	height: 32px;
+	line-height: 32px;
+	padding: 0 20px;
+	text-align: center;
+}
+
+.page-con .pagination {
+	margin: 3px 0 0 10px;
+}
+
+.page-con .pagination .webpage-jump {
+	margin-left: 20px;
+}
+
+.page-con .pagination .isTxtBig {
+	margin: 0 10px;
+	width: 50px;
+	height: 25px;
+	line-height: 25px;
+	float: left;
+	outline: none;
+	border: 1px solid #ddd;
+	padding: 0 4px;
+	text-align: center;
+}
+
+.page-con nav .page-text {
+	margin-right: 15px;
+}
+
+.pagination > li > a, .pagination > li > span {
+    padding: 2px 12px;
+    color: #8a8a8a;
+}
+.pagination > .active > a{ background: #369; border-color: #369;}
+.page-con{ margin-top: 20px;}
+.page-con .pagination .isTxtBig{ height: 23px;}

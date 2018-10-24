@@ -1,0 +1,150 @@
+<extend name="Public/Olympic/base" />
+<block name="seo">
+    <title>2016里约奥运会图片_全球体育手机网</title>
+</block>
+<block name="content">
+    <style>
+        .pt_tool ul li{width:50%;}
+    </style>
+    <section class="photo">
+        <ul id='js-list'>
+        <volist name='list' id='v'>
+            <li>
+            <div class="pt_list">
+                <a href="{:U('Olympic/photo_detail',['id'=>$v['id']])}">
+                    <img src="{$v.img_array.1}" alt="{$v.title}">
+                    <p>{$v.title}</p>
+                </a>
+            </div> 
+            <div class="pt_tool">
+                <ul>
+                    <li><a data-id='{$v.id}' href="javascript:;" class="js-like <eq name='v.is_like' value='1'>on</eq>"><img src="__IMAGES__/Olympic/<eq name='v.is_like' value='1'>p_zan.png<else/>yy.png</eq>" alt="点赞">(<span>{$v.like_num}</span>)</a></li>
+                    <li><a href="{:U('Olympic/photo_detail',['id'=>$v['id']])}"><img src="__IMAGES__/Olympic/p_view.png" alt="查看">({$v.click_number})</a></li>
+<!--                    <li><a href="javascript:;"><img src="__IMAGES__/Olympic/p_share.png" alt="分享">(32)</a></li> -->
+                </ul>
+            </div>
+            </li>
+        </volist>
+        </ul>
+        <div class="paged boxs">
+            <div class="load_gif fs24 text-999" <lt name="list|count" value="10">style="display:none;"</lt>>
+                <span><img style='width:auto;' src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>正在加载更多的数据...</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="<eq name="list|count" value="10">display:none;</eq> cursor:default;" id="showLess">已经全部加载完毕</a>
+        </div>
+    </section>
+    <div class="bubbleTips"></div>
+</block>
+
+
+
+
+<!-- 金牌快讯 Swiper JS --> 
+<block name="scripts">
+    <script src="__JS__/Olympic/swiper_banner.js"></script>   
+    <script>
+        $(function () {
+            var DOMAIN="__DOMAIN__";
+            var p = 2;// 初始化页面，点击事件从第二页开始
+            var flag = false;
+            $(window).scroll(function () {
+                //初始状态，如果没数据return ,false;否则
+                if ($(document).height() - ($(document).scrollTop() + $(window).height()) <= 400) {
+                    send();
+                }
+            });
+            function send() {
+                if (flag) {
+                    return false;
+                }
+                flag = true;
+                var params = {
+                    page: p,
+                }
+                $.ajax({
+                    type: 'post',
+                    url: "",
+                    data: params,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 1) {
+                            var list = data.info;
+                            if (list != null) {
+                                $.each(list, function (k, v) {  
+                                    var is_like='';
+                                    var like_img='yy.png';
+                                    if(v.is_like=='1'){
+                                        is_like='on';
+                                        like_img='p_zan.png';
+                                    }
+                                    var html = '<li><div class="pt_list">' +
+                                            ' <a href="//m.'+ DOMAIN +'/Olympic/photo_detail/id/'+v.id+'.html">'+
+                                            '<img src="'+v['img_array'][1]+'" alt="'+v.title+'">'+
+                                            '<p>'+v.title+'</p></a></div><div class="pt_tool"><ul>'+
+                                            '<li><a data-id="'+v.id+'" href="javascript:;" class="js-like '+is_like+'">'+
+                                            '<img src="__PUBLIC__/Mobile/images/Olympic/'+like_img+'" alt="点赞">(<span>'+v.like_num+'</span>)</a></li>'+
+                                            '<li><a href="//m.'+ DOMAIN +'/Olympic/photo_detail/id/'+v.id+'.html"><img src="__PUBLIC__/Mobile/images/Olympic/p_view.png" alt="查看">('+v.click_number+')</a></li>'+
+                                            '</ul></div></li>';
+                                    $("#js-list>li:last").after(html);
+                                });
+                                flag = false;
+                                if (data.info.length < 10) {
+                                    $('.load_gif').hide();
+                                    $('#showLess').show();
+                                    flag = true;
+                                }
+                            }else{
+                                $('.load_gif').hide();
+                                $('#showLess').show();
+                                flag = true;
+                            }
+                        } else {
+                            $('.load_gif').hide();
+                            $('#showLess').show();
+                            flag = true;
+                        }
+                    }
+                });
+                p++;
+            }
+
+            $(document).on('click', '.js-like', function () {
+                var $this = $(this);
+                if ($this.hasClass('on')) {
+                    $('.bubbleTips').html('您已经赞过了!').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                    return false;
+                }
+                
+                $.ajax({
+                    type: 'post',
+                    url: "/Olympic/dolike.html",
+                    data: {id: $this.data('id'),type:1,url:window.location.href},
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.status==1){
+                            $this.addClass('on');
+                            $this.find('img').attr('src','__PUBLIC__/Mobile/images/Olympic/p_zan.png');
+                            var like_num=$this.children('span');
+                            var num=parseInt(like_num.html())+1;
+                            like_num.html(num);
+                        }else if(data.status==-1){
+                            alert(data.info);
+                            location.href=data.url;
+                            return false;
+                        }
+                        $('.bubbleTips').html(data.info).stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                    }
+                });
+            });
+
+            //金牌快讯
+            var swiper = new Swiper('.swiper-container-teacher', {
+                direction: 'vertical',
+                autoplay: 2500
+            });
+        });
+    </script> 
+    <!-- 公共js -->
+    <script type="text/javascript" src="__JS__/Olympic/common.js"></script>
+</block>

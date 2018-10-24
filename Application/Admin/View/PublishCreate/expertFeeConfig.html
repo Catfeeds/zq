@@ -1,0 +1,111 @@
+<style>
+    .table2-config tr{
+        height: 35px;
+    }
+    .table2-config td{
+        text-align: center;
+        padding:12px;
+    }
+    .inputInfo2 {
+        line-height: 21px;
+    }
+    p.remark {
+        width:500px;
+    }
+</style>
+
+<div class="pageContent">
+    <form method="post" action="__URL__/expertFeeConfig" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+        <div class="pageFormContent" layoutH="58">
+            <h2>专家稿费：</h2>
+            <div class="unit">
+                <label></label>
+                <table class="table2-config">
+                    <tr style="background: #f2f2f2;">
+                        <td>规则名称</td>
+                        <td>字数单价</td>
+                        <td>字数最多</td>
+                    </tr>
+
+                    <tr>
+                        <td>字数配置</td>
+                        <td><input type="text" size="5" name="expertConfig[wordCountRule][unit]" value="{$expertConfig[expertConfig][wordCountRule][unit]}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="expertConfig[wordCountRule][max]" value="{$expertConfig[expertConfig][wordCountRule][max]}">&nbsp;<span class="inputInfo2">元</span></td>
+                    </tr>
+                    <tr style="background: #f2f2f2;">
+                        <td>规则名称</td>
+                        <td>1场胜率</td>
+                        <td>2-5胜率</td>
+                        <td>6-10胜率</td>
+                        <td>11胜以上</td>
+                    </tr>
+                    <tr>
+                        <td>胜率配置</td>
+                        <td><input type="text" size="5" name="expertConfig[streakCountRule][one]" value="{$expertConfig[expertConfig][streakCountRule][one]}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="expertConfig[streakCountRule][twoToFive]" value="{$expertConfig[expertConfig][streakCountRule][twoToFive]}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="expertConfig[streakCountRule][sixToTen]" value="{$expertConfig[expertConfig][streakCountRule][sixToTen]}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="expertConfig[streakCountRule][elevenToMore]" value="{$expertConfig[expertConfig][streakCountRule][elevenToMore]}">&nbsp;<span class="inputInfo2">元</span></td>
+                    </tr>
+                    <tr style="background: #f2f2f2;">
+                        <td>规则名称</td>
+                        <td>阅读数单价</td>
+                        <td>阅读数最多</td>
+                    </tr>
+                    <tr>
+                        <td>阅读数配置</td>
+                        <td><input type="text" size="5" name="expertConfig[readingsRule][unit]" value="{$expertConfig[expertConfig][readingsRule][unit]}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="expertConfig[readingsRule][max]" value="{$expertConfig[expertConfig][readingsRule][max]}">&nbsp;<span class="inputInfo2">元</span></td>
+                    </tr>
+                    <tr style="background: #f2f2f2;">
+                        <td>规则名称</td>
+                        <td>评论数单价</td>
+                        <td>评论数最多</td>
+                    </tr>
+                    <tr>
+                        <td>评论数配置</td>
+                        <td><input type="text" size="5" name="expertConfig[commentsRule][unit]" value="{$expertConfig[expertConfig][commentsRule][unit]}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="expertConfig[commentsRule][max]" value="{$expertConfig[expertConfig][commentsRule][max]}">&nbsp;<span class="inputInfo2">元</span></td>
+                    </tr>
+                    <tr style="background: #f2f2f2;">
+                        <td>规则名称</td>
+                        <td>0-3小时价格</td>
+                        <td>3-5小时价格</td>
+                        <td>5-10小时价格</td>
+                        <td>10小时以上价格</td>
+                    </tr>
+                    <tr>
+                        <td>发布时间配置</td>
+                        <td><input type="text" size="5" name="expertConfig[releaseTimeRule][zeroToThree]" value="{$expertConfig[expertConfig][releaseTimeRule][zeroToThree]}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="expertConfig[releaseTimeRule][threeToFive]" value="{$expertConfig[expertConfig][releaseTimeRule][threeToFive]}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="expertConfig[releaseTimeRule][fiveToTen]" value="{$expertConfig[expertConfig][releaseTimeRule][fiveToTen]}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="expertConfig[releaseTimeRule][tenToMore]" value="{$expertConfig[expertConfig][releaseTimeRule][tenToMore]}">&nbsp;<span class="inputInfo2">元</span></td>
+                    </tr>
+                    <tr style="background: #f2f2f2;">
+                        <td>规则名称</td>
+                        <td>推荐分析稿费系数</td>
+                        <td>新闻资讯的稿费系数</td>
+                    </tr>
+                    <tr>
+                        <td>稿费配置</td>
+                        <td><input type="text" size="5" name="expertConfig[analysisCoefficient]" value="{$expertConfig[expertConfig][analysisCoefficient]}">&nbsp;<span class="inputInfo2"></span></td>
+                        <td><input type="text" size="5" name="expertConfig[InformationCoefficient]" value="{$expertConfig[expertConfig][InformationCoefficient]}">&nbsp;<span class="inputInfo2"></span></td>
+                    </tr>
+
+                </table>
+                <h4>备注：</h4>
+                    <p class="remark">1、结算时间：每天15:30<br>2、结算时当天发布的资讯不结算，时间周期为前一日10:35-今天10:35<br>3、推荐分析稿费=字数金额+胜率金额+阅读金额+评论数据金额+发布时间金额<br>4、新闻资讯稿费=字数金额+阅读金额+评论数据金额<br>5、结算程序只审核已结算的资讯，请资讯结算之后，在进行审核</p>
+            </div>
+        </div>
+
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+
+
+

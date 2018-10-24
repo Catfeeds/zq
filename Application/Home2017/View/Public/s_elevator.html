@@ -1,0 +1,36 @@
+<div class="liveByMoblie">
+    <p><img src="__PUBLIC__/Home/score/images/scoreLive/ia-ewm.png" width="90" height="90"></p>
+    <strong>手机版看比分</strong>
+</div>
+<div id="elevator">
+    <ul class="backTools_list">
+        <li class="i04" style="visibility:hidden;">
+            <a title="返回顶部" class="bts_backToTop moveTop" href="javascript:;">
+                <i style="margin-top: 0px;"></i>
+                <span>返回顶部</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<script>
+    //返回顶部
+    $(window).scroll(function(e) {
+        if($(window).scrollTop()>$(window).height()){
+            $('.backTools_list li').eq(0).css("visibility","visible");
+            $("#elevator").css('margin-left','600px');
+        }else {
+            $('.backTools_list li').eq(0).css("visibility","hidden");
+        }
+    });
+    $('.moveTop').click(function(e) {
+        $('body,html').animate({'scrollTop':'0'},500);
+
+    });
+    //梯口模块
+    $('.backTools_list li a').hover(function(e) {
+        $(this).children('i').stop().animate({"margin-top":"-50px"},300)
+        var myLi = $(this).parent('li').index();
+    },function(){
+        $(this).children('i').stop().animate({"margin-top":"0px"},300)
+    });
+</script>

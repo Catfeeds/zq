@@ -1,0 +1,121 @@
+<select id="first1" name="" class="<if condition='$is_edit eq 1'>required</if> textInput  changeUserUrl">
+    <option value="">{$selectData['first']|default="请选择"}</option>
+</select>
+<select id="second1" name="" class="textInput  changeUserUrl">
+    <option value="">{$selectData['second']|default="请选择"}</option>
+</select>
+<select id="third1" name="" class="textInput  changeUserUrl">
+    <option value="">{$selectData['third']|default="请选择"}</option>
+</select>
+<!--<script src="__PUBLIC__/Home/js/common/jquery-1.11.1.min.js"></script>-->
+<script type="text/javascript">
+    var firstC = "{$selectData['first']}";
+    var secondC = "{$selectData['second']}";
+    var thirdC = "{$selectData['third']}";
+    $(function () {
+        function Init(node) {
+            return node.html("<option>---请选择---</option>");
+        }
+
+        //多维数组做数据来源
+        var db = {};
+        $.ajax({
+            url: '/qqty_admin/PublishList/getPublishClass.html',
+            type: 'post', //GET
+            async: false,    //或false,是否异步
+            data: {},
+            timeout: 5000,    //超时时间
+            dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            success: function (data) {
+                db = data.data;
+            },
+            error: function (xhr, textStatus) {
+            },
+            complete: function () {
+            }
+        });
+        //初始化select节点
+        $("#first1").append("<option>请选择</option>");
+        $.each(db, function (changShang) {
+            $("#first1").append("<option>" + changShang + "</option>");
+        })
+
+        if(firstC != '')
+        {
+            $("input[name='first1']").val(firstC);
+            $("input[name='second1']").val(secondC);
+            $("input[name='third1']").val(thirdC);
+            $("#first1").removeClass('required');
+            if(secondC != '' && db[firstC] != undefined)
+            {
+                $.each(db[firstC], function (pp, xhs) {
+                    $("#second1").append("<option>" + pp + "</option>");
+                });
+                $("#second1").change(function () {
+                    Init($("#third1"));
+                    $.each(db[firstC], function (pp, xhs) {
+                        if(xhs != undefined)
+                        {
+                            if ($("#second1 option:selected").text() == pp) {
+                                $("input[name='second1']").val($("#second1 option:selected").text());
+                                $("input[name='third1']").val('');
+                                $.each(xhs.split(','), function () {
+                                    if(this != '')
+                                    {
+                                        $("#third1").append("<option>" + this + "</option>");
+                                    }
+                                })
+                            }
+                        }
+                    })
+                })
+            }
+            if(thirdC != '' && db[firstC][secondC] != undefined)
+            {
+                $.each(db[firstC][secondC].split(','), function () {
+                    if(this != '')
+                    {
+                        $("#third1").append("<option>" + this + "</option>");
+                    }
+                })
+            }
+        }
+
+        //一级变动
+        $("#first1").change(function () {
+            //清空二三级
+            Init($("#second1"));
+            Init($("#third1"));
+            $.each(db, function (cs, pps) {
+                $("input[name='second1']").val('');
+                $("input[name='third1']").val('');
+                if ($("#first1 option:selected").text() == cs) {
+                    $.each(pps, function (pp, xhs) {
+                        $("#second1").append("<option>" + pp + "</option>");
+                    });
+                    $("#second1").change(function () {
+                        Init($("#third1"));
+                        $.each(pps, function (pp, xhs) {
+                            if ($("#second1 option:selected").text() == pp) {
+                                $("input[name='second1']").val($("#second1 option:selected").text());
+                                $("input[name='third1']").val('');
+                                $.each(xhs.split(','), function () {
+                                    if(this != '')
+                                    {
+                                        $("#third1").append("<option>" + this + "</option>");
+                                    }
+                                })
+                            }
+                        })
+                    })
+                }
+            })
+            $("input[name='first1']").val($("#first1 option:selected").text());
+        })
+
+        $('#third1').on('change',function(){
+            $("input[name='third1']").val($("#third1 option:selected").text());
+        })
+
+    })
+</script>

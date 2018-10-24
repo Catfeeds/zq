@@ -1,0 +1,116 @@
+<extend name="Public/Olympic/base" />
+<block name="seo">
+    <title>2016里约奥运会推荐_全球体育网</title>
+</block>
+<!-- 二级头部 s -->
+<block name="header">
+  <header id="other_header">
+    <a href="guess.html"></a>推荐记录 
+  </header>
+</block>
+<!-- 二级头部 e --> 
+
+<!-- 内容 s -->
+<block name="nav"></block>
+<block name="content">
+      <div class="new_tj com_dt clearfix">
+         <ul class="posts">
+          <volist name="record" id="item">
+           <li class="list">
+             <!--各种样式: 赢:win 赢半:win_half 输:lose 输半:lose_half 平:ping -->
+             <switch name="item.result">
+              <case value="1"><div class="win"></div></case>
+              <case value="-1"><div class="lose"></div></case>
+             </switch>
+             <div class="n_top">
+               <aside><img src="__IMAGES__/Olympic/gr_title.png" alt=""><span>{$item.union_name}</span> <time>{$item.game_time|date='m-d H:i',###}</time></aside>
+             </div>
+             <p class="p_1">{$item.title}</p>
+             <p class="p_2">推荐情况：<em>{$item.question}<span>（{$item.odds}）</span></em></p>
+             <p class="p_3">推荐结果：{$item.answer_name|default="未结算"}</p>
+             <neq name="item.result" value="0">
+             <p class="p_5">盈利结果：<neq name="item.earn_point" value="0">+</neq>{$item.earn_point}</p> 
+             </neq>
+             <p class="p_4">推荐时间：{$item.create_time|date='Y-m-d H:i',###}</p> 
+           </li>
+          </volist>
+         </ul>
+      </div>
+      <input type="hidden" id="auto_load" value="1">
+      <div class="paged boxs">
+          <div class="load_gif fs24 text-999">
+              <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+              <span>正在加载更多的数据...</span>
+          </div>
+          <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已经全部加载完毕</a>
+      </div>
+</block>
+<!-- 内容 e -->
+
+<!-- 金牌快讯 Swiper JS --> 
+<block name="scripts">
+<script>
+  $(function () {
+      $("#auto_load").val(1);
+      var p = 2;// 初始化页面，点击事件从第二页开始
+      var flag = false;
+      if ($(".list").size() < 10)
+      {
+          $("#auto_load").val(0);
+          $(".load_gif").hide();
+          $("#showLess").show();
+      }
+      $(window).scroll(function () {
+          var auto_load = $("#auto_load").val();
+          if (auto_load == 0) {
+              return false;
+          }
+          //初始状态，如果没数据return ,false;否则
+          if ($(".list").size() <= 0)
+          {
+              return false;
+          } else {
+              if ($(document).height() - ($(document).scrollTop() + $(window).height()) <= 400) {
+                  if (auto_load == 1) {
+                      $("#auto_load").val(0);
+                      send();
+                  }
+              }
+          }
+      });
+      function send() {
+          if (flag) {
+              return false;
+          }
+          $.ajax({
+              type: 'post',
+              url: "/Olympic/guess_record.html",
+              data: {k: p},
+              dataType: 'json',
+              success: function (data) {
+                  if (data.status == 1) {
+                      var list = data.info;
+                      $(".posts li:last").after(list);
+                      if (list != null) {
+                          $("#auto_load").val(1);
+                          if (data.info.length < 10) {
+                              $("#auto_load").val(0);
+                              $(".load_gif").hide();
+                              $("#showLess").show();
+                              flag = true;
+                          }
+                      }
+                  } else {
+                      $("#auto_load").val(0);
+                      $(".load_gif").hide();
+                      $("#showLess").show();
+                      flag = true;
+                  }
+
+              }
+          });
+          p++;
+      }
+  });
+</script>
+</block>

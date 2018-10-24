@@ -1,0 +1,92 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+
+        <div class="searchBar">
+            <ul class="searchContent">
+
+                <li>
+                    <label>赛程ID：</label>
+                    <input type="text" name="game_id" value="{$_REQUEST.game_id}">
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="add" href="__URL__/edit" target="dialog" mask="true"><span>添加</span></a>
+            </li>
+            <li>
+                <a class="delete" href="__URL__/foreverdelete/id/{sid_record}" target="ajaxTodo" title="你确定要删除吗？" warn="请选择赛程"><span>删除</span></a>
+            </li>
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST.id eq 'id'">class="{$_REQUEST.id}"</if>>ID</th>
+            <th>赛程ID</th>
+
+            <th>赔率-胜</th>
+            <th>赔率-平</th>
+            <th>赔率-输</th>
+            <th>主队让球</th>
+            <th>客队让球</th>
+            <th>让球后的比赛结果</th>
+            <th>操作</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name='list'>
+            <volist name='list' id='vo'>
+                <tr target="sid_record" rel="{$vo['id']}">
+                    <td>{$vo['id']}</td>
+                    <td>{$vo['game_id']}</td>
+                    <td>{$vo['odds_win']}</td>
+                    <td>{$vo['odds_flat']}</td>
+                    <td>{$vo['odds_lose']}</td>
+                    <td>{$vo['home_let']}</td>
+                    <td>{$vo['away_let']}</td>
+                    <td>
+                        <if condition='$vo.rsl eq 0'>未出</if>
+                        <if condition='$vo.rsl eq 1'>胜</if>
+                        <if condition='$vo.rsl eq 2'>平</if>
+                        <if condition='$vo.rsl eq 3'>负</if>
+                    </td>
+                    <td>
+                       <a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true">
+                            <span>编辑</span>
+                        </a>|
+                       <a class="delete" href="__URL__/foreverdelete/id/{$vo.id}" target="ajaxTodo" title="你确定要删除吗？">
+                            <span>删除</span>
+                       </a>
+                        |
+
+                        {$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",''}
+
+                    </td>
+                    </td>
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+</table>
+
+<include file="Public:pagerNum" />
+
+
+</div>
+
+

@@ -1,0 +1,80 @@
+<link href="__PUBLIC__/Plugs/emoji/emoji.css?cb=<?=time()?>" rel="stylesheet" type="text/css" />
+<div class="pageContent">
+    <form method="post" action="__URL__/check" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="{$vo.id}" />
+        <input type="hidden" name="user_id" value="{$vo.user_id}" />
+        <div class="pageFormContent" layoutH="58">
+                <div class="content-div1">
+                    <div class="unit" >
+                        <strong>{$vo['base64_title']}</strong>
+                    </div>
+
+                    <div class="unit" >
+                        {$vo['nick_name']} &nbsp;&nbsp; {$vo['create_time']|date="Y-m-d H:i:s",###}
+                    </div>
+
+                    <div class="unit content-text">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$vo['base64_content']}
+                    </div>
+                    <div class="unit">
+                        <ul class="tabImg">
+                            <volist name="img" id="item">
+                                <li><a target="_blank" href="{$item}"><img src="{$item}"  width="80" height="80" /></a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="unit"></div>
+
+                <div class="content-div2">
+
+                    <div class="unit">
+                        <label>屏蔽帖子：</label>
+                        <input <if condition="$vo.status eq 1">checked</if> name="status" type="radio" value="1" />否
+                        <input <if condition="$vo.status eq 0">checked</if> name="status" type="radio" value="0" />是
+                    </div>
+
+                    <div class="unit">
+                        <label>热门推荐：</label>
+                        <input <if condition="$vo.home_recommend eq 0">checked</if> name="home_recommend" type="radio" value="0" />否
+                        <input <if condition="$vo.home_recommend eq 1">checked</if> name="home_recommend" type="radio" value="1" />是
+                    </div>
+
+                    <div class="unit">
+                        <label>置顶帖子：</label>
+                        <input <if condition="$vo.top_recommend eq 0">checked</if> name="top_recommend" type="radio" value="0" />否
+                        <input <if condition="$vo.top_recommend eq 1">checked</if> name="top_recommend" type="radio" value="1" />是
+                    </div>
+
+                    <div class="unit">
+                        <label>屏蔽用户：</label>
+                        <input name="community_status" type="radio" value="0" <if condition="$vo['community_status'] eq 0 or $vo['community_status'] lt time()">checked</if> />否
+                        <input name="community_status" type="radio" value="1" <if condition="!in_array($vo['community_status'],[0,2]) and $vo['community_status'] gt time()">checked</if> />禁言一天
+                        <input name="community_status" type="radio" value="2" <if condition="$vo.community_status eq 2">checked</if> />永久
+                    </div>
+
+                </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <notempty name='vo'>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <else/>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">添加</button></div></div></li>
+                </notempty>
+
+
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+<style>
+    .content-div1{width:97%; border:1px solid #CCC; min-height:340px;padding:10px;}
+    .content-div2{width:97%; border:1px solid #CCC; min-height:110px;padding:10px;}
+    .content-text{width: 99%;height: 194px;letter-spacing:1px;line-height: 1.5em;overflow:auto;}
+    .tabImg li{float: left;margin-right: 5px;border:3px solid #f2f2f2;overflow: hidden;cursor: pointer;}
+</style>
+

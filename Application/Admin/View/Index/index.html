@@ -1,0 +1,491 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$Think.config.sitename}</title>
+<link rel="shortcut icon" href="__PUBLIC__/Home/images/icon/16X16.ico">
+<link href="__PUBLIC__/dwz/themes/default/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/dwz/themes/css/core.css" rel="stylesheet" type="text/css" />
+<!--[if IE]>
+<link href="__PUBLIC__/dwz/themes/css/ieHack.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+<style type="text/css">
+	#header{height:85px}
+	#leftside, #container, #splitBar, #splitBarProxy{top:90px}
+	.statistics{margin-left: 5%}
+	.statistics ul li {line-height: 30px;}
+</style>
+<script>
+/*ThinkPHP常量*/
+var _APP_="__APP__";
+var _PUBLIC_="__PUBLIC__";
+var ADMIN = '__ADMIN__';
+
+/*本地域名正则表达式*/
+//var localTest=/^http?:\/\/<?php echo str_replace(".","\.",$_SERVER['HTTP_HOST']) ?>\//i;
+var localTest=/^http?:\/\/[^\/]*?(sinaapp\.com)\//i;
+</script>
+<!--引入百度编辑器-->
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.min.js"> </script>
+<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<script type="text/javascript" src="__PUBLIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<!--引入DWZ-->
+<script src="__PUBLIC__/dwz/js/speedup.js" type="text/javascript"></script>
+<script src="__PUBLIC__/dwz/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/dwz/js/jquery.cookie.js" type="text/javascript"></script>
+<script src="__PUBLIC__/dwz/js/jquery.bgiframe.js" type="text/javascript"></script>
+<!-- <script src="__PUBLIC__/xheditor/xheditor-1.2.1.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/xheditor/xheditor_lang/zh-cn.js" type="text/javascript"></script> -->
+<script src="__PUBLIC__/dwz/js/dwz.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/common/cookie.js"></script>
+<!--表单验证插件-->
+<script src="__PUBLIC__/Plugs/jquery.validate.simple.js" type="text/javascript"></script>
+<link rel="stylesheet" href="__PUBLIC__/dwz/js/jquery.validate.simple.css">
+
+<script src="__PUBLIC__/dwz/js/dwz.tree.js" type="text/javascript"></script>
+<script src="__PUBLIC__/Plugs/echarts.min.js" type="text/javascript"></script>
+
+
+
+<script type="text/javascript">
+function fleshVerify(){
+	//重载验证码
+	$('#verifyImg').attr("src", '__MODULE__/Public/verify/'+new Date().getTime());
+}
+function dialogAjaxMenu(json){
+	dialogAjaxDone(json);
+	if (json.statusCode == DWZ.statusCode.ok){
+			//扩展
+			var menuTag=$("#navMenu .selected").attr('menu');
+			$("#sidebar").loadUrl("__MODULE__/Public/menu/menu/"+menuTag);
+	}
+}
+
+function navTabAjaxMenu(json){
+	navTabAjaxDone(json);
+	if (json.statusCode == DWZ.statusCode.ok){
+		//扩展
+		var menuTag=$("#navMenu .selected").attr('menu');
+		$("#sidebar").loadUrl("__MODULE__/Public/menu/menu/"+menuTag);
+	}
+}
+
+
+function navTabAjaxGroupMenu(json){
+	navTabAjaxDone(json);
+	if (json.statusCode == DWZ.statusCode.ok){
+		//扩展
+		var menuTag=$("#navMenu .selected").attr('menu');
+		$("#sidebar").loadUrl("__MODULE__/Public/menu/menu/"+menuTag);
+	}
+}
+
+
+/*function navTabAjax(json){
+	navTabAjaxDone(json);
+	if (json.statusCode == DWZ.statusCode.ok){
+		$("#navMenu").loadUrl("__MODULE__/Public/nav");
+	}
+}
+*/
+$(function(){
+	DWZ.init("__PUBLIC__/dwz/dwz.frag.xml", {
+		loginUrl:"__MODULE__/Public/login_dialog", loginTitle:"登录",	// 弹出登录对话框
+		statusCode:{ok:1,error:0},
+		pageInfo:{pageNum:"pageNum", numPerPage:"numPerPage", orderField:"_order", orderDirection:"_sort"}, //【可选】
+		debug:false,	// 调试模式 【true|false】
+		callback:function(){
+			initEnv();
+			$("#themeList").theme({themeBase:"__PUBLIC__/dwz/themes"});
+		}
+	});
+});
+</script>
+</head>
+
+<body scroll="no">
+	<div id="layout">
+		<div id="header">
+			<div class="headerNav">
+				<a class="logo" href="__MODULE__">Logo</a>
+				<ul class="nav">
+					<li>
+						<a id="hideStatus" href="javascript:;" title="用户操作异常" onclick="hideDialog()" >隐藏异常提示框
+						</a>
+					</li>
+					<li style="margin-top:0px;">
+						<a href="__MODULE__/ExceptionNotice/index" title="用户操作异常" target="navTab" rel="ExceptionNotice">
+							用户操作异常<span id="notice" style="color:red;"></span>
+						</a>
+					</li>
+					<li><a href="__MODULE__/Public/ClearRuntime" title="你确定要清除缓存吗？" target="ajaxTodo" rel="Runtime">清除缓存</a></li>
+					<if condition="$_SESSION['authId'] eq 1 or $_SESSION['authId'] eq 17">
+						<li><a href="__MODULE__/Public/commonConf" target="dialog" rel="commonConf" width="600" height="800">网站配置</a></li>
+					</if>
+					<li><a href="__MODULE__/Public/main" target="dialog" width="580" height="360" rel="sysInfo">系统消息</a></li>
+					<li><a href="__MODULE__/Public/password/" target="dialog" width="650" height="350" mask="true">修改密码</a></li>
+					<li><a href="__MODULE__/Public/profile/" target="dialog" mask="true">修改资料</a></li>
+					<li><a href="__MODULE__/Public/logout/">退出</a></li>
+				</ul>
+				<ul class="themeList" id="themeList">
+					<li theme="default"><div class="selected">蓝色</div></li>
+					<li theme="green"><div>绿色</div></li>
+					<li theme="purple"><div>紫色</div></li>
+					<li theme="silver"><div>银色</div></li>
+					<li theme="azure"><div>天蓝</div></li>
+				</ul>
+			</div>
+			<div id="navMenu">
+				<ul>
+					<volist name="volist" id="vo" key='k'>
+						<li <eq name="k" value='1'>class="selected"</eq> menu="{$vo.menu}"><a href="javascript:void;" onclick="table('{$vo.menu}')" ><span>{$vo.name}</span></a></li>
+					</volist>
+				</ul>
+			</div>
+		</div>
+
+		<ul>
+			<include file="Public:work" />
+		</ul>
+
+		<div id="container">
+			<div id="navTab" class="tabsPage">
+				<div class="tabsPageHeader">
+					<div class="tabsPageHeaderContent"><!-- 显示左右控制时添加 class="tabsPageHeaderMargin" -->
+						<ul class="navTab-tab" style="left:17px;">
+							<li tabid="main" class="main"><a href="javascript:void(0)"><span><span class="home_icon">我的主页</span></span></a></li>
+						</ul>
+					</div>
+					<div class="tabsLeft" onclick="left()">left</div><!-- 禁用只需要添加一个样式 class="tabsLeft tabsLeftDisabled" -->
+					<div class="tabsRight">right</div><!-- 禁用只需要添加一个样式 class="tabsRight tabsRightDisabled" -->
+					<div class="tabsMore">more</div>
+				</div>
+				<ul class="tabsMoreList">
+					<li><a href="javascript:void(0)">我的主页</a></li>
+				</ul>
+				<div class="navTab-panel tabsPageContent layoutBox">
+					<div class="page unitBox" id="workindex">
+						<div class="accountInfo">
+							<div class="alertInfo">
+								<h2><a target="_blank" href="http://www.qqty.com">前台网站</a></h2>
+							</div>
+							<div class="right">
+								<p>{$Think.now}</p>
+							</div>
+							<p><span>{$Think.config.sitename}</span></p>
+							<p>Welcome, {$_SESSION['loginUserName']}</p>
+						</div>
+						<if condition="getUserPower()['is_show_index'] eq 1">
+						<div class="pageFormContent">
+						<div id="register" style="width: 500px;height:300px;float: left;margin-left: 2%"></div>
+						<div id="recharge" style="width: 500px;height:300px;float: left;"></div>
+						<script>
+							// 基于准备好的dom，初始化echarts实例
+							var register = echarts.init(document.getElementById('register'));
+							option1 = {
+							    title: {
+							        text: '近七天注册'
+							    },
+							    tooltip : {
+							        trigger: 'axis'
+							    },
+							    grid: {
+							        left: '3%',
+							        right: '4%',
+							        bottom: '3%',
+							        containLabel: true
+							    },
+							    xAxis : [
+							        {
+							            type : 'category',
+							            boundaryGap : false,
+							            data : {$days}
+							        }
+							    ],
+							    yAxis : [
+							        {
+							            type : 'value'
+							        }
+							    ],
+							    series : [
+							        {
+							            name:'注册数',
+							            type:'line',
+							            stack: '总量',
+							            label: {
+							                normal: {
+							                    show: true,
+							                    position: 'top'
+							                }
+							            },
+							            areaStyle: {normal: {}},
+							            data:{$register}
+							        }
+							    ]
+							};
+							// 使用刚指定的配置项和数据显示图表。
+							register.setOption(option1);
+
+							// 基于准备好的dom，初始化echarts实例
+							var recharge = echarts.init(document.getElementById('recharge'));
+							option2 = {
+							    title: {
+							        text: '近七天充值'
+							    },
+							    tooltip : {
+							        trigger: 'axis'
+							    },
+							    grid: {
+							        left: '3%',
+							        right: '4%',
+							        bottom: '3%',
+							        containLabel: true
+							    },
+							    xAxis : [
+							        {
+							            type : 'category',
+							            boundaryGap : false,
+							            data : {$days}
+							        }
+							    ],
+							    yAxis : [
+							        {
+							            type : 'value'
+							        }
+							    ],
+							    series : [
+							        {
+							            name:'充值金额',
+							            type:'line',
+							            stack: '总量',
+							            label: {
+							                normal: {
+							                    show: true,
+							                    position: 'top'
+							                }
+							            },
+							            areaStyle: {normal: {}},
+							            data:{$recharge}
+							        }
+							    ]
+							};
+							// 使用刚指定的配置项和数据显示图表。
+							recharge.setOption(option2);
+						</script>
+
+						</div>
+						<div class="statistics">
+							<ul>
+								<li><a target="navTab" href="__MODULE__/GambleList/index/gameType/1">当天真实用户推荐数：{$gambleNum|default=0}</a> </li>
+								<li><a target="_blank" href="{:U('@jc')}">当前可推荐赛事场数：亚盘 {$gameNum|default=0} 场 &nbsp;&nbsp;&nbsp;&nbsp;竞彩 {$bettingNum|default=0} 场 </a></li>
+								<li><a target="navTab" href="__MODULE__/AccountLog">{$coinMsg}</a></li>
+								<li><a target="navTab" href="__MODULE__/AccountLog/salesCount/gameType/1">当前推荐被购买数： {$trueQuizSum.quizSum} &nbsp;&nbsp;&nbsp;&nbsp;销售金额 {$trueQuizSum.quizRradeCoin}</a> </li>
+								<li><a target="navTab" href="__MODULE__/AccountLog">{$UsercoinMsg}</a></li>
+								<li><a target="navTab" href="__MODULE__/AccountLog">{$conUsercoinMsg}</a></li>
+								<!-- <li><a target="navTab" href="__MODULE__/GambleList/index/gameType/1">{$gambleMsg}</a></li> -->
+								<li><a target="navTab" href="__MODULE__/AccountLog/index/drawing/1">{$accountLogMsg}</a></li>
+								<li><a target="navTab" href="__MODULE__/PublishList">{$newsMsg}</a></li>
+							</ul>
+						</div>
+						<else/>
+							<div class="pageFormContent">
+								<p><strong>欢迎来到全球体育后台管理系统</strong></p>
+								</pre>
+							</div>
+						</if>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div id="pop" style="display:none;">
+		<style type="text/css">
+			#pop{background:#fff;width:260px;border:1px solid #e0e0e0;font-size:12px;position: fixed;right:10px;bottom:10px;}
+			#popHead{line-height:32px;background:#f6f0f3;border-bottom:1px solid #e0e0e0;position:relative;font-size:12px;padding:0 0 0 10px;}
+			#popHead h2{font-size:14px;color:#666;line-height:32px;height:32px;}
+			#popHead #popClose{position:absolute;right:10px;top:10px;}
+			#popHead a#popClose:hover{color:#f00;cursor:pointer;}
+			#popContent{padding:5px 15px;}
+			#popTitle a{line-height:50px;font-size:14px;font-family:'微软雅黑';color:red;font-weight:bold;text-decoration:none;}
+			#popTitle a:hover{color:#f60;}
+
+			#popMore{text-align:right;border-top:1px dotted #ccc;line-height:24px;margin:8px 0 0 0;padding-top: 5px;}
+			#popMore a{color:#f60;}
+			#popMore a:hover{color:#f00;}
+		</style>
+		<div id="popHead">
+			<a id="popClose" title="关闭">关闭</a>
+			<h2>温馨提示</h2>
+		</div>
+		<div id="popContent">
+			<dl>
+				<dt id="popTitle"><a id="unDeal" href="__MODULE__/ExceptionNotice/index" target="navTab"></a></dt>
+			</dl>
+			<p id="popMore"><a href="__MODULE__/ExceptionNotice/index" target="navTab">查看 »</a></p>
+		</div>
+	</div>
+
+	<div id="footer">全彩科技有限公司 &copy; 2017 <a href="http://www.qqty.com" target="_blank">qqty.com</a></div>
+
+
+</body>
+</html>
+<script type="text/javascript">
+$(function(){
+	//改变按钮显示隐藏或显示
+	var storage = window.localStorage;
+	if (storage["hideStatus"] != 1)
+	{
+		$('#hideStatus').html('隐藏异常提示框');
+	}
+	else
+	{
+		$('#hideStatus').html('显示异常提示框');
+	}
+
+	$('#popClose').click(function(event) {
+  		$('#pop').css({
+      		display: 'none'
+      	});
+  	});
+
+	setTimeout('getNotIsException()',100);//监控是否有未处理的异常
+});
+setInterval('getNotIsException()', 1200000);//二十分钟更新一次
+//隐藏或显示右下角的提示框（目的就是有些用户不想看这提示框）
+function hideDialog()
+{
+	if(!window.localStorage){
+ 		alert('您的浏览器版本不支持本地存储，请更新！');
+	}
+	else
+	{
+		var storage = window.localStorage;
+		// storage.hideStatus = 0;
+		if (storage["hideStatus"] == 1)
+		{
+			$('#hideStatus').html('隐藏异常提示框');
+			storage.hideStatus = 0;
+		}
+		else
+		{
+			$('#hideStatus').html('显示异常提示框');
+			storage.hideStatus = 1;
+		}
+	}
+
+}
+//监控是否有未处理的异常
+function getNotIsException()
+{
+	var storage = window.localStorage;
+    $.ajax({
+        type: "POST",
+        url: ADMIN+'/Public/getNotIsException.html',
+        dataType:'json',
+        success: function(data){
+          	if(data.status == 1)
+          	{
+          		if(data.info['excepLogCount'] != 0) //判断是否有未处理异常消息
+          		{
+          			$('#notice').text('('+data.info['excepLogCount']+')');
+          		}
+              	if (data.info['new_count'] != 0) //判断是否有新异常消息
+              	{
+              		//用本地存储来隐藏或显示对话框
+              		if (storage.hideStatus != 1)
+              		{
+	              		$('#pop').css({
+	              			display: 'block'
+	              		});
+	              		$('#unDeal').html('系统发现新的用户操作异常('+data.info['new_count']+')');
+					}
+              	}
+
+
+
+          }
+        }
+    });
+}
+//工作窗口切换功能
+var arr = [];
+function table($menu)
+{
+	var _height = $("#sidebar").height() - $("li[type="+ $menu +"]").find(".accordionContent").length * 25 -10;
+	$('.accordionContent').css('height',_height);
+	$(".navTab-tab").css('left','0px');
+	var navtable = $("li[menu='"+$menu+"']");
+	var work = $("li[type='"+$menu+"']");
+	$('.unitBox').each(function(){
+		if($(this).css('display') == 'block'){
+			right = $(this).children('#pagerForm').attr('action');
+			return false;
+		}
+	});
+	arr[$('#navMenu ul').children('.selected').attr('menu')] = right;
+	console.log(arr);
+	navtable.siblings("li").removeClass();
+	navtable.addClass('selected');
+	work.siblings("li").css('display','none');
+	work.css('display','block');
+	var data = getmenu($menu);
+	var res = eval('(' + data + ')');
+	$(".navTab-tab").children("li").css('display','none');
+	$(".navTab-tab").css('left','17px');
+	for(var i=0;i<res.length;i++){
+		$("li[tabid='"+res[i].name+"']").css('display','block');
+	}
+	$('.navTab-tab li').each(function(){
+		var fat_type= $(this).attr('fat');
+		if(fat_type == $menu)
+		{
+			$(this).css('display','block');
+		}
+	});
+	if(arr[$menu])
+	{
+		$("li[tabid='main']").css('display','block');
+		$(".navTab-panel").children("div").css('display','none');
+		$("form[action='"+ arr[$menu] +"']").parent().css('display','block');
+		$("li[url='"+ arr[$menu] +"']").addClass('selected');
+	}else{
+		$(".navTab-panel").children("div").css('display','none');
+		$("li[tabid='main']").css('display','block').addClass('selected');
+		$("#workindex").css('display','block');
+	}
+}
+//ajax查询列表url
+function getmenu($menu) {
+	var result;
+	//用ajax的“同步方式”调用一般处理程序
+	$.ajax({
+		url: "__MODULE__/Public/menulist",
+		async: false,//改为同步方式
+		type: "GET",
+		data: { menu:$menu },
+		success: function (courseDT4) {
+			result = courseDT4;
+		}
+	});
+	return result;
+}
+
+function left()
+{
+	var _left = parseInt($(".navTab-tab").css('left'));
+	console.log(_left);
+	if((_left + 122 ) <= 17)
+	{
+		$('.navTab-tab').css('left',_left + 122);
+		left();
+	}else{
+		$('.navTab-tab').css('left',17);
+	}
+	$(".tabsRight").removeClass("tabsRightDisabled");
+}
+</script>

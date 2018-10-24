@@ -1,0 +1,73 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label >昵称：</label>
+				<input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+			</li>
+
+			<li>
+                <label >手机号：</label>
+                <input type="text" name="phone" value="{$_REQUEST.phone}"/>
+            </li>
+			<li>
+				<label>挑选的高手：</label>
+				<input type="text" name="master_name" value="{$_REQUEST.master_name}"/>
+			</li>
+			<li>
+				<label>竞猜时间：</label>
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="10">至
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="10">
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="1%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="6%">挑选的高手</th>
+			<th width="5%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'add_time')"> class="desc"</if> orderField="add_time" <if condition="$_REQUEST._order eq 'add_time'">class="{$_REQUEST._sort}"</if>>提交时间</th>
+			<th width="6%">手机号码</th>
+			<th width="3%">昵称</th>
+			<th width="5%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'reg_time')"> class="desc"</if> orderField="reg_time" <if condition="$_REQUEST._order eq 'reg_time'">class="{$_REQUEST._sort}"</if>>注册时间</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['master_name']|default="<font color='red'>相关记录被删除</font>"}</td>
+					<td>{$vo['add_time']|date="Y-m-d H:i",###}</td>
+				    <td>{$vo['phone']}</td>
+				    <td>{$vo['nick_name']|default="-"}</td>
+					<td>{$vo['reg_time']|default="-"|date="Y-m-d H:i",###}</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

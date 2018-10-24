@@ -1,0 +1,183 @@
+/**
+ * 公共css样式文件
+ * 
+ * @author pengjian <710348662@qq.com>
+ *
+ * @since  2016-04-27
+**/
+
+
+/*导航02 */
+.n_module{height: .7rem;line-height: .7rem; background: #fff; border-bottom: 1px solid #dddddd}
+.nav_list{margin: 0 auto;padding: 0 2%;text-align: center;}
+.nav_list a{color: #666666; display: inline-block;text-align: center;height: .68rem;margin: 0 .8%;width: 17.2%}
+/*.nav_list a:hover{color: #0166b8;border-bottom: .1rem solid #0166b8;}*/
+.nav_list a.on{color: #0166b8;border-bottom: .1rem solid #0166b8;}
+
+/*二级导航*/
+.sub_nav a{display: inline-block;text-align: center; width: 25%; height: .7rem;line-height: .7rem;border-right: 1px solid #101f36;background-color:#293952;float:left;color: #cccccc}
+.sub_nav a.on{background:#d0021c url(../../images/euro/on.png) no-repeat center bottom; color: #fff;background-size:.18rem .09rem; }
+
+ 
+
+
+
+/*-----------------------------分页 s---------------------------------*/
+.paged{float: left; width: 100%; text-align: center; margin-top: .2rem}
+.paged .load_gif{ height: .3rem;}
+.paged .load_gif img { width: .3rem; vertical-align: middle;}
+.paged a{ width: 100%; display: inline-block; font-size: .24rem;}
+.paged a:hover{color: #fff}
+
+/* 绿色 */
+.btn-green {
+  color: #ffffff;
+  background-color: #2ac782;
+  border-color: #2ac782;
+}
+.btn-green:hover,
+.btn-green:focus,
+.btn-green.focus,
+.btn-green:active,
+.btn-green.active,
+.open > .dropdown-toggle.btn-green {
+  color: #ffffff;
+  background-color: #2db77b;
+  border-color: #2db77b;
+}
+.btn-green:active,
+.btn-green.active,
+.open > .dropdown-toggle.btn-green {
+  background-image: none;
+}
+.btn-green.disabled,
+.btn-green[disabled],
+fieldset[disabled] .btn-green,
+.btn-green.disabled:hover,
+.btn-green[disabled]:hover,
+fieldset[disabled] .btn-danger:hover,
+.btn-green.disabled:focus,
+.btn-green[disabled]:focus,
+fieldset[disabled] .btn-green:focus,
+.btn-green.disabled.focus,
+.btn-green[disabled].focus,
+fieldset[disabled] .btn-green.focus,
+.btn-green.disabled:active,
+.btn-green[disabled]:active,
+fieldset[disabled] .btn-green:active,
+.btn-green.disabled.active,
+.btn-green[disabled].active,
+fieldset[disabled] .btn-green.active {
+  background-color: #2ac782;
+  border-color: #2ac782;
+}
+
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  /*border-radius: 4px;*/
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+  outline:none;
+}
+.btn:hover,
+.btn:focus,
+.btn.focus {
+  color: #333333;
+  text-decoration: none;
+  outline:none
+}
+.btn:active,
+.btn.active {
+  outline: 0 none;
+  background-image: none;
+  /* -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); */
+  /* box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); */
+}
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.btn-default {
+  color: #fff;
+  background-color: #ccc;
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default.focus,
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+  color: #fff;
+  background-color: #bebebe;
+}
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+  background-image: none;
+}
+.btn-default.disabled,
+.btn-default[disabled],
+fieldset[disabled] .btn-default,
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+fieldset[disabled] .btn-default:hover,
+.btn-default.disabled:focus,
+.btn-default[disabled]:focus,
+fieldset[disabled] .btn-default:focus,
+.btn-default.disabled.focus,
+.btn-default[disabled].focus,
+fieldset[disabled] .btn-default.focus,
+.btn-default.disabled:active,
+.btn-default[disabled]:active,
+fieldset[disabled] .btn-default:active,
+.btn-default.disabled.active,
+.btn-default[disabled].active,
+fieldset[disabled] .btn-default.active {
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+.btn-default .badge {
+  color: #ffffff;
+  background-color: #333333;
+}
+
+/* app下载 */
+.app-bar-con{overflow: hidden; position:fixed; left:0; bottom: 0; width:100%; height: 1.1rem; z-index:10001;}
+.app-bar{ width:100%; height: 1.1rem; background: url(../../images/euro/app-bar.png) no-repeat center center; background-size: 100%  100%; color:#FFF;  font-size: 12px; font-family: "Microsoft Yahei";}
+.app-bar .app-logo{float:left; width: .8rem; margin: .15rem 0 0 .5rem;}
+.app-bar .app-logo img{ width: .8rem;} 
+.app-btn{ float:right; background-color: #ff7e00; border-radius: .08rem; width: 1.8rem; height: .68rem; line-height: .68rem; font-size: 0.34rem; text-align: center; margin: .21rem .2rem 0 0; color:#FFF;}
+.app-close{ width: .38rem; height: .38rem; background: url(../../images/euro/app-close.png) no-repeat; background-size:100%; position: absolute; left: 0; top: 0; /* left: -.15rem; top: -.24rem; */z-index:10002;}
+
+/*-----------------------------分页 e---------------------------------*/

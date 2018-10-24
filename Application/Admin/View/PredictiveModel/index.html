@@ -1,0 +1,177 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+    <input type="hidden" name="predictive_type" value="{$_REQUEST.predictive_type}" />
+    <div class="searchBar">
+
+        <ul class="searchContent">
+            <li>
+                <label>预测时间：</label>
+                <input  class="date textInput" type="text" datefmt="yyyy-MM-dd" name="predictive_date" value="{$_REQUEST.predictive_date}" size="10">
+            </li>
+            <li>
+                <label>首页显示：</label>
+                <select name="home_recommend" onchange="$(form).submit()" class="combox">
+                    <option value="">全部</option>
+                    <option <if condition="$_REQUEST.home_recommend eq '0'"> selected </if> value="0">否</option>
+                    <option <if condition="$_REQUEST.home_recommend eq '1'">selected </if> value="1">是</option>
+                </select>
+            </li>
+            <li>
+                <label>推荐状态：</label>
+                <select name="status" onchange="$(form).submit()" class="combox">
+                    <option value="">全部</option>
+                    <option <if condition="$_REQUEST.status eq '1'">selected </if> value="1">正常</option>
+                    <option <if condition="$_REQUEST.status eq '0'"> selected </if> value="0">禁用</option>
+                </select>
+            </li>
+            <li>
+                <label>付费状态：</label>
+                <select name="pay_state" onchange="$(form).submit()" class="combox">
+                    <option value="">全部</option>
+                    <option <if condition="$_REQUEST.pay_state eq '1'">selected </if> value="1">正常</option>
+                    <option <if condition="$_REQUEST.pay_state eq '0'"> selected </if> value="0">免费</option>
+                </select>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <span style='padding-left:10px;color: red'>
+                    赢：{$winrate['win'] + $winrate['half']}
+                </span>
+            </li>
+            <li>
+                <span style='padding-left:10px;color: red'>
+                    平：{$winrate['level']}
+                </span>
+            </li>
+            <li>
+                <span style='padding-left:10px;color: red'>
+                    输：{$winrate['transport'] + $winrate['donate']}
+                </span>
+            </li>
+            <li>
+                <span style='padding-left:10px;color: red'>
+                    胜率：{$winrate['winrate']}%
+                </span>
+            </li>
+            <li>
+                <span style='padding-left:10px;color: red'>
+                    盈亏：{$winrate['return_rate']}
+                </span>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="2%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+            <th width="3%">赛程id</th>
+            <th width="4%">赛事名称</th>
+            <th width="5%">预测时间</th>
+            <th width="6%">生成时间</th>
+            <th width="6%" orderField="game_start_timestamp" <if condition="$_REQUEST._order eq 'game_start_timestamp'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>比赛时间</th>
+            <th width="3%">比赛状态</th>
+            <th width="8%">主队名称</th>
+            <th width="5%">全场（半场）</th>
+            <th width="8%">客队名称</th>
+            <th width="3%">盘口</th>
+            <th width="5%">即时赔率</th>
+            <if condition="$_REQUEST.predictive_type eq ''">
+                <th width="4%">差异值</th>
+            </if>
+            <th width="5%">预测结果</th>
+            <th width="4%" orderField="forecast_rate" <if condition="$_REQUEST._order eq 'forecast_rate'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>预测比例</th>
+            <th width="3%">结算结果</th>
+            <th width="3%">盈亏</th>
+            <th width="3%">首页显示</th>
+            <th width="3%">推荐状态</th>
+            <th width="3%">付费状态</th>
+            <th width="3%">操作人</th>
+            <th width="3%">编辑</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist id="vo" name="list">
+            <tr target="sid_mission" rel="{$vo['id']}">
+                <td>{$vo['id']}</td>
+                <td>{$vo['game_id']}</td>
+                <td>{$vo['union_name']|switchName=0,###}</td>
+                <td>{$vo['predictive_date']}</td>
+                <td>{$vo['create_date_time']|date="Y-m-d H:i",###}</td>
+                <td>{$vo['game_start_timestamp']|date="Y-m-d H:i",###}</td>
+                <td>{:C('game_state')[$vo['game_state']]}</td>
+                <td>{$vo['home_team_name']|switchName=0,###}</td>
+                <td>{$vo['score']}（{$vo['half_score']}）</td>
+                <td>{$vo['away_team_name']|switchName=0,###}</td>
+                <td>{$vo['handcp']}</td>
+                <td>{$vo['odds']}</td>
+                <if condition="$_REQUEST.predictive_type eq ''">
+                    <td>{$vo['comment']}</td>
+                </if>
+                <td>{$vo['answer']}</td>
+                <td>{$vo['forecast_rate']}%</td>
+                <td>
+                    <switch name="vo.state">
+                        <case value="1"><div style="color:red;">赢</div></case>
+                        <case value="0.5"><div style="color:red;">赢半</div></case>
+                        <case value="2"><div style="color:green;">平</div></case>
+                        <case value="-1"><div style="color:blue;">输</div></case>
+                        <case value="-0.5"><div style="color:blue;">输半</div></case>
+                        <case value="-10"><div style="color:black;">取消</div></case>
+                        <case value="-11|-2"><div style="color:black;">待定</div></case>
+                        <case value="-12"><div style="color:black;">腰斩</div></case>
+                        <case value="-13"><div style="color:black;">中断</div></case>
+                        <case value="-14"><div style="color:black;">推迟</div></case>
+                        <default/>--
+                    </switch>
+                </td>
+                <td>{$vo['yingkui']}</td>
+                <td>
+                    <switch name="vo.home_recommend">
+                        <case value="0"><div style="color:green">否</div></case>
+                        <case value="1"><div style="color:blue">是</div></case>
+                    </switch>
+                </td>
+                <td>
+                    <eq name="vo.status" value='0'>
+                        <a title="确定设置为正常吗？" href="__URL__/resume/id/{$vo.id}/status/1" target="ajaxTodo"><div style="color:red;">禁用</div></a>
+                    <else/>
+                        <a title="确定设置为禁用吗？" href="__URL__/forbid/id/{$vo.id}/status/0" target="ajaxTodo"><div style="color:green">正常</div></a>
+                    </eq>
+                </td>
+                <td>
+                    <switch name="vo.pay_state">
+                        <case value="0"><div style="color:blue">免费</div></case>
+                        <case value="1"><div style="color:green">正常</div></case>
+                    </switch>
+                </td>
+                <td>{$vo['nickname']}</td>
+                <td>
+                    <if condition="$vo['game_state'] eq 0 && $vo['game_start_timestamp'] gt time()">
+                        <a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" title="{$vo.name}编辑" rel="editPage" height="450">编辑</a>
+                    </if>
+                </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+
+</div>
+
+

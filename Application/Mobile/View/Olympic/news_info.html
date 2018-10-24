@@ -1,0 +1,33 @@
+<extend name="Public/Olympic/base" />
+<block name="seo">
+    <title>2016年里约奥运会新闻滚动_全球体育手机网</title>
+</block>
+<block name="header"></block>
+    <!-- 二级头部 s -->
+    <block name="nav">
+    <header id="other_header">
+    	<a href="{:U('Olympic/index')}"></a>{$title} 
+    </header>
+    </block>
+    <!-- 二级头部 e --> 
+	
+    <!-- 列表 s -->
+    <block name="content">
+    <section class="news_con clearfix">
+       <ul>
+         <volist name='list' id='v'>
+         <li class="list clearfix">
+           <div class="n_img"><a href="{:U('Olympic/news_detail',['id'=>$v['id']])}"><img src="{$v.img|default='__IMAGES__/default.jpg'}" alt="{$v.title}"></a></div>
+           <div class="n_des">
+             <h3 class="overflow"><a href="{:U('Olympic/news_detail',['id'=>$v['id']])}">{$v.title}</a></h3>
+             <p class="q-two"><a href="{:U('Olympic/news_detail',['id'=>$v['id']])}">{$v.remark}</a></p>
+           </div> 
+         </li>
+         </volist>
+       </ul>    
+    </section>
+    <!-- 列表 e -->
+    
+    <!-- 公共js -->
+    <script type="text/javascript" src="__JS__/Olympic/common.js"></script>
+</block>

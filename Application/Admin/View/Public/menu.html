@@ -1,0 +1,47 @@
+
+<div class="accordion" fillSpace="sideBar">
+<volist name="groups" id="group">
+	<div class="accordionHeader">
+		<h2><span>Folder</span>{$group.title}</h2>
+	</div>
+	<div class="accordionContent">
+
+		<ul class="tree treeFolder">
+			<volist id="item" name="menu[$group['id']]" >
+				<eq name="item['access']" value="1">
+				<eq name="item.level" value="3">
+				<li>
+					<a href="__MODULE__/{$parents[$item['pid']]['name']}/{$item['name']}" target="navTab" rel="{$parents[$item['pid']]['name']}.{$item['name']}">{$item['title']}</a></li>
+				<else/>
+					<li><a href="__MODULE__/{$item['name']}" target="navTab" rel="{$item['name']}">{$item['title']}</a></li>
+				</eq>
+				</eq>
+			</volist>
+			<if condition="$group.id eq 34">
+			<volist name="PublishClass" id="item">
+				<ul class="tree treeFolder">
+					<li><a href="__MODULE__/PublishList/index/class_id/{$item.id}" target="navTab">{$item.name}</a>
+					<notempty name="item.childs">
+						<volist name="item.childs" id="item2">
+							<ul>
+								<li><a href="__MODULE__/PublishList/index/class_id/{$item2.id}" target="navTab" rel="奥运">{$item2.name}</a>
+								<notempty name="item2.childs">
+									<?php foreach ($item2['childs'] as $item3) { ?>
+										<ul><li><a href="__MODULE__/PublishList/index/class_id/{$item3.id}" target="navTab" rel="法国">{$item3.name}</a></li></ul>
+									<?php } ?>
+								</notempty>
+								</li>
+							</ul>
+						</volist>
+					</notempty>
+					</li>
+				</ul>
+			</volist>
+			</if>
+		</ul>
+
+	</div>
+</volist>
+</div>
+
+

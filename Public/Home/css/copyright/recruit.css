@@ -1,0 +1,35 @@
+/**
+ * 全彩关于我们css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-12-25
+**/
+/* 主体内容 */
+.home,.main{ width: 1000px; margin: 0 auto; margin-top: 12px\9; margin-bottom: 12px\9}
+.main{ margin: 12px 0; display: block}
+.home h2{ margin: 38px 0 0 0;}
+.main h2{ margin: 38px 0 0 0;}
+.main h2 img{ display: block}
+.rec-banner{ width: 1000px; height: 224px; overflow: hidden; background: url(../../images/copyright/rec-banner.jpg) no-repeat center center; position: relative;}
+.rec-banner .rec-info{ position: absolute; left: 0; bottom: 0; padding-left: 16px;margin: 11px 0}
+.rec-banner .rec-info li{ color: #ffffff; line-height: 24px;}
+.rec-banner .rec-info li span{ text-decoration: underline;}
+.tab{ border-bottom: 1px solid #e5e5e5;}
+.tab-nav,.recruitClass{ margin-bottom: 26px;}
+.tab-nav li,.recruitClass li{ float: left; margin-left: 10px;}
+.tab-nav li a,.recruitClass li a{ display: block; height: 30px; line-height: 30px; padding: 0 16px; font-size: 16px;}
+.job_intro_info{ line-height: 24px; color: #8a8a8a; margin-bottom: 28px;}
+.job_intro_info span{ color: #555;}
+.other-nav li{ margin-left: 45px; float: left;}
+.other-nav li a{ font-size: 16px;}
+p {
+    margin: 0 0 10px;
+}
+.home h1,.home .h1, .home h2, .home .h2, .home h3, .home .h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+h4,.h4,h5,.h5,h6,.h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

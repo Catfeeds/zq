@@ -1,0 +1,41 @@
+<extend name="Public/euro/base" />
+<block name="seo">
+    <title>2016欧洲杯赛程_全球体育欧洲杯专题</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/euro/hot.css"> 
+</block>
+<!-- 二级导航 s-->
+<block name="sub_nav">
+    <include file="Euro/live_nav"/>
+</block>
+<!-- 二级导航 e-->
+ 
+  <!-- 射手榜 s-->
+      <block name="content">
+  <section>
+                  
+                  <table class="tb_striker" border="0" cellpadding="0" cellspacing="0">
+                    <tbody>
+                      <tr>
+                          <th>排名</th>
+                          <th>球员</th>
+                          <th>国家</th>
+                          <th>进球</th> 
+                      </tr>
+                      <volist name="list" id="v">
+                      <tr>
+                          <td <elt name='i' value='3'>class="red"</elt>>{$i}</td>
+                          <td>{$v.player}</td>
+                          <td><img src="{$v.img_url}" alt="{$v.country_name}">{$v.country_name}</td>
+                          <td>{$v.score}<neq name="v.penalty" value="0">({$v.penalty})</neq></td> 
+                      </tr>
+                      </volist>
+                    </tbody>
+                  </table> 
+
+                  
+  </section>
+  <!-- 射手榜 e-->
+      </block>

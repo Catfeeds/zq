@@ -1,0 +1,109 @@
+<form id="pagerForm" action="__URL__/findFrontUser" method="post">
+	<input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+	<input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+	<input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+	<input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+	<volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+	<form rel="pagerForm" method="post" action="__URL__/findFrontUser" onsubmit="return dwzSearch(this, 'dialog');">
+	<input type="hidden" name="Multiselect" value="{$_REQUEST.Multiselect}"/>
+	<input type="hidden" name="is_expert" value="{$_REQUEST.is_expert}"/>
+	<input type="hidden" name="val" value="{$_REQUEST.val}"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>用户名:</label>
+				<input class="textInput" name="username" value="{$_REQUEST.username}" type="text">
+			</li>	
+			<li>
+				<label>昵 称:</label>
+				<input class="textInput" name="nick_name" value="{$_REQUEST.nick_name}" type="text">
+			</li>	
+		</ul>
+		<if condition="$Multiselect eq 1">
+		<ul class="searchContent">
+			<li>
+				<label>多昵称:</label>
+				<input class="textInput" name="more_name" value="{$_REQUEST.more_name}" type="text" style="width: 550px;">
+				<span class="inputInfo">（逗号隔开）</span>
+			</li>	
+		</ul>
+		</if>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+				<if condition="$Multiselect eq 1">
+					<li><div class="button"><div class="buttonContent"><button type="button" multlookup="userId" warn="请选择接收用户">选择带回</button></div></div></li>
+				</if>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+<div class="pageContent j-resizeGrid" style="width: 806px;">
+
+	<table class="table" layoutH="135" style="width:786px;" targetType="dialog" >
+		<thead>
+			<tr>
+			<if condition="$Multiselect eq 1">
+				<th style="width: 24px;"><div class="gridCol" title=""><input type="checkbox" class="checkboxCtrl" group="userId"></div></th>
+			</if>
+				<th width="50">用户ID</th>
+				<th>用户名</th>
+				<th>昵称</th>
+				<eq name="descript" value="1">
+					<th>简介</th>
+					<else />
+					<th>真实姓名</th>
+				</eq>
+			<if condition="$_REQUEST.val gt 0">
+				<th>专家发布类型</th>
+			</if>
+				<th width="50">选择</th>
+			</tr>
+		</thead>
+		<tbody>
+			<volist name="list" id="vo">
+			<tr>
+			<if condition="$Multiselect eq 1">
+				<td style="width: 24px;"><div><input type="checkbox" name="userId" value="{ id:'{$vo.id}', username:'{$vo.username}', nick_name:'{$vo.nick_name}' }"></div></td>
+			</if>
+				<td width="50">{$vo.id}</td>
+				<td>{$vo.username|is_show_mobile}</td>
+				<td>{$vo.nick_name}</td>
+				<eq name="descript" value="1">
+					<td>{$vo.descript}</td>
+					<else />
+					<td>{$vo.true_name}</td>
+				</eq>
+				<if condition="$_REQUEST.val gt 0">
+				<td>
+					<switch name="vo.expert_type">
+						<case value="1">足球</case>
+						<case value="2">篮球</case>
+						<case value="3">电竞</case>
+						<case value="4">综合</case>
+						<case value="5">运营专用</case>
+					</switch>
+				</td>
+				</if>
+				<td width="50">
+					<a class="btnSelect" title="选择" href="javascript:" onclick="$.bringBack({ id:'{$vo.id}', username:'{$vo.username}',nick_name:'{$vo.nick_name}', live_uniqueid:'{$vo.live_uniqueid}'})">选择</a>
+				</td>
+			</tr>
+			</volist>
+		</tbody>
+	</table>
+
+	<div class="panelBar">
+		<div class="pages">
+			<span>共{$totalCount}条</span>
+		</div>
+		<div class="pagination" targetType="dialog" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="5" currentPage="{$currentPage}"></div>
+	</div>
+	
+</div>

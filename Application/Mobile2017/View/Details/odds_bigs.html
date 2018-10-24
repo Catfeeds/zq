@@ -1,0 +1,49 @@
+<extend name="Public/tpl-detail" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/odds.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/scrollCss3/animateTeam.css">
+
+    <!-- 本页需要引用的js -->
+    <script type="text/javascript" src="__JS__/scrollCss3/collapsingToolbarLayout.js"></script> 
+</block>
+<!-- 内容 s -->
+<block name="content">
+    <section class="data_con odds_con clearfix">
+
+        <!-- 导航切换 s-->
+        <nav class="odds_nav clearfix">
+            <ul>
+                <li><a href="{:U('Details/odds_asia',array('scheid'=>$_GET['scheid']))}">亚赔</a></li>
+                <li><a href="{:U('Details/odds_euro',array('scheid'=>$_GET['scheid']))}">欧赔</a></li>
+                <li class="on"><a href="{:U('Details/odds_bigs',array('scheid'=>$_GET['scheid']))}">大小</a></li>
+                <li><a href="{:U('Details/odds_betfair',array('scheid'=>$_GET['scheid']))}">必发</a></li>
+            </ul> 
+        </nav> 
+        <!-- 导航切换 e-->
+
+        <table class="tb_odds_bigs" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <th colspan="2">公司</th>
+                    <th colspan="3">初盘</th>
+                    <th colspan="2">即时盘</th>
+                </tr>
+            <volist name='data' id='v'>
+                <tr>
+                    <td>{$v.0}</td>
+                    <td>{$v.1}</td>
+                    <td>{$v.2}</td>
+                    <td>{$v.3}</td>
+                    <td <gt name='v.4' value='$v.1'>class='red'</gt><lt name='v.4' value='$v.1'>class='green'</lt>>{$v.4}</td>
+                    <td <gt name='v.res_now' value='$v.res_star'>class='red'</gt><lt name='v.res_now' value='$v.res_star'>class='green'</lt>>{$v.5}</td>
+                    <td <gt name='v.6' value='$v.3'>class='red'</gt><lt name='v.6' value='$v.3'>class='green'</lt>>{$v.6}</td>
+                </tr>
+            </volist>
+            </tbody>
+        </table> 
+    </section>
+    <!-- 内容 e -->
+
+
+</block>

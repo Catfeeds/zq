@@ -1,0 +1,82 @@
+<include file="Public:pagerForm" />
+<div class="pageHeader">
+    <div class="searchBar">
+        <!--<ul class="searchContent">-->
+            <!--<li>-->
+                <!--<label>活动名：</label>-->
+                <!--<input type="text"name="act_name" value="{$_REQUEST.act_name}">-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<label>发起者昵称：</label>-->
+                <!--<input type="text"name="nickname" value="{$_REQUEST.nickname}">-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<label>助力者昵称：</label>-->
+                <!--<input type="text"name="sponsor_name" value="{$_REQUEST.sponsor_name}">-->
+            <!--</li>-->
+        <!--</ul>-->
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="850" height="550"><span>新增玩法</span></a></li>
+        </ul>
+    </div>
+    </div>
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="3%">ID</th>
+            <th width="10%">玩法标题</th>
+            <th width="30%">玩法选项</th>
+            <th width="4%">状态</th>
+            <th width="5%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name="list">
+            <volist id="vo" name="list">
+                <tr target="sid_record" rel="{$vo['id']}" >
+                    <td>{$vo['id']}</td>
+                    <td>{$vo['name']}</td>
+                    <td>
+                        <volist name="vo.options" id="options">
+                            <input type="checkbox" disabled="false"  value="{$options[0]}" ><lable>{$options[1]}</lable>
+                        </volist>
+
+                    </td>
+                    <td>{$vo.status|getStatus}</td>
+                    <td>
+                        <a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" height="600" width="960"title="{$vo.name}编辑" rel="editPage">编辑</a>
+                    </td>
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+<script>
+    //隐藏和显示对应题目的选项
+    function show(id,obj){
+        var show = $(obj).attr("show");
+        if(show == 0){
+            $(".action-"+id).show();
+        }else{
+            $(".action-"+id).hide();
+        }
+        //记录是否已展开
+        var new_show = show == 0 ? 1 : 0;
+        $(obj).attr("show",new_show);
+    }
+</script>
+
+

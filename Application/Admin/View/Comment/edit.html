@@ -1,0 +1,70 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="{$vo.id}" />
+		<input type="hidden" name="level" value="{$vo.level|default=1}" id="level"/>
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>分类名称：</label>
+				<textarea class="large bLeft" name="remark"  rows="11" cols="57">{$vo.content}</textarea>
+			</div>
+			<div class="unit">
+				<label>上级：</label>
+				<select name="pid" onchange="changeLevel()" id="pid">
+			    	<option value="0|1">无上级</option>
+					<volist name="list" id="item">
+						<option value="{$item.id}|2" <if condition="$item['id'] eq $vo['pid']">selected</if> >{$item.name}</option>
+						<notempty name="item.childs">
+							<volist name="item.childs" id="item2">
+								<option value="{$item2.id}|3" <if condition="$item2['id'] eq $vo['pid']">selected</if> >|_{$item2.name}</option>
+								<notempty name="item2.childs">
+									<volist name="item2.childs" id="item3">
+										<option value="{$item3.id}|4" <if condition="$item3['id'] eq $vo['pid']">selected</if>>|__{$item3.name}</option>
+									</volist>
+								</notempty>
+							</volist>
+						</notempty>
+					</volist>
+				</select>
+			</div>
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft"  name="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+				</select>
+			</div>
+			<div class="unit">
+				<label>是否推荐：</label>
+				<input type="radio" name="is_recommend"  value="1" <eq name="vo.is_recommend" value="1">checked</eq> />是
+                <input type="radio" name="is_recommend"  value="0" <eq name="vo.is_recommend" value="0">checked</eq> />否
+			</div>
+			<div class="unit">
+				<label>排序：</label>
+				<input type="text" class="" name="sort" value="{$vo.sort}">
+			</div>
+			
+			<div class="unit">
+				<label>备 注：</label>
+				<textarea class=""  name="remark" rows="2" cols="57">{$vo.remark}</textarea>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script>
+	//同步改变level值
+	function changeLevel(){
+		var vals = $("#pid").val().split("|");
+		var level = vals[1];
+		$("#level").val(level);
+	}
+</script>
+

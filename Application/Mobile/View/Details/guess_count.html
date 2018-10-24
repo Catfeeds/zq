@@ -1,0 +1,203 @@
+<extend name="Public/tpl-detail" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/guess.css">
+
+    <style>
+        .win,.win_half,.lose,.lose_half,.ping,.putoff,.pending,.cancel,.interrupt,.cut{top: 2.1rem;}
+    </style>
+    <script type="text/javascript" src="__PUBLIC__/Mobile/Plugs/jquery.lazyload.min.js"></script>
+    <script>
+        var DOMAIN = "m."+"__DOMAIN__";
+        var IMAGES = "__IMAGES__";
+    </script>
+</block>
+<!-- 二级头部 s -->
+<block name="header">
+    <header id="other_header"> 
+        <a href="{:U('Details/odd_guess',array('scheid'=>$scheid))}"></a>推荐统计
+    </header>
+</block>
+
+
+<!-- 二级头部 e --> 
+<!-- 比赛对阵 s-->
+<block name="against">
+    <section class="game_vs clearfix">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td id="home_name"><eq name='Think.cookie.language' value='0'>{$against.home_team_name.0}<else/>{$against.home_team_name.1}</eq></td>
+            <td><img src="{$against.home_logo}" alt="{$against.home_team_name.0}" onerror='this.src="__PUBLIC__/Home/images/common/home_def.png"'></td>
+            <td><span>VS</span></td>
+            <td><img src="{$against.away_logo}" alt="{$against.away_team_name.0}" onerror='this.src="__PUBLIC__/Home/images/common/away_def.png"'></td>
+            <td id="away_name"><eq name='Think.cookie.language' value='0'>{$against.away_team_name.0}<else/>{$against.away_team_name.1}</eq></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</block>
+<!-- 比赛对阵 e-->
+
+<!-- nav s-->
+<block name="nav">
+    <section class="n_module">
+        <nav class="nav_list clearfix nav_num_3">
+            <!--            <a href="#" class="on">推荐</a>-->
+            <a href="{:U('',['scheid'=>$scheid,'type'=>1])}" <eq name='type' value='1'>class="on"</eq>>让球</a>
+            <a href="{:U('',['scheid'=>$scheid,'type'=>-1])}" <eq name='type' value='-1'>class="on"</eq>>大小</a>
+            <a href="{:U('',['scheid'=>$scheid,'type'=>2])}" <if condition="$type eq '2' or $type eq '-2' ">class="on"</if>>竞彩</a>
+        </nav>
+    </section>
+</block>
+<!-- nav e -->
+
+
+<!-- 内容 s -->
+<block name="content">
+    <div id="gambleListLoad" class="paged boxs" style="display:none;">
+        <div class="load_gif fs24 text-999">
+            <span><img src="__IMAGES__/load.gif"></span>
+            <span>正在加载更多的数据...</span>
+        </div>
+
+    </div>
+    <empty name="list">
+        <div id="gambleRelease" class="paged boxs" style="display:block;margin-top: 1rem;">
+            <div class="load_gif fs24 text-999">
+                <span style="font-size: 0.3rem;">暂无数据...</span>
+            </div>
+        </div>
+    </empty>
+
+    <div>
+        <section class="guess_count clearfix">
+            <ul id='js-list'>
+                <volist name='list' id='v'>
+                    <li>
+                        <!--各种样式: 赢:win 赢半:win_half 输:lose 输半:lose_half 平:ping -->
+
+                        <if condition="$v['result'] eq '1' OR $v['result'] eq '0.5'"><div class="win"></div></if>
+                        <if condition="$v['result'] eq '-1' OR $v['result'] eq '-0.5'"><div class="lose"></div></if>
+                        <if condition="$v['result'] eq '2' "><div class="ping"></div></if>
+                        <if condition="$v['result'] eq '-10' "><div class="cancel"></div></if>
+                        <if condition="$v['result'] eq '-11' "><div class="pending"></div></if>
+                        <if condition="$v['result'] eq '-12' "><div class="cut"></div></if>
+                        <if condition="$v['result'] eq '-13' "><div class="interrupt"></div></if>
+                        <if condition="$v['result'] eq '-14' "><div class="putoff"></div></if>
+                        <div class="gc_top clearfix">
+
+                            <a <if condition="$type eq '2' OR $type eq '-2'">href="{:U('/expUser/'.$v['user_id'].'/2')}"
+                            <else/>href="{:U('/expUser/'.$v['user_id'].'/'.$v['play_type'])}"</if> >
+                                <if condition="(($v.is_trade eq 1) OR ($v.result neq 0)) AND ($v.tradeCoin eq 0)"><div class="free"></div></if>
+                                <img  class="lazy" data-original="{$v['face']}" src="__IMAGES__/index/headImg.png"  alt="{$v.nick_name}">
+                                <div class="gct_right fl">
+                                    <p>{$v.nick_name}<if condition="$v['play_type'] eq '1' OR $v['play_type'] eq '-1'"><em class="lv lv{$v['lv']}"></em><else/><em class="lv jc_lv{$v['lv_bet']}"></em></if></p>
+                                    <p>周胜：<span>{$v.weekPercnet}% </span>  月胜：<span>{$v.monthPercnet}%</span>   季胜：<span>{$v.seasonPercnet}%</span></p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="gc_bottom clearfix">
+                            <span>近十场</span>
+                            <volist name='v.tenGamble' id='vv'>
+                                <switch name='vv'>
+                                    <case value="0.5"><em class="c_win">红</em></case>
+                                    <case value="1"><em class="c_win">红</em></case>
+                                    <case value='-0.5'><em class="c_lose">黑</em></case>
+                                    <case value='-1'><em class="c_lose">黑</em></case>
+                                    <case value='2'><em class="c_ping">走</em></case>
+                                </switch>
+                            </volist>
+                        </div>
+                        <div class="gc_des clearfix">
+                            <if condition="($v.is_trade eq 1) OR ($v.result neq 0)">
+                                <p class="p_4">推荐：
+                                    <eq name='v.play_type' value='1'>
+                                        <eq name='v.chose_side' value='1'>
+                                            <eq name='Think.cookie.language' value='0'>
+                                                {$against.home_team_name.0}
+                                                <else/>
+                                                {$against.home_team_name.1}
+                                            </eq>
+                                            <else/>
+                                            <eq name='Think.cookie.language' value='0'>
+                                                {$against.away_team_name.0}
+                                                <else/>
+                                                {$against.away_team_name.1}
+                                            </eq>
+                                        </eq>
+                                        {$v.handcp}
+                                        <span>({$v.odds})</span>
+                                    </eq>
+                                    <eq name='v.play_type' value='-1'>
+                                        <eq name='v.chose_side' value='1'>
+                                            大
+                                            <else/>
+                                            小
+                                        </eq>
+                                        {$v.handcp}
+                                        <span>({$v.odds})</span>
+                                    </eq>
+                                    <if condition="$v.play_type eq '2' OR $v.play_type eq '-2' ">
+                                        <eq name='Think.cookie.language' value='0'>
+                                            {$against.home_team_name.0}
+                                            <else/>
+                                            {$against.home_team_name.1}
+                                        </eq>({$v.handcp})
+                                        {$v.Answer} <span>({$v.odds})</span>
+                                    </if>
+
+                                </p>
+                                <p class="p_5 q-two">分析：<span>{$v.desc|default='暂无分析'}</span></p>
+                                <else/>
+                                <a href="javascript:;" class="gold" id='to-view' data-coin="{$v.tradeCoin}" data-gambleid='{$v.gamble_id}' <eq name="v.tradeCoin" value="0">style="background: green;">免费<else/>> {$v.tradeCoin}金币 </eq> </a>
+                            </if>
+                        </div>
+                    </li>
+                </volist>
+                <input type='hidden' id='game_id' value='{$scheid}'>
+                <input type='hidden' id='type' value='{$type}'>
+                <input type='hidden' id='user_id' value='{$user_auth.id}'>
+                <input type='hidden' id='page' value='2'>
+            </ul>
+            <div class="bubbleTips"></div>
+
+        </section>
+    </div>
+    <div id="showLess" class="paged boxs" style="display:none;">
+        <div class="load_gif fs24 text-999">
+            <span>已经全部加载完毕</span>
+        </div>
+    </div>
+    <div id="moreLoad" class="paged boxs" style="display:none;">
+        <div class="load_gif fs24 text-999">
+            <span><img src="__IMAGES__/load.gif"></span>
+            <span>正在加载更多的数据...</span>
+        </div>
+    </div>
+
+</block>
+<!-- 内容 e -->
+<block name="footer"></block>
+<block name="scripts">
+    <script>
+
+        var guessCountScrollTop = Cookie.getCookie('guessCountScrollTop');
+        if (guessCountScrollTop) {
+            $("html, body").animate({scrollTop: guessCountScrollTop}, 1000);
+            Cookie.delCookie('guessCountScrollTop');
+
+        }
+        // 头像跳转前的滚动位置
+        $(document).on('click','ul li .gc_top a',function () {
+            var topHeight = $(document).scrollTop();
+            Cookie.setCookie('guessCountScrollTop', topHeight, 60000);//点击位置
+        });
+
+
+
+
+    </script>
+    <script type="text/javascript" src="__JS__/guess_count.js"></script>
+    <script type="text/javascript" src="__JS__/common/trade.js"></script>
+</block>

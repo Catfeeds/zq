@@ -1,0 +1,23 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/saveAbnormal/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="device_token" value="{$_REQUEST.device_token}" />
+		<input type="hidden" name="last_ip" value="{$_REQUEST.last_ip}" />
+		<input type="hidden" name="reg_ip" value="{$_REQUEST.reg_ip}" />
+		<div class="pageFormContent" layoutH="58">
+			
+			<div class="unit">
+				<label>禁用原因：</label>
+				<textarea class=""  name="status_desc" rows="5" cols="57">{$vo.status_desc}</textarea>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

@@ -1,0 +1,103 @@
+/**
+ * 竞猜王css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-05-23
+ *
+**/
+
+/* 头部 */
+#other_header{position: relative;}
+#other_header .share{float: right;display: block; color: #fff; position: relative;}
+#other_header .share img{width: .4rem; height: .4rem;vertical-align: middle;}
+#other_header .share i{ width: .15rem; height: .15rem; border-radius: 50%; background: #eb0000; position: absolute; left: .1rem; top: .2rem;}
+/* 关注 */
+#other_header .atten{float: right; margin-right: .4rem; width: .42rem; background: url(../../images/icon/icon-atten.png) no-repeat 0 center; background-size: contain;}
+#other_header .atten2{float: right; margin-right: .4rem; width: .42rem; background: url(../../images/icon/icon-atten2.png) no-repeat 0 center; background-size: contain;}
+/* 用户头像信息 */
+.user_infor { padding: .1rem .3rem .24rem .3rem; background: #159a7f;margin-top: -1px}
+.user_infor figure{ display:-webkit-box;}
+figcaption.head_infor{ margin-left: .2rem; -webkit-box-flex:1;}
+figcaption.head_infor p{ color: #fff; margin-bottom: .05rem;}
+
+/* 个人中心头部 */
+.head_user{ height: 1.5rem; background: #0a94e4; text-align:center; -webkit-box-sizing:border-box; position: relative;z-index: 99999;margin-top: -1px;}
+.head_user a{ color:#fff; /*width: 1.44rem;*/ position: absolute; left: 50%; top: -.6rem; margin-left: -.72rem;}
+.head_user figure div,.user_infor figure div{display:inline-block; width: 1.4rem; height: 1.4rem; border-radius:50%; border: 0.04rem solid #fff; background: #fff; margin-bottom: .05rem; position:relative; overflow: hidden;}
+.head_user img,.user_infor img{ min-width: 100%; min-height: 100%; border-radius:50%;}
+.lv_position{ position: absolute; right: -.4rem; bottom: 0;}
+.user_nav{ height: 1rem; background-color: rgba(10,148,228,.5);}
+.user_nav_con{ height: 1rem; background: rgba(0,0,0,0.2); padding: .1rem 0;}
+.user_nav_con ul li{ float: left; width: 33.3%; height: .8rem; line-height: .4rem; text-align: center; color: #fff; border-right: 1px solid #fff;}
+.user_nav_con ul li a{ color: #fff;}
+.user_nav_con ul li:last-child,.user_list ul li:last-child{ border: none 0;}
+
+/* 个人中心列表项 */
+.user_list { background: #f7f7f7; padding-bottom: .14rem;}
+.user_list ul li{ background: #fff; border-bottom: 1px solid #e5e5e5;}
+.user_list ul li a{ display: block; height: .8rem; line-height: .8rem; padding: 0 .2rem;}
+.user_list ul li a:hover{ color: #ff7e00;}
+.user_list ul li a:active{ color: #ff7e00;}
+.user_list ul li span{line-height: .8rem;}
+.user_list ul li span.iconImg{ width: .54rem; margin-right: .18rem;}
+.user_list ul li span img{ width: .54rem; vertical-align: middle;}
+.user_list ul li i img{ width: .22rem; vertical-align: middle;}
+
+/* 个人战绩 */
+.user_record{ padding: .2rem;}
+.user_rate{ padding: .1rem;}
+.user_record .dl01{ height: .3rem; line-height: .3rem;}
+.user_record .dl01 dt{ padding-left: .38rem; background: url(../../images/icon/icon-cup.png) no-repeat 0 center; background-size: .3rem auto;}
+.user_record .dl01 dd{ margin-left: .18rem;}
+.user_record .beat_ul{ margin-top: .2rem;}
+.user_rate .swiper-slide,.user_rate .swiper-wrapper{ border: none;}
+
+/* 百分比环 */
+.pro_con{ padding-bottom: .2rem 0; border-bottom: .2rem solid #f7f7f7; position: relative;}
+
+
+/* 底部导航 */
+.foter_nav ul li{ float: left; height: 1rem; line-height: 1rem; width: 33.3%; text-align: center;}
+.foter_nav ul li img{ width: .34rem; margin-right: .2rem;}
+
+/*swiper-css重置*/
+.swiper-slide{ height: auto;}
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ bottom: 0;}
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ margin-right: -1.4rem;} 
+/*胜率*/
+.sw_top{padding: .1rem; font-size: .32rem; border-bottom: 1px solid #e5e5e5; margin-bottom: .3rem;}
+.sw_top img{width: .3rem!important; height: auto; vertical-align: middle;margin-top: -.1rem;margin-right: .2rem;}
+.sw_con{margin-bottom: .4rem;}
+.sw_con ul li{ float: left; width: 22.5%; height:auto; margin-left: 2%; padding: .1rem 0;}
+.sw_con01 ul li{ width: 25%; margin: 0; border-right: 2px solid #e5e5e5;}
+.sw_con01 ul li:last-child{ border-right: none 0;}
+.sw_con02 ul li{ border: 2px solid #e5e5e5; background: #f7f7f7;}
+.sw_con02 ul li:last-child{ margin-right: 2%;}
+.sw_con ul li p:nth-child(2){font-size: .24rem; color: #999;}
+.sw_con ul li p span{font-size: .32rem;}
+
+.bg_green {
+    background: #01af63 none repeat scroll 0 0 !important;
+}
+/*大小、让球导航选择*/
+.rank_nav{ background: #f7f7f7; padding: .1rem .2rem;}
+.rank_nav ul{ padding-left: 2px;}
+.rank_nav ul li{ width: 25%; position: relative; margin-left: -1px;}
+.rank_nav ul li.on a{ background: #0a94e4; color: #fff;}
+.rank_nav ul li a{ display: block; height: 0.6rem; line-height: 0.58rem; text-align: center; color: #999; border: 1px solid #0a94e4; background: #fff;}
+/*我的竞猜页面修改 2016年9月5日 10:45:24; by pengj*/
+.new_tj ul li{border-bottom: 0} 
+.myguess_new ul li{width:100%;float: left;border-bottom: .1rem solid #ededed}
+.myguess_new ul li:last-child{border-bottom: 0}
+.myguess_new .dtime{float: right;color: #989896}
+.g_detail{margin-top: .3rem;width: 100%;float: left;}
+.guess_type{float: left;width: 1.2rem;height: 1.2rem;}
+.guess_right{float: left;padding-left: .2rem;margin-top: -.1rem}
+.guess_right img{width: .34rem;height: .34rem;}
+.guess_right p{line-height: .36rem;width: 100%;height: .36rem;margin-bottom: .1rem;padding: 0;} 
+.guess_right p img{float: left;margin-right: .1rem}  
+.guess_right p span{float: left;width: 2rem}
+.guess_right p em{float: right;width: 2rem}
+#my_fenx{width: 100%;float: left;margin-top: .1rem}
+#my_fenx span{color: #676767}

@@ -1,0 +1,23 @@
+/**
+ * 欧洲杯竞猜css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-06-01
+ *
+**/
+html,body{background: url(../../images/etc/etc-bg.jpg) repeat-y 0 0; background-size: 100% auto; padding-bottom: .1rem;}
+/* 竞猜内容 */
+.cai_con{ padding: 0 .26rem;}
+.cai_con .cai_title{ height: .52rem; width: 100%; margin-top: .3rem; margin-bottom: .12rem; background: #0054ae; -webkit-transform: skew(-20deg);-moz-transform: skew(-20deg); -o-transform: skew(-20deg); -ms-transform: skew(-20deg); transform: skew(-20deg);}
+.cai_title ul{height: .52rem; overflow:hidden;  -webkit-transform: skew(20deg);-moz-transform: skew(20deg); -o-transform: skew(20deg); -ms-transform: skew(20deg); transform: skew(20deg);}
+.cai_title ul li{ height: .52rem; line-height: .52rem; text-align: center; overflow:hidden;}
+.cai_con .cai_title a{ color: #fff; font-size: .24rem;}
+.cai_con .cai_title img{ width: .3rem;}
+
+.cai_list_con .change_list{ width: 3.47rem; height: 1.22rem; padding: .3rem .2rem; background: url(../../images/etc/exchange-list-bg.png) no-repeat 0 0; background-size: 100% 100%; box-shadow: 0 0 .1rem #0b2c6b; margin-bottom: .2rem; border-radius: .1rem; color: #fff;}
+.cai_list_con .change_list a{ display: inline-block; width: 1.5rem; height: .56rem; line-height: .56rem; background: url(../../images/etc/change-on-btn.png) no-repeat 0 0; background-size: 100% 100%; text-align: center; color: #fff; text-shadow: 1px 1px 1px #000;}
+.cai_list_con .change_list a.dis{background: url(../../images/etc/change-dis-btn.png) no-repeat 0 0; background-size: 100% 100%; cursor: not-allowed; pointer-events: none;  -webkit-box-shadow: none; box-shadow: none;}
+.cai_list_con .change_list span{ display: inline-block; height: .56rem; line-height: .56rem;}
+.do_task{ display: block; width: 4rem; margin:.2rem auto;}
+

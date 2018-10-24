@@ -1,0 +1,80 @@
+<style>
+    tbody tr td:nth-child(1),td:nth-child(3){width: 70px;}
+    tbody tr td:nth-child(2),td:nth-child(4){width: 122px;}
+    .matchJc{padding:26px 126px;position:relative}
+    .matchJc .table{margin-bottom:0}
+    .matchJc .table tr td{background:#f5f5f5;font:13px/22px "Helvetica Neue", Helvetica, Arial, sans-serif}
+    .matchJc .table .selectOdd{background:#fff;color:#666;cursor:pointer}
+    .matchJc .table .selectOdd.on{background:#0094d5;color:#fff}
+</style>
+<div class="matchJc">
+    <table class="table table-bordered"  width="100%" align="center" cellspacing="0" border="0" cellpadding="0">
+<switch name="list.play_type">
+    <case value="1">
+        <tbody>
+        <tr>
+            <td>玩法</td>
+            <td>主队</td>
+            <td>盘口</td>
+            <td>客队</td>
+        </tr>
+        <eq>
+            <td>让分</td>
+            <td class="selectOdd <eq name="list.chose_side" value="1">on</eq>">{$game.home_team_name|switchName=0,###}({$game.fsw_exp_home})</td>
+            <td class="selectOdd"><if name="vo.fsw_exp" condition="$game['gtype'] eq 1 and strpos($game['fsw_exp'],'-') !== false">受</if><if condition="$game['gtype'] eq 1">{$game.fsw_exp|abs|handCpSpread}<else/>{$game.fsw_exp}</if></td>
+            <td class="selectOdd <eq name="list.chose_side" value="-1">on</eq>">{$game.away_team_name|switchName=0,###}({$game.fsw_exp_away})</td>
+        </tr>
+        </tbody>
+    </case>
+    <case value="2">
+        <tbody>
+        <tr>
+            <td>玩法</td>
+            <td>胜</td>
+            <td>平</td>
+            <td>负</td>
+        </tr>
+        <tr>
+            <td>胜平负</td>
+            <td class="selectOdd <eq name="list.chose_side" value="1">on</eq>">胜({$game.home_odds})</td>
+            <td class="selectOdd <eq name="list.chose_side" value="0">on</eq>">平({$game.draw_odds})</td>
+            <td class="selectOdd <eq name="list.chose_side" value="-1">on</eq>">负({$game.away_odds})</td>
+        </tr>
+        </tbody>
+    </case>
+    <case value="-1">
+        <tbody>
+        <tr>
+            <td>玩法</td>
+            <td>大球</td>
+            <td>盘口</td>
+            <td>小球</td>
+        </tr>
+        <tr>
+            <td>大小</td>
+            <td class="selectOdd <eq name="list['chose_side']" value="1">on</eq>">大球({$game.fsw_exp_home})</td>
+            <td class="selectOdd">{$game.fsw_exp|handCpTotal}</td>
+            <td class="selectOdd <eq name="list['chose_side']" value="-1">on</eq>">小球({$game.fsw_exp_away})</td>
+        </tr>
+        </tbody>
+    </case>
+    <case value="-2">
+        <tbody>
+        <tr>
+            <td>玩法</td>
+            <td>胜</td>
+            <td>平</td>
+            <td>负</td>
+        </tr>
+        <tr>
+            <td>让球({$game.handcp})</td>
+            <td class="selectOdd <eq name="list.chose_side" value="1">on</eq>">胜({$game.home_letodds})</td>
+            <td class="selectOdd <eq name="list.chose_side" value="">on</eq>">平({$game.draw_letodds})</td>
+            <td class="selectOdd <eq name="list.chose_side" value="-1">on</eq>">负({$game.away_letodds})</td>
+        </tr>
+        </tbody>
+    </case>
+</switch>
+    </table>
+    <i class="sign <if condition="$list['result'] eq 1 or $list['result'] eq 0.5">win<elseif condition="$list['result'] eq 2" />split<elseif condition="$list['result'] eq -1 or $list['result'] eq -0.5" />lose<elseif condition="$list['result'] eq -10"/>cancel<elseif condition="$list['result'] eq -11"/>pending<elseif condition="$list['result'] eq -12"/>cut<elseif condition="$list['result'] eq -13"/>interrupt<elseif condition="$list['result'] eq -14"/>putoff</if>"></i>
+</div>

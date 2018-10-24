@@ -1,0 +1,109 @@
+<style>
+    .searchContent label{width: auto}
+    .searchContent li{width: auto !important;margin-right: 12px;}
+</style>
+<form id="pagerForm" action="__URL__/abnormal" method="post">
+	<input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+	<input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+	<input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+	<input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+	<volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/abnormal" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>异常查询：</label>
+                <select name="abnormal" onchange="$(form).submit()" class="combox">
+                	<option <if condition="$_REQUEST.abnormal eq '1'">selected </if> value="1">同设备登录</option>
+                	<option <if condition="$_REQUEST.abnormal eq '2'">selected </if> value="2">同ip登录</option>
+                	<option <if condition="$_REQUEST.abnormal eq '3'">selected </if> value="3">同ip注册</option>
+                </select>
+			</li>
+			<li>
+				<label>设备号：</label>
+                <input type="text" name="device_token" value="{$_REQUEST.device_token}">
+			</li>
+			<li>
+				<label>登录ip：</label>
+                <input type="text" name="last_ip" value="{$_REQUEST.last_ip}">
+			</li>
+			<li>
+				<label>注册ip：</label>
+                <input type="text" name="reg_ip" value="{$_REQUEST.reg_ip}">
+			</li>
+			
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li>
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<if condition="$_SESSION['is_show_mobile'] eq 1">
+				<li><a class="edit" href="__URL__/edit/id/{sid_user}" target="dialog" mask="true" warn="请选择用户" height="650"><span>编辑</span></a></li>
+			</if>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="2%" >编号</th>
+			<th width="50%">用户昵称</th>
+			<th width="22%">
+				<switch name="abnormal">
+					<case value="1">设备号</case>
+					<case value="2">最后登录ip</case>
+					<case value="3">注册ip</case>
+				</switch>
+				（点击可查看用户）
+			</th>
+			<th width="4%" orderField="count" <if condition="$_REQUEST._order eq 'count'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>用户数量</th>
+			<th width="4%">已禁用数量</th>
+			<th width="4%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<volist id="vo" name="list">
+			<tr target="sid_user" rel="{$vo['id']}">
+				<td>{$i+$page}</td>
+				<td>{$vo.nick_name|msubstr=###,0,130}</td>
+				<td>
+					<switch name="abnormal">
+						<case value="1"><a href="__ADMIN__/FrontUser/index/device_token/{$vo.device_token}" target="navTab" mask="true" title="异常用户查看">{$vo.device_token}</a></case>
+						<case value="2"><a href="__ADMIN__/FrontUser/index/last_ip/{$vo.last_ip}" target="navTab" mask="true" title="异常用户查看">{$vo.last_ip}</a></case>
+						<case value="3"><a href="__ADMIN__/FrontUser/index/reg_ip/{$vo.reg_ip}" target="navTab" mask="true" title="异常用户查看">{$vo.reg_ip}</a></case>
+					</switch>
+				</td>
+				<td>{$vo.count}</td>
+				<td>{:array_count_values(explode(',', $vo['status']))[0]?:0}</td>
+				<td>
+					<switch name="abnormal">
+						<case value="1"><a href="__ADMIN__/FrontUser/saveAbnormal/device_token/{$vo.device_token}" target="dialog" mask="true" title="禁用操作">一键禁用</a></case>
+						<case value="2"><a href="__ADMIN__/FrontUser/saveAbnormal/last_ip/{$vo.last_ip}" target="dialog" mask="true" title="禁用操作">一键禁用</a></case>
+						<case value="3"><a href="__ADMIN__/FrontUser/saveAbnormal/reg_ip/{$vo.reg_ip}" target="dialog" mask="true" title="禁用操作">一键禁用</a></case>
+					</switch>
+				</td>
+			</tr>
+		</volist>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

@@ -1,0 +1,20 @@
+<div class="pageContent">
+	<form method="post" action="" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>消息标题：</label>
+				<input type="text" class="required" size="40" name="name" value="{$vo.title}"/>
+			</div>
+			<div class="unit">
+				<label>内容：</label>
+				<textarea class="large bLeft" name="remark"  rows="8" cols="57">{$vo.content}</textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>

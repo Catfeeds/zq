@@ -1,0 +1,79 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/logCount" method="post">
+
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li style="width: auto;margin-right: 25px;">
+                    <label>抽奖时间：</label>
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="11">至
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="11">
+                </li>
+                <li>
+                    <label style="width: 100px;">手机号&nbsp;/ &nbsp;昵称：</label>
+                    <input name="username_nickname" value="{$_REQUEST.username_nickname}" type="text" placeholder="用户名、昵称"/>
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="__URL__/logCount.html?Export=1&{:http_build_query($_REQUEST)}" ><span>导出</span></a>
+            </li>
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="2%">ID</th>
+            <th width="15%">用户名（昵称）</th>
+            <th width="4%">抽奖总次数</th>
+            <th width="80%">奖品明细</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name='list'>
+            <volist name='list' id='vo'>
+                <tr target="sid_record" rel="{$vo['id']}">
+                    <td>{$key}</td>
+                    <td>{$vo['username']|is_show_mobile}（{$vo.nick_name}）</td>
+                    <td>{$vo.log} 次</td>
+                    <td>
+                        <if condition="$vo.prize1 gt 0">[ iphone6S(128G)（{$vo.prize1} 次）      ] &nbsp;</if>
+                        <if condition="$vo.prize2 gt 0">[ 恒大7月VIP门票（{$vo.prize2} 次）      ] &nbsp;</if>
+                        <if condition="$vo.prize3 gt 0">[ 联通/电信100,移动70M（{$vo.prize3} 次）] &nbsp;</if>
+                        <if condition="$vo.prize4 gt 0">[ 行车记录仪（{$vo.prize4} 次）          ] &nbsp;</if>
+                        <if condition="$vo.prize5 gt 0">[ 2000积分（{$vo.prize5} 次）            ] &nbsp;</if>
+                        <if condition="$vo.prize6 gt 0">[ 移动/电信30,联通50M（{$vo.prize6} 次） ] &nbsp;</if>
+                        <if condition="$vo.prize7 gt 0">[ 1000积分（{$vo.prize7} 次）            ] &nbsp;</if>
+                        <if condition="$vo.prize8 gt 0">[ 欧洲杯官方T恤（{$vo.prize8} 次）       ] &nbsp;</if>
+                    </td> 
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+</table>
+
+<div class="panelBar">
+    <div class="pages">
+        <span>共{$totalCount}条</span>
+    </div>
+</div>
+
+</div>
+
+
+
+
+

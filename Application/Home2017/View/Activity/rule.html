@@ -1,0 +1,319 @@
+<include file="Public:header"/>
+<link rel="stylesheet" href="__PUBLIC__/Home/css/index/index.css">
+
+<body>
+<link rel="stylesheet" href="__PUBLIC__/Home/css/gamble/gamble.css?d=20170614">
+<include file="Public:top_include"/>
+
+
+
+<div class="g_content">
+	<div class="head_con clearfix">
+        <include file="user_info"/>
+        <div class="fr rules">
+            <a href="{:U('Activity/gamble')}" >推荐首页</a>
+            <a class="gamUser"  id="gambleLog" href="{:U('Activity/gambleLog')}" >推荐记录</a>
+            <a class="on" href="{:U('Activity/rule',['activityId'=>$activityId])}">活动规则</a>
+        </div>
+    </div>
+
+    <div class="content_main">
+        <div class="timeT"><p><img src="__PUBLIC__/Home/images/gamble/activiT.png" alt="活动规则"></p></div>
+        <div class="guess_rules">
+            <p>{$ruleText}</p>
+            <!--<p>1、推荐结果全部以90分钟常规时间赛果为准，加时、点球大战不计；猜对8道即为中奖，多人猜对奖金平分！</p>-->
+            <!--<p>2、活动期间分享推荐至朋友圈，若中奖凭截图额外加奖50元，仅限前10名；</p>-->
+            <!--<p>3、所有推荐的结果都以中国竞彩官方数据为准，若比赛延期或重赛，推荐截止时间会随之变动；</p>-->
+            <!--<p>4、奖金将统一通过全球体育APP金币形式发放（1金币=1元）；</p>-->
+            <!--<p>5、中奖名单将在比赛结束之后由全球体育APP以及【全球体育网】公众号推文公布；</p>-->
+            <!--<p>6、活动最终解释权归全球体育所有。</p>-->
+        </div>
+
+    </div>
+</div>
+<input type="hidden" value="{$activityId}" id="activityId">
+</body>
+<script>
+    $(function(){
+        //提交状态
+        if ($('.sub_con_2 a').hasClass('on'))
+        {
+
+            $('#g_sele').html(0);//已选场次
+            $('#g_have').html(0);//剩余场次
+        }
+        else
+        {
+            //共多少场
+            var gl_len = $('.guess_list').length;
+            $('#g_have').html(gl_len);
+        }
+
+        //点击选择
+        $('.win_sele a').on('click',function(){
+
+            //如果判断是否已经推荐了
+            if ($(this).siblings().hasClass('on_sele on'))
+            {
+                return;
+            }
+            //判断是否在登录的状态--同步请求
+            var isLogin = false;
+            $.ajax({
+                type: 'post',
+                async : false,
+                url: "/Activity/appLogin.html",
+                dataType: 'json',
+                success: function (data) {
+                    if(data.status==1)
+                    {
+                        isLogin = true;
+                        $('#is_login').val("success");
+                    }
+                    else
+                    {
+                        msgWindow('还有没登录喔，亲！',1);
+                    }
+                }
+            });
+
+            if (!isLogin)
+                return;
+
+//        if ($('#is_login').val() != "success")
+//        {
+//            $('#loginContent').html('还有没登录喔，亲！');
+//            $('#dailogLogin').css('display','block');
+//            return;
+//        }
+
+            $(this).addClass('on').siblings().removeClass('on');
+            //已选场次
+            var sele_len = $('.win_sele .on').length;
+            $('#g_sele').html(sele_len);
+            //剩余场次
+            var sheng_len = gl_len - sele_len;
+            $('#g_have').html(sheng_len);
+            if ($('.sub_con_2 a').hasClass('on'))
+            {
+
+                $('#g_sele').html(0);//已选场次
+                $('#g_have').html(0);//剩余场次
+            }
+
+        });
+
+        //提交事件
+        $('.sub_con_2 a').on('click',function () {
+
+            if ($(this).hasClass('on') || $(this).hasClass('submission') )
+            {
+                return;
+            }
+
+            //判断是否选择完
+            if ($('.guess_list table td.win_sele a.on').length  != $('.guess_list').length)
+            {
+                msgWindow('还有没选喔，亲！',2);
+                return;
+            }
+            $(this).html('提交中...');
+
+
+
+
+
+            var strData = '';
+            $('.guess_list table td.win_sele a.on').each(function () {
+                strData += $(this).data('singid')
+                        +':'+ $(this).data('answer')
+                        +':'+$(this).data('quizid')
+                        +':'+$(this).data('gameid')+',';
+
+            });
+            console.log(strData);
+            console.log($('#activityId').val());
+
+            $.ajax({
+                type: 'post',
+                async : false,
+                url: "/Activity/requestGamble.html",
+                data:{strData:strData,activityId:$('#activityId').val()},
+                dataType: 'json',
+                success: function (data) {
+                    $('.sub_con_2 a').html('提交答案');
+                    if(data.status==1)
+                    {
+                        msgWindow('提交成功!',2);
+                        $('.sub_con_2 a').addClass('on');
+                        $('.sub_con_2 a').html('已提交');
+                    }
+                    else if (data.status == -1)
+                    {
+                        $('.sub_con_2 a').removeClass('on');
+                        msgWindow(data.info,2);
+                        $('.sub_con_2 a').addClass('on');
+                        $('#g_sele').html(0);//已选场次
+                        $('#g_have').html(0);//剩余场次
+                    }
+                    else if (data.status == 2)
+                    {
+                        msgWindow('还有没登录喔，亲！',1);
+                    }
+                    else
+                    {
+                        msgWindow(data.info,2);
+                    }
+
+                },
+                complete:function () {
+                    $('.sub_con_2 a').removeClass('submission');
+                }
+            });
+        });
+    });
+
+    function msgWindow(msg,type)
+    {
+        var $html = '<div class="modal-scrollable" style="z-index: 1050;">' +
+                ' <div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="false" style="display: block; margin-top: -99.5px;top: 45%;">' +
+                ' <div class="modal-content">' +
+                ' <div class="modal-header" style="text-align:center;color: #000000;">' +
+                ' <button  type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>' +
+                ' <h4 class="modal-title" style="color: #000000;">温馨提示</h4>' +
+                ' </div>' +
+                ' <div class="modal-body" style="padding: 20px 50px;">' +
+                ' <dl class="clearfix text-center">' +
+                ' <dt style="padding-bottom: 10px; border-bottom: 1px solid #e5e5e5; font-weight: normal; font-size: 16px; margin-bottom: 10px;">' +
+                msg +
+                ' </dt>' +
+                '</dl>' +
+                ' <div class="btn-con" style="text-align: center; margin-top: 15px;">';
+        switch(type)
+        {
+            case 1:
+                $html = $html +
+                        ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-orange"  onclick="window.open(\'//www.' + DOMAIN + '/User/login.html\')">马上去</button>' +
+                        ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-default" data-dismiss="modal" onclick="$(\'.modal-scrollable\').addClass(\'hidden\')">再逛逛</button>';
+                break;
+            case 2:
+                $html = $html +
+                        ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-orange" data-dismiss="modal" onclick="$(\'.modal-scrollable\').addClass(\'hidden\')">确定</button>';
+                break;
+        }
+
+
+                $html = $html +
+                ' </div>' +
+                ' </div>' +
+                ' </div>' +
+                ' </div>' +
+                ' <div class="modal-backdrop fade in" style="z-index: 1040;"></div>' +
+                ' </div>';
+        $('body').append($html);
+    }
+
+
+    function qwBuyModal(obj, productId,sign) {
+
+        $.ajax({
+            type: "POST",
+            url: "/Common/qwBuyCheck.html",
+            data: {'productId': productId},
+            dataType: "json",
+            success: function (data) {
+                if (data.status == 1)
+                {
+                    var $modalHtml = '<div class="modal-scrollable" style="z-index: 1050;">' +
+                            ' <div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="false" style="display: block; margin-top: -99.5px;top: 45%;">' +
+                            ' <div class="modal-content">' +
+                            ' <div class="modal-header" style="text-align:center;">' +
+                            ' <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>' +
+                            ' <h4 class="modal-title" style="color: #000000;">温馨提示</h4>' +
+                            ' </div>' +
+                            ' <div class="modal-body" style="padding: 20px 50px;">' +
+                            ' <dl class="clearfix text-center">' +
+                            ' <dt style="padding-bottom: 10px; font-weight: normal; font-size: 16px; margin-bottom: 10px;">' +
+                            ' 查看该服务需要花费 <span class="text-red">' + data.saleCoin + '</span> 金币' +
+                            ' </dt>' +
+                            ' <div class="btn-con" style="text-align: center; margin-top: 15px;">' +
+                            ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-orange" onclick="setQwBuy('+productId+','+sign+')"> 确定 </button>' +
+                            ' <button style="width: 100px; border-radius: 3px;" type="button"  class="btn btn-default" data-dismiss="modal" onclick="$(\'.modal-scrollable\').addClass(\'hidden\')">取消</button>' +
+                            ' </div>' +
+                            ' </div>' +
+                            ' </div>' +
+                            ' </div>' +
+                            ' <div class="modal-backdrop fade in" style="z-index: 1040;"></div>' +
+                            ' </div>';
+                    $('body').append($modalHtml);
+                }
+                else
+                {
+
+                    if (data.errorCode == 8009)
+                    {
+                        var $modalHtml = '<div class="modal-scrollable" style="z-index: 1050;">' +
+                                ' <div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="false" style="display: block; margin-top: -99.5px;top: 45%;">' +
+                                ' <div class="modal-content">' +
+                                ' <div class="modal-header" style="text-align:center;color: #000000;">' +
+                                ' <button  type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>' +
+                                ' <h4 class="modal-title" style="color: #000000;">温馨提示</h4>' +
+                                ' </div>' +
+                                ' <div class="modal-body" style="padding: 20px 50px;">' +
+                                ' <dl class="clearfix text-center">' +
+                                ' <dt style="padding-bottom: 10px; border-bottom: 1px solid #e5e5e5; font-weight: normal; font-size: 16px; margin-bottom: 10px;">' +
+                                ' 查看该服务需要花费 <span class="text-red">' + data.saleCoin + '</span> 金币' +
+                                ' </dt>' +
+                                ' <dd>您的余额不足，请充值！</dd></dl>' +
+                                ' <div class="btn-con" style="text-align: center; margin-top: 15px;">' +
+                                ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-orange"  onclick="window.open(\'//www.' + DOMAIN + '/UserAccount/charge.html\')">马上去' +
+                                ' </button>' +
+                                ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-default" data-dismiss="modal" onclick="$(\'.modal-scrollable\').addClass(\'hidden\')">再逛逛</button>' +
+                                ' </div>' +
+                                ' </div>' +
+                                ' </div>' +
+                                ' </div>' +
+                                ' <div class="modal-backdrop fade in" style="z-index: 1040;"></div>' +
+                                ' </div>'
+                        $('body').append($modalHtml);
+                    }
+                    else if (data.errorCode == 1111)
+                    {
+                        var $modalHtml = '<div class="modal-scrollable" style="z-index: 1050;">' +
+                                ' <div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="false" style="display: block; margin-top: -99.5px;top: 45%;">' +
+                                ' <div class="modal-content">' +
+                                ' <div class="modal-header" style="text-align:center;color: #000000;">' +
+                                ' <button  type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>' +
+                                ' <h4 class="modal-title" style="color: #000000;">温馨提示</h4>' +
+                                ' </div>' +
+                                ' <div class="modal-body" style="padding: 20px 50px;">' +
+                                ' <dl class="clearfix text-center">' +
+                                ' <dt style="padding-bottom: 10px; border-bottom: 1px solid #e5e5e5; font-weight: normal; font-size: 16px; margin-bottom: 10px;">' +
+                                ' 您还未登入，是否登入？ ' +
+                                ' </dt>' +
+                                '</dl>' +
+                                ' <div class="btn-con" style="text-align: center; margin-top: 15px;">' +
+                                ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-orange"  onclick="window.open(\'//www.' + DOMAIN + '/User/login.html\')">马上去' +
+                                ' </button>' +
+                                ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-default" data-dismiss="modal" onclick="$(\'.modal-scrollable\').addClass(\'hidden\')">再逛逛</button>' +
+                                ' </div>' +
+                                ' </div>' +
+                                ' </div>' +
+                                ' </div>' +
+                                ' <div class="modal-backdrop fade in" style="z-index: 1040;"></div>' +
+                                ' </div>'
+                        $('body').append($modalHtml);
+                    }
+                    else
+                    {
+                        showMsg(data.msg, false, 'error');
+                    }
+
+                }
+            }
+        });
+
+    }
+
+</script>
+</html>

@@ -1,0 +1,57 @@
+
+/*----------------------------
+	Thumbnails
+-----------------------------*/
+.girl-main{margin:.2rem; }
+section h1{font-size: .38rem}
+/*img-gather*/
+.img-gather{}
+.img-gather a{float:left; width:100%; }
+
+#thumbs{
+	width:100%;
+	 
+	text-align:center;
+}
+#thumbs a{ 
+	margin-top:.2rem;
+	background-position:center center;
+	background-repeat: no-repeat;
+	background-size:cover;
+	-moz-background-size:cover;
+	-webkit-background-size:cover;
+}
+#thumbs a img{width: 100%}
+/*----------------------------
+	Media Queries
+-----------------------------*/
+@media screen and (max-width: 960px) {
+	#thumbs{
+		width:auto;
+	}
+	
+	#bsaHolder{
+		display:none;
+	}
+}
+
+/*点赞*/
+.zan div{position: relative;width: 1.4rem; height: 1.4rem; border:1px solid #999999; border-radius:50%;background:url(../images/z.png) no-repeat center 0.4rem; margin:0 auto; margin-top: .6rem; background-size: .46rem .46rem;}
+.zan div span{ text-align: center; width: 1.4rem; display: block; vertical-align: middle; line-height: 2.1rem; font-size: .24rem;color: #999999 }
+.zan.on div{border:1px solid #ea6464; background:url(../images/z_on.png) no-repeat center 0.4rem; background-size: .46rem .46rem;}
+.zan.on div span{color: #eb6363}
+.zan div p{color:#fff; width: .6rem; height: .4rem; line-height: .4rem; background-color: #ef8282;font-size: .28rem; text-align: center; border-radius: 5px; position: absolute; left: 50%; top:0; margin-left: -0.3rem; display: none;   }
+
+
+/*list*/
+.girl_list ul li img{width: 100%}
+.girl_list ul li p:nth-child(2){padding: 0 .2rem;margin: .1rem 0}
+.girl_list ul li p a{color: #242424}
+.girl_list ul li .g_tool{padding:.2rem;color: #9a9a9a;line-height: .42rem}
+.girl_list ul li .g_tool h1{float: left;font-size: .28rem;font-weight: normal; color: #333}
+.girl_list ul li .g_tool em{float: right;}
+.girl_list ul li .g_tool img{width: .42rem;height:auto;vertical-align: middle;margin-top: -.08rem}
+.girl_list ul li .g_tool span{padding-left: .2rem}
+
+
+

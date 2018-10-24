@@ -1,0 +1,66 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>手机全球体育手机网_即时足球比分,比分直播,足球直播,比分预测,赔率分析</title>
+</block>
+
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/intro/order.css">
+</block>
+<block name="header">
+</block>
+<block name="nav">
+</block>
+
+<!-- 内容 s -->
+<block name="content">
+    <!-- content main -->
+    <section>
+        <header id="other_header">
+            <a href="{:U('User/index')}"></a>
+            <span>球王订购</span>
+        </header>
+        <section class="order_nav">
+            <ul>
+                <li><a href="{:U('Intro/order')}">我的订购</a></li>
+                <li><a href="{:U('Intro/putout')}" class="on">最新发布</a></li>
+            </ul>
+        </section>
+        <if condition="$list eq ''">
+                <section class="no_order_main">
+                    <a href="{:U('Intro/index')}"><div class="no_putout"></div></a>
+                    <a class="purchase" href="{:U('/Intro/index')}">马上关注！</a>
+                </section>
+            <else/>
+                <volist name="list" id="item">
+                    <a href="{:U('Intro/intro_info',['id'=>$item['product_id']])}">
+                    <section class="put_main">
+                        <div class="title_release"></div>
+                    <div class="put_list">
+                        <div class="ol_top">
+                            <div class="olt_head"><img src="{$item.logo} alt=""></div>
+                            <div class="olt_r">
+                                <div class="u_name"><em>{$item.name}</em></div>
+                                <div class="near_state"><em>近10中{$item.ten_num}</em></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buy_count">
+                        <div class="buyc_l fl">
+                            <div class="buy_man"><img src="__IMAGES__/qw/car.png" alt="">购买人数：{$item.buy_num}/{$item.total_num}</div>
+                            <div class="buy_per">
+                                <div class="bc_percent"><em></em><i style="width: {$item.percent}%"></i></div>
+                            </div>
+                        </div>
+                        <div class="buyc_r fr">
+                            <p>{$item.total_rate}<span>%</span></p>
+                            <p>累计回报率</p>
+                        </div>
+                    </div>
+                </section>
+                </a>
+                </volist>
+            </if>
+    </section>
+    <!-- content main -->
+</block>

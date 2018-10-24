@@ -1,0 +1,87 @@
+/**
+ * jquery.validate 自定义插件 样式
+ *
+ */
+.field-msg{
+	position: absolute;
+	top: 50%;
+	margin-left: 10px;
+	margin-top: -10px;
+	left: 107%;
+	white-space: nowrap;
+	min-width: 72px;
+	text-align: center;
+	height: 20px;
+	line-height: 15px;
+	font-size: 14px;
+	padding: 3px 6px;
+	color: #f06666!important;
+	border-radius: 3px;
+	display: inline-block;
+	z-index:1000
+}
+.field-msg:after {
+	content: '';
+	display: inline-block;
+	background: url(../Images/icon-eorr.png) no-repeat 0 0;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	left: -14px;
+	top: 50%;
+	margin-top: -8px;
+	margin-right: 5px;
+}
+label.field-error{
+	background:#fff;
+}
+label.field-error:after{
+	content: '';
+	display: inline-block;
+	background: url(../Images/icon-eorr.png) no-repeat 0 0;
+	position: absolute;
+	left: -14px;
+	top: 50%;
+}
+label.field-warning {
+	display:none!important;
+	color: #a3e3c8!important;
+}
+label.field-warning:after{
+	display:none!important;
+	content: '';
+	display: inline-block;
+	background: url(../Images/icon-warn.png) no-repeat 0 0;
+	position: absolute;
+	left: -14px;
+	top: 50%;
+} 
+label.field-success{
+	background:#fff;
+}
+label.field-success:after{
+	content: '';
+	display: inline-block;
+	width: 0;
+	height: 0;
+	position: absolute;
+	left: -5px;
+	top: 50%;
+	margin-top: -5px;
+}
+input.field-error,textarea.field-error,select.field-error{
+	border-color: #f06666 !important;
+	/*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #e61c15;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #e61c15;*/
+}
+input.field-warning,textarea.field-warning,select.field-warning{
+	display:none!important;
+	border-color: #f06666 !important;
+	/*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #66afe9;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #66afe9;*/
+}
+input.field-success,textarea.field-success,select.field-success{
+	border-color: #e5e5e5 !important;
+	/*-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 2px #83f384;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 2px #83f384;*/
+}

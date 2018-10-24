@@ -1,0 +1,100 @@
+ 
+/**
+ * index css
+ *
+ * @author Weiqianqian <1937025663@qq.com>
+ * 
+ * @since  2018-01-18
+ *
+**/
+
+.commList .topListImg{ width: 120px; height: 80px; overflow: hidden;}
+
+/*导航部分*/
+.themeBox{background: url(../../images/tuku/top-center.png) no-repeat center top; width: 100%; }
+.themeBox{ width: 100%; padding-top: 111px; min-height: 500px;}
+.themeNavBox{ width: 1024px; margin: 0 auto; -webkit-transform: skew(22deg) translateZ(0); -moz-transform: skew(22deg) translateZ(0); -ms-transform: skew(22deg); -o-transform: skew(22deg) translateZ(0); transform: skew(22deg) translateZ(0);}
+.themeNavIn{ -webkit-transform: skew(-22deg) translateZ(0); -moz-transform: skew(-22deg) translateZ(0); -ms-transform: skew(-22deg) translateZ(0); -o-transform: skew(-22deg) translateZ(0); transform: skew(-22deg) translateZ(0);}
+.themeLogo a{ display: block; width: 142px; height: 48px; line-height: 48px; text-align: center; webkit-transform: skew(22deg); -moz-transform: skew(22deg); -ms-transform: skew(22deg); -o-transform: skew(22deg); transform: skew(22deg);}
+.themeLogo a img {
+    -webkit-transform: skew(-22deg) translateZ(0);
+    -moz-transform: skew(-22deg) translateZ(0);
+    -ms-transform: skew(-22deg) translateZ(0);
+    -o-transform: skew(-22deg) translateZ(0);
+    transform: skew(-22deg) translateZ(0);
+}
+
+.themeNav{ height: 48px; webkit-transform: skew(22deg) translateZ(0); -moz-transform: skew(22deg) translateZ(0); -ms-transform: skew(22deg) translateZ(0); -o-transform: skew(22deg) translateZ(0); transform: skew(22deg) translateZ(0);}
+.themeNav ul{ padding-left: 16px; -webkit-transform: skew(-22deg) translateZ(0); -moz-transform: skew(-22deg) translateZ(0); -ms-transform: skew(-22deg) translateZ(0); -o-transform: skew(-22deg) translateZ(0); transform: skew(-22deg) translateZ(0);}
+.themeNav ul li a{ display: block; height: 48px; line-height: 48px; color: #fff; font-size: 16px; padding: 0 45px; transition: .2s; -webkit-transition: .2s; -moz-transition: .2s; -o-transition: .2s;}
+
+.themeNav ul li.on, .themeNav ul li:hover {
+    -webkit-transform: skew(22deg) translateZ(0);
+    -moz-transform: skew(22deg) translateZ(0);
+    -ms-transform: skew(22deg) translateZ(0);
+    -o-transform: skew(22deg) translateZ(0);
+    transform: skew(22deg) translateZ(0);
+}
+.themeNav ul li.on span, .themeNav ul li:hover span {
+    display: inline-block;
+    -webkit-transform: skew(-22deg) translateZ(0);
+    -moz-transform: skew(-22deg) translateZ(0);
+    -ms-transform: skew(-22deg) translateZ(0);
+    -o-transform: skew(-22deg) translateZ(0);
+    transform: skew(-22deg) translateZ(0);
+}
+.themeNav ul li.on a, .themeNav ul li a:hover { background: #fff; color:#000; font-weight: 700; /*background: rgba(255,255,255,0.2);*/}
+/*主体内容*/
+.main{ width: 1024px;}
+
+/*标签部分*/
+.ponsion{ margin: 30px 20px 20px 0px;}
+.ponsion li{float: left;}
+
+/*Tab部分*/
+  /*Tab按钮*/
+.skillShot .navTab{margin-top: -10px;border-bottom: 2px solid #e5ac00; width: 100%; height: 35px; position: relative;}
+.skillShot .navTab .news-o{color: #e5ac00; float: left; padding:0px  40px 0px 0px;  height: 22px; border-left: 4px solid #000; line-height: 75px; padding-top: 5px;}
+.skillShot .navTab .news-o .line-l{ width: 1px; height:22px; border: 2px solid #e5ac00; float: left; margin-top: -5px; margin-left: -2px;}
+.skillShot .navTab .news-o h4{ font-size: 24px;  padding-left: 10px; margin-top: -4px;}
+.p-left{float: left; padding: 0px 20px;  text-align: center; margin-top: 8px; font-size: 14px; color: #4d4d4d; font-weight: bold; border-left: 1px solid #e0e0e0;}
+.p-left .on{ color:#e5ac00;}
+/*.navTab ul li:first-child{ border-left: none 0;}低版本不兼容*/
+.navTab ul li.li-first{ border-left: none 0;}
+  /*Tab按钮结束*/
+}
+}
+
+
+.shotBox{ padding: 10px 0px;}
+
+  /*Tab-left*/
+
+.left-tab {margin: 0px -6px; }
+.left-tab li{ width: 240px; height: 222px; margin: 10px 9.5px; border: 1px solid #e0e0e0;}
+.numb-tab-d{ display: block; width: 239px; height: 170px; }
+.numb-tab-d .tab-work .glyphicon{ color: #e8a400;}
+.tab-img{ width: 239px; height: 170px; line-height: 170px;  position: relative;  overflow: hidden; text-align: center;}
+.tab-img img:hover{ -webkit-transform: scale(1.2);  transform: scale(1.2); color:#f00; cursor:pointer;}
+.tab-img img{ margin: 0 auto; max-width: 239px; max-height: 170px; -webkit-transition: .3s; transition: .3s;}/*文字超出用省略号表示*/
+
+.tab-work{ margin-top: 5px; padding: 0px 5px;}
+.tab-work p{ overflow: hidden; text-overflow:ellipsis; white-space: nowrap;}
+.tab-work .time-tab{ color: #999999; margin-right: 100px;}
+.tab-work span{ color:#666666;}
+.tab-work .glyphicon{ color: #d6d6d6; margin-right: 10px;}
+
+/*页码开始*/
+.page-con{ font-size: 12px; text-align: center;}
+.page-con ul{ height: 22px;}
+.page-con ul li a{ height: 30px; padding-top: 5px; margin:0px 5px;}
+.apge-con .s-l a{ border: none;}
+.page-con .disabled span{ border: none; font-size: 20px; margin-top:-5px;}
+.page-con .next span{ border: none; font-size: 20px; margin-top: -5px;}
+.page-con input{ width: 48px; height: 28px; margin-top: -5px;}
+
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus{ z-index: 2; color: #fff; background-color: #bdbdbd; border-color: #bdbdbd; cursor: default; }
+.pagination > li > a{ color:#666;}
+.pagination > li > a,{padding: 2px 12px; color: #d4d4d4;}
+.pagination>li>a, .pagination>li>a span{ position: relative; float: left; border: 1px solid #e5e5e5; margin-left: -1px;}
+a{ background: transparent; text-decoration: none !important;}

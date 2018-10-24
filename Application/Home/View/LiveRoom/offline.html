@@ -1,0 +1,163 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__CSS__/quiz_hall/myScroll/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="__STATIC__/score/dist/css/jquery.emoji.css?201710101758"/>
+    <link rel="stylesheet" href="__CSS__/LiveRoom/index.css?v=20180830">
+    <style>
+        #dplayer{
+            width:100%;
+            height:100%;
+        }
+        .reminder img{ float: left; margin-top: 10px;}
+        .reminder marquee{ height: 30px !important; line-height: 20px; margin: -60px 0 20px 30px !important;}
+        .live-b .namm{ border: 1px solid #f0f;}
+        .live-one{ width: 64px; height: 26px; margin-left: -3px; padding-left: 6px; background-color: rgba(0,0,0,0.5);}
+        .live-one img{ margin: 8px 0 0 10px; width: 12px; height: auto;}
+        .live-two{ width: 64px; height: 26px; margin-left: -3px; padding-left: 6px; background-color: rgba(212,63,131,0.6);}
+        .live-two img{ margin: 5px 0 0 8px; }
+        .live-three{ width: 64px; height: 26px; margin-left: -3px; padding-left: 3px; background-color: rgba(25,119,215,0.5);}
+    </style>
+</block>
+<block name="content">
+    <div class="liveBox clearfix">
+        <div class="pull-left liveBoxL">
+            <!-- live box -->
+            <div class="animatelive">
+                <div class="animateTile clearfix">
+                    <a href="javascript:;" class="pull-left teamName">
+                        <div class="pull-left ra"><img src="{$roomInfo['head']}" class="lazy" title="" original="__IMAGES__/LiveRoom/headImg.ong" style="display: inline;"></div>
+                        <span class="pull-left" style="font-size: 16px; color: #4d4d4d;">{$roomInfo['nick_name']}</span><span class="pull-left" style="width: 300px; height: 30px;">{$roomInfo['descript']}</span>
+                    </a>
+                    <a href="javascript:;" class="pull-right teamName right-icon">
+                        <span class="share"><img src="__IMAGES__/LiveRoom/share.png">分享
+                            <div  class="share-box">
+                                <div class="share-click" >
+                                    <span class="sina-share" onclick="shareTo('sina')"></span>
+                                    <span class="qq-share" onclick="shareTo('qq')"></span>
+                                    <span class="qq-space-share"  onclick="shareTo('qzone')"></span>
+                                    <span class="wx-share" >
+                                        <i class="qqty-wx"></i>
+                                    </span>
+                                </div>
+                                <p  class="hint">直播间网址</p>
+                                <p class="textarea-box">
+                                    <textarea readonly="" class="textarea" onclick="select()" id="code" rows="1" resize="none" wrap="off" ></textarea>
+                                </p>
+
+                                <input type="button" value="复制代码" onclick="getCode('code')"  class="getcode">
+                            </div>
+                        </span>
+                        <span  class="go-load"><img src="__IMAGES__/LiveRoom/phone.png">手机端看直播
+                            <div class="app-load">
+                                  <p class="load-left">
+                                      <img src="__IMAGES__/LiveRoom/ewm.png" style="width:100%;height:100%" >
+                                  </p>
+                                  <p class="load-right">
+                                      <span  class="qqty-wore">全球体育客服端</span>
+                                      <span class="ios" onclick="window.open('https://www.pgyer.com/qqty_enterprise')"></span>
+                                      <span class="android" onclick="window.open('https://www.qqty.com/Uploads/App/qqty.apk?v=5.2')"></span>
+                                  </p>
+                            </div>
+                        </span>
+                        <span onclick="goUrl()"><img src="__IMAGES__/LiveRoom/tell.png">联系客服</span>
+                    </a>
+                </div>
+                <div class="animateCon">
+                    <div class="svglive">
+                         <!--<div class="small-left"><img src="__IMAGES__/LiveRoom/ic_cl.png"></div>-->
+                        <div class="complete liveRegion">
+                            <div class="mask">
+                                <div class="small-left"><img src="__IMAGES__/LiveRoom/ic_cl.png"></div>
+                                <div class="leave one">
+                                    <img src="__IMAGES__/LiveRoom/ic_bzj.png">
+                                    <p>主播不在家~</p>
+                                    <p class="otime">直播时间</p>
+                                    <p class="otime">暂时无安排时间</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="reminder">
+                            <img src="__IMAGES__/LiveRoom/tzhi.png">
+                            <marquee id="a1" onfinish="replay();" direction="left" behavior="slide" scrollamount="30" scrolldelay="0" loop="5" width="1090" height="40" line-height="40" hspace="10" vspace="10">欢迎各位老铁光临全球体育直播间</marquee>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    <div class="pull-right liveBoxR">
+        <!-- conChat -->
+        <div class="conChat">
+            <div class="video-top"><img src="__IMAGES__/LiveRoom/top.png"></div>
+            <div class="conChatList" style=" height: 670px;">
+                <div class="chatList">
+                    <ul>
+                        <volist name="liveList" id="item">
+                            <li class="start on">
+                                <volist name="item" id="vo">
+                                    <a href="{$vo.RoomUrl}" target="_blank">
+                                        <span class="pep">
+                                        <div class="video-bg" style="background:url('{$vo.img}');"><div class="pic"></div></div>
+                                        <div class="live-b">
+                                            <switch name="vo.live_status">
+                                                <case value="-1"><div class="live-one">离线
+                                                <img src="__IMAGES__/LiveRoom/sz.png"></div></case>
+                                                <case value="0"><div class="live-two">回播
+                                                <img src="__IMAGES__/LiveRoom/sl.png"></div></case>
+                                                <case value="1"><div class="live-three">直播中<img src="__IMAGES__/LiveRoom/zb.png"></div></case>
+                                                <case value="2"><div class="live-three">直播中<img src="__IMAGES__/LiveRoom/zb.png"></div></case>
+                                            </switch>
+                                        </div>
+                                        <div class="live-title">
+                                            <p class="tit">{$vo.nick_name}</p>
+                                            <p class="tle">{$vo.title}</p>
+                                        </div>
+                                    </span>
+                                    </a>
+                                </volist>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <!-- conChat -->
+    </div>
+    </div>
+    <!-- app -->
+</block>
+<block name="elevator"></block>
+<block name="js">
+    <script>
+        var topic = ["{$roomInfo.mqtt_room_topic}"];
+        var roomId = "{$roomInfo.room_id}";
+        var mqHost = window.location.protocol == 'https:'? 'wss://'+'{$mqttOpt.ssl_host}'+':8084':'ws://'+'{$mqttOpt.host}'+':8083';
+        var mqUser = JSON.parse('{$mqttUser|json_encode}');
+        var liveStart = "{$roomInfo['live_status']}";
+       var liveUrl = "{$roomInfo['live_url']}";
+        var liveUrl = "http://www.flashls.org/playlists/test_001/stream_1000k_48k_640x360.m3u8";
+        var liveImg = "{$roomInfo['img']}";
+        var u = '{$userInfo}';
+        var userStatus = "{$userInfo['userStatus']}";
+        var userInfo = u !='' ? JSON.parse(u) : '';
+        var ip = "{$ip}";
+        var isAdmin = '';
+        function replay()
+        {
+            document.all.wxy.start();
+        }
+    </script>
+    <script type="text/javascript" src="__JS__/common/qrcode.js"></script>
+    <script type="text/javascript" src="__CSS__/quiz_hall/myScroll/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="__JS__/special/kxbdSuperMarquee.js"></script>
+    <script type="text/javascript" src="__STATIC__/score/dist/js/jquery.emoji.min.js"></script>
+    <script src="__PUBLIC__/Plugs/livePlayer/ckplayer.js"  charset="UTF-8"></script>
+
+    <script type="text/javascript" src="__STATIC__/score/js/mqtt.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/score/js/emoji.js"></script>
+    <!--<script type="text/javascript" src="__STATIC__/score/js/mqttConnect.js"></script>-->
+    <script type="text/javascript" src="__JS__/LiveRoom/index.js?v=20180829"></script>
+</block>

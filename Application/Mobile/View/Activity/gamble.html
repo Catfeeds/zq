@@ -1,0 +1,598 @@
+<extend name="Public/base" />
+<block name="download">
+</block>
+<block name="seo">
+    <title>我参与了{$title}__全球体育APP</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/activity/game.css?d=20170615">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/Olympic/swiper_banner.css?d=20170614">
+
+</block>
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+<block name="header">
+</block>
+<block name="body">
+    <body>
+</block>
+<block name="nav">
+</block>
+<block name="content">
+<style>
+    .swiper-slide{height: 3.45rem;}
+    #other_header{background: #2a252c; text-indent: 0;}
+</style>
+    <!-- banner s-->
+    <!-- <section class="banner">
+        <img src="__IMAGES__/activity/gamble/banner_new.jpg" alt="banner">
+    </section> -->
+    <section class="main_banner ">
+        <!-- Swiper -->
+        <div class="swiper-container swiper-container-horizontal">
+            <div class="swiper-wrapper">
+                <volist name='banner' id='v'>
+                    <figure class="swiper-slide">
+                        <a href="{$v['url']}">
+                            <img src="{$v.img}" alt="{$v.title}"></a>
+                        </a>
+                        <!--<figcaption>{$v.title}</figcaption>-->
+                    </figure>
+                </volist>
+            </div>
+            <!-- Add Pagination -->
+            <!-- <if condition="$bannerCount gt 1">
+                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+
+                </div>
+            </if> -->
+        </div>
+    </section>
+    <!-- banner e-->
+    <notempty name="list">
+
+            <!-- content s -->
+            <section class="g_content">
+                <div class="con_bg_top">
+                    <!-- 头像信息 s-->
+                    <div class="head_con clearfix" style="border-bottom:0">
+                        <div class="fl head">
+                            <a <if condition="is_login() neq ''">href="{:U('User/index')}<else/>href="{:U('User/login')}</if> ">
+                            <img src="{$userInfo['head']|default='__IMAGES__/index/headImg.png'}" alt="头像">
+                            <if condition="is_login() neq ''">
+                                {$userInfo['nick_name']}
+                                <else/>
+                                登录/注册
+                            </if>
+
+                            </a>
+
+
+                        </div>
+                        <div class="fr rules">
+                            <a id="gambleLog" href="{:U('Activity/gambleLog')}" >推荐记录</a>&nbsp;&nbsp;&nbsp;
+                            <a href="{:U('Activity/rule',['activityId'=>$activityId])}">活动规则</a>
+                        </div>
+                    </div>
+                    <!-- 头像信息 e-->
+                </div>
+                <div class="con_bg">
+                    <div class="content_main">
+                        <div class="timeT"><p><img src="__PUBLIC__/Mobile/images/activity/gamble/timeT.png" alt="推荐截止时间"></p><p>{$end_time}</p></div>
+                        <volist name="list" id="vo">
+                            <div class="guess_con">
+                                <if condition="$multiple eq '0'">
+                                    <!-- 对阵信息 s-->
+                                    <section class="team_vs">
+                                        <table class="table">
+                                            <tbody>
+                                            <tr class="tr_vs">
+                                                <td width="35%"><img src="{$vo['homeTeamLogo']}" alt=""></td>
+                                                <td width="30%"><p style="color: {$vo['union_color']}">{$vo['union_name']}</p><p class="timeP">{$vo['game_time']}</p></td>
+                                                <td width="35%"><img src="{$vo['awayTeamLogo']}" alt=""></td>
+                                            </tr>
+                                            <tr class="tr_team_name">
+                                                <td>{$vo['home_team_name']}</td>
+                                                <td class="vs">VS</td>
+                                                <td>{$vo['away_team_name']}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <!-- 对阵信息 e-->
+                                </if>
+
+
+
+                                <!-- 样式说明：赢：win；赢半：winhalf；输：lose；输半：losehalf；平：split；推迟：putoff；待定：pending；腰斩：cut；中断：interrupt；取消：cancel -->
+                                <volist name="vo.game" id="ga" key="key">
+                                    <div class="guess_list">
+                                        <if condition="$ga['is_true'] neq ''">
+                                            <div class="g_state {$ga['is_true']}"></div>
+                                        </if>
+                                        <table class="table tb_guess_con">
+                                            <tbody>
+                                            <if condition="$multiple eq '0'">
+                                                <tr class="tr_qs">
+                                                    <td class="q-tl">
+                                                        <i>{$key}</i>
+                                                        <span>{$ga['question']}</span></td>
+                                                </tr>
+                                            <else/>
+                                                <tr class="tr_vs">
+                                                    <td width="35%"><img src="{$vo['homeTeamLogo']}" alt=""></td>
+                                                    <td width="30%"><p style="color: {$vo['union_color']}">{$vo['union_name']}</p><p class="timeP">{$vo['game_time']}</p></td>
+                                                    <td width="35%"><img src="{$vo['awayTeamLogo']}" alt=""></td>
+                                                </tr>
+                                                <tr class="tr_team_name">
+                                                    <td>{$vo['home_team_name']}</td>
+                                                    <td class="vs">VS</td>
+                                                    <td>{$vo['away_team_name']}</td>
+                                                </tr>
+                                            </if>
+
+
+                                            <tr>
+                                                <td <if condition="$multiple eq '1'">colspan="3"</if> class="win_sele">
+                                                    <foreach name="ga.option" item="op">
+                                                        <a href="javascript:;"
+                                                            <if condition="$op['is_quiz'] eq '1' and $ga['is_true'] neq '' and $ga['re_answer'] eq $op['aid']">
+                                                                class="on_sele on res"
+                                                            <else/>
+                                                                <if condition="$op['is_quiz'] eq '1'">class="on_sele on"</if>
+                                                                <if condition="$ga['is_true'] neq '' and $ga['re_answer'] eq $op['aid']">class="res"</if>
+
+                                                            </if>
+
+                                                               data-singid="{$ga['single_id']}" data-quizid="{$ga['id']}" data-gameid="{$vo['game_id']}" data-answer="{$op['aid']}">
+                                                                {$op['option']}<span>({$op['num']}%)</span>
+                                                            <if condition="$ga['is_true'] neq '' and $ga['re_answer'] eq $op['aid']"><em></em></if>
+                                                        </a>
+                                                    </foreach>
+
+                                                    <!--<a href="javascript:;" class="res">平(28%)<em></em></a>-->
+                                                    <!--<a href="javascript:;">负(28%)</a>-->
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </volist>
+
+                                
+
+                        </div>
+                        </volist>
+                        <!-- 提交 s -->
+                                <section class="sub_con_2">
+                                    <span>已选<em id="g_sele">0</em>场，还剩<em id="g_have"></em>场</span>
+                                    <a href="javascript:;" <if condition="$statusId eq '1'">class="on"</if>>{$statusfont}</a>
+                                </section>
+                                <!-- 提交 e -->
+                        <!-- 奖金 s-->
+                        <div class="g_money">
+                            <div class="setT"><p><img src="__PUBLIC__/Mobile/images/activity/gamble/setT.png" alt="奖项设置"></p></div>
+                            <div class="flex-container">
+                                <div class="flex-item flex-item02">
+                                    <p class="gold"><strong>{$explain_title}</strong></p>
+                                    <p style="color: #7bb9df;"> {$explain_cont} </p>
+                                </div>
+                            </div>
+                            <div class="setT"><p><img src="__PUBLIC__/Mobile/images/activity/gamble/ruleT.png" alt="推荐规则"></p></div>
+                            <div class="flex-container">
+                                <div class="flex-item flex-item02">
+                                    <p>{$ruleText}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 奖金 e-->
+
+                    </div>
+                </div>
+            </section>
+            <!-- content e -->
+
+        <else/>
+
+        <section class="guess_gonggao">
+
+            <!-- 头像信息 s-->
+            <div class="head_con clearfix" style="border-bottom:0; background: #e8e8e8; margin: 0 .2rem; width: auto; border-radius: 4px;">
+                <div class="fl head">
+                    <a style="color: #4c4c4c;" <if condition="is_login() neq ''">href="{:U('User/index')}<else/>href="{:U('User/login')}</if> ">
+                    <img src="{$userInfo['head']|default='__IMAGES__/index/headImg.png'}" alt="头像">
+                    <if condition="is_login() neq ''">
+                        {$userInfo['nick_name']}
+                        <else/>
+                        登录/注册
+                    </if>
+
+                    </a>
+
+
+                </div>
+                <div class="fr rules">
+                    <a id="gambleLog" href="{:U('Activity/gambleLog')}" >推荐记录</a>&nbsp;&nbsp;&nbsp;
+                    <a href="{:U('Activity/rule',['activityId'=>$activityId])}">活动规则</a>
+                </div>
+            </div>
+            <!-- 头像信息 e-->
+            <!--<div class="gg_title"><span></span><em>下期推荐即将开启，敬请期待！</em><span></span></div>-->
+            <div class="gg_title">
+                <div class="stop_time">下期推荐即将开启，敬请期待！</div>
+            </div>
+            <div class="gg_con">
+                <ul>
+                    <volist name="publishList" id="vo">
+                        <li>
+                            <a href="{$vo.href}">
+                                <div class="ggc_img"><img <notempty name='v.img'>src="{$vo.img}"<else/>src="__IMAGES__/default.jpg"</notempty> alt=""></div>
+                                <div class="ggc_con">
+                                    <p>{$vo['short_title']}</p>
+                                    <p class="q-two">{$vo['remark']}</p>
+                                </div>
+                            </a>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+        </section>
+    </notempty>
+
+
+    <div id="dailogFixBox" class="fixBox" style="display: none">
+        <div class="fixBoxIn clearfix">
+            <div class="tip" style="line-height: 0.8rem; "><span id="dailogContent" ></span></div>
+            <a id="yesDailog" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+        </div>
+    </div>
+    <div id="dailogLogin" class="fixBox" style="display: none">
+        <div class="fixBoxIn clearfix">
+            <div class="tip" style="line-height: 0.8rem; "><span id="loginContent" ></span></div>
+            <a id="yesLogin" href="{:U('User/login')}" class="tip_btn fs30" style="width: 50%;">登录</a>
+            <a id="noLogin" href="javascript:;" class="tip_btn fs30 red" style="width: 50%;">取消</a>
+        </div>
+    </div>
+
+    <input type="hidden" name="is_login" id="is_login" <if condition="is_login() neq ''"> value= "success" <else/>value= ""</if>>
+    <div style="display: none" id="shareTitle">
+        <input type="hidden" value="{$activityId}" id="activityId">
+    </div>
+
+
+    <style>
+        #maskLayer{z-index: 99999;}
+        .share_f{position: fixed;top:0;right: 0;z-index: 999999;text-align: center;}
+        .share_f img{width: 90%;}
+    </style>
+    <section id="share_pyq" style="display: none;">
+        <div id="maskLayer" style="display: block;"></div>
+        <div class="share_f"><img src="__IMAGES__/activity/gamble/share_bg.png" alt=""></div>
+    </section>
+    <div id="app-bar" class="app-bar ios_touch" style="">
+        <!-- <div class="app-logo"><img src="__PUBLIC__/Mobile/images/app-logo.png"></div> -->
+        <a class="app-close ios_touch" id="cone" href="javascript:;">&nbsp;</a>
+        <!-- <a class="app-btn" href="//m.qqty.com/App/introduce.html" target='_blank'>立即下载</a> -->
+    </div>
+
+</block>
+
+<block name="footer">
+
+</block>
+<block name="scripts">
+
+    <script>
+        $(function(){
+            //分享关闭
+             $('#share_pyq').on('click',function(){
+                 $('#share_pyq').css('display','none');
+                 window.location.reload();
+             })
+
+            $('.tb_guess_con').each(function(e){
+                $(this).find('.em_xb').html(e+1+'、')
+            });
+            //提交状态
+            if ($('.sub_con_2 a').hasClass('on'))
+            {
+
+                $('#g_sele').html(0);//已选场次
+                $('#g_have').html(0);//剩余场次
+            }
+            else
+            {
+                //共多少场
+                var gl_len = $('.guess_list').length;
+                $('#g_have').html(gl_len);
+            }
+
+
+            //点击选择
+            $('.win_sele a').on('click',function(){
+
+                //如果判断是否已经推荐了
+                if ($(this).siblings().hasClass('on_sele on'))
+                {
+                    return;
+                }
+
+                if ($('#is_login').val() != "success")
+                {
+                    $('#loginContent').html('还有没登录喔，亲！');
+                    $('#dailogLogin').css('display','block');
+                    return;
+                }
+
+                $(this).addClass('on').siblings().removeClass('on');
+                //已选场次
+                var sele_len = $('.win_sele .on').length;
+                $('#g_sele').html(sele_len);
+                //剩余场次
+                var sheng_len = gl_len - sele_len;
+                $('#g_have').html(sheng_len);
+                if ($('.sub_con_2 a').hasClass('on'))
+                {
+
+                    $('#g_sele').html(0);//已选场次
+                    $('#g_have').html(0);//剩余场次
+                }
+
+            });
+
+            //关闭登录信息提示框
+            $('#noLogin').on('click',function () {
+                $('#dailogLogin').css('display','none');
+            });
+
+            //关闭信息提示框
+            $('#yesDailog').on('click',function () {
+                $('#dailogFixBox').css('display','none');
+            });
+
+            //提交事件
+            $('.sub_con_2 a').on('click',function () {
+
+                if ($(this).hasClass('on') || $(this).hasClass('submission') )
+                {
+                    return;
+                }
+
+                //判断是否选择完
+                if ($('.guess_list table td.win_sele a.on').length  != $('.guess_list').length)
+                {
+                    $('#dailogContent').html('还有没选喔，亲！');
+                    $('#dailogFixBox').css('display','block');
+                    return;
+                }
+                $(this).html('提交中...');
+                //判断是否在登录的状态--同步请求
+                var isLogin = false;
+                $.ajax({
+                    type: 'post',
+                    async : false,
+                    url: "/Activity/appLogin.html",
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.status==1)
+                        {
+                            isLogin = true;
+                            $('#is_login').val("success");
+                        }
+                        else
+                        {
+                            isLogin = false;
+                            $('.sub_con_2 a').removeClass('submission');
+                            $('.sub_con_2 a').html('提交答案');
+                            $('#is_login').val("");
+                            $('#loginContent').html('还有没登录喔，亲！');
+                            $('#dailogLogin').css('display','block');
+                        }
+                    }
+                });
+
+                if (!isLogin)
+                    return;
+
+
+
+
+                var strData = '';
+                $('.guess_list table td.win_sele a.on').each(function () {
+                    strData += $(this).data('singid')
+                            +':'+ $(this).data('answer')
+                            +':'+$(this).data('quizid')
+                            +':'+$(this).data('gameid')+',';
+
+                });
+
+                $.ajax({
+                    type: 'post',
+                    async : false,
+                    url: "/Activity/requestGamble.html",
+                    data:{strData:strData,activityId:$('#activityId').val()},
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.status==1)
+                        {
+                            $('#share_pyq').css('display','block');
+                            $('.sub_con_2 a').addClass('on');
+
+                        }
+                        else if (data.status == -1)
+                        {
+                            $('.sub_con_2 a').removeClass('on');
+                            $('#dailogContent').html(data.info);
+                            $('#dailogFixBox').css('display','block');
+                            $('.sub_con_2 a').addClass('on');
+                            $('#g_sele').html(0);//已选场次
+                            $('#g_have').html(0);//剩余场次
+                        }
+                        else if (data.status == 2)
+                        {
+                            $('#loginContent').html('还有没登录喔，亲！');
+                            $('#dailogLogin').css('display','block');
+                        }
+                        else
+                        {
+                            $('#dailogContent').html(data.info);
+                            $('#dailogFixBox').css('display','block');
+                        }
+
+                    },
+                    complete:function () {
+                        $('.sub_con_2 a').removeClass('submission');
+                        $('.sub_con_2 a').html('提交答案');
+                    }
+                });
+            });
+        })
+    </script>
+      <script src="__JS__/Olympic/swiper_banner.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //banner 切换
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: 10000,
+                autoplayDisableOnInteraction: false
+            });
+        })
+    </script>
+    <script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        var title='我参与了'+"{$title}"+'__全球体育APP';
+        var img='__PUBLIC__/Mobile/images/logo200.png';
+        var desc='免费推荐赢大奖，每期千元奖金等你拿！';
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+
+            appId: "{$appid}", // 必填，公众号的唯一标识
+
+            timestamp: "{$time}", // 必填，生成签名的时间戳
+
+            nonceStr: "{$nonceStr}", // 必填，生成签名的随机串
+
+            signature: "{$signature}", // 必填，签名，见附录1
+
+            jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareQZone','onMenuShareQZone','onMenuShareWeibo'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+
+        });
+        wx.ready(function () {
+            wx.onMenuShareTimeline({
+                title: title, // 分享标题
+
+                link: "{$link}", // 分享链接
+
+                imgUrl: img, // 分享图标
+
+                success: function () {
+
+                    // 用户确认分享后执行的回调函数
+
+                },
+                cancel: function () {
+
+                    // 用户取消分享后执行的回调函数
+
+                }
+
+            });
+            wx.onMenuShareWeibo({
+                title: title, // 分享标题
+                desc: desc, // 分享描述
+                link: "{$link}", // 分享链接
+                imgUrl: img, // 分享图标
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title: title, // 分享标题
+
+                desc: desc, // 分享描述
+
+                link: "{$link}", // 分享链接
+
+                imgUrl: img, // 分享图标
+
+                type: '', // 分享类型,music、video或link，不填默认为link
+
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+
+                success: function () {
+
+                    // 用户确认分享后执行的回调函数
+
+                },
+                cancel: function () {
+
+                    // 用户取消分享后执行的回调函数
+
+                }
+            });
+            wx.onMenuShareQQ({
+                title: title, // 分享标题
+
+                desc: desc, // 分享描述
+
+                link: "{$link}", // 分享链接
+
+                imgUrl: img, // 分享图标
+
+                success: function () {
+
+                    // 用户确认分享后执行的回调函数
+
+                },
+                cancel: function () {
+
+                    // 用户取消分享后执行的回调函数
+
+                }
+
+            });
+            wx.onMenuShareQZone({
+                title: title, // 分享标题
+
+                desc: desc, // 分享描述
+
+                link: "{$link}", // 分享链接
+
+                imgUrl: img, // 分享图标
+
+                success: function () {
+
+                    // 用户确认分享后执行的回调函数
+
+                },
+                cancel: function () {
+
+                    // 用户取消分享后执行的回调函数
+
+                }
+
+            });
+        });
+        
+    </script>
+    <script type="text/javascript">
+        $(function(){
+            $('#app-bar').on('click',function() {
+                 window.location.href="//m.qqty.com/H5/appJump/sign/jc.html";
+            });
+        })
+    </script>
+</block>
+
+

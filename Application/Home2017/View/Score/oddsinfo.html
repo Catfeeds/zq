@@ -1,0 +1,379 @@
+<extend name="Public:header" />
+<block name="seo">
+    <if condition="$sign eq '1'">
+        <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}_竞彩赔率_亚盘赔率_全球体育</title>
+        <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、赛前分析、足球推荐、足球分析、竞彩推荐、竞彩分析、篮球分析、篮球推荐"/>
+        <meta name="description" content="全球体育提供百家足球即时赔率、亚盘对比、即时盘口、百家欧赔比较、赔率变化比较、赔率分析、历史相同赔率查询、盘路走势分析"/>
+    <else />
+        <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、大小赔率、大小球赔率、全球体育</title>
+        <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、大小球指数、大小球赔率、大小球变化、大小球比较、大小球分析、赔率分析"/>
+        <meta name="description" content="全球体育提供百家足球即时赔率、亚盘对比、即时盘口、百家欧赔比较、赔率变化比较、赔率分析、历史相同赔率查询、盘路走势分析"/>
+    </if>
+</block>
+<block name="body">
+<body>
+<!--引入本页所需css-->
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreLive/scoreLive.css?20171024">
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreData/data-common.css?201710101758">
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreData/data-chart.css?201710101758">
+<div class="body">
+    <!-- top nav -->
+    <include file="Public:top_score"/>
+    <!-- 主体内容开始 -->
+    <div class="home clearfix">
+        <div class="odd_nav ">
+            <ul class="clearfix">
+                <li class="<if condition="$_GET['sign'] eq 1">on</if>">
+                    <a href="{:U('/oddsinfo@bf',['game_id'=>$_GET['game_id'],'compid'=>$_GET['compid'],'sign'=>1])}"><span>亚盘</span></a>
+                </li>
+                <li class="<if condition="$_GET['sign'] eq 2">on</if>">
+                    <a href="{:U('/oddsinfo@bf',['game_id'=>$_GET['game_id'],'compid'=>$_GET['compid'],'sign'=>2])}"><span>欧赔</span></a>
+                </li>
+                <li class="<if condition="$_GET['sign'] eq 3">on</if>">
+                    <a href="{:U('/oddsinfo@bf',['game_id'=>$_GET['game_id'],'compid'=>$_GET['compid'],'sign'=>3])}"><span>大小</span></a>
+                </li>
+                <li >
+                    <a href="#" class="oddstab"><span>三合一</span></a>
+                </li>
+                <li class="<if condition="$_GET['sign'] eq 5">on</if>">
+                    <a href="#" class="oddstab"><span>半场亚赔</span></a>
+                </li>
+                <li class="<if condition="$_GET['sign'] eq 6">on</if>">
+                    <a href="#" class="oddstab"><span>半场欧赔</span></a>
+                </li>
+                <li class="<if condition="$_GET['sign'] eq 7">on</if> last-li" >
+                    <a href="#" class="oddstab"><span>半场大小</span></a>
+                </li>
+            </ul>
+        </div>
+        <!-- chart con -->
+        <div class="chartMain">
+            <div class="chartTop">
+                <div class="compList clearfix">
+                    <volist name="company" id="item" key="$key">
+                        <a href="{:U('/oddsinfo@bf',['game_id'=>$_GET['game_id'],'compid'=>$key,'sign'=>$_GET['sign']])}" <if condition="$key eq $comp_id">class="on"</if>>{$item}</a>
+                    </volist>
+                </div>
+                <div class="changeTitle" style="text-align: center"><span class="matchName" style="background: {$union_color}">{$gameInfo.union_name}</span><font class="matchTime">{:explode(' ',$gameInfo['gtime'])[1]}</font><font color="#333333">{$gameInfo.home_team_name}&nbsp;VS&nbsp;{$gameInfo.away_team_name}</font> </div>
+                <div class="changeTitle">即时赔率走势</div>
+                <div id="chartTopCon" class="chartTopCon"></div>
+            </div>
+            <div class="chartBootom">
+                <div class="changeTitle">最新赔率变化</div>
+                <div class="changeCon clearfix">
+                    <div class="pull-left changeLeft per" id="home_per">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr bgcolor="#f7f7fc">
+                                <th width="90">时间</th>
+                                <th width="140">盘口</th>
+                                <th width="300">
+                                    <ul class="clearfix pkSign">
+                                        <li class="pull-left"><span>初盘</span> <span class="pSign pSign-green">绿</span></li>
+                                        <li class="pull-left"><span>即时盘</span> <span class="pSign pSign-red">红</span></li>
+                                        <li class="pull-left"><span>走地盘</span> <span class="pSign pSign-purple">紫</span></li>
+                                    </ul>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="list['data']['tab_h']" id="item">
+                                    <if condition="count($item) neq 6">
+                                        <tr>
+                                            <td><span class="text-999">{$item.5}</span>  {$item.6}</td>
+                                            <td class="text-666"><if condition="$_GET['sign'] neq 2">{$item.3}</if></td>
+                                            <td><div class="expandBox"><span class="expandIn <eq name="item[7]" value="早">pSign-green</eq><eq name="item[7]" value="即">pSign-red</eq><eq name="item[7]" value="滚">pSign-purple</eq>" style="width: {$item.home_per}%"><em class="text-666">{$item.2}</em></span></div></td>
+                                        </tr>
+                                    </if>
+                                </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pull-left changeLeft per" id="away_per" style="display:none;">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr bgcolor="#f7f7fc">
+                                <th width="90">时间</th>
+                                <th width="140">盘口</th>
+                                <th width="300">
+                                    <ul class="clearfix pkSign">
+                                        <li class="pull-left"><span>初盘</span> <span class="pSign pSign-green">绿</span></li>
+                                        <li class="pull-left"><span>即时盘</span> <span class="pSign pSign-red">红</span></li>
+                                        <li class="pull-left"><span>走地盘</span> <span class="pSign pSign-purple">紫</span></li>
+                                    </ul>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="list['data']['tab_h']" id="item">
+                                <if condition="count($item) neq 6">
+                                    <tr>
+                                        <td><span class="text-999">{$item.5}</span>  {$item.6}</td>
+                                        <td class="text-666"><if condition="$_GET['sign'] neq 2">{$item.3}</if></td>
+                                        <td><div class="expandBox"><span class="expandIn <eq name="item[7]" value="早">pSign-green</eq><eq name="item[7]" value="即">pSign-red</eq><eq name="item[7]" value="滚">pSign-purple</eq>" style="width: {$item.away_per}%"><em class="text-666">{$item.4}</em></span></div></td>
+                                    </tr>
+                                </if>
+                            </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                    <if condition="$_GET['sign'] eq 2 or $_GET['sign'] eq 6">
+                        <div class="pull-left changeLeft per" id="pin_per" style="display:none;">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr bgcolor="#f7f7fc">
+                                    <th width="90">时间</th>
+                                    <th width="140">盘口</th>
+                                    <th width="300">
+                                        <ul class="clearfix pkSign">
+                                            <li class="pull-left"><span>初盘</span> <span class="pSign pSign-green">绿</span></li>
+                                            <li class="pull-left"><span>即时盘</span> <span class="pSign pSign-red">红</span></li>
+                                            <li class="pull-left"><span>走地盘</span> <span class="pSign pSign-purple">紫</span></li>
+                                        </ul>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <volist name="list['data']['tab_h']" id="item">
+                                    <if condition="count($item) neq 6">
+                                        <tr>
+                                            <td><span class="text-999">{$item.5}</span>  {$item.6}</td>
+                                            <td class="text-666"><if condition="$_GET['sign'] eq 1">{$item.3}</if></td>
+                                            <td><div class="expandBox"><span class="expandIn <eq name="item[7]" value="早">pSign-green</eq><eq name="item[7]" value="即">pSign-red</eq><eq name="item[7]" value="滚">pSign-purple</eq>" style="width: {$item.pin_per}%"><em class="text-666">{$item.3}</em></span></div></td>
+                                        </tr>
+                                    </if>
+                                </volist>
+                                </tbody>
+                            </table>
+                        </div>
+                    </if>
+                    <div class="pull-right changeRight">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr bgcolor="#f7f7fc">
+                                <th width="70">时间</th>
+                                <th width="70">比分</th>
+                                <if condition="$_GET['sign'] eq 1 or $_GET['sign'] eq 5 or $_GET['sign'] eq 3 or $_GET['sign'] eq 7">
+                                    <th width="102">{$list['name_h']}</th>
+                                    <th width="90">盘口</th>
+                                    <th width="102">{$list['name_a']}</th>
+                                </if>
+                                <if condition="$_GET['sign'] eq 2 or $_GET['sign'] eq 6">
+                                    <th width="102">{$list['name_h']}</th>
+                                    <th width="90">{$list['name_p']}</th>
+                                    <th width="102">{$list['name_a']}</th>
+                                </if>
+                                <th width="90">变化时间</th>
+                                <th width="46">状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="list['data']['tab_h']" id="item">
+                                <tr>
+                                    <td class="text-red">{$item.0}<if condition="is_numeric($item[0])"><img src="/Public/Home/score/images/scoreLive/time.gif"></if></td>
+                                    <td class="text-blue">{$item.1}</td>
+                                    <if condition="count($item) eq 6">
+                                        <td colspan="3" class="">{$item.2}</td>
+                                        <td class="text-666"><span class="text-999">{$item.3}</span>  {$item.4}</td>
+                                        <td class="text-fff <eq name="item[5]" value="早">pSign-green</eq><eq name="item[5]" value="即">pSign-red</eq><eq name="item[5]" value="滚">pSign-purple</eq>">{$item.5}</td>
+
+                                        <else/>
+                                        <td class="{$item.home_c}">{$item.2}</td>
+                                        <td class="{$item.per_c|default="text-666"}">{$item.3}</td>
+                                        <td class="{$item.away_c}">{$item.4}</td>
+                                        <td class="text-666"><span class="text-999">{$item.5}</span>  {$item.6}</td>
+                                        <td class="text-fff <eq name="item[7]" value="早">pSign-green</eq><eq name="item[7]" value="即">pSign-red</eq><eq name="item[7]" value="滚">pSign-purple</eq>">{$item.7}</td>
+
+                                    </if>
+                                    </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- chart con -->
+    </div>
+    <!-- 主体内容开始 -->
+    <!-- 底部版权信息开始 -->
+    <include file="Public:s_elevator"/>
+    <include file="Public:footer"/>
+</div>
+</body>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/intro/echarts-all-3.js"></script>
+    <script type="text/javascript">
+
+        $(function(){
+            var myChart = echarts.init(document.getElementById('chartTopCon'));
+            var option = {
+                tooltip : {
+                    trigger: 'axis'
+                },
+                toolbox: {
+                    show : false,
+                    feature : {
+                        mark : {show: true},
+                        dataZoom : {show: true},
+                        dataView : {show: true},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                legend: {
+                    selectedMode: 'single',
+                    data: [
+                        {
+                            name: '{$list['name_h']}',
+                            // 强制设置图形为圆。
+                            icon: 'circle',
+                            // 设置文本为红色
+                            textStyle: {
+                                color: 'red',
+                                fontSize: 18
+                            },
+                        },
+                            <?php
+                                if($_GET['sign'] == 2 || $_GET['sign'] == 6)
+                                {
+                                    echo "{".
+                                    "name: '".$list['name_p']."',".
+                                    "icon: 'circle',".
+                                    "textStyle: {".
+                                    "color: '#334B5C',".
+                                    "fontSize: 18".
+                                    "},".
+                                    "},";
+                                }
+                            ?>
+                        {
+                            name: '{$list['name_a']}',
+                            // 强制设置图形为圆。
+                            icon: 'circle',
+                            // 设置文本为红色
+                            textStyle: {
+                                color: <?php
+                                        if($_GET['sign'] == 1 || $_GET['sign'] == 5 || $_GET['sign'] == 3 || $_GET['sign'] == 7)
+                                        {
+                                            echo "'#334B5C'";
+                                        }else{
+                                            echo "'#6AB0B8'";
+                                        }
+
+                                        ?>,
+                                fontSize: 18
+                            },
+                        }
+                    ],
+                    selected: {
+                        // 选中'系列1'
+                        '{$list['name_h']}': true,
+                        <?php
+                            if($_GET['sign'] == 2 || $_GET['sign'] == 6)
+                            {
+                                echo "'".$list['name_p']."': false,";
+                            }
+                            ?>
+                        // 不选中'系列2'
+                        '{$list['name_a']}': true
+                    }
+                },
+                grid:{
+                    x:50
+                },
+                xAxis : [
+                    {
+                        type : 'category',
+                        boundaryGap : false,
+                        data: [{$list['tab_time']}]
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value',
+                        boundaryGap : false,
+                        min: {$list.min},
+                        max: {$list.max}
+
+                    }
+                ],
+                series : [
+                    {
+                        name:'{$list['name_h']}',
+                        type:'line',
+                        itemStyle : { normal: {label : {show: true}}},
+                        data:function (){
+                            var list = [];
+                            var _info = {$list['tab_h']};
+                            var info = eval(_info);
+                            for (var i = 0; i < info.length; i++) {
+                                list.push(info[i]);
+                            }
+                            return list;
+                        }()
+                    },<?php
+                        if($_GET['sign'] == 2 || $_GET['sign'] == 6)
+                                {
+                                    echo "{".
+                                    "name:'".$list['name_p']."',".
+                                    "type:'line',".
+                                    "itemStyle : { normal: {label : {show: true}}},".
+                                    "data:function (){".
+                                    "var list = [];".
+                                    "var _info = ".$list['tab_p'].";".
+                                    "var info = eval(_info);".
+                                    "for (var i = 0; i < info.length; i++) {".
+                                        "list.push(info[i]);".
+                                    "}".
+                                    "return list;".
+                                "}()".
+                                '},';
+                                }
+                        ?>
+                    {
+                        name:'{$list['name_a']}',
+                        type:'line',
+                        itemStyle : { normal: {label : {show: true}}},
+                        data:function (){
+                            var list = [];
+                            var _info = {$list['tab_a']};
+                            var info = eval(_info);
+                            for (var i = 0; i < info.length; i++) {
+                                list.push(info[i]);
+                            }
+                            return list;
+                        }()
+                    }
+                ],
+                calculable:false
+            };
+            myChart.setOption(option);
+            // 图例开关的行为只会触发 legendselectchanged 事件
+//            myChart.on('click', function (params) {
+//                window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
+//            });
+
+            myChart.on('legendselectchanged', function (params) {
+                $(".per").css('display','none');
+                switch(params.name)
+                {
+                    case "主队":
+                    case "胜":
+                    case "大球":
+                        $("#home_per").css('display','block');
+                        break;
+                    case "客队":
+                    case "负":
+                    case "小球":
+                        $("#away_per").css('display','block');
+                        break;
+                    case "平":
+                        $("#pin_per").css('display','block');
+                        break;
+                    default:;
+                }
+            });
+        })
+    </script>
+</block>

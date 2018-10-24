@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="no" id="fullscreen" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="全球体育手机网体育频道提供最迅速、最权威地发布国内国际最热门体育赛事比分和赛果，国内外足球赛事、NBA、CBA全面直播" />
+    <block name="seo">
+        <title>手机全球体育手机网_赔率数据分析</title>
+    </block>
+    <link rel="shortcut icon" href="__PUBLIC__/Home/images/icon/16X16.ico">
+    <!-- jquery -->
+    <script type="text/javascript" src="__JS__/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home2017/backend_js/common/cookie.js"></script>
+    <script>
+        var DOMAIN = "__DOMAIN__";
+        var IMAGES = "__IMAGES__";
+        var gift1_after  = "{$gift1['after_img']}";
+        var gift1_open   = "{$gift1['open']}";
+        var gift1_close  = "{$gift1['close']}";
+        var gift2_before = "{$gift2['before_img']}";
+        var gift2_after  = "{$gift2['after_img']}";
+        var gift2_close  = "{$gift2['close']}";
+        var gift2_frame  = "{$gift2_frame}";
+        var user_auth    = "{$user_auth}";
+    </script>
+    <!-- 引入公共样式 -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/common.css?v=20180620">
+    <!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__JS__/htmlwidth.js"></script>
+    <!-- 公共js -->
+    <script type="text/javascript" src="__JS__/common.js"></script>
+</head>
+<block name="body"><body>
+    <!--<div id="app-bar" class="app-bar ios_touch" style="display:none">-->
+<!--&lt;!&ndash;        <div class="app-logo"><img src="__IMAGES__/app-logo.png"></div>-->
+<!--&ndash;&gt;        <a class="app-close ios_touch" id="cone" href="javascript:;">&nbsp;</a>&lt;!&ndash;-->
+        <!--<a class="app-btn" href="{:U('/App/introduce')}" target='_blank'>立即下载</a>&ndash;&gt;-->
+    <!--</div>-->
+</block>
+{//附加}
+<block name="append"></block>
+{//头部}
+<block name="header">
+    <include file="Public/header_detail"/>
+</block>
+{//球队比分}
+<block name="against">
+    <include file="Details/against"/>
+</block>
+{//导航}
+<block name="nav">
+    <include file="Details/subnav"/>
+</block>
+    <div id="cnzz">
+        {:htmlspecialchars_decode($site_setting['mobileJs'])}
+    </div>
+{//主内容区域}
+<block name="content"></block>
+<block name="scripts"></block>
+<script type="text/javascript" src="__PUBLIC__/Api/Home/picDetail/js/panDuan.js"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+/**
+ * index css
+ *
+ * @author Chensiren <245017279@qq.com>
+ * 
+ * @since  2018-01-22
+ *
+**/
+body{ background: #fafafa;}
+.table > tbody > tr > td { border-top: none 0;}
+.skewRight{ -webkit-transform: skew(-30deg) translateZ(0); -moz-transform: skew(-30deg) translateZ(0); -ms-transform: skew(-30deg) translateZ(0); -o-transform: skew(-30deg) translateZ(0); transform: skew(-30deg) translateZ(0);}
+.skewLeft{ -webkit-transform: skew(30deg) translateZ(0); -moz-transform: skew(30deg) translateZ(0); -ms-transform: skew(30deg) translateZ(0); -o-transform: skew(30deg) translateZ(0); transform: skew(30deg) translateZ(0);}
+.text-rared{color: #ef5555;}
+.text-brown{ color: #675855;}
+
+
+.themeBox{ width: 100%; min-height: 500px;}
+.themeBox.rdBody{ background: url(../../images/ypRadar/rdBody-bg.jpg) no-repeat center 226px;}
+.themeBanner{ width: 100%; height: 174px; background: #0f172e url(../../images/ypRadar/radarData-banner.jpg) no-repeat center 0;}
+.themeBanner .themeBanTet{ width: 1024px; margin:0 auto; text-align: center; color: #fff; padding-top: 120px;}
+.themeNavCon{ width: 100%; background: #000000; border-top: 4px solid #d50032;}
+.themeNavBox{ width: 1024px; margin: 0 auto; background: #d50032; position: relative;}
+.themeNavBox:after,.themeNavBox:before{ content:""; width: 0; height: 0; border-top: 48px solid #d50032; position: absolute; top: 0;}
+.themeNavBox:before{ border-left: 20px solid transparent; left: -20px; }
+.themeNavBox:after{ border-right: 20px solid transparent; right: -20px; }
+.themeLogo a{ display: block; width: 170px; height: 48px; line-height: 48px; padding-left: 10px; background: #d50032;}
+.themeNav ul li a{ display: block; height: 48px; line-height: 48px; color: #fff; font-size: 18px; padding: 0 20px;}
+.themeNav ul li.on,.themeNav ul li:hover{ -webkit-transform: skew(30deg) translateZ(0); -moz-transform: skew(30deg) translateZ(0); -ms-transform: skew(30deg) translateZ(0); -o-transform: skew(30deg) translateZ(0); transform: skew(30deg) translateZ(0);}
+.themeNav ul li.on span,.themeNav ul li:hover span{ display: inline-block; -webkit-transform: skew(-30deg) translateZ(0); -moz-transform: skew(-30deg) translateZ(0); -ms-transform: skew(-30deg) translateZ(0); -o-transform: skew(-30deg) translateZ(0); transform: skew(-30deg) translateZ(0);}
+.themeNav ul li.on a,.themeNav ul li a:hover{ background: #f3f3f3; color: #d50032;}
+
+.themeBox.rdBody .main{ background: #ffffff;}
+/* 二级菜单 */
+.levelNav{margin: 0 auto; padding: 12px 0; background: #f3f3f3; position: relative;}
+.levelNav .levelUl li a{ display: block; height: 24px; padding: 0 15px; font-size: 16px; text-align: center;}
+
+.explain{ padding: 15px 15px 1px 15px; background: #f3f3f3;}
+.explain p{ margin-bottom: 15px;}
+.explain p .text-red{ color: #d50032;}
+.position { padding: 20px; margin-bottom: 12px;}
+
+.subNav{ position: relative; height: 40px; text-align: center;}
+.subNav .ctLink{ font-size: 18px; color: #fff; display: inline-block; margin-top: 8px; position: relative;}
+.subNav a.ctLink:before{ content:""; width: 0; height: 0; border-bottom: solid 6px #f4ebe9; border-left: solid 6px transparent; border-right: solid 6px transparent; position: absolute; left: 50%; margin-left: -6px; bottom: -7px; opacity: 0; transition: all ease-out .2s;}
+.subNav a.ctLink.on,.subNav a.ctLink:hover{ color: #e4ff00;}
+.subNav a.ctLink.on:before,.subNav a.ctLink:hover::before{ opacity: 1;}
+.subNav span.ctLink{ color: #473630; margin: 0 15px;}
+.jxSubNav{ background-color: #a36ff2; background-image: url(../../images/ypRadar/jxsub-nav-tit.jpg); background-repeat: no-repeat;}
+.jySubNav{ background-color: #6596e4; background-image: url(../../images/ypRadar/jysub-nav-tit.jpg); background-repeat: no-repeat;}
+.dkSubNav{ background-color: #ed8b64; background-image: url(../../images/ypRadar/dksub-nav-tit.jpg); background-repeat: no-repeat;}
+.cySubNav{ background-color: #75615a; background-image: url(../../images/ypRadar/cysub-nav-tit.jpg); background-repeat: no-repeat;}
+.subNavL{ padding: 0 15px; position: relative; overflow: hidden;}
+.subNavL ul li a{ display: block; height: 40px; line-height: 40px; color: #fff; font-size: 18px; padding: 0 15px;}
+.subNavL ul li.on,.subNavL ul li:hover{ -webkit-transform: skew(-16deg) translateZ(0); -moz-transform: skew(-16deg) translateZ(0); -ms-transform: skew(-16deg) translateZ(0); -o-transform: skew(-16deg) translateZ(0); transform: skew(-16deg) translateZ(0);}
+.subNavL ul li.on span,.subNavL ul li:hover span{ display: inline-block; -webkit-transform: skew(16deg) translateZ(0); -moz-transform: skew(16deg) translateZ(0); -ms-transform: skew(16deg) translateZ(0); -o-transform: skew(16deg) translateZ(0); transform: skew(16deg) translateZ(0);}
+.jxSubNav .subNavL ul li.on a,.jxSubNav .subNavL ul li a:hover{ background: #8454cd; color: #fff;}
+.jySubNav .subNavL ul li.on a,.jySubNav .subNavL ul li a:hover{ background: #446fb4; color: #fff;}
+.dkSubNav .subNavL ul li.on a,.dkSubNav .subNavL ul li a:hover{ background: #c2633e; color: #fff;}
+.cySubNav .subNavL ul li.on a,.cySubNav .subNavL ul li a:hover{ background: #554339; color: #fff;}
+.subNavR{ margin-right: 35px; margin-top: 5px;}
+.subNavR .dropdown .ddTime{ display: inline-block; border-radius: 30px; padding: 4px 15px; font-size: 16px;}
+.jxSubNav .subNavR .dropdown .ddTime{ background: #8454cd; color: #e4ff00;}
+.jySubNav .subNavR .dropdown .ddTime{ background: #4b7ac4; color: #ffffff;}
+.dkSubNav .subNavR .dropdown .ddTime{ background: #ce704b; color: #ffffff;}
+.cySubNav .subNavR .dropdown .ddTime{ background: #664f47; color: #ffffff;}
+.subNavR .dropdown .ddTime span{ font-size: 12px;}
+.subNavR .dropdown-menu > li.on > a{ background: #f5f5f5;}
+.subNavR .dropdown-menu { min-width: auto; width: 100%;}
+.secSubNav{ height: 40px; background: #8454cd; padding: 10px 0; text-align: center;}
+.cySecNav{ background: #f4ebe9}
+.secSubNav a,.secSubNav span{ display: inline-block; height: 20px; line-height: 20px; color: #fff; font-size: 16px; position: relative;}
+.cySecNav a{ color: #999;}
+.secSubNav a{ margin: 0 15px;}
+.secSubNav span{ color: #c5b5dd;}
+.jxSecNav a:before{ content:""; width: 0; height: 0; border-bottom: solid 6px #fff; border-left: solid 6px transparent; border-right: solid 6px transparent; position: absolute; left: 50%; margin-left: -6px; bottom: -10px; opacity: 0; transition: all ease-out .2s;}
+.cySecNav a:before{ content:""; width: 32px; height: 2px; background: #c2ada5; position: absolute; bottom: -10px; opacity: 0; transition: all ease-out .2s;}
+.jxSecNav a.on,.jxSecNav a:hover{ color: #e4ff00;}
+.cySecNav a.on,.cySecNav a:hover{ color: #554339;}
+.secSubNav a.on:before,.secSubNav a:hover::before{ opacity: 1;}
+
+.dtNoneBox{ padding: 50px 0; text-align: center;}
+.dtNoneBox p{ margin-top: 15px;}
+
+.dtBox{ position: relative; padding-top: 26px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; box-shadow: 0 0 8px #d3d3d3; margin-bottom: 38px;}
+.jxjxBox{ border-top: 2px solid #935fe2;}
+.lrjyBox{ border-top: 2px solid #5d8ad0;}
+.ypdkBox{ border-top: 2px solid #e7845c;}
+.jccyBox{ border-top: 2px solid #89736b;}
+
+.jxjxSub{ border-top: none 0; padding: 20px 0;}
+.lrjySub{ border-top: none 0; padding: 20px 0;}
+.ypdkSub{ border-top: none 0; padding: 20px 0;}
+.jccySub{ border-top: none 0; padding: 20px 0;}
+
+.dtBox .dtBoxL,.dtBox .dtBoxR{ width: 50%;}
+.dtBox .dtBoxIn{ width: 100%;}
+.dtBox .dtBoxIn ul li{ width: 50%; float: left;}
+.dtBox .dtBoxIn ul li:nth-of-type(odd){ border-right: 1px solid #e5e5e5;}
+.dtBox .dtBoxL{ border-right: 1px solid #e5e5e5;}
+.dtBox .dtBoxType{ width: 132px; height: 40px; line-height: 40px; color: #fff; font-size: 18px; padding-left: 28px; position: absolute; left: 0; top: -13px;}
+.dtBox .graListL{ background: -webkit-linear-gradient(left, #f1f1f1, #fff); /* Safari 5.1 - 6.0 */ background: -o-linear-gradient(left, #f1f1f1, #fff); /* Opera 11.1 - 12.0 */ background: -moz-linear-gradient(left, #f1f1f1, #fff); /* Firefox 3.6 - 15 */ background: linear-gradient(to right, #f1f1f1 , #fff); /* 标准的语法（必须放在最后） */}
+.dtBox .graListR{ background: -webkit-linear-gradient(right, #f1f1f1, #fff); /* Safari 5.1 - 6.0 */ background: -o-linear-gradient(right, #f1f1f1, #fff); /* Opera 11.1 - 12.0 */ background: -moz-linear-gradient(right, #f1f1f1, #fff); /* Firefox 3.6 - 15 */ background: linear-gradient(to left, #f1f1f1 , #fff); /* 标准的语法（必须放在最后） */}
+.dtBox .list{ position: relative;}
+.dtBox .list:before{ display: block; content:""; width: 4px; height: 100%; background: #ed8f14; position: absolute; left: 0; top: 0; opacity: 0; transition: all ease-out .2s;}
+.dtBox .list:hover:before{ opacity: 1;}
+
+.jxjxBox .dtBoxType{ background: url(../../images/ypRadar/jxjx-tit.png) no-repeat 0 0;}
+.lrjyBox .dtBoxType{ background: url(../../images/ypRadar/lrjy-tit.png) no-repeat 0 0;}
+.ypdkBox .dtBoxType{ background: url(../../images/ypRadar/ypdk-tit.png) no-repeat 0 0;}
+.jccyBox .dtBoxType{ background: url(../../images/ypRadar/jccy-tit.png) no-repeat 0 0;}
+
+.jxjxBox .list{ padding-top: 15px; padding-bottom: 30px; position: relative;}
+.jxjxBox .dLeft{ width: 290px; padding-left: 20px;}
+.jxjxBox .dLeft .name{ max-width: 150px;}
+.jxjxBox .dLeft .scoreTeam{ width: 50px; text-align: center;}
+.jxjxBox .homeTeam,.jxjxBox .awayTeam{ max-width: 104px;}
+.jxjxBox .dLeft .spanLb{ display: inline-block; border: 1px solid #71bf91; color: #71bf91; padding: 5px 10px; border-radius: 4px;}
+.jxjxBox .dCenter,.jxjxBox .dRight{ width: 102px;}
+.jxjxBox .dCenter .rowNum,.jxjxBox .dRight .rowNum{ font-size: 32px;}
+.jxjxBox .dCenter{ color: #da4646;}
+.jxjxBox .dRight{ color: #4c4c4c;}
+
+.lrjyBox .list{ padding-top: 15px; padding-bottom: 15px; position: relative;}
+.lrjyBox .dLeft{ width: 230px; padding-left: 20px;}
+.lrjyBox .homeTeam,.lrjyBox .awayTeam{ max-width: 166px;}
+.lrjyBox .cjj{ width: 90px;}
+.lrjyBox .cjl{ width: 90px;}
+.lrjyBox .cjbl{ width: 100px;}
+
+.ypdkBox .list{ padding-top: 15px; padding-bottom: 15px; position: relative;}
+.ypdkBox .dLeft{ width: 290px; padding-left: 20px;}
+.ypdkBox .spanMat{ line-height: 32px;}
+.ypdkBox .dLeft .spanLb{ display: inline-block; border: 1px solid #71bf91; color: #71bf91; padding: 5px 10px; border-radius: 4px;}
+.ypdkBox .sldk{ width: 80px;}
+.ypdkBox .cyz{ width: 75px; height: 75px; position: relative; margin-right: 30px; margin-top: 10px;}
+
+.jccyBox .list{ padding-top: 15px; padding-bottom: 15px; position: relative;}
+.jccyBox .dLeft{ width: 270px; padding-left: 20px;}
+.jccyBox .dLeft .spanLb{ display: inline-block; border: 1px solid #71bf91; color: #71bf91; padding: 5px 10px; border-radius: 4px;}
+.jccyBox .tzbl,.jccyBox .gl,.jccyBox .cyz{ width: 80px;}
+.jccyBox .rowNum,.jccyBox .rowNum{ font-size: 28px;}
+.jccyBox .tzbl .rowNum,.jccyBox .gl .rowNum{ color: #4c4c4c;}
+.jccyBox .cyz .rowNum{ color: #da4646;}
+
+.circle { width: 75px; height: 75px; position: absolute; top: 0; border-radius: 50%;}
+.circleRight{ background: #ef5555;}
+.circle .pie_left, .circle .pie_right { width: 75px;   height: 75px; position: absolute; top: 0;left: 0; }
+.circleRight .pieLeftIn,.circleRight .pieRightIn {  width: 75px;  height: 75px;  background:#e1e1e1; border-radius: 50%; position: absolute; top: 0; left: 0;}
+.circle .pie_right,.circle .pieRightIn { clip:rect(0,auto,auto,38px);}
+.circle .pie_left,.circle .pieLeftIn { clip:rect(0,38px,auto,0); }
+.circle .mask {width: 65px; height: 65px; border-radius: 50%; left: 5px; top: 5px; background: #FFF; position: absolute; text-align: center; font-size: 12px; color: #ef5555; padding: 5px; padding-top: 12px;}
+.circle .mask p{ border-bottom: 1px solid #ef5555;}
+.maPro{ text-align: center; font-size: 12px;}

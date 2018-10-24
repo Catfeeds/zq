@@ -1,0 +1,160 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/live_score.css">
+    <style type="text/css">
+        .f7{ background: #f7f7f7}
+        .ff{ background: #fff}
+    </style>
+</block>
+<block name="header">
+    <include file="Public/header_score"/>
+</block>
+<block name="nav">
+    <include file="Public/nav_bk"/>
+</block>
+<!-- 内容 s -->
+<block name="content">
+    <section  class="content contentPt">
+        <!-- 时间导航s -->
+        <section class="n_time">
+            <nav class="nav_time fs22 clearfix">
+                <volist name='date_list' id='v'>
+                    <a href="?date={$v['date']|date='Ymd',###}" class="swiper-slide <eq name="GetDate" value="$v['ymd']">on</eq>">
+                        <p>{$v['week']}</p>
+                        <p>{$v['date']|date='m-d',###}</p>
+                    </a>
+                </volist>
+            </nav>
+        </section>
+        <!-- 时间导航e -->
+        <!--        <div class="f-td clearfix">
+                    <div class="fl fs26 text-999">显示即时赔率</div>
+                    <div class="fr">
+                        <input type="checkbox" id="check" value="">
+                    </div>
+                </div>-->
+        <div class="liveList">
+            <volist name="list" id="v" mod='2' key='k'>
+                <div class='match js-data ios_touch <eq name='mod' value='1'>f7<else/>ff</eq>' data-url='{:U("DetailsBk/event_technology",["scheid"=>$v[0]])}'>
+                    <div class="top">
+                        <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td width="44%" class="q-tl"><span class="match_name" style="color:{$v[3]}"><eq name='language' value='0'>{$v[2][0]}<else/>{$v[2][1]}</eq></span> <em class="mach_will_time">{$v['date']} {$v[6]}</em></td>
+                                    <td width="14%" class="fs20 mach_begin_time q-tl"><time>完场</time></td>
+                                    <td width="42%" class="q-tl sec_score">
+                                        <!--                                        <ul class="clearfix">
+                                                                                    <li class="mach_begin">-8.5</li>
+                                                                                    <li class="mach_begin">98.5</li>
+                                                                                </ul>-->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="middle">
+                        <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td width="45%" class="q-tl"><span class="homeTeamName"><eq name='language' value='0'>{$v[7][0]}<else/>{$v[7][1]}</eq></span></td>
+                                    <td width="45%" class="sec_score">
+                                        <ul class="clearfix">
+                                            <li>{$v[11]}</li>
+                                            <li>{$v[13]}</li>
+                                            <li>{$v[15]}</li>
+                                            <li>{$v[17]}</li>
+                                            <volist name="v['home_ot']" id='vo'>
+                                                <li>{$vo}</li>
+                                            </volist>
+                                        </ul>
+                                    </td>
+                                    <td width="10%" class="q-tr mach_begin_time">{$v[9]}</td>
+                                </tr>
+                                <tr>
+                                    <td width="37%" class="q-tl"><span class="guestTeamName"><eq name='language' value='0'>{$v[8][0]}<else/>{$v[8][1]}</eq></span></td>
+                                    <td width="45%" class="sec_score">
+                                        <ul class="clearfix">
+                                            <li>{$v[12]}</li>
+                                            <li>{$v[14]}</li>
+                                            <li>{$v[16]}</li>
+                                            <li>{$v[18]}</li>
+                                            <volist name="v['away_ot']" id='vo'>
+                                                <li>{$vo}</li>
+                                            </volist>
+                                        </ul>
+                                    </td>
+                                    <td width="10%" class="q-tr mach_begin_time">{$v[10]}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <neq name='v[22]' value=''>
+                    <div class="bottom">
+                        <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td width="45%" class="q-tl">
+                                        <div class="odds rf">
+                                            <span class="oddsType">让</span>
+                                            <span class="addsNub js-home-asian">{$v[22]}</span>
+                                            <span class="addsPankou js-all-asian">{$v[23]}</span>
+                                            <span class="addsNub js-away-asian">{$v[24]}</span>
+                                        </div>
+                                    </td>
+                                    <td width="45%" class="q-tl">
+                                        <div class="odds dx">
+                                            <span class="oddsType">总</span>
+                                            <span class="addsNub js-home-ball" style="">{$v[25]}</span>
+                                            <span class="addsPankou js-all-ball">{$v[26]}</span>
+                                            <span class="addsNub js-away-ball" style="">{$v[27]}</span>
+                                        </div>
+                                    </td>
+                                    <td width="10%" class="mach_half"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </neq>
+                </div>
+            </volist>
+        </div>
+    </section>
+</block>
+<!-- 内容 e -->
+<block name='filtrate'>
+    <include file="Public/bk_filtrate"/>
+</block>
+<block name="scripts">
+    <script>
+        $(function () {
+            var scrollTop = Cookie.getCookie('scrollTop');
+            if (scrollTop) {
+                $("html, body").animate({scrollTop: scrollTop}, 500);
+                Cookie.delCookie('scrollTop');
+            }
+            //确定
+            $("#sele_confirm").click(function () {
+                var chioce = '';
+                if ($(".subnav_list a.on").length < 1) {
+                    alert('至少选择一项!');
+                    return false;
+                }
+                $(".subnav_list a").each(function () {
+                    $this = $(this);
+                    if ($this.hasClass('on')) {
+                        chioce += $this.data('key') + ',';
+                    }
+                });
+                chioce = chioce.substring(0, chioce.length - 1);
+                Cookie.setCookie('BkScheRes', chioce);
+                window.location.reload();
+            });
+            $(document).on('click', '.js-data', function () {
+                var topHeight = $(document).scrollTop();
+                Cookie.setCookie('scrollTop', topHeight, 60000);
+                window.location.href = $(this).data('url');
+            });
+        });
+    </script>
+</block>

@@ -1,0 +1,67 @@
+<extend name="Public/base" />
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/worldcup/competition.css?201806221825">
+    <link rel="stylesheet" type="text/css" href="__CSS__/worldcup/analysis.css">
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file="WorldCup:topHead"/>
+</block>
+<!-- 二级头部 e -->
+<block name="nav"></block>
+<!-- 用户所有明细 -->
+<block name="content">
+    <!-- 主体内容 -->
+    <section class="wrapCon">
+        <div class="enterprise">
+            <img src="__IMAGES__/worldcup/teamLogo/{$team.filter_value}.png" alt="{$team.name}">
+            <div class="grouping">{$team.sign}组</div>
+            <div class="state">{$team.name}</div>
+        </div>
+        <div class="top-img">
+            <img src="__IMAGES__/worldcup/analysis/top-img.png" alt="球队赛程">
+            <span>球队赛程</span>
+        </div>
+        <ul class="list">
+            <volist name="game" id="vo">
+                <li>
+                    <a class="clearfix" href="<if condition="$_GET['header'] eq 'no'">javascript:void(0)<else/>{:U('Details/data',['scheid'=>$vo['game_id']])}</if>">
+                        <div class="top">
+                            <span class="top-l">{$vo.day} {$vo.weekday}</span>
+                            <span class="top-r">{$vo.gstate}</span>
+                        </div>
+                        <div class="left">
+                            <span class="most">{$vo['home_team_name']}</span>
+                            <span><img src="{$vo.home_logo}" alt="{$vo['home_team_name']}"></span>
+                        </div>
+                        <div class="middle"><span>
+                            <if condition="$vo['game_state'] eq 0">
+                                {$vo.time}
+                            <else/>
+                                {$vo.score}
+                            </if>
+                        </span></div>
+                        <div class="right">
+                            <span class="right-img"><img src="{$vo.away_logo}" alt="{$vo['away_team_name']}"></span>
+                            <span class="most-t">{$vo['away_team_name']}</span>
+                        </div>
+                    </a>
+                </li>
+            </volist>
+        </ul>
+        <ul class="master clearfix">
+            <volist name="newList" id="vo">
+                <li>
+                    <a title="{$vo.title}" href="{$vo.href}<eq name="_GET['header']" value="no">?header=no</eq>">
+                        <img src="{$vo.img}" alt="{$vo.title}">
+                        <div class="predictions">{$key}</div>
+                    </a>
+                </li>
+            </volist>
+        </ul>
+    </section>
+</block>
+<block name='scripts'>
+    <script src="__JS__/worldcup/competition.js" type="text/javascript"></script>
+</block>

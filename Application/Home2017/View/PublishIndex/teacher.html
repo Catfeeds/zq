@@ -1,0 +1,132 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>{$className}_全球体育资讯情报qqty.com</title>
+</block>
+<block name="body">
+<body>
+<link rel="stylesheet" type="text/css" href="/min/?b=Public/Home/css/publish_index&f=infor_common.css,teacher.css">
+<include file="Public:top_index" />
+
+<!-- 主体内容开始 -->
+<div class="home">
+ <div class="main clearfix pt25 pb50">
+     <!-- 左边内容  start-->
+    <div class="main-left fl">
+       <!-- 当前位置标题 -->
+      <div class="position">
+        当前位置：<span class="now"><a href="{:U('/')}">首页</a></span> > <span class="now"><a href="{:U('/analysts')}">资讯情报</a> > </span>  {$className}
+      </div>
+
+      <div class="re_title">
+        <em class="f24 fb pl10">{$className}</em> <span class="f16 pl5"></span>
+      </div>
+      
+      <notempty name="list">
+        <!-- 左边信息列表 start -->
+        <div class="main-left-con clearfix">
+            <ul class="posts">
+              <volist name="list" id="item">
+                <li class="ds-list" <if condition="$i % 2 eq 0">style="background-color:#f5f5f5"</if>>
+                    <!-- <em class="tuijian"></em> -->
+                    <div class="rec_img">
+                        <a target="_blank" href="{:U('/userindex/'.$item['user_id'].'')}"><img class="lazy" src="{$item.face}"></a><p>{$item.nick_name}</p>
+                    </div>
+                    <div class="rec_right">
+                        <p class="mlc_title"><a target="_blank" href="{:getNewsUrl($item['id'],$item['is_original'])}">{$item.title}</a></p>
+                        <p class="mlc_des">
+                          {$item.remark|msubstr=###,0,65,'utf-8'}
+                        </p>
+                        <div class="mlc_share">
+                          <em>{$item.add_time|date="Y-m-d H:i",###}</em>
+                          <em class="pinl">{$item.click_number}</em>
+                          <!-- <div class="s_main"><a href="javascript:;" class="share">分享</a>
+                              <div>
+                                  <a class="jiathis_button_weixin" href="javascript:;"><img src="__PUBLIC__/Home/images/publish_index/share01.jpg"></a>
+                                  <a class="jiathis_button_tsina" href="javascript:;"><img src="__PUBLIC__/Home/images/publish_index/share02.jpg"></a>
+                                  <a class="jiathis_button_qzone" href="javascript:;"><img src="__PUBLIC__/Home/images/publish_index/share03.jpg"></a>
+                                  <a class="jiathis_button_cqq" href="javascript:;"><img src="__PUBLIC__/Home/images/publish_index/share04.jpg"></a>
+                              </div>
+                          </div> -->
+                          <!-- <a target="_blank" href="{:getNewsUrl($item['id'],$item['is_original'])}#cm" class="pinl"><img src="__PUBLIC__/Home/images/publish_index/pinl.png" alt="评论"> 评论 （{$item.comment}）</a> -->
+                        </div>
+                    </div>
+                </li>
+              </volist>
+            </ul>
+        </div>
+        <!--页码开始-->
+        <div class="page-con">
+            <nav>
+                <ul class="pagination pull-right">
+                    {$show}
+                    <li>
+                        <input class="isTxtBig" type="text" value="{$_REQUEST.p|default=1}" name="p">
+                    </li>
+                    <li id="GO">
+                        <a href="javascript:void(0)">
+                            GO
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="pull-right" style="margin-top: 5px;">
+                共有{$totalCount}条，每页显示：{$numPerPage}条
+            </div>
+        </div>
+        <!--页码结束-->
+      <else/>
+          <p>没有找到相关资讯哦！ <a href="{:U('/analysts')}"><i class="icon-arrow-right text-tie"> 返回资讯快报</i></a></p>
+      </notempty>
+     <!-- 左边信息列表 end-->
+    </div>
+    <!-- 左边内容  end-->
+    <input type="hidden" id="class_id" name="class_id" value="{$Think.get.class_id}">
+
+    <include file="class_right" />
+
+ </div>
+</div>
+<!-- 主体内容结束 -->
+
+<include file="Public:footer" />
+<include file="Public:return_top" />
+
+</body>
+</html>
+<!-- JiaThis Button BEGIN -->
+<script "text/javascript">
+var jiathis_config = {
+    url: '',
+    title: '',
+    summary: '',
+    pic: '',
+}
+function getShare(){
+  $(".s_main").mouseover(function(){
+    var url = $(this).next().attr("href");
+    var title = $(this).parent().prev().prev().find("a").text();
+    var summary = $(this).parent().prev().text();
+    var pic = $(this).parents(".rec_right").prev().find("img").attr("src");
+     jiathis_config = {
+          url: url,
+          title: title,
+          summary: summary,
+          pic: pic
+      }
+  })
+}
+getShare();
+
+//绑定a标签
+$("#GO").find("a").bind("click", function(){
+    var p = $("input[name='p']").val();
+    if (isNaN(p)) {
+        return;
+    } else if (p>0){
+        var class_id = $("input[name='class_id']").val();
+        window.location.href = "/list_n/"+class_id+'/'+p+'.html';
+    }
+});
+</script>
+<script type="text/javascript" src="/min/?b=Public/Home/js&f=publish_index/publish_class.js,index/jquery.inview.min.js"></script>
+</block>

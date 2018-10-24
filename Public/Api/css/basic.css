@@ -1,0 +1,91 @@
+/*
+ * 公用基本样式
+ *
+ * @author Chensiren <245017279@qq.com>
+ * @since  2016-02-01
+*/
+
+* {
+    box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+}
+.clearfix{zoom:1;}
+.clearfix:after{content:" ";display:block;clear:both;height:0;overflow:hidden;visibility:hidden;}
+
+.fl { float:left !important;}
+.fr { float:right!important;}
+
+.mar-a{margin:.4em;}
+.mar-t{margin-top:0.625em;}
+.mar-b{margin-bottom:0.625em;}
+.mar-l{margin-left:0.625em;}
+.mar-r{margin-right:0.625em;}
+.mar-a-sm{margin:.4em;}
+.mar-t-sm{margin-top:0.625em;}
+.mar-b-sm{margin-bottom:0.625em;}
+.mar-l-sm{margin-left:0.625em;}
+.mar-r-sm{margin-right:0.625em;}
+.mar-a2{margin:.4em;}
+.mar-t2{margin-top:1.25em;}
+.mar-b2{margin-bottom:1.25em;}
+.mar-l2{margin-left:1.25em;}
+.mar-r2{margin-right:1.25em;}
+
+.pad-a{padding:.625em;}
+.pad-t{padding-top:.625em;}
+.pad-b{padding-bottom:.625em;}
+.pad-l{padding-left:.625em;}
+.pad-r{padding-right:.625em;}
+.pad-a-sm{padding:.25em;}
+.pad-t-sm{padding-top:.25em;}
+.pad-b-sm{padding-bottom:.25em;}
+.pad-l-sm{padding-left:.25em;}
+.pad-r-sm{padding-right:.25em;}
+.pad-a2{padding:1.25em;}
+.pad-t2{padding-top:1.25em}
+.pad-b2{padding-bottom:1.25em}
+.pad-l2{padding-left:1.25em}
+.pad-r2{padding-right:1.25em}
+
+.bor-a{border:1px solid #d7d7d7;}
+.bor-t{border-top:1px solid #d7d7d7;}
+.bor-b{border-bottom:1px solid #d7d7d7;}
+.bor-l{border-left:1px solid #d7d7d7;}
+.bor-r{border-right:1px solid #d7d7d7;}
+.bor-danger{border-color:#db2329;}
+.bor-primary{border-color:#107ee3;}
+
+.btn{padding:.2em .9em;min-height:2.2em;font-size:1em;text-align:center; border-radius:.3em;-webkit-box-pack: center;box-pack: center;-webkit-box-align: center;box-align: center;display: -webkit-box !important;display: box !important;position: relative;}
+.btn-default{background:#f2f2f2;color:#666; border:1px solid #d7d7d7;}
+.btn-primary{background:#107ee3;color:#fff;}
+.btn-danger{background:#db2329; color:#fff;}
+.btn-warning{background:#ffc107; color:#fff;}
+
+.bg-default{background:#f7f7f7;}
+.bg-orange{ background: #ff7e00;}
+.bg-primary{background:#107ee3;}
+.bg-danger{background:#db2329;}
+.bg-warning{background:#ffc107;}
+
+.label-default{padding:.1em .2em;color:#fff;background:#f2f2f2;}
+.label-primary{padding:.1em .2em;color:#fff;background:#107ee3;}
+.label-danger{ padding:.1em .2em;color:#fff;background:#db2329;}
+.label-warning{padding:.1em .2em;color:#fff;background:#ffc107;}
+
+.text-red{ color: #eb0000;}
+.text-default{color:#333;}
+.text-primary{color:#107ee3;}
+.text-danger{color:#db2329;}
+
+
+.fs-10{font-size:0.2rem;}
+.fs-12{font-size:.24rem;}
+.fs-14{font-size:.28rem;}
+.fs-16{font-size:.32rem;}
+.fs-20{font-size:.4rem;}
+.fs-32{font-size:.64rem;}
+
+
+.footer { clear:both; padding:20px 0;text-align:center;}
+

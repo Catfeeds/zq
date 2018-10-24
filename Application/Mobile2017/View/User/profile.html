@@ -1,0 +1,61 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/login/login.css">
+    <style type="text/css">
+        #other_header{ text-align: left; text-indent:0}
+	    #other_header span{ text-indent: 0; padding-left: .2rem; border-left: 1px solid #fff;}
+        .login-container{ padding-left: 0; margin-bottom: 0;}
+        .text-con{ padding: .15rem;}
+        .text-con .textarea{ resize: none; outline: 0; border: none; width: 100%; height: 2rem;}
+        .limit span{ display: inline-block; padding: .15rem .3rem; background: #dddddd; color: #999999; margin-right: .2rem;}
+        #other_header a{width: 1rem;}
+    </style>
+</block>
+<!-- 二级头部 s -->
+<block name="header">
+    <header id="other_header">
+        <a href="javascript:history.go(-1)"></a>
+        <span>个人简介</span>
+        <a href="javascript:;" id='complete' class="share" style="font-size:.3rem;">完成</a>
+    </header>
+</block>
+<!-- 二级头部 e -->
+<block name='nav'></block>
+<block name='content'>
+    <div class="login_panel">
+        <form id="login-form" action="" method="post">
+            <div class="login-container">
+                <div class="text-con">
+                    <textarea id="fb" class="textarea required fs26" name="content" placeholder="(违反国家法律，涉及色情、政治、造谣、敏感等内容，或含有联系方式和外链，一经发现封号处理)" >{$data}</textarea>
+                </div>
+            </div>
+            <p class="q-tr limit"><span class="fs26">限20字</span></p> 
+        </form>
+    </div>
+</block>
+<block name='scripts'>
+    <script>
+        $(document).on('click','#complete',function(){
+            var countent=$('#fb').val();
+            countent = $.trim(countent);
+            if(countent==''){
+                alert('请输入内容！');
+                return false;
+            }
+            $.ajax({
+                type: 'post',
+                url: "",
+                data: {content: countent},
+                dataType: 'json',
+                success: function (data) {
+                    if(data.status==1){
+                        window.location=data.url;
+                    }else{
+                        alert(data.info);
+                    }
+                }
+            });
+        });
+    </script>
+</block>

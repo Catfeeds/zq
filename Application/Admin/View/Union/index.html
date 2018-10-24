@@ -1,0 +1,77 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>联盟ID：</label>
+				<input type="text" name="union_id" value="{$_REQUEST.union_id}">
+			</li>
+			<li>
+				<label>联盟名称：</label>
+				<input type="text" name="union_name" value="{$_REQUEST.union_name}">
+			</li>
+			<li>
+				<label>联盟级别：</label>
+				<input type="text" name="is_sub" value="{$_REQUEST.is_sub}">
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true"><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/delete/id/{sid_node}/navTabId/__DWZ__" target="ajaxTodo"  title="你确定要删除吗？" warn="请选择记录"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择记录"><span>编辑</span></a></li>
+		</ul>
+	</div>
+	<table class="list" width="100%" layoutH="117">
+		<thead>
+		<tr>
+			<th width="30">id</th>
+			<th width="30">图片</th>
+			<th width="100">联盟名称</th>
+			<th width="50">联盟id</th>
+			<th width="50">颜色</th>
+			<th width="100">国家名称</th>
+			<th width="50">国家id</th>
+			<th width="50">联/杯赛</th>
+			<th width="50">级别</th>
+			<th width="50">排序</th>
+			<th width="30">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+
+		<volist id="vo" name="list">
+			<tr target="sid_node" rel="{$vo['id']}">
+				<td>{$vo['id']}</td>
+				<td><empty name="vo.img">没有上传<else/><a href="{$vo.img}" target="_blank"><img src="{$vo['img']}" width="25" height="21" /></a></empty></td>
+				<td>{$vo['union_name']}</td>
+				<td>{$vo['union_id']}</td>
+				<td>{$vo['union_color']}</td>
+				<td>{:getCountry($country,$vo['country_id'])}</td>
+				<td>{$vo['country_id']}</td>
+				<td>{$vo['is_union']}</td>
+				<td>{$vo['is_sub']}</td>
+				<td>{$vo['sort']}</td>
+				<td>
+					<a href="__URL__/edit/id/{$vo['id']}" target="dialog">编辑</a>
+				</td>
+			</tr>
+		</volist>
+
+		</tbody>
+	</table>
+	<include file="Public:pagerNum" />
+
+</div>

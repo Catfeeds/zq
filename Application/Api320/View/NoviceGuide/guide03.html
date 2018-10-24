@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta charset="UTF-8">
+	<title>全球体育网</title>
+	<!-- jquery -->
+    <script type="text/javascript" src="__PUBLIC__/Api/NoviceGuide/js/jquery-1.11.1.min.js"></script>
+
+	<!-- 引入公共样式 -->
+    <link rel="shortcut icon" href="__PUBLIC__/Api/NoviceGuide/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/NoviceGuide/css/base.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/NoviceGuide/css/common.css">
+	<!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Api/NoviceGuide/js/htmlwidth.js"></script>
+
+	<!-- 本页需要引用的js -->
+    <script type="text/javascript" src="__PUBLIC__/Mobile/js/swiper.js"></script>
+    <script type="text/javascript">
+	$(function(){
+		//banner 切换
+		var swiper = new Swiper('.swiper-container', {
+			pagination: '.swiper-pagination',
+			paginationClickable: true,
+			spaceBetween: 30,
+			centeredSlides: true,
+			autoplayDisableOnInteraction: false,
+		});
+	})
+    </script> 
+    
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__PUBLIC__/Mobile/css/swiper.css">
+    <link rel="stylesheet" href="__PUBLIC__/Api/NoviceGuide/css/guide/guide.css">
+</head>
+<body>
+	<section class="swiper-con">
+   		<!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="height: auto;">
+                	<header id="other_header">
+                        <a href="__MODULE__/Index/noviceGuide"></a>排行榜奖励
+                    </header>
+                    <h2 class="title_notice">排行榜：这是高手云集的地方，所有分析师的战绩按日、周、月、季统计，胜率从高到低排名</h2>
+					<a href="javacript:;"><img src="__PUBLIC__/Api/NoviceGuide/images/app-guide/03-1.jpg"></a>
+                </div>
+                <div class="swiper-slide" style="height: auto;">
+                	<header id="other_header">
+                        <a href="__MODULE__/Index/noviceGuide"></a>榜单奖励
+                    </header>
+                    <h2 class="title_notice">进入榜单排名除了会有更多曝光之外，还会有额外的金币奖励！</h2>
+					<a href="javacript:;"><img src="__PUBLIC__/Api/NoviceGuide/images/app-guide/swiper-con-bg.jpg"></a>
+                    <div class="scollCon">
+                    	<ul>
+                    		<li><img src="__PUBLIC__/Api/NoviceGuide/images/app-guide/scoll-1.jpg"></li>
+                    	</ul>
+                    </div>
+              	</div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination swiper-pagination-second"></div>
+        </div>
+	</section>
+</body>
+	<!-- 公共js -->
+    <script type="text/javascript" src="__PUBLIC__/Api/NoviceGuide/js/common.js"></script>
+</html>

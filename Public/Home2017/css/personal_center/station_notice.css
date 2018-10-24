@@ -1,0 +1,14 @@
+/**
+ * 全彩个人中心css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-23
+**/
+
+/* 站内通知 */
+.notice-list ul li{ padding: 10px 0; border-bottom: 1px dashed #d7d7d7; margin-bottom: 10px;}
+.notice-list ul li .right{ width: 755px; font-size: 12px;}
+.notice-list ul li .ml{ margin-left: 20px;}
+.notice-list ul li .ml p{ margin-top: 10px; margin-bottom: 0; color:#999; word-wrap:break-word; word-break:normal;word-break:break-all;}
+.title .yd{ margin-left: 5px; color: #999;}
+.title .wd{ margin-left: 5px; color: #bf1a20;}

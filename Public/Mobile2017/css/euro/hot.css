@@ -1,0 +1,224 @@
+/**
+ * 欧洲杯css样式文件
+ * 
+ * @author pengjian <710348662@qq.com>
+ *
+ * @since  2016-04-25
+**/
+
+
+.schedule_show{padding:.1rem; padding-bottom: 0 }
+.sc_sele{width: 100%; background: #0165b8;color: #fff;height: .7rem;line-height: .7rem;border-radius: .5rem;text-align: center;margin-bottom: .2rem;position: relative;}
+.sc_sele a{color: #fff;display: inline-block; text-align: center;float: left;font-size: .24rem;width: 20%}
+.sc_sele a.on{ background-color:#fff; color: #0165b8;border-radius: .5rem;height: .8rem;margin-top:-.05rem; border:2px solid #f9f9f9; 
+    -webkit-box-shadow:0 0 2px #f9f9f9;
+    -moz-box-shadow:0 0 2px #f9f9f9;
+    box-shadow:0 0 2px #f9f9f9;
+}
+.sc_sele a:first-child.on{margin-left: -.03rem}
+.sc_sele a:last-child.on{position: absolute;right: -.03rem;top: 0}
+/*-webkit-box-shadow:0 .02rem .02rem #ddd;*/
+
+/*赛程*/
+.schedule_con{height: 1.4rem;overflow: hidden; position: relative;}
+.sc_con{width: 100%; height: 100%; overflow: hidden; }
+.sc_top{color: #999999}
+.sc_bottom{margin-top: .1rem}
+.sc_bottom figure div{width:.3rem; height: .3rem; border-radius: 50%;margin: 0 auto}
+.sc_bottom figure div img{width:.3rem; height: .3rem;border-radius: 50% }
+.sc_bottom .scb_l{float: left;}
+.sc_bottom figure figcaption{padding-top: .1rem; }
+.sc_bottom .scb_r{float: right;}
+.sc_bottom span{color: #999999;line-height: .5rem;font-size: .24rem}
+
+.schedule_show .line_l{width: .01rem; border-right: .05rem solid #fff; position: absolute; left:-.01rem;top: 0;height: 1.4rem;z-index: 999}
+.schedule_show .line_r{width: .01rem; border-right: .05rem solid #fff; position: absolute; right:0;top: 0;height: 1.4rem;z-index: 999}
+
+/*小组赛*/
+.sc_small{padding-left: .1rem;}
+.sc_small nav{width: 100%; height: .85rem;line-height: .85rem;text-align: center;}
+.sc_small nav a{width: .74rem; display: inline-block; text-align: center;margin: 0 .2rem;float: left;font-size: .3rem}
+.sc_small nav a.on{background: url("../../images/euro/ball.png") no-repeat left center; background-size: .72rem .82rem; color: #fff}
+
+.sc_small .cou_list{margin-top: .1rem; display: none;}
+.sc_small .cou_list em{padding: 0 .15rem;display: block;float: left;border-right: 1px dashed #999999;height: .32rem;  }
+.sc_small .cou_list em:last-child{border-right:0}
+.sc_small .cou_list em img{width: .32rem;height: .32rem;border-radius: 50%; vertical-align: middle;margin-right: .1rem;margin-top: -.05rem; }
+
+/*--------------------------------- 新闻列表 ---------------------------------*/
+.news_con ul li{width:100%;padding:.2rem .2rem; border-top: 1px solid #dddddd;}
+.news_con ul .list a{display: -moz-box; 
+    display: -webkit-box; 
+    display: box;}
+.news_con ul li .n_img{width: 2.25rem;height:1.45rem;margin-right: .2rem;}
+.news_con ul li .n_img img{width: 100%;height: 100%;display: block;border-radius: 2px}
+ 
+
+/*图片列表*/
+.news_con ul .img_list{position: relative;  }
+.news_con ul .img_list .n_img{width: 100%; height: 100%;float: left;padding-top: .1rem;padding-right: 0}
+.news_con ul .img_list .n_img a{float: left;display: block; width: 2.25rem; height: 1.45rem; margin-right: .17rem} 
+.news_con ul .img_list .n_img a:last-child{margin-right: 0;}
+.news_con ul .img_list .n_img a img{border-radius: 2px;} 
+.news_con ul .img_list img{width: 2.25rem; }
+.news_con ul li .n_des{    
+	-moz-box-flex: 1; 
+    -webkit-box-flex: 1; 
+    box-flex: 1;
+    position: relative;
+    height: 1.45rem;
+}
+.news_con ul li .n_des h3{height: .6rem; line-height: .6rem; }
+.news_con ul li .n_des h3 a,.news_con ul .img_list h3 a{
+width:100%;
+display:block;/*内联对象需加*/
+word-break:keep-all;/* 不换行 */
+white-space:nowrap;/* 不换行 */
+overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+.news_con ul .img_list h3{padding-bottom: .1rem}
+.news_con ul .img_list div{line-height: 150%}
+.news_con ul li .n_des h3 a:hover{color: #0165b8}
+.news_con ul li .n_des p{height: .7.8rem; }
+.news_con ul li .n_des p{color: #666666;font-size: .26rem}
+/*评论*/
+.news_con ul li  .n_pl{color: #a0a0a0;position: absolute;right: 0;bottom: 0;height: .33rem; line-height: .33rem}
+.news_con ul li  .n_pl img{ vertical-align: middle; }
+.news_con ul li  .n_pl a{color: #a0a0a0;display: block;}
+.news_con ul li  .n_pl a em{
+	background: url(../../images/euro/pl.png) no-repeat left top; 
+	background-size: .33rem .28rem;  
+    display: block;
+    width: .33rem;
+    height: .28rem;
+    float: left;margin-right: 5px
+}
+.news_con ul .img_list .n_pl{bottom: .2rem; right: .2rem}
+
+
+/*---------------------------------  积分榜 ---------------------------------*/
+/*分组*/
+.teamname:first-child{border-top: 0}
+.teamname{width: 100%; height: .7rem;line-height: .7rem;padding:0 .2rem;border-top: 1px solid #ddd;border-bottom: 1px solid #ddd;font-size: .3rem}
+.teamname img{vertical-align: middle;padding-right: .13rem;width:.48rem;height:.45rem; }
+
+.data_con{padding-top: .1rem}
+.tb_rank{width: 100%;padding: 0 .2rem }
+.tb_rank tr th{color: #0c88b2; height: .8rem; text-align: center;font-weight: normal;border-bottom: 1px solid #ddd}
+.tb_rank tr td{height: .8rem;text-align: center; border-bottom: 1px solid #ddd;color: #666666} 
+.tb_rank tr td span{display: block; width: .28rem;height: .36rem;line-height: .4rem;background: #d0021c;margin: 0 auto; color: #fff;text-align: center; border-radius: .05rem; }
+.tb_rank tr:last-child td{border-bottom:0} 
+.tb_rank tr:nth-child(3) td:first-child span{background: #f1cc00} 
+.tb_rank tr:nth-child(4) td:first-child span{background: #b2c9df} 
+
+/*---------------------------------  射手榜 ---------------------------------*/
+.tb_striker{width: 100%;}
+.tb_striker tr th{color: #999999; height: .6rem; text-align: center;font-weight: normal;border-bottom: 0.06rem solid #f2f2f2}
+.tb_striker tr th:nth-child(2){text-align: left;padding-left: 1.1rem}
+
+.tb_striker tr td{height: .9rem;text-align: center; border-bottom: 1px solid #ddd;} 
+.tb_striker tr td span{display: block; width: .28rem;height: .36rem;line-height: .4rem;background: #d0021c;margin: 0 auto; color: #fff;text-align: center; border-radius: .05rem; } 
+.tb_striker tr td:first-child{background: #f7f7f7;font-size: .3rem;color: #0165b8}  
+.tb_striker tr td:nth-child(3) img{ width: .7rem;height: .7rem; border-radius: 50%;vertical-align: middle;margin-right: .1rem}
+.tb_striker tr td:nth-child(3){text-align: left;padding-left: .3rem}
+
+
+/*---------------------------------  推荐 ---------------------------------*/
+.tj_top{height: 1.5rem; background: #f2f2f2;padding:.1rem 0; text-align: center;}
+.tj_top ul li{ width: 1.5rem; display: inline-block; }
+.tj_top ul li figure{    width: .95rem;height: .95rem; margin:auto;}
+.tj_top ul li figcaption{font-size: .22rem;height: .35rem;overflow: hidden;}
+.tj_top ul li img{width: 100%; height: 100%;border-radius: 50%}
+.tj_top ul li a{color: #999999;}
+
+.tj_top ul li.on figure{
+    border: .04rem solid #0ba3d6;
+    border-radius: 50%;}
+.tj_top ul li.on figcaption{color:#0ba3d6;} 
+
+/*list*/
+.news_hot ul li{padding:.2rem .2rem; border-bottom: 1px solid #dddddd;}
+.news_hot p{width: 100%}
+/*top*/
+.news_hot .nh_top aside{float: left; width: .8rem; height: .8rem; border-radius: 50%}
+.news_hot .nh_top aside img{width: .8rem; height: .8rem; border-radius: 50%}
+.news_hot .nh_top .nht_right{padding-left: .25rem;}
+.news_hot .nh_top .nht_right p{color: #ff7e00; font-size: .26rem;padding-top: .05rem;    width: 100%;
+    display: block;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;}
+.news_hot .nh_top .nht_right p span{color: #0ba3d6;font-size: .28rem; padding-right: .35rem }
+.news_hot .nh_top .nht_right h3{padding-top: .1rem;font-size: .32rem;font-weight: normal;}
+/*des*/
+.news_hot .nt_des{padding-top: .2rem; color: #666666}
+
+/*---------------------------------  推荐详情页 ---------------------------------*/
+
+/*内页 - 二级头部*/
+#other_header{width: 100%; height: .9rem;line-height: .9rem;text-align: center;font-size: .34rem;background:url(../../images/euro/back.png) no-repeat .25rem center; background-size: .22rem .4rem; text-indent: -.44rem;border-bottom: 1px solid #dddddd}
+#other_header a{width: .6rem;height: 100%;display: block;float: left;}
+
+.article_show{padding: .2rem}
+/*标题*/
+.art_title {
+    clear: both;  
+    padding-bottom: .3rem; 
+}
+.art_title h1 { 
+    font-weight: bold;
+    padding-bottom: 0.2rem;
+    font-size: .38rem; 
+}
+.art_title time {  
+    font-size: .24rem; 
+    color: #999999
+}
+
+/*内容*/
+.article_main {
+    clear: both; 
+    text-align: justify; 
+    font-size: .36rem;  
+    line-height: 180%;
+    overflow: hidden;  
+}
+.article_main p{ 
+    text-indent: 2em;
+    text-align:justify;
+}
+.article_main img{ 
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    width: 100%;
+}
+
+
+/*---------------------------------  视频 ---------------------------------*/
+.v_title{ text-align: center;padding-bottom: .2rem; }
+.v_title img{ width:7.1rem; height:auto; }
+.video_con ul li{width: 3.45rem; height: 2.9rem;margin-bottom: .2rem; float: left;margin-right: .2rem; position: relative;}
+.video_con ul li img{width: 3.45rem; height: 2rem; border-radius: .05rem;}
+/*.video_con ul li:nth-child(2n){float: right;}*/
+.video_con ul li:nth-child(2n){margin-right: 0}
+.video_con ul li em{display: block;background: url(../../images/euro/play.png) no-repeat left center; background-size:.54rem .54rem;width: .54rem; height: .54rem;position: absolute;left: 1.725rem; top: 1rem;margin:-.27rem 0 0 -.27rem;}
+
+
+.photo_con ul li{background: #ffffff}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

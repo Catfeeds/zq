@@ -1,0 +1,47 @@
+/**
+ * 全彩竞猜大厅首页css样式文件
+ * 
+ *
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-28
+**/
+/* 主体内容 */
+.main-box{ margin-bottom: 10px; width: 1000px; margin:0 auto; background: #fff; margin-bottom: 12px; position: relative;}
+.main-box .box-left{width: 204px; background: #fff; position: absolute; left: 0; top: 0;}
+.main-box .box-left-con{ width: 204px; background: #fff;}
+.main-box .box-left-con .tab-title li{ float: left; width: 50%; height: 38px;}
+.main-box .box-left-con .tab-title a{ display: block; height: 38px; line-height: 38px; color: #666; font-size: 16px; padding-left: 50px; background: url(../../images/quiz_hall/foo-bas.png) no-repeat 12px -138px;}
+.main-box .box-left-con .tab-title .bid{ border-top: 2px solid #10af63;}
+.main-box .box-left-con .tab-title .bid a{ background-position: 12px 7px; color: #10af63; font-weight: 700;}
+.main-box .box-left-con .tab-title .n-bid{ border: 1px solid #e5e5e5; border-right: 0 none;}
+.main-box .box-left-con .tab-title .n-bid a:hover{ color: #10af63;}
+.tab-con{ padding: 10px 0; height: 100%; height: 550px; overflow: auto; min-height: 300px;}
+.tab-con ul li{ padding: 0 10px; margin-bottom: 5px;}
+.tab-con ul li a{ display: block; height: 28px; line-height: 28px; padding: 0 10px; color: #000;}
+.tab-con ul li a:hover{ color: #ff7e00;}
+.tab-con .current a{ background: #10af63; color: #fff;}
+.tab-con .current a:hover{ background: #2db77b; color: #fff;}
+/* 右边内容 */
+.main-box .box-right{ padding: 15px 10px 0 10px; width: 795px; *width: 775px; background: #fff; border-left: 1px solid #e5e5e5; min-height: 615px;}
+.match-list ul li{ border: 1px solid #e5e5e5; float: left; padding: 15px 0; margin: 0 10px 12px 10px; background: #fff;}
+.against .team1,.against .team2{ width: 112px; text-align: center;}
+.against .team1 .team-name,.against .team2 .team-name{ line-height: 24px; width: 106px;text-overflow : ellipsis;
+white-space : nowrap;
+overflow : hidden;}
+.against .against-con{ width: 140px; text-align: center;}
+.against .against-con .match-name span{ display: inline-block; padding: 2px 10px; background: #10af63; color: #fff;}
+.against .against-con .text-col{ color: #999;}
+.grid{ text-align: center;}
+.grid span ,.grid em{ display: inline-block; width: 82px; height: 28px; line-height: 26px; border: 1px solid #e5dd8c; background: #ffffe3; margin-bottom: 5px; overflow: hidden;}
+.grid em{ cursor: pointer;}
+.grid .hoverIt{ display: block; width: 100%; height: 100%;}
+.grid .fenxi{ border: 0 none;}
+.grid .fenxi a{ display: block; width: 100%; height: 100%; border: 1px solid #e5dd8c; background: #ffffe3;}
+.grid .fenxi a:hover{background: #fff9f4; color: #ff7e00; border-color: #ff7e00;}
+.grid .current{ background: #fff9f4; color: #ff7e00; border-color: #ff7e00;}
+.grid .haveCurrent{ width: 82px; height: 28x; line-height: 24px; background: #fff9f4; color: #eb0000; border-color: #eb0000; border-width: 2px; background: url(../../images/quiz_hall/haveCur.png) no-repeat right bottom; position: relative; overflow-style: none;}
+.grid .point{ display: none;}
+.grid .haveCurrent .point{ display:block; width: 14px; height: 14px; background: url(../../images/quiz_hall/star.png) no-repeat; position: absolute; left: -5px; top: -5px; border:none;}
+.grid .haveCurrent .point em{ position: absolute; left: -65px; top: -6px; width: 66px; height: 22px; line-height: 22px; font-size: 12px; background: url(../../images/quiz_hall/point-bg-l.png) no-repeat; border: none; display:none; font-family:"Microsoft YaHei";}
+.grid .haveCurrent:hover .point em{ display: block;}
+.grid .whit{ background: #fff;}

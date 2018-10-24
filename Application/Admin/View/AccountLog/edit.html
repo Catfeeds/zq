@@ -1,0 +1,84 @@
+<style>
+    .unit input{width: 250px;}
+    .pageFormContent span{line-height: 21px;}
+</style>
+<div class="pageContent">
+
+    <form method="post" action="__URL__/save" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="{$list.id}"/>
+        <input type="hidden" name="user_id" value="{$list.user_id}"/>
+        <div class="pageFormContent" layoutH="58">
+
+            <div class="unit">
+                <label>真实姓名：</label>
+                <span>{$list.true_name|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>会员昵称：</label>
+                <span>{$list.nick_name|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>用户名：</label>
+                <span>{$list.username|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>银行名称：</label>
+                <span>{$list.bank_name|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>开户银行名称：</label>
+                <span>{$list.bank_full_name|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>开户省份、市：</label>
+                <span>{$list.bank_region|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>银行卡号：</label>
+                <span>{$list.bank_card_id|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>支付宝账号：</label>
+                <span>{$list.alipay_id|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>提款金额：</label>
+                <span>{$list.change_num}</span>
+            </div>
+            <div class="unit">
+                <label>审核操作 ：</label>
+                <volist name=":C('accountStatus')" id="item">
+                    <span style="color: red;"><if condition="$list.log_status eq $key ">{$item}</if></span>
+                </volist>
+            </div>
+            <if condition="$list.log_status eq 1">
+                <div  class="unit">
+                    <label>转账方式：</label>
+                    <input type="text" name="transfer_way" value="{$list.transfer_way}" class="required ">
+                </div>
+                <div  class="unit">
+                    <label>转账流水单号：</label>
+                    <input type="text" name="pay_no" value="{$list.pay_no}" class="required ">
+                </div>
+                <div  class="unit">
+                    <label>转账手续费：</label>
+                    <input type="text" name="poundage" value="{$list.poundage|default=0}" class="required number">
+                </div>
+            </if>
+
+            <div class="unit">
+                <div class="unit">
+                    <label>审核说明：</label>
+                    <textarea  name="desc"  rows="5" cols="57" maxlength="255" class="required" >{$list.desc}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>

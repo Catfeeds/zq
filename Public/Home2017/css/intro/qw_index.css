@@ -1,0 +1,219 @@
+.qw_content{width: 1000px;margin:0 auto;padding-bottom: 50px;margin-top: 20px}
+/*.banner_tmsg{padding-top: 20px}*/
+.user_tab{width: 355px;}
+.user_main,.user_main_login,.user_main_intro{width: 100%;height: 193px;border:1px solid #d2d4d6;padding:20px 15px;background:-webkit-linear-gradient(top,#fbfbfc,#e9eaed);background:-o-linear-gradient(top,#fbfbfc,#e9eaed);background:-moz-linear-gradient(top,#fbfbfc,#e9eaed);background:linear-gradient(top,#fbfbfc,#e9eaed) }
+.um_head{padding-bottom: 10px;border-bottom: 1px solid #ddd;width: 100%;height: 93px;}
+.um_head_img{width: 75px;}
+.um_head_img img{width: 75px;height: 75px;border-radius: 50%}
+.um_right{padding-left: 20px;}
+.umr_name{font-size: 24px;color: #d2d4d6;padding-top: 10px}
+.umr_gold{font-size: 18px;color: #f78e21}
+/*tab*/
+/*.ut_main{margin-top: 15px;width: 100%;float: left;}
+.tap_list{width: 100px;height: 50px;border:1px solid #d2d4d6;float: left;margin-right: 11px;border-radius: 4px;background:-webkit-linear-gradient(top,#fcfcfd,#e8e9ec);background:-o-linear-gradient(top,#fcfcfd,#e8e9ec);background:-moz-linear-gradient(top,#fcfcfd,#e8e9ec);background:linear-gradient(top,#fcfcfd,#e8e9ec);line-height: 50px;padding-left: 10px; text-align: center;text-indent: 10px;background-position:10px center;background-repeat:no-repeat;}
+.last_tap{margin-right: 0}
+.tap_list img{vertical-align: middle;margin-top: -4px;margin-right: 5px}
+.tap_list:hover{background:-webkit-linear-gradient(top,#e9eaed,#fbfbfc);background:-o-linear-gradient(top,#e9eaed,#fbfbfc);background:-moz-linear-gradient(top,#e9eaed,#fbfbfc);background:linear-gradient(top,#e9eaed,#fbfbfc);background-image:url(../../images/qw/my_buy_on.png);}
+.tap_list a:hover{color: #2e76c7}
+.tap_list:hover{background-position:10px center;background-repeat:no-repeat;}
+.my_order{background-image:url(../../images/qw/my_buy.png);}
+.my_order:hover{background-image:url(../../images/qw/my_buy_on.png);}
+.my_at{background-image:url(../../images/qw/my_at.png);}
+.my_at:hover{background-image:url(../../images/qw/my_at_on.png);}
+.last_tap{background-image:url(../../images/qw/my_money.png);}
+.last_tap:hover{background-image:url(../../images/qw/my_money_on.png);}*/
+.ut_main{margin-top: 15px;width: 100%;float: left;}
+.tap_list{width: 100px;height: 50px;border:1px solid #d2d4d6;float: left;margin-right: 11px;border-radius: 4px;background:url(../../images/qw/my_buy.png) no-repeat 10px center,-webkit-linear-gradient(top,#fcfcfd,#e8e9ec);background:url(../../images/qw/my_buy.png) no-repeat 10px center,-o-linear-gradient(top,#fcfcfd,#e8e9ec);background:url(../../images/qw/my_buy.png) no-repeat 10px center,-moz-linear-gradient(top,#fcfcfd,#e8e9ec);background:url(../../images/qw/my_buy.png) no-repeat 10px center,linear-gradient(top,#fcfcfd,#e8e9ec);line-height: 50px;padding-left: 10px; text-align: center;text-indent: 10px;}
+.tap_list:hover{background:url(../../images/qw/my_buy_on.png) no-repeat 10px center,-webkit-linear-gradient(top,#e9eaed,#fbfbfc);background:url(../../images/qw/my_buy_on.png) no-repeat 10px center,background:url(../../images/qw/my_buy_on.png) no-repeat 10px center,-moz-linear-gradient(top,#e9eaed,#fbfbfc);background:url(../../images/qw/my_buy_on.png) no-repeat 10px center,linear-gradient(top,#e9eaed,#fbfbfc);}
+.my_at{width: 100px;height: 50px;border:1px solid #d2d4d6;float: left;margin-right: 11px;border-radius: 4px;background:url(../../images/qw/my_at.png) no-repeat 10px center,-webkit-linear-gradient(top,#fcfcfd,#e8e9ec);background:url(../../images/qw/my_at.png) no-repeat 10px center,-o-linear-gradient(top,#fcfcfd,#e8e9ec);background:url(../../images/qw/my_at.png) no-repeat 10px center,-moz-linear-gradient(top,#fcfcfd,#e8e9ec);background:url(../../images/qw/my_at.png) no-repeat 10px center,linear-gradient(top,#fcfcfd,#e8e9ec);line-height: 50px;padding-left: 10px; text-align: center;text-indent: 10px;}
+.my_at:hover{background:url(../../images/qw/my_at_on.png) no-repeat 10px center,-webkit-linear-gradient(top,#e9eaed,#fbfbfc);background:url(../../images/qw/my_at_on.png) no-repeat 10px center,background:url(../../images/qw/my_at_on.png) no-repeat 10px center,-moz-linear-gradient(top,#e9eaed,#fbfbfc);background:url(../../images/qw/my_at_on.png) no-repeat 10px center,linear-gradient(top,#e9eaed,#fbfbfc);}
+.last_tap{width: 100px;height: 50px;border:1px solid #d2d4d6;float: left;margin-right: 11px;border-radius: 4px;background:url(../../images/qw/my_money.png) no-repeat 10px center,-webkit-linear-gradient(top,#fcfcfd,#e8e9ec);background:url(../../images/qw/my_money.png) no-repeat 10px center,-o-linear-gradient(top,#fcfcfd,#e8e9ec);background:url(../../images/qw/my_money.png) no-repeat 10px center,-moz-linear-gradient(top,#fcfcfd,#e8e9ec);background:url(../../images/qw/my_money.png) no-repeat 10px center,linear-gradient(top,#fcfcfd,#e8e9ec);line-height: 50px;text-align: center;text-indent: 10px;margin-right: 0}
+.last_tap:hover{background:url(../../images/qw/my_money_on.png) no-repeat 10px center,-webkit-linear-gradient(top,#e9eaed,#fbfbfc);background:url(../../images/qw/my_money_on.png) no-repeat 10px center,background:url(../../images/qw/my_money_on.png) no-repeat 10px center,-moz-linear-gradient(top,#e9eaed,#fbfbfc);background:url(../../images/qw/my_money_on.png) no-repeat 10px center,linear-gradient(top,#e9eaed,#fbfbfc);}
+.tap_list img{vertical-align: middle;margin-top: -4px;margin-right: 5px}
+.tap_list a:hover{color: #2e76c7}
+/*二维码*/
+.ewm_main{margin-top: 10px}
+.ewm_li{width: 46%;float: left;margin-left:4%}
+.ewm_li img{margin-left:10px;}
+.ewm_li p{background: url(../../images/qw/app_bg.png) no-repeat left bottom;width: 100%;height: 36px;margin-top: -8px;z-index: 999}
+.ewm_li .gzh_bg{background: url(../../images/qw/gzh_bg.png) no-repeat left bottom;}
+/*广告*/
+.qw_ad{margin-top: 10px}
+/*淘金*/
+.taojin_content{margin-top: 20px}
+.tjc_left{width: 675px;border: 1px solid #e6e6e6;border-top: 0;padding-bottom: 40px}
+.tjc_nav{background: #f5f5f5;height: 60px;line-height: 60px}
+.tjc_nav ul li{width: 20%;float: left;text-align: center;border-top: 2px solid transparent}
+.tjc_nav ul li a{font-size: 20px;color: #333}
+.tjc_nav ul li:hover{background: #fff;border-top: 2px solid #2e76c7}
+.tjc_nav ul li:hover a{color: #2e76c7;font-weight: bold;}
+.tjc_nav ul li.on{background: #fff;border-top: 2px solid #2e76c7}
+.tjc_nav ul li.on a{color: #2e76c7;font-weight: bold;}
+
+.tj_main{margin-top: 10px;padding: 0 20px;display: none;}
+.tjm_top .tjmImg{ width: 102px; height: 102px; border-radius: 38px; overflow: hidden; background: #f7f7f7;}
+.tjm_top img{vertical-align: middle; width: 100%; height: 100%; border-radius: 38px;}
+.tjm_top span{ padding-left: 15px; width: 530px; height: 112px; overflow: hidden;text-overflow: ellipsis; font-size: 16px; word-break: break-all; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; -moz-box-orient: vertical;}
+.tjm_bottom{margin-top: 30px}
+.tjmb_nav{width: 100%;height: 50px;line-height: 50px}
+.tjmb_nav ul li{width: 25%;float:left;text-align: center;border-bottom: 1px solid #dbdbdb;background: url(../../images/qw/tb_hbl.png) no-repeat 20% center;}
+.tjmb_nav ul li a{font-size: 16px}
+.tjmb_nav ul li:hover{border-bottom: 2px solid #2e76c7;background: url(../../images/qw/tb_hbl_on.png) no-repeat 20% center;}
+.tjmb_nav ul li.on{border-bottom: 2px solid #2e76c7;background: url(../../images/qw/tb_hbl_on.png) no-repeat 20% center;}
+.tjmb_nav ul li:hover a{color: #2e76c7;}
+.tjmb_nav ul li.on a{color: #2e76c7;}
+
+.tjmb_nav ul .tn_xl{background: url(../../images/qw/tb_xl.png) no-repeat 30% center;text-indent: 15px}
+.tjmb_nav ul .tn_xl:hover{background: url(../../images/qw/tb_xl_on.png) no-repeat 30% center;}
+.tjmb_nav ul .tn_xl.on{background: url(../../images/qw/tb_xl_on.png) no-repeat 30% center;}
+.tjmb_nav ul .tn_put_time{background: url(../../images/qw/tb_put_time.png) no-repeat 20% center;text-indent: 15px}
+.tjmb_nav ul .tn_put_time:hover{background: url(../../images/qw/tb_put_time_on.png) no-repeat 20% center;}
+.tjmb_nav ul .tn_put_time.on{background: url(../../images/qw/tb_put_time_on.png) no-repeat 20% center;}
+.tjmb_nav ul .tn_price{background: url(../../images/qw/tb_price.png) no-repeat 30% center;text-indent: 15px}
+.tjmb_nav ul .tn_price:hover{background: url(../../images/qw/tb_price_on.png) no-repeat 30% center;}
+.tjmb_nav ul .tn_price.on{background: url(../../images/qw/tb_price_on.png) no-repeat 30% center;}
+/*宝典*/
+.bd_list{margin-top: 20px}
+.bdl_title{background: url(../../images/qw/bd_title.png) no-repeat left top;width: 100%;height: 40px;line-height: 40px;padding-left: 20px;font-size: 22px;color: #fff}
+.bdl_con{border: 1px solid #dbdbdb;border-top:0;}
+.bdl_con:hover{border: 1px solid #ff7e00;border-top:0;}
+.bdlc_top{padding: 20px;background: #FFF}
+.bdlct_left{width: 70%;}
+.bdlct_right{width: 30%;}
+.bdlct_left img{border-radius: 6px;margin-right: 20px;width: 68px;height: 68px;float: left;}
+.near_get{float: left;margin-top: 5px}
+.ng_zhong em{width: 85px;height: 25px;display: inline-block;background: #e26b6c;border-radius: 4px;line-height: 25px;color: #fff;text-align: center;margin-right: 10px}
+.near_get .ng_zhong .put_out{background: #a0a1a3}
+.ng_price{margin-top: 10px;font-size: 16px}
+.ng_price span{font-size: 20px;font-weight: bold;color: #4c4c4c}
+.bdlct_right{text-align: right;}
+.bdlct_right .dr_percent{color: #fb211a;font-size: 18px}
+.bdlct_right p{color: #666666;}
+.bdlct_right .dr_percent span{font-size: 32px;font-weight: bold;}
+.tb_put_game tr th{background: #f5f5f5;color: #666666;height: 38px;border-top: 1px solid #dddddd!important;border-bottom: 1px solid #dddddd!important;}
+.table{margin-bottom: 0}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{font-size: 14px;color: #333333;border-top: 0}
+.tb_put_game tr td{height: 50px}
+.tb_put_game tr:nth-child(even){background: #f0faff}
+.tb_put_game tr td span{color: #2e76c7;font-weight: bold;}
+.tb_put_game tr .g_result{position: relative;}
+.tb_put_game tr .g_result img{position: absolute;right: 10px;top: 7px;width: 40px;height: 40px;opacity: 0.9}
+.tb_put_game tr td{border-right: 1px solid #ddd!important;}
+.tb_put_game tr td:last-child{border-right: 0!important;}
+.tb_put_game .tr_border td{border-right:0}
+
+.tb_put_game tr td:first-child{width:10%}
+.tb_put_game tr td:nth-child(2){width:10%}
+.tb_put_game tr td:nth-child(3){width:41%}
+.tb_put_game tr td:nth-child(4){width:6%}
+.tb_put_game tr td:nth-child(5){width:33%}
+
+.baodian_content{display: none;}
+/*回报率*/
+.tjc_right{width: 300px;border: 1px solid #ddd;}
+
+.tjcr_nav{background: #f5f5f5;height: 60px;line-height: 60px;}
+.tjcr_nav ul li{width: 50%;float: left;text-align: center;border-top: 2px solid transparent}
+.tjcr_nav ul li a{font-size: 20px;color: #333}
+.tjcr_nav ul li:hover{background: #fff;border-top: 2px solid #2e76c7}
+.tjcr_nav ul li:hover a{color: #2e76c7;font-weight: bold;}
+.tjcr_nav ul li.on{background: #fff;border-top: 2px solid #2e76c7}
+.tjcr_nav ul li.on a{color: #2e76c7;font-weight: bold;}
+
+.phb_list{display: none;}
+.tb_phb_list{margin: 0 2%;width: 96%;}
+.tb_phb_list tr td{border-bottom: 1px solid #ddd;height: 50px}
+/*.tb_phb_list tr td a:hover{color: #fff;font-weight: bold;}*/
+.tb_phb_list tr:hover{ background:#2e76c7;}
+.tb_phb_list tr:hover td a{ color:#fff; font-weight: bold;}
+.tb_phb_list tr:hover .td_perc{ color: #fff; font-weight: bold;}
+.tb_phb_list tr:hover td i{ color: #fff!important; font-weight: bold;}
+.tb_phb_list tr:last-child td{border-bottom: 0}
+.tb_phb_list tr td img{width: 28px;height: 28px;border-radius: 50%;vertical-align: middle;margin-right: 5px;margin-top: -3px}
+.tb_phb_list tr .td_index{width: 20%;font-size: 20px;}
+.tb_phb_list tr .td_user{width: 50%;text-align: left;color: #666666}
+.tb_phb_list tr .td_perc{width: 20%;color: #333333;font-weight: bold;text-align: left;}
+.tb_phb_list tr:first-child .td_index i{color: #cc2222}
+.tb_phb_list tr:nth-child(2) .td_index i{color: #cc2222}
+.tb_phb_list tr:nth-child(3) .td_index i{color: #cc2222}
+
+/*详情页*/
+.qwc_left{width: 235px;}
+.jx_title{background: #2e76c7;height: 55px;line-height: 55px;font-size: 22px;padding-left: 20px;color: #fff;}
+.jx_title img{padding-right: 10px;padding-left: 30px;margin-top: -4px}
+.game_list{border:1px solid #ddd;padding-bottom: 10px;position: relative;margin-bottom: 10px}
+.game_list:hover{border:1px solid #2e76c7;}
+.gl_head{text-align: center;margin-top: 20px}
+.gl_head img{width: 100px;height: 100px;border-radius: 50%}
+
+.gl_main{margin-top: 10px;padding: 0 10px}
+.glm_name{font-size: 20px;color:#131313;font-weight: bold;}
+.glm_perc{font-size: 18px;color:#666;}
+.glm_perc span{color:#fb211a;font-weight: bold;}
+.glm_buy{color: #999;font-size: 16px}
+
+.gl_foot{padding: 0 10px;color: #666666;}
+.gl_foot span{font-size: 16px;padding-top: 5px}
+.gl_foot span i{font-size: 20px;font-style: normal;font-weight: bold;}
+.game_state{width: 30px;height: 94px;background: url(../../images/qw/game_sure.png) no-repeat left top;position: absolute;top: 0;right: 10px}
+.game_hold{background: url(../../images/qw/game_hold.png) no-repeat left top;}
+
+.ad_detail{width: 100%;height: auto;margin-bottom: 10px}
+.ad_detail img{width: 100%;height: 140px}
+
+/*qwc_right*/
+.qwc_right{width: 740px;}
+.qwc_right_ad{width: 100%;height: auto;margin-bottom: 10px}
+.qwc_right_ad img{width: 100%;height: 70px}
+.qwc_right_con{padding: 20px;border:1px solid #ddd;position: relative;}
+.xingxing{background: url(../../images/qw/xingxing.png) no-repeat left top;width: 60px;height: 60px;position: absolute;top:0;right: 0;z-index: 999}
+.xingxing:hover{background: url(../../images/qw/save_sele.png) no-repeat left top; cursor: pointer;}
+.xingxing.on{background: url(../../images/qw/save_sele.png) no-repeat left top; cursor: pointer;}
+
+.qrc_header{border-bottom: 1px solid #ddd;padding-bottom: 20px}
+.qrch_head{width: 120px;height: 120px;margin-right: 20px}
+.qrch_head img{width: 120px;height: 120px;border-radius: 10px}
+.qrch_right{width: 550px}
+.qrchr_top .ng_zhong span{color:#333333;font-size: 24px;font-weight: bold;padding-right: 10px;}
+.qrchrt_perc{padding-right: 40px;font-size: 12px}
+.qrchrt_perc span{font-size: 28px;color: #f54e4e;font-weight: bold;}
+.qrchrt_perc span i{font-size: 16px;font-style: normal;}
+.qrchr_foot{width: 100%;margin-top: 10px;line-height: 180%}
+.qrcp_title{padding: 20px 0;color: #333333;font-weight: bold;font-size: 18px}
+/*最新推介*/
+.new_tj,.history_tj{margin-top: 20px}
+.nt_title{width: 100%;height: 55px;background: #f76f61;color: #fff;line-height: 55px;padding-left: 20px;font-weight: bold;font-size: 20px}
+.nt_con,.ht_con{border:1px solid #ddd;border-top: 0;padding: 20px;position: relative;}
+.ntc_head{width: 110px;height: 110px;margin-right: 20px}
+.ntc_head img{width: 110px;height: 110px;border-radius: 10px}
+.ntc_right .game_sure{color: #333333;font-size: 20px;font-weight: bold;}
+.ntc_right .buy_tip{color: #f45a5a;font-size: 16px;}
+.ntc_right .game_time{color: #666;font-size: 16px;}
+.ntc_right .buy_count{color: #999;font-size: 16px;}
+.ntc_right .buy_count img{margin-top: -3px;margin-right: 5px}
+.bc_percent{width: 180px;height: 10px;position: relative;margin-top: 7px}
+.ntc_right .buy_count em{width: 100%;height: 10px;border:1px solid #c4c4c4;display: inline-block;border-radius: 10px;margin-left: 5px;position: absolute;left: 0;top: 0; background: -webkit-linear-gradient(bottom,#fff,#e1e1e1)}
+.ntc_right .buy_count i{width: 40%;height: 10px;display: inline-block;border-radius: 10px;margin-left: 5px;position: absolute;left: 0;top: 0;background: #f76f61;}
+.bcp_num{margin-left: 10px;margin-top: 3px;color: #999999}
+.gold_tip{width: 160px;height: 40px;color: #fff;background: #f54e4e;border-radius: 30px;line-height: 40px;font-size: 18px;text-align: center;position: absolute;right: 20px;top:50%;margin-top: -20px;font-weight: bold;}
+.gold_tip span{font-size: 14px}
+/*历史推介*/
+.htc_list{margin-bottom: 20px}
+.put_time{width: 100%;height: 38px;background:url(../../images/qw/put_time_bg.png) no-repeat left top; line-height: 32px;color: #fff;padding-left: 20px;font-weight: bold;margin-bottom: 20px}
+.game_con{border:1px solid #ddd;border-top: 0}
+
+.head_bg{height: 45px;text-align: center;line-height: 45px;color: #fff;font-size: 20px;background:#2e76c7 url(../../images/qw/head_bg.png) no-repeat 40% center;text-indent: 55px}
+.login_main{padding: 15px;padding-bottom: 0}
+.lm_text{width: 215px;float: left;}
+.lm_text input{width:215px;padding-left: 40px;border:1px solid #d2d4d6;color: #999999;background:url(../../images/qw/txt_phone.png) no-repeat 10px center;margin-bottom: 13px}
+.lm_text .txt_pwd{background:url(../../images/qw/txt_pwd.png) no-repeat 10px center;}
+.lmb_main{width: 78px;height: 78px;border-radius: 6px;line-height: 78px;text-align: center;color: #fff;font-size: 24px;background:-webkit-linear-gradient(top,#3484df,#2560a3);background:-moz-linear-gradient(top,#3484df,#2560a3);background:-o-linear-gradient(top,#3484df,#2560a3);background:linear-gradient(top,#3484df,#2560a3)}
+.lmb_main{cursor: pointer;}
+.pwd_tool{margin: 5px 15px 0 15px;border-top: 1px solid #c8c8c8;height: 35px;line-height: 35px;}
+.pwd_tool a:hover{color: #2e76c7}
+.reg_bg{background:url(../../images/qw/reg_bg.png) no-repeat right center;padding-right: 15px}
+.reg_bg:hover{background:url(../../images/qw/reg_bg_on.png) no-repeat right center;padding-right: 15px}
+.lmb_main{border:0}
+
+.g_result em{color:#0078ff}
+.g_result font{font-weight:bold;color:red;}

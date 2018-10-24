@@ -1,0 +1,36 @@
+<extend name="Public/euro/base" />
+<block name="seo">
+    <title>{$data.title}_全球体育网</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/Olympic/video_detail.css"> 
+</block>
+<block name="banner"></block>
+<block name="nav"></block>
+<block name="content">                
+    <!-- 二级头部 s -->
+    <header id="vd_header">
+        <a href="{:U('Olympic/video')}"></a>
+    </header>
+    <!-- 二级头部 e --> 
+
+    <section class="vd_title">
+        {$data.title}
+    </section>
+
+    <!-- video player -->
+    <section id="vd_player">
+        <iframe style="min-height:4.25rem " src="{$data.m_url}" width="100%" scrolling="no">
+        </iframe>
+    </section>
+    <!-- video player -->
+</block>
+<block name="scripts"> 
+    <script>
+        var scr_h = window.screen.height;
+        var vd_h = document.getElementById("vd_player").offsetHeight;
+        $("#vd_player").css("margin-top", -(vd_h / 2))
+
+    </script>
+</block>

@@ -1,0 +1,87 @@
+/**
+ * @author Weiqianqian <1937025663@qq.com>
+ *
+ * @since  2018-03-08
+**/
+body{ height: auto;}
+
+.container{background-color: #fff; }
+
+
+/*tabs-content 英超*/
+.premier-box{  width: 100%; padding: 0 .2rem .1rem .2rem; background-color: #fff;}
+.premier li{ border-bottom: 1px solid #eee; padding: .2rem 0 .2rem 0;}
+.left-part{ width: 66%; float: left; padding: .1rem .4rem .1rem 0;}
+.left-part h2{ font-size: 17px; line-height: 26.5px; min-height: 1rem; font-weight: 300; overflow: hidden; word-break:break-all; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; font-family: "PingFangSC-Medium", "Source Han Sans CN", sans-serif; text-align: justify;}
+.Tit-t{ font-size: .22rem; color: #999; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: .4rem; line-height: .4rem;}
+.Tit-t span{ font-size: .22rem;}
+.Tit-t .y-c{ background-color: #f00; background-color: #ef6a6a; border-radius: .1rem; margin-left: .1rem; color: #fff; font-size: .16rem; padding: 1px 4px 1px 4px;}
+.right-part{float: left; width: 34%;}
+.right-part img{width: 2.4rem; height: 1.54rem;}
+
+.League{ border-bottom: .01rem solid #eeeeee; padding-top: .2rem; }
+.League li{ float: left; height: 1.9rem; }
+.left{ width: 4.3rem; margin-right: .3rem;}
+.left .Tit{ font-size: .32rem; line-height: .5rem; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; margin: .1rem 0rem; font-weight: bold; height: 1rem;}
+.left .Tit-t{ padding: .12rem 0rem;}
+.Tit-t span{ font-size: .22rem; color: #b6b6b6;}
+.Tit-t span img{ width: .23rem;}
+.Tit-t .num img{ width: .3rem; margin:0rem .1rem .05rem;}
+.Tit-t .hot img{ width: .23rem; margin: -.1rem .1rem 0rem 0rem; }
+.Tit-t .s-p{ border-radius: .06rem; border: .01rem solid #b6b6b6; padding: .03rem .08rem;}
+.Tit-t .y-c{ border-radius: .06rem; border: .01rem solid #f07373; padding: .03rem .08rem; background-color: #f07373; color: #fff; font-size: .22rem;}
+.right{ width: 2.5rem;}
+.right img{ width: 100%;}
+.right .video{ position: relative; width: .62rem; z-index: 2; left: .84rem; top: .9rem;}
+
+.pictrue{ border-bottom: .01rem solid #eeeeee;width: 100% ; height: 2.3rem; padding:.25rem 0rem 2.5rem 0rem;}
+.pictrue li{ float: left; list-style-type: none; width: .4rem;}
+.pictrue li:nth-child(odd){ margin-right: 3.3rem;}
+.explain span:nth-child(odd){ margin-right: .1rem;}
+.nom-l { position: relative;}
+.nom-l img{ width: 3.4rem; height: 2.25rem;}
+.nom-l .explain{ position: absolute;  z-index: 99 ; margin-top: -2.2rem; margin-left: 2.6rem; color: #fff; width: .8rem; font-size: .24rem; padding-left: .1rem;}
+.nom-l .explain img{ width: .2rem; height: .2rem; margin-bottom: .05rem;}
+.nom-l .state{ position: absolute; z-index: 99 ; font-size: .24rem; ; background-color: rgba(0,0,0,0.4); width: 3.4rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin-top: -.42rem; color:#fff; padding: .06rem .16rem;}
+/*列表*/
+.list{ padding: .2rem 0; background-color: rgba(249,249,250,0.95); margin: .2rem 0;}
+.List{ float: left; padding: .1rem 0rem .2rem 0rem; background-color: #fff; width: 100%;}
+.list .pic li,.list .words li{ width: 2.48rem; float:left; text-align: center; padding: .1rem 0rem; list-style-type: none;}
+.listpic{ padding: .1rem .1rem; text-align: center;}
+.agenda{text-align: center; padding: .2rem .2rem;}
+.agenda img{ width: .6rem; height: .6rem;}
+.competition{ font-size: .24rem;}
+
+/*点击查看更多*/
+.more{ width: 100%; text-align: center; padding: .3rem .1rem; background-color: #fff;}
+.more span{ font-size: .28rem; color:#0a94e4;}
+.more img{ width: .12rem; margin-left: .1rem;}
+.click_number{margin-left: .5rem;}
+.phone .imgCover{height: 1.67rem;width: 2.5rem;}
+/*刷新*/
+.foot-discuss{ position: fixed; right: .2rem; bottom: 3rem; z-index: 999; width: .8rem; height: .8rem;}
+.foot-discuss a{ display: block;}
+.foot-discuss img{ width: .8rem; height: .8rem; pointer-events: none;}
+
+/*返回顶部*/
+.backtop{ position: fixed; right: .2rem; z-index: 999; width: .8rem; height: .8rem; bottom: 2.1rem;}
+.backtop a{ display: block;}
+.backtop img{ width: .8rem; height: .8rem; pointer-events: none;}
+
+h2 {font-size: .32rem; font-weight: 300; line-height:.5rem;}
+
+.click_number img{width: 20px;margin-left: 5px;margin-bottom: 1px;}
+.headline{width:100%;height:1.6rem;background:#1d2b3d;background-size: 100%;padding: .1rem .4rem;display:flex;flex-direction:row;}
+.headline a { width: 25%;display: flex;justify-content: center;margin-left: 7%;}
+.headline a:first-child{margin-left:0}
+.headline a img {display:block;width:50%;}
+.headline-selected{background:#fff04e;}
+.headline a{width:20%;display:block;height:100%; background-size: 400%;}
+.schedule{background:url('../../images/worldcup/common/tabworko.png')no-repeat .45rem;}
+.Analysis{background:url('../../images/worldcup/common/tabworko.png')no-repeat -1.2rem;}
+.predict{background:url('../../images/worldcup/common/tabworko.png')no-repeat -2.8rem;}
+.Crunchies{background:url('../../images/worldcup/common/tabworko.png')no-repeat -4.4rem;}
+.schedule-selected{background:url('../../images/worldcup/common/tabselect.png') #fff04e no-repeat .35rem;}
+.Analysis-selected{background:url('../../images/worldcup/common/tabselect.png')#fff04e no-repeat -1.2rem;}
+.predict-selected{background:url('../../images/worldcup/common/tabselect.png')#fff04e no-repeat -2.8rem;}
+.Crunchies-selected{background:url('../../images/worldcup/common/tabselect.png')#fff04e no-repeat -4.3rem;}

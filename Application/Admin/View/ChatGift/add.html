@@ -1,0 +1,184 @@
+<style>
+	.a-upload {
+		padding: 4px 10px;
+		height: 20px;
+		line-height: 20px;
+		position: absolute;
+		cursor: pointer;
+		color: #888;
+		background: #fafafa;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		overflow: hidden;
+		display: inline-block;
+		*display: inline;
+		*zoom: 1
+	}
+
+	.a-upload  input {
+		position: absolute;
+		font-size: 100px;
+		right: 0;
+		top: 0;
+		opacity: 0;
+		filter: alpha(opacity=0);
+		cursor: pointer
+	}
+
+	.a-upload:hover {
+		color: #444;
+		background: #eee;
+		border-color: #ccc;
+		text-decoration: none
+	}
+</style>
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			<div class="unit">
+				<label>表情包名称：</label>
+				<input type="text" class="required"  name="name" value="{$vo.name}" size="50"/>
+			</div>
+
+			<div class="unit">
+				<label>销售价格：</label>
+				<input type="text" class="required digits" name="price" value="{$vo.price|default=0}" size="30"/>
+			</div>
+
+			<div class="unit">
+				<label>直播间类型：</label>
+				<select name="type" class="combox">
+					<option value="1" <if condition="$vo.type eq '1'">selected</if> >赛事聊天室</option>
+					<option value="2" <if condition="$vo.type eq '2'">selected</if> >主播聊天室</option>
+				</select>
+			</div>
+
+			<div class="unit">
+				<label>会员价格：</label>
+				<input type="text" class="required digits" name="vip_price" value="{$vo.vip_price|default=0}" size="30"/>
+			</div>
+
+			<div class="unit">
+				<label>排序：</label>
+				<input type="text" class="required" name="sort" value="{$vo.sort}" />
+			</div>
+
+			<div class="unit">
+				<label>开始时间：</label>
+				<input type="text" class="date textInput readonly" datefmt="yyyy-MM-dd HH:mm" readonly="true" name="online_time" <if condition="$vo['online_time'] eq 0">value="<?php echo date('Y-m-d H:i',time());?>" <else /> value="{$vo['online_time']|date="Y-m-d H:i",###}"</if> />
+				<a class="inputDateButton" href="JavaScript:;">选择</a>
+			</div>
+			<div class="unit">
+				<label>结束时间：</label>
+				<input type="text" class="date textInput readonly" datefmt="yyyy-MM-dd HH:mm" readonly="true" name="end_time"  <if condition="$vo['end_time'] eq 0"> value="<?php echo date('Y-m-d H:i',time());?>"<else /> value="{$vo['end_time']|date="Y-m-d H:i",###}"</if>/>
+				<a class="inputDateButton" href="JavaScript:;">选择</a>
+			</div>
+
+			<div class="unit">
+				<label>图片：</label>
+				<ul class="tabImg">
+					<li>
+						<input id="viewUploadInput_88" name="fileInput" type="file" onChange="previewImage(88)" style="display:none;" />
+						<a href="javascript:void(0);">
+							 <span id="viewUploadDiv_88">
+								<empty name="vo.img">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_88"/>
+								<else/>
+									<if condition="pathinfo($vo['img'], PATHINFO_EXTENSION) eq swf">
+										<embed width="80" height="80" id="viewUploadImg_88" wmode="opaque" type="application/x-shockwave-flash" src="{$vo.img}">
+									<else/>
+									    <img id="viewUploadImg_88" width='80' height='80' border=0 src="{$vo.img}">
+									</if>
+								</empty>
+							 </span>
+						</a>
+						<div id="poiter_88" class="poiter">
+							<empty name="vo.img">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_88')">添加图片</a>
+							<else/>
+								<a title="删除" onclick="delPic({$vo.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_88')">重传</a>
+							</empty>
+						</div>
+
+					</li>
+				</ul>
+			</div>
+			<div class="unit">
+				<label>压缩包：</label>
+				<ul>
+					<li><a href="javascript:;" class="a-upload"><input  id="zipFile" name="zip_file" type="file" />点击这里上传文件</a></li>
+					<li><span id="showFileName" style="line-height: 32px; margin-left: 130px;">{$vo.zip_file}</span></li>
+				</ul>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+	$(function(){
+		$('.tabImg li').hover(function(e) {
+			$(this).children('div').stop().animate({'top':'0'},300);
+		},function(){
+			$(this).children('div').stop().animate({'top':'80px'},300);
+		});
+        var module_type = $('#module_type').val();
+        if(module_type == '10'){
+            $("#grzx").css('display','block');
+        }
+	});
+	function delPic(id){
+		if(confirm("确认要删除吗？") == false){
+			return false;
+		}
+		//异步执行删除
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/AdverList/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                	$("#viewUploadInput_88").val("");
+					$("#viewUploadImg_88").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+					var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_88')\">添加图片</a>";
+					$("#poiter_88").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+
+	//
+    $(".a-upload").on("change","input[type='file']",function(){
+        var filePath=$(this).val();
+        if(filePath.indexOf(".")!=-1){
+            var arr=filePath.split('\\');
+            var fileName=arr[arr.length-1];
+            $("#showFileName").html(fileName);
+        }else{
+            $("#showFileName").html("");
+            return false
+        }
+    })
+</script>
+
+
+
+

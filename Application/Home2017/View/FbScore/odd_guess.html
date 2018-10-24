@@ -1,0 +1,110 @@
+<include file="Public:header"/>
+<block name="body">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/common.css"> 
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/odd_guess.css"> 
+	<!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Home/js/score/htmlwidth.js"></script>
+        <include file="Public:top_index" />
+        <include file="FbScore/against"/>
+            <include file="FbScore/subnav"/>
+    <section class="guess_title">
+      <img src="__IMAGES__/guess.png" alt="统计推荐"> 统计推荐
+    </section>
+     <!-- 内容 s -->
+     <section class="guess_con clearfix">
+         <table class="tb_guess" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+              <tr>
+                  <th colspan="4">推荐赔率</th>
+              </tr>
+              <tr>
+                <td>让球</td>
+                <td>主0.92</td>
+                <td>0.25</td>
+                <td>客0.9</td>
+              </tr>
+              <tr>
+                <td>大小</td>
+                <td>主0.92</td>
+                <td>0.25</td>
+                <td>客0.9</td>
+              </tr>  
+            </tbody>
+        </table> 
+     </section>
+
+     <section class="guess_sele_con">
+        <table class="tb_guess_sele" border="0" cellpadding="5" cellspacing="5">
+            <tbody>
+              <tr>
+                  <th colspan="3">推荐选项</th>
+              </tr>
+              <tr class="zk">
+                <td>全场让球</td>
+                <td><a href="javascript:;">主 -0.25(0.89)</a></td>
+                <td><a href="javascript:;">客 +0.25(0.95)</a></td> 
+              </tr>
+              <tr class="dx">
+                <td>全场大小</td>
+                <td><a href="javascript:;">大190(0.85)</a></td>
+                <td><a href="javascript:;">小190(0.85)</a></td> 
+              </tr>  
+            </tbody>
+        </table>
+     
+     </section>
+
+     <section class="guess_sele_con">
+       <table class="tb_guess_form" border="0" cellpadding="5" cellspacing="5">
+            <tbody>
+              <tr>
+                  <th>推荐表单</th> 
+              </tr> 
+              <tr>
+                <td>  
+                  <div class="type_sle">
+                  	<ul class="clearfix">
+                  		<li class="fl on"><a href="javascript:;">普通推荐</a></li>
+                      <li class="fr"><a href="javascript:;">重点推荐</a></li>
+                  	</ul>
+                    <span class="cur"></span>
+                  </div> 
+                </td>
+              </tr>
+            </tbody>
+        </table>
+        <div class="sub_btn"><a href="javascript:;">确认提交</a></div>
+     </section> 
+	   <!-- 内容 e -->
+     <include file="Public:footer"/>
+<include file="Public:return_top"/>
+</block>
+<block name='scripts'>
+       <script> 
+        $(function(){
+          //主客队和大小球选择
+          $('.zk a,.dx a').click(function(e) {
+                    $(this).toggleClass('on').parents('td').siblings().children('a').removeClass('on');
+                });
+          //重点推荐、普通推荐
+          $('.type_sle ul li').click(function(e) {
+              var liNum = $(this).index(); 
+              var curLeft = liNum*50;
+              $('.cur').animate({'left':''+curLeft+'%'},500)
+              $(this).addClass('on').siblings().removeClass('on');
+            });
+          });
+        
+          $('.sub_btn').click(function(e) {
+            //推荐表单和按钮 透明
+            $(this).css("opacity","0.5");
+            $(this).children("a").css("cursor","default");
+            $(".cur").css("opacity","0.5");
+            $(".tb_guess_sele tr td:first-child").css({"background":"#eb0000","border":"1px solid #eb0000"});
+            //推荐选项 选中的变红 
+            $(".tb_guess_sele tr td a").addClass("no_sele");
+            $(".tb_guess_sele tr td").children(".on").addClass("on_sub");
+          });
+        </script>
+</block>

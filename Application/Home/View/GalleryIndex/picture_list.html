@@ -1,0 +1,138 @@
+yy<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/gallery/pcc.css">
+</block>
+<block name="content">
+	<div class="body">
+        <include file="Public:top_user"/>
+        <!-- 主体内容开始 -->
+        <div class="imgMain">
+            <!-- 当前位置标题 -->
+            <div class="position">
+                当前位置：<span class="now"><a href="{:U('/@www')}" title="全球体育首页">首页</a></span> >
+                <span class="now"><a href="{:U('@photo')}" title="图片专区">图片专区</a></span> >
+                <span class="now"><a href="{:U('/'.$gallery['path'].'@photo')}" title="{$gallery.className}">{$gallery.className}</a></span> > 正文
+            </div>
+            <!-- <div class="mid_m font24 tc">{$gallery.title}</div>
+            <div class="mid_m font12 tc">发布时间：{$gallery.add_time|date="Y-m-d",###}&nbsp;&nbsp;&nbsp;已浏览：{$gallery.click_number}次 </div> -->
+            <!-- 焦点图轮播开始 -->
+            <div class="wrap mt-a" id="SI_Wrap">        
+              <div class="slide-wrap  slide-wrap-loading" id="SI_Slide_Wrap">
+                  <div class="sw-player" id="SI_Player">
+                      <div class="part-a">
+                          <h1>{$gallery.title}</h1>
+                          <div class="swp-tit clearfix" slide-type="title">
+                              <h2><!-- 小标题 --></h2>
+                          </div>
+                          <div class="swp-tool">
+                              <em class="swpt-time" slide-type="time"></em>
+                              <!-- <em class="swpt-author">作者：JCKE</em> -->
+                          </div>
+                          <div class="swp-hd" id="SI_Cont" slide-type="cont" action-type="slide-move">
+                          </div>
+                          <a href="javascript:;" slide-type="prev" action-type="slide-prev" class="rgba-w-60 swp-btn swp-prev" title="上一张" hidefocus><i></i></a>
+                          <a href="javascript:;" slide-type="next" action-type="slide-next" class="rgba-w-60 swp-btn swp-next" title="下一张" hidefocus><i></i></a>
+                          <!-- 图片介绍 start -->
+                          <div class="swp-txt clearfix" slide-type="introWrap">
+                              <div class="swpt-table">
+                                  <div class="swpt-cell">
+                                      <div class="swpt-cont" slide-type="intro">
+                                      <span class="num"><em><!-- 当前图片 --></em><!-- 图片总数 --></span>
+                                      <div class="swpt-1013">
+                                          <!-- 描述 -->
+                                      </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- 图片介绍 end -->
+
+                          <!-- 小图列表 start -->
+                          <div class="swp-list-wrap swp-list-prev-last" scroll-type="wrap" id="SI_SmallList">
+                            <div class="swp-list">
+                                <!-- 上一图集 -->
+                                <span class="bg bg-a">
+                                  <span class="inner"><!-- 上一图集图片 --></span>
+                                </span>
+                                <span class="bg bg-b"></span>
+                                <span class="bg bg-c"></span>
+                                <a>
+                                <i>&nbsp;</i>
+                                </a>
+                                <!-- 图片描述 -->
+                              
+                              <a href="javascript:;" class="swpl-btn swpl-fastprev disabled" scroll-type="fastprev"action-type="fastprev" title="" hidefocus="">
+                                <i></i>
+                              </a>
+                              <div class="swp-list-cont" scroll-type="cont">
+                                <ul scroll-type="list"></ul>
+                              </div>
+                              <a href="javascript:;" class="swpl-btn swpl-fastnext" scroll-type="fastnext" action-type="fastnext" hidefocus="">
+                                <i></i>
+                                <!-- 下一图集 -->
+                                <span class="bg bg-a">
+                                  <span class="inner">
+                                  <!-- 下一图集图片 -->
+                                  </span>
+                                </span>
+                                <span class="bg bg-b"></span>
+                                <span class="bg bg-c"></span>
+                                <i>&nbsp;</i>
+                              </a>
+                                <!-- 图片描述 -->
+                            </div>
+                          </div>
+                          <div class="swp-tool"><p class="swpt-time" style="padding: 0 10px 0 20px;">{:C('user_statement')}</p></div>
+                      </div>
+                  </div>
+              </div>
+            <!-- <p style="font-size:14px;color:#999;">{:C('news_statement')}</p> -->
+            <!-- 标签 -->
+        <!--<div class="ban-b">-->
+          <!--<span class="b-q">标签</span>-->
+          <!--<span class="x-j">西甲</span>-->
+          <!--<span class="x-j">西甲</span>-->
+          <!--<span class="x-j">西甲</span>-->
+        <!--</div>-->
+            <!-- 标签 -->
+            <!-- 分享 -->
+        <div class="ban-c clearfix">
+          <span class="f-x">分享到</span>
+            <!--百度分享代码-->
+            <include file="Public:baiduShare"/>
+          <!--<div class="B-Q">-->
+            <!--<a class="g-l"><span class="glyphicon glyphicon-heart"></span><span class="r-c">{$gallery.click_number}</span></a>-->
+          <!--</div>-->
+        </div>
+        <!-- 分享 -->
+        </div>
+        <!-- 高清图主js和启动js start -->
+            <!-- 相关图片开始 -->
+            <div class="mid_b font18 mt30 pl5">相关图片</div>
+            <div class="photosBox">
+                <ul class="row">
+                    <volist name="withImg" id="vo">
+                        <li class="col-xs-3"><a target="_blank" href="{$vo.info_url}"><div class="imgBox"><img class="lazy" data-original="{$vo.img}" alt="{$vo.title}" width="188" height="auto"></div><div class="imgText">{$vo.title}</div></a></li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+  </div>
+</block>
+<block name="js">
+<script type="text/javascript">
+  $(function(){
+    $('.row .col-xs-3').hover(function(e) {
+      $(this).children('div.desc_img').find('.img_text').stop().animate({'bottom':'0px'},300);
+    },function(){
+      $(this).children('div.desc_img').find('.img_text').stop().animate({'bottom':'-30px'},300);
+    });
+  });
+  var __ch_id__ ='2';
+  var __sid__ ='786';
+  var slide_data = {$slide_data};
+</script>
+<script type="text/javascript" src="__JS__/gallery/pccc.js"></script>
+<script type="text/javascript" src="__JS__/gallery/slide.js"></script>
+<script type="text/javascript" src="__JS__/gallery/boot.js"></script>
+</block>

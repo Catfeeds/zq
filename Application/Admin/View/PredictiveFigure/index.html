@@ -1,0 +1,133 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input type="hidden" name="predictive_type" value="{$_REQUEST.predictive_type}">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+                <label>日期：</label>
+                <input autocomplete="off" class="date textInput" type="text" datefmt="yyyy-MM-dd" name="startTime" value="{$_REQUEST.startTime}" size="10">
+                至
+                <input autocomplete="off" class="date textInput" type="text" datefmt="yyyy-MM-dd" name="endTime" value="{$_REQUEST.endTime}" size="10">
+            </li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<span style='padding-left:0px;color: red'>
+				    预测数：{$countArr['numCount']}
+				</span>
+			</li>
+			<li>
+				<span style='padding-left:10px;color: red'>
+				    红：{$countArr['winCount']}
+				</span>
+			</li>
+			<li>
+				<span style='padding-left:10px;color: red'>
+				    走：{$countArr['drawCount']}
+				</span>
+			</li>
+			<li>
+				<span style='padding-left:10px;color: red'>
+				    黑：{$countArr['lostCount']}
+				</span>
+			</li>
+			<li>
+				<span style='padding-left:10px;color: red'>
+				    自然平均胜率：{$countArr['source_winrateCount']}%
+				</span>
+			</li>
+			<li>
+				<span style='padding-left:10px;color: red'>
+				    自然总盈亏：{$countArr['source_incomeCount']}
+				</span>
+			</li>
+			<li>
+				<span style='padding-left:10px;color: red'>
+				    人工平均胜率：{$countArr['winrateCount']}%
+				</span>
+			</li>
+			<li>
+				<span style='padding-left:10px;color: red'>
+				    总交易额：{$countArr['numCount'] * 100}
+				</span>
+			</li>
+			<li>
+				<span style='padding-left:10px;color: red'>
+				    人工总盈亏：{$countArr['incomeCount']}
+				</span>
+			</li>
+			<li>
+				<span style='padding-left:10px;color: red'>
+				    总回报率：{$countArr['AllIncomeCount']}%
+				</span>
+			</li>
+			
+			<li style="margin-left:20px;">
+			    <a class="icon" href="__URL__/index.html?Export=1&totalCount={$totalCount}&{:http_build_query($_REQUEST)}"  warn="导出">
+			        <span>导出</span>
+			    </a>
+			</li>
+
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="3%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th width="8%">日期</th>
+			<th width="8%">{$strType}预测数</th>
+			<th width="8%">红</th>
+			<th width="8%">走</th>
+			<th width="8%">黑</th>
+			<th width="8%">自然胜率</th>
+			<th width="8%">自然盈亏</th>
+			<th width="8%">人工胜率</th>
+			<th width="8%">人工盈亏</th>
+			<th width="8%">回报率</th>
+			<th width="8%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['predictive_date']}</td>
+					<td>{:$vo[$strSign.'_num']}</td>
+					<td>{:$vo[$strSign.'_win']}</td>
+					<td>{:$vo[$strSign.'_draw']}</td>
+					<td>{:$vo[$strSign.'_lost']}</td>
+					<td <if condition="$vo[$strSign.'_source_winrate'] gt 50">style="color:red;"</if>>{:$vo[$strSign.'_source_winrate']}%</td>
+					<td>{:$vo[$strSign.'_source_income']}</td>
+					<td <if condition="$vo[$strSign.'_winrate'] gt 50">style="color:red;"</if>>{:$vo[$strSign.'_winrate']}%</td>
+					<td>{:$vo[$strSign.'_income']}</td>
+					<td>{:getModelTodayIncome($vo[$strSign.'_income'],$vo[$strSign.'_win'],$vo[$strSign.'_lost'])}%</td>
+					<td><a href="__ADMIN__/PredictiveModel/index/predictive_type/{$predictive_type}/predictive_date/{$vo.predictive_date}"  target="navTab" mask="true" rel="{$strType}{$vo['predictive_date']}" title="{$strType}预测信息">查看</a></td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<div class="panelBar">
+	    <div class="pages">
+	        <span <if condition="$hiddenCount eq 1">style="display:none"</if>>{$totalCount}条</span>
+	    </div>
+	</div>
+</div>
+
+

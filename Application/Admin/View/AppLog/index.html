@@ -1,0 +1,115 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>用户昵称：</label>
+				<input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+			</li>
+			<li>
+				<label>idfa：</label>
+				<input type="text" name="idfa" value="{$_REQUEST.idfa}"/>
+			</li>
+			<li>
+				<label>机型：</label>
+				<input type="text" name="device" value="{$_REQUEST.device}"/>
+			</li>
+			<li>
+				<label>系统版本：</label>
+				<input type="text" name="os" value="{$_REQUEST.os}"/>
+			</li>
+			<li>
+				<label>app版本：</label>
+				<input type="text" name="version" value="{$_REQUEST.version}"/>
+			</li>
+			<li>
+			    <label>时间：</label>
+			    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="10">至
+			    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="10">
+			</li>
+			<li style="width: 200px;">
+				<label>推送黑名单：</label>
+				<select name="push_status" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="0" <if condition="$_REQUEST.push_status  eq '0'">selected</if> >黑名单</option>
+					<option value="1" <if condition="$_REQUEST.push_status  eq '1'">selected</if> >正常</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="delete" href="__URL__/foreverdelete/id/{sid_record}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择记录"><span>删除</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="3%">序号</th>
+			<th width="5%">用户昵称</th>
+			<th width="13%">idfa设备号</th>
+			<th width="13%">设备标识</th>
+			<th width="4%">推送黑名单</th>
+			<th width="4%">机型</th>
+			<th width="4%">系统版本号</th>
+			<th width="4%">app版本号</th>
+			<th width="4%">pkg</th>
+			<th width="18%">(PIO)地理位置</th>
+			<th width="5%">IP</th>
+			<th width="4%">记录类型</th>
+			<th width="7%">时间</th>
+			<th width="3%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['nick_name']|default=''}</td>
+					<td>{$vo['idfa']}</td>
+					<td>{$vo['device_id']}</td>
+					<td>
+						{$vo.push_status|getStatus}
+					</td>
+					<td>{:iphoneWiki($vo['device'])}</td>
+					<td>{$vo['os']}</td>
+					<td>{$vo['version']}</td>
+					<td>{$vo['pkg']}</td>
+					<td>{$vo['location']}</td>
+					<td>{$vo['ip']}</td>
+					<td>
+						<switch name="vo.type">
+							<case value="1">打开</case>
+							<case value="2">关闭</case>
+						</switch>
+					</td>
+					<td>{$vo['add_time']|date="Y-m-d H:i:s",###}</td>
+					<td>
+						<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" height="400" width="660" rel="editPage">编辑</a>
+						|
+						<a href="__URL__/foreverdelete/id/{$vo['id']}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择记录">删除</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

@@ -1,0 +1,95 @@
+/**
+ * 赔率css样式文件
+ * 
+ * @author pengjian <710348662@qq.com>
+ *
+ * @since  2016-04-12
+**/
+
+ /*赔率-导航切换*/
+.odds_nav{width: 100%; margin: 0 auto;margin-top: .1rem;margin-bottom: .15rem;line-height: .56rem;padding: 0 2%;}
+.odds_nav ul li{border:1px solid #01af63;float: left;width: 25%;height:100%;text-align: center;line-height: .58rem;border-right:0; -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+   box-sizing: border-box;  }
+.odds_nav ul li:first-child{border-radius:.05rem 0  0 .05rem;}
+.odds_nav ul li:last-child{border-right:1px solid #01af63;border-radius:0 .05rem .05rem 0;}
+.odds_nav ul li a{color: #999999;width: 100%;display: block;}
+.odds_nav ul li.on{background: #01af63;}
+.odds_nav ul li.on a{background: #01af63;color: #fff;}
+ 
+ /*赔率 -  大小*/
+ .data_con{padding-top: .1rem; clear: both; width: 100%; position: relative; overflow-y: scroll; -webkit-overflow-scrolling: touch;}
+.tb_odds_bigs{width: 100%;text-align: left; }
+.tb_odds_bigs tr th{color: #cb945c;font-size: .26rem; height: .6rem;background: #ffefe0}
+.tb_odds_bigs tr th:first-child{text-indent: .48rem} 
+.tb_odds_bigs tr td{height: .8rem;} 
+.tb_odds_bigs tr td:first-child{width: 1.5rem;text-align: center;}
+.tb_odds_bigs tr:nth-child(2n+3){background-color: #f2f2f2}
+.tb_odds_bigs tr td span{ float: left;padding-right: .05rem } 
+
+ /*赔率 -  大小 -详情*/
+.tb_odds_detail{width: 100%;text-align: left; }
+.tb_odds_detail tr th{color: #cb945c;font-size: .26rem; height: .6rem;background: #ffefe0;text-align: center;}
+
+.tb_odds_detail tr td{height: .8rem;  width: 1.4rem; text-align: center;  } 
+.tb_odds_detail tr td:first-child{width:1.5rem;border-bottom: 1px solid #dddddd;border-right: 1px solid #dddddd;text-align: center;} 
+.tb_odds_detail tr td:last-child{color: #999999;width: 1.8rem;text-align: center;}
+.tb_odds_detail tr td.on{background-color: #01af63;color: #fff} 
+
+.tb_odds_detail tr:nth-child(2n+3){background-color: #f2f2f2}
+.tb_odds_detail tr:last-child td{border-bottom: 0}
+.tb_odds_detail tr td span{ float: left;padding-right: .05rem } 
+
+
+ /*赔率 - 欧赔*/
+.tb_odds_euro{width: 100%;text-align: left; }
+.tb_odds_euro tr th{color: #cb945c;font-size: .26rem; height: .6rem;background: #ffefe0;text-align: center;}
+
+.tb_odds_euro tr td{height: 1rem;  width: 1.4rem;text-align: center; } 
+.tb_odds_euro tr td div{padding: .1rem 0}
+.tb_odds_euro tr td:first-child{width:2.5rem; text-align: center;} 
+.tb_odds_euro tr td:first-child img{display:inline;width:.29rem;height:.29rem;} 
+.tb_odds_euro tr td:nth-child(2){}
+.tb_odds_euro tr td.on{background-color: #01af63;color: #fff} 
+
+.tb_odds_euro tr:nth-child(2n+3){background-color: #f2f2f2}
+.tb_odds_euro tr:last-child td{border-bottom: 0}
+.tb_odds_euro tr td span{ padding-right: .05rem } 
+
+/*交易总量*/
+.jy_title{width: 100%;height:.6rem;background: #f1f3f4;line-height:.6rem;border-top: 1px solid #e6e6e6;padding-left: .2rem;color: #333333;  }
+.jy_con{}
+.jy_con .jyc_left{padding: .2rem;width: 85%}
+.jy_con .jyc_right{width: 15%;height:2.6rem;}
+/*-百分比-*/
+.jy_con .jyc_left .jycl_title{font-size: .22rem;}
+.jy_con .jyc_left .jycl_title em{width: .2rem;height: .2rem;display: inline-block;background: #666666;margin-right: .1rem;}
+.jycl_percent table{width: 100%}
+.jycl_percent table tr td{text-align: left;padding-top: .25rem}
+.jycl_percent table tr td:nth-child(3){padding-left: .1rem}
+.jycl_percent table tr td p{width:100%;background: #f1f1f1;height: .16rem;border-radius: .2rem;margin-top: .05rem}
+.jycl_percent table tr td p a{background: #f86054;height: .16rem;border-radius: .2rem;margin-top: .05rem;display: block;}
+.jycl_percent table tr:nth-child(2) td p a{background: #01af63;}
+.jycl_percent table tr:nth-child(3) td p a{background: #fedd4b;}
+
+/*-切换-*/
+.jy_con .jyc_right a{height: 1.3rem;background: #e6e6e6;color: #666666;display: block;line-height:1.3rem;text-emphasis: center;writing-mode: vertical-rl; text-align: center;}
+.jy_con .jyc_right a:first-child{border-bottom: 1px solid #b8b8b8;}
+.jy_con .jyc_right a.on{background: #10af63;color: #fff}
+
+
+.tb_betfair{display: none;} 
+
+.tb_betfair tr td span{color: #eb0000}
+.tb_betfair tr td em{color: #01af63}
+
+.nav_buy{width: 100%;height: .6rem;padding:0 .2rem;margin: .2rem 0;}
+.nav_buy a{width: 22%;height: .6rem;display: inline-block;background: #ffc2bd;color: #fff;text-align: center;line-height: .6rem; border-radius: .1rem;margin: 0 1%}
+.nav_buy a.on{background: #f86054;}
+
+.more_data{width: 100%;height: .8rem;border-top: 1px solid #ddd;line-height: .8rem; text-align: center;}
+.more_data a{color: #666666;display: block;}
+
+.nav_buy2{width: 100%;height: .6rem;}
+.nav_buy2 a{width: 24.1%;height: .6rem;display: inline-block;color: #666;text-align: center;line-height: .6rem; }
+.nav_buy2 a.on{border-bottom: 2px solid #01af63}

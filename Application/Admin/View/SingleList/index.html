@@ -1,0 +1,138 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>活动标题：</label>
+				<input type="text" name="single_title" value="{$_REQUEST.single_title}"/>
+			</li>
+			<li>
+				<label>状态：</label>
+				<select name="status" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >启用</option>
+					<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >禁用</option>
+				</select>
+			</li>
+			<li>
+				<label>活动类型：</label>
+				<select name="single_multiple" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="0" <if condition="$_REQUEST.single_multiple eq '0'">selected</if> >单场</option>
+					<option value="1" <if condition="$_REQUEST.single_multiple eq '1'">selected</if> >多场</option>
+				</select>
+			</li>
+			<li>
+				<label>是否世界杯活动：</label>
+				<select name="is_worldcup" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="0" <if condition="$_REQUEST.is_worldcup eq '0'">selected</if> >否</option>
+					<option value="1" <if condition="$_REQUEST.is_worldcup eq '1'">selected</if> >是</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/addsingle" target="dialog" height="600" mask="true"><span>新增活动</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138" align="center">
+		<thead>
+		<tr>
+			<th width="3%">ID</th>
+			<th width="6%">活动标题</th>
+			<th width="5%">活动类型</th>
+			<th width="5%">添加时间</th>
+			<th width="6%">活动截止时间</th>
+			<th width="12%">竞猜内容</th>
+			<th width="5%">是否世界杯活动</th>
+			<th width="3%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'status')"> class="desc"</if> orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}"</if>>状态</th>
+			<th width="5%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td><a href="//www.__DOMAIN__/Activity/gamble/activityId/{$vo.id}.html" target="_blank">{$vo['single_title']}</a></td>
+					<td>
+						<if condition="$vo.single_multiple eq 0"> 单场<else/><div style="color: red">多场</div></if>
+					</td>
+					<td>{:date('Y-m-d H:i',$vo['add_time'])}</td>
+					<td>{:date('Y-m-d H:i',$vo['end_time'])}</td>
+					<td>
+					<if condition="$vo.status eq 0">
+						<a style="color: blue" href="__URL__/editquiz/titleId/{$vo.id}/type/add<if condition="$vo.single_multiple eq 1">/mult/1</if>" target="dialog" mask="true" height="500" width="600" title="添加竞猜" rel="editPage">添加竞猜</a> | 
+					</if>
+						<a href="javascript:;" onclick="showGame({$vo.id})">查看竞猜</a>
+					</td>
+					<td>
+						<if condition="$vo.is_worldcup eq 0"> 否<else/><div style="color: red">是</div></if>
+					</td>
+					<td>{$vo['status']|getStatus}</td>
+					<td>
+					<a href="__URL__/addsingle/id/{$vo.id}" target="dialog" height="450" mask="true" title="编辑" rel="editPage">编辑</a> |
+					{$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",'__DWZ__'} | 
+					<a class="delete" href="__URL__/delsingle/id/{$vo.id}" target="ajaxTodo" title="你确定要删除吗？">
+						<span>删除</span>
+					</a>
+					</td>
+				</tr>
+				<notempty name="vo.game">
+					<volist name="vo.game" id="item2">
+						<tr target="sid_record" rel="{$item2['id']}" style="display: none;" class="gameTr tr-{$vo.id}">
+							<td>{$item2.id}</td>
+							<td>|__</td>
+							<td>赛事id：{$item2.game_id}</td>
+							<td>主队：{$item2.home_team_name|switchName=0,###}</td>
+							<td>客队：{$item2.away_team_name|switchName=0,###}</td>
+							<td>开赛时间：{:date('Y-m-d H:i',$item2['game_time'])}</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<notempty name="item2.quiz">
+							<volist name="item2.quiz" id="item3">
+								<tr target="sid_record" rel="{$item3['id']}" class="gameTr tr-{$vo.id}" style="display: none;">
+									<td>{$item3.id}</td>
+									<td>&nbsp;</td>
+									<td colspan="2">|__ 竞猜标题：【{$item3.question}】</td>
+									<td colspan="2">竞猜内容：【{$item3.option}】</td>
+									<td>排序：{$item3.sort}</td>
+									<td>&nbsp;</td>
+									<td>
+										<a href="__URL__/editquiz/titleId/{$vo.id}/id/{$item3.id}/type/edit/mult/1" target="dialog" mask="true" height="500" width="600" title="编辑" rel="editPage">编辑</a>
+									</td>
+								</tr>
+							</volist>
+						</notempty>
+					</volist>
+				</notempty>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+	<include file="Public:pagerNum" />
+</div>
+<script>
+	function showGame(id){
+		$('.gameTr').hide();
+		$('.tr-'+id).show();
+	}
+</script>
+
+

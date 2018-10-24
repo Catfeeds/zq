@@ -1,0 +1,90 @@
+
+<if condition="$_REQUEST.BettingListIndex eq '1'">
+	<div class="pageContent">
+		<form method="post" action="{$_REQUEST.actionName}"class="pageForm" onsubmit="return navTabSearch(this);">
+			<input type="hidden" name="gameType" value="{$_REQUEST.gameType}"/>
+			<input type="hidden" name="game_id" value="{$_REQUEST.game_id}"/>
+			<input type="hidden" name="robot" value="{$_REQUEST.robot}"/>
+			<input type="hidden" name="referTime" value="{$_REQUEST.referTime}"/>
+			<input type="hidden" name="user_id" value="{$_REQUEST.user_id}"/>
+			<input type="hidden" name="gambleCount" value="{$_REQUEST.gambleCount}"/>
+			<input type="hidden" name="actionName" value="{$_REQUEST.actionName}"/>
+			<div class="pageFormContent" layoutH="58">
+				<div class="unit" width="200" height="50">
+					<label>竞猜时间：</label>
+					<input class="date textInput" type="text" datefmt="yyyy-MM-dd HH:mm" name="startTime" value="{$_REQUEST.startTime}" size="16">
+					<label style="width:10px">至</label>
+					<input class="date textInput" type="text" datefmt="yyyy-MM-dd HH:mm" name="endTime" value="{$_REQUEST.endTime}" size="16">
+				</div>
+				<div class="unit" width="200">
+					<label>手机号：</label>
+					<input name="username" value="{$_REQUEST.username}" type="text"/>
+				</div>
+				<div class="unit" width="200">
+					<label>昵称：</label>
+					<input name="nick_name" value="{$inputQuest['nick_name']}" type="text"/>
+				</div>
+                <div class="unit" width="200">
+                    <label>赛程ID：</label>
+                    <input type="text" value="{$_REQUEST.game_id}" placeholder="赛程ID" name="game_id" size="10">
+                </div>
+                <div class="unit" width="200">
+                    <label>ID：</label>
+                    <input type="text" value="{$_REQUEST.id}" placeholder="竞猜ID" name="id" size="10">
+                </div>
+				<div class="unit" width="200">
+					<label>赛事：</label>
+					<input type="text" value="{$inputQuest['union_name']}" placeholder="" name="union_name">
+				</div>
+				<div class="unit" width="200">
+					<label>主队名称：</label>
+					<input type="text" value="{$inputQuest['home_team_name']}" placeholder="主队名称" name="home_team_name">
+				</div>
+				<div class="unit" width="200">
+					<label>客队名称：</label>
+					<input type="text" value="{$inputQuest['away_team_name']}" placeholder="客队名称" name="away_team_name">
+				</div>
+				<!-- <div class="unit" width="200">
+                    <label>是否被修改：</label>
+                    <select name="is_change" class="combox" onchange="$(form).submit()">
+                        <option value="" selected>全部</option>
+                        <option value="1" <if condition="$_REQUEST.is_change eq '1'">selected</if> >是</option>
+                                        <option value="2" <if condition="$_REQUEST.is_change eq '2'">selected</if> >否</option>
+                    </select>
+                </div> -->
+                <!-- <div class="unit" width="200">
+                    <label>高手筛选：</label>
+                    <select name="aceType" class="combox" onchange="$(form).submit()">
+                        <option value="" selected>全部</option>
+                        <option value="1" <if condition="$_REQUEST.aceType eq '1'">selected</if> >高命中</option>
+                        <option value="2" <if condition="$_REQUEST.aceType eq '2'">selected</if> >连胜多</option>
+                        <option value="3" <if condition="$_REQUEST.aceType eq '3'">selected</if> >人气旺</option>
+                        <option value="4" <if condition="$_REQUEST.aceType eq '4'">selected</if> >等级高</option>
+                        <option value="5" <if condition="$_REQUEST.aceType eq '5'">selected</if> >周胜率</option>
+                        <option value="6" <if condition="$_REQUEST.aceType eq '6'">selected</if> >价格低</option>
+                        <option value="7" <if condition="$_REQUEST.aceType eq '7'">selected</if> >价格高</option>
+                    </select>
+                </div> -->
+                <div class="unit" width="200">
+                    <label>竞猜内容：</label>
+                    <select name="play_type" onchange="$(form).submit()" class="combox">
+                        <option value="">全部</option>
+                        <option <if condition="$_REQUEST.play_type eq '-2'">selected </if> value="-2">让球</option>
+                        <option <if condition="$_REQUEST.play_type eq '2'"> selected </if> value="2">不让球</option>
+                    </select>
+                </div>
+			</div>
+			<if condition="$_REQUEST.BettingListIndex eq '1' ">
+				<div class="formBar">
+					<ul>
+						<li><div class="buttonActive"><div class="buttonContent"><button type="submit">开始检索</button></div></div></li>
+					</ul>
+				</div>
+			</if>
+		</form>
+	</div>
+</if>
+
+
+
+

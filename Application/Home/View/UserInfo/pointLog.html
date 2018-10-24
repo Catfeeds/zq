@@ -1,0 +1,125 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userInfo/account_list.css">
+</block>
+<block name="content">
+    <include file="Public:top_user"/>
+    <div class="body">
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <!-- 个人头部信息开始 -->
+                            <div class="data-graph account-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="javascript:void(0);" class="current">积分明细</a></li>
+                                </ul>
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div id="account" class="line-graph clearfix">
+                                        <div class="select-con">
+                                            <select class="form-control">
+                                                <option value="aweek" <eq name="dateType" value="aweek">selected="selected"</eq>>近一周</option>
+                                                <option value="amonth" <eq name="dateType" value="amonth">selected="selected"</eq>>近一月</option>
+                                                <option value="3months" <eq name="dateType" value="3months">selected="selected"</eq>>近三月</option>
+                                            </select>
+                                        </div>
+                                        <notempty name="list">
+                                            <div class="account-list">
+                                                <table class="table table-bordered">
+                                                    <tbody>
+                                                    <tr class="table-header">
+                                                        <th>序号</th>
+                                                        <th>时间</th>
+                                                        <th>收入</th>
+                                                        <th>支出</th>
+                                                        <th>积分余额</th>
+                                                        <th>类型</th>
+                                                        <th>说明</th>
+                                                    </tr>
+                                                    <volist name="list" id="vo" key="k">
+                                                        <tr <if condition="$k % 2 != 0">class="one" <else /> class="two" </if>>
+                                                        <td>{$k}</td>
+                                                        <td class="begin-time"><span>{$vo.log_time|date='Y-m-d H:i:s',###}</span></td>
+                                                        <td>
+                                                            <if condition="in_array($vo['log_type'],[1,5,11,12,13,14,15,16,17,18])">
+                                                                {$vo.change_num}
+                                                            </if>
+                                                        </td>
+                                                        <td>
+                                                            <if condition="in_array($vo['log_type'],[2,6,19])">
+                                                                {$vo.change_num}
+                                                            </if>
+                                                        </td>
+                                                        <td>{$vo.total_point}</td>
+                                                        <td>
+                                                            {:C('pointType')[$vo['log_type']]}
+                                                        </td>
+                                                        <td>{$vo.desc|default="无"}</td>
+                                                        </tr>
+                                                    </volist>
+                                                    </tbody>
+                                                </table>
+                                                <!--页码开始-->
+                                                <div class="pageNum">
+                                                    <nav aria-label="...">
+                                                        <ul class="pagination clearfix">
+                                                            {$show}
+                                                            <li>
+                                                                <input class="form-control isTxt" type="text" value="{$_REQUEST.p|default=1}" name="p">
+                                                            </li>
+                                                            <li id="GO"><a href="javascript:void(0)">GO</a></li>
+                                                        </ul>
+                                                        <div class="">共有{$totalCount}条，每页显示：{$numPerPage}条</div>
+                                                    </nav>
+                                                </div>
+                                                <!--页码结束-->
+                                            </div>
+                                            <else/>
+                                            <p>没有明细记录哦</p>
+                                        </notempty>
+                                    </div>
+                                </div>
+                                <!-- Tab panes -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+</block>
+<block name='js'>
+    <script>
+        //日期筛选
+        $(function(){
+            $('.form-control').change(function() {
+                var dateType = $(this).children('option:selected').val();
+                var url = "/UserInfo/pointLog/dateType/"+dateType;
+                window.location.href = url;
+            });
+        });
+        //绑定a标签
+        $("#GO").find("a").bind("click", function(){
+            var p = $("input[name='p']").val();
+            if (isNaN(p)) {
+                return;
+            } else if (p>0){
+                var dateType = $(".form-control").val();
+                window.location.href="/UserInfo/pointLog/dateType/"+dateType+"/p/"+p+".html";
+            }
+        });
+    </script>
+</block>

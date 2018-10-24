@@ -1,0 +1,85 @@
+<form id="pagerForm" action="__URL__/mobileLog" method="post">
+	<input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+	<input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+	<input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+	<input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+	<volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+	<form rel="pagerForm" method="post" action="__URL__/mobileLog" onsubmit="return dwzSearch(this, 'dialog');">
+	<input type="hidden" name="Multiselect" value="{$_REQUEST.Multiselect}"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>手机号:</label>
+				<input class="textInput" name="mobile" value="{$_REQUEST.mobile}" type="text">
+			</li>	
+			<li>
+				<label>昵 称:</label>
+				<input class="textInput" name="name" value="{$_REQUEST.name}" type="text">
+			</li>
+			<li>
+				<label>备注:</label>
+				<input class="textInput" name="remark" value="{$_REQUEST.remark}" type="text">
+			</li>
+		</ul>
+		<ul class="searchContent">
+			<li>
+				<label>多昵称:</label>
+				<input class="textInput" name="more_name" value="{$_REQUEST.more_name}" type="text" size="100">
+				<span class="inputInfo">（逗号隔开）</span>
+			</li>	
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+				<if condition="$Multiselect eq 1">
+					<li><div class="button"><div class="buttonContent"><button type="button" multlookup="MobileLog" warn="请选择接收用户">选择带回</button></div></div></li>
+				</if>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+<div class="pageContent j-resizeGrid" style="width: 806px;">
+
+	<table class="table" layoutH="135" style="width:786px;" targetType="dialog" >
+		<thead>
+			<tr>
+			<if condition="$Multiselect eq 1">
+				<th style="width: 24px;"><div class="gridCol" title=""><input type="checkbox" class="checkboxCtrl" group="MobileLog"></div></th>
+			</if>
+				<th width="50">用户ID</th>
+				<th>手机号</th>
+				<th>备注</th>
+				<th width="50">选择</th>
+			</tr>
+		</thead>
+		<tbody>
+			<volist name="list" id="vo">
+			<tr>
+			<if condition="$Multiselect eq 1">
+				<td style="width: 24px;"><div><input type="checkbox" name="MobileLog" value="{ id:'{$vo.id}', mobile:'{$vo.mobile}', remark:'{$vo.remark}' }"></div></td>
+			</if>
+				<td width="50">{$vo.id}</td>
+				<td>{$vo.mobile}</td>
+				<td>{$vo.remark}</td>
+				<td width="50">
+					<a class="btnSelect" title="选择" href="javascript:" onclick="$.bringBack({ id:'{$vo.id}', mobile:'{$vo.mobile}',remark:'{$vo.remark}' })">选择</a>
+				</td>
+			</tr>
+			</volist>
+		</tbody>
+	</table>
+
+	<div class="panelBar">
+		<div class="pages">
+			<span>共{$totalCount}条</span>
+		</div>
+		<div class="pagination" targetType="dialog" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="5" currentPage="{$currentPage}"></div>
+	</div>
+	
+</div>

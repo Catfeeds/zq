@@ -1,0 +1,67 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input type="hidden" name="gameType" value="{$_REQUEST.gameType}"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li >
+				<label>活动标题：</label>
+				<input name="title_name" value="{$_REQUEST.title_name}" type="text" placeholder="标题"/>
+			</li>
+
+			<li >
+				<label>昵称：</label>
+				<input name="nick_name" value="{$_REQUEST.nick_name}" type="text" placeholder="昵称"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+
+		<ul class="toolBar">
+
+		</ul>
+	</div>
+	<table class="list" width="100%" layoutH="117">
+		<thead>
+		<tr>
+			<th width="2%" >活动ID</th>
+			<th width="13%">活动标题</th>
+			<th width="8%">用户昵称</th>
+			<th width="8%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'winCount')"> class="desc"</if> orderField="winCount" <if condition="$_REQUEST._order eq 'winCount'">class="{$_REQUEST._sort}"</if>>
+                赢的场数
+            </th>
+            <th width="3%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['title_id']}</td>
+				    <td><a href="http://m.__DOMAIN__/Activity/gamble/activityId/{$vo['title_id']}.html" target="_blank">{$vo['single_title']}</a></td>
+                    <td><a href="__ADMIN__/FrontUser/index/id/{$vo['user_id']}" target="navTab">{$vo['nick_name']}</a></td>
+                    <td>{$vo['winCount']}</td>
+
+					<td><a href="__URL__/ansinfo/user_id/{$vo.user_id}/title_id/{$vo.title_id}" target="navTab" mask="true" height="500" width="600" title="查看" rel="editPage">查看竞猜详情</a></td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

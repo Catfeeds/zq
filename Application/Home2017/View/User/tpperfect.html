@@ -1,0 +1,216 @@
+<include file='Public:header'/>
+
+<body>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/login/tpperfect.css">
+    <!-- 注册头部开始 -->
+    <include file="Public:top"/>
+    <!-- 注册头部结束 -->
+    <div class="home">
+        <!-- 注册表单内容开始 -->
+        <div class="form-main">
+            <div class="form-nav">
+              <ul class="clearfix">
+                <li class="li1 cur1">
+                  完善基本资料
+                </li>
+              </ul>
+            </div>
+            <div class="guide">
+              来自 <switch name="sdk_type">
+                    <case value='qq'><img src="__PUBLIC__/Home/images/login/qq.png" >QQ登录</case>
+                    <case value='weixin'><img src="__PUBLIC__/Home/images/login/wx.png" >微信登录</case>
+                    <case value='sina'><img src="__PUBLIC__/Home/images/login/sina.png" >微博登录</case>
+                   </switch> 的 
+                   <span class="sdk_name">
+                   <switch name="sdk_type">
+                    <case value='weixin'>{$user_info.nickname}</case>
+                    <default/>{$user_info.name}</switch>
+                   </span>，您好！现在可以连接全球体育了
+            </div>
+            <div class="pull-left face">
+              <img src="<switch name="sdk_type"><case value='qq'>{$user_info['head']}</case><case value='weixin'>{$user_info['headimgurl']}</case><case value='sina'>{$user_info['head']}</case></switch>" alt="头像" width="200" height="200" />
+            </div>
+            <div class="form-con">
+              <div class="con clearfix">
+                    <div class="pull-left form">
+                        <div class="data-graph basic-infor pull-right">
+                              <!-- Nav tabs -->
+                              <ul class="top-nav nav nav-tabs">
+                                  <li role="presentation"><a href="javascript:void(0);" class="current">无全球体育帐号&nbsp;</a></li>
+                                  <li role="presentation"><a href="javascript:void(0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;绑定已有帐号</a></li>
+                              </ul>
+                              <!-- Nav tabs -->
+                              <!-- Tab panes -->
+                              <form action="#" method="post">
+                              <input type="hidden" name='head' value="<switch name="sdk_type"><case value='qq'>{$user_info['head']}</case><case value='weixin'>{$user_info['headimgurl']}</case><case value='sina'>{$user_info['head']}</case></switch>">
+                              <div class="tab-content">
+                                <div class="line-graph">
+                                       <div class="form-in clearfix">
+                                           <div class="pull-left input-name"><span class="text-red">*</span>昵&nbsp;&nbsp;称：</div>
+                                           <div class="pull-left input-con">
+                                               <input class="form-control" name="nick_name" type="text" value="{$user_info.randName}" placeholder="请输入昵称"/>
+                                           </div>
+                                       </div>
+                                       <div class="form-in clearfix">
+                                           <div class="pull-left input-name">手机号：</div>
+                                           <div class="pull-left input-con">
+                                               <input type="password" class="hidden"/>
+                                               <input class="form-control" name="mobile" type="text" placeholder="选填" />
+                                           </div>
+                                       </div>
+                                       <div class="form-in clearfix">
+                                           <div class="pull-left input-name">密&nbsp;&nbsp;&nbsp;码：</div>
+                                           <div class="pull-left input-con">
+                                               <input type="password" class="hidden"/>
+                                               <input class="form-control" name="password" type="password" placeholder="选填"/>
+                                           </div>
+                                       </div>
+                                       <div class="form-group">
+                                           <div class="checkbox" style="margin-left: 15px;">
+                                             <label>
+                                               <input type="checkbox" checked id="agree">我已阅读并接受<a target="_blank" href="{:U('Copyright/service')}" class="text-green">《全球体育服务协议》</a>
+                                             </label>
+                                           </div>
+                                       </div>
+                                       <div class="reg-btn clearfix form-in">
+                                           <input type="submit" class="btn btn-orange pull-right dosubmit" value="完成" />
+                                       </div>
+                                </div>
+                                <div class="line-graph" style="display: none;">
+                                       <div class="form-in clearfix">
+                                           <div class="pull-left input-name">手机号：</div>
+                                           <div class="pull-left input-con">
+                                               <input type="password" class="hidden"/>
+                                               <input class="form-control" name="has_mobile" type="text" placeholder="请输入手机号"/>
+                                           </div>
+                                       </div>
+                                       <div class="form-in clearfix">
+                                           <div class="pull-left input-name">密&nbsp;&nbsp;&nbsp;码：</div>
+                                           <div class="pull-left input-con">
+                                               <input type="password" class="hidden"/>
+                                               <input class="form-control" name="has_password" type="password" placeholder="请输入密码"/>
+                                           </div>
+                                       </div>
+                                       <div class="reg-btn clearfix form-in">
+                                           <input type="submit" class="btn btn-orange pull-right dosubmit" value="完成" />
+                                       </div>
+                                </div>        
+                              </div>
+                              <input type="hidden" value="0" id="is_has" name="is_has">
+                              </form>
+                          </div>
+                          <input type="hidden" value="{$sdk_type}" id="sdk_type">
+                    </div>
+                    <div class="pull-right clearfix">
+                      <div class="ew-ma"><img src="__PUBLIC__/Home/images/login/ew-ma.jpg" width="264" height="264"></div>
+                        <div class="ew-nioce">
+                          <p>扫二维码，下载全球体育APP<br/>随时获取最新信息！</p>
+                        </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- 注册表单内容结束 -->
+    </div>
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+</body>
+</html>
+<script type="text/javascript">
+  $(function(){
+    $("#is_has").val(0);
+    $('.data-graph .nav-tabs>li>a').click(function(e) {
+      $(this).parent().siblings().children("a").removeClass('current');
+      $(this).addClass('current');
+      var num = $(this).parent().index();
+      $('.tab-content').children().eq(num).stop().fadeIn().siblings().hide();
+      $("#is_has").val(num);
+    });
+    $("form").validate({
+      onkeyup : false,
+      rules: {
+        mobile : {
+          mobile:true,
+          remote: {
+            url: "/User/checkMobile.html",
+            type: "post",
+            dataType: "json",
+            data: {
+              fieldValue: function() {
+                return $("input[name='username']").val();
+              },
+            }
+          }
+        },
+        nick_name : {
+          required:true,
+          rangelength:[2,10],
+          remote: {
+            url: "/User/checkNickname.html",
+            type: "post",
+            dataType: "json",
+            data: {
+              fieldValue: function() {
+                return $("input[name='nick_name']").val();
+              },
+            }
+          }
+        },
+        password: {
+          checkpass:true,
+        },
+        has_mobile:{ required:true },
+        has_password:{ required:true },
+      },
+      messages : {
+        mobile : {
+          remote : '该手机号已经注册',
+        },
+        nick_name : {
+          required:"请输入昵称",
+          rangelength: "昵称为2-10个字符",
+          remote : '该昵称已被使用',
+        },
+        password: {
+          checkpass:"6-15位英文字母和数字"
+        },
+        has_mobile: {
+          required: "请输入手机号",
+        },
+        has_password: {
+          required: "请输入密码",
+        },
+      },
+      submitHandler:function(form){
+            if($("#agree").is(':checked')==false){
+              _alert("提示","您必须同意注册协议！");
+              return;
+            }
+            var form = $(form);
+            var data = form.serialize();
+            $.ajax({
+                type: "POST",
+                url: "/User/tpperfect.html",
+                dataType: "json",
+                data: data,
+                beforeSend:function(){
+                  console.log($("#dosubmit"))
+                    $(".dosubmit").attr('disabled',true).val('正在注册...');
+                },
+                success: function(data){
+                  if(data.status){
+                    window.location.href="/UserInfo/index.html";
+                  }else{
+                    _alert("温馨提示",data.info);
+                  }
+                },
+                complete:function(){
+                    $(".dosubmit").removeAttr('disabled').val("完成");
+                },
+            });
+        }
+    });
+  })
+</script>

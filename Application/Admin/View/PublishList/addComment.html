@@ -1,0 +1,94 @@
+<style>
+	#table tr{ height: 55px; }
+</style>
+<div class="pageContent">
+	<form method="post" action="__URL__/addComment/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" value="{$vo.id}" name="id" />
+		<input type="hidden" value="{$vo.update_time}" name="update_time" />
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>资讯标题：</label>
+				<input type="text" class="required" readonly value="{$vo.title}" size="75" />
+			</div>
+
+			<div class="unit">
+				<label>发布评论：</label>				
+				<table id='table' width="480">
+					<tr>
+						<td width="13%"></td>
+						<td width="60%">评论内容</td>
+						<td width="14%">点赞数</td>
+						<td width="13%">操作</td>
+					</tr>
+					<for start="1" end="9">
+						<tr>
+							<td>评论 <span class="xuhao">{$i}</span>：</td>
+							<td>
+								<textarea name="comment[{$i}][content]"  rows="2" cols="40"></textarea>
+							</td>
+							<td><input type='text' size="5" class="digits" name="comment[{$i}][like_num]" value="0" /></td>
+							<td>
+								<a class="buttonActive" href="javascript:;" onclick="delOption(this);">
+								<span>删除</span>
+								</a>
+							</td>
+						</tr>
+					</for>
+					<tr>
+						<td>&nbsp;</td>
+						<td><a class="buttonActive" href="javascript:addOption()"><span>点击添加一条选项</span></a></td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+				</table>				
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<script>
+//遍历input对象
+function eachTr(){
+	$(".xuhao").each(function(index){
+		$(this).text(index+1);
+	});
+}
+//添加评论
+function addOption(){
+	var num = $(".xuhao").length + 1;
+	//添加一条评论
+	var str="<tr>"+
+				"<td>评论 <span class=\"xuhao\">"+num+"</span>：</td>"+
+				"<td>"+
+					"<textarea style='border-style: solid;border-width: 1px;font-size: 12px;line-height: 15px;margin: 0;padding: 2px;' name=\"comment["+num+"][content]\"  rows=\"2\" cols=\"40\"></textarea>"+
+				"</td>"+
+				"<td><input style='border-style: solid;border-width: 1px;font-size: 12px;line-height: 15px;margin: 0;padding: 2px;' type='text' size=\"5\" class=\"digits\" name=\"comment["+num+"][like_num]\" value=\"0\" /></td>"+
+				"<td>"+
+					"<a class=\"buttonActive\" href=\"javascript:;\" onclick=\"delOption(this);\">"+
+					"<span>删除</span>"+
+					"</a>"+
+				"</td>"+
+			"</tr>";
+	$("#table tr:last").prev().after(str);
+}
+//删除当前一行选项
+function delOption(obj){
+	if($("#table tr").length < 4){
+		alert('至少要有一条评论噢!');
+		return;
+	}
+	$(obj).parent().parent().remove();
+	eachTr();
+}
+</script>
+
+
+
+

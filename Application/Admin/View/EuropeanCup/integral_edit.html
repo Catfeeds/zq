@@ -1,0 +1,67 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/euro_save/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="{$vo.id}" />
+		<input type="hidden" name="type" value="2" />
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>小组字母：</label>
+				<input type="radio" value="A" name="group_letter" <eq name="vo.group_letter" value="A" >checked</eq>/>A
+				<input type="radio" value="B" name="group_letter" <eq name="vo.group_letter" value="B" >checked</eq>/>B
+				<input type="radio" value="C" name="group_letter" <eq name="vo.group_letter" value="C" >checked</eq>/>C
+				<input type="radio" value="D" name="group_letter" <eq name="vo.group_letter" value="D" >checked</eq>/>D
+				<input type="radio" value="E" name="group_letter" <eq name="vo.group_letter" value="E" >checked</eq>/>E
+				<input type="radio" value="F" name="group_letter" <eq name="vo.group_letter" value="F" >checked</eq>/>F
+			</div>
+
+			<div class="unit">
+				<label>国家名称：</label>
+				<input type="text" class="required" maxlength="60" name="country_name" size="60" value="{$vo.country_name}">
+			</div>
+
+			<div class="unit">
+				<label>轮次：</label>
+				<input type="text" class="required" maxlength="10" name="round" size="60" value="{$vo.round}">
+			</div>
+
+			<div class="unit">
+				<label>胜：</label>
+				<input type="text" class="required" maxlength="30" name="win" size="60" value="{$vo.win}">
+			</div>
+
+			<div class="unit">
+				<label>平：</label>
+				<input type="text" class="required" maxlength="60" name="draw" size="60" value="{$vo.draw}">
+			</div>
+
+			<div class="unit">
+				<label>负：</label>
+				<input type="text" class="required" maxlength="10" name="lose" size="60" value="{$vo.lose}">
+			</div>
+
+			<div class="unit">
+				<label>进球：</label>
+				<input type="text" class="required" maxlength="30" name="score" size="60" value="{$vo.score}">
+			</div>
+
+			<div class="unit">
+				<label>失球：</label>
+				<input type="text" class="required" maxlength="60" name="lose_ball" size="60" value="{$vo.lose_ball}">
+			</div>
+
+			<div class="unit">
+				<label>积分：</label>
+				<input type="text" class="required" maxlength="10" name="integral" size="60" value="{$vo.integral}">
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

@@ -1,0 +1,174 @@
+<extend name="Public/tpl-detail" /> 
+<block name="append">
+<!--    <script src="__PUBLIC__/Plugs/echarts.simple.min.js"></script> -->
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" href="__CSS__/bk/odds.css?v=201806061536">
+</block>
+<!-- 导航 s-->
+<block name="nav">
+    <include file="DetailsBk/subnavBk"/>
+</block>
+<!-- 导航 e-->
+
+
+<!-- 内容 s -->
+<block name="content">
+    <section>
+        <!-- 数据导航s -->
+        <nav class="odd_nav clearfix" id="odds">
+            <ul>
+                <li><a href="{:U('DetailsBk/odds_asia',array('scheid'=>$scheid))}">亚赔</a></li>
+                <li class="on"><a href="{:U('DetailsBk/odds_euro',array('scheid'=>$scheid))}">欧赔</a></li>
+                <li><a href="{:U('DetailsBk/odds_bigs',array('scheid'=>$scheid))}">大小</a></li>
+            </ul> 
+        </nav>
+        <!-- 数据导航e --> 
+
+<!--
+        <div class="echarts">
+            <nav class="nav_odds clearfix">
+                <div class="pd_main">
+                    <a href="javascript:;" class="on">主胜</a>
+                    <a href="javascript:;">平局</a>
+                    <a href="javascript:;">客胜</a>
+                </div>
+            </nav>
+             为ECharts准备一个具备大小（宽高）的Dom 
+            <div id="main" style="width: 100%;height:4rem;float: left;"></div>
+        </div>
+
+
+
+        <div class="echarts_tool clearfix echarts_tool2">
+            <div class="fl">上次盘口变化时间：8月23日11:20</div> 
+        </div>-->
+
+        <table class="table tb_odds_euro tb_history"  id="tb_odds" cellspacing="0">
+            <tbody>
+                <tr>
+                    <th>公司</th>
+                    <th>初/即</th>
+                    <th>主胜</th>
+                    <th>客队</th>
+                </tr>
+            <volist name="data" id="v">
+                <tr>
+                    <td data-uid='{$v[1]}'><em class="on"></em>{$v[0]}</td>
+                    <td><div class="bottom_line">初盘</div><div >即盘</div></td>
+                    <td><div class="bottom_line">{$v[2]}</div><div >{$v[5]}</div></td>
+                    <td><div class="bottom_line">{$v[4]}</div><div>{$v[7]}</div></td>
+                </tr>
+            </volist>
+            </tbody>
+        </table> 
+    </section>
+</block>
+<!-- 内容 e -->
+
+
+
+<block name="scripts">
+    <script type="text/javascript">
+//        // 基于准备好的dom，初始化echarts实例
+//        var myChart = echarts.init(document.getElementById('main'));
+//        //加载默认数据
+//        var zhu_data = [1, 2, 0.5, 0.5, 1.2, 1.3, 1];
+//
+//        //指定图表的配置项和数据
+//        option = {
+//            title: {
+//                text: '',
+//            },
+//            tooltip: {
+//                trigger: 'axis'
+//            },
+//            legend: {
+//            },
+//            grid: {
+//                left: '3%',
+//                right: '4%',
+//                bottom: '3%',
+//                containLabel: true
+//            },
+//            toolbox: {
+//                show: true
+//            },
+//            xAxis: {
+//                type: 'category',
+//                boundaryGap: false,
+//                data: []
+//            },
+//            yAxis: {
+//                type: 'value'
+//            },
+//            series: [
+//                {
+//                    name: '',
+//                    type: 'line',
+//                    itemStyle: {normal: {color: "#23559f"}},
+//                    data: zhu_data
+//                }
+//            ]
+//        };
+//        // 使用刚指定的配置项和数据显示图表。
+//        myChart.setOption(option);
+//
+//        //点击获取赔率
+//        $(document).on('click', '#tb_odds tr td:first-child', function () {
+//            //alert($(this).attr('data-uid'))
+//            $('#tb_odds tr td em').removeClass('on');
+//            $(this).children('em').addClass('on');
+//
+//            //test
+//            var uid = $(this).attr('data-uid');
+//            if (uid == 1 || uid == 2) {
+//                var zhu_data = [1, 1, 1.5, 0.5, 1.2, 1.1, 1];
+//            } else {
+//                var zhu_data = [1, 2, 0.3, 0.5, 1.2, 1.3, 1];
+//            }
+//
+//
+//
+//            //指定图表的配置项和数据
+//            option = {
+//                title: {
+//                    text: '',
+//                },
+//                tooltip: {
+//                    trigger: 'axis'
+//                },
+//                legend: {
+//                },
+//                grid: {
+//                    left: '3%',
+//                    right: '4%',
+//                    bottom: '3%',
+//                    containLabel: true
+//                },
+//                toolbox: {
+//                    show: true
+//                },
+//                xAxis: {
+//                    type: 'category',
+//                    boundaryGap: false,
+//                    data: []
+//                },
+//                yAxis: {
+//                    type: 'value'
+//                },
+//                series: [
+//                    {
+//                        name: '',
+//                        type: 'line',
+//                        itemStyle: {normal: {color: "#23559f"}},
+//                        data: zhu_data
+//                    }
+//                ]
+//            };
+//            // 使用刚指定的配置项和数据显示图表。
+//            myChart.setOption(option);
+//        }).on('click', '.nav_odds a', function () {
+//            $(this).addClass('on').siblings().removeClass('on');
+//        })
+    </script>
+</block>

@@ -1,0 +1,174 @@
+/**
+ * svgLive css
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2017-08-09
+**/
+
+body{ background-color: #f4f4f4; background-image: url(../../images/scoreLive/the-ball-background.png); background-repeat: no-repeat; background-position: center top;}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{font:14px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;}
+.liveTop{ width: 100%; min-width: 1200px; background: #ffffff;  margin-bottom: 12px;}
+.liveTopIn{ width: 1200px; margin: 0 auto; padding: 10px 0;}
+.liveTopNav{ margin-left: 50px; padding: 10px 0;}
+.liveTopNav ul li{ margin: 0 15px; height: 30px; line-height: 30px;}
+.scoreType{ width: 100px; border: 1px solid #e5e5e5; border-radius: 4px;}
+.scoreType li a{ text-align: center; line-height: 24px;}
+.liveTopLogin{ padding: 8px 0;}
+.liveTopLogin .loginLink,.liveTopLogin .SslLine{ height: 34px; line-height: 34px;}
+.liveTopLogin .SslLine{ margin: 0 10px;}
+.liveTopLogin .headImg{ width: 34px; height: 34px; background: #f7f7f7; border-radius: 50%; overflow: hidden; margin-left: 10px;}
+.liveTopLogin .headImg img{ width: 100%; height: 100%; border-radius: 50%;}
+
+.liveTopLogin .dropdown-top{ margin: 0; color:#666; padding: 0 10px; padding-top: 8px; font-size: 12px;}
+.liveTopLogin .user-name .nav{ color:#ff7e00; display: block; width: 58px; height: 26px; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.liveTopLogin .user-name .on{ color: #ff7e00;}
+.liveTopLogin .user-name .dropdown-menu{ width: 90px; padding: 0;}
+.liveTopLogin .user-name .dropdown-menu li{ display: block; height: 23px;}
+.liveTopLogin .user-name .dropdown-menu a{ padding-left: 8px; display: block; width: 100%;}
+.liveTopLogin .user-name .dropdown-menu a:hover{ background:#f7f7f7;}
+.liveTopLogin .dropdown-top:hover{ color:#000; background-color:#fff; border-left: 1px solid #e5e5e5; border-right: 1px solid #e5e5e5;}
+.liveTopLogin .dropdown-top:hover .caret,.liveTopNav .dropdown-top:hover .caret{ -webkit-transform:rotate(180deg); -moz-transform:rotate(180deg); -o-transform:rotate(180deg); transform:rotate(180deg); transition: ease-out 0.3s; color: #ff7e00;}
+.liveTopLogin .dropdown-top:hover .dropdown-menu{ display:block; border: 1px solid #e5e5e5; border-top: none; right: -1px; box-shadow:none;}
+.liveTopNav .dropdown-top:hover .dropdown-menu{ display:block; border: 1px solid #e5e5e5;}
+
+/* animate live */
+.liveBox{ width: 1200px; margin:0 auto;}
+.liveBoxL{ width: 750px;}
+.animatelive .animateTile{ padding: 15px 36px; background: #305c72; background: linear-gradient(#36657c 0%,#30576e 50%,#203f52 100%); background: -moz-linear-gradient(#36657c 0%,#30576e 50%,#203f52 100%); background: -webkit-linear-gradient(#36657c 0%,#30576e 50%,#203f52 100%); background: -o-linear-gradient(#36657c 0%,#30576e 50%,#203f52 100%); border-top-left-radius: 14px; border-top-right-radius: 14px;}
+.animateTile .teamName{ width: 188px; padding: 4px 0;}
+.animateTile .teamName img{ width: 36px; height: 36px; border-radius: 50%;}
+.animateTile .teamName span{ height: 36px; line-height: 36px; color: #ffffff; margin: 0 10px; max-width: 126px;overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.animateTile .teamInfor{ width: 300px;}
+.animateTile .teamInfor{ color: #ffffff; text-align: center;}
+.animateTile .teamInfor span,.animateTile .teamInfor a{ margin: 0 5px;}
+.animateTile .teamInfor a{ color: #6eb6ff;}
+.animateNav ul li{ width: 50%; height: 40px; line-height: 40px; text-align: center; position: relative;}
+.animateNav ul .firstLi{ border-bottom: 40px solid #e6e6e6; border-right: 40px solid #ffffff; height: 0;}
+.animateNav ul .secondLi{ width: 415px; border-bottom: 40px solid #e6e6e6; border-left: 40px solid #ffffff; height: 0; margin-left: -40px;}
+.animateNav ul .firstLi.on{ border-color: #ffffff; z-index: 1; border-right: 40px solid #e6e6e6;}
+.animateNav ul .secondLi.on{ border-color: #ffffff; z-index: 1; border-left: 40px solid #e6e6e6;}
+.animateNav ul li a{color: #999999;}
+.animateNav ul li.firstLi a{ background: url(../../images/scoreLive/icon-svg-det.png) no-repeat left center; padding: 5px 0 5px 45px;}
+.animateNav ul li.firstLi.on a{ background: url(../../images/scoreLive/icon-svg-on.png) no-repeat left center; padding: 5px 0 5px 45px; color: #45788d;}
+.animateNav ul li.secondLi a{ background: url(../../images/scoreLive/icon-live-det.png) no-repeat left center; padding: 10px 0 5px 36px;}
+.animateNav ul li.secondLi.on a{ background: url(../../images/scoreLive/icon-live-on.png) no-repeat left center; padding: 10px 0 5px 36px; color: #45788d;}
+
+.animateCon .svglive{ width: 750px; height: 480px; padding: 46px 24px; background: #343434; position: relative;}
+.animateCon .hotLiveBox{ width: 214px; position: absolute; left: 0; top: 0; z-index: -1;}
+.animateCon .hotLiveTit{ background: #333333; text-align: center; padding: 7px 0; color: #ffffff; border-top-left-radius: 6px;}
+.animateCon .hotLiveTit img{ margin-right: 10px;}
+.animateCon .hotLiveList{ padding: 6px; background: #444444; height: 440px; overflow: hidden; border-bottom-left-radius: 6px;}
+.animateCon .hotLiveList li{ padding: 5px 0; border-bottom: 1px solid #383838; padding-right: 5px;}
+.animateCon .hotLiveList .teamS{ padding: 3px; font-size: 12px;}
+.animateCon .hotLiveList .teamS span{ margin-left: 4px; color: #f5f5f5;}
+.animateCon .hotLiveList .teamS em{ color: #ff8282;}
+.animateCon .hotLiveList .mCS-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ background: #898989;}
+.animateCon .hotLiveList .mCSB_inside > .mCSB_container{ margin-right: 0;}
+.animateCon .hotLiveList .mCSB_scrollTools{ width: 5px;}
+.animateCon .hotLiveBox .indentBtn{ position: absolute; left: -20px; top: 195px; width: 20px; height: 90px; background: url(../../images/scoreLive/indent-btn.png) no-repeat 0 0;}
+
+.oddTable{ background: #ffffff; margin: 10px 0;}
+.oddTable select{background-color: #dce2e6; border: none; outline: none;}
+.oddTable .table > thead > tr > th{ font-size: 16px;} 
+.oddTable .table .selectOdd div{ float: left; width: 33.333%;}
+.oddTable .table .selectOdd span{ padding: 2px 4px; border-radius: 3px;}
+.down-green{background: #48d893; color: #fff;}
+.up-red{background: #f16969; color: #fff;}
+.skillData .conlRate{ background: #ffffff; padding: 15px 20px; margin-bottom: 12px;}
+.conlRate .conlRateTit{ text-align: center; font-size: 16px;}
+.conlRate .conlData{ margin-bottom: 15px;}
+.conlRate .conlRateC{ width: 450px;}
+.conlRateC .homeAway{ margin: 20px 0;}
+.conlRateC .homeRate,.conlRateC .awayRate{ width: 220px; height: 20px; line-height: 20px; padding: 0 10px;}
+.conlRateC .homeRate{ background: #c6472f; color: #ffffff; text-align: right;}
+.conlRateC .awayRate{ background: #e6e6e6; color: #808080;}
+.conlRateC .attackRate{ height: 40px; background: #cadff0; position: relative;}
+.conlRateC .attackRate .homeAttack,.conlRateC .attackRate .awayAttack{ position: absolute; top: 0; height: 40px; background: #f7dfe2; width: 50%; padding: 0 10px;}
+.conlRateC .attackRate .homeAttack{ left: 0;}
+.conlRateC .attackRate .awayAttack{ right: 0; background: #cadff0;}
+.conlRateC .attackRate .percent{ font-size: 22px; line-height: 40px;}
+.conlRateC .attackRate .homeAttack .percent:after,.conlRateC .attackRate .awayAttack .percent:after{ content:''; width: 0; height: 0; border-top: 20px solid transparent; border-bottom: 20px solid transparent; position: absolute; z-index: 1;}
+.conlRateC .attackRate .homeAttack .percent:after{ border-left: 40px solid #f7dfe2; right: -40px;}
+.conlRateC .attackRate .awayAttack .percent:after{ border-right: 40px solid #cadff0; left: -40px;}
+.conlRateC .attackRate .noAttack .percent:after{ border-left: none 0; border-right: none 0;}
+
+.conlRateC .attackRate .attackText{ line-height: 40px;}
+
+.conlRate .conlRateL h4,.conlRate .conlRateR h4{ width: 130px; text-align: center; font-size: 48px;}
+.conlRate .conlRateL h4{ color: #ab1c32;}
+.conlRate .conlRateR h4{ color: #76b3e4;}
+.conCard{ padding: 0 30px;}
+.conCard .cardNum{ text-align: center; margin: 0 5px; color: #666666;}
+.conlRateList .table tr td{ border-top: none 0;}
+.expand-percent{position: relative; height: 12px; background: #e6e6e6;}
+.expand{ position: absolute; left: 0; top: 0; height: 12px; background: #c6472f; border-radius: 0; border-top: 12px solid #c6472f; border-right: 12px solid #e6e6e6; height: 0;}
+.expand:after{ content:''; width: 12px; width: 2px; height: 12px; transform: skew(-45deg); -webkit-transform: skew(-45deg); -moz-transform: skew(-45deg); -o-transform: skew(-45deg); background: #ffffff; position: absolute; right: -10px; top: -12px; z-index: 1;}
+.conlRateList .table tr td.f18{ font-size: 18px;}
+
+.conEvent{ background: #fff; padding: 10px; margin-bottom: 300px;}
+.conEventList{ padding: 20px 0; height: 520px; overflow: hidden;}
+.conEvent .conEventList .mCS-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ background: #bfbfbf;}
+.conEventList .eventList{ padding-left: 48px;}
+.conEventList ul{ border-left: 1px solid #e5e5e5; padding-left: 36px;}
+.conEventList ul li{ margin-bottom: 10px; position: relative;}
+.conEventList ul li .timePoint{ position: absolute; left: -76px; top: 2px;}
+.conEventList ul li .spotPoint{ width: 16px; height: 16px; border-radius: 50%; border: 1px solid #30607b; position: absolute; left: -45px; top: 2px;}
+.homeSpot{ background: #30607b;}
+.awaySpot{ background: #ffffff;}
+.conEventList .triangle-border img{ margin-right: 10px;}
+.triangle-border { position:relative; padding: 0 10px; height: 42px; line-height: 42px; border: 1px solid #e5e5e5; color:#333; background:#fff; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; background: #fafafa;}
+.triangle-border:before {content:""; position:absolute; top:6px; left:-12px; border-width:7px 12px 7px 0;  border-style:solid;  border-color:transparent #e5e5e5; display:block; width:0;}
+.triangle-border:after { content:""; position:absolute; top:7px; left:-10px; border-width:6px 10px 6px 0; border-style:solid; border-color:transparent #fafafa; display:block; width:0;}
+.description{ background: #fafafa;}
+.description .lab{ width: 16.666%; height: 60px; line-height: 60px; font-size: 16px; text-align: center;}
+
+.liveBoxR{ width: 442px;}
+.conChat{ background: #ffffff; border: 1px solid #e0e0e0; margin-bottom: 10px;}
+.conChat .chatTit{ height: 42px; line-height: 42px; padding: 0 10px; border-bottom: 2px solid #2e607c; margin-bottom: 15px;}
+.bigShot .shotTit{ height: 42px; line-height: 42px; padding: 0 10px;}
+.conChat .chatTit span,.bigShot .shotTit span{ font-size: 16px; background: url(../../images/scoreLive/tall-ball.png) no-repeat left center; padding-left: 30px;}
+.conChat .noticeCon{ background: #f0f0f0; padding: 10px 20px; margin: 0 10px;}
+.conChat .noticeCon .noticeLeft span{ padding-left: 22px; background: url(../../images/scoreLive/icon-tips.png) no-repeat 0 center; color: #e95655;}
+.conChat .noticeCon .noticeRight{ width: 310px; height: 20px; overflow: hidden;}
+.conChat .noticeCon .noticeRight ul li{ height: 20px; line-height: 20px; text-align: left; margin-left: 10px;}
+.conChat .noticeCon .noticeRight ul li a{ color: #666666; transition: .5s; -webkit-transition: .5s; -moz-transition: .5s; -o-transition: .5s;}
+.conChat .noticeCon .noticeRight ul li a:hover{ color: #ff7e00;}
+.conChatList{ height: 410px; overflow: hidden; padding: 0 10px; padding-top: 15px;}
+.conChat .conChatList .mCS-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ background: #bfbfbf;}
+.conChatList .chatList ul>li { width: 100%; display: inline-block; padding: 5px; font-size: 14px; color: #333; word-break: break-all;}
+.conChatList .chatList ul>li .live-lb.initial .tips { background-color: #d7d2d9;}
+.conChatList .chatList ul>li .live-lb .tips { float: left; line-height: 16px; border-radius: 3px; padding: 0 2px; color: #fff; font-size: 12px; margin: 2px 4px 0 0;}
+.conChatList .chatList .m-r-2{ margin-right: 2px;}
+.conChatList .chatList ul>li .name { float: left; color: #6daade; position: relative; z-index: 1;}
+.conChatList .chatList ul>li .name .shield-report { transform: translateX(-10px); -webkit-transform: translateX(-10px); -moz-transform: translateX(-10px); -o-transform: translateX(-10px); position: absolute; top: 0; left: 100%; margin-left: -2px; background-color: #666; border-radius: 0 5px 5px 5px; white-space: nowrap; display: none; opacity: 0;}
+.reportBtn { line-height: 30px; padding: 0 10px; border-radius: 3px; display: inline-block; cursor: pointer; color: #666; font-size: 12px;}
+.conChatList .chatList ul>li .name .shield-report .reportBtn { transition: .5s; -webkit-transition: .5s; -moz-transition: .5s; -o-transition: .5s; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; -moz-transform-style: preserve-3d; -o-transform-style: preserve-3d; line-height: 24px; color: #bbb; padding: 0 10px;}
+.conChatList .chatList ul>li .name:hover .shield-report { animation-name: shield-report; animation-duration: .8s; animation-timing-function: cubic-bezier(1, 0, 0, 1.4); animation-iteration-count: 1; animation-fill-mode: forwards; animation-delay: .1s; -webkit-animation-name: shield-report; -webkit-animation-duration: .8s; -webkit-animation-timing-function: cubic-bezier(1, 0, 0, 1.4); -webkit-animation-iteration-count: 1; -webkit-animation-fill-mode: forwards; -webkit-animation-delay: .1s; -moz-animation-name: shield-report; -moz-animation-duration: .8s; -moz-animation-timing-function: cubic-bezier(1, 0, 0, 1.4); -moz-animation-iteration-count: 1; -moz-animation-fill-mode: forwards; -moz-animation-delay: .1s; -o-animation-name: shield-report; -o-animation-duration: .8s; -o-animation-timing-function: cubic-bezier(1, 0, 0, 1.4); -o-animation-iteration-count: 1;  -o-animation-fill-mode: forwards; -o-animation-delay: .1s; display: block; opacity: 1;}
+.conChatList .chatList ul>li .name .shield-report .reportBtn:hover {color: #fff;}
+.conChatList .chatList ul>li.start .content-txt { opacity: 1;}
+.conChatList .chatList ul>li .content-txt { display: block;}
+
+.chatPost{ padding: 6px; background: #ffffff; border-top: 1px solid #e5e5e5; margin-top: 20px; position: relative;}
+.chatPost .btnExp{ padding: 10px; padding-left: 45px;}
+.chatPost .btnExp a{ margin: 0 10px;}
+.chatPost .textareaCon{ border: 1px solid #e0e0e0; border-radius: 6px; padding-left: 5px; /* overflow: hidden; */}
+.chatPost .chatTxt{ width: 333px; height: 62px; resize: none; border: 0; padding: 5px 10px; overflow: auto; outline: none;}
+.chatPost .btnPost{ background: #30607b; width: 88px; height: 62px; line-height: 62px; text-align: center; font-size: 16px; color: #ffffff;}
+
+.bigShot{ background: #fff;}
+.bigShot .navTab ul li{ width: 50%;}
+.bigShot .navTab ul li a{ display: block; height: 40px; line-height: 40px; text-align: center; color: #808080; border-top: 2px solid #efefef; background: #efefef;}
+.bigShot .navTab ul li.on a{ background: #fff; border-color: #2e607c; color: #2e607c;}
+.bigShot .shotBox { padding: 0 15px;}
+.bigShot .shotBox ul li { padding: 12px 0; border-bottom: 1px solid #e5e5e5; position: relative;}
+.bigShot .shotBox .faceImg{width: 44px; height: 44px; border-radius: 50%; overflow: hidden;}
+.bigShot .shotBox .faceImg img { width: 100%; height: 100%;}
+.bigShot .shotBox .uShot { margin-left: 16px;}
+.bigShot .shotBox .uShot span { padding-left: 10px;}
+.bigShot .shotBox .icon-past{ width: 47px; height: 44px; position: absolute; right: 16px; top: 16px; background: url(../../images/scoreLive/icon-past.png) no-repeat 0 0;}
+
+/* app */
+.appEw{ width: 158px; background: #f7f7f7; background: rgba(0,0,0,0.5); text-align: center; position: fixed; left: 50%; top: 170px; margin-left: 620px; padding-top: 22px;}
+.appEw img{ margin-bottom: 10px;}
+.appEw p{ color: #fff; font-size: 12px;}
+.appEw .closeApp{ position: absolute; right: 8px; top: -1px; color: #fff; font-size: 22px;}

@@ -1,0 +1,11 @@
+<!-- 好友助力榜 -->
+<h2>-好友助力榜-</h2>
+ <volist name="helper" id="item" key="k">
+     <switch name="k">
+         <case value="1"><p><span><img src="__IMAGES__/CupquizActivities/medal-1.png"><i class="name">{$item.nick_name}</i><i class="brother">最佳老铁</i></span><span><i class="number">{$item.qcoin}</i><i class="meony">Q币</i></span></p></case>
+         <case value="2"><p><span><img src="__IMAGES__/CupquizActivities/medal-2.png"><i class="name">{$item.nick_name}</i></span><span><i class="number">{$item.qcoin}</i><i class="meony">Q币</i></span></p></case>
+         <case value="3"><p><span><img src="__IMAGES__/CupquizActivities/medal-3.png"><i class="name">{$item.nick_name}</i></span><span><i class="number">{$item.qcoin}</i><i class="meony">Q币</i></span></p></case>
+         <default /><p><span><i class="four">{$k}</i><i class="name">{$item.nick_name}</i></span><span><i class="number">{$item.qcoin}</i><i class="meony">Q币</i></span></p>
+     </switch>
+ </volist>
+ 

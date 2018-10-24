@@ -1,0 +1,56 @@
+<div class="pageContent">
+
+    <form method="post" action="__URL__/createQueue/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>指定平台：</label>
+                <select class="combox" name="platform" >
+                    <option value="0">所有平台</option>
+                    <option value="2">ios</option>
+                    <option value="3">android</option>
+                </select>
+            </div>
+
+            <div class="unit">
+                <label>指定用户：</label>
+                <input name="userGroup.type" class="required" type="hidden" value=""/>
+                <textarea name="userGroup.desc"  cols="80" rows="2" class="required" readonly ></textarea>
+                <a width="600" height='500' lookupgroup="userGroup" href="{:U('__ADMIN__/EasemobUser/getGroup')}" class="btnLook"></a>
+                <label style="color: blue">请选择某个分组类型的用户？</label>
+            </div>
+
+            <div class="unit">
+                <label>选择消息打开行为：</label>
+                <input name="msgType.module" class="required" type="hidden" value=""/>
+                <textarea rows="4" cols="80" name="msgType.desc" class="required" readonly/></textarea>
+                <a width="600" height='500' lookupgroup="msgType" href="{:U('__ADMIN__/EasemobMsg/msgType')}" class="btnLook"></a>
+                <label style="color: blue">请选择，用户app收到消息，点击之后的行为？</label>
+            </div>
+
+            <div class="unit">
+                <label>指定参数值：</label>
+                <input type="text" class="required" name="msgType.mValue" size="79">
+            </div>
+
+            <div class="unit">
+                <label>显示内容：</label>
+                <textarea name="content" class="required" editor="{:uniqid()}" cols="80" rows="4"></textarea>
+            </div>
+
+            <div class="unit">
+                <label>设置定时推送时间：</label>
+                <input class="date textInput readonly valid" type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm"
+                       name="task_time" value="">
+                <a class="inputDateButton" href="javascript:;">选择</a>
+            </div>
+        </div>
+
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>

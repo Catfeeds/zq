@@ -1,0 +1,145 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/guess_search.css?v=20180619">
+</block>
+<!-- 顶部开始 -->
+<block name="header">
+    <include file="Guess:guess_head"/>
+</block>
+<!-- 顶部结束 -->
+<block name="nav">
+    <include file="Guess/nav"/>
+</block>
+<!-- 内容 s -->
+<block name="content">
+<div class="contentPt">
+<!-- 搜素 s-->
+<header id="search_header">
+    <form id="fmsearch" action="{:U('Guess/search_results')}" method="get" onsubmit="return checkForm();">
+    <div class="sc_text">
+<!--        <a href="{:U('Guess/rank')}" class="his_back"></a>-->
+        <div>
+            <input id='search_txt' type="text" name='keyword' placeholder="搜索推荐高手" maxlength="10">
+            <a href="javascript:;" class="ne_close"></a>
+        </div>
+    </div>
+    <div class="sc_btn">
+        <a id='js-confirm' href="javascript:;">确定</a>
+    </div> 
+    </form>
+</header>
+<!-- 搜素 e-->
+<!-- title s-->
+<div class="gs_title">
+    <h4>热门高手</h4>
+</div>
+<!-- title e-->
+
+    <section class="new_put_con clearfix">   
+        <div class="hot_tj clearfix">
+            <ul>
+                <volist name="hot" id="v">
+                <li>
+                    <eq name="v.is_gamble" value="1"><em></em></eq>
+                    <a href="{:U('/expUser/'.$v['user_id'].'/'.$v['gambleType'])}"><figure><img src="{$v.face}" alt="{$v.nick_name}"></figure>
+                        <figcaption class="q-one">{$v.nick_name}</figcaption>
+                        <div class="hot_tj_name hot_tj_type">
+                            <if condition="$v['gambleType'] eq '1'">
+                                亚盘
+                                <else/>
+                                竞彩
+                            </if>
+                        </div>
+                        <span class="record">近10中{$v['tenGambleRate']}</span>
+                    </a>
+                </li>
+                </volist>
+            </ul>
+        </div>
+
+        <!-- title s-->
+        <div class="gs_title">
+            <h4>历史搜索</h4><a id='clear' href="javascript:;">清除</a>
+        </div>
+        <!-- title e-->
+        <!-- 搜索历史 s-->
+        <notempty name="history">
+            <nav class="search_history history">
+                <volist name='history' id='vo'>
+                    <a href="{:U('Guess/search_results',['keyword'=>$vo])}">{$vo}</a>
+                </volist>
+            </nav>
+            <nav class="search_history notHistory" style="display: none;"></nav>
+         <else/>
+            <nav class="search_history notHistory">
+                <div id="gambleRelease" class="paged boxs" style="margin-top: 0.8rem;" >
+                    <div class="load_gif fs24 text-999">
+                        <span>没有历史记录</span>
+                    </div>
+                </div>
+            </nav>
+        </notempty>
+
+
+
+        <!-- 搜索历史 s-->
+
+    </section>
+</div>
+    <div id="dailogFixBox" class="fixBox" style="display: none">
+        <div class="fixBoxIn clearfix">
+            <div class="tip" style="line-height: 0.8rem; "><span id="dailogContent" ></span></div>
+            <a id="yesDailog" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+        </div>
+    </div>
+</block>
+<!-- 内容 e -->
+<block name="scripts">
+    <script>
+        $(function () {
+
+            //关闭弹框
+            $('#yesDailog').on('click',function () {
+                $('#dailogFixBox').css('display','none');
+            });
+
+            //清除历史搜索记录
+            $('#clear').on('click',function() {
+                Cookie.delCookie('searchHistory');
+                $('.search_history.history').remove();
+                $('.search_history.notHistory').html('<div id="gambleRelease" class="paged boxs" style="margin-top: 0.8rem;" >' +
+                            ' <div class="load_gif fs24 text-999">' +
+                                ' <span>没有历史记录</span>' +
+                            ' </div>' +
+                        ' </div>');
+                $('.search_history.notHistory').css('display','block');
+            });
+
+            //清空输入框
+            $(document).on('click', '.ne_close', function () {
+                $(this).siblings('input').val('');
+            });
+
+            //搜索提交
+            $('#js-confirm').on('click',function () {
+                $('#fmsearch').submit();
+            });
+
+
+        });
+         function checkForm(){
+                var search_txt=$('#search_txt').val();
+                if(search_txt==''){
+                    return false;
+                }
+                if(search_txt.length>10){
+                    $('#dailogFixBox').css('display','block');
+                    $('#dailogContent').html('关键字不能超过10个字符！');
+                    return false;
+                }
+
+                return true;
+            }
+    </script>
+</block>

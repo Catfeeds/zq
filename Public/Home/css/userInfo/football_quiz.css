@@ -1,0 +1,63 @@
+/**
+ * 全彩个人中心css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-23
+**/
+
+/* 我的关注 */
+.record .re-li{ padding: 1px 0 1px 16px; margin-bottom: 5px;}
+.data-graph .nav-tabs>li>a.reset-data{ color: #fff; background: #d9534f; border-color: #d9534f;}
+.data-graph .nav-tabs>li>a.reset-data:hover{ color: #fff; background: #c9302c; border-bottom: 0 none;}
+.record .even02{ margin-left: 20px;}
+.record .even02 em,.record .even01 em{ padding: 0 5px;}
+.record .ten{ margin-bottom: 10px;}
+.record .ten span{ padding-right: 10px;}
+.record .ten em{ margin-left: 15px;}
+.record .week,.record .month,.record .year{ margin-bottom: 10px;}
+.record .data ul li{ float: left; margin-left: 15px;}
+.record .data ul li.w_65{ width:71px;}
+.record .data ul li.w_55{ width:65px;}
+.record .data ul li.w_45{ width:55px;}
+.record .data ul li em{ margin-left: 5px;}
+.record-list .table .table-header th{ text-align: center; background: #f7f7f7;}
+.record-list .table .one{ text-align: center; background: #ffffff;}
+.record-list .table .two{ text-align: center; background: #f7f7f7;}
+.record-list .table .green{ background: #10a225; color: #fff;}
+.record-list .table .begin-time em{ margin-left: 10px;}
+.point{ position: absolute; left: 100%; top: 10%; width: 66px; height: 25px; line-height: 25px; background: url(../../images/userIndex/personal_index/point-bg.png) no-repeat;}
+.seal-star{ position: relative; background: url(../../images/userIndex/personal_index/star.png) no-repeat 98% 8%;}
+
+
+/* 模态窗口 */
+/* modal-header */
+.modal-header .close{ color: #10af63; opacity: 1;}
+.modal-header .close:hover{ color: #ccc; opacity: 1;}
+.modal-header h4{ color: #10af63;}
+.modal-header .modal-title .mach_name{ font-size: 12px; margin-right: 10px;}
+.modal-header .modal-title em{ font-size: 16px; color: #333;}
+
+/* modal-body */
+.ditai01{ width: 430px;}
+.ditai04{ width: 490px;}
+.modal-body .dl_list{ margin-bottom: 10px;}
+.modal-body .dl_list dt{ font-weight: normal; width: 70px; color: #999; text-align: right;}
+.modal-body .dl_list dd{ width: 310px; padding-left: 5px;}
+.modal-body .dl_list .mach_name{ font-size: 12px; margin-right: 10px;}
+
+.modal-body .radio-con label{ margin: 0 auto;}
+.modal-body .radio-con .selet-m{ margin-left: 10px;}
+.modal-body .radio-con input{ vertical-align: -2px;}
+.textarea_wap{ border: 1px solid #e5e5e5; border-radius: 5px; padding: 10px; background: #fff;}
+.textarea_wap .textarea{ height: 36px; border: none 0; outline: none; width: 100%; font-family: "Times New Roman",Times,sans-serif; resize:none;outline:0;-webkit-appearance:none;white-space:pre-wrap;word-wrap:break-word;background:#fff}
+
+.price_ul li{ float: left; width: 80px; text-align: center; margin: 0 3px 10px 3px;}
+.price_ul a{ display: inline-block;  width: 80px; height: 30px; line-height: 28px; text-align: center; border: 1px solid #e5e5e5; border-radius: 15px; position: relative; background: #fff;}
+.price_ul a em{ width: 16px; height: 16px; background: url(../../images/login/icon-tick-red.png) no-repeat 0 0; position: absolute; right: 0; top: 0; display: none;}
+.price_ul .on em{ display: block;}
+.price_ul .on{ color: #eb0000; border-color: #eb0000; background: #fff1f1;}
+
+/* modal-btn */
+.modal-body .btn-con{  text-align: center; margin-top: 15px;}
+.modal-body .btn-con button{ width: 100px; border-radius: 3px; margin: 0 10px;}
+

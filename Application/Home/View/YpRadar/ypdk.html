@@ -1,0 +1,135 @@
+<extend name="Public:layout"/>
+<block name='seo'>
+    <title>赢盘对抗_全球体育网</title>
+    <meta name="keywords" content="数据分析,比赛数据分析,球队比赛数据统计">
+    <meta name="description" content="全球体育赢盘对抗频道通过对万场比赛数据，根据球队数据、球队战术风格、球员近期状态的综合数据，得出近期球队最精准的实力分布。">
+</block>
+<block name='css'>
+    <!-- 页面所需css -->
+    <link rel="stylesheet" href="__CSS__/ypRadar/radarData.css">
+</block>
+
+<block name="content">
+    <!-- theme -->
+    <div class="themeBox rdBody">
+    	<div class="themeBanner"><div class="themeBanTet">全球体育大数据全年已经覆盖450余个各级别足球赛事，近60000场比赛，每日处理赛前数据2000万条,利用独创的大数据AI人工智能算法结合比赛基本面、球队技战术数据、赔率必发等进行分析计算给出独有的分析数据，大大提高你的胜率。</div></div>
+        <include file="YpRadar:topLink" />
+
+        <!-- main -->
+        <div class="main">
+            <div class="explain">
+                <p><span class="text-red">实力对抗：</span>通过对万场比赛数据，根据球队数据、球队战术风格、球员近期状态的综合数据，得出近期球队最精准的实力分布。</p>
+                <p><span class="text-red">赔率倾向：</span>采集上百家赔率公司的实时赔率变化，结合历史相同赔率情况出现的结果，模拟赔率公司对比赛结果预判的有效倾向</p>
+                <p><span class="text-red">风险提示：</span>本产品所提供的数据内容仅供浏览和参考之用</p>
+            </div>
+            <!-- 当前位置 -->
+            <div class="position">
+                当前位置：<span class="now"><a href="https://www.qqty.com/" title="全球体育">全球体育首页</a></span> &gt; <span class="now"><a href="{:U('@sporttery')}" title="专家说彩">专家说彩</a></span> &gt;<span class="text-blue">盈盘雷达</span></div>
+            <!-- 当前位置 -->
+            <div class="subNav dkSubNav clearfix">
+                <div class="subNavL pull-left">
+                    <ul class="clearfi">
+                      <li class="pull-left <eq name="param['type']" value="1">on</eq>"><a href="javascript:void(0);" data-type="1" title="实力对抗"><span>实力对抗</span> </a></li>
+                      <li class="pull-left <eq name="param['type']" value="2">on</eq>"><a href="javascript:void(0);" data-type="2" title="亚盘对抗"><span>亚盘对抗</span></a></li>
+                      <li class="pull-left <eq name="param['type']" value="3">on</eq>"><a href="javascript:void(0);" data-type="3" title="大小对抗"><span>大小对抗</span></a></li>
+                    </ul>
+                </div>
+                <div class="subNavR pull-right">
+                    <div class="dropdown">
+                      <a id="dLabel" class="ddTime" title="时间筛选" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        时间筛选
+                        <span class="glyphicon glyphicon-menu-down"></span>
+                      </a>
+                    
+                      <ul class="dropdown-menu" aria-labelledby="dLabel">
+                          <foreach name="week" item="v" key="k">
+                              <li <eq name="param['date']" value="$v">class="on"</eq>><a href="#" data-date="{$v}">{$k}</a></li>
+                          </foreach>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" value="{$data | count}" name="data-length">
+
+            <div class="dtTypeCon">
+                <!-- ypdkBox -->
+                <empty name="data">
+                    <div class="dtBox dtNoneBox clearfix">
+                        <div><img src="__IMAGES__/ypRadar/none-data-bg.jpg" width="520" height="234"></div>
+                        <p><a href="javascript:void(0);" class="text-666" title="回査数据">回査数据 >></a></p>
+                    </div>
+                    <else />
+                    <div class="dtBox ypdkBox ypdkSub clearfix">
+                    <div class="pull-left dtBoxIn">
+                        <ul>
+                            <foreach name="data" item="v" key="k">
+                                <li class="clearfix list <if condition='$k%4 eq 2'>graListL<elseif condition='$k%4 eq 3'/>graListR</if>">
+                                    <a class=clearfix" title="实力对抗"  target="_blank"
+                                    <switch name="param['type']" >
+                                        <case value="1">href="{:U('/dataFenxi/game_id/'.$v['gameId'].'@bf')}"</case>
+                                        <case value="2">href="{:U('/ypOdds/game_id/'.$v['gameId'].'/sign/1@bf')}"</case>
+                                        <case value="3">href="{:U('/ypOdds/game_id/'.$v['gameId'].'/sign/2@bf')}"</case>
+                                    </switch>>
+                                    <div class="pull-left dLeft">
+                                        <div class="clearfix mb10">
+                                            <span class="pull-left text-999 mr10 spanMat">{$v['unionName']|switchName=0,###}  {$v['gtime']}</span>
+                                            <span class="pull-left spanLb">{$v['handcp']}</span>
+                                        </div>
+                                        <p class="text-666 f16 mb10 text-hidden" title="{$v['homeTeamName']|switchName=0,###}"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,0}</span></empty>{$v['homeTeamName']|switchName=0,###}</p>
+                                        <p class="text-666 f16 text-hidden" title="{$v['awayTeamName']|switchName=0,###}"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,1}</span></empty>{$v['awayTeamName']|switchName=0,###}</p>
+                                    </div>
+                                    <div class="pull-left sldk">
+                                        <p class="f16 text-center mb15 text-999"><eq name="param['type']" value="1">实力值<else />倾向值</eq></p>
+                                        <p class="rowNum text-center f20 text-red">{$v['homeTrend']}</p>
+                                        <p class="rowNum text-center f20 text-blue">{$v['awayTrend']}</p>
+                                    </div>
+                                    <div class="pull-right cyz">
+                                        <div class="circle circleRight left-circle{$k}">
+                                            <div class="pie_left"><div class="pieLeftIn"></div></div>
+                                            <div class="pie_right"><div class="pieRightIn"></div></div>
+                                            <div class="mask"><p><span class="left-circle{$k}-span">{$v['trendDif']}</span></p><div class="maPro">差异值</div></div>
+                                        </div>
+                                    </div>
+                                    </a>
+                                </li>
+                            </foreach>
+                        </ul>
+                    </div>
+                </div>
+                </empty>
+                <!-- ypdkBox -->
+            </div>
+        </div>
+        <!-- main -->
+        
+    </div>
+    <!-- theme -->
+</block>
+
+<block name="js">
+    <!-- 页面所需的js -->
+    <script type="text/javascript" src="__JS__/ypRadar/radarData.js"></script>
+    <script type="text/javascript">
+        $(function(){
+
+            $('.subNavL ul li a').click(function(){
+                var type = $(this).data('type');
+                var date = $('.dropdown-menu li.on a').data('date');
+
+                loadData(type, date);
+            });
+
+            $('.dropdown-menu li a').click(function(){
+                var type = $('.subNavL ul li.on a').data('type');
+                var date = $(this).data('date');
+
+                loadData(type, date);
+            });
+
+            function loadData(type, date){
+                window.location.href = '?type='+type+'&date='+date;
+            }
+        });
+    </script>
+</block>

@@ -1,0 +1,70 @@
+/**
+ * 支付css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-06-02
+ *
+**/
+
+body,html{ background: #f7f7f7;}
+
+/* 用户头像信息 */
+.user_infor { padding: .15rem .24rem; background: #fff; border-bottom: 1px solid #e5e5e5; margin-bottom: .15rem;}
+figcaption.head_infor{ margin-left: .2rem;}
+.user_infor figure .myHeadImg{display:inline-block; width: .9rem; height: .9rem; border-radius:50%; border: 2px solid #e5e5e5; background: #fff; margin-bottom: .05rem; position:relative;}
+.user_infor img{ width: 100%; min-height: 100%; border-radius:50%;}
+figcaption.head_infor p:nth-child(1){ margin-bottom: .1rem;}
+/* navtab */
+.n_module{ background: #fff; line-height: .8rem; height: .8rem;}
+.nav_num_2 { width: 100%; border-bottom: 1px solid #e5e5e5; padding: 0;}
+.nav_num_2 .nav-item{ display: block; position: relative; text-align: center; margin: 0; width: 50%; height: .8rem; font-size: .34rem;}
+.nav_list a.on{ border-bottom: 3px solid #01af63; color: #01af63;}
+
+.slide_content{ width: 100%; overflow: hidden; background-color: none; position: relative; width: 100%;}
+.tabslider{ width: 200%;  position: relative; overflow: hidden;}
+
+/* 充值选择 */
+.pay_con{ padding-bottom: 2.4rem; width: 50%; float: left; margin: 0px; position: relative;}
+.pay_con .price_list{ padding: .2rem; background: #f7f7f7;}
+.pay_con .price_list ul li{ float: left; margin: 0 1%; width: 31.333%; text-align: center; margin-bottom: .2rem; border-radius: 4px; overflow: hidden;}
+.pay_con .price_list li a{ display: block; border: 1px solid #e5e5e5; padding: .15rem 0; border-radius: 4px; background: #fff;}
+.pay_con .price_list li.active a{ background: url(../../images/icon/activity-icon.png) no-repeat top right; background-size: .56rem auto;}
+.pay_con .price_list ul li p:nth-child(1){ height: .45rem; line-height: .45rem; text-align: center; color: #f1c83a; margin-bottom: .1rem;}
+.pay_con .price_list ul li p:nth-child(1) em{ line-height: .45rem; text-align: center;}
+.pay_con .price_list ul li p:nth-child(1) img{ width: .44rem; margin-top: -.05rem;}
+.pay_con .price_list li.on a{ border-color: #ff7e00;}
+.pay_con .price_list li.on p:nth-child(2){ color: #ff7e00;}
+
+/* 其他价格充值选择 */
+.other_coin{ padding: .15rem .2rem; background: #fff; border: 1px solid #e5e5e5; border-radius: 5px; display: -webkit-box; display: -ms-flexbox; display: flex; position: relative;  justify-content: space-around; flex-justify-content: space-around;}
+.other_coin .item{ height: .5rem; line-height: .5rem; font-size: .32rem;}
+.other_coin .item-right{ text-align: left;}
+.other_coin .item-center{display: block; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; padding-left: .2rem; padding-right: .1rem;}
+.other_coin .item-center input{ width: 100%; text-align: right;}
+.other_coin .item input::input-placeholder{ text-align: right;}
+.other_coin .item input::-ms-input-placeholder{text-align: right;}
+.other_coin .item input::-webkit-input-placeholder{text-align: right;} 
+
+/* 协议 */
+.agreeCheck { text-align: center; padding: .2rem;}
+.agreeCheck label{ padding-left: .4rem; background: url(../../images/icon/on-check-icon.png) no-repeat left center; background-size: .3rem auto; cursor: pointer;}
+.agreeCheck label.default{ background: url(../../images/icon/check-icon.png) no-repeat left center; background-size: .3rem auto;}
+.agreeCheck input[type=hidden]{ visibility: hidden; display: none; border: 1px solid #333;}
+.reminder{ padding: .2rem;}
+
+/* 支付类型radio选择 */
+.form{ width: 100%; position: fixed; bottom: 0; left: 0;}
+.form01{ z-index: 1;}
+.form_inline{ background: #fff; text-align: center; padding: .25rem}
+.form_inline label{ display: inline-block; width: 32.5%; text-align: left; padding-left: .4rem; background: url(../../images/icon/radio-icon.png) no-repeat left center; background-size: .3rem auto; cursor: pointer;}
+.form_inline label.on{ background: url(../../images/icon/on-radio-icon.png) no-repeat left center; background-size: .3rem auto; cursor: pointer;}
+.form_inline label img{ width: auto; height: .48rem;}
+.form_inline label input[type=radio]{ visibility: hidden; display: none;}
+
+/* 提交按钮 */
+.next_con{  padding: .2rem; width: 100%; background: #fff;}
+.next_con .submit{ width:100%; height: .9rem; border-radius: .05rem; cursor: pointer; outline: none; font-family: 'STHeiti','Microsoft YaHei',Helvetica,Arial,sans-serif; font-size: .3rem;}
+.next_con .submit:hover{ background: #ff9229;}
+.next_con a,.isseued_btn a{ display: block; height: 1rem; line-height: 1rem; text-align: center; border-radius: .05rem;}
+.isseued_btn{ height: 1.2rem; padding: 0 .2rem; width: 100%;}

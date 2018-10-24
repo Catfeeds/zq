@@ -1,0 +1,134 @@
+<extend name="Public/tpl-detail" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/odds.css?v=201806061543">
+    <link rel="stylesheet" type="text/css" href="__CSS__/scrollCss3/animateTeam.css">
+
+    <!-- 本页需要引用的js -->
+    <script type="text/javascript" src="__JS__/scrollCss3/collapsingToolbarLayout.js"></script> 
+
+</block>
+<block name="header">
+    <header id="other_header">
+    <a href="javascript:history.go(-1);"></a>
+    <span>大额明细</span>
+</header>
+</block>
+<block name="nav"></block>
+<!-- 内容 s -->
+<block name="content">
+
+    <section class="data_con odds_con clearfix"> 
+        <nav class="nav_buy2">
+            <a href="javascript:;" class="on">全部</a>
+            <a href="javascript:;">主胜</a>
+            <a href="javascript:;">客胜</a>
+            <a href="javascript:;">平局</a>
+        </nav>
+
+        <table class="tb_odds_euro tb_betfair" style="display: block;" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <th width="20%">成交量</th>
+                    <th width="20%">属性</th>
+                    <th width="10%">价位</th>
+                    <th width="10%">占比</th>
+                    <th width="40%">时间</th> 
+                </tr>
+                 <volist name="trade" id="all">
+                 <tr>
+                     <td>{$all[2]}</td>
+                     <td><eq name="all[0]" value="平">平局<else/>{$all[0]}胜</eq><eq name="all[1]" value="买"><span>买入</span></eq><eq name="all[1]" value="卖"><em>卖出</em></eq></td>
+                     <td>{$all[3]}</td>
+                     <td>{$all[5]}</td>
+                     <td>{$all[4]}</td> 
+                 </tr>
+             </volist>
+            </tbody>
+        </table> 
+        <table class="tb_odds_euro tb_betfair" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <th width="20%">成交量</th>
+                    <th width="20%">属性</th>
+                    <th width="10%">价位</th>
+                    <th width="10%">占比</th>
+                    <th width="40%">时间</th> 
+                </tr>
+                 <volist name="trade" id="home" >
+                    <eq name="home[0]" value="主">
+                    <tr>
+                        <td>{$home[2]}</td>
+                        <td>{$home[0]}胜<eq name="home[1]" value="买"><span>买入</span></eq><eq name="home[1]" value="卖"><em>卖出</em></eq></td>
+                        <td>{$home[3]}</td>
+                        <td>{$home[5]}</td>
+                        <td>{$home[4]}</td> 
+                    </tr>
+                    </eq>
+                </volist>
+            </tbody>
+        </table> 
+        <table class="tb_odds_euro tb_betfair" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <th width="20%">成交量</th>
+                    <th width="20%">属性</th>
+                    <th width="10%">价位</th>
+                    <th width="10%">占比</th>
+                    <th width="40%">时间</th> 
+                </tr>
+                 <volist name="trade" id="away" >
+                    <eq name="away[0]" value="客">
+                    <tr>
+                        <td>{$away[2]}</td>
+                        <td>{$away[0]}胜<eq name="away[1]" value="买"><span>买入</span></eq><eq name="away[1]" value="卖"><em>卖出</em></eq></td>
+                        <td>{$away[3]}</td>
+                        <td>{$away[5]}</td>
+                        <td>{$away[4]}</td> 
+                    </tr>
+                    </eq>
+                </volist>
+            </tbody>
+        </table>
+        <table class="tb_odds_euro tb_betfair" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <th width="20%">成交量</th>
+                    <th width="20%">属性</th>
+                    <th width="10%">价位</th>
+                    <th width="10%">占比</th>
+                    <th width="40%">时间</th> 
+                </tr>
+                 <volist name="trade" id="draw" >
+                    <eq name="draw[0]" value="平">
+                    <tr>
+                        <td>{$draw[2]}</td>
+                        <td>{$draw[0]}局<eq name="draw[1]" value="买"><span>买入</span></eq><eq name="draw[1]" value="卖"><em>卖出</em></eq></td>
+                        <td>{$draw[3]}</td>
+                        <td>{$draw[5]}</td>
+                        <td>{$draw[4]}</td> 
+                    </tr>
+                    </eq>
+                </volist>
+            </tbody>
+        </table>
+
+        <!-- 大额明细 e-->
+    
+ 
+    </section>
+    <!-- 内容 e -->
+
+      <script> 
+         //大额明细
+        $(function(){
+            $('.nav_buy2 a').each(function(e){ 
+                 $(this).on('click',function(){ 
+                    $(this).addClass('on').siblings().removeClass('on');  
+                    $('.tb_betfair').eq(e).show().siblings('.tb_betfair').hide();
+                 });
+             });
+         });
+
+        </script>
+</block>

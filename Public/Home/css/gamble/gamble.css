@@ -1,0 +1,74 @@
+/**
+ * 游戏竞猜css
+ *
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2017-06-05
+**/
+
+body{ background: #0d1017 url(../../images/gamble/yx-bg.jpg) no-repeat center top; min-width: 1000px;}
+.g_content{ padding-top: 688px; width: 1000px; margin: 0 auto;}
+.head_con{ padding: 15px 20px; background: #000000; background: rgba(0,0,0,0.5); width: 100%; margin-bottom: 36px;}
+.head_con a{ color: #fff;}
+.head_con a:hover{ color: #f7d56d;}
+.head img{ width: 64px; height: 64px; border-radius: 50%; margin-right: 15px;}
+.head{ position: relative; font-size: 18px; max-width: 288px; overflow: hidden;}
+.head a:after{ content:""; height: 72px; width: 2px; background: #2a3344; position: absolute; left: 300px; top: 0; z-index: 1;}
+.rules{ margin-top: 9px;}
+.head_con .rules a{ float: left; width: 120px; height: 44px; line-height: 44px; margin-left: 15px; text-align: center; background: url(../../images/gamble/fr-bg.png) no-repeat 0 0;}
+.head_con .rules a.on{color: #f7d56d; background: url(../../images/gamble/on-fr-bg.png) no-repeat 0 0;}
+.head_con .rules a:hover{ color: #f7d56d;}
+
+.timeT{ margin-bottom: 30px;}
+.timeT p{ text-align: center;}
+.timeT .p2{ color: #f7d56d;}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{ border-top: none 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; padding: 10px;}
+.guess_con{ width: 876px; margin: 0 auto;}
+.team_vs{ padding: 0 30px; margin-bottom: 20px;}
+.guess_list{ background: #283144; background: linear-gradient(#283144, #181c26); margin-bottom: 20px; position: relative;}
+.g_state{ width: 74px; height: 74px; position: absolute; right: 0; top: 0;}
+.lose{ background: url(../../images/gamble/ic_dyseal_lose.png) no-repeat left top;}
+.win{ background: url(../../images/gamble/ic_dyseal_win.png) no-repeat left top;}
+.end{width: 85px; height: 85px; background: url(../../images/gamble/end-tip.png) no-repeat left top;}
+.ing{width: 85px; height: 85px; background: url(../../images/gamble/ing-tip.png) no-repeat left top;}
+.guess_con .tr_vs img{ width: 80px; height: 80px;}
+.guess_con .matchName{ font-size: 22px;}
+.guess_con .timeP{ font-size: 20px; color: #e0e0e0;}
+.guess_con .tr_team_name .homeTeam,.guess_con .tr_team_name .visiTeam{ font-size: 24px; color: #ffffff;}
+.guess_con .vs{ font-size: 48px; color: #ffffff;}
+.guess_con .guess_list{ padding: 15px;}
+.guess_con .tr_qs td i { display: inline-block; width: 22px; height: 22px; font-size: 14px; border-radius: 50%; text-align: center; line-height: 22px; background: #f2d06c;}
+.guess_con .tr_qs td span{padding-left: 20px;font-size: 18px; color: #fff;}
+.win_sele a{min-width: 192px; padding:0 20px; height: 46px; display: inline-block; /* float: left; */ line-height: 46px; border:1px solid #2b3b53; margin: 20px 6px 0 6px; position: relative; color: #fff; background: #2b3b53; font-size: 14px;}
+.win_sele a.on{background: #7bb9df;color: #fff!important;border:1px solid #7bb9df;}
+.win_sele a.on_sele{ background: #7bb9df; color: #fff; border:1px solid #7bb9df;}
+.win_sele a.on_disab{ background: #53809b; color: #fff; border:1px solid #53809b;}
+.win_sele a.on_red{ background: #e13f3f; color: #fff;}
+.win_sele a.res{ border:1px solid #f13232; color: #ffffff;}
+.win_sele a.res em{display: block; width: 32px; height: 32px;position: absolute; right: 0; top: 0; background: url(../../images/gamble/res.png) no-repeat left top;}
+
+/*提交*/
+.sub_con_2{width: 100%; background: #222633;padding: 20px; margin-bottom: 36px;}
+.sub_con_2 span{float: left; color: #98d8ff; height: 52px; line-height: 52px; font-size: 20px;}
+.sub_con_2 span em{ color: #e3c467;}
+.sub_con_2 a{float: right;display: block; width: 216px; height: 52px; background: #e3c467;color: #272212; line-height: 52px; text-align: center; margin-top: .2rem; border-radius: 5px; font-size: 18px;}
+.sub_con_2 a:hover{ background: #e3b52b;}
+.sub_con_2 a.on{ background: #e3c467; background: rgba(227, 196, 103, 0.7);}
+
+.flex-container{display: -webkit-flex; display: flex; -webkit-flex-wrap: nowrap; flex-wrap: nowrap; margin-bottom: 40px; font-size: 18px;padding: 0 62px}
+.flex-item01{width: 94px; height: 34px; line-height: 34px; text-align: center; background: #f2d06c; border-radius: 5px; margin-right: 20px;}
+.flex-item02 {-webkit-flex: 1; flex: 1; color: #FFF;}
+.flex-item02 .gold{ color: #f7d56d; font-size: 20px;}
+.flex-container p{ line-height: 34px;}
+
+/* rule */
+.guess_rules{ background: #272f41; padding: 30px; margin-bottom: 100px;}
+.guess_rules p{ color: #fff; font-size: 18px; line-height: 36px;}
+/* record */
+.guess_history{ margin-bottom: 100px;}
+.guess_history ul li{ background: #272f41; padding: 20px 80px 20px 30px; margin-bottom: 20px; position: relative;}
+.guess_history .ght_time{ color: #f2d06c; font-size: 20px;}
+.guess_history .gh_con { color: #ffffff; font-size: 18px; line-height: 36px;}
+.guess_history .gh_con em{ color: #7bb9df;}
+.guess_history .gh_link{ color: #f2d06c; font-size: 20px;}

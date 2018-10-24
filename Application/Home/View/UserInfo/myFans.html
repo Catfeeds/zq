@@ -1,0 +1,97 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userInfo/my_attention02.css">
+</block>
+<block name="content">
+    <include file="Public:top_user"/>
+    <div class="body">
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <div class="data-graph atten-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="javascript:void(0);" class="current">我的粉丝</a></li>
+                                </ul>
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div id="atten02" class="line-graph clearfix">
+                                        <div class="atten-list02">
+                                            <div class="my-atten clearfix">
+                                                <ul class="clearfix">
+                                                    <volist name="list" id="item">
+                                                        <li class="pull-left clearfix <if condition="$i % 2 eq 0">db</if>">
+                                                        <div class="pull-left face-img"><a href="{:U('/userindex/'.$item['user_id'].'')}" target="_blank"><img src="{$item.face}" width="58" height="58" /></a></div>
+                                                        <div class="pull-left ml face-infor">
+                                                            <div class="title"><strong><a href="{:U('/userindex/'.$item['user_id'].'')}" target="_blank">{$item.nickname}</a></strong></div>
+                                                            <div class="clearfix winrate">
+                                                                <span>足球周胜率 <em class="text-danger">{$item.footballWin}% </em></span>
+                                                                <span class="ml">篮球周胜率 <em class="text-danger">{$item.basketballWin}% </em></span>
+                                                            </div>
+                                                            <div class="winrate"><span>有 <em class="text-danger">{$item.gambleCount} </em>条新推荐</span></div>
+                                                        </div>
+                                                        <if condition="in_array($item['user_id'],$followIds)">
+                                                            <div class="pull-right concern"><a href="javascript:;" onclick="cancelFollow({$item.user_id})">取消关注</a></div>
+                                                            <else/>
+                                                            <div class="pull-right concern"><a href="javascript:;" onclick="addFollow({$item.user_id})">添加关注</a></div>
+                                                        </if>
+                                                        </li>
+                                                    </volist>
+                                                </ul>
+                                            </div>
+                                            <if condition="$list neq false">
+                                                <!--页码开始-->
+                                                <div class="pageNum">
+                                                    <nav aria-label="...">
+                                                        <ul class="pagination clearfix">
+                                                            {$show}
+                                                            <li>
+                                                                <input class="form-control isTxt" type="text" value="{$_REQUEST.p|default=1}" name="p">
+                                                            </li>
+                                                            <li id="GO"><a href="javascript:void(0)">GO</a></li>
+                                                        </ul>
+                                                        <div class="">共有{$totalCount}条，每页显示：{$numPerPage}条</div>
+                                                    </nav>
+                                                </div>
+                                                <!--页码结束-->
+                                            </if>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Tab panes -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+</block>
+<block name='js'>
+    <!--引入本页所需js-->
+    <script type="text/javascript" src="__JS__/common/follow.js"></script>
+    <script>
+        //绑定a标签
+        $("#GO").find("a").bind("click", function(){
+            var p = $("input[name='p']").val();
+            if (isNaN(p)) {
+                return;
+            } else if (p>0){
+                var dateType = $(".form-control").val();
+                window.location.href="/UserInfo/myFans/p/"+p+".html";
+            }
+        });
+    </script>
+</block>

@@ -1,0 +1,61 @@
+<extend name="Public/euro/base" />
+<block name="seo">
+    <title>2016欧洲杯赛程_全球体育欧洲杯专题</title>
+</block>
+<block name="append">
+    <script type="text/javascript" src="__js__/euro/panDuan.js"></script>
+
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/euro/euro2016.css">
+
+</block>
+
+
+<!-- 二级导航 s-->
+<block name="sub_nav">
+    <include file="Euro/live_nav"/>
+</block>
+<!-- 二级导航 e-->
+
+<!-- 内容 s -->
+<block name="content">
+    <section class="content">
+        <div class="liveList">
+            <volist name='list' id='v'>
+                <div class="match">
+                    <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="45%" class="q-tl"><span class="match_name" style="color:#0baee2">{$i}.{$v.run_name.0}<eq name='v.runno' value='9852'>{$v.rno}</eq></span><em class="mach_will_time mlf-10">{$v.gtime|date='m-d',###}</em> <em class="mach_will_time">{$v.gtime|date='H:i',###}</em></td>
+
+                        <switch name="v.game_state">
+                        <case value="0|-10|-11|-12|-13|-14">
+                            <td width="10%" class="mach_will_time fs20">{:C('game_state')[$v['game_state']]}</td>
+                        </case>
+                        <case value="-1|1|2|3|4">
+                            <td width="10%" class="mach_begin_time fs20">{:C('game_state')[$v['game_state']]}</td></case>
+                        </switch>
+
+                        <td width="45%"></td>
+                        </tr>
+                        <tr>
+                            <td width="45%" class="q-tr"><span class="homeTeamName">{$v.home_team_name.0}</span></td>
+                            <td width="10%">
+                                <switch name="v.game_state">
+                        <case value="0|-10|-11|-12|-13|-14">
+                            <span>VS</span>
+                        </case>
+                        <case value="-1|1|2|3|4">
+                            <span class="mach_begin">{$v.score|default='0-0'}</span>
+                        </case>
+                        </switch>
+                        </td>
+                        <td width="45%" class="q-tl"><span class="guestTeamName">{$v.away_team_name.0}</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </volist>
+        </div>
+        <include file="Public/app-bar"/>
+    </section>
+    <!-- 内容 e -->
+</block>

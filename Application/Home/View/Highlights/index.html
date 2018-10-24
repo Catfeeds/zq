@@ -1,0 +1,157 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/highlights/videoList.css">
+</block>
+<block name="content">
+    <!-- 主体内容 -->
+    <div class="con-main themeBox">
+        <div class="themeNavCon">
+            <div class="themeNavBox">
+                <div class="clearfix themeNavIn">
+                    <div class="pull-left themeLogo"><a href="{:U('/')}"><img src="__IMAGES__/special/theme-logo.png" width="142" height="35"></a></div>
+                    <div class="pull-left themeNav">
+                        <ul class="clearfix">
+                            <li class="pull-left">
+                                <a href="{:U('/@video')}"><span>直播</span></a>
+                            </li>
+                            <volist name="treeArr" id="vo">
+                                <li class="pull-left <if condition="$parent_id eq $vo['id']">on</if>">
+                                    <a href="{$vo.href}"><span>{$vo.name}</span></a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- 二级菜单 -->
+            <div class="levelNav">
+                <ul class="levelUl clearfix">
+                    <volist name="childArr" id="vo">
+                        <li class="pull-left"><a <if condition="$class_id eq $vo['id']">style="font-weight: bold;"</if> href="{$vo.href}">{$vo.name}</a></li>
+                    </volist>
+                </ul>
+            </div>
+            <!-- 二级菜单 -->
+        </div>
+        <div class="main">
+            <!-- 当前位置标题 -->
+            <div class="position curPosi">
+                <span class="now">当前位置：</span> <span class="now"><a href="{:U('/')}">  首页></a></span> <span class="now"><a href="{:U('/@video')}">视频专区  ></a></span><span class="position_tip">{$className}</span>
+            </div>
+            <!-- 焦点轮播+焦点集锦 -->
+            <div class="video_banner_con clearfix">
+                <div class="pull-left cont_sec_left">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <volist name="carousel" id="item">
+                                <li data-target="#myCarousel" data-slide-to="{$key}" >
+                                  <if condition="$key eq 0" class="active"></if>
+                                </li>
+                            </volist>
+                        </ol>
+                        <div class="carousel-inner">
+                            <volist name="carousel" id="item">
+                                <div class="item <if condition="$key eq 0">active</if>">
+                                    <a href="{$item.href}" target="_blank"><img src="{$item.img}" alt="{$item.title}"></a>
+                                    <div class="fbanner_title">
+                                        <a href="{$item.href}" target="_blank">{$item.title}</a>
+                                    </div>
+                                </div>
+                            </volist>
+                        </div>
+                        <!-- 按钮 -->
+                        <a class="carousel-control left" href="#myCarousel" data-slide="prev" style="display: none; opacity: 0.5;"><span class="banner_arrow"></span></a>
+                        <a class="carousel-control right" href="#myCarousel" data-slide="next" style="display: none; opacity: 0.5;"><span class="banner_arrow"></span></a>
+                    </div>
+                </div>
+                <div class="pull-right video_banner_r">
+                    <ul class="clearfix" style="padding-left:0px;">
+                        <volist name="recommend" id="item">
+                            <li>
+                                <a href="{$item.href}" target="_blank" class="figure" tabindex="-1">
+                                <img class="lazy" data-original="{$item.img}" width="192" height="106" alt="{$item.title}">
+                                <div class="hover_mask">
+                                    <div class="title">{$item.title}</div>
+                                    <div class="mask_con clearfix">
+                                        <span class="mask_time pull-left">
+                                            <span class="info_inner">{$item.add_time|format_date}</span>
+                                        </span>
+                                        <span class="mask_mub pull-right click_num">
+                                            <i class="ico_play_12"></i>
+                                            <span class="mask_fans">{$item.click_num}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                </a>
+                            </li>
+                        </volist>
+                    </ul>
+               </div>
+            </div>
+
+            <!-- 集锦list -->
+            <div class="video_list_con" id="v">
+                <!-- 类别标题 -->
+                <div class="list_title_new"><img class="" src="__IMAGES__/highlights/list_title.png" alt=""><span>精彩视频</span></div>
+                <div class="line-s"></div>
+            </div>
+
+            <div class="gall_list">
+                <div class="video_list_con">
+                    <!-- 列表 -->
+                    <div class="list_box mod_figures">
+                        <ul class="clearfix posts">
+                            <volist name="new" id="item">
+                                <li class="list_item">
+                                    <a target="_blank" href="{$item.href}" class="c-f">
+                                        <i class="p-h"></i>
+                                        <div class="img-i">
+                                            <img class="lazy" data-original="{$item.img}" width="186" height="104" alt="{$item.title}">
+                                        </div>
+                                        <div class="figure_title">
+                                            <p>{$item.title}</p>
+                                        </div>
+                                        <div class="figure_info">
+                                            <span class="figure_info_brand">
+                                                <span class="info_inner">{$item.add_time|format_date}</span>
+                                            </span>
+                                            <span class="figure_info_play figure_info_right click_num">
+                                                <i class="ico_play_12"></i>
+                                                <span class="info_inner">{$item.click_num}</span>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <!-- 列表 -->
+                    <!-- 加载更多 s-->
+                    <div class="loading_more clearfix">
+                        <div class="load_more">
+                            <a target="_blank" class="load_ajax" path="{$path}" style="cursor: pointer;">查看更多</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 主体内容结束 -->
+</block>
+    
+<block name="js">
+    <script>
+        //焦点图轮播
+        $('.cont_sec_left').hover(function(e) {
+            $('.carousel-control').stop().fadeIn(500);
+        },function(){
+            $('.carousel-control').stop().fadeOut(500);
+        });
+        $('.carousel-control').hover(function(e) {
+            $(this).animate({"opacity":"0.75"},200);
+        },function(){
+            $(this).animate({"opacity":"0.5"},200);
+        });
+    </script>
+    <script type="text/javascript" src="__JS__/highlights/highlights.js"></script>
+</block>

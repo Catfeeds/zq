@@ -1,0 +1,122 @@
+<style>
+    .searchContent label{width: auto}
+    .searchContent li{width: auto !important;margin-right: 12px;}
+</style>
+<form id="pagerForm" action="__URL__" method="post">
+	<input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+	<input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+	<input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+	<input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+	<volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+
+
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input type="hidden" name="gameType" value="{$_REQUEST.gameType}"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li style="width: auto;margin-right: 25px;">
+				<label>比赛时间：</label>
+				<input type="text" readonly="true" datefmt="yyyyMMdd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="11">至
+				<input type="text" readonly="true" datefmt="yyyyMMdd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="11">
+			</li>
+			<li>
+				<label>赛事名称：</label>
+				<input type="text" value="{$_REQUEST.union_name}" placeholder="赛事名称" name="union_name">
+			</li>
+			<li>
+				<label>主队名称：</label>
+				<input type="text" value="{$_REQUEST.home_team_name}" placeholder="主队名称" name="home_team_name">
+			</li>
+			<li>
+				<label>客队名称：</label>
+				<input type="text" value="{$_REQUEST.away_team_name}" placeholder="客队名称" name="away_team_name">
+			</li>
+			<li>
+				<label>赛程ID：</label>
+				<input type="text" name="game_id" value="{$_REQUEST.game_id}">
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
+				</li>
+				<li>
+					<a class="button" title="查询框" mask="true" target="dialog" href="__URL__/pageSearch.html?GameCountIndex=1&actionName=__ACTION__&{:http_build_query($_REQUEST)}" height="420">
+						<span>高级检索</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li style="color:blue;padding-top:5px;font-size:14px;float:left;">销售总金额：</li>
+			<li style="color:blue;padding-top:5px;font-size:14px;">{$marketAccount|default=0}金币</li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="20" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="30">赛程ID</th>
+			<th width="40"<if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'game_date')"> class="desc"</if> orderField="game_date" <if condition="$_REQUEST._order eq 'game_date'">class="{$_REQUEST._sort}"</if>>比赛时间</th>
+			<th width="50">赛事名称</th>
+			<th width="30" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'show_date')"> class="desc"</if> orderField="show_date" <if condition="$_REQUEST._order eq 'show_date'">class="{$_REQUEST._sort}"</if>>竞猜日期</th>
+			<th width="70">主队</th>
+			<th width="30">全场（半场）</th>
+			<th width="70">客队</th>
+			<th width="35">让分总人数</th>
+			<th width="30"<if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'let_home_num')"> class="desc"</if> orderField="let_home_num" <if condition="$_REQUEST._order eq 'let_home_num'">class="{$_REQUEST._sort}"</if>>主队人数</th>
+			<th width="30"<if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'let_away_num')"> class="desc"</if> orderField="let_away_num" <if condition="$_REQUEST._order eq 'let_away_num'">class="{$_REQUEST._sort}"</if>>客队人数</th>
+			<th width="35">大小总人数</th>
+			<th width="30"<if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'size_big_num')"> class="desc"</if> orderField="size_big_num" <if condition="$_REQUEST._order eq 'size_big_num'">class="{$_REQUEST._sort}"</if>>大的人数</th>
+			<th width="30"<if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'size_small_num')"> class="desc"</if> orderField="size_small_num" <if condition="$_REQUEST._order eq 'size_small_num'">class="{$_REQUEST._sort}"</if>>小的人数</th>
+			<th width='30'>销售金币</th>
+			<th width="20">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['game_id']}</td>
+					<td>{$vo['game_date']} {$vo['game_time']}</td>
+				    <td>{$vo['union_name']|switchName=0,###}</td>
+					<td>{$vo['show_date']}</td>
+					<td>{$vo['home_team_name']|switchName=0,###}</td>
+					<td>{$vo['score']}（{$vo['half_score']}）</td>
+					<td>{$vo['away_team_name']|switchName=0,###}</td>
+					<td>{$vo['letCount']|default=0}</td>
+					<td>{$vo['let_home_num']|default=0}</td>
+					<td>{$vo['let_away_num']|default=0}</td>
+					<td>{$vo['sizeCount']|default=0}</td>
+					<td>{$vo['size_big_num']|default=0}</td>
+					<td>{$vo['size_small_num']|default=0}</td>
+					<td>{$vo['marketCoin']|default=0}</td>
+					<td>
+						<a href="{:U('__ADMIN__/GambleList/index',array('gameType'=>1,'game_id'=>$vo['game_id'],'gambleCount'=>1))}" target="navTab" mask="true"  rel="1{:time()}{$vo['id']}" title="{$vo['union_name']|switchName=0,###}-{$vo['home_team_name']|switchName=0,###}">查看</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

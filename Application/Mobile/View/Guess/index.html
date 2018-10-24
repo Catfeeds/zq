@@ -1,0 +1,198 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" href="__CSS__/guess.css?v=2018060619">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="__CSS__/swiper_gonggao.css">
+    <style>
+  .swiper-container {
+        width: 100%;
+        height: 100%;
+        border-bottom: 1px solid #dddddd;
+    }
+    .mach_begin {
+    color: #1490d8;
+}
+</style>
+</block>
+<!-- 二级头部 e -->
+<block name="header">
+    <include file="Guess:guess_head"/>
+</block>
+<!-- 导航 s-->
+<block name="nav">
+    <include file="Guess/nav"/>
+</block>
+<!-- 导航 e-->
+<block name="content">
+    <section class="contentPt">
+    <notempty name='adver'>
+    <section style="width: 100%;height: .8rem" >
+        <!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper"> 
+                <volist name="adver" id="v">
+               <section class="notice swiper-slide q-one">
+                  <img src="__IMAGES__/notice.png" alt="最新公告">  
+                  <a href="{$v['url']}">
+                    <span>最新公告:</span>{$v.title}
+                  </a>
+               </section>
+                </volist>
+            </div> 
+        </div>
+     </section>
+    </notempty>
+        <nav id="navTab" class="jc_type clearfix">
+            <a id="yp" data-gambletype="1" href="{:U('',['gambleType'=>1])}" <if condition='($_GET.gambleType eq 1) OR ($_GET.gambleType eq null)'>class="on"</if>><i></i>亚盘</a>
+            <a id="jc" data-gambletype="2" href="{:U('',['gambleType'=>2])}" <if condition='($_GET.gambleType eq 2) '>class="jc on"<else/>class="jc"</if>><i></i>竞彩</a>
+        </nav>
+       <!-- 排序 s -->
+       <aside class="sort">
+           <div class="fl">
+               <eq name="type" value='1'>
+                   <a href="{:U('',['type'=>2,'gambleType'=>$gambleType])}">按联赛</a>
+                   <else/>
+                   <a href="{:U('',['type'=>1,'gambleType'=>$gambleType])}">按时间</a>
+               </eq> &nbsp;&nbsp;&nbsp;&nbsp; {$today.0}  {$today.1}
+           </div>
+           <div class="fr" id="showAll" <eq name='type' value='1'> style='padding-right:.8rem'</eq>>(共{:count($game)}场) <eq name='type' value='1'><img src="__IMAGES__/hall.png" alt=""></eq></div>
+       </aside>
+       <!-- 排序 e -->
+
+       <!-- 内容 s -->
+       <section class="data_con clearfix">
+ 
+                <!--友情提示: 如果改变了__IMAGES__/hide.png的路径，需要相应改变下面js的img路径 -->
+               <!-- 比赛内容 -->
+               <eq name="type" value="2">
+               <div class="team_con clearfix">  
+                  <table class="tb_rank tb_tdwidth" border="0" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <volist name="game" id="vv">
+                            <tr class='js-detail' data-url="/Details/odd_guess/scheid/{$vv['game_id']}/gambleType/{$_REQUEST.gambleType|default=1}.html">
+                                <td>{$vv.home_team_name|switchName=0,###}</td>
+                                <td><img class="lazy" data-original="{$vv.homeTeamLogo}"  src="__PUBLIC__/Home/images/common/home_def.png" alt="{$vv.home_team_name|switchName=0,###}"></td>
+                                <td><p style='color:{$vv.union_color}'>{$vv.union_name|switchName=0,###}</p><p style='color:orange;'><switch name='vv.game_state'>
+                                            <case value='1||3'>{:showGameTime($vv['game_half_time'],$vv[game_state])}'</case>
+                                            <case value='2'>中场</case>
+                                            <case value='4'>加时</case>
+                                            <case value='-11'>待定</case>
+                                            <case value='-12'>腰斩</case>
+                                            <case value='-13'>中断</case>
+                                            <case value='-14'>推迟</case>
+                                            <case value='-10'>取消</case>
+                                            <default />{$vv.game_time}
+                                        </switch></p>
+                                            <p <switch name='vv.game_state'><case value='-1'>class='red'</case><case value='1||2||3||4'>class='mach_begin'</case></switch>><in name='vv.game_state' value='-1,1,2,3,4'>{$vv.score}<else/>VS</in></p></td>
+                                <td><img  class="lazy" data-original="{$vv.awayTeamLogo}"  src="__PUBLIC__/Home/images/common/away_def.png"  alt="{$vv.away_team_name|switchName=0,###}"></td>
+                                <td>{$vv.away_team_name|switchName=0,###}</td> 
+                            </tr>
+                        </volist>
+                    </tbody>
+                  </table> 
+                </div>
+               <else/>
+               <volist name="union" id="v">
+                   <div class="d_title boxs"><span><em style="color:{$v.union_color}">{$v.union_name|switchName=0,###}</em> ({$v.union_num}场)</span><a href="javascript:;"><img <eq name='key' value='0'>src="__IMAGES__/hide.png"<else/>src="__IMAGES__/show.png"</eq>></a></div>
+               <div class="team_con clearfix" <neq name='key' value='0'>style="display:none;"</neq>>  
+                  <table class="tb_rank tb_tdwidth" border="0" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <volist name="game" id="vv">
+                            <eq name="v.union_id" value="$vv.union_id">
+                            <tr class='js-detail' data-url="/Details/odd_guess/scheid/{$vv['game_id']}/gambleType/{$_REQUEST.gambleType|default=1}.html">
+                                <td>{$vv.home_team_name|switchName=0,###}</td>
+                                <td><img src="{$vv.homeTeamLogo}" alt="{$vv.home_team_name|switchName=0,###}"></td>
+                                <td><p style='color:{$vv.union_color}'>{$vv.union_name|switchName=0,###}</p><p style='color:orange;'><switch name='vv.game_state'>
+                                            <case value='1||3'>{:showGameTime($vv['game_half_time'],$vv[game_state])}'</case>
+                                            <case value='2'>中场</case>
+                                            <case value='4'>加时</case>
+                                            <case value='-11'>待定</case>
+                                            <case value='-12'>腰斩</case>
+                                            <case value='-13'>中断</case>
+                                            <case value='-14'>推迟</case>
+                                            <case value='-10'>取消</case>
+                                            <default />{$vv.game_time}
+                                        </switch></p><p <switch name='vv.game_state'><case value='-1'>class='red'</case><case value='1||2||3||4'>class='mach_begin'</case></switch>><in name='vv.game_state' value='-1,1,2,3,4'>{$vv.score}<else/>VS</in></p></td>
+                                <td><img src="{$vv.awayTeamLogo}" alt="{$vv.away_team_name|switchName=0,###}"></td>
+                                <td>{$vv.away_team_name|switchName=0,###}</td> 
+                            </tr>
+                            </eq>
+                        </volist>
+                    </tbody>
+                  </table> 
+                </div>
+               </volist>
+               </eq>
+               </section>
+       <div class="bubbleTips"></div>
+       </section>
+</block>
+
+<block name="scripts">
+ <!-- Swiper JS -->
+    <!-- Initialize Swiper -->
+    <script>var DOMAIN = "m."+"__DOMAIN__";</script>
+    <script src="__JS__/swiper.js"></script>
+    <script type="text/javascript">
+
+        //球队logo懒加载
+        function lazyload(){
+            $("img.lazy").lazyload({
+                effect: "fadeIn",
+                threshold : 50,
+                failurelimit:10
+        });
+        }
+        $(function(){
+
+            //球队logo懒加载
+            lazyload();
+
+
+        //赛程 - 数据  隐藏和显示 
+            $(".d_title").each(function(){
+               var $imgSrc = $(this).find("img"); 
+                 $(this).bind("click", function () {  
+                       $(this).next("div").stop().fadeToggle(200,function(){  
+                       $imgSrc.attr("src") == "__IMAGES__/hide.png" ? $imgSrc.attr("src","__IMAGES__/show.png") : $imgSrc.attr("src","__IMAGES__/hide.png");   
+                      }) 
+                }); 
+            });
+            //显示所有
+            // $("#showAll").click(function(){
+            //   $(".team_con").show();
+            //   $(".d_title img").attr("src","images/show.png");
+            // })
+            $("#showAll").click(function(){
+             // $(".team_con").fadeToggle();
+
+               var $imgSrc = $(this).children("img");  
+               if($imgSrc.attr("src") == "__IMAGES__/hall_on.png"){
+                 $(".team_con").hide(); 
+                 $imgSrc.attr("src","__IMAGES__/hall.png");
+                 $(".d_title img").attr("src","__IMAGES__/show.png"); 
+                 $(".d_title img").attr("src") == "__IMAGES__/show.png";
+               }else{  
+                 $(".team_con").show();
+                 $imgSrc.attr("src","__IMAGES__/hall_on.png");
+                 $(".d_title img").attr("src","__IMAGES__/hide.png");
+                 $(".d_title img").attr("src") == "__IMAGES__/hide.png"
+               }
+
+               //$imgSrc.attr("src") == "images/hall_on.png" ? $imgSrc.attr("src","images/hall.png") : $imgSrc.attr("src","images/hall_on.png");
+
+              // $(".team_con").stop().fadeToggle(200,function(){   
+              //   $(".d_title img").attr("src") == "images/hide.png" ? $(".d_title img").attr("src","images/show.png") : $(".d_title img").attr("src","images/hide.png");  
+
+              // });
+
+            })
+        var swiper = new Swiper('.swiper-container', { 
+            direction: 'vertical',
+            autoplay:2500
+        });
+    });
+    </script>
+
+</block>

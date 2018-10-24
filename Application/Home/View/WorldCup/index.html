@@ -1,0 +1,167 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <!-- 页面所需css -->
+    <link rel="stylesheet" href="__CSS__/WorldCup/theme.css?v=20180601">
+</block>
+<block name="content">
+
+    <!-- dj-theme -->
+    <div class="themeBox wcTheme">
+      <!-- 导航栏 -->
+    	<div class="themeNavCon">
+            <div class="clearfix themeNavIn">
+                    <div class="pull-left themeLogo"><a href="javascript:;"><img src="__IMAGES__/WorldCup/theme-logo.png" width="142" height="35"></a>
+                    </div> 
+                    <div class="pull-left themeNav">
+                        <ul class="clearfix">
+                          <volist name="nav" id="item">
+                              <li class="pull-left <if condition='$key eq 0'>on</if>"><a href="{$item.url}" title="{$item.name}" target="_blank">{$item.name}</a></li>
+                          </volist>
+                        </ul>                                
+                    </div>
+                    <span class="dec decL"></span>
+                    <span class="dec decR"></span>
+            </div> 
+      </div>
+
+      <!-- main -->
+      <div class="main clearfix active">
+          <div class="position">
+              当前位置：<span class="now"><a href="{:U('/')}" title="全球体育首页" target="_blank">全球体育首页</a></span>  &gt; <span class="now"><a href="{:U('/@sporttery')}" title="专家说彩" target="_blank">专家说彩</a></span>  &gt;世界杯预测分析宝典
+          </div>
+          <div class="grouping">
+              <div class="group-all clearfix">
+                  <volist name="navList" id="item">
+                      <div class="group {$key}">
+                          <span>{$key}</span>
+                          <volist name="item" id="vo">
+                              <a href="{$vo.url}" target="_blank" title="{$vo.name}<if condition="in_array($vo['id'],$redNav) neq false">世界杯</if>" class="argentina"><img src="{$vo.icon}" alt="{$vo.name}<if condition="in_array($vo['id'],$redNav) neq false">世界杯</if>"><p>{$vo.name}</p></a>
+                          </volist>
+                      </div>
+                  </volist>
+              </div>
+             
+          </div>
+          <div class="article clearfix">
+              <a href="{$carousel.0.url}" title="{$carousel.0.title}" class="article-left" target="_blank">
+                  <img src="{$carousel.0.img}" alt="{$carousel.0.title}">
+                  <h1>{$carousel.0.title}</h1>
+              </a>
+              <div class="article-right clearfix">
+                  <volist name="carousel" id="vo" offset="1" length='4'>
+                      <a href="{$vo.url}" target="_blank" title="{$vo.title}" class="article-photo <if condition='$key%2 neq 0'>mr</if>">
+                          <img src="{$vo.img}" alt="{$vo.title}">
+                          <h2>{$vo.title}</h2>
+                      </a>
+                  </volist>
+              </div>
+          </div>
+          <a href="{$ad.url}" title="{$ad.title}" target="_blank" class="advertise">
+              <img src="{$ad.img}" alt="{$ad.title}">
+          </a>
+          <div class="competition clearfix">
+              <ul class="competion-left">
+                  <volist name="recList" id="vo">
+                      <li>
+                          <a href="{$vo['href']}" title="{$vo['title']}" class="expect clearfix" target="_blank">
+                              <div class="number-left">第{$vo['vol']}期</div>
+                              <div class="triangle"></div>
+                              <div class="number-right">
+                                  <h3>{$vo['short_title']}</h3>
+                                  <p>{$vo['title']}</p>
+                              </div>
+                              <div class="magnify"><img src="{$vo['img']}" alt="{$vo['title']}"></div>
+                          </a>
+                      </li>
+                  </volist>
+
+                  <li class="moreList">
+                    <a href="javascript:;" title="加载更多" class="more">
+                      加载更多
+                    </a>
+                  </li>
+              </ul>
+              <div class="competion-right">
+                     <div class="great">
+                         <img src="__IMAGES__/WorldCup/nation-flag/hg.png" alt="球王">
+                         球王
+                     </div>
+                     <ul class="classify clearfix">
+                         <li><a href="{:U('/@info')}" target="_blank" title="资料库">资料库</a></li>
+                         <li><a href="{:U('/@bf')}" target="_blank" title="比分通道">比分通道</a></li>
+                         <li><a href="{:U('/rank@jc')}" target="_blank" title="大咖推荐">大咖推荐</a></li>
+                         <li><a href="{:U('/dujia@sporttery')}" target="_blank" title="独家解盘">独家解盘</a></li>
+                         <li><a href="https://www.qqty.com/notice/20180320/292852.html" target="_blank" title="高手招募">高手招募</a></li>
+                         <li><a href="{:U('/djmj@sporttery')}" target="_blank" title="独家秘笈">独家秘笈</a></li>
+                     </ul>
+                     <div class="seniority">
+                         <img src="__IMAGES__/WorldCup/nation-flag/jb.png" alt="">
+                         大咖排行
+                     </div>
+                     <div class="tab-list">
+                          <div class="tab clearfix">
+                             <a class="tab-left on" href="javascript:;" title="亚盘">亚盘</a>
+                             <a class="tab-right" href="javascript:;" title="竞彩">竞彩</a>
+                          </div>
+                          <ul class="list clearfix yaList">
+                               <volist name="daka.ya" id="vo">
+                                   <li>
+                                       <a href="{:U('/userindex/'.$vo['user_id'].'')}" title="{$vo.nick_name}" target="_blank">
+                                           <img src="{$vo.face}" alt="{$vo.nick_name}">
+                                           <div class="list-right">
+                                               <p><span class="username">{$vo.nick_name}</span><span class="lables">近5W5</span></p>
+                                               <p>亚盘：{$vo.home_team_name}VS{$vo.away_team_name}</p>
+                                           </div>
+                                       </a>
+                                   </li>
+                               </volist>
+                          </ul>
+                         <ul class="list clearfix jinList" style="display:none;">
+                             <volist name="daka.jin" id="vo">
+                                 <li>
+                                     <a href="{:U('/userindex/'.$vo['user_id'].'')}" title="{$vo.nick_name}" target="_blank">
+                                         <img src="{$vo.face}" alt="{$vo.nick_name}">
+                                         <div class="list-right">
+                                             <p><span class="username">{$vo.nick_name}</span><span class="lables">近5W5</span></p>
+                                             <p>竞彩：{$vo.home_team_name}VS{$vo.away_team_name}</p>
+                                         </div>
+                                     </a>
+                                 </li>
+                             </volist>
+                         </ul>
+                     </div>
+                     <div class="artic">
+                         <img src="__IMAGES__/WorldCup/nation-flag/wz.png" alt="">
+                         大咖文章
+                     </div>
+                     <ul class="permit clearfix">
+                          <volist name="dakaNew" id="vo">
+                              <li>
+                                  <a href="{$vo.href}" target="_blank" title="{$vo.title}">
+                                      <img src="{$vo.img}" alt="{$vo.title}">
+                                      <div class="list-right">
+                                          <p>{$vo.title}</p>
+                                      </div>
+                                  </a>
+                              </li>
+                              <li>
+                          </volist>
+                     </ul>
+              </div>
+          </div>
+      </div>
+      <!-- main -->
+    </div>
+    <!-- dj-theme -->
+
+</block>
+
+<block name="js">
+
+    <!-- 页面所需的js -->
+    <script>
+        var listTime = "{$listTime}";
+    </script>
+    <script type="text/javascript" src="__JS__/WorldCup/theme.js"></script>
+    <script type="text/javascript" src="__JS__/WorldCup/index.js?v=201806011134"></script>
+</block>

@@ -1,0 +1,348 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/gamble/gamble.css?d=20170614">
+</block>
+<block name="content">
+<div class="g_content">
+	<div class="head_con clearfix">
+        <include file="user_info"/>
+        <div class="fr rules">
+            <a class="on"  id="gambleLog" href="{:U('Activity/gamble')}" >推荐首页</a>
+            <a class="gamUser"  id="gambleLog" href="{:U('Activity/gambleLog')}" >推荐记录</a>
+            <a href="#rule">活动规则</a>
+        </div>
+    </div>
+    <div class="content_main">
+    	<div class="timeT"><p><img src="__PUBLIC__/Home/images/gamble/timeT.png" alt="推荐截止时间"></p><p class="p2">{$titleRes.end_time|date="Y年m月d日 H:i",###}</p></div>
+        <div class="guess_con">
+            <volist name="list" id="vo">
+                <if condition="$multiple eq '0'">
+                    <!-- 对阵信息 s-->
+                    <div class="team_vs">
+                        <table class="table">
+                            <tbody>
+                            <tr class="tr_vs">
+                                <td width="35%"><img src="{$vo['homeTeamLogo']}" alt=""></td>
+                                <td width="30%"><p style="color: {$vo['union_color']}" class="matchName">{$vo['union_name']}</p><p class="timeP">{$vo['game_time']}</p></td>
+                                <td width="35%"><img src="{$vo['awayTeamLogo']}" alt=""></td>
+                            </tr>
+                            <tr class="tr_team_name">
+                                <td class="homeTeam">{$vo['home_team_name']}</td>
+                                <td class="vs"><strong>VS</strong></td>
+                                <td class="visiTeam">{$vo['away_team_name']}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 对阵信息 e-->
+                </if>
+
+                <volist name="vo.game" id="ga" key="key">
+                    <div class="guess_list">
+                        <div class="g_state {$ga['is_true']}"></div>
+                        <if condition="$multiple neq '0'">
+                            <!-- 对阵信息 s-->
+                            <div class="team_vs">
+                                <table class="table">
+                                    <tbody>
+                                    <tr class="tr_vs">
+                                        <td width="35%"><img src="{$vo['homeTeamLogo']}" alt=""></td>
+                                        <td width="30%"><p style="color: {$vo['union_color']}" class="matchName">{$vo['union_name']}</p><p class="timeP">{$vo['game_time']}</p></td>
+                                        <td width="35%"><img src="{$vo['awayTeamLogo']}" alt=""></td>
+                                    </tr>
+                                    <tr class="tr_team_name">
+                                        <td class="homeTeam">{$vo['home_team_name']}</td>
+                                        <td class="vs"><strong>VS</strong></td>
+                                        <td class="visiTeam">{$vo['away_team_name']}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- 对阵信息 e-->
+                        </if>
+
+                        <table class="table tb_guess_con">
+                            <tbody>
+                            <tr class="tr_qs">
+                                <td class="text-l">
+                                    <i>{$key}</i>
+                                    <span>{$ga['question']}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="win_sele">
+                                    <foreach name="ga.option" item="op">
+                                        <a href="javascript:;"
+                                        <if condition="$op['is_quiz'] eq '1' and $ga['is_true'] neq '' and $ga['re_answer'] eq $op['aid']">
+                                            class="on_sele on res"
+                                            <else/>
+                                            <if condition="$op['is_quiz'] eq '1'">class="on_sele on"</if>
+                                            <if condition="$ga['is_true'] neq '' and $ga['re_answer'] eq $op['aid']">class="res"</if>
+
+                                        </if>
+
+                                        data-singid="{$ga['single_id']}" data-quizid="{$ga['id']}" data-gameid="{$vo['game_id']}" data-answer="{$op['aid']}">
+                                        {$op['option']}({$op['num']}%)
+                                        <if condition="$ga['is_true'] neq '' and $ga['re_answer'] eq $op['aid']"><em></em></if>
+                                        </a>
+                                    </foreach>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </volist>
+            </volist>
+            <section class="sub_con_2 clearfix">
+                <span>已选<em id="g_sele">0</em>场，还剩<em id="g_have">0</em>场</span>
+                <a href="javascript:;" class="<eq name="statusId" value="1">on</eq>">{$statusfont|default="提交答案"}</a>
+            </section>
+        </div>
+
+        <div class="rules_txt">
+            <if condition="$titleRes['trophy'] neq '' || $titleRes['explain_cont'] neq '' || $titleRes['explain_title'] neq ''">
+                <div class="timeT" id="rule"><p><img src="__PUBLIC__/Home/images/gamble/prizeT.png" alt="奖项设置"></p></div>
+            	<div class="flex-container">
+                    <div class="flex-item flex-item02">
+                        <p class="gold">
+                            <em>{$titleRes.trophy}</em><br>
+                            <em style="font-size: 16px">{$titleRes.explain_cont|nl2br} </em><br>
+                            <em style="color: #7bb9df; font-size: 16px">{$titleRes.explain_title|nl2br}</em>
+                        </p>
+                    </div>
+                </div>
+            </if>
+            <div class="timeT"><p><img src="__PUBLIC__/Home/images/gamble/ruleT.png" alt="推荐规则"></div>
+            <div class="flex-container">
+                <div class="flex-item flex-item02">
+                    <p>{$ruleText}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" value="{$activityId}" id="activityId">
+</block>
+<block name="js">
+<script>
+    $(function(){
+        //提交状态
+        if ($('.sub_con_2 a').hasClass('on'))
+        {
+            $('#g_sele').html(0);//已选场次
+            $('#g_have').html(0);//剩余场次
+        }
+        else
+        {
+            //共多少场
+            var gl_len = $('.guess_list').length;
+            $('#g_have').html(gl_len);
+        }
+        //点击选择
+        $('.win_sele a').on('click',function(){
+            //如果判断是否已经推荐了
+            if ($(this).siblings().hasClass('on_sele on'))
+            {
+                return;
+            }
+            //判断是否在登录的状态--同步请求
+            var isLogin = false;
+            $.ajax({
+                type: 'post',
+                async : false,
+                url: "/Activity/appLogin.html",
+                dataType: 'json',
+                success: function (data) {
+                    if(data.status==1)
+                    {
+                        isLogin = true;
+                        $('#is_login').val("success");
+                    }
+                    else
+                    {
+                        modalLogin();
+                    }
+                }
+            });
+            if (!isLogin)
+                return;
+
+//        if ($('#is_login').val() != "success")
+//        {
+//            $('#loginContent').html('还有没登录喔，亲！');
+//            $('#dailogLogin').css('display','block');
+//            return;
+//        }
+
+            $(this).addClass('on').siblings().removeClass('on');
+            //已选场次
+            var sele_len = $('.win_sele .on').length;
+            $('#g_sele').html(sele_len);
+            //剩余场次
+            var sheng_len = gl_len - sele_len;
+            $('#g_have').html(sheng_len);
+            if ($('.sub_con_2 a').hasClass('on'))
+            {
+                $('#g_sele').html(0);//已选场次
+                $('#g_have').html(0);//剩余场次
+            }
+        });
+
+        //提交事件
+        $('.sub_con_2 a').on('click',function () {
+
+            if ($(this).hasClass('on') || $(this).hasClass('submission') )
+            {
+                return;
+            }
+            //判断是否选择完
+            if ($('.guess_list table td.win_sele a.on').length  != $('.guess_list').length)
+            {
+                _alert('提示','请继续答完本轮的全部题目，才能成功提交哦！');
+                return;
+            }
+            $(this).html('提交中...');
+            var strData = '';
+            $('.guess_list table td.win_sele a.on').each(function () {
+                strData += $(this).data('singid')
+                        +':'+ $(this).data('answer')
+                        +':'+$(this).data('quizid')
+                        +':'+$(this).data('gameid')+',';
+            });
+            $.ajax({
+                type: 'post',
+                async : false,
+                url: "/Activity/requestGamble.html",
+                data:{strData:strData,activityId:$('#activityId').val()},
+                dataType: 'json',
+                success: function (data) {
+                    $('.sub_con_2 a').html('提交答案');
+                    if(data.status==1)
+                    {
+                        _alert('提示','提交成功!');
+                        $('.sub_con_2 a').addClass('on');
+                        $('.sub_con_2 a').html('已提交');
+                    }
+                    else if (data.status == -1)
+                    {
+                        $('.sub_con_2 a').removeClass('on');
+                        _alert('提示',data.info);
+                        $('.sub_con_2 a').addClass('on');
+                        $('#g_sele').html(0);//已选场次
+                        $('#g_have').html(0);//剩余场次
+                    }
+                    else if (data.status == 2)
+                    {
+                        modalLogin();
+                    }
+                    else
+                    {
+                        _alert('提示',data.info);
+                    }
+                },
+                complete:function () {
+                    $('.sub_con_2 a').removeClass('submission');
+                }
+            });
+        });
+    });
+
+    function qwBuyModal(obj, productId,sign) {
+
+        $.ajax({
+            type: "POST",
+            url: "/Common/qwBuyCheck.html",
+            data: {'productId': productId},
+            dataType: "json",
+            success: function (data) {
+                if (data.status == 1)
+                {
+                    var $modalHtml = '<div class="modal-scrollable" style="z-index: 1050;">' +
+                            ' <div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="false" style="display: block; margin-top: -99.5px;top: 45%;">' +
+                            ' <div class="modal-content">' +
+                            ' <div class="modal-header" style="text-align:center;">' +
+                            ' <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>' +
+                            ' <h4 class="modal-title" style="color: #000000;">温馨提示</h4>' +
+                            ' </div>' +
+                            ' <div class="modal-body" style="padding: 20px 50px;">' +
+                            ' <dl class="clearfix text-center">' +
+                            ' <dt style="padding-bottom: 10px; font-weight: normal; font-size: 16px; margin-bottom: 10px;">' +
+                            ' 查看该服务需要花费 <span class="text-red">' + data.saleCoin + '</span> 金币' +
+                            ' </dt>' +
+                            ' <div class="btn-con" style="text-align: center; margin-top: 15px;">' +
+                            ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-orange" onclick="setQwBuy('+productId+','+sign+')"> 确定 </button>' +
+                            ' <button style="width: 100px; border-radius: 3px;" type="button"  class="btn btn-default" data-dismiss="modal" onclick="$(\'.modal-scrollable\').addClass(\'hidden\')">取消</button>' +
+                            ' </div>' +
+                            ' </div>' +
+                            ' </div>' +
+                            ' </div>' +
+                            ' <div class="modal-backdrop fade in" style="z-index: 1040;"></div>' +
+                            ' </div>';
+                    $('body').append($modalHtml);
+                }
+                else
+                {
+                    if (data.errorCode == 8009)
+                    {
+                        var $modalHtml = '<div class="modal-scrollable" style="z-index: 1050;">' +
+                                ' <div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="false" style="display: block; margin-top: -99.5px;top: 45%;">' +
+                                ' <div class="modal-content">' +
+                                ' <div class="modal-header" style="text-align:center;color: #000000;">' +
+                                ' <button  type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>' +
+                                ' <h4 class="modal-title" style="color: #000000;">温馨提示</h4>' +
+                                ' </div>' +
+                                ' <div class="modal-body" style="padding: 20px 50px;">' +
+                                ' <dl class="clearfix text-center">' +
+                                ' <dt style="padding-bottom: 10px; border-bottom: 1px solid #e5e5e5; font-weight: normal; font-size: 16px; margin-bottom: 10px;">' +
+                                ' 查看该服务需要花费 <span class="text-red">' + data.saleCoin + '</span> 金币' +
+                                ' </dt>' +
+                                ' <dd>您的余额不足，请充值！</dd></dl>' +
+                                ' <div class="btn-con" style="text-align: center; margin-top: 15px;">' +
+                                ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-orange"  onclick="window.open(\'//www.' + DOMAIN + '/UserInfo/charge.html\')">马上去' +
+                                ' </button>' +
+                                ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-default" data-dismiss="modal" onclick="$(\'.modal-scrollable\').addClass(\'hidden\')">再逛逛</button>' +
+                                ' </div>' +
+                                ' </div>' +
+                                ' </div>' +
+                                ' </div>' +
+                                ' <div class="modal-backdrop fade in" style="z-index: 1040;"></div>' +
+                                ' </div>'
+                        $('body').append($modalHtml);
+                    }
+                    else if (data.errorCode == 1111)
+                    {
+                        var $modalHtml = '<div class="modal-scrollable" style="z-index: 1050;">' +
+                                ' <div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="false" style="display: block; margin-top: -99.5px;top: 45%;">' +
+                                ' <div class="modal-content">' +
+                                ' <div class="modal-header" style="text-align:center;color: #000000;">' +
+                                ' <button  type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>' +
+                                ' <h4 class="modal-title" style="color: #000000;">温馨提示</h4>' +
+                                ' </div>' +
+                                ' <div class="modal-body" style="padding: 20px 50px;">' +
+                                ' <dl class="clearfix text-center">' +
+                                ' <dt style="padding-bottom: 10px; border-bottom: 1px solid #e5e5e5; font-weight: normal; font-size: 16px; margin-bottom: 10px;">' +
+                                ' 您还未登入，是否登入？ ' +
+                                ' </dt>' +
+                                '</dl>' +
+                                ' <div class="btn-con" style="text-align: center; margin-top: 15px;">' +
+                                ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-orange"  onclick="window.open(\'//www.' + DOMAIN + '/User/login.html\')">马上去' +
+                                ' </button>' +
+                                ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-default" data-dismiss="modal" onclick="$(\'.modal-scrollable\').addClass(\'hidden\')">再逛逛</button>' +
+                                ' </div>' +
+                                ' </div>' +
+                                ' </div>' +
+                                ' </div>' +
+                                ' <div class="modal-backdrop fade in" style="z-index: 1040;"></div>' +
+                                ' </div>'
+                        $('body').append($modalHtml);
+                    }
+                    else
+                    {
+                        showMsg(data.msg, false, 'error');
+                    }
+                }
+            }
+        });
+    }
+</script>
+</block>

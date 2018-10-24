@@ -1,0 +1,28 @@
+<a href="{:U('Intro/intro_info',['id'=>$item['id']])}">
+    <div class="im_list">
+        <div class="iml_title" style="background:url({$item['background']});">
+            <div class="imlt_l fl">{$item.name}</div>
+            <div class="imlt_r fr"><span><i>{$item.sale}</i>金币</span>/{$item.game_num}场</div>
+        </div>
+        <div class="iml_con">
+            <div class="imlc_main clearfix">
+                <div class="imlc_com imlc_l"><img src="{$item.logo}" alt=""></div>
+                <div class="imlc_com imlc_c">
+                    <div class="ic_jianj">简介：{$item.desc|mb_substr=###,0,28,'utf-8'}...</div>
+                    <div class="near_state">
+                        <em>近10中{$item.ten_num}</em>
+                            <eq name="item.published" value='0'><em>未发布</em></eq>
+                            <eq name="item.published" value='1'><em style="background:#ff3e63;color:#FFF;">已发布</em></eq>
+                    </div>
+                </div>
+                <div class="imlc_com imlc_r">
+                    <p>{$item.total_rate}<span>%</span></p>
+                    <p>累计回报率</p>
+                </div>
+            </div>
+            <div class="iml_shuom q-one">
+                <img src="__IMAGES__/qw/cup.png" alt=""> {$item.remark}
+            </div>
+        </div>
+    </div>
+</a>

@@ -1,0 +1,92 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input name="front_user_id" value="{$_REQUEST.FrontUser_id}" type="hidden"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>消息标题：</label>
+				<input type="text" name="title" value="{$_REQUEST.title}"/>
+			</li>
+			<li style="width: 400px">
+				<label style="width: 120px;">收件人用户名&nbsp;/ &nbsp;昵称：</label>
+				<input name="username_nickname" value="{$_REQUEST.username_nickname}" type="text" placeholder="用户名、昵称"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true" rel="add" height="450" width="600"><span>发送消息</span></a></li>
+			<li><a class="delete" href="__URL__/foreverdelete/id/{sid_record}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择文章"><span>删除</span></a></li>
+			<li>
+			<a class="delete" href="__URL__/delAll" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要删除这些记录吗?">
+			<span>批量删除</span>
+			</a>
+			</li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th style="width: 10px; cursor: default;">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th width="30" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if> >ID</th>
+			<th width="100">发件人</th>
+			<th width="100">收件人</th>
+			<th width="100">消息标题</th>
+			<th width="100">内容</th>
+			<th width="100" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'send_time')"> class="desc"</if> orderField="send_time" <if condition="$_REQUEST._order eq 'send_time'">class="{$_REQUEST._sort}"</if>>发送时间</th>
+			<th width="50">是否查看</th>
+			<th width="40">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td style="width: 10px;">
+						<div>
+							<input type="checkbox" value="{$vo.id}" name="id">
+						</div>
+					</td>
+					<td>{$vo['id']}</td>
+					<td><if condition="$vo.user_id eq 0">系统消息<else/>{$vo['nickname']}（{$vo['account']}）</if></td>
+					<td><a href="__ADMIN__/FrontUser/index/id/{$vo['front_user_id']}" target="navTab">{$vo['nick_name']}（{$vo['username']|is_show_mobile}）</a></td>
+					<td>{$vo['title']}</td>
+					<td>{$vo['content']|mb_substr=###,0,50,'utf-8'}</td>
+					<td>{$vo['send_time']|date="Y-m-d H:i:s",###}</td>
+					<td>
+						<switch name="vo.is_read">
+						    <case value="1">是</case>
+						    <case value="0">否</case>
+						</switch>
+					</td>
+					<td>
+						<a href="__URL__/contentDetail/id/{$vo.id}" target="dialog" title="查看详细内容!" warn="参数错误">查看</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

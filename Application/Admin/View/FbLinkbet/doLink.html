@@ -1,0 +1,47 @@
+<style>
+    .pageFormContent span{line-height: 21px;}
+</style>
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="{$vo.id}" />
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>动画赛程：</label>
+				<span>联赛名称：{$vo.game_title}</span><br/>
+				<label>&nbsp;</label>
+				<span>比赛时间：{$vo.gtime|date="Y-m-d H:i:s",###}</span><br/>
+				<label>&nbsp;</label>
+				<span>主队：{$vo.home_team_name}</span><br/>
+				<label>&nbsp;</label>
+				<span>客队：{$vo.away_team_name}</span>
+			</div>
+
+			<div class="unit">
+				<label>关联赛程id：</label>
+				<input type="text" class="required" name="game_id" value="{$vo.game_id}">
+			</div>
+
+			<notempty name="game">
+				<div class="unit">
+					<label>已关联赛事：</label>
+					<span>联赛名称：{$game.union_name}</span><br/>
+					<label>&nbsp;</label>
+					<span>比赛时间：{$game.gtime|date="Y-m-d H:i:s",###}</span><br/>
+					<label>&nbsp;</label>
+					<span>主队：{$game.home_team_name}</span><br/>
+					<label>&nbsp;</label>
+					<span>客队：{$game.away_team_name}</span>
+				</div>
+			</notempty>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

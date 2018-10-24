@@ -1,0 +1,15 @@
+<!-- 竞猜结果 -->
+<volist name="gamble" id="item">
+	<li>
+		<h3>{$item.home_team_name}vs{$item.away_team_name} {$item.play_name}</h3>
+		<div>
+            <volist name="item.tOptions" id="itemo">
+            <p class="
+                <if condition="$item.result eq 0"><if condition="$item.chose_side == $itemo[0]">selected</if></if>
+                <if condition="$item.result eq 1"><if condition="$item.chose_side == $itemo[0]">same</if></if>
+                <if condition="$item.result eq -1"><if condition="$item.chose_side == $itemo[0]">selected</if><if condition="$item.option_anwser == $itemo[0]">win</if></if>
+                ">{$itemo.1}</p>
+            </volist>
+		</div>  
+	</li>
+</volist>

@@ -1,0 +1,121 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>球队名称：</label>
+				<input type="text" name="team_name" value="{$_REQUEST.team_name}"/>
+			</li>
+			<li>
+				<label>联盟名称：</label>
+				<input type="text" name="union_name" value="{$_REQUEST.union_name}"/>
+			</li>
+			<li>
+				<label>国家ID：</label>
+				<input type="text" name="country_id" value="{$_REQUEST.country_id}"/>
+			</li>
+			<li style="width: 200px">
+				<label style="width: auto">logo是否存在：</label>
+				<select name="logo" class="combox" onchange="$(form).submit()">
+					<option value="" <if condition="$_REQUEST.logo eq null">selected</if>  >全部</option>
+					<option value="2" <if condition="$_REQUEST.logo eq 2">selected</if> >是</option>
+					<option value="3" <if condition="$_REQUEST.logo eq 3">selected</if> >否</option>
+				</select>
+			</li>
+
+			<li style="width: 200px">
+				<label style="width: auto">联盟级别：</label>
+				<select name="is_sub" class="combox" onchange="$(form).submit()">
+					<option value="" <if condition="$_REQUEST.is_sub eq null">selected</if>  >全部</option>
+					<option value="1" <if condition="$_REQUEST.is_sub eq 1">selected</if>  >1级</option>
+					<option value="2" <if condition="$_REQUEST.is_sub eq 2">selected</if> >2级</option>
+					<option value="3" <if condition="$_REQUEST.is_sub eq 3">selected</if> >3级</option>
+					<option value="4" <if condition="$_REQUEST.is_sub eq 4">selected</if> >其他</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<!--<li><a class="add" href="__URL__/add" target="dialog" mask="true" height="350"><span>新增</span></a></li>-->
+			<li><a class="delete" href="__URL__/delete/id/{sid_record}" target="ajaxTodo" title="你确定要删除吗？" warn="请选择广告"><span>删除</span></a></li>
+			<li>
+			<a class="delete" href="__URL__/delAll" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要删除这些记录吗?">
+			<span>批量删除</span>
+			</a>
+			</li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" warn="请选择用户" height="350"><span>编辑</span></a></li>
+		</ul>
+	</div>
+
+	<table class="list" width="100%" layoutH="117">
+		<thead>
+		<tr>
+			<th style="width: 10px; cursor: default;">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th width="20" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="30">球队logo</th>
+			<th width="30">国家ID/名称</th>
+			<th width="30">联盟ID</th>
+			<th width="100">联盟名称</th>
+			<th width="20">联盟级别</th>
+			<th width="30">球队ID</th>
+			<th width="120">球队名称</th>
+			<th width="120">球队简称</th>
+			<th width="30">状态</th>
+			<th width="30">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td style="width: 10px;">
+						<div>
+							<input type="checkbox" value="{$vo.id}" name="id">
+						</div>
+					</td>
+					<td>{$vo['id']}</td>
+					<td><empty name="vo.img_url">没有上传<else/><a href="{$vo.img_url}" target="_blank"><img src="{$vo['img_url']}" width="25" height="21" /></a></empty></td>
+					<td>{$vo['country_id']|default="--"}（{$vo['country_name']|default="--"}）</td>
+					<td>{$vo['union_id']}</td>
+					<td>{$vo['union_name']}</td>
+					<td>{$vo['is_sub']}</td>
+					<td>{$vo['team_id']}</td>
+					<td>{$vo['team_name']}</td>
+					<td>{$vo['short_team_name']}</td>
+					<td>{$vo['status']|getStatus}</td>
+					<td>
+						<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" title="编辑" rel="editPage" height="350">编辑</a> |
+						<eq name="vo.status" value='0'>
+							<a href="__URL__/changeStatus/id/{$vo.id}/status/1" target="ajaxTodo">恢复</a>
+						<else/>
+							<a href="__URL__/changeStatus/id/{$vo.id}/status/0" target="ajaxTodo">禁用</a>
+						</eq>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

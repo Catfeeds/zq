@@ -1,0 +1,260 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/special/wc_theme.css">
+</block>
+<block name="content">
+    <!-- dj-theme -->
+    <div class="themeBox wcTheme">
+    	<div class="themeNavCon">
+            <div class="themeNavBox">
+                <div class="clearfix themeNavIn">
+                    <div class="pull-left themeLogo"><a href="{:U('/')}" title="全球体育"><img src="__IMAGES__/special/world-cup/theme-logo.png" width="142" height="35" alt="全球体育"></a></div>
+                    <div class="pull-left themeNav">
+                        <ul class="clearfix">
+                            <volist name="nav" id="vo">
+                                <li class="pull-left"><a target="_blank" href="{$vo.url}" title="{$vo.name}"><span>{$vo.name}</span> </a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <span class="dec decL"></span>
+                    <span class="dec decR"></span>
+                </div> 
+            </div> 
+        </div>
+        <div class="wcMain">
+        <!-- main -->
+        <div class="main">
+            <div class="position">
+                当前位置：<span class="now"><a href="{:U('/')}" title="全球体育首页">全球体育首页</a></span> &gt; <span class="now"><a href="/">世界杯</a></span> &gt;赛程
+            </div>
+            <div class="schNav">
+            	<ul class="clearfix">
+            		<li class="pull-left on" data-type="day"  ><a href="javascript:void(0);" title="日程赛程"><span>日程赛程</span></a></li>
+                    <li class="pull-left"    data-type="group"><a href="javascript:void(0);" title="小组赛赛程"><span>小组赛赛程</span></a></li>
+                    <li class="pull-left"    data-type="emn"  ><a href="javascript:void(0);" title="淘汰对阵赛程"><span>淘汰对阵赛程</span></a></li>
+                    <li class="pull-left"    data-type="giant"><a href="javascript:void(0);" title="豪门赛程"><span>豪门赛程</span></a></li>
+            	</ul>
+            </div>
+
+            <!-- 日程赛程 -->
+            <div id="day-schedule" >
+                <div class="schBox">
+            	<span class="schTit schTitBlue text-center text-fff pt5">
+                	<em class="f20 mb10 strong">日程</em>
+                    <p>赛事</p>
+                </span>
+                    <table class="table">
+                        <thead>
+                        <tr bgcolor="#b19465">
+                            <th width="100"></th>
+                            <th width="90">场次</th>
+                            <th width="158">北京时间</th>
+                            <th width="178">主队</th>
+                            <th width="100">比分</th>
+                            <th width="178">客队</th>
+                            <th width="128">资料</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="day_schedule" id="vo">
+                            <tr bgcolor="#f0e4cd">
+                                <td></td>
+                                <td>{$vo.round} </td>
+                                <td>{$vo.gtime}</td>
+                                <td><a target="_blank" title="{$vo.home_team_name}" href="{:U('/team/' . $vo['home_team_id'] . '@data', '', 'html')}">{$vo.home_team_name}</a></td>
+                                <td>{$vo.score}</td>
+                                <td><a target="_blank" title="{$vo.away_team_name}" href="{:U('/team/' . $vo['away_team_id'] . '@data', '', 'html')}">{$vo.away_team_name}</a></td>
+                                <td class="data-a">
+                                    <a href="{:U('/ypOdds@bf',['game_id'=>$vo['game_id'],'sign'=>1])}" target="_blank">亚</a>
+                                    <a href="{:U('/eur_index@bf',['game_id'=>$vo['game_id']])}" target="_blank">欧</a>
+                                    <a href="{:U('/dataFenxi@bf',['game_id'=>$vo['game_id']])}" target="_blank" class="text-bblue">析</a>
+                                    <if condition="$vo['gamble'] eq 1">
+                                        <a href="{:U('/gambleDetails@bf',['game_id'=>$vo['game_id']])}" target="_blank" class="text-bblue">猜</a>
+                                        <else/>
+                                        <a href="javascript:void(0);" class="text-bblue"></a>
+                                    </if>
+                                </td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- 日程赛程 -->
+
+            <!-- 小组赛程 -->
+            <div id="group-schedule" style="display: none">
+                <volist name="group_schedule" id="gschedule">
+                    <div class="schBox">
+                    <span class="schTit schTitBlue text-center text-fff pt5">
+                        <em class="text-uppercase strong" style="font-size:32px">{$key}</em>
+                        <span>组</span>
+                    </span>
+                        <table class="table">
+                            <thead>
+                            <tr bgcolor="#b19465">
+                                <th width="100"></th>
+                                <th width="90">场次</th>
+                                <th width="158">北京时间</th>
+                                <th width="178">主队</th>
+                                <th width="100">比分</th>
+                                <th width="178">客队</th>
+                                <th width="128">资料</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="gschedule" id="gc">
+                                <tr bgcolor="#f0e4cd">
+                                    <td></td>
+                                    <td>{$gc['round']} </td>
+                                    <td>{$gc['gtime']} </td>
+                                    <td><a target="_blank" title="{$gc.home_team_name}" href="{:U('/team/' . $gc['home_team_id'] . '@data', '', 'html')}">{$gc.home_team_name}</a></td>
+                                    <td>{$gc['score']}</td>
+                                    <td><a target="_blank" title="{$gc.away_team_name}" href="{:U('/team/' . $gc['away_team_id'] . '@data', '', 'html')}">{$gc.away_team_name}</a></td>
+                                    <td class="data-a">
+                                        <a href="{:U('/ypOdds@bf',['game_id'=>$gc['game_id'],'sign'=>1])}" target="_blank">亚</a>
+                                        <a href="{:U('/eur_index@bf',['game_id'=>$gc['game_id']])}" target="_blank">欧</a>
+                                        <a href="{:U('/dataFenxi@bf',['game_id'=>$gc['game_id']])}" target="_blank" class="text-bblue">析</a>
+                                        <if condition="$gc['gamble'] eq 1">
+                                            <a href="{:U('/gambleDetails@bf',['game_id'=>$gc['game_id']])}" target="_blank" class="text-bblue">猜</a>
+                                            <else/>
+                                            <a href="javascript:void(0);" class="text-bblue"></a>
+                                        </if>
+                                    </td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                </volist>
+            </div>
+            <!-- 小组赛程 -->
+
+            <!-- 淘汰赛程 -->
+            <div id="emn-schedule" style="display: none">
+                <!-- 赛程对阵图 -->
+                <div class="matMap">
+                    <div class="clearfix wcTitle"><h2 class="pull-left sml-red">淘汰阵图</h2></div>
+                    <div class="mapList">
+                        <volist name="fmatchs" id="vo">
+                            <div class="mod mod{$vo.round}">
+                                <p class="text-center mb5 f12">第 {$vo.round} 场</p>
+                                <div class="clearfix mb5">
+                                    <span class="pull-left teamName text-right f12">{$vo.home_team_name}</span>
+                                    <span class="pull-left text-center score strong">vs</span>
+                                    <span class="pull-left teamName text-left f12">{$vo.away_team_name}</span>
+                                </div>
+                                <p class="text-center f12">{$vo.gtime}</p>
+                            </div>
+                        </volist>
+                    </div>
+                </div>
+
+                <!-- 赛程对阵图 -->
+                <volist name="knockout_matchs" id="matchs">
+                    <div class="schBox">
+                    <span class="schTit schTitRed text-center text-fff pt5">
+                        <em class="f20 strong">{$key}</em>
+                        <if condition="$key neq 决赛">  <p>决赛</p></if>
+
+                    </span>
+                        <table class="table">
+                            <thead>
+                            <tr bgcolor="#b19465">
+                                <th width="100"></th>
+                                <th width="90">场次</th>
+                                <th width="158">北京时间</th>
+                                <th width="178">主队</th>
+                                <th width="100">比分</th>
+                                <th width="178">客队</th>
+                                <th width="128">资料</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="matchs" id="mVo">
+                                    <tr bgcolor="#f0e4cd">
+                                        <td></td>
+                                        <td>{$mVo['round']} </td>
+                                        <td>{$mVo['gtime']}</td>
+                                        <td><a target="_blank" title="{$mVo.home_team_name}" href="{:U('/team/' . $mVo['home_team_id'] . '@data', '', 'html')}">{$mVo.home_team_name}</a></td>
+                                        <td>{$mVo['score']}</td>
+                                        <td><a target="_blank" title="{$mVo.away_team_name}" href="{:U('/team/' . $mVo['away_team_id'] . '@data', '', 'html')}">{$mVo.away_team_name}</a></td>
+                                        <td class="data-a">
+                                            <a href="{:U('/ypOdds@bf',['game_id'=>$mVo['game_id'],'sign'=>1])}" target="_blank">亚</a>
+                                            <a href="{:U('/eur_index@bf',['game_id'=>$mVo['game_id']])}" target="_blank">欧</a>
+                                            <a href="{:U('/dataFenxi@bf',['game_id'=>$mVo['game_id']])}" target="_blank" class="text-bblue">析</a>
+                                            <if condition="$mVo['gamble'] eq 1">
+                                                <a href="{:U('/gambleDetails@bf',['game_id'=>$mVo['game_id']])}" target="_blank" class="text-bblue">猜</a>
+                                                <else/>
+                                                <a href="javascript:void(0);" class="text-bblue"></a>
+                                            </if>
+                                        </td>
+                                    </tr>
+                                </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                </volist>
+
+            </div>
+            <!-- 淘汰赛程 -->
+
+            <!-- 豪门赛程 -->
+            <div id="giant-schedule" style="display: none">
+                <volist name="giant_matchs" id="gm">
+                    <div class="schBox">
+            	<span class="schTit schTitLogRed text-center text-fff pt10">
+                	<h2 class="text-uppercase f16 center-block pl5 pr5 mb10">{$key}</h2>
+                    <p><img src="__IMAGES__/special/world-cup/nation-flag/{$giantTeamImgs[$key]}.png" width="44" height="22"></p>
+                </span>
+                        <table class="table">
+                            <thead>
+                            <tr bgcolor="#b19465">
+                                <th width="100"></th>
+                                <th width="90">场次</th>
+                                <th width="158">北京时间</th>
+                                <th width="178">主队</th>
+                                <th width="100">比分</th>
+                                <th width="178">客队</th>
+                                <th width="128">资料</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="gm" id="games">
+                                <tr bgcolor="#f0e4cd">
+                                    <td></td>
+                                    <td>{$games.round} </td>
+                                    <td>{$games.gtime} </td>
+                                    <td><a target="_blank" title="{$games.home_team_name}" href="{:U('/team/' . $games['home_team_id'] . '@data', '', 'html')}">{$games.home_team_name}</a></td>
+                                    <td>{$games.score} </td>
+                                    <td><a target="_blank" title="{$games.away_team_name}" href="{:U('/team/' . $games['away_team_id'] . '@data', '', 'html')}">{$games.away_team_name}</a></td>
+                                    <td class="data-a">
+                                        <a href="{:U('/ypOdds@bf',['game_id'=>$games['game_id'],'sign'=>1])}" target="_blank">亚</a>
+                                        <a href="{:U('/eur_index@bf',['game_id'=>$games['game_id']])}" target="_blank">欧</a>
+                                        <a href="{:U('/dataFenxi@bf',['game_id'=>$games['game_id']])}" target="_blank" class="text-bblue">析</a>
+                                        <if condition="$mVo['gamble'] eq 1">
+                                            <a href="{:U('/gambleDetails@bf',['game_id'=>$games['game_id']])}" target="_blank" class="text-bblue">猜</a>
+                                            <else/>
+                                            <a href="javascript:void(0);" class="text-bblue"></a>
+                                        </if>
+                                    </td>
+                                </tr>
+                            </volist>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </volist>
+
+            <!-- 豪门赛程 -->
+        </div>
+        <!-- main -->
+        </div>
+    </div>
+    <!-- dj-theme -->
+</block>
+
+
+<block name="js">
+    <script type="text/javascript" src="__JS__/special/wc_theme.js"></script>
+</block>

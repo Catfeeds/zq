@@ -1,0 +1,95 @@
+<style>
+    .table2-config tr{
+        height: 35px;
+    }
+    .table2-config td{
+        text-align: center;
+        padding:12px;
+    }
+    .inputInfo2 {
+        line-height: 21px;
+    }
+</style>
+<div class="pageContent">
+    <form method="post" action="__URL__/rechargeConfig" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+        <div class="pageFormContent" layoutH="58">
+
+            <h2>充值金币：</h2>
+            <div class="unit">
+                <label></label>
+                <table class="table2-config">
+                    <tr style="background: #f2f2f2;">
+                        <td>顺序</td>
+                        <td>充值金额</td>
+                        <td>赠送金币</td>
+                    </tr>
+
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text" size="5" name="account[]" value="{$rechargeConfig['recharge'][0]['account']}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="number[]" value="{$rechargeConfig['recharge'][0]['number']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><input type="text" size="5" name="account[]" value="{$rechargeConfig['recharge'][1]['account']}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="number[]" value="{$rechargeConfig['recharge'][1]['number']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><input type="text" size="5" name="account[]" value="{$rechargeConfig['recharge'][2]['account']}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="number[]" value="{$rechargeConfig['recharge'][2]['number']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><input type="text" size="5" name="account[]" value="{$rechargeConfig['recharge'][3]['account']}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="number[]" value="{$rechargeConfig['recharge'][3]['number']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><input type="text" size="5" name="account[]" value="{$rechargeConfig['recharge'][4]['account']}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="number[]" value="{$rechargeConfig['recharge'][4]['number']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><input type="text" size="5" name="account[]" value="{$rechargeConfig['recharge'][5]['account']}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="number[]" value="{$rechargeConfig['recharge'][5]['number']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><input type="text" size="5" name="account[]" value="{$rechargeConfig['recharge'][6]['account']}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="number[]" value="{$rechargeConfig['recharge'][6]['number']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><input type="text" size="5" name="account[]" value="{$rechargeConfig['recharge'][7]['account']}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="number[]" value="{$rechargeConfig['recharge'][7]['number']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><input type="text" size="5" name="account[]" value="{$rechargeConfig['recharge'][8]['account']}">&nbsp;<span class="inputInfo2">元</span></td>
+                        <td><input type="text" size="5" name="number[]" value="{$rechargeConfig['recharge'][8]['number']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="unit">
+                <label>充值绑定赠送金币：</label>
+                <input type="text" size="5" name="rechargeBind" value="{$rechargeConfig['rechargeBind']}">&nbsp;<span class="inputInfo2">金币</span>
+                </table>
+            </div>
+        </div>
+
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+
+
+
+

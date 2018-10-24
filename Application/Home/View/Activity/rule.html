@@ -1,0 +1,31 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/gamble/gamble.css?d=20170614">
+</block>
+<block name="content">
+    <div class="g_content">
+        <div class="head_con clearfix">
+            <include file="user_info"/>
+            <div class="fr rules">
+                <a href="{:U('Activity/gamble')}" >推荐首页</a>
+                <a class="gamUser"  id="gambleLog" href="{:U('Activity/gambleLog')}" >推荐记录</a>
+                <a class="on" href="{:U('Activity/rule',['activityId'=>$activityId])}">活动规则</a>
+            </div>
+        </div>
+
+        <div class="content_main">
+            <div class="timeT"><p><img src="__PUBLIC__/Home/images/gamble/activiT.png" alt="活动规则"></p></div>
+            <div class="guess_rules">
+                <p>{$ruleText}</p>
+                <!--<p>1、推荐结果全部以90分钟常规时间赛果为准，加时、点球大战不计；猜对8道即为中奖，多人猜对奖金平分！</p>-->
+                <!--<p>2、活动期间分享推荐至朋友圈，若中奖凭截图额外加奖50元，仅限前10名；</p>-->
+                <!--<p>3、所有推荐的结果都以中国竞彩官方数据为准，若比赛延期或重赛，推荐截止时间会随之变动；</p>-->
+                <!--<p>4、奖金将统一通过全球体育APP金币形式发放（1金币=1元）；</p>-->
+                <!--<p>5、中奖名单将在比赛结束之后由全球体育APP以及【全球体育网】公众号推文公布；</p>-->
+                <!--<p>6、活动最终解释权归全球体育所有。</p>-->
+            </div>
+
+        </div>
+    </div>
+    <input type="hidden" value="{$activityId}" id="activityId">
+</block>

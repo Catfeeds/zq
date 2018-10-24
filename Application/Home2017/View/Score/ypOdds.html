@@ -1,0 +1,127 @@
+<extend name="Public:header" />
+<block name="seo">
+    <if condition="$sign eq '1'">
+        <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}_竞彩赔率_亚盘赔率_全球体育</title>
+        <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、赛前分析、足球推荐、足球分析、竞彩推荐、竞彩分析、篮球分析、篮球推荐"/>
+        <meta name="description" content="全球体育提供百家足球即时赔率、亚盘对比、即时盘口、百家欧赔比较、赔率变化比较、赔率分析、历史相同赔率查询、盘路走势分析"/>
+    <else />
+        <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、大小赔率、大小球赔率、全球体育</title>
+        <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、大小球指数、大小球赔率、大小球变化、大小球比较、大小球分析、赔率分析"/>
+        <meta name="description" content="全球体育提供百家足球即时赔率、亚盘对比、即时盘口、百家欧赔比较、赔率变化比较、赔率分析、历史相同赔率查询、盘路走势分析"/>
+    </if>
+</block>
+<block name="body">
+<body>
+<!--引入本页所需css-->
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreLive/scoreLive.css?20171024">
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreData/data-common.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreData/data-index.css">
+<div class="body">
+    <!-- top nav -->
+    <include file="Public:top_score"/>
+    <!-- 主体内容开始 -->
+    <div class="home clearfix">
+        <!-- 头部比分s -->
+        <include file="Public:odd_header"/>
+        <include file="Public:odd_nav"/>
+        <!-- 头部比分额e -->
+        <!-- 数据导航s -->
+        <section class="main blWith">
+            <table class="table table-bordered">
+                <tbody>
+                <tr bgcolor="#3f697e" class="text-fff">
+                    <td width="190" rowspan="2">指数公司</td>
+                    <td width="380" colspan="3">初盘</td>
+                    <td width="380" colspan="3">即时</td>
+                    <td width="100">变化时间</td>
+                    <td width="100">走势</td>
+                </tr>
+                <tr bgcolor="#f9f6ef">
+                    <td><if condition="$sign eq '1'">主队<else/>大球</if></td>
+                    <td>盘口</td>
+                    <td><if condition="$sign eq '1'">客队<else/>小球</if></td>
+                    <td><if condition="$sign eq '1'">主队<else/>大球</if></td>
+                    <td>盘口</td>
+                    <td><if condition="$sign eq '1'">客队<else/>小球</if></td>
+                    <td>时间</td>
+                    <td>详情</td>
+                </tr>
+                <volist name="aoAdds" id="vo" key="k">
+                    <tr bgcolor="<if condition="$k%2 eq 0">#ffffff<else/>#f2f2f7</if>">
+                        <td>{$vo[0]}</td>
+                        <td>{$vo[1]}</td>
+                        <td>{$vo[2]}</td>
+                        <td>{$vo[3]}</td>
+                        <td <if condition="$vo['homeColor'] eq '0'"></if>
+                            <if condition="$vo['homeColor'] eq '1'">class="text-red"</if>
+                            <if condition="$vo['homeColor'] eq '2'">class="text-green"</if>
+                        >{$vo[4]}</td>
+                        <td>{$vo[5]}</td>
+                        <td
+                            <if condition="$vo['awayColor'] eq '0'"></if>
+                            <if condition="$vo['awayColor'] eq '1'">class="text-red"</if>
+                            <if condition="$vo['awayColor'] eq '2'">class="text-green"</if>
+                        >{$vo[6]}</td>
+                        <td><span class="text-999">{$vo.day}</span> {$vo.hour}</td>
+                    <?php
+                        if($_GET['sign'] == 1)
+                        {
+                            $sign = 1;
+                        }else{
+                            $sign = 3;
+                        }
+                        ?>
+                        <td><a target="_blank" href="{:U('/oddsinfo@bf',['game_id'=>$_GET['game_id'],'compid'=>$vo[7],'sign'=>$sign])}"><img src="__PUBLIC__/Home/score/images/scoreLive/line-graph.png" width="16" height="13"></a></td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <!-- 主体内容开始 -->
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+</div>
+</body>
+<script type="text/javascript">
+
+    $(document).on('click','.checkHis',function () {
+        var checkHis = this;
+        //公司ID
+        var companyId = $(checkHis).data('companyid');
+        //获取是否为关闭状态
+        var status = $(checkHis).hasClass('checkClose');
+
+        $('.hisData').each(function () {
+
+            if ($(this).data('companyid') != companyId)
+            {
+                return true;
+            }
+
+            if (status)
+            {
+                $(this).stop().slideDown(0);
+            }
+            else
+            {
+                $(this).stop().slideUp(0);
+            }
+
+        });
+        var _public = '__PUBLIC__';
+        var _img = $(this).children();
+        if (status)
+        {
+            $(checkHis).removeClass('checkClose');
+            _img.attr('src',_public + "/Home/score/images/odd_del.png");
+        }
+        else
+        {
+            $(checkHis).addClass('checkClose');
+            _img.attr('src',_public + "/Home/score/images/scoreLive/line-graph.png"); ;
+        }
+
+    });
+</script>
+</block>

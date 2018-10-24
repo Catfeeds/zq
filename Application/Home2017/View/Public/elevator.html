@@ -1,0 +1,56 @@
+<div id="elevator">
+    <ul class="backTools_list">
+        <li>
+            <a title="公众号" class="bts_backToTop bts_moveTop" href="javascript:;">
+                <i style="margin-top: 0px;"></i>
+                <span style="padding:0; line-height: 40px; text-align:center;">公众号</span>
+            </a>
+        </li>
+        <li class="i02">
+            <a title="客服" class="bts_backToTop bts_moveTop" href="javascript:void(window.open('{$liveChatUrl}','','width=610,height=760,left=0,top=0,resizable=yes,menubar=no,location=no,status=yes,scrollbars=yes'))">
+            <!--<a title="客服" class="bts_backToTop bts_moveTop customer" href="javascript:;" onclick="ec_cs_fnDialogOK();return false;">-->
+                <i style="margin-top: 0px;"></i>
+                <span style="padding:0; line-height: 40px; text-align:center;">客服</span>
+
+            </a>
+        </li>
+        <li class="i03">
+            <a title="反馈" class="bts_backToTop bts_moveTop" target="_blank" href="{:U('Copyright/feedback')}">
+                <i style="margin-top: 0px;"></i>
+                <span style="padding:0; line-height: 40px; text-align:center;">反馈</span>
+            </a>
+        </li>
+        <li class="i04" style="visibility:hidden;">
+            <a title="返回顶部" class="bts_backToTop moveTop" href="javascript:;">
+                <i style="margin-top: 0px;"></i>
+                <span>返回顶部</span>
+            </a>
+        </li>
+    </ul>
+    <div class="ewm"></div>
+</div>
+<script>
+    //返回顶部
+    $(window).scroll(function(e) {
+        if($(window).scrollTop()>$(window).height()){
+            $('.backTools_list li').eq(3).css("visibility","visible");
+        }else {
+            $('.backTools_list li').eq(3).css("visibility","hidden");
+        }
+    });
+    $('.moveTop').click(function(e) {
+        $('body,html').animate({'scrollTop':'0'},500);
+
+    });
+    //梯口模块
+    $('.backTools_list li a').hover(function(e) {
+        $(this).children('i').stop().animate({"margin-top":"-50px"},300)
+        var myLi = $(this).parent('li').index();
+        if(myLi==0){
+            $('.ewm').stop().fadeIn(400);
+        }
+    },function(){
+        $(this).children('i').stop().animate({"margin-top":"0px"},300)
+        $('.ewm').stop().fadeOut(300);
+    });
+</script>

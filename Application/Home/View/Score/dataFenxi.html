@@ -1,0 +1,1341 @@
+<extend name="Public:layout" />
+<block name="seo">
+    <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}_数据分析_赛前分析_全球体育</title>
+    <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、赛前分析、足球推荐、足球分析、竞彩推荐、竞彩分析、篮球分析、篮球推荐、数据分析"/>
+    <meta name="description" content="全球体育提供百家足球即时赔率、亚盘对比、即时盘口、百家欧赔比较、赔率变化比较、赔率分析、历史相同赔率查询、盘路走势分析"/>
+</block>
+<block name='css'>
+    <link rel="stylesheet" href="__STATIC__/score/css/scoreLive/scoreLive.css">
+    <link rel="stylesheet" href="__STATIC__/score/css/scoreData/data-common.css">
+    <link rel="stylesheet" href="__STATIC__/score/css/scoreData/data-index.css">
+    <link rel="stylesheet" href="__CSS__/bootstrap/font-awesome.min.css">
+    <style>
+        .text-red a { color: #eb0000 ; }
+    </style>
+</block>
+<block name="content">
+<div class="body">
+    <!-- top nav -->
+    <include file="Public:top_score"/>
+    <!-- 主体内容开始 -->
+    <div class="home clearfix">
+        <div class="home clearfix">
+            <!-- 头部比分s -->
+            <include file="Public:odd_header"/>
+            <include file="Public:odd_nav"/>
+            <!-- 头部比分额e -->
+            <section class="main"> 
+            <!-- 数据导航s -->
+              <!-- 即时赔率 s -->
+              <if condition="!empty($goals)">
+                  <div class="itemTable" id="jspl">
+                      <table class="table table-bordered tb_data_fenxi">
+                          <tbody class="odds">
+                          <tr>
+                              <th colspan="14">即时赔率</th>
+                          </tr>
+                          <tr bgcolor="#ebeef7">
+                              <td width="180" rowspan="2" colspan="2">公司名称</td>
+                              <td width="" colspan="4">亚盘</td>
+                              <td width="" colspan="3">大小球</td>
+                              <td width="" colspan="3">欧洲指数</td>
+                              <td width="50" rowspan="2">详情</td>
+                              <td width="50" rowspan="2"><a class="tdss" href="javascript:;"><img src="__STATIC__/score/images/scoreLive/add.png" alt="" width="16" height="16" /></a></td>
+                          </tr>
+                          <tr bgcolor="#f9f6ef">
+                              <td width="80">主队</td>
+                              <td width="100">盘口</td>
+                              <td width="80">客队</td>
+                              <td width="100">总水位</td>
+                              <td width="80">大</td>
+                              <td width="100">盘口</td>
+                              <td width="80">小</td>
+                              <td width="80">主胜</td>
+                              <td width="100">平局</td>
+                              <td width="80">客胜</td>
+                          </tr>
+                          <volist name="goals" id="item">
+                              <tr bgcolor="#ffffff">
+                                  <td rowspan="2">{$item.on}</td>
+                                  <td width="70">初盘</td>
+                                  <td>{$item.ych|default="--"}</td>
+                                  <td>{$item.ycp|default="--"}</td>
+                                  <td>{$item.yca|default="--"}</td>
+                                  <td>{$item.ycz|default="--"}</td>
+                                  <td>{$item.dch|default="--"}</td>
+                                  <td>{$item.dcp|default="--"}</td>
+                                  <td>{$item.dca|default="--"}</td>
+                                  <td>{$item.och|default="--"}</td>
+                                  <td>{$item.ocp|default="--"}</td>
+                                  <td>{$item.oca|default="--"}</td>
+                                  <td rowspan="2"><a target="_blank" href="{:U('/oddsinfo@bf',['game_id'=>$_GET['game_id'],'compid'=>$item['cid'],'sign'=>1])}"><img src="__STATIC__/score/images/scoreLive/line-graph.png" alt="" width="16" height="13" /></a></td>
+                                  <td rowspan="2"><a class="tds" href="javascript:;"><img src="__STATIC__/score/images/scoreLive/blue-reduce.png" alt="" width="14" height="14" /></a></td>
+                              </tr>
+                              <tr bgcolor="#f2f2f7">
+                                  <td width="70" bgcolor="#ffffff">即时</td>
+                                  <td class="{$item.yhc}">{$item.yjh|default="--"}&nbsp;<eq name="item['yhc']" value="text-red"><i class="icon icon-arrow-up"></i></eq><eq name="item['yhc']" value="text-green"><i class="icon icon-arrow-down"></i></eq></td>
+                                  <td class="{$item.ypc}">{$item.yjp|default="--"}&nbsp;<eq name="item['ypc']" value="text-red"><i class="icon icon-arrow-up"></i></eq><eq name="item['ypc']" value="text-green"><i class="icon icon-arrow-down"></i></eq></td>
+                                  <td class="{$item.yac}">{$item.yja|default="--"}&nbsp;<eq name="item['yac']" value="text-red"><i class="icon icon-arrow-up"></i></eq><eq name="item['yac']" value="text-green"><i class="icon icon-arrow-down"></i></eq></td>
+                                  <td class="{$item.yzc}">{$item.yjz|default="--"}&nbsp;<eq name="item['yzc']" value="text-red"><i class="icon icon-arrow-up"></i></eq><eq name="item['yzc']" value="text-green"><i class="icon icon-arrow-down"></i></eq></td>
+                                  <td class="{$item.dhc}">{$item.djh|default="--"}&nbsp;<eq name="item['dhc']" value="text-red"><i class="icon icon-arrow-up"></i></eq><eq name="item['dhc']" value="text-green"><i class="icon icon-arrow-down"></i></eq></td>
+                                  <td class="{$item.dpc}">{$item.djp|default="--"}&nbsp;<eq name="item['dpc']" value="text-red"><i class="icon icon-arrow-up"></i></eq><eq name="item['dpc']" value="text-green"><i class="icon icon-arrow-down"></i></eq></td>
+                                  <td class="{$item.dac}">{$item.dja|default="--"}&nbsp;<eq name="item['dac']" value="text-red"><i class="icon icon-arrow-up"></i></eq><eq name="item['dac']" value="text-green"><i class="icon icon-arrow-down"></i></eq></td>
+                                  <td class="{$item.ohc}">{$item.ojh|default="--"}&nbsp;<eq name="item['ohc']" value="text-red"><i class="icon icon-arrow-up"></i></eq><eq name="item['ohc']" value="text-green"><i class="icon icon-arrow-down"></i></eq></td>
+                                  <td class="{$item.opc}">{$item.ojp|default="--"}&nbsp;<eq name="item['opc']" value="text-red"><i class="icon icon-arrow-up"></i></eq><eq name="item['opc']" value="text-green"><i class="icon icon-arrow-down"></i></eq></td>
+                                  <td class="{$item.oac}">{$item.oja|default="--"}&nbsp;<eq name="item['oac']" value="text-red"><i class="icon icon-arrow-up"></i></eq><eq name="item['oac']" value="text-green"><i class="icon icon-arrow-down"></i></eq></td>
+                              </tr>
+                          </volist>
+                          </tbody>
+                      </table>
+                  </div>
+              </if>
+              <!-- 即时赔率 s -->
+              
+              <!-- 必发指数 s -->
+              <if condition="!empty($bifa)"><div class="itemTable" id="bfzs">
+                  <table class="table table-bordered tb_data_fenxi">
+                      <tbody>
+                      <tr>
+                          <th colspan="13">必发指数</th>
+                      </tr>
+                      <tr bgcolor="#ebeef7">
+                          <td width="950" class="text-l betTit" colspan="12">必发标盘数据对比</td>
+                          <td width="100"  class="saleTit"><a target="_blank" class="text-blue" href="{:U('/detTrade/game_id/'.$_GET['game_id'].'@bf')}">交易明细</a></td>
+                      </tr>
+                      <tr bgcolor="#f9f6ef" class="cb">
+                          <td width="96" rowspan="2">选项</td>
+                          <td width="" colspan="3">
+                              <select name="" id="bifaOdds">
+                                  <volist name="bifa.odds" id="item">
+                                      <option value="{$item.company_id}" info="{$item.company_val}" <if condition="$item['company_id'] eq 0">selected="selected"</if>>{$item.company_name}</option>
+                                  </volist>
+                              </select>
+                          </td>
+                          <td width="" colspan="5">必发成交数据</td>
+                          <td width="96" rowspan="2">必发转换亚盘</td>
+                          <td width="96" rowspan="2">庄家盈亏</td>
+                          <td width="96" rowspan="2">盈亏指数</td>
+                          <td width="96" rowspan="2">冷热指数</td>
+                      </tr>
+                      <tr bgcolor="#f9f6ef">
+                          <td width="74">赔率</td>
+                          <td width="74">概率</td>
+                          <td width="74">返还率</td>
+                          <td>价位</td>
+
+                          <td width="90">概率</td>
+                          <td width="90">返还率</td>
+                          <td width="90">成交量</td>
+                          <td width="90">成交比</td>
+                      </tr>
+                      <volist name="bifa.standard" id="item">
+                          <tr bgcolor="<if condition="$i eq 2">#f2f2f7<else/>#ffffff</if>">
+                              <td><eq name="i" value="1">主队</eq><eq name="i" value="2">平局</eq><eq name="i" value="3">客队</eq></td>
+                              <td><span class="{$i}-1"></span></td>
+                              <td><span class="{$i}-2"></span></td>
+                              <if condition="$i eq 1"><td rowspan="3"><span class="{$i}-3"></span></td></if>
+
+                              <td>{$item.0}</td>
+                              <td>{$item.1}</td>
+                              <td <if condition="$i eq 1">rowspan="3"</if>>{$item.2}</td>
+                              <td>{$item.3}</td>
+                              <td>{$item.4}</td>
+                              <td>{$item.5}</td>
+                              <td>{$item.6}</td>
+                              <td>{$item.7}</td>
+                              <if condition="$i eq 1"><td>{$item.8}</td></if>
+                          </tr>
+                      </volist>
+                      </tbody>
+                  </table>
+                  <!--必发大小球-->
+                  <table class="table table-bordered" style="border-top: none 0;">
+                      <tbody>
+                      <tr bgcolor="#ebeef7">
+                          <td width="1050" class="text-l betTit" style="border-top: none 0;" colspan="11">必发大小球数据</td>
+                          <td width="100"  class="saleTit" style="border-top: none 0;"><a target="_blank" class="text-blue" href="{:U('/trades/game_id/'.$_GET['game_id'].'@bf')}">大额交易</a></td>
+                      </tr>
+                      <tr bgcolor="#f9f6ef">
+                          <td width="96">选项</td>
+                          <td width="96">买家挂牌</td>
+                          <td width="96">赔率</td>
+                          <td width="96">卖家挂牌</td>
+                          <td width="96">赔率</td>
+
+                          <td width="96">成交额</td>
+                          <td width="96">赔率</td>
+                          <td width="96">成交比例</td>
+                          <td width="96">庄家盈亏</td>
+                          <td width="96">冷热指数</td>
+                          <td width="96">必发指数</td>
+                          <td width="96">盈亏指数</td>
+                      </tr>
+                      <volist name="bifa.bigsmall" id="item">
+                          <tr>
+                              <td>{$item.0}</td>
+                              <td>{$item.1}</td>
+                              <td>{$item.2}</td>
+                              <td>{$item.3}</td>
+                              <td>{$item.4}</td>
+                              <td>{$item.5}</td>
+                              <td>{$item.6}</td>
+                              <td>{$item.7}</td>
+                              <td>{$item.8}</td>
+                              <td>{$item.9}</td>
+                              <td>{$item.10}</td>
+                              <td>{$item.11}</td>
+                          </tr>
+                      </volist>
+                      </tbody>
+                  </table>
+              </div></if>
+              <!-- 必发指数 e -->
+
+              <!-- 杯赛积分排行 s -->
+                <if condition="!empty($cupmatch_integral)">
+                    <div class="itemTable" id="bsjf">
+                <table class="table table-bordered tb_data_fenxi">
+                    <tbody>
+                        <tr>
+                          <th colspan="10">杯赛积分排行</th>
+                        </tr>
+                        <tr bgcolor="#ebeef7">
+                          <td>排名</td>
+                          <td>球队</td>
+                          <td>总</td>
+                          <td>胜</td>
+                          <td>平</td>
+
+                          <td>负</td>
+                          <td>得</td>
+                          <td>失</td>
+                          <td>净</td>
+                          <td>积分</td>
+                        </tr>
+                        <volist name="cupmatch_integral" id="vo">
+                        <tr>
+                            <td>{$vo[0]}</td>
+                            <td>{$vo[1]}</td>
+                            <td>{$vo[2]}</td>
+                            <td>{$vo[3]}</td>
+                            <td>{$vo[4]}</td>
+
+                            <td>{$vo[5]}</td>
+                            <td>{$vo[6]}</td>
+                            <td>{$vo[7]}</td>
+                            <td>{$vo[9]}</td>
+                            <td>{$vo[8]}</td>
+                        </tr>
+                        </volist>
+                    </tbody>
+                </table>
+                    </div>
+                </if>
+              <!-- 杯赛积分排行 e -->
+
+              <!-- 联赛积分排行 s -->
+              <if condition="!empty(home_league_rank)">
+                  <div class="itemTable" id="lsjf">
+              <table class="table table-bordered tb_data_fenxi">
+                  <tbody>
+                      <tr>
+                        <th colspan="22">联赛积分排行</th>
+                      </tr>
+                      <tr>
+                        <td colspan="11" class="team_zhu no-b-r">{$home_team_name}</td>
+                        <td colspan="11" class="team_ke no-b-l">{$away_team_name}</td>
+                      </tr>
+                      <tr bgcolor="#ebeef7">
+                        <td>全场</td>
+                        <td>赛</td>
+                        <td>胜</td>
+                        <td>平</td>
+                        <td>负</td>
+                        <td>得</td>
+                        <td>失</td>
+                        <td>净</td>
+                        <td>得分</td>
+                        <td>排名</td>
+                        <td>胜率</td>
+
+                        <td>全场</td>
+                        <td>赛</td>
+                        <td>胜</td>
+                        <td>平</td>
+                        <td>负</td>
+                        <td>得</td>
+                        <td>失</td>
+                        <td>净</td>
+                        <td>得分</td>
+                        <td>排名</td>
+                        <td>胜率</td>
+                      </tr>
+                      <foreach name="home_league_rank['full']" item="vo" key="k">
+                          <tr bgcolor="<if condition=" $k%2 eq 0 ">#ffffff<else/>#f2f2f7</if>">
+                              <td>{$home_league_rank['full'][$k][0]}</td>
+                              <td class="text-8a">{$home_league_rank['full'][$k][1]}</td>
+                              <td class="text-8a">{$home_league_rank['full'][$k][2]}</td>
+                              <td class="text-8a">{$home_league_rank['full'][$k][3]}</td>
+                              <td class="text-8a">{$home_league_rank['full'][$k][4]}</td>
+                              <td class="text-8a">{$home_league_rank['full'][$k][5]}</td>
+                              <td class="text-8a">{$home_league_rank['full'][$k][6]}</td>
+                              <td class="text-8a">{$home_league_rank['full'][$k][7]}</td>
+                              <td class="text-8a">{$home_league_rank['full'][$k][8]}</td>
+                              <td class="text-red">{$home_league_rank['full'][$k][9] | default='-'}</td>
+                              <td>{$home_league_rank['full'][$k][10]}</td>
+
+                              <td>{$home_league_rank['full'][$k][0]}</td>
+                              <td class="text-8a">{$away_league_rank['full'][$k][1]}</td>
+                              <td class="text-8a">{$away_league_rank['full'][$k][2]}</td>
+                              <td class="text-8a">{$away_league_rank['full'][$k][3]}</td>
+                              <td class="text-8a">{$away_league_rank['full'][$k][4]}</td>
+                              <td class="text-8a">{$away_league_rank['full'][$k][5]}</td>
+                              <td class="text-8a">{$away_league_rank['full'][$k][6]}</td>
+                              <td class="text-8a">{$away_league_rank['full'][$k][7]}</td>
+                              <td class="text-8a">{$away_league_rank['full'][$k][8]}</td>
+                              <td class="text-red">{$away_league_rank['full'][$k][9] | default='-'}</td>
+                              <td>{$away_league_rank['full'][$k][10]}</td>
+                          </tr>
+                      </foreach>
+                      <tr>
+                        <td colspan="22" bgcolor="#ffffff"></td>
+                      </tr>
+                      <tr bgcolor="#ebeef7">
+                        <td>半场</td>
+                        <td>赛</td>
+                        <td>胜</td>
+                        <td>平</td>
+                        <td>负</td>
+                        <td>得</td>
+                        <td>失</td>
+                        <td>净</td>
+                        <td>得分</td>
+                        <td>排名</td>
+                        <td>胜率</td>
+
+                        <td>半场</td>
+                        <td>赛</td>
+                        <td>胜</td>
+                        <td>平</td>
+                        <td>负</td>
+                        <td>得</td>
+                        <td>失</td>
+                        <td>净</td>
+                        <td>得分</td>
+                        <td>排名</td>
+                        <td>胜率</td>
+                      </tr>
+                      <foreach name="home_league_rank['full']" item="vo" key="k">
+                          <tr bgcolor="<if condition=" $k%2 eq 0 ">#ffffff<else/>#f2f2f7</if>">
+                          <td>{$home_league_rank['half'][$k][0]}</td>
+                          <td class="text-8a">{$home_league_rank['half'][$k][1]}</td>
+                          <td class="text-8a">{$home_league_rank['half'][$k][2]}</td>
+                          <td class="text-8a">{$home_league_rank['half'][$k][3]}</td>
+                          <td class="text-8a">{$home_league_rank['half'][$k][4]}</td>
+                          <td class="text-8a">{$home_league_rank['half'][$k][5]}</td>
+                          <td class="text-8a">{$home_league_rank['half'][$k][6]}</td>
+                          <td class="text-8a">{$home_league_rank['half'][$k][7]}</td>
+                          <td class="text-8a">{$home_league_rank['half'][$k][8]}</td>
+                          <td class="text-red">{$home_league_rank['half'][$k][9]|default='-'}</td>
+                          <td>{$home_league_rank['half'][$k][10]}</td>
+
+                          <td>{$home_league_rank['half'][$k][0]}</td>
+                          <td class="text-8a">{$away_league_rank['half'][$k][1]}</td>
+                          <td class="text-8a">{$away_league_rank['half'][$k][2]}</td>
+                          <td class="text-8a">{$away_league_rank['half'][$k][3]}</td>
+                          <td class="text-8a">{$away_league_rank['half'][$k][4]}</td>
+                          <td class="text-8a">{$away_league_rank['half'][$k][5]}</td>
+                          <td class="text-8a">{$away_league_rank['half'][$k][6]}</td>
+                          <td class="text-8a">{$away_league_rank['half'][$k][7]}</td>
+                          <td class="text-8a">{$away_league_rank['half'][$k][8]}</td>
+                          <td class="text-red">{$away_league_rank['half'][$k][9]|default='-'}</td>
+                          <td>{$away_league_rank['half'][$k][10]}</td>
+                          </tr>
+                      </foreach>
+                  </tbody>
+              </table>
+                </div>
+              </if>
+              <!-- 联赛积分排行 e -->
+              
+              <!-- 过往对阵 s -->
+              <if condition="!empty($match_fight['list'])">
+                  <div class="itemTable" id="dwzj">
+                      <table class="table table-bordered tb_data_fenxi">
+                          <tbody class="past duiwang">
+                          <tr>
+                              <th colspan="22">对往战绩</th>
+                          </tr>
+                          <tr checktype="zhuke">
+                              <td colspan="22" class="cb" bgcolor="#ebeef7">
+                                  <div class="fl tzChoose" value="duiwang">
+                                      <select name="duiwang" id="" class="checkes">
+                                          <volist name="match_fight.data.mix_arr" id="item">
+                                              <option value="{$item}" <if condition="$match_fight['data']['mix'] egt 10"><if condition="$item eq 10">selected</if><else/><if condition="$match_fight['data']['mix'] eq $item">selected</if></if>>近{$item}场</option>
+                                          </volist>
+                                      </select>
+                                  </div>
+                                  <div class="fl tzChoose" value="duiwang">
+                                      <input type="checkbox"  id="check" value="1" class="checkes">
+                                      <label  class="inline myLabel02 past_a checkes" is_chick="no_chick">主客相同</label>
+                                  </div>
+                                  <div class="zhuke">
+                                      <volist name="match_fight.union" id="item">
+                                          <div class="fl tzChoose" value="duiwang" union="{$item}">
+                                              <input type="checkbox"  id="check" checked value="1" class="checkes">
+                                              <label  class="inline myLabel02 past_a checkes"  is_chick="no_chick">{$item}</label>
+                                          </div>
+                                      </volist>
+                                  </div>
+                              </td>
+                          </tr>
+                          <tr bgcolor="#f9f6ef">
+                              <td rowspan="2" width="70">赛事</td>
+                              <td rowspan="2" width="86">日期</td>
+                              <td rowspan="2" width="136">主场</td>
+                              <td rowspan="2" width="86">比分(半场)</td>
+                              <td rowspan="2" width="136">客场</td>
+                              <td rowspan="2" width="44">结果</td>
+                              <td rowspan="2" width="44">角球</td>
+                              <td colspan="3" width="230">SB亚盘</td>
+                              <td rowspan="2" width="60">盘路</td>
+                              <td colspan="3" width="230">SB欧赔</td>
+                              <td rowspan="2" width="60">大小</td>
+                          </tr>
+                          <tr bgcolor="#f9f6ef">
+                              <td width="73">主</td>
+                              <td width="73">盘口</td>
+                              <td width="73">客</td>
+                              <td width="73">胜</td>
+                              <td width="73">平</td>
+                              <td width="73">负</td>
+                          </tr>
+                          <volist name="match_fight.list" id="item">
+                              <include file="dataFenxi_game_info" />
+                          </volist>
+                          </tbody>
+                      </table>
+                      <div class="pieCon">
+                          <div class="circle circleLeft">
+                              <div class="pie_left"><div class="pieLeftIn"></div></div>
+                              <div class="pie_right"><div class="pieRightIn"></div></div>
+                              <div class="mask"><span>55.6</span>%</div>
+                              <div class="maPro">胜率</div>
+                          </div>
+
+                          <div class="proCon">
+                              <p class="text-c">近{$match_fight['data']['total']}场交战</p>
+                              <ul class="clearfix">
+                                  <li class="pull-left winRed" style="width:{$match_fight['data']['win_per']}%">{$match_fight['data']['win']}胜</li>
+                                  <li class="pull-left flatBlue" style="width:{$match_fight['data']['draw_per']}%">{$match_fight['data']['draw']}平</li>
+                                  <li class="pull-right loseGreen" style="width:{$match_fight['data']['fail_per']}%">{$match_fight['data']['fail']}负</li>
+                              </ul>
+                          </div>
+
+                          <div class="circle circleRight">
+                              <div class="pie_left"><div class="pieLeftIn"></div></div>
+                              <div class="pie_right"><div class="pieRightIn"></div></div>
+                              <div class="mask"><span>55.6</span>%</div>
+                              <div class="maPro">赢盘率</div>
+                          </div>
+                      </div>
+                  </div>
+              </if>
+              <!-- 过往对阵 e -->
+              <!-- 近期战绩 s -->
+            <if condition="(!empty($recent_fight['0']['list']) or !empty($recent_fight['1']['list']))">
+              <div class="itemTable" id="jqjz">
+                <table class="table table-bordered tb_data_fenxi" style="margin-bottom: 20px">
+                    <tbody class="past jin_home">
+                        <tr>
+                          <th colspan="22">近期交战</th>
+                        </tr>
+                        <tr>
+                          <td colspan="22">
+                            <div class="pieCon">
+                                <!-- 赢盘率 -->
+                                <div class="circle2 circleLeft2">
+                                    <div class="pie_left2"><div class="pieLeftIn2"></div></div>
+                                    <div class="pie_right2"><div class="pieRightIn2"></div></div>
+                                    <div class="mask2"></div>
+                                </div>
+                                <!-- 胜率 -->
+                                <div class="circle3 circleLeft3">
+                                    <div class="pie_left3"><div class="pieLeftIn3"></div></div>
+                                    <div class="pie_right3"><div class="pieRightIn3"></div></div>
+                                    <div class="mask3"><img src="{$gameInfo['homeTeamLogo']}" alt="{$gameInfo['home_team_name']}" width="40px" height="auto"  onerror='this.src="__PUBLIC__/Home/images/common/home_def.png"'></div>
+                                </div>
+
+                                <div class="warPro">
+                                  <ul>
+                                    <li class="signTitle"><i class="winBg"></i><span>胜率</span><i class="winPanBg"></i><span>赢盘率</span></li>
+                                    <li class="winPent"><em class="winColor mask3Left"><span>{$recent_fight[0]['data']['win_per']}</span>%</em><em class="winPentTix">胜率</em><em class="winColor mask3Right"><span>{$recent_fight[1]['data']['win_per']}</span>%</em></li>
+                                    <li class="winPent"><em class="winPanColor mask2Left"><span>{$recent_fight[0]['data']['win_pan_per']}</span>%</em><em class="winPentTix">赢盘率</em><em class="winPanColor mask2Right"><span>{$recent_fight[1]['data']['win_pan_per']}</span>%</em></li>
+                                  </ul>
+                                </div>
+                                <!-- 胜率 -->
+                                <div class="circle3 circleRight3">
+                                    <div class="pie_left3"><div class="pieLeftIn3"></div></div>
+                                    <div class="pie_right3"><div class="pieRightIn3"></div></div>
+                                    <div class="mask3"><img src="{$gameInfo['awayTeamLogo']}" alt="{$gameInfo['away_team_name']}" width="40px" height="auto"  onerror='this.src="__PUBLIC__/Home/images/common/away_def.png"'></div>
+                                </div>
+                                <!-- 赢盘率 -->
+                                <div class="circle2 circleRight2">
+                                    <div class="pie_left2"><div class="pieLeftIn2"></div></div>
+                                    <div class="pie_right2"><div class="pieRightIn2"></div></div>
+                                    <div class="mask2"></div>
+                                </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr checktype="tongzhu">
+                          <td colspan="22" class="cb" bgcolor="#ebeef7">
+                              <div class="pull-left tzChoose">
+                                  {$home_team_name}
+                              </div>
+                              <div class="fl tzChoose" value="jin_home">
+                                <select name="jin_home" id="" class="checkes">
+                                    <volist name="recent_fight.0.data.mix_arr" id="item">
+                                        <option value="{$item}" <if condition="$recent_fight[0]['data']['mix'] egt 10"><if condition="$item eq 10">selected</if><else/><if condition="$recent_fight[0]['data']['mix'] eq $item">selected</if></if>>近{$item}场</option>
+                                    </volist>
+                                </select>
+                              </div>
+                              <div class="fl tzChoose" value="jin_home">
+                                <input type="checkbox"  id="check" value="1" class="checkes">
+                                <label  class="inline myLabel02 past_a checkes" is_chick="no_chick">同主</label>
+                              </div>
+                              <div class="tongzhu">
+                                  <volist name="recent_fight.0.union" id="item">
+                                      <div class="fl tzChoose" value="jin_home" union="{$item}">
+                                          <input type="checkbox"  id="check" checked value="1" class="checkes">
+                                          <label  class="inline myLabel02 past_a checkes" is_chick="no_chick">{$item}</label>
+                                      </div>
+                                  </volist>
+                              </div>
+                              <div class="pull-right text-666 jin_home_data"><font class="text-red">{$recent_fight[0]['data']['win']} </font>胜 <font class="text-blue">{$recent_fight[0]['data']['draw']} </font>平<font class="text-green"> {$recent_fight[0]['data']['fail']} </font>负</div>
+                          </td> 
+                        </tr>
+                        <tr bgcolor="#f9f6ef">
+                          <td rowspan="2" width="70">赛事</td>
+                          <td rowspan="2" width="86">日期</td>
+                          <td rowspan="2" width="136">主场</td>
+                          <td rowspan="2" width="86">比分(半场)</td>
+                          <td rowspan="2" width="136">客场</td>
+                          <td rowspan="2" width="44">结果</td>
+                          <td rowspan="2" width="44">角球</td>
+                          <td colspan="3" width="230">SB亚盘</td>
+                            <td rowspan="2" width="60">盘路</td>
+                          <td colspan="3" width="230">SB欧赔</td>
+                          <td rowspan="2" width="60">大小</td>
+                        </tr>
+                        <tr bgcolor="#f9f6ef">
+                            <td width="73">主</td>
+                            <td width="73">盘口</td>
+                            <td width="73">客</td>
+                            <td width="73">胜</td>
+                            <td width="73">平</td>
+                            <td width="73">负</td>
+                        </tr>
+                        <volist name="recent_fight['0']['list']" id="item">
+                            <include file="dataFenxi_game_info" />
+                        </volist>
+                    </tbody>
+                </table>
+                <table class="table table-bordered tb_data_fenxi">
+                    <tbody class="past jin_away">
+                        <tr checktype="tongke">
+                          <td colspan="22" class="cb" bgcolor="#ebeef7">
+                              <div class="pull-left tzChoose">
+                                  {$away_team_name}
+                              </div>
+                              <div class="fl tzChoose" value="jin_away">
+                                <select name="jin_away" id="" class="checkes">
+                                    <volist name="recent_fight.1.data.mix_arr" id="item">
+                                        <option value="{$item}" <if condition="$recent_fight[1]['data']['mix'] egt 10"><if condition="$item eq 10">selected</if><else/><if condition="$recent_fight[0]['data']['mix'] eq $item">selected</if></if>>近{$item}场</option>
+                                    </volist>
+                                </select>
+                              </div>
+                              <div class="fl tzChoose" value="jin_away" away="away">
+                                <input type="checkbox"  id="check" value="1" class="checkes">
+                                <label  class="inline myLabel02 past_a checkes" is_chick="no_chick">同客</label>
+                              </div>
+                              <div class="tongke">
+                                  <volist name="recent_fight.1.union" id="item">
+                                      <div class="fl tzChoose" value="jin_away" union="{$item}">
+                                          <input type="checkbox"  id="check" checked value="1" class="checkes">
+                                          <label  class="inline myLabel02 past_a checkes" is_chick="no_chick">{$item}</label>
+                                      </div>
+                                  </volist>
+                              </div>
+                              <div class="pull-right text-666 jin_away_data"><font class="text-red">{$recent_fight[1]['data']['win']} </font>胜 <font class="text-blue">{$recent_fight[1]['data']['draw']} </font>平<font class="text-green"> {$recent_fight[1]['data']['fail']} </font>负</div>
+                          </td> 
+                        </tr>
+                        <tr bgcolor="#f9f6ef">
+                          <td rowspan="2" width="70">赛事</td>
+                          <td rowspan="2" width="86">日期</td>
+                          <td rowspan="2" width="136">主场</td>
+                          <td rowspan="2" width="86">比分(半场)</td>
+                          <td rowspan="2" width="136">客场</td>
+                          <td rowspan="2" width="44">结果</td>
+                          <td rowspan="2" width="44">角球</td>
+                          <td colspan="3" width="230">SB亚盘</td>
+                          <td rowspan="2" width="60">盘路</td>
+                          <td colspan="3" width="230">SB欧赔</td>
+                          <td rowspan="2" width="60">大小</td>
+                        </tr>
+                        <tr bgcolor="#f9f6ef">
+                            <td width="73">主</td>
+                            <td width="73">盘口</td>
+                            <td width="73">客</td>
+                            <td width="73">胜</td>
+                            <td width="73">平</td>
+                            <td width="73">负</td>
+                        </tr>
+                        <volist name="recent_fight['1']['list']" id="item">
+                            <include file="dataFenxi_game_info" />
+                        </volist>
+                    </tbody>
+                </table>
+              </div>
+            </if>
+              <!-- 近期战绩 e -->
+              
+            <!-- 数据对比 s -->
+            <if condition="!empty($compare)">
+              <div class="itemTable" id="sjdb">
+                <table class="table table-bordered tb_data_fenxi">
+                    <tbody class="shuju">
+                        <tr>
+                          <th colspan="15">数据对比<span class="chooseSel">
+                              <select name="" id="compare">
+                                  <foreach name="compare" item="v" key="k">
+                                      <option value="{$k}" <if condition="count($compare) gt 10"><if condition="$k eq 9">selected >近{$k+1}场<else/>>近{$k+1}场</if><else/><if condition="$k eq (count($compare) -1)">selected >近{$k+1}场<else/>>近{$k+1}场</if></if></option>
+                                  </foreach>
+                              </select></span></th>
+                        </tr>
+                        <tr bgcolor="#ebeef7">
+                          <td width="122">球队</td>
+                          <td width="62">总进球</td>
+                          <td width="62">总失球</td>
+                          <td width="62">净胜球</td>
+                          <td width="82">场均进球</td>
+                          <td width="42">胜率</td>
+                          <td width="42">平率</td>
+                          <td width="42">负率</td>
+                          <td width="82">主客进球</td>
+                          <td width="82">主客失球</td>
+                          <td width="102">主客净胜球</td>
+                          <td width="102">主客均进球</td>
+                          <td width="82">主客胜率</td>
+                          <td width="82">主客平率</td>
+                          <td width="82">主客负率</td>
+                        </tr>
+                        <volist name="compare" id="item" key="k">
+                            <tr type="tr" class="select_data" value="{$k}"  <if condition="count($compare) gt 10"><if condition="$k neq 10" >style="display:none;"<else/></if><else/><if condition="$k neq (count($compare))" >style="display:none;"<else/></if></if>  >
+                                <td>{$home_team_name}</td>
+                                <td class="text-666">{$item[$k][0]}</td>
+                                <td class="text-666">{$item[$k][2]}</td>
+                                <td class="text-666">{$item[$k][4]}</td>
+                                <td class="text-666">{$item[$k][6]}</td>
+                                <td class="text-666">{$item[$k][8]}</td>
+                                <td class="text-666">{$item[$k][10]}</td>
+                                <td class="text-666">{$item[$k][12]}</td>
+                                <td class="text-666">{$item[$k][14]}</td>
+                                <td class="text-666">{$item[$k][16]}</td>
+                                <td class="text-666">{$item[$k][18]}</td>
+                                <td class="text-666">{$item[$k][20]}</td>
+                                <td class="text-666">{$item[$k][22]}</td>
+                                <td class="text-666">{$item[$k][24]}</td>
+                                <td class="text-666">{$item[$k][26]}</td>
+                            </tr>
+                            <tr type="tr" class="select_data" value="{$k}"  <if condition="count($compare) gt 10"><if condition="$k neq 10" >style="display:none;"<else/></if><else/><if condition="$k neq (count($compare))" >style="display:none;"<else/></if></if>  >
+                            <td>{$away_team_name}</td>
+                            <td class="text-666">{$item[$k][1]}</td>
+                            <td class="text-666">{$item[$k][3]}</td>
+                            <td class="text-666">{$item[$k][5]}</td>
+                            <td class="text-666">{$item[$k][7]}</td>
+                            <td class="text-666">{$item[$k][9]}</td>
+                            <td class="text-666">{$item[$k][11]}</td>
+                            <td class="text-666">{$item[$k][13]}</td>
+                            <td class="text-666">{$item[$k][15]}</td>
+                            <td class="text-666">{$item[$k][17]}</td>
+                            <td class="text-666">{$item[$k][19]}</td>
+                            <td class="text-666">{$item[$k][21]}</td>
+                            <td class="text-666">{$item[$k][23]}</td>
+                            <td class="text-666">{$item[$k][25]}</td>
+                            <td class="text-666">{$item[$k][27]}</td>
+                            </tr>
+                        </volist>
+                    </tbody>
+                </table>
+              </div>
+            </if>
+              <!-- 数据对比 e -->
+
+              <!-- 联赛盘路 s -->
+            <if condition="!empty($panlu)">
+              <div class="itemTable" id="lspl">
+              <table class="table table-bordered tb_data_fenxi">
+                  <tbody>
+                      <tr>
+                        <th colspan="24">联赛盘路走势</th>
+                      </tr>
+                      <tr>
+                        <td colspan="12" class="team_zhu no-b-r">{$home_team_name}</td>
+                        <td colspan="12" class="team_ke no-b-l">{$away_team_name}</td>
+                      </tr>
+                      <tr bgcolor="#ebeef7">
+                        <td colspan="2">全场</td>
+                        <td colspan="5">让球盘</td>
+                        <td colspan="5">大小球</td>
+                        <td colspan="2">全场</td>
+                        <td colspan="5">让球盘</td>
+                        <td colspan="5">大小球</td>
+                      </tr>
+                      <tr bgcolor="#f9f6ef">
+                        <td width="50"></td>
+                        <td width="30">赛</td>
+                        <td width="48">赢盘</td>
+                        <td width="48">走水</td>
+                        <td width="48">输盘</td>
+                        <td width="60">赢盘率</td>
+                        <td width="40">详情</td>
+                        <td width="42">大球</td>
+                        <td width="60">大球率</td>
+
+                        <td width="42">小球</td>
+                        <td width="60">小球率</td>
+                        <td width="40">详情</td>
+                        <td width="50"></td>
+                        <td width="30">赛</td>
+                        <td width="48">赢盘</td>
+                        <td width="48">走水</td>
+                        <td width="48">输盘</td>
+                        <td width="60">赢盘率</td>
+                        <td width="40">详情</td>
+                        <td width="42">大球</td>
+                        <td width="60">大球率</td>
+
+                        <td width="42">小球</td>
+                        <td width="60">小球率</td>
+                        <td width="40">详情</td>
+                      </tr>
+                      <foreach name="panlu['home_team']['full']['bigSmall']" item="vo" key="k">
+                          <tr bgcolor="<if condition=" $k%2 eq 0 ">#ffffff<else/>#f3f2f8</if>">
+                              <td>{$panlu['home_team']['full']['letGoal'][$k][0]}</td>
+                              <td>{$panlu['home_team']['full']['letGoal'][$k][1]}</td>
+                              <if condition="$k eq 3">
+                                  <td colspan="3" class="nearSix">{$panlu['home_team']['full']['letGoal'][$k][2]}</td>
+                                  <td>{$panlu['home_team']['full']['letGoal'][$k][3]}</td>
+                                  <else />
+                                  <td>{$panlu['home_team']['full']['letGoal'][$k][2]}</td>
+                                  <td>{$panlu['home_team']['full']['letGoal'][$k][3]}</td>
+                                  <td>{$panlu['home_team']['full']['letGoal'][$k][4]}</td>
+                                  <td>{$panlu['home_team']['full']['letGoal'][$k][5]}</td>
+                              </if>
+                              <td><a href="javascript:;"><img src="__STATIC__/score/images/scoreLive/pankou-eye.png" alt="" width="17" height="9" /></a></td>
+                              <if condition="$k eq 3">
+                                  <td colspan="4" class="nearSix">{$panlu['home_team']['full']['bigSmall'][$k][2]}</td>
+                                  <else />
+                                  <td>{$panlu['home_team']['full']['bigSmall'][$k][2]}</td>
+                                  <td>{$panlu['home_team']['full']['bigSmall'][$k][3]}</td>
+                                  <td>{$panlu['home_team']['full']['bigSmall'][$k][4]}</td>
+                                  <td>{$panlu['home_team']['full']['bigSmall'][$k][5]}</td>
+                              </if>
+                              <td><a href="javascript:;"><img src="__STATIC__/score/images/scoreLive/pankou-eye.png" alt="" width="17" height="9" /></a></td>
+                                <td>{$panlu['guest_team']['full']['letGoal'][$k][0]}</td>
+                                <td>{$panlu['guest_team']['full']['letGoal'][$k][1]}</td>
+                                <if condition="$k eq 3">
+                                    <td colspan="3" class="nearSix">{$panlu['guest_team']['full']['letGoal'][$k][2]}</td>
+                                    <td>{$panlu['guest_team']['full']['letGoal'][$k][3]}</td>
+                                    <else />
+                                    <td>{$panlu['guest_team']['full']['letGoal'][$k][2]}</td>
+                                    <td>{$panlu['guest_team']['full']['letGoal'][$k][3]}</td>
+                                    <td>{$panlu['guest_team']['full']['letGoal'][$k][4]}</td>
+                                    <td>{$panlu['guest_team']['full']['letGoal'][$k][5]}</td>
+                                </if>
+                              <td><a href="javascript:;"><img src="__STATIC__/score/images/scoreLive/pankou-eye.png" alt="" width="17" height="9" /></a></td>
+                               <if condition="$k eq 3">
+                                   <td colspan="4" class="nearSix">{$panlu['guest_team']['full']['bigSmall'][$k][2]}</td>
+                                   <else />
+                                   <td>{$panlu['guest_team']['full']['bigSmall'][$k][2]}</td>
+                                   <td>{$panlu['guest_team']['full']['bigSmall'][$k][3]}</td>
+                                   <td>{$panlu['guest_team']['full']['bigSmall'][$k][4]}</td>
+                                   <td>{$panlu['guest_team']['full']['bigSmall'][$k][5]}</td>
+                               </if>
+                              <td><a href="javascript:;"><img src="__STATIC__/score/images/scoreLive/pankou-eye.png" alt="" width="17" height="9" /></a></td>
+                          </tr>
+                      </foreach>
+                  </tbody>
+              </table>
+                 <table class="table table-bordered tb_data_fenxi">
+                     <tbody>
+                     <tr>
+                         <td colspan="12" class="team_zhu no-b-r">{$home_team_name}</td>
+                         <td colspan="12" class="team_ke no-b-l">{$away_team_name}</td>
+                     </tr>
+                     <tr bgcolor="#ebeef7">
+                         <td colspan="2">半场</td>
+                         <td colspan="5">让球盘</td>
+                         <td colspan="5">大小球</td>
+                         <td colspan="2">半场</td>
+                         <td colspan="5">让球盘</td>
+                         <td colspan="5">大小球</td>
+                     </tr>
+                     <tr bgcolor="#f9f6ef">
+                         <td width="50"></td>
+                         <td width="30">赛</td>
+                         <td width="48">赢盘</td>
+                         <td width="48">走水</td>
+                         <td width="48">输盘</td>
+                         <td width="60">赢盘率</td>
+                         <td width="40">详情</td>
+                         <td width="42">大球</td>
+                         <td width="60">大球率</td>
+
+                         <td width="42">小球</td>
+                         <td width="60">小球率</td>
+                         <td width="40">详情</td>
+                         <td width="50"></td>
+                         <td width="30">赛</td>
+                         <td width="48">赢盘</td>
+                         <td width="48">走水</td>
+                         <td width="48">输盘</td>
+                         <td width="60">赢盘率</td>
+                         <td width="40">详情</td>
+                         <td width="42">大球</td>
+                         <td width="60">大球率</td>
+                         <td width="42">小球</td>
+                         <td width="60">小球率</td>
+                         <td width="40">详情</td>
+                     </tr>
+                     <foreach name="panlu['home_team']['full']['bigSmall']" item="vo" key="k">
+                         <tr bgcolor="<if condition=" $k%2 eq 0 ">#ffffff<else/>#f3f2f8</if>">
+                         <td>{$panlu['home_team']['half']['letGoal'][$k][0]}</td>
+                         <td>{$panlu['home_team']['half']['letGoal'][$k][1]}</td>
+                         <if condition="$k eq 3">
+                             <td colspan="3" class="nearSix">{$panlu['home_team']['half']['letGoal'][$k][2]}</td>
+                             <td>{$panlu['home_team']['half']['letGoal'][$k][3]}</td>
+                             <else />
+                             <td>{$panlu['home_team']['half']['letGoal'][$k][2]}</td>
+                             <td>{$panlu['home_team']['half']['letGoal'][$k][3]}</td>
+                             <td>{$panlu['home_team']['half']['letGoal'][$k][4]}</td>
+                             <td>{$panlu['home_team']['half']['letGoal'][$k][5]}</td>
+                         </if>
+                         <td><a href="javascript:;"><img src="__STATIC__/score/images/scoreLive/pankou-eye.png" alt="" width="17" height="9" /></a></td>
+                         <if condition="$k eq 3">
+                             <td colspan="4" class="nearSix">{$panlu['home_team']['half']['bigSmall'][$k][2]}</td>
+                             <else />
+                             <td>{$panlu['home_team']['half']['bigSmall'][$k][2]}</td>
+                             <td>{$panlu['home_team']['half']['bigSmall'][$k][3]}</td>
+                             <td>{$panlu['home_team']['half']['bigSmall'][$k][4]}</td>
+                             <td>{$panlu['home_team']['half']['bigSmall'][$k][5]}</td>
+                         </if>
+                         <td><a href="javascript:;"><img src="__STATIC__/score/images/scoreLive/pankou-eye.png" alt="" width="17" height="9" /></a></td>
+                         <td>{$panlu['guest_team']['half']['letGoal'][$k][0]}</td>
+                         <td>{$panlu['guest_team']['half']['letGoal'][$k][1]}</td>
+                         <if condition="$k eq 3">
+                             <td colspan="3" class="nearSix">{$panlu['guest_team']['half']['letGoal'][$k][2]}</td>
+                             <td>{$panlu['guest_team']['half']['letGoal'][$k][3]}</td>
+                             <else />
+                             <td>{$panlu['guest_team']['half']['letGoal'][$k][2]}</td>
+                             <td>{$panlu['guest_team']['half']['letGoal'][$k][3]}</td>
+                             <td>{$panlu['guest_team']['half']['letGoal'][$k][4]}</td>
+                             <td>{$panlu['guest_team']['half']['letGoal'][$k][5]}</td>
+                         </if>
+                         <td><a href="javascript:;"><img src="__STATIC__/score/images/scoreLive/pankou-eye.png" alt="" width="17" height="9" /></a></td>
+                         <if condition="$k eq 3">
+                             <td colspan="4" class="nearSix">{$panlu['guest_team']['half']['bigSmall'][$k][2]}</td>
+                             <else />
+                             <td>{$panlu['guest_team']['half']['bigSmall'][$k][2]}</td>
+                             <td>{$panlu['guest_team']['half']['bigSmall'][$k][3]}</td>
+                             <td>{$panlu['guest_team']['half']['bigSmall'][$k][4]}</td>
+                             <td>{$panlu['guest_team']['half']['bigSmall'][$k][5]}</td>
+                         </if>
+                         <td><a href="javascript:;"><img src="__STATIC__/score/images/scoreLive/pankou-eye.png" alt="" width="17" height="9" /></a></td>
+                         </tr>
+                     </foreach>
+                     </tbody>
+                 </table>
+              </div>
+            </if>
+              <!-- 联赛盘路 e -->
+              
+              <!-- 相同历史亚盘 s -->
+              <!--<if condition="(ord($same_odd['home_team'][0][0]) neq 194) and (ord($same_odd['guest_team'][0][0]) neq 194)">-->
+              <if condition="$same_odd neq ''">
+                  <div class="itemTable" id="xtls">
+                      <table class="table table-bordered tb_data_fenxi">
+                          <tbody>
+                          <tr>
+                              <th colspan="14">相同历史亚盘</th>
+                          </tr>
+                          <tr>
+                              <td colspan="7" class="team_zhu no-b-r"></td>
+                              <td colspan="7" class="team_ke no-b-l"></td>
+                          </tr>
+                          <tr bgcolor="#f9f6ef">
+                              <td width="70">赛事</td>
+                              <td width="90">时间</td>
+                              <td width="120">上盘</td>
+                              <td width="90">初盘</td>
+                              <td width="120">下盘</td>
+                              <td width="50">比分</td>
+                              <td width="40">盘路</td>
+                              <td width="70">赛事</td>
+                              <td width="90">时间</td>
+                              <td width="120">上盘</td>
+                              <td width="90">初盘</td>
+                              <td width="120">下盘</td>
+                              <td width="50">比分</td>
+                              <td width="40">盘路</td>
+                          </tr>
+                          <volist name="same_odd['home_team']" id="item">
+                                <tr>
+                                    <td class="text-666" bgcolor="<if condition="ord($same_odd['home_team'][$key][0]) neq 194">{$union_color}<else/></if>"><font color="white">{$same_odd['home_team'][$key][0] | default="--"}</font></td>
+                                    <td class="text-666"><if condition="$item[1] neq ''">{$same_odd['home_team'][$key][1] | default="--"}<else/>--</if></td>
+                                    <td class="text-666"><a href="{:U('/team/'.$same_odd['home_team'][$key][7].'@data')}" target="_blank">{$same_odd['home_team'][$key][2] | default="--"}</a></td>
+                                    <td class="text-666">{$same_odd['home_team'][$key][3] | negateive=###}</td>
+                                    <td class="text-666"><a href="{:U('/team/'.$same_odd['home_team'][$key][8].'@data')}" target="_blank">{$same_odd['home_team'][$key][4] | default="--"}</a></td>
+                                    <td class="text-666">{$same_odd['home_team'][$key][5] | default="--"}</td>
+                                    <td class="<if condition="$same_odd['home_team'][$key][6] eq '赢'">text-red<elseif condition="$same_odd['home_team'][$key][6] eq '平'"/>text-blue<elseif condition="$same_odd['home_team'][$key][6] eq '输'"/>text-green</if>">{$same_odd['home_team'][$key][6]|default="--"}</td>
+                                    <td class="text-666" bgcolor="<if condition="ord($same_odd['guest_team'][$key][0]) neq 194">{$union_color}<else/></if>"><font color="white">{$same_odd['guest_team'][$key][0] | default="--"}</font></td>
+                                    <td class="text-666">{$same_odd['guest_team'][$key][1] | default="--"}</td>
+                                    <td class="text-666"><a href="{:U('/team/'.$same_odd['guest_team'][$key][7].'@data')}" target="_blank">{$same_odd['guest_team'][$key][2] | default="--"}</a></td>
+                                    <td class="text-666">{$same_odd['guest_team'][$key][3] | negateive=###}</td>
+                                    <td class="text-666"><a href="{:U('/team/'.$same_odd['guest_team'][$key][8].'@data')}" target="_blank">{$same_odd['guest_team'][$key][4] | default="--"}</a></td>
+                                    <td class="text-666">{$same_odd['guest_team'][$key][5] | default="--"}</td>
+                                    <td class="<if condition="$same_odd['guest_team'][$key][6] eq '赢'">text-red<elseif condition="$same_odd['guest_team'][$key][6] eq '平'"/>text-blue<elseif condition="$same_odd['guest_team'][$key][6] eq '输'"/>text-green</if>">{$same_odd['guest_team'][$key][6]|default="--"}</td>
+                                </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                    </div>
+              </if>
+              <!-- 相同历史亚盘 e -->
+              
+              
+              <!-- 阵容情况 s -->
+              <if condition="$st || $team">
+                  <div class="itemTable" id="zrqk">
+                      <table class="table table-bordered tb_data_fenxi">
+                          <tbody>
+                          <tr>
+                              <th colspan="4">阵容情况</th>
+                          </tr>
+                          <tr>
+                              <td colspan="2" class="team_zhu no-b-r">{$gameInfo['home_team_name']}</td>
+                              <td colspan="2" class="team_ke no-b-l">{$gameInfo['away_team_name']}</td>
+                          </tr>
+                          <if condition="$st['Home_T'] neq '' || $st['Away_T'] neq ''">
+                          <tr bgcolor="#f9f6ef">
+                              <td width="70">停赛</td>
+                              <td width="510">
+                                  <ul class="clearfix playerStop">
+                                      <volist name="st.Home_T" id="item">
+                                          <li class="pull-left">{$item.0}  {$item.1}</li>
+                                      </volist>
+                                  </ul>
+                              </td>
+                              <td width="70">停赛</td>
+                              <td width="510">
+                                  <ul class="clearfix playerStop">
+                                      <volist name="st.Away_T" id="item">
+                                          <li class="pull-left">{$item.0}  {$item.1}</li>
+                                      </volist>
+                                  </ul>
+                              </td>
+                          </tr>
+                          </if>
+                          <if condition="$st['Home_S'] neq '' || $st['Away_S'] neq ''">
+                          <tr bgcolor="#f9f6ef">
+                              <td width="70">伤病</td>
+                              <td width="510">
+                                  <ul class="clearfix playerStop">
+                                      <volist name="st.Home_S" id="item">
+                                          <li class="pull-left"> <a href="{:U('/player/'.$item[0].'@data')}" target="_blank"> {$item.1}</a></li>
+                                      </volist>
+                                  </ul>
+                              </td>
+                              <td width="70">伤病</td>
+                              <td width="510">
+                                  <ul class="clearfix playerStop">
+                                      <volist name="st.Away_S" id="item">
+                                          <li class="pull-left"> <a href="{:U('/player/'.$item[0].'@data')}" target="_blank"> {$item.1}</a></li>
+                                      </volist>
+                                  </ul>
+                              </td>
+                          </tr>
+                          </if>
+                          <if condition="$team['s']">
+                          <tr>
+                              <td width="70">首发</td>
+                              <td width="510">
+                                  <ul class="clearfix player_con">
+                                      <volist name="team['s'][0]" id="item">
+                                          <li class="pull-left clearfix"><a href="{:U('/player/'.$item[0].'@data')}" target="_blank"><em class="pull-left even">{:(int)explode('(',$item[1])[0]}</em><span class="pull-left name clearfix">({:explode('(',$item[1])[1]}</span></a></li>
+                                      </volist>
+                                  </ul>
+                              </td>
+                              <td width="70">首发</td>
+                              <td width="510">
+                                  <ul class="clearfix player_con">
+                                      <volist name="team['s'][1]" id="item">
+                                          <li class="pull-left clearfix"><a href="{:U('/player/'.$item[0].'@data')}" target="_blank"><em class="pull-left even ">{:(int)explode('(',$item[1])[0]}</em><span class="pull-left name clearfix">({:explode('(',$item[1])[1]}</span></a></li>
+                                      </volist>
+                                  </ul>
+                              </td>
+                          </tr>
+                          </if>
+                          <if condition="$team['h']">
+                          <tr>
+                              <td width="70">后备</td>
+                              <td width="510">
+                                  <ul class="clearfix player_con">
+                                      <volist name="team['h'][0]" id="item">
+                                          <li class="pull-left clearfix"><a href="{:U('/player/'.$item[0].'@data')}" target="_blank"><em class="pull-left even num_red">{:(int)explode('(',$item[1])[0]}</em><span class="pull-left name clearfix">({:explode('(',$item[1])[1]}</span></a></li>
+                                      </volist>
+                                  </ul>
+                              </td>
+                              <td width="70">后备</td>
+                              <td width="510">
+                                  <ul class="clearfix player_con">
+                                      <volist name="team['h'][1]" id="item">
+                                          <li class="pull-left clearfix"><a href="{:U('/player/'.$item[0].'@data')}" target="_blank"><em class="pull-left even num_red">{:(int)explode('(',$item[1])[0]}</em><span class="pull-left name clearfix">({:explode('(',$item[1])[1]}</span></a></li>
+                                      </volist>
+                                  </ul>
+                              </td>
+                          </tr>
+                          </if>
+                          </tbody>
+                      </table>
+                  </div>
+              </if>
+              <!-- 阵容情况 e -->
+
+              <!-- 未来三场 s -->
+    <if condition="!empty($home_future_three)">
+              <div class="itemTable" id="wlsc">
+              <table class="table table-bordered tb_data_fenxi">
+                  <tbody>
+                      <tr>
+                        <th colspan="10">未来三场</th>
+                      </tr>
+                      <tr>
+                        <td colspan="5" class="team_zhu no-b-r">{$match_three[0][0]}</td>
+                        <td colspan="5" class="team_ke no-b-l">{$match_three[0][1]}</td>
+                      </tr>
+                      <tr bgcolor="#f9f6ef">
+                          <td width="70">赛事</td>
+                          <td width="90">时间</td>
+                          <td width="170">主队</td>
+                          <td width="170">客队</td>
+                          <td width="80">间隔</td>
+                          <td width="70">赛事</td>
+                          <td width="90">时间</td>
+                          <td width="170">主队</td>
+                          <td width="170">客队</td>
+                          <td width="80">间隔</td>
+                      </tr>
+                      <foreach name="home_future_three" item="vo" key="k">
+                          <tr>
+                              <td class="text-fff" bgcolor="{$union_color}">{$home_future_three[$k]['league_name']}</td>
+                              <td class="text-666">{:substr($home_future_three[$k]['game_time'],0,4)}-{:substr($home_future_three[$k]['game_time'],4,2)}-{:substr($home_future_three[$k]['game_time'],6,2)}</td>
+                              <td class="text-666"><a href="{:U('/team/'.$home_future_three[$k]['home_team_id'].'@data')}" target="_blank">{$home_future_three[$k]['home_team_name']}</a></td>
+                              <td class="text-666"><a href="{:U('/team/'.$home_future_three[$k]['away_team_id'].'@data')}" target="_blank">{$home_future_three[$k]['away_team_name']}</a></td>
+                              <td class="text-red"><if condition="$home_future_three[$k]['day_left'] neq ''">{$home_future_three[$k]['day_left']}天</if></td>
+                              <td class="text-fff" bgcolor="{$union_color}">{$away_future_three[$k]['league_name']}</td>
+                              <td class="text-666">{:substr($away_future_three[$k]['game_time'],0,4)}-{:substr($away_future_three[$k]['game_time'],4,2)}-{:substr($away_future_three[$k]['game_time'],6,2)}</td>
+                              <td class="text-666"><a href="{:U('/team/'.$away_future_three[$k]['home_team_id'].'@data')}" target="_blank">{$away_future_three[$k]['home_team_name']}</a></td>
+                              <td class="text-666"><a href="{:U('/team/'.$away_future_three[$k]['away_team_id'].'@data')}" target="_blank">{$away_future_three[$k]['away_team_name']}</a></td>
+                              <td class="text-red"><if condition="$away_future_three[$k]['day_left'] neq ''">{$away_future_three[$k]['day_left']}天</if></td>
+                          </tr>
+                      </foreach>
+                  </tbody>
+              </table>
+              <!-- 未来三场 e -->
+              </div>
+            </if>
+
+            <!-- 入球数上下半场入球分布 s -->
+        <if condition="!empty($goal_distribution['home_team'])">
+            <div class="itemTable" id="rqs">
+                <table class="table table-bordered tb_data_fenxi">
+                    <tbody class="shuju">
+                    <tr>
+                        <th colspan="16">入球数/上下半场入球分布</th>
+                    </tr>
+                    <tr bgcolor="#ebeef7">
+                        <td width="72" bgcolor="#f9f6ef"></td>
+                        <td width="72" bgcolor="#f9f6ef">0</td>
+                        <td width="72" bgcolor="#f9f6ef">1</td>
+                        <td width="72" bgcolor="#f9f6ef">2</td>
+                        <td width="72" bgcolor="#f9f6ef">3</td>
+                        <td width="72" bgcolor="#f9f6ef">4+</td>
+                        <td width="72" bgcolor="#f9f6ef">上半场</td>
+                        <td width="72" bgcolor="#f9f6ef">下半场</td>
+                        <td width="72"></td>
+                        <td width="72">0</td>
+                        <td width="72">1</td>
+                        <td width="72">2</td>
+                        <td width="72">3</td>
+                        <td width="72">4+</td>
+                        <td width="72">上半场</td>
+                        <td width="72">下半场</td>
+                    </tr>
+                    <foreach name="goal_distribution['home_team']" item="v" key="k">
+                        <tr>
+                            <td>{$goal_distribution['home_team'][$k][0]}</td>
+                            <td>{$goal_distribution['home_team'][$k][1]}</td>
+                            <td>{$goal_distribution['home_team'][$k][2]}</td>
+                            <td>{$goal_distribution['home_team'][$k][3]}</td>
+                            <td>{$goal_distribution['home_team'][$k][4]}</td>
+                            <td>{$goal_distribution['home_team'][$k][5]}</td>
+                            <td>{$goal_distribution['home_team'][$k][6]}</td>
+                            <td>{$goal_distribution['home_team'][$k][7]}</td>
+                            <td>{$goal_distribution['guest_team'][$k][0]}</td>
+                            <td>{$goal_distribution['guest_team'][$k][1]}</td>
+                            <td>{$goal_distribution['guest_team'][$k][2]}</td>
+                            <td>{$goal_distribution['guest_team'][$k][3]}</td>
+                            <td>{$goal_distribution['guest_team'][$k][4]}</td>
+                            <td>{$goal_distribution['guest_team'][$k][5]}</td>
+                            <td>{$goal_distribution['guest_team'][$k][6]}</td>
+                            <td>{$goal_distribution['guest_team'][$k][7]}</td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+            </div>
+        </if>
+          <!-- 入球数上下半场入球分布 e -->
+
+          <!-- 半全场 s -->
+        <if condition="!empty($half_full['home_team'])">
+            <div class="itemTable" id="half_full">
+                <table class="table table-bordered tb_data_fenxi">
+                    <tbody class="shuju">
+                    <tr>
+                        <th colspan="20">半全场</th>
+                    </tr>
+                    <tr bgcolor="#ebeef7">
+                        <td width="58" bgcolor="#f9f6ef">半场</td>
+                        <td width="58" bgcolor="#f9f6ef">胜</td>
+                        <td width="58" bgcolor="#f9f6ef">胜</td>
+                        <td width="58" bgcolor="#f9f6ef">胜</td>
+                        <td width="58" bgcolor="#f9f6ef">平</td>
+                        <td width="58" bgcolor="#f9f6ef">平</td>
+                        <td width="58" bgcolor="#f9f6ef">平</td>
+                        <td width="58" bgcolor="#f9f6ef">负</td>
+                        <td width="58" bgcolor="#f9f6ef">负</td>
+                        <td width="58" bgcolor="#f9f6ef">负</td>
+                        <td width="58">半场</td>
+                        <td width="58">胜</td>
+                        <td width="58">胜</td>
+                        <td width="58">胜</td>
+                        <td width="58">平</td>
+                        <td width="58">平</td>
+                        <td width="58">平</td>
+                        <td width="58">负</td>
+                        <td width="58">负</td>
+                        <td width="58">负</td>
+                    </tr>
+                    <tr bgcolor="#ebeef7">
+                        <td width="58" bgcolor="#f9f6ef">全场</td>
+                        <td width="58" bgcolor="#f9f6ef">胜</td>
+                        <td width="58" bgcolor="#f9f6ef">平</td>
+                        <td width="58" bgcolor="#f9f6ef">负</td>
+                        <td width="58" bgcolor="#f9f6ef">胜</td>
+                        <td width="58" bgcolor="#f9f6ef">平</td>
+                        <td width="58" bgcolor="#f9f6ef">负</td>
+                        <td width="58" bgcolor="#f9f6ef">胜</td>
+                        <td width="58" bgcolor="#f9f6ef">平</td>
+                        <td width="58" bgcolor="#f9f6ef">负</td>
+                        <td width="58">全场</td>
+                        <td width="58">胜</td>
+                        <td width="58">平</td>
+                        <td width="58">负</td>
+                        <td width="58">胜</td>
+                        <td width="58">平</td>
+                        <td width="58">负</td>
+                        <td width="58">胜</td>
+                        <td width="58">平</td>
+                        <td width="58">负</td>
+                    </tr>
+                    <foreach name="half_full['home_team']" item="v" key="k">
+                        <tr>
+                            <td>{$half_full['home_team'][$k][0]}</td>
+                            <td>{$half_full['home_team'][$k][1]}</td>
+                            <td>{$half_full['home_team'][$k][2]}</td>
+                            <td>{$half_full['home_team'][$k][3]}</td>
+                            <td>{$half_full['home_team'][$k][4]}</td>
+                            <td>{$half_full['home_team'][$k][5]}</td>
+                            <td>{$half_full['home_team'][$k][6]}</td>
+                            <td>{$half_full['home_team'][$k][7]}</td>
+                            <td>{$half_full['home_team'][$k][8]}</td>
+                            <td>{$half_full['home_team'][$k][9]}</td>
+                            <td>{$half_full['guest_team'][$k][0]}</td>
+                            <td>{$half_full['guest_team'][$k][1]}</td>
+                            <td>{$half_full['guest_team'][$k][2]}</td>
+                            <td>{$half_full['guest_team'][$k][3]}</td>
+                            <td>{$half_full['guest_team'][$k][4]}</td>
+                            <td>{$half_full['guest_team'][$k][5]}</td>
+                            <td>{$half_full['guest_team'][$k][6]}</td>
+                            <td>{$half_full['guest_team'][$k][7]}</td>
+                            <td>{$half_full['guest_team'][$k][8]}</td>
+                            <td>{$half_full['guest_team'][$k][9]}</td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+            </div>
+        </if>
+          <!-- 半全场 e -->
+          <!-- 大小/单双 s -->
+        <if condition="!empty($bigSmall_singleDouble['home_team'])">
+            <div class="itemTable" id="dxds">
+                <table class="table table-bordered tb_data_fenxi">
+                    <tbody class="shuju">
+                    <tr>
+                        <th colspan="12">大小/单双</th>
+                    </tr>
+                    <tr bgcolor="#ebeef7">
+                        <td width="96" bgcolor="#f9f6ef"></td>
+                        <td width="96" bgcolor="#f9f6ef">大</td>
+                        <td width="96" bgcolor="#f9f6ef">小</td>
+                        <td width="96" bgcolor="#f9f6ef">走</td>
+                        <td width="96" bgcolor="#f9f6ef">单</td>
+                        <td width="96" bgcolor="#f9f6ef">双</td>
+                        <td width="96"></td>
+                        <td width="96">大</td>
+                        <td width="96">小</td>
+                        <td width="96">走</td>
+                        <td width="96">单</td>
+                        <td width="96">双</td>
+                    </tr>
+                    <foreach name="bigSmall_singleDouble['home_team']" item="v" key="k">
+                        <tr>
+                            <td>{$bigSmall_singleDouble['home_team'][$k][0]}</td>
+                            <td>{$bigSmall_singleDouble['home_team'][$k][1]}</td>
+                            <td>{$bigSmall_singleDouble['home_team'][$k][2]}</td>
+                            <td>{$bigSmall_singleDouble['home_team'][$k][3]}</td>
+                            <td>{$bigSmall_singleDouble['home_team'][$k][4]}</td>
+                            <td>{$bigSmall_singleDouble['home_team'][$k][5]}</td>
+                            <td>{$bigSmall_singleDouble['guest_team'][$k][0]}</td>
+                            <td>{$bigSmall_singleDouble['guest_team'][$k][1]}</td>
+                            <td>{$bigSmall_singleDouble['guest_team'][$k][2]}</td>
+                            <td>{$bigSmall_singleDouble['guest_team'][$k][3]}</td>
+                            <td>{$bigSmall_singleDouble['guest_team'][$k][4]}</td>
+                            <td>{$bigSmall_singleDouble['guest_team'][$k][5]}</td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+            </div>
+        </if>
+
+          <!-- 大小/单双 e -->
+          <!-- 大小/单双 s -->
+        <if condition="$goal_time['home_team']">
+            <div class="itemTable" id="jqsj">
+                <table class="table table-bordered tb_data_fenxi">
+                    <tbody class="shuju">
+                    <tr>
+                        <th colspan="22">进球时间</th>
+                    </tr>
+                    <tr bgcolor="#ebeef7">
+                        <td width="" bgcolor="#f9f6ef"></td>
+                        <td width="" bgcolor="#f9f6ef">1-10</td>
+                        <td width="" bgcolor="#f9f6ef">11-20</td>
+                        <td width="" bgcolor="#f9f6ef">21-30</td>
+                        <td width="" bgcolor="#f9f6ef">31-40</td>
+                        <td width="" bgcolor="#f9f6ef">41-45</td>
+                        <td width="" bgcolor="#f9f6ef">46-50</td>
+                        <td width="" bgcolor="#f9f6ef">51-60</td>
+                        <td width="" bgcolor="#f9f6ef">61-70</td>
+                        <td width="" bgcolor="#f9f6ef">71-80</td>
+                        <td width="" bgcolor="#f9f6ef">81-90+</td>
+                        <td width=""></td>
+                        <td width="">1-10</td>
+                        <td width="">11-20</td>
+                        <td width="">21-30</td>
+                        <td width="">31-40</td>
+                        <td width="">41-45</td>
+                        <td width="">46-50</td>
+                        <td width="">51-60</td>
+                        <td width="">61-70</td>
+                        <td width="">71-80</td>
+                        <td width="">81-90+</td>
+                    </tr>
+
+                    <foreach name="goal_time['home_team']" item="v" key="k">
+                        <if condition="$k eq 3">
+                            <tr bgcolor="#ebeef7">
+                                <td colspan="11" bgcolor="#f9f6ef">第一个进球时间统计</td>
+                                <td colspan="11">第一个进球时间统计</td>
+                            </tr>
+                        </if>
+                        <tr>
+                            <td>{$goal_time['home_team'][$k][0]}</td>
+                            <td>{$goal_time['home_team'][$k][1]}</td>
+                            <td>{$goal_time['home_team'][$k][2]}</td>
+                            <td>{$goal_time['home_team'][$k][3]}</td>
+                            <td>{$goal_time['home_team'][$k][4]}</td>
+                            <td>{$goal_time['home_team'][$k][5]}</td>
+                            <td>{$goal_time['home_team'][$k][6]}</td>
+                            <td>{$goal_time['home_team'][$k][7]}</td>
+                            <td>{$goal_time['home_team'][$k][8]}</td>
+                            <td>{$goal_time['home_team'][$k][9]}</td>
+                            <td>{$goal_time['home_team'][$k][10]}</td>
+                            <td>{$goal_time['guest_team'][$k][0]}</td>
+                            <td>{$goal_time['guest_team'][$k][1]}</td>
+                            <td>{$goal_time['guest_team'][$k][2]}</td>
+                            <td>{$goal_time['guest_team'][$k][3]}</td>
+                            <td>{$goal_time['guest_team'][$k][4]}</td>
+                            <td>{$goal_time['guest_team'][$k][5]}</td>
+                            <td>{$goal_time['guest_team'][$k][6]}</td>
+                            <td>{$goal_time['guest_team'][$k][7]}</td>
+                            <td>{$goal_time['guest_team'][$k][8]}</td>
+                            <td>{$goal_time['guest_team'][$k][9]}</td>
+                            <td>{$goal_time['guest_team'][$k][10]}</td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+            </div>
+        </if>
+
+          <!-- 大小/单双 e -->
+</section>
+<!-- 主体内容开始 -->
+</div>
+</div>
+</div>
+<!--悬浮梯口-->
+<div class="floatBox">
+    <div class="toolBox">
+        <ul id="columnsNav">
+            <if condition="!empty($goals)"><li data-index="1"><a href="#jspl">即时赔率</a></li></if>
+            <if condition="!empty($bifa)"><li data-index="2"><a href="#bfzs">必发指数</a></li></if>
+            <if condition="!empty($cupmatch_integral)"><li data-index="3"><a href="#bsjf">杯赛积分</a></li></if>
+            <if condition="!empty($match_integral)"><li data-index="4"><a href="#lsjf">联赛积分</a></li></if>
+            <if condition="!empty($match_fight['list'])"><li data-index="5"><a href="#dwzj">对往战绩</a></li></if>
+            <if condition="!empty($recent_fight['0']['list'])"><li data-index="6"><a href="#jqjz">近期交战</a></li></if>
+            <if condition="!empty($compare)"><li data-index="7"><a href="#sjdb">数据对比</a></li></if>
+            <if condition="!empty($match_panlu)"><li data-index="8"><a href="#lspl">联赛盘路</a></li></if>
+            <if condition="!empty($sameExp)"><li data-index="9"><a href="#xtls">历史亚盘</a></li></if>
+            <if condition="$st || $team[0] || $team[1]"><li data-index="10"><a href="#zrqk">阵容情况</a></li></if>
+            <if condition="!empty($home_future_three)"><li data-index="11"><a href="#wlsc">未来三场</a></li></if>
+            <if condition="!empty($goal_distribution['home_team'])"><li data-index="11"><a href="#rqs">入球分布</a></li></if>
+            <if condition="!empty($half_full['home_team'])"><li data-index="11"><a href="#half_full">半场全场</a></li></if>
+            <if condition="!empty($bigSmall_singleDouble['home_team'])"><li data-index="11"><a href="#dxds">大小单双</a></li></if>
+            <if condition="!empty($home_future_three)"><li data-index="11"><a href="#jqsj">进球时间</a></li></if>
+        </ul>
+        <div class="toolImg"></div>
+    </div>
+</div>
+
+</block>
+<block name="js">
+    <!--引入本页js-->
+    <script type="text/javascript" src="__STATIC__/score/js/dataFenxi.js?d=20180711"></script>
+</block>

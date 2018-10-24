@@ -1,0 +1,299 @@
+<extend name="Public:layout" />
+<block name="seo">
+    <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}_事件赛况_全球体育</title>
+    <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、即时比分、即时盘口、球队排名、出场阵容、先开球、半场/全场胜负统计、半全场角球"/>
+    <meta name="description" content="全球体育提供最快的足球篮球比分、即时盘口、球队排名、出场阵容、先开球、半场/全场胜负"/>
+</block>
+<block name='css'>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__STATIC__/score/css/scoreLive/scoreLive.css?20171024">
+    <link rel="stylesheet" href="__STATIC__/score/css/scoreData/data-common.css">
+    <link rel="stylesheet" href="__STATIC__/score/css/scoreData/data-index.css">
+</block>
+<block name="content">
+<!-- top nav -->
+<include file="Public:top_score"/>
+<div class="body">
+    <div class="home clearfix">
+        <!-- 头部比分s -->
+        <include file="Public:odd_header"/>
+        <include file="Public:odd_nav"/>
+        <!-- 头部比分额e -->
+        <!-- 技术统计s -->
+        <div class="compare-data">
+            <if condition="!empty($eventRe_t)">
+                <table class="table table-bordered" width="100%" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr bgcolor="#e5e5e5">
+                        <th colspan="3">比赛实况</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="eventRe_t" id="vo">
+                        <tr>
+                            <td width="550" class="alignLeft">
+                                <if condition="$vo[1] eq 1">
+                                    <switch name="vo[2]">
+                                        <case value="1">
+                                   <span>
+                                       <img src="__STATIC__/score/images/event/jinqiu.png" width="19" height="20">
+                                   </span>
+                                            <span>{$vo[6]}</span>
+                                        </case>
+                                        <case value="2">
+                                            <img src="__STATIC__/score/images/event/red-card.png" width="16"
+                                                 height="20">
+                                            {$vo[6]}
+                                        </case>
+                                        <case value="3">
+                                            <img src="__STATIC__/score/images/event/yellow-card.png" width="16"
+                                                 height="20">
+                                            {$vo[6]}
+                                        </case>
+                                        <case value="7">
+                                            <img src="__STATIC__/score/images/event/penalty.png" width="19"
+                                                 height="20">
+                                            {$vo[6]}
+                                        </case>
+                                        <case value="8">
+                                            <img src="__STATIC__/score/images/event/oolong.png" width="19"
+                                                 height="20">
+                                            {$vo[6]}
+                                        </case>
+                                        <case value="9">
+                                            <img src="__STATIC__/score/images/event/red-card.png" width="16"
+                                                 height="20">
+                                            {$vo[6]}
+                                        </case>
+                                        <case value="11">
+                                            <span>{$vo['upName']}</span>
+                                            <span>
+                                       <img src="__STATIC__/score/images/event/in-out.png" width="26" height="12">
+                                   </span>
+                                            <span>{$vo['endName']}</span>
+                                        </case>
+                                        <case value="13">
+                                            <img src="__STATIC__/score/images/event/oolong.png" width="19"
+                                                 height="20">
+                                            {$vo[6]}
+                                        </case>
+                                    </switch>
+                                </if>
+                            </td>
+                            <td width="100" class="mid-time">{$vo[3]}＇</td>
+                            <td width="550" class="alignRight">
+                                <if condition="$vo[1] eq 0">
+                                    <switch name="vo[2]">
+                                        <case value="1">
+                                            <span>{$vo[6]}</span>
+                                            <span>
+                                       <img src="__STATIC__/score/images/event/jinqiu.png" width="19" height="20">
+                                   </span>
+                                        </case>
+                                        <case value="2">
+                                            <span>{$vo[6]}</span>
+                                            <img src="__STATIC__/score/images/event/red-card.png" width="16"
+                                                 height="20">
+                                        </case>
+                                        <case value="3">
+                                            <span>{$vo[6]}</span>
+                                            <img src="__STATIC__/score/images/event/yellow-card.png" width="16"
+                                                 height="20">
+
+                                        </case>
+                                        <case value="7">
+                                            <span>{$vo[6]}</span>
+                                            <img src="__STATIC__/score/images/event/penalty.png" width="19"
+                                                 height="20">
+                                        </case>
+                                        <case value="8">
+                                            <span>{$vo[6]}</span>
+                                            <img src="__STATIC__/score/images/event/oolong.png" width="19"
+                                                 height="20">
+                                        </case>
+                                        <case value="9">
+                                            <span>{$vo[6]}</span>
+                                            <img src="__STATIC__/score/images/event/red-card.png" width="16"
+                                                 height="20">
+                                        </case>
+                                        <case value="11">
+                                            <span>{$vo['upName']}</span>
+                                            <span>
+                                       <img src="__STATIC__/score/images/event/in-out.png" width="26" height="12">
+                                   </span>
+                                            <span>{$vo['endName']}</span>
+                                        </case>
+                                        <case value="13">
+                                            <img src="__STATIC__/score/images/event/oolong.png" width="19"
+                                                 height="20">
+                                            {$vo[6]}
+                                        </case>
+                                    </switch>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </if>
+            <if condition="!empty($eventRe_s)">
+                <table class="table table-bordered" width="100%" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr bgcolor="#e5e5e5">
+                        <th colspan="5">技术统计</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <notempty name="eventRe_s">
+                        <volist name="eventRe_s" id="vo">
+                            <switch name="vo[1]">
+                                <case value="3|4|5|6|8|9|11|13|14">
+                                    <tr>
+                                        <td width="50" class="no-b-r">{$vo[2]}</td>
+                                        <td width="" class="no-b-l no-b-r">
+                                            <div class="expand-percent alignRight"><span class="expand"
+                                                                                         style="width: {$vo['homerate']}%"></span>
+                                            </div>
+                                        </td>
+                                        <td width="100" class="no-b-r no-b-l">
+                                            <switch name="vo[1]">
+                                                <case value="3">射门</case>
+                                                <case value="4">射中</case>
+                                                <case value="5">犯规</case>
+                                                <case value="6">角球</case>
+                                                <case value="8">任意球</case>
+                                                <case value="9">越位</case>
+                                                <case value="11">黄牌</case>
+                                                <case value="13">红牌</case>
+                                                <case value="14">控球率</case>
+                                            </switch>
+                                        </td>
+                                        <td width="" class="no-b-l no-b-r">
+                                            <div class="expand-percent alignLeft"><span class="expand"
+                                                                                        style="width: {$vo['awayrate']}%"></span>
+                                            </div>
+                                        </td>
+                                        <td width="50" class="no-b-l">{$vo[3]}</td>
+                                    </tr>
+                                </case>
+                            </switch>
+                        </volist>
+                    </notempty>
+
+                    </tbody>
+                </table>
+            </if>
+            <if condition="!empty($lineupStart)">
+                <table class="table table-bordered" width="100%" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr bgcolor="#e5e5e5">
+                        <th colspan="4">双方阵容</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <notempty name="lineupStart">
+
+                        <volist name="lineupStart" id="vo">
+                            <tr>
+                                <if condition="$key eq '0'">
+                                    <td width="60" rowspan="11">首发</td>
+                                </if>
+                                <td width="540" class="alignLeft">
+                                    <div class="clearfix player_con">
+                            	<span class="pull-left name">
+                                    <switch name="vo['home'][0]">
+                                        <case value="2">门将</case>
+                                        <case value="3">后卫</case>
+                                        <case value="4">中场</case>
+                                        <case value="5">前锋</case>
+                                        <default/><span class="pull-left name place"></span>
+                                    </switch>
+                                </span>
+                                        <em class="pull-left even">{$vo['home'][2]}</em>
+                                        <span class="pull-left even name clearfix">
+                                    <div class="fs28">{$vo['home'][1]}</div>
+                                </span>
+                                    </div>
+                                </td>
+                                <td width="540" class="alignRight">
+                                    <div class="clearfix player_con">
+                            	<span class="pull-right name">
+                                    <switch name="vo['away'][0]">
+                                        <case value="2">门将</case>
+                                        <case value="3">后卫</case>
+                                        <case value="4">中场</case>
+                                        <case value="5">前锋</case>
+                                        <default/><span class="pull-left name place"></span>
+                                    </switch>
+                                </span>
+                                        <em class="pull-right even num_red">{$vo['away'][2]}</em>
+                                        <span class="pull-right even name clearfix">
+                                    <div class="fs28">{$vo['away'][1]}</div>
+                                </span>
+                                    </div>
+                                </td>
+                                <if condition="$key eq '0'">
+                                    <td width="60" rowspan="11">首发</td>
+                                </if>
+
+                            </tr>
+                        </volist>
+                        <tr>
+                            <td colspan="4" bgcolor="#e5e5e5"></td>
+                        </tr>
+                        <volist name="lineupSub" id="vo">
+                            <tr>
+
+                                <if condition="$i eq '1'">
+                                    <td width="60" rowspan="{$lineupSubCount}">替补</td>
+                                </if>
+                                <td width="540" class="alignLeft">
+                                    <div class="clearfix player_con">
+                                <span class="pull-left name">
+                                   <switch name="vo['home'][0]">
+                                        <case value="2">门将</case>
+                                        <case value="3">后卫</case>
+                                        <case value="4">中场</case>
+                                        <case value="5">前锋</case>
+                                        <default/><span class="pull-left name place"></span>
+                                    </switch>
+                               </span>
+                                        <em class="pull-left even">{$vo['home'][2]}</em>
+                                        <span class="pull-left even name clearfix">
+                                    <div class="fs28">{$vo['home'][1]}</div>
+                                </span>
+                                    </div>
+                                </td>
+                                <td width="540" class="alignRight">
+                                    <div class="clearfix player_con">
+                                 <span class="pull-right name">
+                                   <switch name="vo['away'][0]">
+                                        <case value="2">门将</case>
+                                        <case value="3">后卫</case>
+                                        <case value="4">中场</case>
+                                        <case value="5">前锋</case>
+                                        <default/><span class="pull-left name place"></span>
+                                    </switch>
+                               </span>
+                                        <em class="pull-right even num_red">{$vo['away'][2]}</em>
+                                        <span class="pull-right even name clearfix">
+                                    <div class="fs28">{$vo['away'][1]}</div>
+                                </span>
+                                    </div>
+
+                                </td>
+                                <if condition="$i eq '1'">
+                                    <td width="60" rowspan="{$lineupSubCount}">替补</td>
+                                </if>
+                            </tr>
+                        </volist>
+                    </notempty>
+
+                    </tbody>
+                </table>
+            </if>
+        </div>
+        <!-- 技术统计e -->
+    </div>
+</div>
+</block>

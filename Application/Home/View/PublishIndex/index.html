@@ -1,0 +1,416 @@
+<extend name="Public:layout"/>
+<block name="seo">
+    <title>全球体育新闻,竞彩推荐,赛事直播,足球指数,足彩推荐|全球体育网</title>
+    <meta name="keywords" content="全球体育资讯,新闻,国际足球新闻,国内足球,篮球新闻,综合体育,电竞,彩票资讯,视频集锦,英超,西甲,德甲,意甲,欧冠杯,亚冠,世界杯资讯">
+    <meta name="description" content="全球体育资讯网为您提供国际足球、国内足球、篮球、NBA、综合体育类的大型体育新闻网，包括电竞、彩票资讯、足球比分直播等一系列体育竞技类最新资讯，还有英雄联盟、DOTA2、绝地求生、王者荣耀的精彩手游类视频集锦。">
+</block>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/publish_index/news.css">
+</block>
+<block name="content">
+    <!-- top-center-con -->
+    <div class="top-center-con">
+        <div class="top-center">
+            <a href="{:U('/')}" class="indexLogo" title="全球体育"><img src="__IMAGES__/common/logo.png" width="169" height="52" alt="全球体育"></a>
+            <ul class="clearfix">
+                <li class="pull-left linkLi first linkLi01">
+                    <foreach name="topNav" item="v" key="k">
+                        <a href="{$v['url']}" title="{$v['name']}" target="_blank" <lt name="k" value="5">class="topLinka"</lt>>{$v['name']}</a>
+                    </foreach>
+                </li>
+                <li class="pull-left linkLi linkLi02">
+                    <foreach name="topNav2" item="v" key="k">
+                        <a href="{$v['url']}" title="{$v['name']}" target="_blank" <lt name="k" value="3">class="topLinka"</lt>>{$v['name']}</a>
+                    </foreach>
+                </li>
+                <li class="pull-left linkLi linkLi03">
+                    <foreach name="topNav3" item="v" key="k">
+                        <a href="{$v['url']}" title="{$v['name']}" target="_blank" <eq name="k" value="0">style="margin-right: 37px;"</eq> <lt name="k" value="2">class="topLinka"</lt>>{$v['name']}</a>
+                    </foreach>
+                </li>
+                <li class="pull-left linkLi linkLi04">
+                    <foreach name="topNav4" item="v" key="k">
+                        <a href="{$v['url']}" title="{$v['name']}" target="_blank" <lt name="k" value="2">class="topLinka"</lt>>{$v['name']}</a>
+                    </foreach>
+                </li>
+                <li class="pull-left linkLi last linkLi05">
+                    <foreach name="topNav5" item="v" key="k">
+                        <a href="{$v['url']}" title="{$v['name']}" target="_blank" <eq name="k" value="2">style="margin-right: 30px;"</eq> <lt name="k" value="4">class="topLinka"</lt>>{$v['name']} <eq name="v.name" value="专家说彩"><i class="hotIcon"></i></eq></a>
+                    </foreach>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- top-center-con -->
+    <!-- main -->
+    <div class="main">
+        <!-- ad -->
+        <a href="{$bigBanner[0]['url']}" target="_blank" title="全球体育" class="ad" style=" display: block; margin-bottom: 24px;"><img src="{$bigBanner[0]['img']}" width="1024" height="110" alt="全球体育"></a>
+        <!-- ad -->
+        <!-- 专题栏目 -->
+        <div class="topicMain clearfix">
+            <div class="pull-left topicLeft">
+                <!-- FootballTopic -->
+                <div class="FootballTopic">
+                    <!-- fbTopic -->
+                    <div class="ballTopic">
+                        <div class="pull-left leftTitle"><span class="glyphicon glyphicon-football"></span><strong>足球专栏</strong></div>
+                        <div class="pull-right rightNav">
+                            <foreach name="fbNav" item="v" key="k">
+                                <a href="{$v['url']}" target="_blank" title="{$v['name']}">{$v['name']}</a>
+                            </foreach>
+                        </div>
+                    </div>
+                    <!-- fbTopic -->
+                    <div class="typeNav"><div class="pull-left typeTitle"><strong>国际足球</strong></div></div>
+                    
+                    <!-- typeArtCon -->
+                    <div class="typeArtCon clearfix">
+                        <div class="pull-left typeArtLeft">
+                            <foreach name="newsTwo" item="v" key="k">
+                                <div class="typeArtBox <gt name='k' value='0'>typeArtBox02</gt>">
+                                    <nav class="typeArtNav">
+                                        <a style="cursor: default;" href="javascript:;" class="on" title="{$v['className']}">{$v['className']}</a>
+                                        <foreach name="v.subClass" item="v3" key="k3">
+                                            <a target="_blank" href="{$v3.href}" title="{$v3['name']}">{$v3['name']}</a>
+                                        </foreach>
+                                    </nav>
+                                    <ul class="typeArtUl <eq name='k' value='4'>noDashed</eq>">
+                                        <foreach name="v.list" item="v2" key="k2">
+                                            <li><a href="{$v2.href}" target="_blank" class="text-hidden" title="{$v2['title']}"><i></i>{$v2['title']}</a></li>
+                                        </foreach>
+                                    </ul>
+                                </div>
+                            </foreach>
+                        </div>
+                        <div class="pull-right typeArtRight">
+                            <ul class="recUl">
+                                <foreach name="newsTwoMiddle['list']" item="v" key="k">
+                                    <li>
+                                        <a href="{$v['href']}" target="_blank" class="clearfix" title="{$v['title']}">
+                                            <div class="pull-left recImg"><img src="{$v['img']}" width="104" height="72" alt="{$v['title']}"></div>
+                                            <div class="pull-left recArt">
+                                                <p class="text-hidden"><strong>{$v['title']}</strong></p>
+                                                <article>{$v['remark']} <span>[详情]</span></article>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </foreach>
+                            </ul>
+                            <div class="videoBox">
+                                <div class="clearfix titAndm">
+                                    <h4 class="pull-left"><strong>每日视频锦集</strong></h4>
+                                    <a href="{:U('/foot@video')}" target="_blank" class="f12 text-999 pull-right moreTit" title="每日视频锦集-更多">更多<span class="rightIcon"><i class="glyphicon glyphicon-menu-right"></i></span></a>
+                                </div>
+                                <ul class="clearfix videoBoxUl">
+                                    <foreach name="newsTwoMiddle['highlights']" item="v" key="k">
+                                        <li class="pull-left">
+                                            <a href="{$v['href']}" target="_blank" class="cmHover" title="{$v['title']}">
+                                                <div class="videoImg"><img class="lazy" data-original="{$v['img']}" width="104" height="72" alt="{$v['title']}"><i class="coverMask"></i><i class="playBtn"></i>
+                                                </div><p class="row-2">{$v['title']}</p>
+                                            </a>
+                                        </li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                            <div class="picBox">
+                                <div class="clearfix titAndm">
+                                    <h4 class="pull-left"><strong>足球精彩图片</strong></h4>
+                                    <a href="{:U('/photo_football@photo')}" target="_blank" class="f12 text-999 pull-right moreTit" title="足球精彩图片-更多">更多<span class="rightIcon"><i class="glyphicon glyphicon-menu-right"></i></span></a>
+                                </div>
+                                <ul class="clearfix picBoxUl">
+                                    <foreach name="newsTwoMiddle['gallery']" item="v" key="k">
+                                        <li class="pull-left" <gt name='k' value='1'>style="margin-bottom: 0"</gt>>
+                                            <a href="{$v['href']}" target="_blank" title="{$v['title']}">
+                                            <div class="picImg"><img class="lazy" data-original="{$v['img']}" width="158" height="110"></div>
+                                            <p class="text-hidden">{$v['title']}</p>
+                                            </a>
+                                        </li>
+                                    </foreach>
+                               </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- typeArtCon -->
+                    <!-- fbTopic -->
+                    <div class="typeNav"><div class="pull-left typeTitle"><strong>国内足球</strong></div><div class="pull-left typeNavList">
+                        <foreach name="newsTwoDown['fbNav']" item="v" key="k">
+                            <a href="{$v['url']}" target="_blank" title="{$v['name']}">{$v['name']}</a>
+                        </foreach>
+                    </div></div>
+                    <!-- typeArtCon -->
+                    <div class="typeArtCon clearfix localType">
+                        <div class="pull-left typeArtLeft">
+                            <ul class="recUl noDashed">
+                                <foreach name="newsTwoDown['list']" item="v" key="k">
+                                    <li>
+                                        <a href="{$v['href']}" target="_blank" class="clearfix" title="{$v['title']}">
+                                            <div class="pull-left recImg"><img class="lazy" data-original="{$v['img']}" width="104" height="72" alt="{$v['title']}"></div>
+                                            <div class="pull-left recArt">
+                                                <p class="text-hidden"><strong>{$v['title']}</strong></p>
+                                                <article>{$v['remark']}<span>[详情]</span></article>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                        <div class="pull-right typeArtRight">
+                            <div class="typeArtBox homeArtBox">
+                                <ul class="typeArtUl noDashed">
+                                    <foreach name="newsTwoDown['list2']" item="v" key="k">
+                                        <li><a href="{$v['href']}" target="_blank" class="text-hidden" title="{$v['title']}"><i></i>中国足球  |  {$v['title']}</a></li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                            <div class="videoBox homeVideoBox">
+                                <div class="clearfix">
+                                    <h4 class="pull-left"><strong>每日视频锦集</strong></h4>
+                                    <a href="{:U('/foot@video')}" target="_blank" class="f12 text-999 pull-right moreTit" title="每日视频锦集-更多">更多<span class="rightIcon"><i class="glyphicon glyphicon-menu-right"></i></span></a>
+                                </div>
+                                <ul class="clearfix videoBoxUl noDashed noPadBot noMarBot">
+                                    <foreach name="newsTwoDown['highlights']" item="v" key="k">
+                                        <li class="pull-left"><a href="{$v['href']}" target="_blank" class="cmHover" title="{$v['title']}"><div class="videoImg"><img class="lazy" data-original="{$v['img']}" width="104" height="72"><i class="coverMask"></i><i class="playBtn"></i></div><p class="text-hidden">{$v['title']}</p></a></li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- typeArtCon -->
+                </div>
+                <!-- FootballTopic -->
+                <!-- BasketballTopic -->
+                <div class="BasketballTopic">
+                    <!-- bsTopic -->
+                    <div class="ballTopic">
+                        <div class="pull-left leftTitle"><strong>篮球专栏</strong></div>
+                        <div class="pull-right rightNav">
+                            <foreach name="newsThird['bkNav']" item="v" key="k">
+                                <a href="{$v['url']}" target="_blank" title="{$v['name']}">{$v['name']}</a>
+                            </foreach>
+                        </div>
+                    </div>
+                    <!-- bsTopic -->
+                    <div class="typeNav"><div class="pull-left typeTitle"><strong>NBA</strong></div></div>
+                    <!-- typeArtCon -->
+                    <div class="typeArtCon clearfix nbaType">
+                        <div class="pull-left typeArtLeft">
+                            <div class="typeArtBox">
+                                <ul class="typeArtUl noDashed" style="margin-bottom: 20px; padding-top: 20px;">
+                                    <volist name="newsThird['nba2']" id="v" offset="0" length="6">
+                                        <li><a href="{$v['href']}" target="_blank" class="text-hidden" title="{$v['title']}"><i></i>{$v['title']}</a></li>
+                                    </volist>
+                                </ul>
+                                <ul class="typeArtUl noDashed" style="padding-top: 20px; padding-bottom: 20px;">
+                                    <volist name="newsThird['nba2']" id="v" offset="5" length="6">
+                                        <li><a href="{$v['href']}" target="_blank" class="text-hidden" title="{$v['title']}"><i></i>{$v['title']}</a></li>
+                                    </volist>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pull-right typeArtRight">
+                            <ul class="recUl">
+                                <foreach name="newsThird['nba1']" item="v" key="k">
+                                    <li style="margin-bottom: 20px;">
+                                        <a href="{$v['href']}" target="_blank" class="clearfix" title="{$v['title']}">
+                                            <div class="pull-left recImg"><img class="lazy" data-original="{$v['img']}" width="104" height="72" alt="{$v['title']}"></div>
+                                            <div class="pull-left recArt">
+                                                <p class="text-hidden"><strong>{$v['title']}</strong></p>
+                                                <article>{$v['remark']}... <span>[详情]</span></article>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </foreach>
+                            </ul>
+                            <div class="videoBox">
+                                <div class="clearfix titAndm">
+                                    <h4 class="pull-left"><strong>视频中心</strong></h4>
+                                    <a href="{:U('/nba@video')}" target="_blank" class="f12 text-999 pull-right moreTit" title="视频中心-更多">更多<span class="rightIcon"><i class="glyphicon glyphicon-menu-right"></i></span></a>
+                                </div>
+                                <ul class="clearfix videoBoxUl noDashed noMarBot noPadBot">
+                                    <foreach name="newsThird['nba3']" item="v" key="k">
+                                        <li class="pull-left"><a href="{$v['href']}" target="_blank" class="cmHover" title="{$v['title']}"><div class="videoImg"><img class="lazy" data-original="{$v['img']}" width="104" height="72" alt="{$v['title']}"><i class="coverMask"></i><i class="playBtn"></i></div><p class="row-2">{$v['title']}</p></a></li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- typeArtCon -->
+                    <div class="typeNav"><div class="pull-left typeTitle"><strong>CBA</strong></div></div>
+                    <!-- typeArtCon -->
+                    <div class="typeArtCon clearfix cbaType">
+                        <div class="pull-left typeArtLeft">
+                            <ul class="recUl noDashed">
+                                <foreach name="newsThird['cba1']" item="v" key="k">
+                                    <li>
+                                        <a href="{$v['href']}" target="_blank" class="clearfix" title="{$v['title']}">
+                                            <div class="pull-left recImg"><img class="lazy" data-original="{$v['img']}" width="104" height="72" alt="{$v['title']}"></div>
+                                            <div class="pull-left recArt">
+                                                <p class="text-hidden"><strong>{$v['title']}</strong></p>
+                                                <article>{$v['remark']}... <span>[详情]</span></article>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                        <div class="pull-right typeArtRight">
+                            <div class="typeArtBox homeArtBox">
+                                <ul class="typeArtUl noDashed">
+                                    <foreach name="newsThird['cba2']" item="v" key="k">
+                                        <li><a href="{$v['href']}" target="_blank" class="text-hidden" title="{$v['title']}"><i></i>中国篮球  |  {$v['title']}</a></li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                            <div class="videoBox">
+                               <div class="clearfix">
+                                    <h4 class="pull-left"><strong>视频中心</strong></h4>
+                                    <a href="{:U('/cba@video')}" target="_blank" class="f12 text-999 pull-right moreTit" title="{$v['title']}">更多<span class="rightIcon"><i class="glyphicon glyphicon-menu-right"></i></span></a>
+                                </div>
+                                <ul class="clearfix videoBoxUl noDashed noPadBot noMarBot">
+                                    <foreach name="newsThird['cba3']" item="v" key="k">
+                                        <li class="pull-left"><a href="{$v['href']}" target="_blank" class="cmHover" title="{$v['title']}"><div class="videoImg"><img class="lazy" data-original="{$v['img']}" width="104" height="72" alt="{$v['title']}"><i class="coverMask"></i><i class="playBtn"></i></div><p class="text-hidden">{$v['title']}</p></a></li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- typeArtCon -->
+                </div>
+                <!-- BasketballTopic -->
+                <!-- ComsportsTopic -->
+                <div class="ComsportsTopic">
+                    <!-- comsTopic -->
+                    <div class="ballTopic">
+                        <div class="pull-left leftTitle"><strong>综合体育</strong></div>
+                        <div class="pull-right rightNav">
+                            <foreach name="newsFour['sportNav']" item="v" key="k">
+                                <a href="{$v['url']}" target="_blank" title="{$v['name']}">{$v['name']}</a>
+                            </foreach>
+                        </div>
+                    </div>
+                    <!-- comsTopic -->
+                    <!-- typeArtCon -->
+                    <div class="typeArtCon clearfix comsType">
+                        <div class="pull-left typeArtLeft">
+                            <foreach name="newsFour['list1']" item="v" key="k">
+                                <div class="typeArtBox <gt name='k' value='0'>typeArtBox02</gt>">
+                                    <nav class="typeArtNav">
+                                        <a href="javascript:void(0);" class="on" title="{$v['className']}">{$v['className']}</a>
+                                    </nav>
+                                    <ul class="typeArtUl <eq name='k' value='3'>noDashed</eq>">
+                                        <foreach name="v.list" item="v2" key="k2">
+                                            <li>
+                                                <a href="{$v2['href']}" target="_blank" class="text-hidden" title="{$v2['title']}"><i></i>{$v2['title']}</a>
+                                            </li>
+                                        </foreach>
+                                    </ul>
+                                </div>
+                            </foreach>
+                        </div>
+                        <div class="pull-right typeArtRight">
+                            <!--
+                            <ul class="recUl">
+                                <foreach name="newsFour['list2']" item="v" key="k">
+                                    <li>
+                                        <a href="{$v['href']}" target="_blank" class="clearfix">
+                                            <div class="pull-left recImg"><img class="lazy" data-original="{$v['img']}" width="104" height="72" alt="{$v['title']}"></div>
+                                            <div class="pull-left recArt">
+                                                <p class="text-hidden"><strong>{$v['title']}</strong></p>
+                                                <article>{$v['remark']}... <span>[详情]</span></article>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </foreach>
+                            </ul>
+                            -->
+                            <div class="videoBox">
+                                <div class="clearfix titAndm" style="margin-bottom: 10px;">
+                                    <h4 class="pull-left"><strong>视频中心</strong></h4>
+                                    <a href="{:U('/others@video')}" target="_blank" class="f12 text-999 pull-right moreTit" title="视频中心-更多">更多<span class="rightIcon"><i class="glyphicon glyphicon-menu-right"></i></span></a>
+                                </div>
+                                <ul class="clearfix videoBoxUl" style="padding-bottom: 20px;">
+                                    <foreach name="newsFour['highlights']" item="v" key="k">
+                                        <li class="pull-left"><a href="{$v['href']}" target="_blank" class="cmHover" title="{$v['title']}"><div class="videoImg"><img class="lazy" data-original="{$v['img']}" width="104" height="72" alt="{$v['title']}"><i class="coverMask"></i><i class="playBtn"></i></div><p class="row-2">{$v['title']}</p></a></li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                            <div class="picBox">
+                                <div class="clearfix titAndm" style="margin-bottom: 10px;">
+                                    <h4 class="pull-left"><strong>图片中心</strong></h4>
+                                    <a href="{:U('/photo_allsports@photo')}" target="_blank" class="f12 text-999 pull-right moreTit" title="图片中心">更多<span class="rightIcon"><i class="glyphicon glyphicon-menu-right"></i></span></a>
+                                </div>
+                                <ul class="clearfix picBoxUl noDashed noPadBot noMarBot">
+                                    <foreach name="newsFour['gallery']" item="v" key="k">
+                                        <li class="pull-left" style="margin-bottom: 30px;"><a href="{$v['href']}" target="_blank" title="{$v['title']}"><div class="picImg"><img class="lazy" data-original="{$v['img']}" width="158" height="110"></div><p class="text-hidden">{$v['title']}</p></a></li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- typeArtCon -->
+                </div>
+                <!-- ComsportsTopic -->
+                <!-- GameTopic -->
+                <div class="GameTopic">
+                    <!-- mymTopic -->
+                    <div class="ballTopic">
+                        <div class="pull-left leftTitle"><strong>电竞专区</strong></div>
+                        <div class="pull-right rightNav">
+                            <foreach name="newsFourGame['gameNav']" item="v" key="k">
+                                <a href="{$v['url']}" target="_blank" title="{$v['name']}">{$v['name']}</a>
+                            </foreach>
+                        </div>
+                    </div>
+                    <!-- mymTopic -->
+                    <!-- typeArtCon -->
+                    <div class="typeArtCon clearfix mymType">
+                        <div class="pull-left typeArtLeft">
+                            <ul class="recUl noMarBot">
+                                <li class="lastRecLi" style="margin-bottom: 20px;">
+                                    <a href="{$newsFourGame['list'][0]['href']}" target="_blank" class="clearfix" title="{$newsFourGame['list'][0]['className']}">
+                                        <div class="pull-left recImg"><img class="lazy" data-original="{$newsFourGame['list'][0]['img']}" width="104" height="72" alt="{$newsFourGame['list'][0]['title']}"></div>
+                                        <div class="pull-left recArt">
+                                            <p class="text-hidden"><strong>[ {$newsFourGame['list'][0]['className']} ] {$newsFourGame['list'][0]['title']}</strong></p>
+                                            <article>{$newsFourGame['list'][0]['remark']}... <span>[详情]</span></article>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="typeArtBox">
+                                <ul class="typeArtUl noDashed">
+                                    <foreach name="newsFourGame['list']" item="v" key="k">
+                                        <gt name="k" value="0">
+                                        <li><a href="{$v['href']}" target="_blank" class="text-hidden" title="{$v['title']}"><i></i>{$v['className']}  |  {$v['title']}</a></li>
+                                        </gt>
+                                    </foreach>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pull-right typeArtRight">
+                            <div class="videoBox">
+                                <div class="clearfix">
+                                    <h4 class="pull-left"><strong>视频中心</strong></h4>
+                                    <a href="{:U('/esports@video')}" target="_blank" class="f12 text-999 pull-right moreTit" title="视频中心-更多">更多<span class="rightIcon"><i class="glyphicon glyphicon-menu-right"></i></span></a>
+                                </div>
+                                <ul class="clearfix videoBoxUl noDashed noPadBot noMarBot">
+                                    <foreach name="newsFourGame['highlights']" item="v" key="k">
+                                        <li class="pull-left" style="margin-bottom:20px;"><a href="{$v['href']}" target="_blank" class="cmHover" title="{$v['title']}"><div class="videoImg"><img class="lazy" data-original="{$v['img']}" width="104" height="72" alt="{$v['title']}"><i class="coverMask"></i><i class="playBtn"></i></div><p class="row-2">【{$v['className']}】{$v['title']}</p></a></li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- typeArtCon -->
+                </div>
+                <!-- GameTopic -->
+            </div>
+            
+        </div>
+        <!-- 专题栏目 -->
+    </div>
+    <!-- main -->
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/index/index.js?v2"></script>
+</block>

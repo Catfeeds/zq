@@ -1,0 +1,131 @@
+<extend name="Public/tpl-detail" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/team_data.css"> 
+</block>
+<block name="content">
+	   <!-- 内容 s -->
+	   <section class="odds_con clearfix">
+       		<!-- 数据导航s -->
+	   	    <nav class="odd_nav">
+                <ul>
+                  <li><a href="{:U('Details/event_case',array('scheid'=>$_GET['scheid']))}">赛况</a></li>
+                  <li class="on"><a href="{:U('Details/event_technology',array('scheid'=>$_GET['scheid']))}">技术</a></li>
+                  <li><a href="{:U('Details/event_squad',array('scheid'=>$_GET['scheid']))}">阵容</a></li>
+                </ul> 
+             </nav>
+             <!-- 数据导航e --> 
+			<!-- 球队统计and比赛事件s -->
+            <div class="data_title">
+            	比赛事件
+            </div>
+            <div class="compare-data">
+                <div class="item">
+                    <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                        <tbody>
+                                                <volist name='action' id='v'>
+                                <php>
+                                    if($v[2]==11){
+                                        $swop=str_replace('↓','',$v[6]);
+                                        $swop=explode('↑',$swop);
+                                    }
+                                </php>
+                            <tr>
+                                <td width="50%" class="alignRight">
+                                    <eq name='v[1]' value='1'>                           
+                                        <div class="clearfix">
+                                            <eq name='v.2' value='11'>
+                                                <div class="clearfix">
+                                                    <span class="fr even evenImg"><img src="__IMAGES__/in.png"></span>
+                                                    <span class="fr even">{$swop[1]}</span>
+                                                </div>
+                                                <div class="clearfix">
+                                                    <span class="fr even evenImg"><img src="__IMAGES__/out.png"></span>
+                                                    <span class="fr even">{$swop[0]}</span>
+                                                </div>
+                                            <else/>
+                                            <span class="fr even evenImg"><img 
+                                                    <switch name="v.2">
+                                                    <case value="1"><img src='__IMAGES__/jinqiu.png'></case>
+                                                    <case value="2"><img src='__IMAGES__/red-card.png'></case>
+                                                    <case value="3"><img src='__IMAGES__/yellow-card.png'></case>
+                                                    <case value="7"><img src='__IMAGES__/penalty.png'></case>
+                                                    <case value="8"><img src='__IMAGES__/oolong.png'></case>
+                                                    <case value="13"><img src='__IMAGES__/13.png'></case>
+                                                    </switch>
+                                                    </span>
+                                            <span class="fr even name">{$v.6}</span>
+                                            </eq>
+                                        </div>
+                                    <else/>
+                                	<div class="clearfix">
+                                    	<span class="fr even">{$v.3}'</span>
+                                    </div>
+                                    </eq>
+                                </td>
+                                <td class="centerlLine">
+                                    <div class="mid">
+                                        <div class="time"></div>
+                                    </div>
+                                </td>
+                                <td width="50%" class="alignLeft">
+                                    <eq name='v[1]' value='1'>
+                                    <div class="clearfix">
+                                    	<span class="fl even">{$v.3}'</span>
+                                    </div>
+                                    <else/>
+                                    <div class="clearfix">
+                                        <eq name='v.2' value='11'>
+                                                <div class="clearfix">
+                                                    <span class="fl even evenImg"><img src="__IMAGES__/in.png"></span>
+                                                    <span class="fl even">{$swop[1]}</span>
+                                                </div>
+                                                <div class="clearfix">
+                                                    <span class="fl even evenImg"><img src="__IMAGES__/out.png"></span>
+                                                    <span class="fl even">{$swop[0]}</span>
+                                                </div>
+                                            <else/>
+                                            <span class="fl even evenImg"><img 
+                                                    <switch name="v.2">
+                                                <case value="1"><img src='__IMAGES__/jinqiu.png'></case>
+                                                <case value="2"><img src='__IMAGES__/red-card.png'></case>
+                                                <case value="3"><img src='__IMAGES__/yellow-card.png'></case>
+                                                <case value="7"><img src='__IMAGES__/penalty.png'></case>
+                                                <case value="8"><img src='__IMAGES__/oolong.png'></case>
+                                                <case value="13"><img src='__IMAGES__/13.png'></case>
+                                                    </switch>
+                                                    </span>
+                                            <span class="fl even name">{$v.6}</span>
+                                            </eq>
+                                        </div>
+                                    </eq>
+                                </td>
+                            </tr>
+                            </volist>
+                            </tr>                        </tbody>
+                    </table>
+                </div>
+            <div class="data_title">
+                球队统计
+            </div>
+            	<table class="table" width="100%" cellpadding="0" cellspacing="0">
+                    <volist name="data" id="v">
+                	<tr>
+                    	<td width="8%">{$v.1}</td>
+                        <td width="35%">
+                        	<div class="expand-percent alignRight"><span class="expand" style="width: {$v.homerate}%"></span></div>
+                        </td>
+                        <td width="14%">{$v.title}</td>
+                        <td width="35%">
+                        	<div class="expand-percent alignLeft"><span class="expand" style="width: {$v.awayrate}%"></span></div>
+                        </td>
+                        <td width="8%">{$v.2}</td>
+                    </tr>
+                    </volist>
+                </table>
+            </div>
+            <!-- 球队统计and比赛事件e -->
+         
+	   </section>
+	   <!-- 内容 e -->
+</block>

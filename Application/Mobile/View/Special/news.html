@@ -1,0 +1,106 @@
+<extend name="Public/base" />
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/special/news.css?v=20180601614">
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file="Public:titleHead"/>
+</block>
+<!-- 二级头部 e -->
+<block name="nav"></block>
+<block name="content">
+        <!-- 主体内容 -->
+        <section class="container">
+            <div class="head-tit">
+                <h1>{$list['title']}</h1>
+            </div>
+            <!-- 用户信息 -->
+            <div class="user-generated clearfix">
+                <a class="fl clearfix " href="<if condition="$_GET['header'] eq no">javascript:;<else/>{:U('/expUser/'.$list['user_id'])}</if>" title="{$list['nick_name']}">
+                    <div class="user-phone"><img src="{$list['face']}"></div>
+                    <div class="userall clearfix">
+                        <div class="user-name">
+                            <span class="user-n">{$list['nick_name']}</span>
+                            <if condition="$list['specialName'] neq ''"><span class="label-n">{$list['specialName']}</span></if>
+                        </div>
+                        <div class="time-n">{$list['add_time']|date="Y-m-d H:i:s",###}</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 法甲 -->
+            <if condition="$game['game_id'] neq '' or $game['gamebk_id'] neq ''">
+                <div class="ligue">
+                    <div class="single clearfix">
+                        <span class="left"><a><img src="{$game.homeTeamLogo}"></a></span>
+                        <span class="middle">
+                        <div class="mtop">
+                            <ul>
+                                <li class="fajia">{$game.union_name|switchName=0,###}</li>
+                                <li class="week">{$game.bet_code} {$game.gtime|date="Y-m-d H:i",###}</li>
+                            </ul>
+                        </div>
+                        <div class="mbottom">
+                            <ul>
+                                <li class="monicker">{$game.home_team_name|switchName=0,###}</li>
+                                <li class="vs">VS</li>
+                                <li class="reputation">{$game.away_team_name|switchName=0,###}</li>
+                            </ul>
+                        </div>
+                    </span>
+                        <span class="right"><a><img src="{$game.awayTeamLogo}"></a></span>
+                    </div>
+                    <div class=" twin">
+                        <ul>
+                            <li class="move"><a href="{:U('Details/odds_asia',['scheid'=>$game['game_id']])}">亚盘</a></li>
+                            <li class="move"><a href="{:U('Details/odds_euro',['scheid'=>$game['game_id']])}">欧赔</a></li>
+                            <li class="move"><a href="{:U('Details/data',['scheid'=>$game['game_id']])}">分析</a></li>
+                            <li><a href="{:U('Details/odd_guess',['scheid'=>$game['game_id'],'gambleType'=>1])}">高手推荐</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </if>
+            <!-- 赛事信息 -->
+            <div class="RacingDiscuss">
+                <div class="article_main">
+                    {$list['content']}
+                </div>
+
+                <!--引入玩法选择页面-->
+                <if condition="$game['game_id'] neq '' or $game['gamebk_id'] neq ''"><include file="content_game"/></if>
+
+                <div class="state">
+                    <span>声明：本文由入驻的作者编辑撰写，除官方账号外，观点仅代表作者本人，不代表本网站立场，如有侵犯您的知识产权的作品和其它问题，请与我们取得联系，我们会及时修改或删除</span>
+                </div>
+                <neq name="_GET['header']" value="no">
+                <div class="tally">
+                    <volist name="list['label']" id="v">
+                        <span> <a href="{$v['url']}" title="{$v['name']}">{$v['name']}</a></span>
+                    </volist>
+                </div>
+                </neq>
+
+            </div>
+            <if condition="$moreUrl neq ''">
+            <div class="more">
+                <a href="{$moreUrl}<eq name="_GET['header']" value="no">?header=no</eq>"><span>点击查看更多<img src="__IMAGES__/index/more.png"></span></a>
+            </div>
+            </if>
+            <eq name="_GET['header']" value="no">
+                <include file="Public:go_back_pack"/>
+            </eq>
+        </section>
+</block>
+<block name='scripts'>
+    <script>
+        var class_id = "{$list['class_id']}";
+        var _time = "{:time()}";
+        var moreUrl = "{$moreUrl}";
+        var pageNum = 2;
+        var htmlData = "";
+        <eq name="_GET['header']" value="no">pageNum = 99999;htmlData = '?header=no';</eq>
+    </script>
+    <script type="text/javascript" src="__JS__/special/news.js?v20180604"></script>
+</block>
+

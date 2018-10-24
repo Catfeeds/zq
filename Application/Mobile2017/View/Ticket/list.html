@@ -1,0 +1,259 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>手机全球体育网_即时足球比分,比分直播,足球直播,比分预测,赔率分析</title>
+</block>
+
+<!-- 本页需要引用的css -->
+<block name="append">
+    <!-- 页面所需css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/coupon/coupon.css">
+</block>
+
+<block name="nav"></block>
+<block name="header"></block>
+<!-- 内容 -->
+<block name="content">
+	<header id="other_header">
+        <a href="javascript:history.go(-1)"></a>
+        购买体验卷
+    </header>
+
+    <if condition="count($list) gt 0">
+    <section class="conBuy">
+        <div class="buyBox" id="js-list">
+                <foreach name="list" item="v" >
+                    <div href="javascript:;" class="item clearfix" >
+                        <div class="fr buyItemR <if condition="$v['rest_num'] eq 0">noneBuy</if>">
+                            <p class="fs26">数量</p>
+                            <p><strong><span>{$v['rest_num']}</span>/{$v['totle_num']}</strong></p>
+                            <if condition="$v['rest_num'] eq 0">
+                                <p><a href="javascript:;" class="buyBtn buyBtnOn buyBtnDet">已抢光</a></p>
+                            <else />
+                                <if condition="$v['is_buy'] eq 1">
+                                    <p><a href="javascript:;" class="buyBtn buyBtnDet">已抢购</a></p>
+                                <else />
+                                    <p><a href="javascript:;" ticketid="{$v['id']}" price="{$v['sale']}" class="buyBtn buyBtnOn ticketClass">抢购</a></p>
+                                </if>
+                            </if>
+                            <i class="halfTop"></i>
+                        </div>
+                        <div class="fl buyItemL clearfix">
+                            <div class="fl textLeft">
+                                <p class="fs24"><span>{$v['sale']}</span>元</p>
+                                <i class="mark">体验券</i>
+                            </div>
+                            <div class="fr textRight">
+                                <p class="fs34">{$v['name']}</p>
+                                <p class="text-666 fs24">有效期至{$v['over_time']|date="Y.m.d",###}</p>
+                            </div>
+                        </div>
+                    </div>
+                </foreach>
+        </div>
+    </section>
+    <else />
+    <section class="conBlock">
+        <ul class="clearfix">
+            <li class="conList">
+                <div class="couponBox">
+                    <div class="noPonCon">
+                        <i class="noPon"></i>
+                        <p class="text-999 q-tc fs34">暂无优惠卷</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <input type="hidden" name="noticket" id="noticket" value="1" />
+    </section>
+    </if>
+
+    <input type="hidden" id="auto_load" value="1">
+    <input type="hidden" name="page" id="page" value="{$page}" />
+    <input type="hidden" name="total_coin" id="total_coin" value="{$total_coin}" />
+    <input type="hidden" id="ticketid" name="ticketid" value="">
+    <div class="paged boxs" style="display: none">
+        <div class="load_gif fs24 text-999" >
+            <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+            <span>正在加载更多的数据...</span>
+        </div>
+        <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已经全部加载完毕</a>
+    </div>
+
+    <!-- 模态窗口开始 -->
+    <div class="modal in modal-raduis other_div1" style="display: none">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title green">温馨提示</h4>
+                <p></p>
+                <div class="modalBtn clearfix">
+                    <a href="javascript:;" class="fl btnGreen lookBtn1">确定</a>
+                    <a href="javascript:;" class="fr btnDefaut closeBtn1">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal in modal-raduis other_div2" style="display: none">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title green">温馨提示</h4>
+                <p>购买此体验券需要花费64金币(限购一张)</p>
+                <div class="modalBtn clearfix">
+                    <a href="javascript:;" class="fl btnGreen lookBtn2">充值</a>
+                    <a href="javascript:;" class="fr btnDefaut exchangeBtn1">兑换</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="bg" class="modal-backdrop" style="z-index: 1040;display: none"></div>
+</block>
+
+<block name="scripts">
+    <script type="text/javascript">
+        $(function(){
+            $('.ticketClass').click(function(){
+                var coin = $('#total_coin').val();
+                var sale = $(this).attr('price');
+
+                if(parseInt(coin) < parseInt(sale)){
+                    $('.other_div2').find('p').html('购买此体验券需要花费'+sale+'金币，您的金币不足，请充值或用积分兑换');
+                    $('#bg').show();
+                    $('.other_div2').show();
+                }else{
+                    $('.other_div1').find('p').html('购买此体验券需要花费'+sale+'金币(限购一张)');
+                    $('#bg').show();
+                    $('.other_div1').show();
+                    var id = $(this).attr('ticketid');
+                    $('#ticketid').val(id);
+                }
+            });
+
+            $('.lookBtn1').click(function(){
+                var id = $('#ticketid').val();
+
+                $.ajax({
+                    type: 'post',
+                    url: "/Ticket/buyTicket.html",
+                    async: false,
+                    data: {id: id},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 1) {
+                            alert(data.info);
+                            window.location.reload();
+                        } else {
+                            alert(data.info);
+                        }
+                    }
+                });
+            });
+
+            $('.closeBtn1').click(function(){
+                $('#bg').hide();
+                $('.other_div1').hide();
+                $('#ticketid').val(0);
+            });
+
+            $('.lookBtn2').click(function(){
+                window.location.href = '/Pay/index';
+            });
+
+            $('.exchangeBtn1').click(function(){
+                window.location.href = '/Guess/exchange';
+            });
+        });
+
+        //加载更多方法
+        $(function () {
+            //没有优惠券就不显示
+            var noticket = $('#noticket').val();
+            if(noticket == 1){
+                $(".paged").hide();
+                return false;
+            }
+
+            $("#auto_load").val(1);
+            var flag = false;
+
+            if ($(".item").size() <= 10)
+            {
+                $("#auto_load").val(0);
+                $(".paged").show();
+                $(".load_gif").hide();
+                $("#showLess").show();
+            }
+
+            //滚动加载滚动---亚盘、竞彩
+            $(window).scroll(function () {
+                var auto_load = $("#auto_load").val();
+                if (auto_load == 0) {
+                    $(".paged").show();
+                    return false;
+                }
+
+                //初始状态，如果没数据return ,false;否则
+                if ($(".item").size() <= 0) {
+                    $(".paged").show();
+                    return false;
+                } else {
+                    //$(window).scrollTop()这个方法是当前滚动条滚动的距离
+                    //$(window).height()获取当前窗体的高度
+                    //$(document).height()获取当前文档的高度
+                    var bot = 100; //bot是底部距离的高度
+                    //当底部基本距离+滚动的高度〉=文档的高度-窗体的高度时；
+                    if (($(window).scrollTop()) >= ($(document).height() - $(window).height() - bot)) {
+                        if (auto_load == 1) {
+                            $("#auto_load").val(0);
+                            getListMore();
+                        }
+                    }
+                }
+            });
+
+            function getListMore(){
+                // 初始化页面，点击事件从第二页开始
+                var page = $('#page').val();
+                page++;
+
+                $.ajax({
+                    type: 'post',
+                    url: "/Ticket/ticketList.html",
+                    async : false,
+                    data: {page: page},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 1)
+                        {
+                            var list = data.list;
+                            if (list != '') {
+                                $('#js-list').append(list);
+                                $("#auto_load").val(1);
+
+                                if (data.num < 20) {
+                                    $("#auto_load").val(0);
+//                                    $(".paged").show();
+                                    $(".load_gif").hide();
+                                    $("#showLess").show();
+                                    flag = true;
+                                }
+                            } else{
+                                $("#auto_load").val(0);
+//                                $(".paged").show();
+                                $(".load_gif").hide();
+                                $("#showLess").show();
+                                flag = true;
+                            }
+                        }else {
+                            $('#dailogContent').html('连接失败');
+                            $('#dailogFixBox').css({'display':'block'});
+                        }
+                    },
+
+                    complete:function () {
+                        $('#page').val(page);
+                    }
+                });
+            }
+        });
+    </script>
+</block>

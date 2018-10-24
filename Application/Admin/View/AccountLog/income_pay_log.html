@@ -1,0 +1,143 @@
+<form id="pagerForm" action="__URL__/income_pay_log" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+    <volist name="map" id="m">
+        <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);"  method="post">
+        <div class="searchBar">
+            <input type="hidden" name="game_type" value="{$_REQUEST.game_type}">
+            <ul class="searchContent">
+                <li style="width: auto;margin-right: 25px;">
+                    <label>日期：</label>
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="11">至
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="11">
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+
+        <ul class="toolBar">
+            <li>
+                <span style='color:red;padding-left:0px;'>
+                    充值总金额：{$gainCoin|default=0}；
+                </span>
+            </li>
+            <li>
+                <span style='color:red;padding-left:0px;'>
+                    支付宝(自)：{$totalAliPay|default=0}；
+                </span>
+            </li>
+            <li>
+                <span style='color:red;padding-left:0px;'>
+                    微信(自)：{$totalWeChatPay|default=0}；
+                </span>
+            </li>
+            <li>
+                <span style='color:red;padding-left:0px;'>
+                    易宝(自)：{$totalYeepay|default=0}；
+                </span>
+            </li>
+             <li>
+                <span style='color:red;padding-left:0px;'>
+                    移动(自)：{$totalMobilePay|default=0}；
+                </span>
+            </li>
+             <li>
+                <span style='color:red;padding-left:0px;'>
+                    苹果(自)：{$totalApplePay|default=0};
+                </span>
+            </li>
+             <li>
+                <span style='color:red;padding-left:0px;'>
+                    苹果充值测试(自)：{$totalApplePayTest|default=0}；
+                </span>
+            </li>
+             <li>
+                <span style='color:blue;padding-left:0px;'>&nbsp&nbsp
+                    营销支出：{$totalMarketingNum|default=0}；
+                </span>
+            </li>
+             <li>
+                <span style='color:blue;padding-left:0px;'>
+                    总提款金额：{$totaldrawCoinSum|default=0}；
+                </span>
+            </li>
+             <li>
+                <span style='color:blue;padding-left:0px;'>
+                    提款笔数：{$totaldrawNum|default=0}；
+                </span>
+            </li>
+             <li>
+                <span style='color:blue;padding-left:0px;'>
+                    总转账手续费：{$totaldrawNumSum|default=0}；
+                </span>
+            </li>
+             <li>
+                <span style='color:blue;padding-left:0px;'>
+                    系统扣除：{$totalsysCoinSum|default=0}；
+                </span>
+            </li>
+
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'operation_time')"> class="desc"</if> orderField="operation_time" <if condition="$_REQUEST._order eq 'operation_time'">class="{$_REQUEST._sort}"</if>>日期</th>
+            <th>总充值金额</th>
+            <th>支付宝(自动充值)</th>
+            <th>微信(自动充值)</th>
+            <th>易宝(自动充值)</th>
+            <th>移动(自动充值)</th>
+            <th>苹果(自动充值)</th>
+            <th>苹果充值测试(自动充值)</th>
+            <th>营销支出</th>
+            <th>总提款金额</th>
+            <th>提款笔数</th>
+            <th>总转账手续费</th>
+            <th>系统扣除</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <volist id="vo" name="list">
+            <tr target="sid_user" rel="{$vo['id']}">
+                <td >{$vo['operation_time']|date='Y/m/d',###}</td>
+                <td>{$vo['alipay']+$vo['weChatPay']+$vo['yeepay']+$vo['mobilePay']+$vo['applePay']+$vo['applePayTest']+$vo['manualRecharge']}</td>
+                <td>{$vo['alipay']|default=0}</td>
+                <td>{$vo['weChatPay']|default=0}</td>
+                <td>{$vo['yeepay']|default=0}</td>
+                <td>{$vo['mobilePay']|default=0}</td>
+                <td>{$vo['applePay']|default=0}</td>
+                <td>{$vo['applePayTest']|default=0}</td>
+                <td>{$vo['MarketingNum']|default=0}</td>
+                <td>{$vo['drawCoinSum']|default=0}</td>
+                <td>{$vo['drawNum']|default=0}</td>
+                <td>{$vo['poundageSum']|default=0}</td>
+                <td>{$vo['sysCoinSum']|default=0}</td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+
+

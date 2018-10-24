@@ -1,0 +1,364 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>全球体育网</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/activity/master_sele.css">
+
+</block>
+<block name="header"></block>
+<block name="body">
+
+</block>
+<block name="nav">
+
+</block>
+<!-- 内容 s -->
+<block name="content">
+    <section class="ms_bg">
+<div class="logo"></div>
+        <div class="logo_right"><a href="{:U('Index/index')}"></a></div>
+<div class="top_back" onclick="history.go(-1)"></div>
+        <section class="ms_tip">
+            <p>各国赛事激战连场，全球体育专家团推介全面飘红！</p>
+            <p>周胜率达90%！这么高命中率不相信？</p>
+            <p>现在我们推出免费产品体验！就让你相信！</p>
+            <p>精选4个专家覆盖大小联赛，价值512元推介免费送！</p>
+            <p>免费获取精准推介助您畅赢足球赛场！</p>
+            <p>重要事情说三遍，免费的！免费的！免费的！</p>
+        </section>
+        <!-- 挑选高手推介 s-->
+        <section class="master_list clearfix">
+            <div class="master_title"><img src="__IMAGES__/activity/masterSele/master_title.png" alt="挑选高手推介"></div>
+            <div class="ms_list_con">
+                <ul>
+                    <volist name="list" id="vo">
+                        <li data-id="{$vo['id']}">
+                            <div class="head"><img src="{$vo['head']}" alt="头像"></div>
+                            <div class="head_top"></div>
+                            <p><span>{$vo['master_name']}</span><em>胜率: {$vo['winrate']}%</em></p>
+                            <p>{$vo['descript']}</p>
+                            <div class="check_box <if condition="$key eq '0'">on</if>"></div>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+        </section>
+        <!-- 挑选高手推介 e-->
+
+
+     
+
+
+    </section>
+
+            
+
+           <section class="tel_con">
+
+            <section class="get_msg">
+                 <div class="get_type"><img src="__IMAGES__/activity/masterSele/get1.png" alt="获取一"></div>
+                 <div class="get_word">关注微信号“qqtyvip”，可获得<span>推介2场</span></div>
+
+                 <div class="get_ewm"><img src="__IMAGES__/activity/masterSele/ewm.png" alt="二维码"></div>
+
+                 <div class="get_type"><img src="__IMAGES__/activity/masterSele/get2.png" alt="获取一"></div>
+                 <div class="get_word">新注册用户填写手机号码并提交后，可获得<span>推介1场</span></div>
+            </section>
+
+            <!-- <div class="get_now"><img src="__IMAGES__/activity/masterSele/get_now.png" alt=""></div> -->
+            <div class="tel" style="padding-top: .2rem">手机号码：<input id="phone" type="text" name="phone"></div>
+            <div class="tel clearfix" style="margin-top: .2rem;">
+                <div class="word_code">验 &nbsp;证&nbsp;码：</div>
+                <div class="txt_code">
+                    <input type="text" id="captcha" name="captcha">
+                    <a href="javascript:;" class="get_code">获取验证码</a>
+                </div>
+            </div>
+            <div class="tel_tip">输入手机号码，我们将通过短信或者APP推送的方式发送到您手机上</div>
+            <!--<div class="sub_btn"><a href="javascript:;" <if condition="$logCount EGT '50'">class="gray" style="background-color:#999;border-bottom:#999;"</if>>提交</a></div>-->
+            <div class="sub_btn"><a href="javascript:;">提交</a></div>
+        </section>
+
+    <section class="footer">
+        <div><span> 注意：</span></div>
+        <p>1、新注册的用户填写手机号码并提交后，次日免费获赠所选
+专家1场精准推介！每天限量名额30个，活动每天任何时段
+均可申请！本次活动解释权归全球体育所有！</p>
+        <p>2、关注微信号“qqtyvip”的新用户，次日免费获赠
+所选专家2场精准推介</p>
+    </section>
+    <div id="dailogFixBox" class="fixBox" style="display: none;">
+        <div class="fixBoxIn clearfix">
+            <div class="tip" style="line-height: 0.8rem; "><span id="dailogContent" ></span></div>
+            <a id="yesDailog" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+        </div>
+    </div>
+
+    <div id="app-bar" class="app-bar ios_touch" style="">
+        <!-- <div class="app-logo"><img src="/Public/Mobile/images/app-logo.png"></div> -->
+        <a class="app-close ios_touch" id="cone" href="javascript:;">&nbsp;</a>
+        <!-- <a class="app-btn" href="http://m.qqty.com/Api/Index/introduce.html" target='_blank'>立即下载</a> -->
+    </div>
+
+
+    <div id="maskLayer" style="display: none;"></div>
+    <!-- 弹窗 s-->
+    <section class="sub_success" style="display: none;">
+        <div class="sub_close"></div>
+        <div class="sub_con" id="sub_con">提交成功！您将获得免费推介一场。请下载
+            “全球体育”APP获取更多推介猛料！</div>
+        <div class="sub_down"><a href="{:U('H5/appJump',['sign'=>'lhbd'])}"></a></div>
+    </section>
+    <!-- 弹窗 e-->
+    <div id="dailogSuccess" class="fixBox" style="display: none;">
+        <div class="fixBoxIn clearfix">
+            <div class="tip"><span id="contentSuccess" ></span></div>
+            <a id="yesSuccess" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+        </div>
+    </div>
+
+
+</block>
+{//底部}
+<block name="footer">
+
+</block>
+<block name="scripts">
+    <script>
+        $(function(){
+            // 点击选择
+            $('.ms_list_con ul li').on('click',function(){
+                $('.ms_list_con ul li').children('.check_box').removeClass('on');
+                $(this).children('.check_box').addClass('on');
+            });
+            //弹窗-关闭
+            $('.sub_close').on('click',function(){
+                $('#maskLayer').hide();
+                $('.sub_success').hide();
+                window.location.reload();
+            });
+
+            $('#yesDailog').on('click',function () {
+                $('#dailogFixBox').css('display','none');
+            });
+
+            $('#yesSuccess').on('click',function () {
+                $('#dailogSuccess').css('display','none');
+            });
+
+            //选择
+            $('.check_box').on('click',function(){
+                if($(this).hasClass('on')){
+                    $(this).removeClass('on');
+                }else{
+                    $('.check_box').removeClass('on');
+                    $(this).addClass('on');
+                }
+            });
+            if(sessionStorage.getItem('appbar') != 1) {
+                $('#app-bar').show();
+            }else{
+                $('#app-bar').hide();
+            }
+            //关闭app下载提示
+            $(document).on('click','#cone',function(){
+                sessionStorage.setItem('appbar', 1);
+                $('#app-bar').hide();
+                return false;
+            });
+
+            //发送验证码嘛
+            $('.txt_code a').on('click',function () {
+
+                //已经发过验证吗了
+                if ($(this).hasClass('etc'))
+                {
+                    return;
+                }
+
+                //当名额满了就不能提交
+                if ($('.sub_btn a').hasClass('gray'))
+                {
+                    $('#dailogFixBox').css('display','block');
+                    $('#dailogContent').html('今天名额已满！');
+                    return;
+                }
+                var list_id = "";
+                $('.ms_list_con ul li').each(function(){
+                    if($(this).children('.check_box').hasClass('on')){
+                        list_id  = $(this).attr('data-id');
+                    }
+                });
+
+                if (list_id == '' || list_id == null)
+                {
+                    $('#dailogFixBox').css('display','block');
+                    $('#dailogContent').html('请选择推介！');
+                    return;
+                }
+
+                var phone = $('#phone').val();
+                if (phone == '' || phone == null)
+                {
+                    $('#dailogFixBox').css('display','block');
+                    $('#dailogContent').html('请输入手机号码！');
+                    return;
+                }
+
+                $.ajax({
+                    type: 'post',
+                    url: "/Activity/sendMobileMsg.html",
+                    data:{mobile:phone},
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.status == 1)
+                        {
+                            $('#dailogSuccess').css('display','block');
+                            $('#contentSuccess').html(data.info);
+                            daojishi(60);
+                        }
+                        else if (data.status == 0)
+                        {
+                            $('#sub_con').html('今天名额已满，请下载 “全球体育”APP获取更多推介猛料！');
+                            $('#maskLayer').css('display','block');
+                            $('.sub_success').css('display','block');
+                            //名额满了就不能提交
+                            $('.sub_btn a').addClass('gray');
+                            $('.sub_btn a').attr('style','background-color:#999;border-bottom:#999;');
+                        }
+                        else
+                        {
+
+                            $('#dailogFixBox').css('display','block');
+                            $('#dailogContent').html(data.info);
+
+                        }
+                    }
+                });
+            });
+            //点击提交获取选中的data-id
+            $('.sub_btn a').click(function(){
+
+                //当名额满了就不能提交
+                if ($(this).hasClass('gray'))
+                {
+                    return;
+                }
+                var list_id = "";
+                $('.ms_list_con ul li').each(function(){
+                    if($(this).children('.check_box').hasClass('on')){
+                        list_id  = $(this).attr('data-id');
+                    }
+                });
+
+                if (list_id == '' || list_id == null)
+                {
+                    $('#dailogFixBox').css('display','block');
+                    $('#dailogContent').html('请选择推介！');
+                    return;
+                }
+                var phone = $('#phone').val();
+                if (phone == '' || phone == null)
+                {
+                    $('#dailogFixBox').css('display','block');
+                    $('#dailogContent').html('请输入手机号码！');
+                    return;
+                }
+
+                var captcha = $('#captcha').val();
+                if (captcha == '' || captcha == null)
+                {
+                    $('#dailogFixBox').css('display','block');
+                    $('#dailogContent').html('请输入验证码！');
+                    return;
+                }
+
+                //验证手机号码是否正确
+                var sign = false;
+                $.ajax({
+                    type: 'post',
+                    async : false,
+                    url: "/Activity/checkPhone.html",
+                    data:{mobile:phone},
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.status==1)
+                        {
+                            sign = true;
+                        }
+                        else
+                        {
+                            sign = false;
+                            $('#dailogFixBox').css('display','block');
+                            $('#dailogContent').html('手机号码格式不正确！');
+
+                        }
+                    }
+                });
+                if (! sign)
+                    return false;
+
+                $.ajax({
+                    type: 'post',
+                    url: "/Activity/saveMaster.html",
+                    data:{mobile:phone,masterId:list_id,captcha:captcha},
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.status == 1)
+                        {
+
+                            $('#sub_con').html('提交成功！您将获得免费推介一场。请下载 “全球体育”APP获取更多推介猛料！');
+                            $('#maskLayer').css('display','block');
+                            $('.sub_success').css('display','block');
+
+                        }
+                        else  if(data.status == 0)
+                        {
+                            $('#sub_con').html('今天名额已满，请下载 “全球体育”APP获取更多推介猛料！');
+                            $('#maskLayer').css('display','block');
+                            $('.sub_success').css('display','block');
+                            //名额满了就不能提交
+                            $('.sub_btn a').addClass('gray');
+                            $('.sub_btn a').attr('style','background-color:#999;border-bottom:#999;');
+                        }
+                        else
+                        {
+
+                            $('#dailogFixBox').css('display','block');
+                            $('#dailogContent').html(data.info);
+
+                        }
+                    }
+                });
+
+            });
+
+
+        });
+        /**
+         * 倒计时
+         *
+         */
+        function daojishi(S){
+            if (S>0)
+            {
+                $(".txt_code a").addClass('etc');
+                var S = S-1;
+                $(".txt_code a").html(S+"秒后重发");
+                setTimeout("daojishi("+S+")",1000);
+                return;
+            }
+            else
+            {
+                $(".txt_code a").html('获取验证码');
+                $(".txt_code a").removeClass('etc');
+            }
+        }
+
+
+    </script>
+</block>
+
+

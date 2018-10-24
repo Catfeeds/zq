@@ -1,0 +1,269 @@
+<extend name="Public:layout"/>
+<block name="seo">
+  <title>高手排行_推荐胜率排行榜_全球体育网</title>
+  <metahttp-equiv="X-UA-Compatible"content="IE=8">
+  <meta name="keywords" content="专家预测,专家数据分析预测,专家排行榜"/>
+  <meta name="description" content="全球体育推荐王高手排行频道依据专家过往历史预测的足球蓝球让分胜负、胜负彩、大小分等数据，为您提供最精准的赛前预测分析，供大家投注参考！"/>
+</block>
+<block name="css">
+  <!--引入本页所需css-->
+    <link rel="stylesheet" href="__CSS__/quiz_hall/qh_common.css">
+    <link rel="stylesheet" href="__CSS__/quiz_hall/rank.css">
+</block>
+<block name="content">
+  <!-- 推荐内容 s -->
+    <div class="con-main">
+        <div class="guess_content clearfix" style=" margin-bottom: -65px;">
+            <include file="Public:top_gamble"/>
+            <div class="g_content_nav fl">
+                <div class="guess_type clearfix">
+                    <ul>
+                        <li <if condition="($Think.get.gameType eq 1 or $Think.get.gameType eq '')">class="on"</if>>
+                        <a href="{:U('/rank@jc')}">
+                            <img src="__IMAGES__/quiz_hall/football.png" alt="足球">
+                            <p>足球</p>
+                        </a>
+                        </li>
+                        <li <if condition="($Think.get.gameType eq 2)">class="on"</if>>
+                          <a href="{:U('/rank/2@jc')}">
+                            <img src="__IMAGES__/quiz_hall/basketball.png" alt="篮球">
+                            <p>篮球</p>
+                          </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="game_list">
+                    <ul>
+                        <li <if condition="($Think.get.dateType eq 4) or $Think.get.dateType eq ''">class="on"</if>>
+                        <a href="{:U('/rank/'.$gameType.'@jc')}">
+                            <em>日排行榜</em></a>
+                        </li>
+                        <li <if condition="($Think.get.dateType eq 1)">class="on"</if>>
+                        <a href="{:U('/rank/'.$gameType.'/1@jc')}">
+                            <em>周排行榜</em></a>
+                        </li>
+                        <li <if condition="($Think.get.dateType eq 2)">class="on"</if>>
+                        <a href="{:U('/rank/'.$gameType.'/2@jc')}">
+                            <em>月排行榜</em></a>
+                        </li>
+                        <li <if condition="($Think.get.dateType eq 3)">class="on"</if>>
+                        <a href="{:U('/rank/'.$gameType.'/3@jc')}">
+                            <em>季排行榜</em></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="g_content_main fl">
+                <div class="pull-left box-right rank_con">
+                    <div class="clearfix title">
+                        <div class="pull-left section-title">
+                            <h4>
+                                <switch name="Think.get.dateType">
+                                    <case value="1">周排行榜</case>
+                                    <case value="2">月排行榜</case>
+                                    <case value="3">季排行榜</case>
+                                    <case value="4">日排行榜</case>
+                                    <default />日排行榜
+                                </switch>
+                            </h4>
+                            <span style="color: #999;">（每天<if condition="$gameType eq 1">上午11点<else/>下午14:05</if>更新榜单）</span></div>
+                    </div>
+                    <!-- Nav tabs -->
+                    <div class="clearfix">
+                        <ul class="clearfix nav-tab match-tab pull-left">
+                            <li class="pull-left on">
+                                <a href="/rank<if condition="$_REQUEST.gameType neq ''">/{$_REQUEST.gameType}</if><if condition="$_REQUEST.dateType neq ''">/{$_REQUEST.dateType}</if>.html">亚盘</a>
+                            </li>
+                            <if condition="$_REQUEST.gameType neq 2">
+                                <li class="pull-left">
+                                    <a href="/rank_bet<if condition="$_REQUEST.gameType neq ''">/{$_REQUEST.gameType}</if><if condition="$_REQUEST.dateType neq ''">/{$_REQUEST.dateType}</if>.html">竞彩</a>
+                            </li>
+                            </if>
+                        </ul>
+                        <form action="" method="POST" id="jsForm">
+                            <input type="hidden" value="{$_REQUEST.p}" name="p" />
+                            <input type="hidden" value="{$_REQUEST.gameType}" name="gameType" />
+                            <input type="hidden" value="{$_REQUEST.dateType}" name="dateType" />
+                            <div class="pull-left r-noice">
+                                <!-- 矩形 -->
+                                <input type="checkbox" id="check" name="is_quiz" type="submit" onclick="$('#jsForm').submit();" value="1" <if condition="$_POST.is_quiz eq 1">checked</if> style="vertical-align: -1px;">
+                                <!-- 推荐 -->
+                                <label class="myLabel" for="check">当天有推荐</label>
+                                <!-- 胜率榜 -->
+                                <select id="__switch" style="display:inline-block;">
+                                    <option value="rank" selected style=" float: left;">胜率榜</option>
+                                    <option value="profit">盈利榜</option>
+                                </select>
+                            </div>
+                            <!-- 搜索框 -->
+                            <div class="pull-right input-append">
+                                <input id="search_text" name="nick_name" value="{$_POST.nick_name}" class="Colltext pull-left" type="text" placeholder="输入会员昵称">
+                                <button class="Colladd pull-left" href="javascript:;" type="submit">搜索</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Nav tabs -->
+                    <div class="table-con">
+                        <div class="rank-list">
+                            <table class="table">
+                                <tbody>
+                                <tr class="table-header">
+                                    <th width="7%">排名</th>
+                                    <th width="5%">头像</th>
+                                    <th width="23%" class="iden" style="padding-left: 30px;">用户昵称</th>
+                                    <th width="5%" <if condition="$Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>>场次</th>
+                                    <th width="5%" <if condition="$Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>>胜</th>
+                                    <th width="5%" <if condition="$Think.get.gameType neq 1 or $Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>>胜半</th>
+                                    <th width="5%" <if condition="$Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>>平</th>
+                                    <th width="5%" <if condition="$Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>>负</th>
+                                    <th width="5%" <if condition="$Think.get.gameType neq 1 or $Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>>负半</th>
+                                    <th>胜率
+                                        <if condition="$Think.get.dateType eq 4 or $Think.get.dateType eq ''">（昨日胜率）</if></th>
+                                    <th>积分
+                                        <if condition="$Think.get.dateType eq 4 or $Think.get.dateType eq ''">（昨日所得积分）</if></th>
+                                    <th width="16%">粉丝数</th>
+                                    <th width="6%">查看</th></tr>
+                                <tr bgcolor="#ecfff6" style="border-bottom: 1px solid #dddddd;height: 50px">
+                                    <td colspan="2" style="text-align: right;">我的排名 ：</td>
+                                    <td class="iden text-orange">
+                                        <notempty name="myRank.ranking">{$myRank.ranking} 名
+                                            <else/>未上榜</notempty></td>
+                                    <td <if condition="$Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>> {$myRank.gameCount|default='--'}</td>
+                                    <td class="text-red <if condition=" $Think.get.dateType eq 4 or $Think.get.dateType eq '' ">hidden</if>">{$myRank.win|default='--'}</td>
+                                    <td <if condition="$Think.get.gameType neq 1 or $Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>> {$myRank.half|default='--'}</td>
+                                    <td <if condition="$Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>> {$myRank.level|default='--'}</td>
+                                    <td <if condition="$Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>> {$myRank.transport|default='--'}</td>
+                                    <td <if condition="$Think.get.gameType neq 1 or $Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>> {$myRank.donate|default='--'}</td>
+                                    <td class="text-red">
+                                        <notempty name="myRank">{$myRank.winrate}%
+                                            <else/>--
+                                        </notempty>
+                                    </td>
+                                    <td>{$myRank.pointCount|default='--'}</td>
+                                    <td>{$myRank.follow|default='--'}</td>
+                                    <td>
+                                        <if condition="is_login()">
+                                            <a target="_blank" href="{:U('/userindex/'.$myRank['user_id'].'/'.$gameType)}">查看</a>
+                                        </if>
+                                    </td>
+                                </tr>
+                                <notempty name="Ranking">
+                                    <volist name="Ranking" id="item">
+                                        <tr class="att-show <if condition=" $key % 2 eq 0 ">one<else/>two</if>">
+                                        <td>
+                                            <switch name="item.ranking">
+                                                <case value="1">
+                            <span>
+                              <img src="__IMAGES__/quiz_hall/rank1.png" width="20" height="16" /></span>
+                                                </case>
+                                                <case value="2">
+                            <span>
+                              <img src="__IMAGES__/quiz_hall/rank2.png" width="20" height="16" /></span>
+                                                </case>
+                                                <case value="3">
+                            <span>
+                              <img src="__IMAGES__/quiz_hall/rank3.png" width="20" height="16" /></span>
+                                                </case>
+                                                <default />{$item.ranking|default="<span style='color: #AAAAAA'>未上榜</span>"}
+                                            </switch>
+                                        </td>
+                                        <td>
+                                            <a target="_blank" href="{:U('/userindex/'.$item['user_id'].'/'.$gameType)}" class="face-r">
+                                                <img class="lazy" data-original="{$item['face']}" width="30" height="30"></a>
+                                        </td>
+                                        <td class="iden">
+                                            <div>
+                                                <a target="_blank" href="{:U('/userindex/'.$item['user_id'].'/'.$gameType)}">
+                                                    {$item['nick_name']|str_ireplace=$_POST['nick_name'],"<span class='text-red'>".$_POST['nick_name']."</span>",###}
+                                                </a>
+                                                <em class="myIcon rank_p level lv<if condition='$gameType eq 1'>{$item.lv}<else/>{$item.lv_bk}</if>"></em>
+                                                <notempty name="item.is_quiz">
+                                                    <img class="lazy" data-original="__IMAGES__/quiz_hall/qh-issue.png" width="10" height="10">
+                                                </notempty>
+                                            </div>
+                                        </td>
+                                        <td <if condition="$Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>>{$item.gameCount}</td>
+                                        <td class="text-red <if condition=" $Think.get.dateType eq 4 or $Think.get.dateType eq '' ">hidden</if>">{$item.win}</td>
+                                        <td <if condition="$Think.get.gameType neq 1 or $Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>>{$item.half}</td>
+                                        <td <if condition="$Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>>{$item.level}</td>
+                                        <td <if condition="$Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>>{$item.transport}</td>
+                                        <td <if condition="$Think.get.gameType neq 1 or $Think.get.dateType eq 4 or $Think.get.dateType eq ''">class="hidden"</if>>{$item.donate}</td>
+                                        <td class="text-red">{$item.winrate}%</td>
+                                        <td>{$item.pointCount}</td>
+                                        <td class="fan clearfix">
+                                            <span class="fan-num">{$item.follow}</span>
+                                            <if condition="in_array($item['user_id'],$followIds)">
+                                                <a href="javascript:;" onclick="cancelFollow({$item.user_id},'rank',this);" class="fan-ate btn-default" title="取消关注">已关注</a>
+                                                <else/>
+                                                <a href="javascript:;" onclick="addFollow({$item.user_id},'rank',this);" class="fan-ate btn-orange" title="+关注">+关注</a>
+                                            </if>
+                                        </td>
+                                        <td>
+                                            <a target="_blank" href="{:U('/userindex/'.$item['user_id'].'/'.$gameType)}">查看</a>
+                                        </td>
+                                        </tr>
+                                    </volist>
+                                    <else/>
+                                    <tr>
+                                        <td colspan="20">没有数据</td>
+                                    </tr>
+                                </notempty>
+                                </tbody>
+                            </table>
+                            <!--页码开始-->
+                            <div class="page-con">
+                                <nav>
+                                    <ul class="pagination clearfix">
+                                        <if condition="$totalCount gt $pageNum">{$show}</if>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!--页码结束-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <!--引入本页js-->
+    <script type="text/javascript" src="__JS__/common/follow.js"></script>
+    <script type="text/javascript">
+        /**
+         * 排行js文件
+         * @author Chensiren <245017279@qq.com>
+         * @since  2015-11-28
+         */
+        $(function() {
+            //获取左右高度一样
+            var myRh = $('.g_content_main').height();
+            var myLh = myRh+2;
+            $('.g_content_nav').css("height", myLh + "px");
+            $(window).scroll(function(e) {
+                var myRh = $('.g_content_main').height();
+                var myLh = myRh+2;
+                $('.g_content_nav').css("height", myLh + "px");
+            });
+        });
+        //函数跳转到指定页面
+        function goPage(page)
+        {
+            $("input[name='p']").val(page);
+            $('#jsForm').submit();
+        }
+        //切换榜
+        $("#__switch").bind('change',function(){
+            var action=$(this).children('option:selected').val();
+            if(web_url.indexOf(action) <= 0)
+            {
+                var str = action == 'rank' ? 'profit' : 'rank';
+                var url = web_url.replace(str, action);
+            }else{
+                var url = web_url;
+            }
+            $("#jsForm").attr('action',url);
+            $('#jsForm').submit();
+        })
+    </script>
+</block>

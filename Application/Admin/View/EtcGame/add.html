@@ -1,0 +1,69 @@
+<div class="pageContent">
+    <form method="post" action="__URL__/save" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="{$vo.id}" />
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>赛程ID：</label>
+                <input type="text" class="required" name="game_id" value="{$vo.game_id}">
+            </div>
+
+
+            <div class="unit">
+                <label>赔率-胜：</label>
+                <input type="text" name="odds_win" value="{$vo.odds_win}">
+            </div>
+
+            <div class="unit">
+                <label>赔率-平：</label>
+                <input type="text" name="odds_flat" value="{$vo.odds_flat}">
+            </div>
+
+            <div class="unit">
+                <label>赔率-输：</label>
+                <input type="text" name="odds_lose" value="{$vo.odds_lose}">
+
+            </div>
+            <div class="unit">
+                <label>主队让球：</label>
+                <input type="text" max="9" name="home_let" value="{$vo.home_let}">
+            </div>
+            <div class="unit">
+                <label>客队让球：</label>
+                <input type="text" max="9" name="away_let" value="{$vo.away_let}">
+            </div>
+            <notempty name='vo'>
+                <div class="unit">
+                    <label>让球后的比赛结果：</label>
+                    <select class="small bLeft"  name="rsl">
+                        <option selected value="0">未出</option>
+                        <option <eq name="vo.rsl" value="1" >selected</eq> value="1">胜</option>
+                        <option <eq name="vo.rsl" value="2" >selected</eq> value="2">平</option>
+                        <option <eq name="vo.rsl" value="3" >selected</eq> value="3">负</option>
+                    </select>
+                </div>
+            </notempty>
+            <div class="unit">
+                <label>状态：</label>
+                <select class="small bLeft"  name="status">
+                    <option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+                    <option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <notempty name='vo'>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <else/>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">添加</button></div></div></li>
+                </notempty>
+
+
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+

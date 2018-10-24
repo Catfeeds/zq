@@ -1,0 +1,210 @@
+/**
+ * 全彩个人中心公用css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-28
+**/
+/* Effect 8 */
+body{background-color:#fff;width: 100%;min-height: 1040px;background-repeat: no-repeat;background-attachment: fixed;background-position: center top;}
+/*.c-m{margin-bottom: -115px; padding-bottom: 60px;*/
+/*-------------------导航-------------------*/
+
+/*-------------------matchType-------------------*/
+.guessHead{ padding: 0 20px 0 0; border-bottom: 2px solid #ffca6e; background: #181e2b;}
+.typeBox{ padding-top: 20px; position: relative;}
+.matchType{ display: block; height: 40px; line-height: 40px; color: #ffca6e;font-size: 16px; background: url(../../images/quiz_hall/match-arrow.png) no-repeat right center; padding-right: 24px; padding-left: 20px;}
+.matchType a{ display: block; color: #ffca6e;}
+.matchType a:hover{ color: #ffca6e;}
+.tabType{ width: 178px; height: 60px; line-height: 62px; position:absolute; left: 0; top: 60px; background: #2a364f; z-index: 99; display: none;}
+.thisType:hover .tabType{ display: block;}
+.iconZq,.iconLq{ margin-right: 10px;}
+.pankouBox{ padding-left: 20px; padding-top: 20px;}
+.pankouBox a{ float: left; width: 110px; height: 40px; line-height: 40px; text-align: center; color: #fff; margin-left: 6px; border-top-left-radius: 10px; border-top-right-radius: 10px; background: #384663; background: linear-gradient(#435475, #313e58);}
+.pankouBox a.on{color: #333; background: #ffc45c; background: linear-gradient(#ffca6e, #ffbf50);}
+
+.matchHead{ background:#222c3f; padding: 15px 0;}
+.matchHead .all,.matchHead .eventChoose,.matchHead .hideMac,.matchHead .language{ margin-left: 20px;}
+.matchHead .all a,.matchHead .eventChoose a,.matchHead .hideMac,.language .radio-inline{ color:#c9e2ee;}
+.language .form_inline{ width: 200px\9;}
+.language .radio-inline{ width: 50px\9;}
+.matchHead .eventChoose{ position: relative;}
+.matchHead .hideMac span{color:#ffc96a;}
+.matchHead .eventChoose a{background: url(../../images/quiz_hall/event-icon.png) no-repeat 0 center; padding-left: 15px;}
+.language .radio-inline input[type="radio"]{ margin-top: 3px;}
+.matchHead .eventChoose .box-list{ position: absolute; width:450px; background: #ffffff; display: none;z-index: 1;}
+.box-list .btn-con{ background: #dedede; padding: 6px 15px;}
+.box-list .btn-con .btn{ background: #2a364f;border-color: #2a364f;}
+.menu_list{ padding-top: 10px; max-height: 180px; padding-bottom: 10px; overflow: hidden;}
+.menu_list ul li{ float: left; width: 150px; padding-left: 15px; margin-bottom: 5px;}
+
+.ex_pay{ padding: 8px 15px;}
+.ex_pay .head{width: 40px; height: 40px; border-radius: 50%; border: 2px solid #ffffff;}
+.ex_pay .head img{width: 100%; height: 100%; border-radius: 50%;}
+.ex_pay .show_gold{padding-left: 8px;}
+.ex_pay .show_gold .userScore{ margin-left: 15px;}
+.ex_pay .show_gold p{ margin-bottom: 5px;}
+.ex_pay .show_gold p span{color: #ffc45c;}
+
+
+/*-------------------竞猜内容-------------------*/
+.guess_content{ width: 1024px; margin: 0 auto;margin-top: 10px;}
+.g_content_nav{ width: 200px; background: #222c3f;}
+.g_content_main{ width: 100%; min-height: 900px; background: #2a364f;margin-bottom: 10px;}
+/*足球 篮球*/
+.guess_type{ border: 1px solid #222c3f;}
+.guess_type ul li{ width: 50%; float: left; text-align: center;background: #181e2b;height: 90px;padding-top: 18px ;}
+.guess_type ul li p{ padding-top: 5px; font-size: 16px; color: #ffffff;}
+.guess_type ul li.on{ background: #336699;}
+.guess_type ul li:hover a{ color: #333;}
+.guess_type ul li a{ display: block; width: 100%; height: 90px; font-size: 16px ;}
+
+/*guess list*/
+.guess_list{padding-bottom: 50px;}
+
+.pan_type {  
+    margin: 0 auto;
+    margin-top: 15px;
+    width: 164px;
+}
+.pan_type a {
+    border: 1px solid #354361;
+    width: 80px;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #354361;
+	color: #cccccc;
+}
+
+.pan_type a.on{
+    background: #336699;
+    border:1px solid #efefef;
+    color: #fff;
+}
+/*比赛列表*/
+.game_list{margin-top: 15px;max-height: 600px;}
+.game_list ul li{padding: 0 20px;height: 50px;line-height: 50px;border-left: 5px solid transparent;}
+.game_list ul li em{float: left; color: #ffffff;}
+.game_list ul li span{float: right; color: #cccccc;}
+.game_list ul li a{color: #818583;}
+.game_list ul li:hover{background: #484e59;border-left: 5px solid #336699;}
+.game_list ul li.on{background: #484e59; border-left: 5px solid #336699;}
+.game_list ul li a{display: block;width: 100%;height: 50px;}
+/*右侧内容*/
+.tb_guess tr th{height: 50px;color: #eabb6a;border-bottom: 1px solid #1b2333; background: #1e2433; background: -webkit-linear-gradient(#303d56, #263249); /* Safari 5.1 - 6.0 */ background: -o-linear-gradient(#303d56, #263249); /* Opera 11.1 - 12.0 */ background: -moz-linear-gradient(#303d56, #263249); /* Firefox 3.6 - 15 */background: linear-gradient(#303d56, #263249); /* 标准的语法 */ background: #1e2433;}
+.tb_guess tr td{
+    background: #2a364f;
+    border-top: 1px solid #364766;
+    border-bottom: 1px solid #1b2333;
+    min-height: 80px;
+    padding: 10px 0 !important;
+    text-align: center;
+}
+.tb_guess tr:hover td{ background: #354361;}
+.g_td_1,.g_td_2{width: 8%;}
+.g_td_3{width: 10%;}
+.g_td_5{width: 15%; color: #ffffff;}
+.g_td_6{width: 22%;}
+.gg_td_6{width: 23%;}
+.g_td_7{width: 12%;}
+.div_inline{display: inline;}
+.g_td_3 em{color: #fff;padding:3px 5px;}
+.g_td_1,.g_td_2,.g_td_4{color: #6d7fb3;}
+.tb_guess tr td img{vertical-align: middle;}
+.g_td_5 img{width: 40px;height: 40px;margin:0 5px;}
+.g_td_5 span{font-size: 20px;}
+.g_td_5 em{display: inline-block;}
+.game_score{display: inline-block;width: 90px; height:20px;  position: relative;}
+.game_score .all_score{width: 100%;position: absolute;top: -10px;left: 0;font-weight: bold;font-size: 20px;}
+.game_score .half_score{width: 100%;position: absolute;top: 12px;left: 0;font-size: 18px;}
+.td_score{width: 8%;}
+.gold{ color: #ffca6e !important;}
+.red{color: #eb0000!important;}
+.orange{color: #ff810e!important;}
+.black{color: #333333!important;}
+.blue{color: #6d7fb3!important;}
+.white{color: #ffffff!important;}
+.handCpRed {color: #FF0000;}
+.handCpGreen {color: #32CD32;}
+
+/*玩法*/
+.odds{float: left;width: 100%;}
+.odds ul li{float: left;
+    text-align: center;
+    width: 58px;
+    height: 38px;
+    line-height: 38px;
+    margin-right: 2px;
+    border-radius: 4px;
+	color: #ffffff;
+}
+.odds ul li a{display: block;width: 100%;height: 38px; border-radius: 4px; color: #ffffff; border: 1px solid #1a1a1a; background: #212a3c; background: linear-gradient(#465980, #1c2332);}
+.odds ul li a:hover{background: #ca9d40; border: 1px solid #ca9d40;}
+.odds ul li a.on{color: #fff;background: #ca9d40; border: 1px solid #ca9d40;}
+.odds .rangq:hover{border:none;}
+
+.odds .rangq{color: #859ada;text-align: right;padding-right: 5px;font-weight: bold;width: 20px;border: none;}
+.odds2{margin-top: 2px;}
+.odds .rangq2{color: #ffca6e;}
+/*数据*/
+.g_data{margin-top: 1px;}
+.g_data ul li{float: left;text-align: center; width: 30px; height: auto;line-height: 30px; margin:2px 5px 2px 0; border-radius: 2px;}
+.g_data ul li a{display: block; width: 100%; height: 30px;color: #ffca6e; border: 1px solid #1a1a1a; background: #323232; background: linear-gradient(#3c3c3c, #262626); border-radius: 2px; opacity: .9;}
+.g_data_foot ul li{width: 101px; background: #323232; background: linear-gradient(#3c3c3c, #262626); border-radius: 2px;}
+.g_data_foot ul li a{ display: block; width: 101px; background: url(../../images/quiz_hall/g_tuij.png) no-repeat 10% center; text-indent: 15px; border-radius: 2px;}
+
+.tb_guess .tr_black .g_td_6 .odds ul li{background: #747474;color: #fff;}
+.g_data ul li:hover{opacity: 1;}
+/*欧赔*/
+/*.odds_euro ul li .move_null:hover{background: 0;cursor: default;}*/
+.tr_title{background: linear-gradient(#e5e5e5, #efefef,#e5e5e5);}
+.yapan{background: none!important;border:none!important;width: 91px!important;}
+
+/* modal-header */
+.modal-header .close{ color: #2e76c7; opacity: 1;}
+.modal-header .close:hover{ color: #ccc; opacity: 1;}
+.modal-header h4{ color: #2e76c7;}
+.modal-header .modal-title .mach_name{ font-size: 12px; margin-right: 10px;}
+.modal-header .modal-title em{ font-size: 16px; color: #333;}
+
+/* modal-body */
+.ditai04{ width: 490px;}
+.modal-open .modal{overflow-x: visible; overflow-y: visible;}
+.modal-body .dl_list{ margin-bottom: 10px;}
+.modal-body .dl_list .int{ padding-left: 20px; background: url(../../images/quiz_hall/icon-rule.png) no-repeat left center; color: #3a97d8;}
+.modal-body .dl_list .int .leve{ position: absolute; right: -275px; top: -1000px; width:265px; height: 274px; background: url(../../images/quiz_hall/int-level.png) no-repeat; z-index: 1060; opacity: 0; -webkit-transition:  .5s ease;
+    -moz-transition:  .5s ease;
+    -ms-transition:  .5s ease;
+    transition:  .5s ease;}
+.modal-body .dl_list .int:hover .leve{ opacity: 1; right: -275px; top: 0;}
+.modal-body .dl_list dt{ font-weight: normal; width: 70px; color: #999; text-align: right;}
+.modal-body .dl_list dd{ width: 314px; padding-left: 5px;}
+.modal-body .dl_list .mach_name{ font-size: 12px; margin-right: 10px;}
+
+.modal-body .radio-con label{ margin: 0 auto;}
+.modal-body .radio-con .selet-m{ margin-left: 10px;}
+.modal-body .radio-con input{ vertical-align: -2px;}
+.textarea_wap{ border: 1px solid #e5e5e5; border-radius: 5px; padding: 10px; background: #fff;}
+.textarea_wap .textarea{ height: 36px; border: none 0; outline: none; width: 100%; font-family: "Times New Roman",Times,sans-serif; resize:none;outline:0;-webkit-appearance:none; white-space:pre-wrap;word-wrap:break-word;background:#fff;}
+
+.price_ul li{ float: left; width: 80px; text-align: center; margin: 0 3px 10px 3px;}
+.price_ul a{ display: inline-block;  width: 80px; height: 30px; line-height: 28px; text-align: center; border: 1px solid #e5e5e5; border-radius: 15px; position: relative; background: #fff;}
+.price_ul a em{ width: 16px; height: 16px; background: url(../../images/quiz_hall/icon-tick-red.png) no-repeat 0 0; position: absolute; right: 0; top: 0; display: none;}
+.price_ul .on em{ display: block;}
+.price_ul .on{ color: #eb0000; border-color: #eb0000; background: #fff1f1;}
+
+/* modal-btn */
+.modal-body .btn-con{  text-align: center; margin-top: 15px;}
+.modal-body .btn-con button{ width: 100px; border-radius: 3px; margin: 0 10px;}
+
+/*新增样式*/
+.con-main{ background: url(../../images/quiz_hall/background.png) no-repeat center top; margin: 0 auto; padding-bottom: 60px; margin-bottom: -120px;}
+.guess_content{ padding-top: 180px; margin: 0 auto;}
+.logo{ width: 150px; margin: -60px 5px 10px 40px; }
+#nav{width: 780px; height: 50px; margin-left: 220px; margin-top: -50px; margin-bottom: 20px;}
+#nav ul li{ float: left; height: 50px; padding: 15px 20px;}
+#nav ul li a{color:#fff; font-size: 16px;}
+#nav ul li a:hover{color:red;}
+.home,.main{ width: 1024px; margin: 0 auto ;}
+#nav .on a{color: #eabb6a;}

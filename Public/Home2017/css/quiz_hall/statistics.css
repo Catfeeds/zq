@@ -1,0 +1,132 @@
+/*统计*/
+.tongji{width: 1000px;margin:10px auto;background: #fff}
+.t_core{width: 100%;height: 285px;background: #fff;padding: 20px 10px 0 10px;}
+.t_sele{width: 400px;margin: 0 auto;margin-top: 20px}
+.t_sele ul li{height: 28px;background: #666666;padding: 0 25px; display: inline-block;float: left;line-height: 28px; }
+.t_sele ul li a{color: #fff;}
+.t_sele ul li.on{background: #fff;color: #333333}
+.t_sele ul li.on a{color: #333333}
+.t_sele ul .f_li{border-radius: 20px 0 0 20px}
+.t_sele ul .l_li{border-radius: 0 20px 20px 0}
+
+.t_show{margin-top: 10px; height: 30px; background: #e5e5e5;border-top: 1px solid #dddddd;border-bottom: 1px solid #dddddd;text-align: center;line-height: 30px}
+
+.team_name{width: 350px;height: auto;float: left;text-align: center;}
+.team_name img{ text-align: center; width: 138px;height: 138px; margin: 0 auto }
+.team_name p{background: url(../../images/quiz_hall/team_bg.png) no-repeat left center; width: 100%;height: 50px; text-align: center;line-height: 50px;font-size: 34px;margin-top: 20px;}
+.tc_main{float: left;width: 220px;margin-left: 60px;text-align: center;}
+.tc_main .p1{color: #0956d6;font-weight: bold;font-size: 44px}
+.tc_main .p2{font-size: 24px;padding-top: 10px}
+.tc_main .p3{font-size: 50px;line-height: 50px;color: #eb0000}
+.tc_main .p4{font-size: 22px;width: 160px; margin: 0 auto;padding: 5px;color: #fff}
+.tc_main .p5{color: #ff7e00;font-size: 40px;line-height: 40px}
+.con-list .list-li .game-result{ position: absolute; right: 8%; top:15% ;}
+.tj_tuij{width: 94%;margin:0 auto;height: 40px;border:1px solid #10af63;text-align: center;font-size: 18px;line-height: 40px}
+.tj_tuij a{color: #10af63;}
+.play_type{width: 520px;margin:0 auto;text-align: center;margin-top: 30px}
+.play_type ul li{float: left;margin-right:5px}
+.play_type a{display: block;width: 125px;}
+.play_type p em{width: 125px;display: block;height: 5px;background: #e5e5e5}
+.play_type a:hover em{background: #eb0000}
+.play_type a.on em{background: #eb0000}
+
+.con-list {
+    margin-top: 20px;
+    background: #fff;
+    border:1px solid #ddd;
+    border-right: 0
+}
+.con-list .list-li {
+    float: left; 
+    padding-bottom: 20px;
+    padding-left: 10px;
+    width: 50%;
+    position: relative;
+    background-color: #fafafa; 
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    height: 240px;
+}
+.con-list .list-li .infor-con {
+    padding: 12px 0 7px 0;
+}
+.infor-con .face-infor {
+    margin-left: 10px;
+    width: 378px;
+}
+.infor-con .face-infor .user-name {
+    line-height: 22px;
+}
+.infor-con .face-infor .re-li {
+    margin-bottom: 10px;
+}
+.face-infor .user-name .uname_a {
+    display: block;
+    float: left;
+}
+
+.face-infor .level {
+    margin-bottom: -2px;
+}
+
+.face-infor .user-name em {
+    background: url(../../images/quiz_hall/qh-issue.png) no-repeat right center;
+    width: 11px;
+    height: 14px;
+    float: right;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+.face-infor .user-name .plus {
+    color: #999;
+    margin-left: 20px;
+}
+.infor-con .face-infor .user-name {
+    line-height: 22px;
+}
+.fan-ate {
+    display: inline-block;
+    padding: 0 10px;
+    height: 22px;
+    line-height: 22px;
+    margin-left: 5px;
+}
+.st_count .stc_right a { 
+    width: 135px;
+    height: 35px;
+    text-align: center;
+    color: #2c72c0;
+    border:1px solid #2c72c0;
+    line-height: 30px;
+    font-size: 14px;
+    display: block; 
+    border-radius: 50px;
+    float: right;
+    margin-right: 20px
+}
+.st_count .stc_right a:hover{background: #2c72c0;color: #fff}
+
+.st_count .stc_right {
+    width: 100%;
+}
+.infor-con .face-infor .re-li .ten em {
+    margin-left: 5px;
+}
+.fenxi{line-height: 160%}
+.q-two{overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;-moz-box-orient:vertical}
+.guess_view{float: right;padding-right: 10px;color: #ff7e00;text-decoration:underline!important;font-weight: bold; }
+
+.h_auto{height: auto!important;min-height: 480px}
+.g_auto{height:240px}
+.stc_left{width: 100%;}
+
+.txt_gold a{color: #ff7e00!important;border:1px solid #ff7e00!important;}
+.txt_gold a:hover{background: #fff3e7!important}
+
+.st_count .stc_left .free{display: block;position: absolute; top: 40%;right: 7%;background: url(../../images/quiz_hall/free.png) no-repeat right center; width: 53px; height: 30px}
+
+
+
+
+
+

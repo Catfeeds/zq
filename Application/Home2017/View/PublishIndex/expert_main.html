@@ -1,0 +1,138 @@
+<if condition="$user['type'] neq 'index'">
+<style>
+    /* 专家主页 */
+    .expertBox{ background: #fbfbfb; border: 1px solid #e5e5e5; margin: 20px 0;}
+    .expertBox .expertInt{padding: 10px 20px; color: #666666; line-height: 24px;}
+    .expertInforBox{ border-bottom: 1px dashed #e5e5e5; padding: 10px 20px;}
+    .expertInforBox .fans{ padding-top: 8px;}
+    .expertInforBox .fans span{ margin-right: 15px;}
+    .expertInforBox .fans em{ color: #999999;}
+
+    .listTitle{ border-bottom: 3px solid #c0c0c0; padding: 0 20px;}
+    .listTitle h4{font-size: 20px; margin: 0; padding: 10px 0; position: relative;}
+    .listTitle h4 span{ color: #999999;}
+    .listTitle h4:after{ width: 100%; height: 3px; background: #2e76c7; position: absolute; bottom: -3px; left: 0; z-index: 1; pointer-events: none; position: absolute; content: ''; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box;}
+    .seletBox{ padding-top: 6px;}
+    .seletArticle .btn{ background: #ffffff; color: #333; border: 1px solid #e5e5e5;}
+    .seletArticle .btn1{ background: #ffffff;}
+    .seletArticle .dropdown-menu{ min-width: 100%;}
+    .seletArticle .dropdown-menu li{ text-align: center;}
+    .seletArticle .dropdown-menu > li > a{ padding: 4px 5px;}
+    .seletArticle .dropdown-menu > li > a:hover{ background: #7ebafe; color: #ffffff;}
+
+    .main-left-con{ padding: 0 20px;}
+    .main-left-con ul li{width:100%; padding: 20px 0; border-bottom: 1px solid #e5e5e5;}
+    .main-left-con .mlc_title a{font-size: 18px; color: #2a6cb8; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;display:block;height:78px;}
+    .main-left-con .mlc_des a{color: #666666; line-height: 150%;}
+    .main-left-con  .mlc_match span{ color: #2e76c7; margin-right: 15px;}
+    .mlc_time em{ background: url(__PUBLIC__/Home/images/publish_index/icon-vision.png) no-repeat left center; padding-left: 22px; margin-left: 10px;}
+    .mlc_time{ padding-top: 10px;  color: #999999; font-size: 12px;}
+    .mlc_time span{ margin-right: 15px;}
+    .rec_img{ width: 162px; height: 114px; float: left;}
+    .rec_img img{ width: 162px; height: 114px;  }
+    .rec_right{ width: 746px; float: left; padding-left: 12px; }
+    .posts{position: relative;}
+
+    .pagination > .active > a{ background: #369; border-color: #369;}
+    .page-con{ margin-top: 20px; padding:  20px;}
+
+</style>
+    </if>
+<form action="{:U('/userindex/'.$_REQUEST['user_id'].'/3')}" method="POST" id="jsForm">
+    <input type="hidden" value="{$game_type}" name="game_type" />
+    <input type="hidden" value="{$game_type}" name="game_type" />
+    <input type="hidden" value="{$_REQUEST.gamble_type}" name="gamble_type" />
+    <input type="hidden" name="user_id" id="user_id" value="{$Think.get.user_id}">
+<div class="expertBox">
+    <eq name="user.type" value="index">
+    <div class="expertInforBox clearfix">
+        <div class="pull-left rec_face">
+            <a target="_blank" href="{:U('/userindex/'.$user['id'])}"><img class="lazy" src="{$user.head}" style="display: inline;" original="{$user.head}" title=""></a>
+        </div>
+        <div class="pull-left rec_infor">
+            <p class="faceName"><a target="_blank" href="{:U('/userindex/'.$user['id'])}">{$user.nick_name}</a></p>
+            <div class="clearfix">
+                <div class="pull-left fans">
+                    <span>文章：<em>{$user.publish_total}</em></span>
+                    <span>粉丝：<em>{$user.follow}</em></span>
+                </div>
+            </div>
+        </div>
+        <div class="pull-right">
+            <if condition="$user['type'] eq 'index'">
+                <a href="{:U('Expert/publish')}" class="fan-ate btn-orange" title="+发布文章">+发布文章</a>
+            <else/>
+                <if condition="$is_follow neq ''">
+                <a href="javascript:;" onclick="cancelFollow({$user.id},'rank',this);" class="fan-ate btn-default" title="取消关注">已关注</a>
+                <else/>
+                <a href="javascript:;" onclick="addFollow({$user.id},'rank',this);" class="fan-ate btn-orange" title="+关注">+关注</a></if>
+            </if>
+        </div>
+    </div>
+    </eq>
+    <p class="expertInt">简介：{$user.descript}</p>
+</div>
+<div class="listNews">
+    <div class="listTitle clearfix">
+        <div class="pull-left"><h4>
+            全部
+            <span>（{$user.count}）</span></h4></div>
+        <!--<div class="pull-right seletBox">-->
+            <!--<div class="btn-group seletArticle">-->
+                <!--<button type="button" class="btn btn-default btn1">全部</button>-->
+                <!--<button type="button" class="btn btn-default dropdown-toggle btn2" data-toggle="dropdown">-->
+                    <!--<span class="caret"></span>-->
+                    <!--<span class="sr-only">切换下拉菜单</span>-->
+                <!--</button>-->
+                <!--<ul class="dropdown-menu" role="menu">-->
+                    <!--<if condition="$user['type'] eq 'index'">-->
+                        <!--<li><a href="{:U('/Expert/list_e')}">全部</a></li>-->
+                        <!--<li><a href="#">新闻资讯</a></li>-->
+                        <!--<li><a href="{:U('/Expert/list_e/listType/expert')}">推荐分析</a></li>-->
+                    <!--<else/>-->
+                        <!--<li><a href="{:U('/list_e/'.$user['id'].'')}">全部</a></li>-->
+                        <!--<li><a href="#">新闻资讯</a></li>-->
+                        <!--<li><a href="{:U('/list_e/'.$user['id'].'/expert')}">推荐分析</a></li>-->
+                    <!--</if>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+    <div class="main-left-con clearfix">
+        <ul class="posts">
+            <volist name="list" id="item">
+                <li class="ds-list">
+                    <div class="clearfix">
+                        <div class="rec_img">
+                            <a target="_blank" href="{:U('/news/'.$item['id'].'')}"><img class="lazy" src="{$item.img}" alt="" original="{$item.img}"></a>
+                        </div>
+                        <div class="rec_right">
+                            <p class="mlc_title"><a target="_blank" href="{:U('/news/'.$item['id'].'')}"><strong>{$item.title}</strong></a></p>
+                            <div class="mlc_time clearfix">
+                                <span class="pull-left">{$item.add_time}</span><span class="pull-left">发表</span>
+                                <if condition="$user['type'] neq 'index'"><em class="pull-right">{$item.click_number}</em></if>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </volist>
+        </ul>
+    </div>
+    <!--页码开始-->
+    <div class="page-con">
+        <nav>
+            <ul class="pagination pull-right">
+                {$show}
+                <li>
+                    <input class="isTxtBig" type="text" value="{$_REQUEST.p|default=1}" name="p">
+                </li>
+                <li id="GO"><a href="javascript:void(0)">GO</a></li>
+            </ul>
+            <div class="pull-right" style="margin-top: 5px;">
+                共有{$totalCount|default="0"}条，每页显示：{$numPerPage|default="0"}条
+            </div>
+        </nav>
+    </div>
+    <!--页码结束-->
+</div>
+</form>

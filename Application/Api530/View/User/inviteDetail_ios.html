@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #ee6363;">
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta charset="UTF-8">
+	<title>全球体育网</title>
+	  <!-- jquery -->
+    <script type="text/javascript" src="__PUBLIC__/Api/Invitation/js/jquery-1.8.0.min.js"></script>
+
+	  <!-- 引入公共样式 --> 
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/Invitation/css/base.css">
+	  <!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Api/Invitation/js/htmlwidth.js"></script>
+    
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__PUBLIC__/Api/Invitation/css/index.css">
+    <link rel="stylesheet" href="__PUBLIC__/Api/Invitation/css/lCalendar.css">
+</head>
+<body>
+
+<section class="my_msg"> 
+   
+
+  <div class="my_msg_con" style="padding-top: 1.5rem">
+
+    <header class="in_head">
+      <a href="javascript:void(0);" class="goBack">返回上一页</a>
+    </header>
+    <div class="mmc_main">
+       <div class="ding"></div>
+       <div class="ding" style="left:auto;right: .1rem"></div>
+       <div class="my_msg_title">我的信息</div>
+       <p class="line"></p>
+       <table class="table tb_my_msg">
+         <tbody>
+           <tr>
+             <td><img src="__PUBLIC__/Api/Invitation/images/get_man.png" alt="邀请总人数">邀请总人数: <em>{$total_num}</em>人</td>
+             <td><img src="__PUBLIC__/Api/Invitation/images/icore.png" alt="失效Q币">失效Q币: <em>{$invalid_coin}</em>个</td>
+           </tr>
+           <tr>
+             <td><img src="__PUBLIC__/Api/Invitation/images/ti.png" alt="可提Q币">可提Q币: <em>{$valid_coin}</em>个</td>
+             <td><img src="__PUBLIC__/Api/Invitation/images/no_ti.png" alt="不可提Q币">不可提Q币: <em>{$await_coin}</em>个</td>
+           </tr>
+           <tr>
+             <td colspan="2" style="text-align: center!important;"><img src="__PUBLIC__/Api/Invitation/images/get_icore.png" alt="获得总Q币">获得总Q币: <em>{$total_coin}</em>个</td>
+           </tr>
+         </tbody>
+       </table>
+    </div>
+    <div class="mmc_main" style="margin-top: .2rem;padding:.3rem">
+       <!-- 日期选择 -->
+       <form id="pagerForm" action="__MODULE__/Index/inviteDetail" method="get">
+       <div class="day_sele">
+          <div class="ds_left">
+            <span>从</span>
+              <input id="data1" class="sele_input" type="text" readonly="" value="{$start_time}" name="start_time" placeholder="请选择开始日期" data-lcalendar="2016-01-01,2020-12-31" />
+              <span>到</span>
+              <input id="data2" class="sele_input" type="text" readonly="" value="{$end_time}" name="end_time" placeholder="请选择结束日期" data-lcalendar="2016-01-01,2020-12-31" />
+          </div>
+          <input type="submit" value="查询" class="txt_btn">
+          <input type="hidden" name="userToken" id="userToken" value="{$userToken}">
+          <input type="hidden" name="level" id="level" value="{$level}">
+       </div>
+       </form>
+
+       <table class="table tb_yaoq_view">
+         <tbody>
+           <tr>
+             <th>昵称</th>
+             <th>注册时间</th>
+             <th>登录次数</th>
+           </tr>
+           <if condition="!empty($userInfo)">
+               <foreach name="userInfo" item="v" key="k" >
+           <tr>
+             <td>{$v['nick_name']}</td>
+             <td>{$v['reg_time']|date='Y-m-d',###}</td>
+             <td>{$v['login_count']}</td>
+           </tr>
+               </foreach>
+           <else />
+               <tr>
+                   <td colspan="3">没有数据哦</td>
+               </tr>
+           </if>
+         </tbody>
+       </table>
+    </div>
+  </div>
+  <input type="hidden" value="{$backUrl}" id="backUrl">
+</section>
+
+
+<script src="__PUBLIC__/Api/Invitation/js/lCalendar.min.js"></script>
+<script>
+    var calendar = new lCalendar();
+    calendar.init({
+        'trigger': '#data1',
+        'type': 'date'
+    });
+
+    var calendar2 = new lCalendar();
+    calendar2.init({
+        'trigger': '#data2',
+        'type': 'date'
+    });
+    //返回邀请列表
+    $('.goBack').on('click',function() {
+        var href = $("#backUrl").val();
+        window.location.href = href;
+    });
+</script>
+
+</body>
+</html>

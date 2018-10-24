@@ -1,0 +1,96 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <!-- 页面所需css -->
+    <link rel="stylesheet" href="__CSS__/WorldCup/public.css?v=201806041211">
+    <style>
+        .Denmark{ width: 100%; background: url({$bg}) no-repeat center 0;padding-top: 32px; height: 975px;}
+    </style>
+</block>
+<block name="content">
+    <!-- dj-theme -->
+    <div class="themeBox wcTheme Denmark">
+    	<div class="themeNavCon">
+            <div class="clearfix themeNavIn">
+                
+                <div class="pull-left themeNav">
+                    <ul class="clearfix">
+                        <volist name="nav" id="item">
+                            <li class="pull-left"><a href="{$item.url}" name="{$item.name}" target="_blank">{$item.name}</a></li>
+                        </volist>
+                    </ul>                                
+                </div>
+            </div> 
+        </div>
+        <!-- main -->
+        <div class="main clearfix">
+            <div class="position">
+                当前位置：<span class="now"><a href="{:U('/')}" title="全球体育首页" target="_blank">全球体育首页</a></span> ><span class="now"><a href="{:U('/@sporttery')}" title="专家说彩" target="_blank">专家说彩</a></span> &gt; <span class="now"><a href="{:U('/fifa@sporttery')}" title="2018世界杯预测分析宝典" target="_blank">2018世界杯预测分析宝典</a></span>  &gt;球队直通车
+            </div>
+            <div class="class-cation learfix">
+                <div class="class-left navGoup">
+                    <volist name="navGoupArr" id="vo">
+                        <a href="javascript:;" title="{$vo}" class="<if condition='$nav_goup eq $vo'>on</if>">{$vo}</a>
+                    </volist>
+                </div>
+                <div class="navList">
+                    <volist name="navList" id="item">
+                        <div class="class-right clearfix teamList{$key}" style="<if condition='$nav_goup neq $key'>display:none;</if>">
+                            <volist name="item" id="vo">
+                                <a href="{$vo.url}" title="{$vo.name}" class="<if condition="$nav_id eq $vo['id']">on</if>"><img src="{$vo.icon}" alt="{$vo.name}"><p class="list-name">{$vo.name}</p></a>
+                            </volist>
+                        </div>
+                    </volist>
+                </div>
+            </div>
+            <ul class="compass">
+                <li>
+                    <a href="{$newList['阵容']['href']}" target="_blank" title="{$newList['阵容']['title']}" class="batArray">
+                        <img src="{$newList['阵容']['img']}" alt="{$newList['阵容']['title']}">
+                        <div class="triangle"><p>阵容</p></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{$newList['成绩']['href']}" target="_blank" title="{$newList['成绩']['title']}" class="performance">
+                        <img src="{$newList['成绩']['img']}" alt="{$newList['成绩']['title']}">
+                        <div class="result"><p>成绩</p></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{$newList['深度']['href']}" target="_blank" title="{$newList['深度']['title']}" class="depth">
+                        <img src="{$newList['深度']['img']}" alt="{$newList['深度']['title']}">
+                        <div class="deepness"><P>深度</P></div>
+                    </a>
+                </li>
+                <li class="middle-phonto">
+                    <div class="{$bgphoto}"></div>
+                </li>
+                <li>
+                    <a href="{$newList['人物']['href']}" target="_blank" title="{$newList['人物']['title']}" class="figure">
+                        <img src="{$newList['人物']['img']}" alt="{$newList['人物']['title']}">
+                        <div class="person"><p>人物</p></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{$newList['媒体预测']['href']}" target="_blank" title="{$newList['媒体预测']['title']}" class="Media-pred">
+                        <img src="{$newList['媒体预测']['img']}" alt="{$newList['媒体预测']['title']}">
+                        <div class="media-pred"><P>媒体预测</P></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{$newList['盘口数据']['href']}" target="_blank" title="{$newList['盘口数据']['title']}" class="Position-data">
+                        <img src="{$newList['盘口数据']['img']}" alt="{$newList['盘口数据']['title']}">
+                        <div class="pos-data"><p>盘口数据</p></div>
+                    </a>
+                </li>
+            </ul>
+           
+        </div>
+        <!-- main -->
+    </div>
+    <!-- dj-theme -->
+</block>
+
+<block name="js">
+    <script type="text/javascript" src="__JS__/WorldCup/theme.js"></script>
+    <script type="text/javascript" src="__JS__/WorldCup/teamInfo.js"></script>
+</block>

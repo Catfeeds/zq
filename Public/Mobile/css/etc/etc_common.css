@@ -1,0 +1,86 @@
+/**
+ * 欧洲杯竞猜css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-06-01
+ *
+**/
+.text-gold{ color: #fff44e;}
+/* 二级头部 */
+/*内页 - 二级头部*/
+#other_header{ background:#0165b8  .25rem center; background-size: .22rem .4rem; text-indent: -.44rem}
+.baner img{ height: 3rem;}
+
+.head_top{ padding: .26rem .46rem 0; background: #0165b8;}
+.coop_nav a{ float: left; width: 25%; height: .68rem; padding: .18rem 0; text-align: center; color: #fff;}
+.coop_nav a span{ display: block; height: .32rem; line-height: .32rem; text-align: center; color: #fff; border-right: 1px dashed #143d84;}
+.coop_nav a:last-child span{ border: none 0;}
+.coop_nav .on{ background: #143d84;}
+.coop_banner img{ height: 3rem; width: 100%; min-width: 100%;}
+
+.main{background: url(../../images/etc/etc-bg.jpg) repeat-y 0 0; background-size: 100% auto; padding-bottom: .1rem;}
+.guess_infor{ padding: .12rem .3rem; height: 1.2rem; background: url(../../images/etc/etc-infor-bg.png) no-repeat center 0; background-size: 100% 100%;}
+.guess_infor figure .headImg{display:inline-block; width: 0.96rem; height: 0.96rem; border-radius:50%; border: 0.04rem solid #fff; overflow:hidden; background: #fff; margin-bottom: .05rem;}
+.guess_infor .headImg img{ width: 100%; min-height: 100%; border-radius:50%;}
+figcaption.head_infor{ margin-left: .2rem; padding-top: .08rem;}
+figcaption.head_infor p{ color: #fff; margin-bottom: .05rem;}
+.head_infor .name{ color: #fff44e;}
+figure{ position: relative;}
+figure .etc-more{ position: absolute; right: 0; top: 0; width: 2.26rem; height: .37rem;}
+figure .etc-more img{ width: 2.26rem;}
+.infor_ul li{ float: left; height: .34rem; line-height: .34rem; padding-left: .4rem; margin-left: .2rem;}
+.infor_ul li span{ color: #fff;}
+.infor_ul li em{ color: #fff44e;}
+.infor_ul li:nth-child(1){ background: url(../../images/etc/icon-jifen.png) no-repeat 0 center; background-size: .34rem .34rem; margin-left: 0;}
+.infor_ul li:nth-child(2){ background: url(../../images/etc/icon-jinbi.png) no-repeat 0 center; background-size: .34rem .34rem;}
+.infor_ul li:nth-child(3){ background: url(../../images/etc/icon-paiming.png) no-repeat 0 center; background-size: .34rem .34rem;}
+.infor_ul02 li:nth-child(1){ background: url(../../images/etc/icon-profit.png) no-repeat 0 center; background-size: .34rem .34rem; margin-left: 0;}
+/*公众号*/
+.gzh{ height: .62rem; line-height: .62rem; text-align: center; background: #fff9ea; border-top: 1px solid #fff;}
+
+/*竞猜内容*/
+.cai_con{ padding: 0 .26rem;}
+.cai_con .cai_title{ height: .52rem; width: 100%; margin-top: .3rem; margin-bottom: .12rem; background: #0054ae; -webkit-transform: skew(-20deg);-moz-transform: skew(-20deg); -o-transform: skew(-20deg); -ms-transform: skew(-20deg); transform: skew(-20deg);}
+.cai_title ul{height: .52rem; overflow:hidden;  -webkit-transform: skew(20deg);-moz-transform: skew(20deg); -o-transform: skew(20deg); -ms-transform: skew(20deg); transform: skew(20deg);}
+.cai_title ul li{ height: .52rem; line-height: .52rem; text-align: center; overflow:hidden;}
+.cai_con .cai_title a{ color: #fff; font-size: .24rem;}
+.cai_con .cai_title img{ width: .3rem;}
+
+
+/* 弹出层 */
+.modal{ display: none; position: fixed;  top: 40%;  left: 50%; /* width: 4.5rem; */width: 68%; /* margin-left: -2.25rem; */margin-left: -34%;  border: 3px solid #fff; border-radius: .1rem;  background-color: #fffdf2;  z-index:1050;}
+.modal-header{ height: .5rem; padding: 0 .16rem; background: -webkit-linear-gradient(#fcf305, #feca15); /* Safari 5.1 - 6.0 */ background: -o-linear-gradient(#fcf305, #feca15); /* Opera 11.1 - 12.0 */ background: -moz-linear-gradient(#fcf305, #feca15); /* Firefox 3.6 - 15 */ background: linear-gradient(#fcf305, #feca15); /* 标准的语法 */ border-radius: .05rem .05rem 0 0; border-bottom: 1px solid #fea000;}
+.modal-header .close{ float: right; padding: 0; cursor: pointer; background: transparent; border: 0;  -webkit-appearance: none; margin-top: .1rem;}
+.modal-header .close span{ display: inline-block; width: .2rem; height: .2rem; background: url(../../images/etc/icon-close.png) no-repeat; background-size: 100% 100%;}
+.modal-header .close:hover span{background: url(../../images/etc/icon-close-red.png) no-repeat; background-size: 100% 100%;}
+.modal-header .modal-title{ line-height: .5rem; text-align: center; font-size: .22rem; font-weight: normal;}
+.modal-body{ background: #fffdf2;}
+.modal_pading{ padding: .25rem .5rem;}
+.modal-body .mach_title span{ color: #ab2c00; margin-right: .1rem;}
+.modal_ul li{ margin-bottom: .15rem;}
+.modal_ul input[type="text"],#yb{ height: 24px; width: 1.5rem; border: 1px solid #fea000; border-radius: .05rem; padding: 0 .1rem; margin-top: -.05rem;}
+.modal-btn{ text-align: center;}
+.modal-btn .btn{ padding: .1rem 0; width: 1.5rem; border-radius: .05rem;}
+.btn-orange{ background: #ff7e00; color: #fff;}
+.btn-default{ background: #999999; color: #fff; }
+.btn-orange:hover{ color: #fff;}
+
+.modal-backdrop {
+	display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;s
+    z-index: 1040;
+    background-color: #000000;
+	opacity: 0.5;
+    -webkit-transition: opacity 0.15s linear;
+    -o-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;
+}
+
+
+.bubbleTips{ display: none; width: 2.45rem; height: 1.4rem; line-height: 1.4rem; text-align: center; position: fixed; left: 50%; margin-left: -1.25rem; top: 50%; background: url(../../images/etc/in-sure.png) no-repeat; background-size: 100% 100%; z-index: 2060;}
+.failTips{ display: none; width: 3rem; height: 1.4rem; padding: .2rem; text-align: center; position: fixed; left: 50%; margin-left: -1.5rem; top: 50%; background: url(../../images/etc/in-fail.png) no-repeat; background-size: 100% 100%; z-index: 2060;}

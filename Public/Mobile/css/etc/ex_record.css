@@ -1,0 +1,21 @@
+/**
+ * 欧洲杯竞猜css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-06-04
+ *
+**/
+
+/* 竞猜内容 */
+.main{ background: #fff;}
+.record_con .dl_w{ background: #fff;}
+.record_con dl{ padding: .15rem .8rem;}
+.record_con dt{ padding-left: .4rem; margin-bottom: .1rem; background: url(../../images/etc/dt-circle.png) no-repeat 0 center; background-size: .2rem auto;}
+.record_con dd{ padding-left: .4rem; margin-bottom: .1rem;}
+.record_con dt span{ padding: .05rem .1rem; border-radius: .05rem; background: #fff44e; color: #ab2c00;}
+.circle{width: .6rem; height: .6rem; border-radius: 50%; line-height: .6rem; text-align: center; color: #fff;}
+.dl_w{ background: #fff;}
+.dl_g{ background: #f7f7f7;}
+.circle_win{ background: #eb0000;}
+.circle_lose{ background: #10af63;}

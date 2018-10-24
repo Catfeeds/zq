@@ -1,0 +1,78 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/gallery/picture_area.css">
+</block>
+<block name="content">
+<!-- main -->
+<div class="themeBox all">
+    <div class="themeNavCon">
+        <div class="themeNavBox">
+            <div class="clearfix themeNavIn">
+                <div class="pull-left themeLogo"><a href="{:U('/')}" title="全球体育首页"><img src="__IMAGES__/special/theme-logo.png" width="142" height="35"></a></div>
+                <div class="pull-left themeNav">
+                    <ul class="clearfix">
+                        <li class="pull-left on" id="top-0"><a href="/"><span>图集</span></a></li>
+                        <foreach name="top_class" item="val" key="key">
+                            <li class="pull-left " id="top-{$val.id}"><a href="{$val.url}" title="{$val['name']}"><span>{$val['name']}</span></a></li>
+                        </foreach>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+       
+        <div class="ponsion">
+            <span>当前位置：</span>
+            <span><a href="{:U('/')}" title="全球体育首页">首页</a> > </span>
+            <span class="now">图片专区</span>
+        </div>
+        <!-- tab部分 -->
+        <div class="skillShot">
+            <div class="navTab">
+                <div  class="news-o">
+                    <div class="line-l"></div>
+                    <h4>图片专区</h4>
+                </div>
+                <ul class="clearfix">
+                    <li class="p-left li-first"><a class="on" href="{$top_path}" title="最新图集"><span>最新</span></a></li>
+                     <foreach name="child_class" item="val" key="key">
+                        <li class="p-left" class_id ='{$val.id}' id="c-{$val.id}"><a href="{$val.url}" title="{$val.name}">{$val.name}</a></li>
+                    </foreach> 
+                </ul>
+                <div class="line-bottom"></div>
+            </div>
+            <div class="shotBox">
+                <ul class="left-tab clearfix">
+                    <foreach name="gallery" item="val" key="key">
+                        <li class=" pull-left">
+                            <a class="numb-tab-d" target="_blank" href="{$val.info_url}" title="{$val.title}">
+                                <div class="tab-img"><img alt="{$val.title}" <egt name="key" value="12">class="lazy" data-original="{$val.cover_img}"<else/>src="{$val.cover_img}"</egt> alt="{$val.title}" /></div>
+                                <div class="tab-work">
+                                    <p>{$val.title}</p>
+                                    <span class="time-tab">{$val.date_format}</span>
+                                    <!--<span class="glyphicon glyphicon-heart"></span><span>{$val.like_num}</span>-->
+                                </div>
+                            </a>
+                        </li>
+                    </foreach>
+                </ul>
+            </div>
+            <!-- Tab结束 -->
+            <input type="hidden" id="class_id" name="class_id" value="{$Think.get.class_id}">
+            <!-- main -->
+        </div>
+        <!-- 页码开始 -->
+        <div class="page-con"> <nav> <ul class="pagination pull-rigth">{$page} </ul> </nav> </div>
+        <!-- 页码结束 -->
+    </div>
+</div>
+</block>
+<block name="js">
+    <script>
+        var pid = '{$pid}';
+        var class_id = '{$class_id}';
+    </script>
+    <script type="text/javascript" src="__JS__/gallery/gallery.js"></script>
+</block>

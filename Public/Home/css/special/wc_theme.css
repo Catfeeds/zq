@@ -1,0 +1,318 @@
+/**
+ * World Cup of css
+ *
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2018-03-16
+ *
+**/
+.table > tbody > tr > td { border-top: none 0;}
+.skewRight{ -webkit-transform: skew(-30deg) translateZ(0); -moz-transform: skew(-30deg) translateZ(0); -ms-transform: skew(-30deg) translateZ(0); -o-transform: skew(-30deg) translateZ(0); transform: skew(-30deg) translateZ(0);}
+.skewLeft{ -webkit-transform: skew(30deg) translateZ(0); -moz-transform: skew(30deg) translateZ(0); -ms-transform: skew(30deg) translateZ(0); -o-transform: skew(30deg) translateZ(0); transform: skew(30deg) translateZ(0);}
+
+.themeBox{ width: 100%; padding-top: 111px; min-height: 500px; background: url(../../images/special/world-cup/wc-theme-banner.png?20180615) no-repeat center 0;}
+.wcTheme .themeNavCon{ width: 100%; position: relative;}
+.wcTheme{ padding-top: 118px;}
+.themeNavBox{ width: 1024px; margin: 0 auto; background: #010101;}
+.themeNavIn{ position: relative;}
+.dec{ position: absolute; width: 36px; height: 49px; top: 0;}
+.decL{ left: -36px; background: url(../../images/special/world-cup/dec-navl.png) no-repeat 0 0;}
+.decR{ right: -36px;background: url(../../images/special/world-cup/dec-navr.png) no-repeat 0 0;}
+.themeLogo a{ display: block; width: 210px; height: 48px; line-height: 48px; text-align: center;}
+.themeNav{ background: #010101;}
+.themeNav ul{ padding-left: 30px;}
+.hot a{color:#ffd617!important;}
+.themeNav ul li a{ display: inline-block; height: 49px; line-height: 49px; color: #fff; font-size: 16px; padding: 0 16px; transition: .2s; -webkit-transition: .2s; -moz-transition: .2s; -o-transition: .2s; position: relative;}
+.themeNav ul li a .hotIcon{ width: 17px; height: 20px; top: -3px; right: 0px; position: absolute; background: url(../../images/special/world-cup/icon-hot.png) no-repeat;}
+.themeNav ul li.on a,.themeNav ul li a:hover{ transition: ease-out 0.3s; background: #fff; background: rgba(255,255,255,0.2);}
+
+.wcMain{ width: 1054px; margin: 0 auto; padding: 0 15px; background: #fff; box-shadow: 0 0 10px #e5e5e5; padding-bottom: 30px;}
+.main{ background: #fff;}
+.position { padding: 10px;}
+/*直播条*/
+.matLiveLi{ margin-bottom: 28px;}
+.liveLiCon{ width: 100%; padding: 0 24px; position: relative;}
+.liveLiCon .leftBtn,.liveLiCon .rightBtn{ height: 116px; width: 24px; line-height: 116px; text-align: center; color: #fff; transition: .2s; -webkit-transition: .2s; -moz-transition: .2s; -o-transition: .2s; opacity: 1; text-shadow: none; font-size: 14px; position: absolute;z-index: 2;}
+.liveLiCon .leftBtn{ left: 0; top: 0;}
+.liveLiCon .rightBtn{ right: 0; top: 0;}
+.liveLiCon .leftBtn, .liveLiCon .rightBtn{ background: #161f32;}
+.liveLiCon .leftBtn:hover,.liveLiCon .rightBtn:hover{ opacity: .8; transition: ease-out 0.3s;}
+.liveInner{ width: 100%; height: 116px; overflow: hidden; position: relative;}
+.liveInner ul{ position: absolute; left: 0; top: 0;}
+.liveInner .liItem{ width: 976px; height: 116px;}
+.liItem dl{ height: 116px; font-weight: normal; overflow: hidden;}
+.liItem dl dt{ width: 56px; height: 116px; color: #fff; text-align: center; font-weight: normal;}
+.liItem dl dt h3{ line-height: 24px;font-size: 14px;padding: 33px 0px;}
+.liItem dl dt{ background: #d83c0c;}
+
+.liItem .teamLive{ display: block; width: 92px; text-align: center; border-right: 1px solid #e5e5e5; border-left: 1px solid #f0f0f0;}
+.liItem .teamLive .timeBox{ padding: 2px 0;font-size: 12px;}
+.liItem .timeBox{ background: #f6f6f6;}
+.liItem .timeBox .time{ color: #4c4c4c;}
+.liItem a:hover{ border: 1px solid #d83c0c;}
+.liItem .teamScore{ color: #78bbe6;}
+.liItem .teamLive .teamHome,.liItem .teamLive .teamAway{ padding: 3px 4px; color: #4c4c4c;}
+.liItem .teamLive .score{text-align: center; height: 20px;}
+.liItem a:hover .score{ height: 18px;}
+.liItem .teamLive .teamHome .teamName,.liItem .teamLive .teamAway .teamName{display: block;}
+.liItem .liveTypeCon{ padding: 3px 0 3px; background: #f6f6f6; font-size: 12px;}
+.liItem .liveTypeCon span{ width: 50%; text-align: center;}
+.liItem .liveTypeCon span.rouTime{ border-right: 1px solid #d5d5d5; color: #666;}
+.liItem .liveType{ color: #de0000;}
+.liItem .endType{ color: #999;}
+.liItem .noStatType{ color: #333333;}
+.liveList .liveType{ color: #de0000;}
+
+.chaTab{ position: absolute; top: 0; left: 24px; width: 72px; height: 116px; z-index: 1;}
+.chaTab a{ display: block; height: 58px; color: #fff; text-align: center;}
+.chaTab .xzMatch,.chaTab .ttMatch{ padding: 8px 8px;}
+.noClick{ cursor: not-allowed; background: #999999 !important;}
+.noClick:hover{ opacity: 1 !important; }
+.chaTab .xzMatch,.chaTab .ttMatch{ background: #999999;}
+.chaTab .xzMatch.on,.chaTab .ttMatch.on{ background: #d83c0c;}
+.chaTab .ttMatch{ line-height: 42px;}
+.liItem dl dt{ width: 72px;}
+.liItem .teamLive{ width: 113px;}
+.liItem dl dt{ background: #ffffff;}
+.liItem dl{ margin-left: 72px; }
+/*直播条*/
+
+/*新闻*/
+.themeNews{ width: 308px;}
+.dlNews{ padding-bottom: 15px;}
+.themeNews h2{ font-size: 18px; word-break: break-all; font-weight: 700;}
+.themeNews h2,.dlNews li{ margin-bottom:15px;}
+.themeNews h2 a{height: 26px; line-height: 26px; display: block; word-break: break-all; overflow: hidden; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis;}
+.dlNews li a{ overflow: hidden; word-break:keep-all; white-space:nowrap; display:block; text-overflow: ellipsis; -webkit-text-overflow: ellipsis;}
+.dlNews li span{ margin-top: -4px; color: #fff; padding: 2px 4px; margin-right: 3px;}
+.dlNews li span.red-tip{background: #de0000;}
+.dlNews li span.blue-tip{background: #368def;}
+
+.themeMedia{ width: 412px; margin-left: 18px;}
+.themeMedia .banner{ width: 412px;}
+.themeMedia .carousel-inner img{width: 412px !important;height:258px !important;-webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.themeMedia .carousel-inner img:hover{-webkit-transform: scale(1.2) translateZ(0); -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1); transform: scale(1.2) translateZ(0); transition: transform .75s cubic-bezier(0,1,.75,1);}
+.themeMedia .carousel-control { display: block; height: 90px; width: 34px; background: #000; opacity: 0.3; filter: alpha(opacity=30); top: 50%; margin-top: -45px;}
+.themeMedia .carousel-control:hover{opacity: 0.75; filter: alpha(opacity=75);}
+.themeMedia .carousel span{ display: block; width: 100%; height: 100%; overflow: hidden; }
+.themeMedia .carousel .left span{ background: url(../../images/index/prev-arrow.png) no-repeat center center;}
+.themeMedia .carousel .right span{ background: url(../../images/index/next-arrow.png) no-repeat center center;}
+.themeMedia .carousel-indicators{ margin-bottom: 0; left: 98%!important;  bottom: 10px!important;text-align: right; z-index: 999; width: 30%;}
+.themeMedia .carousel-indicators li { border: none; background-color: #fff; margin: 0 0;margin-left: 5px;}
+.themeMedia .carousel-indicators .active { width: 10px; height: 10px; background-color: #1078c0; border: 1px solid #1078c0; box-shadow: none; margin: 0 0;margin-left: 5px;}
+.themeMedia .fbanner-title{position: absolute;bottom: 0; left: 0;z-index: 99; background: rgba(0,0,0,0.6); height: 45px; line-height: 45px;width: 100%;display: block; color: #fff; padding-left: 10px; font-size: 16px;overflow: hidden;text-overflow: ellipsis;word-break: keep-all;white-space: nowrap;}
+
+.videoList{ padding-top: 30px;}
+.videoList .listTitle{ font-size: 18px; margin-bottom: 20px; position: relative;}
+.videoList .listTitle .moreTit{ line-height: 32px; font-size: 14px;}
+.videoList .listTitle .rightIcon{ padding: 0 1px; margin-left: 4px; color: #fff; font-size: 12px; background: #bbbbbb;}
+.videoList .listTitle .videoTit{ width: 120px; height: 32px; line-height: 32px; font-size: 18px; font-weight: 700;}
+.videoList .listTitle{ border-bottom: 2px solid #e5e5e5;}
+.video-list-ul{ margin-left: -7px; margin-right: -7px;}
+.video-list-ul .video-list{ padding: 0 7px; margin-bottom: 30px; width: 33.333%;}
+.video-list-ul .video-list a{ display: block; height: 92px; position: relative; color: #ffffff; overflow: hidden;}
+.video-list-ul .video-list p{ position: absolute; left: 0; bottom: 0; width: 100%; padding: 3px 8px; background: rgba(0,0,0,0.5);}
+.video-list-ul .video-list .trapezoid{ position: absolute; left: 0; top: 0;  height: 18px; line-height: 18px; padding: 0 10px; background: #e82929; font-size: 10px;}
+.video-list-ul .video-list .trapezoid::after{ content:""; position: absolute; right: -8px; top: 0; width: 0; height: 0; border-top: 18px solid #e82929; border-right: 8px solid transparent;}
+.video-list-ul .video-list a img { -webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.video-list-ul .video-list a:hover img {-webkit-transform: scale(1.2) translateZ(0); -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1); transform: scale(1.2) translateZ(0); transition: transform .75s cubic-bezier(0,1,.75,1);}
+.video-list-ul .video-list .playBtn{ position: absolute; left: 50%; top: 50%; margin-left: -15px; margin-top: -15px; width: 30px; height: 30px; background: url(../../images/special/world-cup/play-btn.png) no-repeat 0 0;}
+.video-list-ul .video-list .playBtn { filter: alpha(opacity=0); opacity: 0; -webkit-transform: scale(.7); -webkit-transition-property: opacity,-webkit-transform;-webkit-transition-duration: .5s; transform: scale(.7); transition-property: opacity,transform; transition-duration: .5s; zoom: 1;}
+.video-list-ul .video-list a:hover .playBtn{background: 0 0\9; filter: progid:dximagetransform.microsoft.alphaimageloader(src="http://imgcache.gtimg.cn/mediastyle/yqq/img/cover_play.png", sizingmethod="crop") alpha(opacity=90); opacity: .9; -webkit-transform: scale(1); -webkit-transition-property: opacity,-webkit-transform; -webkit-transition-duration: .5s; transform: scale(1); transition-property: opacity,transform; transition-duration: .5s; cursor: pointer;}
+.video-list-ul .video-list .coverMask {position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: #000; opacity: 0; filter: alpha(opacity=0); -webkit-transition: opacity .5s; transition: opacity .5s;}
+.video-list-ul .video-list a:hover .coverMask{opacity: .2; filter: alpha(opacity=20); -webkit-transition: opacity .5s; transition: opacity .5s;}
+
+.themeRank{ width: 260px;}
+.themeRank .listTitle{ font-size: 18px; margin-bottom: 3px; position: relative;}
+.themeRank .listTitle .moreTit{ margin-top: 10px; font-size: 14px;}
+.themeRank .listTitle .rightIcon{ padding: 0 1px; margin-left: 4px; color: #fff; font-size: 12px; background: #bbbbbb;}
+.themeRank .listTitle .tit{ width: 120px; height: 32px; line-height: 32px; font-size: 18px; font-weight: 700;}
+.themeRank .groupList{ background: #fafafa; padding: 8px 10px; border-bottom: 1px solid #dbdbdb;}
+.themeRank .groupList a{ font-size: 18px; display: inline-block; margin: 0 7px;}
+.themeRank .groupList a.on,.themeRank .groupList a:hover{ text-decoration: underline !important; color: #0a2476;}
+.themeRank .poiTable,.themeRank .shoTable{ border: 1px solid #dbdbdb; margin-bottom: 15px;min-height: 160px;}
+.themeRank .poiTable .table,.shoTable .table{ margin-bottom: 0;}
+.themeRank .poiTable .poiTitle,.shoTable .shoTitle{ padding: 10px 0; border-bottom: 1px solid #dbdbdb;}
+.themeRank .poiTable .poiTitle strong{ padding-left: 12px; font-size: 20px; position: relative;}
+.themeRank .poiTable .poiTitle strong i{ position: absolute; left: 0; top: 5px; width: 6px; height: 18px;}
+.themeRank .poiTable .poiTitle strong i{background: #d83c0c;}
+.themeRank .poiTable .table > thead > tr > th,.poiTable .table > tbody > tr > td,.themeRank .shoTable .table > thead > tr > th, .shoTable .table > tbody > tr > td{ padding: 6px 6px;}
+.poiTable .table > tbody > tr:hover,.shoTable .table > tbody > tr:hover{ background: #f6f3ed;}
+.themeRank .poiTable .table .playerName{ width: 88px; cursor: default;}
+.themeRank .shoTable .table .playerName,.themeRank .shoTable .table .teamName{ width: 70px;cursor: default; }
+.noRank{ display: inline-block; width: 18px; height: 18px; line-height: 18px; text-align: center; font-weight: 700;}
+.redRank{ background: #c7161e; color: #fff;}
+.grayRank{ background: #999999; color: #fff;}
+
+.wcTitle{ margin-bottom: 12px;}
+.wcTitle .log-red{ width: 176px; height:36px; line-height: 36px; text-align: center; font-size: 20px; background: url(../../images/special/world-cup/pri-red-title.png) no-repeat 0 0; color: #fff;}
+.wcTitle .sml-blue{ width: 128px; height:36px; line-height: 36px; text-align: center; font-size: 20px; background: url(../../images/special/world-cup/pri-blue-title.png) no-repeat 0 0; color: #fff;}
+.wcTitle .sml-red{ width: 116px; height:36px; line-height: 36px; text-align: center; font-size: 20px; background: url(../../images/special/world-cup/sml-red-title.png) no-repeat 0 0; color: #fff;}
+.wcTitle .moreTit{ margin-top: 15px; font-size: 14px; color: #666;}
+.wcTitle .rightIcon{ padding: 0 1px; margin-left: 4px; color: #fff; font-size: 10px; background: #d53039;}
+
+.priBox{ margin-bottom: 40px;}
+.priBox .priLeft{ width: 670px;}
+.guessBox{ height: 595px;position: relative; padding-bottom: 20px; background: #121f60; background: -webkit-linear-gradient(top, #101721 0,#121f60 20%, #121f60 50%, #121f60 80%, #101721 100%); background: -o-linear-gradient(top, #101721 0,#121f60 20%, #121f60 50%, #121f60 80%, #101721 100%); background: -moz-linear-gradient(top, #101721 0,#121f60 20%, #121f60 50%, #121f60 80%, #101721 100%); background: linear-gradient(top, #101721 0,#121f60 20%, #121f60 50%, #121f60 80%, #101721 100%);}
+
+.guessBox .notice-scroll{ width: 100%; height: 20px; line-height: 20px; font-size: 12px; background: #c21514; background: -webkit-linear-gradient(left, #8a0403 0, #c21514 50%, #8a0403 100%); background: -o-linear-gradient(left, #8a0403 0, #c21514 50%, #8a0403 100%); background: -moz-linear-gradient(left, #8a0403 0, #c21514 50%, #8a0403 100%); background: linear-gradient(left, #8a0403 0, #c21514 50%, #8a0403 100%);}
+.guessBox .guessMore{ position: absolute; top: 20px; right: 6px; width: 90px; height: 40px; line-height: 40px; text-align: center; color: #3f3112; background: url(../../images/special/world-cup/guess-more-bg.png) no-repeat 0 0; z-index: 100;}
+.guessBox .guessMore:hover{background: url(../../images/special/world-cup/guhover-more-bg.png) no-repeat 0 0;}
+.guessLiCon{ height: 510px; width: 100%; overflow: hidden; margin: 0 auto;}
+.guessLiCon .mCSB_inside > .mCSB_container{ margin-right: 0;}
+.matchTit{ width: 442px; height: 66px; margin: 0 auto; background: url(../../images/special/world-cup/guess-title-bg.png) no-repeat center 0; margin-top: 2px;}
+.matchTit .timeType{ width: 74px; font-size: 12px; padding-top: 17px;}
+.matchTit .flag{ width: 62px; height: 31px; margin-top: 17px;}
+.matchTit .teamName{ width: 102px; text-align: center; line-height: 31px; color: #382a0d; padding-top: 17px;}
+
+.guessItem{ width: 634px; margin: 0 auto; border: 1px solid #2876bd; box-shadow: 0 0 10px #4391d8; padding: 10px 15px; margin-bottom: 15px;}
+.guessItem dl{ padding-left: 20px; margin-bottom: 20px;}
+.guessItem dt{ color: #fff;  font-weight: normal; margin-bottom: 10px; padding-left: 12px; position: relative;}
+.guessItem dt .topic{ position: absolute; width: 25px; height: 25px; line-height: 25px; text-align: center; color: #013171; font-style: normal; top: 0; left: -25px; background: url(../../images/special/world-cup/topic.png) no-repeat 0 0;}
+.itemList a{ color: #fff; height: 32px; line-height: 32px; text-align: center; font-size: 12px; background: #0d5a9f; margin: 5px 12px; padding: 0 15px;}
+.itemList a.on,.itemList a:hover{ background: #4ca1ed;}
+.btnCon .btn{ width: 120px; height: 40px; line-height: 28px; color: #3f3112; margin: 0 10px;}
+.btnCon .sub{ background: url(../../images/special/world-cup/def-sub.png) no-repeat 0 0;}
+.btnCon .sub:hover{ background: url(../../images/special/world-cup/hov-sub.png) no-repeat 0 0;}
+.btnCon .sub.on{ background: url(../../images/special/world-cup/dis-sub.png) no-repeat 0 0; color: #999;}
+.btnCon .look{ background: url(../../images/special/world-cup/def-look.png) no-repeat 0 0;}
+.btnCon .look:hover{ background: url(../../images/special/world-cup/hov-look.png) no-repeat 0 0;}
+
+.priBox .priRight{ width: 322px;}
+.groupCon{ border: 1px solid #e0e0e0;}
+.groupCon .table{ margin-bottom: 0;}
+.groupCon .table tr>td{ padding: 5px 4px;}
+
+.mapList{ height: 442px; background: url(../../images/special/world-cup/mat-map.jpg) no-repeat center 0; margin-bottom: 40px; position: relative;}
+.mod{ position: absolute; width: 148px; height: 88px; padding-top: 10px;}
+.mod .teamName{ width: 55px; line-height: 20px;}
+.mod .score{ width: 38px;}
+/*8强*/
+.mod49{left: 18px; top: 37px;}
+.mod50{left: 18px; top: 137px;}
+.mod51{right: 18px; top: 37px;}
+.mod52{right: 18px; top: 137px;}
+.mod53{left: 18px; top: 237px;}
+.mod54{left: 18px; top: 337px;}
+.mod55{right: 18px; top: 237px;}
+.mod56{right: 18px; top: 337px;}
+/*4强*/
+.mod57{left: 178px; top: 82px;}
+.mod59{right: 178px; top: 82px;}
+.mod60{right: 178px; top: 282px;}
+.mod58{left: 178px; top: 282px;}
+/*2强*/
+.mod61{left: 336px; top: 182px;}
+.mod62{left: 542px; top: 182px;}
+/*冠军与34名*/
+.mod63{left: 442px; top: 320px;}
+.mod64{left: 436px; top: 64px;}
+
+.dirCon{ margin-bottom: 50px;}
+.dirCon .expList{ width: 272px;}
+.dirCon .expList li{ padding: 9px 10px; color: #4d4d4d;}
+.dirCon .expList li:hover{ background: #f5f0e7;}
+.dirCon .expList .on{ background: #f5f0e7; color: #4d4d4d;}
+.dirCon .expList .faceImg { width: 34px; height: 34px; border-radius: 50%; overflow: hidden;}
+.dirCon .expList .faceImg img { width: 100%; height: 100%;}
+.dirCon .uText{ width: 208px;}
+.dirCon .starList{ width: 442px;}
+.dirCon .starList ul{ background: #fbfbfb; border: 1px solid #e5e5e5; padding:6px 4px;}
+.dirCon .starList li{ width: 25%;}
+.dirCon .starList li a{ display: block; height: 126px; padding: 6px; color: #4d4d4d;}
+.dirCon .starList li.on a,.dirCon .starList a:hover{ background: #f5f0e7;}
+.dirCon .starList .faceImg { width: 68px; height: 68px; margin: 0 auto; margin-bottom: 6px; border-radius: 50%; overflow: hidden;}
+.dirCon .starList .faceImg img { width: 100%; height: 100%;}
+.dirCon .tjList{ width: 246px;}
+.dirCon .tjList li{ margin-bottom: 10px;}
+.dirCon .tjList .dkLink{ display: block; width: 246px; height: 58px; background: url(../../images/special/world-cup/dk-link-bg.png) no-repeat 0 0; padding: 4px 0;}
+.dirCon .tjList .dkTop{ padding: 0 15px;}
+.dirCon .tjList .dkTop .flag{ margin-top: 6px;}
+.dirCon .tjList .teamName{ width: 55px;}
+.dirCon .tjList .scoreType{ width: 30px;}
+.dirCon .tjList .homePro,.dirCon .tjList .awayPro{ width: 62px;}
+.dirCon .tjList .homePro .progress,.dirCon .tjList .awayPro .progress{ margin-bottom: 0; height: 5px; border: 1px solid #815b40; background: #3f5354; margin-top: 7px;}
+.dirCon .tjList .awayPro .progress{ border-color: #4f738a;}
+.dirCon .tjList .homePro .progress-bar{ float: right;}
+.dirCon .tjList .dkBom .dkText{ width: 58px;}
+.dirCon .tjList .homeVal,.dirCon .tjList .awayVal{ width: 32px; padding: 0 2px;}
+.dirCon .tjList .homeVal{ color: #ed244a;}
+.dirCon .tjList .awayVal{ color: #13bfff;}
+
+.atlCon{ margin-bottom: 20px;}
+.atlCon .atlLeft{ width: 728px;margin-bottom: 20px;}
+.atlLeft .bannerCon{ margin-bottom: 20px;}
+.atlLeft .bannerCon .banner{ margin-bottom: 20px;}
+.atlLeft .bannerCon .item ul{ position: relative; margin-left: -3px; margin-right: -3px;}
+.atlLeft .bannerCon .item li{ margin: 8px 2px; width: 238px; height: 148px; overflow: hidden; position: relative; background: #fbfbfb;}
+.atlLeft .bannerCon .item li a{ display: block; width: 238px; height: 148px; line-height: 148px; text-align: center;}
+.atlLeft .bannerCon  img{ width: 100%; height: auto; -webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.atlLeft .bannerCon  li:hover img{-webkit-transform: scale(1.2) translateZ(0); -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1); transform: scale(1.2) translateZ(0); transition: transform .75s cubic-bezier(0,1,.75,1);}
+.atlLeft .bannerCon .fbanner-title{position: absolute;bottom: 0; left: 0;z-index: 99; padding: 0 6px; width: 100%; height: 28px; line-height: 28px;  color: #fff; text-align: left;}
+.atlLeft .bannerCon  li:hover .fbanner-title{ text-decoration: underline !important;}
+.coverGrad{ position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: transparent; background: -webkit-linear-gradient(bottom, #000000 0, transparent 50%, transparent 100%); background: -o-linear-gradient(bottom, #000000 0, transparent 50%, transparent 100%); background: -moz-linear-gradient(bottom, #000000 0, transparent 50%, transparent 100%); background: linear-gradient(bottom, #000000 0, transparent 50%, transparent 100%); opacity: 0.5;}
+
+.atlCon .atlRight{ width: 246px;}
+.atlCon .atlRight .fxUl .listIma .rigthText{ width: 150px;}
+
+.lMatList{ width: 680px;}
+.lMatList .navList{ border-bottom: 2px solid #e5e5e5; margin-bottom: 20px;}
+.lMatList .navList{ border: 1px solid #e5e5e5;}
+.lMatList .navList ul li{ position: relative; z-index: 5;}
+.lMatList .navList ul li a{height: 48px; line-height: 48px; color: #333; padding: 0 7px; font-size: 18px; display: block; position: relative;}
+.navList .navLink:after,.navList .navLink:before{ transition: .2s; -webkit-transition: .2s; -moz-transition: .2s; -o-transition: .2s; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; -moz-transform-style: preserve-3d; -o-transform-style: preserve-3d; content: ''; position: absolute; bottom: -2px; width: 0%; height: 2px;}
+.navList .navLink:after,.navList .navLink:before{ background-color: #bf000c;}
+.navList .active .navLink:after,.navList .active .navLink:before{ width: 50%; font-weight: 700;}
+.navList .navLink:before{ right: 50%;}
+.navList .navLink:after{ left: 50%;}
+.navList .active .navLink,.navList ul li:hover>.navLink{ font-weight: 700;}
+.navList ul li:hover>.navLink:after,.navList ul li:hover>.navLink:before{ width: 50%;}
+
+.matListBox .listInfor{ margin-bottom: 30px;}
+.matListBox .listInfor a.inforLink{ display: block;}
+.matListBox .listInfor .inforArt{ width: 500px; padding-left: 20px;}
+.matListBox .listInfor .inforArt h2{ font-size: 20px; margin-bottom: 10px; font-weight: 700;}
+.matListBox .listInfor .inforArt .inforArtP{ height: 40px; margin-bottom: 15px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; -moz-box-orient: vertical; word-break: break-all;}
+.matListBox .listInfor .author{ height: 28px; line-height: 28px;}
+.matListBox .listInfor .author img{ margin-right: 10px;}
+.matListBox .listInfor .rightEye{ padding-left: 20px; background: url(../../images/special/world-cup/eye-icon.png) no-repeat 0 center;}
+.matListBox .listInfor .listInUl{ margin: 0 -2px; padding: 30px 0; border-bottom: 1px solid #e5e5e5; border-top: 1px solid #e5e5e5;}
+.matListBox .listInfor .listInUl li{ margin: 0 6px;}
+.matListBox .listInfor .listInUl li a{display: block; width: 216px; position: relative; color: #ffffff; overflow: hidden;}
+.matListBox .listInfor .listInUl li p{position: absolute; left: 0; bottom: 0; width: 100%; padding: 5px 8px; background: rgba(0,0,0,0.5);}
+.matListBox .more { display: block; height: 50px; line-height: 48px; text-align: center; font-size: 16px; color: #aeaeae; border: 1px solid #f0f0f0;}
+.matListBox .more:hover { background: #f4f4f4; border: 1px solid #f4f4f4; color: #828282;}
+
+.mainRight{ width: 280px;}
+.fxUl .listIma{ margin-bottom: 10px;}
+.fxUl .listIma .leftIma{ width: 96px; height: 67px; overflow: hidden;}
+.fxUl .listIma .rigthText{ width: 184px; height: 67px; overflow: hidden; word-wrap: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; -moz-box-orient: vertical; word-break: break-all; padding-left: 5px; padding-top: 5px;}
+.fxInfor{ margin-bottom: 30px;}
+.fxInfor .fxUl{ padding-top: 8px;}
+.fxInfor .fxUl .listText{ margin-bottom: 8px;}
+.fxInfor .fxUl .listText a{ display: block; position: relative;}
+.fxInfor .fxUl .listText .fbanner-title{position: absolute;bottom: 0; left: 0;z-index: 99; padding: 0 6px; width: 100%; height: 28px; line-height: 28px;  color: #fff; text-align: left;}
+.fxInfor .fxUl .listText.on a{ color: #0063a7;}
+.fxInfor .fxUl .listText a:hover{ color: #d82222;}
+.fxInfor .fxUl .listText a:hover .fbanner-title{ text-decoration: underline !important;}
+
+/* 赛程表 */
+.schNav{ width: 600px; margin: 0 auto; margin-bottom: 35px; border: 1px solid #e5e5e5;}
+.schNav ul li{ width: 25%;}
+.schNav ul li a{ display: block; padding: 8px 0; text-align: center; color: #666;}
+.schNav ul li.on{ background: #b19465;}
+.schNav ul li.on a{ color: #fff;}
+.schNav ul li.on span{ border: none 0;}
+.schNav ul li a span{ display: block; border-right: 1px solid #e5e5e5;}
+.schNav ul li:last-child span{ border: none 0;}
+
+.schBox{ width: 1020px; margin: 0 auto; position: relative;}
+.schTit{ position: absolute; top: 0; left: 24px;}
+.schTitBlue{ width: 67px; height: 72px; background: url(../../images/special/world-cup/sch-tit-blue.png) no-repeat 0 0;}
+.schTitRed{ width: 67px; height: 63px; background: url(../../images/special/world-cup/sch-tit-red.png) no-repeat 0 0;}
+.schTitLogRed{ width: 67px; height: 96px; background: url(../../images/special/world-cup/sch-tit-log-red.png) no-repeat 0 0;}
+.schBox .table > thead> tr > th{ font-weight: normal; color: #fff;}
+.schBox .table > tbody> tr > td{ padding: 12px 8px; border-bottom: 1px solid #e3d5b9;}
+.schBox .table > tbody> tr:hover{ background: #f3ebdd;}
+.data-a a{ margin: 0 4px;}
+

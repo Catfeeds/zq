@@ -1,0 +1,34 @@
+<extend name="Public/base" />
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/special/index.css?20180622">
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file="Public:titleHead"/>
+</block>
+<!-- 二级头部 e -->
+<block name="nav"></block>
+<!-- 主题内容 -->
+<block name="content">
+    <!-- 主体内容 -->
+    <section class="container clearfix">
+        <!-- 第一模块 -->
+        <div class="premier-box clearfix">
+            <ul class="premier HotList"></ul>
+        </div>
+        <div class="more">
+            <span class="loading">数据加载中</span>
+            <span class="nothing" style="display:none;">无更多数据</span>
+        </div>
+    </section>
+</block>
+<block name="scripts">
+    <script>
+        var listtime = "{:time()}";
+        var IMAGES = "__IMAGES__";
+        var keyWord = "{$key}"
+        var page = 1
+    </script>
+    <script type="text/javascript" src="__JS__/special/newsList.js?20180517"></script>
+</block>

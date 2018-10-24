@@ -1,0 +1,31 @@
+.tb_data_fenxi tr th{height: 30px;background: #e5e5e5}
+.team_zhu{background: #ffe9eb}
+.team_ke{background: #eaf4fe}
+
+/*checkbox按钮*/
+.cb{text-align: right!important;padding-right: 10px!important}
+.cb .myLabel01{background: url(../../images/scoreLive/input-s.png) no-repeat left center;}
+.cb input[type=checkbox]{ vertical-align: -2px; margin: 3px 3px 0px 5px; display: none;}
+.cb .inline {
+    margin-left: 8px;
+    margin-bottom: 0;
+    padding-left: 20px;
+    cursor: pointer;
+    background: url(../images/scoreLive/input-s.png) no-repeat left center;
+}
+.cb .myLabel02{background: url(../images/scoreLive/input-d.png) no-repeat left center;}
+
+.team_title{background: #ffe9eb}
+.team_name{padding-left: 10px}
+.sele_pl{width: 95px;height: 25px;padding-left: 25px;border:1px solid #dddddd;}
+
+.span_padding span{padding:0 3px;}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+<include file="Etc/head"/>
+    <link rel="stylesheet" href="__CSS__/etc/ex_prize_record.css">
+    <style type="text/css">
+    	html,body{ background: #f7f7f7;}
+		.main{ background: #f7f7f7;}
+		.prize_record_con .table  tr td{ border-bottom: 1px solid #ddd; color: #666;}
+    </style>
+<body>
+	<!-- 二级头部 s -->
+	<header id="other_header">
+    	<a href="javascript:history.go(-1);"></a>兑换记录
+    </header>
+    <!-- 二级头部 e -->
+
+	<section class="main">
+<!--    	<div class="cai_title">
+            <div id="marquee" class="pri">
+                <ul>
+                    <li><a class="text-666">说明：凭兑换码去ETC奖品兑奖页面进行兑换</a></li>
+                </ul>
+            </div>
+        </div>-->
+        <div class="prized_con">
+            <ul class="posts">
+                <volist name='list' id='v'>
+                <li class="list clearfix">
+                    <div class="n_img"><img src="{$v.img}" alt="加油卡"></div>
+                    <div class="n_des">
+                        <p class="text-666">{$v.add_time|date='Y-m-d H:i',###}  <span style="margin-left:.1rem;">兑换了</span></p>
+                        <h3 class="overflow">{$v.title}</h3>
+                        <p class="b_p">消耗：{$v.coin}推荐币</p> 
+                    </div> 
+                </li>
+                </volist>
+            </ul>
+      	</div>
+    </section>
+</body>
+</html>

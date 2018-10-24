@@ -1,0 +1,29 @@
+/*
+ * 服务协议手机页面
+ *
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-02-24
+*/
+.main{ position: relative; width: 100%; max-width: 750px; min-width: 320px; height: 100%; background: url(../images/load-mainbg.jpg) no-repeat center top; margin: 0 auto;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100% 100%;
+	padding: 1rem 0;
+}
+.main02{ background: url(../images/load-mainbg02.jpg) no-repeat center top; background-size: 100% 100%;}
+.share_code{ position: absolute; width: 95%; height: 18%; margin-left: 2.5%; background: url(../images/code-bg.png) no-repeat center center; background-size: 100% auto; left: 0; bottom: 22%; padding: 0 4%; padding-top: 10%; padding-left: 9rem;}
+.share_code span{ font-size: 1.4rem; margin-right: 0.5rem;}
+.share_code em{ font-size: 1.6rem; color:  #e15626;  font-weight: 700;}
+.share_code button{ width: 9.5rem; height: 2.3rem;  color: #fff; background: transparent; background: url(../images/rBtn-bg.png) no-repeat right center; background-size: 100% 100%; margin-left: 0.5rem;  border-radius: 4px;}
+.main02 .load-main{ position: absolute; width: 100%; left: 0; bottom: 14%;}
+.load-main{ position: absolute; width: 100%; left: 0; bottom: 16%;}
+.load-main a{ display: block; width: 54%; margin: 0 auto; /*background: #e75454; border-radius: 0.6rem;*/}
+
+@media screen and (min-width:410px) and (max-width:1920px) {
+    .share_code {
+        padding-top: 11.5%;
+        padding-left: 12rem;
+    }
+}

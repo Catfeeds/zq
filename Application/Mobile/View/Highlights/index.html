@@ -1,0 +1,45 @@
+<extend name="Public/base" />
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/video/index.css?v=201804203">
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file="Public:titleHead"/>
+</block>
+<!-- 二级头部 e -->
+<block name="nav"></block>
+<!-- 主题内容 -->
+<block name="content">
+    <include file="Public:navHead"/>
+
+    <!-- 主体内容 -->
+    <section class="container clearfix">
+        <div class="videoList"></div>
+        <div class="more">
+            <span class="loading">数据加载中</span>
+            <span class="nothing" style="display:none;">无更多数据</span>
+        </div>
+        <!-- 返回顶部 -->
+        <neq name="_GET['header']" value="no">
+        <div class="backtop clearfix">
+            <a><img src="__IMAGES__/index/backtop.png"></a>
+        </div>
+        </neq>
+        <eq name="_GET['header']" value="no">
+            <include file="Public:go_back_pack"/>
+        </eq>
+    </section>
+
+</block>
+<block name='scripts'>
+    <script>
+        var page = 1;
+        var listtime = "{:time()}";
+        var IMAGES = "__IMAGES__";
+        var keyWord = "{$keyWord}";
+        var htmlData = "";
+        <eq name="_GET['header']" value="no">htmlData = '?header=no';</eq>
+    </script>
+    <script type="text/javascript" src="__JS__/video/index.js?20180612"></script>
+</block>

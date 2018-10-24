@@ -1,0 +1,313 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			<div class="unit">
+				<label>集锦/前瞻标题：</label>
+				<input type="text" class="required" maxlength="25" name="title" value="{$vo.title}" size="70"/>
+			</div>
+			<div class="unit">
+				<label>选择分类：</label>
+				<select name="class_id" class="required changeUserUrl" onchange="changeUserUrl(this)">
+					<option value="">请选择</option>
+					<volist name="HighlightsClass" id="item">
+						<option value="{$item.id}" <if condition="$item['id'] eq $vo['class_id']">selected</if> >{$item.name}</option>
+						<notempty name="item.childs">
+							<volist name="item.childs" id="item2">
+								<option value="{$item2.id}" <if condition="$item2['id'] eq $vo['class_id']">selected</if> >|_{$item2.name}</option>
+								<notempty name="item2.childs">
+									<volist name="item2.childs" id="item3">
+										<option value="{$item3.id}" <if condition="$item3['id'] eq $vo['class_id']">selected</if>>|__{$item3.name}</option>
+									</volist>
+								</notempty>
+							</volist>
+						</notempty>
+					</volist>
+				</select>
+			</div>
+			<div class="unit">
+				<label>视频类型：</label>
+				<input type="radio" name="is_prospect" value="0" <if condition="$vo.is_prospect eq 0">checked</if>>集锦
+				<input type="radio" name="is_prospect" value="1" <if condition="$vo.is_prospect eq 1">checked</if>>前瞻
+			</div>
+			<div class="unit">
+				<label>关联赛事id：</label>
+				<select name="game_type">
+					<option value="0" selected>不关联</option>
+					<option value="1" <if condition="$_REQUEST['gameType'] eq 1 or $vo['game_type'] eq 1">selected</if>>足球</option>
+					<option value="2" <if condition="$_REQUEST['gameType'] eq 2 or $vo['game_type'] eq 2">selected</if>>篮球</option>
+				</select>
+				<input type="text" name="game_id" value="<if condition="$_REQUEST.game_id neq ''">{$_REQUEST.game_id}<else/>{$vo.game_id}</if>">
+			</div>
+			<div class="unit">
+				<label>首页推荐：</label>
+				<input type="radio" name="top_recommend" value="0" checked>否
+				<input type="radio" name="top_recommend" value="1" <if condition="$vo['top_recommend'] eq 1">checked</if>>推荐
+			</div>
+			<div class="unit">
+				<label>推荐：</label>
+				<input type="radio" name="is_recommend" value="0" checked>否
+				<input type="radio" name="is_recommend" value="1" <if condition="$vo['is_recommend'] eq 1">checked</if>>推荐
+				<input type="radio" name="is_recommend" value="2" <if condition="$vo['is_recommend'] eq 2">checked</if>>轮播推荐
+			</div>
+			<div class="unit">
+				<label>web集锦/前瞻地址：</label>
+				<input type="text" name="web_url" value="{$vo.web_url}" size="70"/>
+			</div>
+			<div class="unit">
+				<label>web是否外链：</label>
+				<input type="radio" name="web_ischain" value="0" checked>否
+				<input type="radio" name="web_ischain" value="1" <if condition="$vo['web_ischain'] eq 1">checked</if>>是
+			</div>
+			<div class="unit">
+				<label>app集锦/前瞻地址：</label>
+				<input type="text" name="app_url" value="{$vo.app_url}" size="70"/>
+			</div>
+			<div class="unit">
+				<label>app是否外链：</label>
+				<input type="radio" name="app_ischain" value="0" checked>否
+				<input type="radio" name="app_ischain" value="1" <if condition="$vo['app_ischain'] eq 1">checked</if>>是
+			</div>
+			<div class="unit">
+				<label>app是否浏览器播放：</label>
+				<input type="radio" name="app_isbrowser" value="0" checked>否
+				<input type="radio" name="app_isbrowser" value="1" <if condition="$vo['app_isbrowser'] eq 1">checked</if>>是
+			</div>
+			<div class="unit">
+				<label>m站集锦/前瞻地址：</label>
+				<input type="text" name="m_url" value="{$vo.m_url}" size="70"/>
+			</div>
+			<div class="unit">
+				<label>m站是否外链：</label>
+				<input type="radio" name="m_ischain" value="0" checked>否
+				<input type="radio" name="m_ischain" value="1" <if condition="$vo['m_ischain'] eq 1">checked</if>>是
+			</div>
+			<div class="unit">
+				<label>专家作者：</label>
+				<input type="hidden" class="required" id="h_user_id" name="user.id" value="{$vo.user_id}" />
+				<input type="text" class="required" id="h_nick_name" name="user.nick_name" readonly disabled value="{$vo.nick_name}" />
+				<a width="800" height='600' lookupgroup="user" id="findFrontUser" href="{:U('__URL__/findFrontUser')}?val={$vo.class_id}&descript=1" class="btnLook">选择专家</a>
+				<span class="info" style="color: red;cursor: pointer;" onclick="setFrontUser();">》》随机获取</span>
+				<label>&nbsp;&nbsp;&nbsp;<a href="javascript:;" style="color: blue" onclick="setPublicUser();">【全球体育小编】</a></label>
+				<label><a href="{:U('__URL__/findFrontUser')}?val=9999"  width="800" height='600' lookupgroup="user" style="color: blue" >【运营专用列表】</a></label>
+			</div>
+
+			<div class="unit keyWordList">
+				<label>标签：</label>
+				<input type="text" name="label[]" class="required textInput keyWordv0" value="{$vo.label.0}" maxlength='24' size="6" />
+				<input type="text" name="label[]" class="required textInput keyWordv1" value="{$vo.label.1}" maxlength='24' size="6" />
+				<input type="text" name="label[]" class="required textInput keyWordv2" value="{$vo.label.2}" maxlength='24' size="6" />
+				<input type="text" name="label[]" class="required textInput keyWordv3" value="{$vo.label.3}" maxlength='24' size="6" />
+				<input type="text" name="label[]" class="required textInput keyWordv4" value="{$vo.label.4}" maxlength='24' size="6" />
+				<span class="info" style="color: red;cursor: pointer;" onclick="setKeyword('keyWordv');">》》随机匹配</span>
+				<span class="info" style="color: green;cursor: pointer;" onclick="getSeoKey();">》》获取关键字</span>
+			</div>
+
+			<div class="unit">
+				<label>描述：</label>
+				<textarea maxlength="255" class="large bLeft" name="remark"  rows="2" cols="57">{$vo.remark}</textarea>
+			</div>
+			<div class="unit">
+				<label>集锦/前瞻图片：</label>
+				<ul class="tabImg">
+					<li>
+						<input id="viewUploadInput_71" name="fileInput" type="file" onChange="previewImage(71)" style="display:none;" />
+						<a href="javascript:void(0);">
+							 <span id="viewUploadDiv_71">
+								<empty name="vo.img">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_71"/>
+								<else/>
+									<img id="viewUploadImg_71" width='80' height='80' border=0 src="{$vo.img}">
+								</empty>
+							 </span>
+						</a>
+						<div id="poiter_71" class="poiter">
+							<empty name="vo.img">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_71')">添加图片</a>
+							<else/>
+								<a title="删除" onclick="delPic({$vo.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_71')">重传</a>
+							</empty>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="unit">
+				<label>SEO 标题：</label>
+				<textarea class=""  name="seo_title" rows="2" cols="57">{$vo.seo_title}</textarea>
+			</div>
+
+			<div class="unit">
+				<label>SEO 关键词：</label>
+				<textarea class="large bLeft seoWordv"  name="seo_keys" rows="2" cols="57">{$vo.seo_keys}</textarea>
+				<span class="info" style="color: green;cursor: pointer;" onclick="getLabelKey();">》》获取标签</span>
+			</div>
+
+			<div class="unit">
+				<label>SEO 描述：</label>
+				<textarea class=""  name="seo_desc" rows="2" cols="57">{$vo.seo_desc}</textarea>
+			</div>
+			<div class="unit">
+				<label>状态：</label>
+				<input type="radio" name="status" value="1" checked />正常
+				<input type="radio" name="status" value="0" <eq name="vo.status" value="0">checked</eq> />待发布
+				<input type="radio" name="status" value="2" <eq name="vo.status" value="2">checked</eq> />待审核
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+	$(function(){
+		$('.tabImg li').hover(function(e) {
+			$(this).children('div').stop().animate({'top':'0'},300);
+		},function(){
+			$(this).children('div').stop().animate({'top':'80px'},300);
+		});
+	});
+	function delPic(id){
+		if(confirm("确认要删除吗？") == false){
+			return false;
+		}
+		//异步执行删除
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/Highlights/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                	$("#viewUploadInput_71").val("");
+					$("#viewUploadImg_71").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+					var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_71')\">添加图片</a>";
+					$("#poiter_71").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+	//更换选择专家链接
+	function changeUserUrl(obj){
+		var val = $(obj).val();
+		var href = $('#findFrontUser').attr('href').split('?')[0];
+		$('#findFrontUser').attr('href',href+'?val='+val+'&descript=1');
+	}
+	//随机返回专家
+	function setFrontUser(){
+		var val = $(".changeUserUrl option:selected").val();
+		if(val == ''){
+			alert('请先选择视频分类！');
+			return
+		}
+		$.ajax({
+			type: 'post',
+			data:{val:val},
+			url: '__ADMIN__/Highlights/setFrontUser.html',
+			dataType: 'json',
+			success:function(data){
+				if(data.status == 1){
+					$('#h_user_id').val(data.info.id);
+					$('#h_nick_name').val(data.info.nick_name);
+				}
+			}
+		})
+	}
+	//全球体育小编
+	function setPublicUser(){
+		$("#h_user_id").val(1850);
+		$("#h_nick_name").val('全球体育小编');
+	}
+	//将SEO关键字填充到标签内
+	function getSeoKey()
+	{
+		var keyWord = $('.seoWordv').val();
+		if(keyWord.length>0)
+		{
+			if(keyWord.indexOf('，') > -1)
+			{
+				keyWord = keyWord.split('，');
+			}else{
+				keyWord = keyWord.split(',');
+			}
+
+
+			for(var i = 0;i<5;i++)
+			{
+				$('.keyWordv'+i).val(keyWord[i]);
+			}
+		}
+	}
+
+	//将标签填充到SEO关键字内
+	function getLabelKey()
+	{
+		var data = new Array;
+		var str = '';
+		data[0] = $('.keyWordv0').val();
+		data[1] = $('.keyWordv1').val();
+		data[2] = $('.keyWordv2').val();
+		data[3] = $('.keyWordv3').val();
+		data[4] = $('.keyWordv4').val();
+		console.log(data)
+		for(var i = 0;i<5;i++)
+		{
+			if(data[i].length > 0)
+			{
+				str += data[i]+',';
+			}
+		}
+		str = (str.substring(str.length-1)==',')?str.substring(0,str.length-1):str;
+		$('.seoWordv').val(str);
+	}
+	//ajax获取标签/Seo关键字
+	function setKeyword(type)
+	{
+		var count = $('.large').val();
+		if (count.length < 1) {
+			alert("请输入内容");
+			return false;
+		}
+		$.ajax({
+			type: 'get',
+			data:{content:count,type:2},
+			url: '__ADMIN__/HotKeyword/getKeyword.html',
+			dataType: 'json',
+			success:function(data){
+				if(data.status == 1){
+					if(type == 'keyWordv')
+					{
+						$('.keyWordList .textInput').val('');
+						var key = data.info.split(',');
+						for(var i = 0;i < key.length;i++)
+						{
+							$('.'+type+i).val(key[i]);
+						}
+					}else{
+						$('.'+type).val(data.info);
+					}
+				}
+			}
+		})
+
+	}
+
+</script>
+
+
+
+

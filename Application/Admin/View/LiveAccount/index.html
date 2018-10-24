@@ -1,0 +1,76 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input type="hidden" name="log_id" value="{$_REQUEST.log_id}"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>直播标题：</label>
+				<input type="text" name="title" value="{$_REQUEST.title}"/>
+			</li>
+			<li>
+				<label>主播昵称：</label>
+				<input type="text" name="cover_name" value="{$_REQUEST.cover_name}"/>
+			</li>
+			<li>
+				<label>打赏用户昵称：</label>
+				<input type="text" name="user_name" value="{$_REQUEST.user_name}"/>
+			</li>
+			<li>
+				<label>礼物名称：</label>
+				<input type="text" name="gift_name" value="{$_REQUEST.gift_name}"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		<!-- 	<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" warn="请选择用户"><span>编辑</span></a></li> -->
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="2%" orderField="i9d" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th width="15%">直播标题</th>
+			<th width="10%">主播昵称</th>
+			<th width="10%">打赏用户昵称</th>
+			<th width="10%">打赏金额</th>
+			<th width="10%">礼物名称</th>
+			<th width="10%">礼物图片</th>
+			<th width="10%">打赏时间</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['title']}</td>
+					<td>{$vo['cover_name']}</td>
+					<td>{$vo['user_name']}</td>
+					<td>{$vo['coin']}</td>
+					<td>{$vo['gift_name']}</td>
+					<td><if condition="$vo.gift_img neq ''"><a target="_blank" href="{$vo.gift_img}"><img width="30" height="30" src="{$vo.gift_img}"></a></if></td>
+					<td><if condition="$vo.add_time neq ''">{$vo['add_time']|date="Y-m-d H:i",###}</if></td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

@@ -1,0 +1,55 @@
+/* 
+* @Author: Marte
+* @Date:   2018-03-27 15:27:49
+* @Last Modified by:   Marte
+* @Last Modified time: 2018-04-17 20:43:57
+*/
+body{ float: left;}
+.grouping{ float: left; width: 100%;background-color: #f2f2f2; padding: 0 .3rem;}
+.grouping .left-s{ float: left; font-size: .5rem;}
+.grouping .right-s{ font-size: .3rem; line-height: 40px; padding-left: 5px;}
+.grouping .left-s .one-s{ font-size: .5rem; padding-right: .1rem;}
+.grouping .left-s .one-s-t{ font-size: .42rem; padding-left: .1rem;}
+.group{ font-size: .3rem;}
+.declare{ font-size: .24rem;}
+.grouping .left-s .two-s{ font-size: .3rem; margin-right: .1rem;}
+.grouping .right-s span{font-size: .24rem; color: #4c4c4c; height: 1rem; line-height: .9rem;}
+
+.main-s{ float: left; width: 100%; padding: 0rem .2rem 0rem .2rem;}
+.main-s .m-s{ padding: .1rem .2rem .1rem .2rem; float: left; font-size: .3rem; color: #666;}
+.main-s .line{ height: 1rem; line-height: .7rem; float: left; border-bottom: 1px solid #e4e4e4;font-size: .3rem; color: #666;}
+.main-s .line span{ }
+
+.m-s .number-q{ background-color: #ec2626; color: #fff; border-radius: .06rem; text-align: center; width: .32rem ;height: .32rem; font-size: .24rem; line-height: .32rem; margin-right: .6rem; width: .34rem; height: .34rem; float: left; margin-top: .2rem;}
+.m-s .orange{ background-color: #ed8d11; color: #fff; border-radius: .06rem; text-align: center; width: .32rem ;height: .32rem; font-size: .24rem; line-height: .32rem; margin-right: .6rem; width: .34rem; height: .34rem; float: left; margin-top: .2rem;}
+.m-s .yellow{ background-color: #edb711; color: #fff; border-radius: .06rem; text-align: center; width: .32rem ;height: .32rem; font-size: .24rem; line-height: .32rem; margin-right: .6rem; width: .34rem; height: .34rem; float: left; margin-top: .2rem;}
+.m-s .gray{ background-color: #c0c0c0; color: #fff; border-radius: .06rem; text-align: center; width: .32rem ;height: .32rem; font-size: .24rem; line-height: .32rem; margin-right: .6rem; width: .34rem; height: .34rem; float: left; margin-top: .2rem;}
+.m-s .numberteam{ margin-right: .24rem;}
+.m-s .nteam-q{ font-size: .28rem; color: #4c4c4c;  margin-right: 1.7rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 1.2rem; float: left; text-align: center;}
+.m-s .league-name{ width: 2rem; margin-right: .4rem;}
+
+.m-s .r{ font-size: .28rem; color: #4c4c4c;  margin-right: .46rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 2rem; float: left; text-align: center;}
+.m-s .nteam-x{ font-size: .28rem; color: #4c4c4c;   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 1.2rem; float: left; text-align: center;}
+.m-s .namegame{ width: 2rem; margin-right: 1.2rem;}
+.m-s .nteam-a{ font-size: .28rem; color: #4c4c4c;  margin-right: 1.6rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 1.2rem; float: left; text-align: center;}
+.m-s .game-q,.m-s .game-a,.m-s .flat-q{ float: left; width: .6rem; overflow: hidden; text-align: center; white-space: nowrap; text-overflow: ellipsis; margin-right: .1rem;}
+.m-s .point{ margin-left: 23px; float: left; width: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.m-s .integral-q{float: left; width: .6rem; overflow: hidden; text-align: center; white-space: nowrap; text-overflow: ellipsis;}
+.m-s .lose-q{margin-right: .2rem; float: left; width: .6rem; overflow: hidden; text-align: center; white-space: nowrap; text-overflow: ellipsis;} 
+.m-s .integral-q{float: left; width: .6rem; overflow: hidden; text-align: center; white-space: nowrap; text-overflow: ellipsis;}
+.m-s .game-a{ float: left; overflow: hidden; text-align: center; white-space: nowrap; text-overflow: ellipsis;width: 2rem;}
+.m-s .success-x{ margin-right: .1rem; float: left; overflow: hidden; text-align: center; white-space: nowrap; text-overflow: ellipsis; width: .6rem;}
+.m-s .success-q{  float: left; width: 1rem; overflow: hidden; text-align: center; white-space: nowrap; text-overflow: ellipsis; margin-left: .2rem;}
+.m-s .point{ margin-left: .2rem;}
+
+.m-s .specific{ margin:0 0 0 -.1rem; float: left; color: #999; font-size: .26rem; height: .7rem;  width: 1.2rem; text-align: center; display: block;}
+.m-s .specific .year{ display: block; line-height: .34rem;}
+.m-s .specific .clock{ display: block;line-height: .34rem;}
+.m-s .toponymy{ overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 1.8rem; display: block; float: left; text-align: center; font-size: .26rem; }
+.m-s .symbol{ float: left; text-align: center; width: 1.4rem; white-space: nowrap; overflow: hidden;}
+.m-s .place{ overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 1.8rem; display: block; float: left; text-align: center; font-size: .26rem;}
+.m-s .particular{  float: left; width: .6rem; text-align: center;}
+.m-s .particular a{ color: #0a94e4;  text-align: center; width: 20px;}
+
+
+

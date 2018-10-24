@@ -1,0 +1,29 @@
+<div class="page">
+    <div class="pageContent">
+        <form method="post" action="__URL__/saveLogConf/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+            <div class="pageFormContent" layoutH="58">
+                <div class="unit">
+                    <label>记录总开关：</label>
+                    <select name="appLogOn" class="required">
+                        <option value="0" <eq name="vo.appLogOn" value="0">selected=selected</eq>>关闭</option>
+                        <option value="1" <eq name="vo.appLogOn" value="1">selected=selected</eq>>开启</option>
+                    </select>
+                </div>
+              <div class="unit">
+                <label>记录的模块：
+                    <p>(多个用逗号隔开)</p>
+                </label>
+                <textarea name="appLogList" class="" editor="{:uniqid()}" cols="40" rows="6">{$vo.appLogList}</textarea>
+                <label ><p></p></label>
+              </div>
+            </div>
+
+            <div class="formBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                    <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>

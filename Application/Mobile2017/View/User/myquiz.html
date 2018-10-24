@@ -1,0 +1,254 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="__CSS__/guess.css">
+    <link rel="stylesheet" href="__CSS__/swiper.css">
+
+    <link rel="stylesheet" href="__CSS__/user/user.css">
+    <link rel="stylesheet" href="__CSS__/user/user_index.css">
+    <style>
+        .rank_nav ul li {width:25%}
+                .color_fen,.color_fen p{color: #fd6d99!important}
+        .color_orange,.color_orange p{color: #ff7e00!important}
+        .color_red,.color_red p{color: #eb0000!important}
+        .color_blue,.color_blue p{color: #0085eb!important}
+        .color_green,.color_green p{color: #01af63!important} 
+    </style>
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file='Public/header_inside'/>
+</block>
+<!-- 二级头部 e --> 
+<block name='nav'></block>
+<!-- 切换 s-->
+<block name='content'>
+    <section class="user_rate">
+        <!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="sw_top clearfix"><span class="fl">亚盘等级</span><em class="lv lv{$lvArr['lv']}"></em></div>
+                    <div class="sw_con sw_con01">
+                        <ul class="clearfix">
+                            <li>
+                              <p><span <egt name='userInfo.weekPercnet' value='50'>class="color_fen"</egt>>{$userInfo.weekPercnet}%</span></p>
+                              <p>周胜率</p>
+                            </li>
+                            <li>
+                              <p><span <egt name='userInfo.monthPercnet' value='50'>class="color_fen"</egt>>{$userInfo.monthPercnet}%</span></p>
+                              <p>月胜率</p>
+                            </li>
+                            <li>
+                              <p><span <egt name='userInfo.seasonPercnet' value='50'>class="color_fen"</egt>>{$userInfo.seasonPercnet}%</span></p>
+                              <p>季胜率</p>
+                            </li>
+                            <li  class="color_orange">
+                              <p><span>{$userInfo['curr_victs']}</span></p>
+                              <p>当前连胜</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="sw_con sw_con02">
+                        <ul class="clearfix">
+                            <li class="color_red">
+                              <p><span>{$userInfo['win']}</span></p>
+                              <p>胜场</p>
+                            </li>
+                            <li class="color_blue">
+                              <p><span>{$userInfo['level']}</span></p>
+                              <p>平场</p>
+                            </li>
+                            <li class="color_green">
+                              <p><span>{$userInfo['transport']}</span></p>
+                              <p>负场</p>
+                            </li>
+                            <li class="color_orange">
+                              <p><span>{$userInfo['max_victs']}</span></p>
+                              <p>最大连胜</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                <div class="sw_top clearfix"><span class="fl">竞彩等级</span><em class="lv jc_lv{$lvArr['lv_bet']}"></em></div>
+                <div class="sw_con sw_con01">
+                    <ul class="clearfix">
+                        <li>
+                            <p><span <egt name='$jcUserInfo.jcWeekPercnet' value='50'>class="color_fen"</egt>>{$jcUserInfo.jcWeekPercnet}%</span></p>
+                            <p>周胜率</p>
+                        </li>
+                        <li>
+                            <p><span <egt name='$jcUserInfo.jcMonthPercnet' value='50'>class="color_fen"</egt>>{$jcUserInfo.jcMonthPercnet}%</span></p>
+                            <p>月胜率</p>
+                        </li>
+                        <li>
+                            <p><span <egt name='$jcUserInfo.jcSeasonPercnet' value='50'>class="color_fen"</egt>>{$jcUserInfo.jcSeasonPercnet}%</span></p>
+                            <p>季胜率</p>
+                        </li>
+                        <li  class="color_orange">
+                            <p><span>{$jcUserInfo['curr_victs']}</span></p>
+                            <p>当前连胜</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sw_con sw_con02">
+                    <ul class="clearfix">
+                        <li class="color_red">
+                            <p><span>{$jcUserInfo['win']}</span></p>
+                            <p>胜场</p>
+                        </li>
+                        <li class="color_green">
+                            <p><span>{$jcUserInfo['transport']}</span></p>
+                            <p>负场</p>
+                        </li>
+                        <li class="color_orange">
+                            <p><span>{$jcUserInfo['max_victs']}</span></p>
+                            <p>最大连胜</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+    <!-- 切换 e-->
+
+
+   <section class="her_tj clearfix">
+      <div class="ht_left fl">推荐场次
+          <span>
+              <if condition="$type eq '2' OR $type eq '-2'"> (共{$jcUserInfo.total_times}场) </if>
+              <if condition="$type eq '0'"> (共{$userInfo['total_times']+$jcUserInfo['total_times']}场) </if>
+              <if condition="$type eq '-1' OR $type eq '1'"> (共{$userInfo.total_times}场) </if>
+
+          </span>
+      </div>
+      <!-- <div class="ht_right fr">
+        <select class="guess_sele">
+          <option <eq name='type' value='0'>selected="selected"</eq> value='0'>全部</option>
+          <option <eq name='type' value='-1'>selected="selected"</eq> value="-1" >大小</option>
+          <option <eq name='type' value='1'>selected="selected"</eq> value="1">让球</option>
+        </select>
+      </div> -->
+    </section>
+    
+    <div class="rank_nav">
+        <ul class="clearfix">
+            <li class="fl <eq name='type' value='0'>on</eq>"><a href="{:U('')}">全部</a></li>
+            <li class="fl <eq name='type' value='1'>on</eq>"><a href="{:U('',[type=>'1'])}">让球</a></li>
+            <li class="fl <eq name='type' value='-1'>on</eq>"><a href="{:U('',[type=>'-1'])}">大小</a></li>
+<!--            <li class="fl "><a href="javascript:;">竞彩</a></li>-->
+            <li  <if condition="$type eq '2' OR $type eq '-2'">class="fl on"<else/>class="fl"</if>>
+            <a href="{:U('',[type=>'2'])}">竞彩</a>
+            </li>
+        </ul>
+    </div>
+   <!-- 内容new  s -->
+     <div class="new_tj com_dt clearfix myguess_new">
+         <ul id='js-list' class="posts"><volist name='list' id='v'>
+           <li>
+              <!--各种样式: 赢:win 赢半:win_half 输:lose 输半:lose_half 平:ping  新增：推迟：putoff  待定：pending 取消：cancel 中断：interrupt  腰斩：cut-->
+              <switch name='v.result'>
+                    <case value='1'><div class="win"></div></case>
+                    <case value='-1'><div class="lose"></div></case>
+                    <case value='0.5'><div class="win_half"></div></case>
+                    <case value='-0.5'><div class="lose_half"></div></case>
+                    <case value='2'><div class="ping"></div></case>
+              </switch>
+              <div class="p_1">
+                <div class="t_vs"><if condition="$v.play_type eq '2' OR $v.play_type eq '-2'"><em>{$v['bet_code']} </em></if><em style="color: {$v.union_color}">{$v.union_name.0}</em> {$v.home_team_name.0}<span style='color:red'><if condition="$v['score'] eq '' or $v['score'] eq null">VS<else/>{$v.score}</if></span> {$v.away_team_name.0}</div><div class="dtime">{$v.day}  {$v.game_time}</div>
+              </div>
+              <div class="g_detail">
+                  <div class="guess_type">
+                      <if condition="$v.play_type eq '1'"><img src="__IMAGES__/myguess/rangq.png" alt="让球"></if>
+                      <if condition="$v.play_type eq '-1'"><img src="__IMAGES__/myguess/bsmall.png" alt="大小"></if>
+                      <if condition="$v.play_type eq '2' OR $v.play_type eq '-2'"><img src="__IMAGES__/myguess/jingcai_play.png" alt="竞彩"></if>
+                  </div>
+                  <div class="guess_right clearfix">
+                    <p>
+                        <img src="__IMAGES__/myguess/recommend.png" alt="赞">
+                        <span style="width: auto!important">
+                            <if condition="$v.play_type eq '1'">
+                                <if condition="$v.chose_side eq '1'">
+                                    {$v.home_team_name.0}
+                                    <else/>{$v.away_team_name.0}
+                                </if>
+                                {$v.handcp}
+                            </if>
+                            <if condition="$v.play_type eq '-1'">
+                                <if condition="$v.chose_side eq '1'">
+                                    大球<else/>小球
+                                </if>
+                                {$v.handcp}
+                            </if>
+                            <if condition="$v.play_type eq '2' or $v.play_type eq '-2'">
+                                {$v.home_team_name.0} ({$v.handcp})
+                                <if condition="$v.chose_side eq '1'">胜</if>
+                                <if condition="$v.chose_side eq '0'">平</if>
+                                <if condition="$v.chose_side eq '-1'">负</if>
+                            </if>
+
+                        </span>
+                        <span style="color: #ff7e00;padding-left: .1rem">({$v.odds})</span>
+                    </p>
+                    <p><span><img src="__IMAGES__/myguess/give.png" alt="投">{$v.vote_point}</span><em><img src="__IMAGES__/myguess/fen.png" alt="分">
+                                    <switch name='v.result'>
+                                        <case value='1||0.5'>+{$v.earn_point}</case>
+                                        <case value='-1||-0.5||2'>0</case>
+                                        <default/>0
+                                    </switch></em></p>
+                    <p><span><img src="__IMAGES__/myguess/gold.png" alt="币">{$v.tradeCoin}</span><em><img src="__IMAGES__/myguess/buy.png" alt="购">{$v.tradeCount}</em></p>
+                  </div>
+              </div>
+              <div id="my_fenx"><span>分析：</span>{$v.desc|default='暂无分析'}</div>          
+           </li> 
+           </volist></ul>
+         <input id='type' type='hidden' value='{$type}'>
+                 <div class="paged boxs">
+            <div class="load_gif fs24 text-999">
+                <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span class="textContent">正在加载更多的数据...</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">没有更多了</a>
+        </div>
+    </div>
+   <!-- 内容new  e -->
+</block>
+<!-- 内容 e -->
+
+<!-- Swiper JS -->
+<block name='scripts'>
+    <!--<script src="__JS__/guess.js"></script>-->
+    <script src="__JS__/swiper.js"></script>  
+    <script src="__JS__/myquiz.js"></script>  
+    <script>
+        var initialSlide = $('#type').val() == '2'
+                        || $('#type').val() == '-2'
+                        ? 1 : 0;
+        //banner 切换
+        var swiper = new Swiper('.swiper-container', {
+            initialSlide: initialSlide,
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: 10000,
+            autoplayDisableOnInteraction: false
+        });
+        $(function(){
+            var select=$('#type').val();
+            $(document).on('change','.guess_sele',function(){
+                var type=$(this).val();
+                if(type=='' || type==0){
+                    location.href='/User/myquiz.html';
+                }else{
+                    location.href='/User/myquiz/type/'+type+'.html';
+                }
+            });
+        });
+    </script>
+</block>

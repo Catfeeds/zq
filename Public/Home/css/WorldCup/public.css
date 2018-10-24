@@ -1,0 +1,171 @@
+/**
+ * World prediction of css
+ *
+ * @author Weiqq <1937025663@qq.com>
+ * 
+ * @since  2018-05-15
+ *
+**/
+body{ background-color: #000;}
+.table > tbody > tr > td { border-top: none 0;}
+.skewRight{ -webkit-transform: skew(-30deg) translateZ(0); -moz-transform: skew(-30deg) translateZ(0); -ms-transform: skew(-30deg) translateZ(0); -o-transform: skew(-30deg) translateZ(0); transform: skew(-30deg) translateZ(0);}
+.skewLeft{ -webkit-transform: skew(30deg) translateZ(0); -moz-transform: skew(30deg) translateZ(0); -ms-transform: skew(30deg) translateZ(0); -o-transform: skew(30deg) translateZ(0); transform: skew(30deg) translateZ(0);}
+
+/*.Russia{ width: 100%; background: url(../../images/WorldCup/A1.png) no-repeat center 0;padding-top: 32px;}*/
+/*.SaudiArabia{ width: 100%; background: url(../../images/WorldCup/A2.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Egypt{ width: 100%; background: url(../../images/WorldCup/A3.png) no-repeat center 0; padding-top: 32px; }*/
+/*.Uruguay{ width: 100%; background: url(../../images/WorldCup/A4.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Portugal{ width: 100%; background: url(../../images/WorldCup/B1.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Spain{ width: 100%; background: url(../../images/WorldCup/B2.png) no-repeat center 0;  padding-top: 32px;}*/
+/*.Morocco{ width: 100%; background: url(../../images/WorldCup/B3.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Iran{ width: 100%; background: url(../../images/WorldCup/B4.png) no-repeat center 0; padding-top: 32px;}*/
+/*.France{ width: 100%; background: url(../../images/WorldCup/c1.png) no-repeat center 0;padding-top: 32px;}*/
+/*.Australian{ width: 100%; background: url(../../images/WorldCup/c2.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Peru{ width: 100%; background: url(../../images/WorldCup/c3.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Denmark{ width: 100%; background: url(../../images/WorldCup/c4.png) no-repeat center 0;  padding-top: 32px;}*/
+/*.Argentina{ width: 100%; background: url(../../images/WorldCup/D1.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Iceland{ width: 100%; background: url(../../images/WorldCup/D2.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Croatia{ width: 100%; background: url(../../images/WorldCup/D3.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Nigeria{ width: 100%; background: url(../../images/WorldCup/D4.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Brazil{ width: 100%; background: url(../../images/WorldCup/E1.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Switzerland{ width: 100%; background: url(../../images/WorldCup/E2.png) no-repeat center 0;  padding-top: 32px;}*/
+/*.CostaRica{ width: 100%; background: url(../../images/WorldCup/E3.png) no-repeat center 0; padding-top: 32px;}*/
+/*.serbia{ width: 100%; background: url(../../images/WorldCup/E4.png) no-repeat center 0;  padding-top: 32px;}*/
+/*.Germany{ width: 100%; background: url(../../images/WorldCup/F1.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Mexico{ width: 100%; background: url(../../images/WorldCup/F2.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Sweden{ width: 100%; background: url(../../images/WorldCup/F3.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Korea{ width: 100%; background: url(../../images/WorldCup/F4.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Belgium{ width: 100%; background: url(../../images/WorldCup/G1.png) no-repeat center 0;padding-top: 32px;}*/
+/*.Panama{ width: 100%; background: url(../../images/WorldCup/G2.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Tunisia{ width: 100%; background: url(../../images/WorldCup/G3.png) no-repeat center 0; padding-top: 32px;}*/
+/*.England{ width: 100%; background: url(../../images/WorldCup/G4.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Poland{ width: 100%; background: url(../../images/WorldCup/H1.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Senegal{ width: 100%; background: url(../../images/WorldCup/H2.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Columbia{ width: 100%; background: url(../../images/WorldCup/H3.png) no-repeat center 0; padding-top: 32px;}*/
+/*.Japanese{ width: 100%; background: url(../../images/WorldCup/H4.png) no-repeat center 0; padding-top: 32px;}*/
+.wcTheme .themeNavCon{ width: 100%; position: relative;}
+.themeNavIn{ position: relative; width: 1000px; margin: 0 auto; padding-left: 298px;}
+.dec{ position: absolute; width: 36px; height: 45px; top: 0; }
+.themeNav ul{ padding-left: 30px;}
+.themeNav ul li a{ display: block; height: 45px; line-height: 45px; color: #fff; font-size: 16px; padding: 0 16px; transition: .2s; -webkit-transition: .2s; -moz-transition: .2s; -o-transition: .2s;}
+.themeNav ul li.on a,.themeNav ul li a:hover{ transition: ease-out 0.3s; border-bottom:1px solid #5ae9fa;}
+
+.position{ padding: 2px 10px 2px 10px; color: #ededed; margin: 20px 10px 15px 10px;background-color: rgba(55,77,171,0.3); width: 510px;}
+.position .now a{ color: #ededed;}
+.position .now a:hover{ color: #fff; text-decoration: underline !important;}
+
+
+.class-cation{ width: 420px; margin: 26px 0 0 314px;}
+.class-left{ width: 140px; float: left; font-size: 24px; padding: 8px 10px 8px 10px; background: url(../../images/WorldCup/train/l-bg.png) no-repeat center 0 ;}
+.class-left a{ color: #fff; width: 30px; margin-top: 4px; float: left; text-align: center;}
+.class-left a:hover{ color: #fff;  background: url(../../images/WorldCup/train/now.png) no-repeat center 0 !important; cursor: pointer;}
+.class-left .on{ color: #fff;  background: url(../../images/WorldCup/train/now.png) no-repeat center 0 !important; cursor: pointer; }
+.class-right{ width: 260px; height: 89px; margin-left: 148px; background: url(../../images/WorldCup/train/r-bg.png) no-repeat center 0 ;}
+.class-right a{  margin-top: 2px; width: 130px; height: 41px;  display: block; float: left; text-align: center; line-height: 40px; color: #fff; font-size: 14px; }
+.class-right a img{ width: 32px; height: 16px; margin: 12px 6px 10px 10px; float: left;}
+.class-right a p{ width: 80px; overflow: hidden; white-space: nowrap; display: inline-block; text-align: left !important;}
+.class-right a:hover{ width: 130px; height: 41px;  color: #fff;  background: url(../../images/WorldCup/train/now-s.png) no-repeat center 0 !important; cursor: pointer;}
+.class-right .on{ width: 130px; height: 41px;  color: #fff;  background: url(../../images/WorldCup/train/now-s.png) no-repeat center 0 !important; cursor: pointer; }
+.compass{ height: 620px;}
+.compass a:hover{ color: #fff; }
+.compass li{ max-width: 294px;}
+.batArray{ width: 294px; height: 202px; display: block; margin: 58px 0 0 117px; border-radius: 15px;  position: relative; overflow: hidden; transform: rotate(0deg);}
+.batArray img{border-radius: 15px; overflow: hidden; width: 294px; height: 202px; -webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.batArray img:hover{ -webkit-transform: scale(1.2) translateZ(0) !important; -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1) !important; transform: scale(1.2) translateZ(0) !important; transition: transform .75s cubic-bezier(0,1,.75,1) !important; }
+.batArray .triangle{ background: url(../../images/WorldCup/train/trangel.png) no-repeat center 0; width: 100px; height: 56px; position: absolute;top: 150px;}
+.batArray .triangle p{ color: #fff; font-size: 18px; transform:rotate(90deg);-ms-transform:rotate(34deg); /* Internet Explorer 9*/ -moz-transform:rotate(34deg); /* Firefox */  -webkit-transform:rotate(34deg); /* Safari 和 Chrome */ -o-transform:rotate(34deg); /* Opera */  filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1); padding: 36px 0 0 12px;}
+.array{ width: 0;  height: 0;  border-bottom: 60px solid #dc2b31; border-right: 100px solid transparent; border-bottom-right-radius: 4px; color: #fff; padding-top: 146px; line-height: 30px; width: 60px; float: left;}
+.natParade{ width: 170px; height: 40px; display: block; margin: -114px 0 0 420px; color: #fff; line-height: 40px; font-size: 24px; text-align: center;}
+
+.performance{ width: 294px; height: 204px; display: block; margin: -208px 0 0 590px; border-radius: 15px; position: relative; overflow: hidden; transform: rotate(0deg);}
+.performance img{ width: 294px; height: 204px; border-radius: 15px;  overflow: hidden; -webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.performance img:hover{ -webkit-transform: scale(1.2) translateZ(0) !important; -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1) !important; transform: scale(1.2) translateZ(0) !important; transition: transform .75s cubic-bezier(0,1,.75,1) !important; }
+.performance .result{ background: url(../../images/WorldCup/train/result.png) no-repeat center 0; width: 100px; height: 56px; top: 154px; right: 0; position: absolute;}
+.performance .result p{ color: #fff; font-size: 18px; transform:rotate(-34deg);-ms-transform:rotate(-34deg); /* Internet Explorer 9*/ -moz-transform:rotate(-34deg); /* Firefox */  -webkit-transform:rotate(-34deg); /* Safari 和 Chrome */ -o-transform:rotate(-34deg); /* Opera */  filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1); padding: 34px 0 0 54px;}
+.depth{ width: 192px; height: 130px; display: block; margin: 50px 0 0 18px; border-radius: 14px; position: relative; overflow: hidden; transform: rotate(0deg);}
+.depth img{ width: 192px; height: 130px; -webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.depth img:hover{ -webkit-transform: scale(1.2) translateZ(0) !important; -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1) !important; transform: scale(1.2) translateZ(0) !important; transition: transform .75s cubic-bezier(0,1,.75,1) !important;}
+.depth .deepness{ background: url(../../images/WorldCup/train/trangel.png) no-repeat center 0; width: 100px; height: 56px; position: absolute; top: 80px;}
+.depth .deepness p{ color: #fff; font-size: 18px; transform:rotate(90deg);-ms-transform:rotate(34deg); /* Internet Explorer 9*/ -moz-transform:rotate(34deg); /* Firefox */  -webkit-transform:rotate(34deg); /* Safari 和 Chrome */ -o-transform:rotate(34deg); /* Opera */  filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1); padding: 36px 0 0 10px;}
+
+.russia{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.russia:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/A1.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.saudiarabia{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.saudiarabia:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/A2.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.egypt{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.egypt:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/A3.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.uruguay{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.uruguay:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/A4.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.portugal{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.portugal:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/B1.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.spain{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.spain:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/B2.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.morocco{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.morocco:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/B3.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.iranian{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.iranian:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/B4.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.france{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.france:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/C1.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.australia{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.australia:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/C2.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.peru{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.peru:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/C3.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.denmark{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.denmark:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/C4.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.argentina{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.argentina:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/D1.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.lceland{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.lceland:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/D2.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.croatia{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.croatia:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/D3.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.nigeria{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.nigeria:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/D4.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.brazil{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.brazil:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/E1.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.switzerland{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.switzerland:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/E2.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.costarica{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.costarica:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/E3.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.serbia{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.serbia:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/E4.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.germany{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.germany:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/F1.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.mexico{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.mexico:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/F2.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.sweden{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.sweden:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/F3.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.korearepublic{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.korearepublic:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/F4.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.belgium{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.belgium:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/G1.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.panama{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.panama:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/G2.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.tunisia{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.tunisia:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/G3.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.england{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.england:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/G4.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.poland{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.poland:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/H1.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.senegal{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.senegal:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/H2.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.colombia{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.colombia:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/H3.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.japan{width: 254px; height: 200px; display: block; margin: -229px 0 0 376px;}
+.japan:hover{width: 254px; height: 200px; display: block; background: url(../../images/WorldCup/train/H4.png) no-repeat center 0; margin: -229px 0 0 376px;}
+.figure{ width: 192px; height: 130px; display: block; border-radius: 14px; margin: -107px 0 0 804px; position: relative; overflow: hidden; transform: rotate(0deg);}
+.figure img{ width: 192px; height: 130px; -webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.figure img:hover{  -webkit-transform: scale(1.2) translateZ(0) !important; -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1) !important; transform: scale(1.2) translateZ(0) !important; transition: transform .75s cubic-bezier(0,1,.75,1) !important; }
+.figure .person{ background: url(../../images/WorldCup/train/result.png) no-repeat center 0; width: 100px; height: 56px; top: 84px; right: 0; position: absolute; }
+.figure .person p{ color: #fff; font-size: 18px; transform:rotate(-34deg);-ms-transform:rotate(-34deg); /* Internet Explorer 9*/ -moz-transform:rotate(-34deg); /* Firefox */  -webkit-transform:rotate(-34deg); /* Safari 和 Chrome */ -o-transform:rotate(-34deg); /* Opera */  filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1); padding: 34px 0 0 58px;}
+.Media-pred{ width: 244px; height: 168px; display: block; border-radius: 14px; margin: 13px 0 0 213px; position: relative; overflow: hidden; transform: rotate(0deg);}
+.Media-pred img{ width: 244px; height: 169px; -webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.Media-pred img:hover{  -webkit-transform: scale(1.2) translateZ(0) !important; -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1) !important; transform: scale(1.2) translateZ(0) !important; transition: transform .75s cubic-bezier(0,1,.75,1) !important; }
+.Media-pred .media-pred{  background: url(../../images/WorldCup/train/trangel.png) no-repeat center 0; width: 112px; height: 66px; top: 104px;  position: absolute;}
+.Media-pred .media-pred p{ color: #fff; font-size: 14px; transform:rotate(32deg);-ms-transform:rotate(32deg); /* Internet Explorer 9*/ -moz-transform:rotate(32deg); /* Firefox */  -webkit-transform:rotate(32deg); /* Safari 和 Chrome */ -o-transform:rotate(32deg); /* Opera */  filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1); padding: 42px 0 0 16px;}
+.Position-data{width: 244px; height: 168px; display: block; border-radius: 14px; margin: -167px 0 0 555px; position: relative; overflow: hidden; transform: rotate(0deg);}
+.Position-data img{ width:244px; height: 168px; -webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.Position-data img:hover{ -webkit-transform: scale(1.2) translateZ(0) !important; -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1) !important; transform: scale(1.2) translateZ(0) !important; transition: transform .75s cubic-bezier(0,1,.75,1) !important; }
+.Position-data .pos-data{ background: url(../../images/WorldCup/train/result.png) no-repeat center 0; width: 112px; height: 66px; top: 104px; right: 0; position: absolute; }
+.Position-data .pos-data p{ color: #fff; font-size: 14px; transform:rotate(-32deg);-ms-transform:rotate(-32deg); /* Internet Explorer 9*/ -moz-transform:rotate(-32deg); /* Firefox */  -webkit-transform:rotate(-32deg); /* Safari 和 Chrome */ -o-transform:rotate(-32deg); /* Opera */  filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1); padding: 42px 0 0 40px;}
+.footer{ margin-top: 0 !important;}
+

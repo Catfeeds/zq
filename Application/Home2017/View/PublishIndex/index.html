@@ -1,0 +1,235 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>全球体育新闻,竞彩推荐,赛事直播,足球指数,足彩推荐|全球体育网</title>
+</block>
+<block name="body">
+<body>
+
+<!--引入本页所需css-->
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/publish_index/infor_common.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/publish_index/news.css">
+<script type="text/javascript" src="__PUBLIC__/Home/js/publish_index/jquery.SuperSlide.2.1.1.js"></script>
+<include file="Public:top_index" />
+<!-- 主体内容开始 -->
+<div class="home">
+ <div class="main clearfix">
+   <!-- 焦点图新闻+独家解盘 开始 -->
+   <div class="focus-teacher clearfix">
+   <!-- 焦点图新闻 开始-->
+   <div class="focus-left">
+     <div id="slideBox" class="slideBox">
+            <div class="hd">
+                <span class="pageState"></span>
+            </div>
+            <div class="bd">
+                <ul>
+                <volist name="carousel" id="item">
+                   <li>
+                        <div class="pic"><a href="{$item.url}" target="_blank"><img class="lazy" src="{$item.img}" /></a></div>
+                        <div class="title"><a href="{$item.url}" target="_blank">{$item.title}</a></div>
+                    </li>
+                </volist>
+                </ul>
+            </div>
+            <!-- 下面是前/后按钮代码，如果不需要删除即可 -->
+            <a class="prev" href="javascript:void(0)"></a>
+            <a class="next" href="javascript:void(0)"></a>
+        </div>
+        <script type="text/javascript">
+        jQuery(".slideBox").slide({mainCell:".bd ul",autoPlay:true,interTime:3000});
+        </script>
+   </div>
+<!-- 焦点图新闻 结束 -->
+<!-- 独家解盘 开始 -->
+<div class="teacher-right">
+
+<!-- 标题 -->
+<div class="clearfix top-title" style="width: 356px; margin-top:-10px;">
+    <div class="pull-left section-title">
+        <h4 style="background: url(__PUBLIC__/Home/images/publish_index/t-title-bg.jpg) no-repeat right center; background-size: 220px 4px;padding-right: 227px"><span><img class="lazy" target="_blank" src="__PUBLIC__/Home/images/publish_index/title.png" width="4" height="18"></span>热门专家</h4>
+    </div>
+    <div class="pull-right more"><a target="_blank" href="{:U('/list_n/10')}">更多&gt;</a></div>
+</div>
+<!-- 标题 -->
+
+  <div class="clearfix tr-border">
+    <volist name="teacher" id="item">
+      <div class="teacher-item" <if condition="$i%2 eq 0">style="background:#f5f5f5"</if>>
+      <!--<span class="tuij-top"></span> -->
+        <div class="img-l"><a target="_blank" href="{:U('userindex/'.$item['id'].'')}"><img class="lazy" src="{$item.head|frontUserFace=###}" width="120" height="102" /></a></div>
+        <div class="des-r">
+            <div><h4><a href="{:U('userindex/'.$item['id'].'')}">{$item.nick_name}</a><p class="sm_des">{$item.avder}</p></h4></div>
+            <p class="des-title"><a target="_blank" href="{:U('/info_n/'.$item['article']['id'].'')}">{$item.article.title}</a></p>
+            <p class="des">{$item.article.remark|msubstr=###,0,35,'utf-8'}</p>
+        </div>
+      </div>
+    </volist>
+  </div>
+
+ </div>
+<!-- 独家解盘 结束 -->
+</div>
+<!-- 焦点图+独家解盘 结束 -->
+
+<!-- 足球 开始-->
+<div class="football clearfix">
+<!-- 足球 左边模块 开始-->
+<div class="football-left">
+<!-- 独家解盘 开始-->
+<div class="football-item clearfix">
+    <div class="fitem-title clearfix">
+         <div class="fitem-left clearfix">
+            <h4><i class="pull-left qb"></i><span class="pull-left">独家解盘</span></h4>
+         </div>
+    </div>
+     <!-- 新闻 start-->
+    <div class="news-list">
+        <ul>
+        <volist name="footPublish.0.news" id="item">
+            <li><img class="lazy" src="__PUBLIC__/Home/images/publish_index/li.jpg" /><a href="{:U('/info_n/'.$item['id'].'')}" target="_blank" title="{$item.title}">{$item.title}</a></li>
+        </volist>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        $(".news-list ul li:nth-child(2n)").css("padding-right","0")
+    </script>
+   <!-- 新闻 end-->
+</div>
+<!-- 独家解盘 结束-->
+
+<!-- 竞彩前瞻 开始-->
+<div class="football-item clearfix">
+    <div class="fitem-title clearfix">
+         <div class="fitem-left clearfix">
+            <h4><i class="pull-left qb"></i><span class="pull-left">竞彩前瞻</span></h4>
+         </div>
+    </div>
+     <!-- 新闻 start-->
+    <div class="news-list">
+        <ul>
+        <volist name="footPublish.1.news" id="item">
+            <li><img class="lazy" src="__PUBLIC__/Home/images/publish_index/li.jpg" /><a href="{:U('/info_n/'.$item['id'].'')}" target="_blank" title="{$item.title}">{$item.title}</a></li>
+        </volist>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        $(".news-list ul li:nth-child(2n)").css("padding-right","0")
+    </script>
+   <!-- 新闻 end-->
+</div>
+<!-- 竞彩前瞻 结束-->
+
+<!-- 北单推荐 开始-->
+<div class="football-item clearfix">
+    <div class="fitem-title clearfix">
+         <div class="fitem-left clearfix">
+            <h4><i class="pull-left qb"></i><span class="pull-left">北单推荐</span></h4>
+         </div>
+    </div>
+     <!-- 新闻 start-->
+    <div class="news-list">
+        <ul>
+        <volist name="footPublish.2.news" id="item">
+            <li><img class="lazy" src="__PUBLIC__/Home/images/publish_index/li.jpg" /><a href="{:U('/info_n/'.$item['id'].'')}" target="_blank" title="{$item.title}">{$item.title}</a></li>
+        </volist>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        $(".news-list ul li:nth-child(2n)").css("padding-right","0")
+    </script>
+   <!-- 新闻 end-->
+</div>
+<!-- 北单推荐 结束-->
+
+<!-- 篮球情报 开始-->
+<div class="football-item clearfix">
+    <div class="fitem-title clearfix">
+         <div class="fitem-left clearfix">
+            <h4><i class="pull-left qb"></i><span class="pull-left">篮球情报</span></h4>
+         </div>
+    </div>
+     <!-- 新闻 start-->
+    <div class="news-list">
+        <ul>
+        <volist name="footPublish.3.news" id="item">
+            <li><img class="lazy" src="__PUBLIC__/Home/images/publish_index/li.jpg" /><a href="{:U('/info_n/'.$item['id'].'')}" target="_blank" title="{$item.title}">{$item.title}</a></li>
+        </volist>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        $(".news-list ul li:nth-child(2n)").css("padding-right","0")
+    </script>
+   <!-- 新闻 end-->
+</div>
+<!-- 篮球情报 结束-->
+
+
+<!-- 独家秘笈 开始-->
+<div class="football-item clearfix">
+    <div class="fitem-title clearfix">
+         <div class="fitem-left clearfix">
+            <h4><i class="pull-left qb"></i><span class="pull-left">独家秘笈</span></h4>
+         </div>
+    </div>
+     <!-- 新闻 start-->
+    <div class="news-list">
+        <ul>
+        <volist name="footPublish.4.news" id="item">
+            <li><img class="lazy" src="__PUBLIC__/Home/images/publish_index/li.jpg" /><a href="{:U('/info_n/'.$item['id'].'')}" target="_blank" title="{$item.title}">{$item.title}</a></li>
+        </volist>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        $(".news-list ul li:nth-child(2n)").css("padding-right","0")
+    </script>
+   <!-- 新闻 end-->
+</div>
+<!-- 独家秘笈 结束-->
+</div>
+<!-- 足球 左边模块 结束-->
+
+<!-- 足球 右边模块 开始-->
+<div class="football-right">
+    <!-- 全球体育客户端 start-->
+    <div class="client-down">
+        <img class="lazy" src="__PUBLIC__/Api/images/app_load/fig_1_05.png" width="174" height="174" class="ewm" />
+       <div class="client-right">
+           <p>全球体育客户端</p>
+           <p><a href="//www.__DOMAIN__/Uploads/App/qqty.apk?v=5.0"><img class="lazy" width="50" height="50" src="__PUBLIC__/Home/images/publish_index/android.jpg" /></a> &nbsp;&nbsp;&nbsp; <a href="https://itunes.apple.com/cn/app/quan-qiu-ti-yu/id1079328958?mt=8" target="_blank;"><img class="lazy" width="50" height="50" src="__PUBLIC__/Home/images/publish_index/ios.jpg" /></a> </p>
+           <p>&nbsp;<a href="//www.__DOMAIN__/Uploads/App/qqty.apk" class="android">安卓版</a> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <a href="https://itunes.apple.com/cn/app/zu-qiu-lan-qiu-bi-fen-da-shi/id1210327035?mt=8" target="_blank;" class="ios">IOS版</a></p>
+       </div>
+    </div>
+    <!-- 全球体育客户端 end-->
+
+    <!-- 标题 -->
+    <div class="clearfix top-title">
+        <div class="pull-left section-title">
+            <h4><span><img class="lazy" target="_blank" src="__PUBLIC__/Home/images/publish_index/title.png" width="4" height="18"></span>赛事集锦</h4>
+        </div>
+        <div class="pull-right more"><a target="_blank" href="{:U('/Highlights/')}">更多&gt;</a></div>
+    </div>
+    <!-- 标题 -->
+
+    <!-- 赛事锦集 start-->
+    <div class="game-all">
+        <ul>
+        <volist name="highlights" id="item">
+            <li>
+                <a target="_blank" href="<if condition="$item.web_ischain eq 0">{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}<else/>{$item.web_url}</if>"><span></span><img class="lazy" src="{$item.img}" width="302" height="175" /><p>{$item.title}</p></a>
+            </li>
+        </volist>
+        </ul>
+    </div>
+     <!-- 赛事锦集 end-->
+</div>
+<!-- 足球 右边模块 结束-->
+</div>
+<!-- 足球 结束-->
+</div>
+</div>
+<!-- 主体内容结束 -->
+<include file="Public:footer" />
+<include file="Public:elevator" />
+</body>
+</html>
+</block>

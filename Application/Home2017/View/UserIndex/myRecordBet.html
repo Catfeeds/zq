@@ -1,0 +1,54 @@
+<div class="myRecord" style="display:none;">
+    <div class="arrow-l"></div>
+    <ul>
+        <li class="re-li user-name">{$item.nick_name}</li>
+        <li class="re-li"><span class="even01">当前连胜：<em class="text-red">{$item.Winning.curr_victs}</em></span><span class="even02">最大连胜：<em class="text-red">{$item.Winning.max_victs}</em></span></li>
+        <li class="re-li">
+            <div class="ten">
+                <span>近10场</span>
+                <volist name="item.Winning.tenGambleArr" id="item2">
+                    <switch name="item2">
+                        <case value="1"><em class="text-red">胜</em></case>
+                        <case value="-1"><em class="text-green">负</em></case>
+                    </switch>
+                </volist>
+            </div>
+            <div class="week clearfix">
+                <div class="pull-left title">周成绩</div>
+                <div class="pull-left data">
+                    <ul clearfix>
+                        <li class="w_50"><em>{$item.RankWeek.count}</em><span>场</span></li>
+                        <li class="w_50"><em class="text-red mr">{$item.RankWeek.win}</em><span>胜</span></li>
+                        <li class="w_50"><em class="text-green mr">{$item.RankWeek.transport}</em><span>负</span></li>
+                        <li class="w_62"><span>胜率</span><em class="text-red ml">{$item.RankWeek.winrate}%</em></li>
+                        <li><span>获得积分</span><em class="text-orange ml">{$item.RankWeek.pointCount}</em></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="month clearfix">
+                <div class="pull-left title">月成绩</div>
+                <div class="pull-left data">
+                    <ul clearfix>
+                        <li class="w_50"><em>{$item.RankMonth.count}</em><span>场</span></li>
+                        <li class="w_50"><em class="text-red mr">{$item.RankMonth.win}</em><span>胜</span></li>
+                        <li class="w_50"><em class="text-green mr">{$item.RankMonth.transport}</em><span>负</span></li>
+                        <li class="w_62"><span>胜率</span><em class="text-red ml">{$item.RankMonth.winrate}%</em></li>
+                        <li><span>获得积分</span><em class="text-orange ml">{$item.RankMonth.pointCount}</em></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="season clearfix">
+                <div class="pull-left title">季成绩</div>
+                <div class="pull-left data">
+                    <ul clearfix>
+                        <li class="w_50"><em>{$item.RankSeason.count}</em><span>场</span></li>
+                        <li class="w_50"><em class="text-red mr">{$item.RankSeason.win}</em><span>胜</span></li>
+                        <li class="w_50"><em class="text-green mr">{$item.RankSeason.transport}</em><span>负</span></li>
+                        <li class="w_62"><span>胜率</span><em class="text-red ml">{$item.RankSeason.winrate}%</em></li>
+                        <li><span>获得积分</span><em class="text-orange ml">{$item.RankSeason.pointCount}</em></li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

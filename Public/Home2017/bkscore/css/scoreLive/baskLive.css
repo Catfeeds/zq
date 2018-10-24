@@ -1,0 +1,24 @@
+/*
+* baskLive of css
+*
+* @Author: Chen Siren <245017279@qq.com>
+* 
+* @since: 2017-11-20
+*/
+
+/*篮球即时比分*/
+.table{ margin-bottom: 0;}
+.mytable01 .table .table-header th{ font-size: 14px;}
+.mytable01 .table .table-header th{ padding: 6px 0;}
+.mytable01 .table th, .mytable01 .table td{ padding: 6px 2px;}
+.mytable01 .table td.gameHomeName,.mytable01 .table td.gameAwayName{ padding-left: 10px;}
+.baskScore tbody tr td{ border-top: none;}
+.mytable01 .table td.baskScoreTd{ padding: 0;}
+.mytable01 .table .homeScore,.mytable01 .table .awayScore{ font-size: 16px;}
+.mytable01 .table .homeScore.start,.mytable01 .table .awayScore.start{ color: #3b6cff;}
+.mytable01 .table .homeScore div,.mytable01 .table .awayScore div{ border-radius: 4px;}
+.mytable01 .table .oddss span{ padding: 0 2px; border-radius: 2px; margin: 0 1px;}
+.mytable01 .table td.pl10{ padding-left: 20px;}
+.eventText {line-height: 22px;}
+.lang_css {display:none;}
+.strong{ font-weight: 700;}

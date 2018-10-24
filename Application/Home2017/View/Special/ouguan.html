@@ -1,0 +1,864 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>欧洲冠军联赛_全球体育网qqty.com</title>
+</block>
+<block name="body">
+
+<body>
+   	<!--引入本页所需css-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/special/special.css">
+
+<!-- 顶部开始 -->
+<include file="Public:top_include" />
+<!-- 顶部结束 -->
+
+<!-- 主体内容开始 -->
+<div class="topic_home">
+	<!-- topic标示 -->
+  	<div class="topic_top">
+        <div class="tip"></div>
+    	<img src="__PUBLIC__/Home/images/special/15-16.png" width="590" height="56">
+  	</div>
+    <!-- topic标示 -->
+    <!-- 内容模块开始 -->
+    <div class="main">
+    	<!-- 比赛列表 -->
+        <div class="contest clearfix">
+        	<div class="pull-left left-list">
+            	<ul>
+                    <li <eq name="type" value='1'>class="on"</eq>><a class="change" type="1" href="javascript:;"><span class="match_pro">1/4决赛</span><i class="icon-angle-right"></i></a></li>
+                    <li <eq name="type" value='2'>class="on"</eq>><a class="change" type="2" href="javascript:;"><span class="match_pro">半决赛</span><i class="icon-angle-right"></i></a></li>
+                    <li <eq name="type" value='3'>class="on"</eq>><a class="change" type="3" href="javascript:;"><span class="match_pro">决赛</span><i class="icon-angle-right"></i></a></li>
+            	</ul>
+            </div>
+            <div class="pull-right right-list qiehuan">
+                <div class="ladyScroll als-container" id="lista1">
+                    <a class="prev als-prev" href="javascript:void(0)"><i class="icon-angle-left"></i></a>
+                    <div class="scrollWrap">
+                        <div class="dlList">  
+                            <ul class="clearfix als-wrapper">
+                            <volist name="game" id="item">
+                                <li class="als-item">
+                                <div class="top_time">{$item.game_date|strtotime|date='m-d',###} {$item.game_time}</div>
+                                <div class="cen_sroce">
+                                    <p class="team"><a href="javascript:;"><span><img src="{$item.home_logo}" width="20" height="20"></span><em>{$item.home_team_name}</em></a></p>
+                                    <switch name="item.game_state">
+                                        <case value="-1|1|2|3|4"><p class="text-center sroce">{$item.score}</p></case>
+                                        <case value="0"><p class="text-center will_begin"><span>未开始</span></p></case>
+                                        <default/><p class="text-center will_begin"><span>{:C('game_state')[$item['game_state']]}</span></p>
+                                    </switch>
+                                    <p class="team"><a href="javascript:;"><span><img src="{$item.away_logo}" width="20" height="20"></span><em>{$item.away_team_name}</em></a></p>
+                                </div>
+                                <div class="bot_video clearfix">
+                                    <span class="text-center pull-left">
+                                        <switch name="item.type">
+                                            <case value='1'>1/4决赛</case>
+                                            <case value='2'>半决赛</case>
+                                            <case value='3'>决赛</case>
+                                        </switch>
+                                    </span>
+                                    <empty name="item.highlights">
+                                        <a href="javascript:;" class="pull-left">视频集锦</a>
+                                    <else/>
+                                        <a target="_blank" href="{:U('Video/lives',['type'=>1,'game_id'=>$item['game_id'],'jj_id'=>$item['highlights']])}" class="pull-left">视频集锦</a>
+                                    </empty>
+                                </div>
+                                </li>
+                            </volist>
+                            </ul>  
+                        </div>
+                    </div>
+                    <a class="next als-next" href="javascript:void(0)"><i class="icon-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- 比赛列表 -->
+    	<!-- banner+推荐数据 -->
+      	<div class="cont_sec clearfix" style="margin-bottom: 25px;">
+        	<!-- baner -->
+        	<div class="pull-left cont_sec_left">
+            	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <volist name="carousel" id="item">
+                            <li data-target="#myCarousel" data-slide-to="{$key}" <if condition="$key eq 0">class="active"</if>></li>       
+                        </volist>                   
+                    </ol>
+                    <!-- Carousel items -->
+                    <div class="carousel-inner">    
+                        <volist name="carousel" id="item">              
+    						<div class="item <if condition="$key eq 0">active</if>">
+    							<a href="{$item.url}" target="_blank"><img src="{$item.img}" alt="{$item.title}" style="width:630px;height:354px;"></a>
+                                <div class="fbanner_title">
+                                <a href="{$item.url}" target="_blank">{$item.title}</a>
+                                </div>
+    						</div> 
+                        </volist>                                                   
+ 					</div>
+                    <!-- Carousel nav -->
+                    <a class="carousel-control left" href="#myCarousel" data-slide="prev" style="display: none; opacity: 0.5;"><span class="banner_arrow"></span></a>
+                    <a class="carousel-control right" href="#myCarousel" data-slide="next" style="display: none; opacity: 0.5;"><span class="banner_arrow"></span></a>
+                </div>
+            </div>
+            <!-- 推荐数据 -->
+          	<div class="pull-right cont_sec_right">
+            	<a target="_blank" href="//jc.__DOMAIN__"><div class="game_title">推荐大厅</div></a>
+                <div class="stat-main">
+                    <ul class="clearfix">
+                    <volist name="Marvellous" id="item" offset="0" length='2'>
+                        <li class="li-list">
+                            <p class="time"><span class="text-555">{$item.union_name|mb_substr=###,0,5,'utf-8'}</span>&nbsp;&nbsp;<em class="text-555">{$item.gtime|date='d日 H:i',###}</em></p>
+                            <div class="clearfix">
+                                <a href="javascript:;" class="hover pull-left">
+                                <div class="team1">
+                                    <span><img src="{$item.homeTeamLogo}" width="55" height="55"></span>
+                                    <p class="team-name">{$item.home_team_name|mb_substr=###,0,5,'utf-8'}</p>
+                                </div>
+                                </a>
+                                <div class="pull-left against">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td class="gray">{$item.fsw_exp_home}</td>
+                                                <td class="gray"><if condition="$item.fsw_exp lt 0">受</if>{$item.fsw_exp|abs|handCpSpread}</td>
+                                                <td class="gray">{$item.fsw_exp_away}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{$item.fsw_ball_home}</td>
+                                                <td>{$item.fsw_ball|handCpTotal}</td>
+                                                <td>{$item.fsw_ball_away}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <a href="javascript:;" class="hover pull-right">
+                                <div class="team2">
+                                    <span><img src="{$item.awayTeamLogo}" width="55" height="55"></span>
+                                    <p class="team-name">{$item.away_team_name|mb_substr=###,0,5,'utf-8'}</p>
+                                </div>
+                                </a>
+                            </div>
+                            <div class="pro-con clearfix">
+                                <div class="pull-left zhu"><span class="text-555">主队</span> <em class="<if condition='$item.mainNumber egt 50'>text-red<else/>text-tie</if>">{$item.mainNumber}%</em></div>
+                                <div class="pull-left content">
+                                    <div class="col">
+                                        <ul id="skill">
+                                            <li class="ft-percent">
+                                                <a target="_blank" style="background: <if condition='$item.mainNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="{:U('/statistics/1/'.$item['game_id'].'/1@jc')}" class="ft-percent-real animation-progress expand left" data-percent="{$item.mainNumber}%" data-animation="progress" ></a>
+                                            </li>
+                                            <li class="ft-percent">
+                                                <a target="_blank" style="background: <if condition='$item.guestNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="{:U('/statistics/1/'.$item['game_id'].'/1@jc')}" class="ft-percent-real animation-progress expand right" data-percent="{$item.guestNumber}%" data-animation="progress"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="pull-right ke"><span class="text-555">客队</span> <em class="<if condition='$item.guestNumber egt 50'>text-red<else/>text-tie</if>">{$item.guestNumber}%</em></div>
+                            </div>
+                            <div class="pro-con clearfix">
+                                <div class="pull-left zhu"><span class="text-555">大球</span> <em class="<if condition='$item.bigNumber egt 50'>text-red<else/>text-tie</if>">{$item.bigNumber}%</em></div>
+                                <div class="pull-left content">
+                                    <div class="col">
+                                        <ul id="skill">
+                                            <li class="ft-percent">
+                                                <a target="_blank" style="background: <if condition='$item.bigNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="{:U('/statistics/1/'.$item['game_id'].'/-1@jc')}" class="ft-percent-real animation-progress expand left" data-percent="{$item.bigNumber}%" data-animation="progress" ></a>
+                                            </li>
+                                            <li class="ft-percent">
+                                                <a target="_blank" style="background: <if condition='$item.smallNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="{:U('/statistics/1/'.$item['game_id'].'/-1@jc')}" class="ft-percent-real animation-progress expand right" data-percent="{$item.smallNumber}%" data-animation="progress"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="pull-right ke"><span class="text-555">小球</span> <em class="<if condition='$item.smallNumber egt 50'>text-red<else/>text-tie</if>">{$item.smallNumber}%</em></div>
+                            </div>
+                        </li>
+                    </volist>
+                    </ul>
+                </div>
+            </div>
+    	</div>
+        <!-- banner+推荐数据 -->
+        <!-- 名师解析名人堂 -->
+        <div class="fame clearfix">
+        	<div class="pull-left fame_left_title">独家解盘</div>
+        	<div class="pull-left fame_left_list">
+            	<ul class="clearfix">
+                <volist name="teacher" id="item">
+            		<li class="pull-left">
+                    	<a target="_blank" href="{:U('userindex/'.$item['id'].'')}">
+                            <div class="head_img"><span><img src="{$item.head|frontUserFace=###}" width="112" height="112"></span></div>
+                            <div class="name">{$item.nick_name}</div>
+                        </a>
+                    </li>
+                </volist>
+            	</ul>
+            </div>
+        </div>
+        <!-- 名师解析名人堂 -->
+        <!-- 通告 -->
+      	<div class="notice clearfix">
+            <div class="pull-right nav-right">
+                <div class="pull-left new-notice"><img src="__PUBLIC__/Home/images/special/icon-horn.png" width="14" height="12"></div>
+                <div class="pull-left">
+                    <div id="marquee">
+                        <ul class="clearfix">
+                            <volist name="news" id="item">
+                                <li><a target="_blank" href="{:U('/info_n/'.$item['id'].'')}" title="{$item.short_title}">{$item.short_title}</a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 通告 -->
+        <!-- 内容子模块 -->
+        <div class="cont_sec clearfix">
+        	<!-- 左边 -->
+        	<div class="pull-left cont_left">
+            	<div class="og_tab clearfix">
+                  <div class="og_tab_val">
+                    <div class="og_tab_cont">
+                    <volist name="game_news" id="item" offset="0" length='4'>
+                    <div class="match_blk clearfix">
+                        <div class="match_blk_lt">
+                          <switch name="item.game_state">
+                              <case value="0"><h3 class="match_status match_will"> <i></i> <label>未开始</label></h3></case>
+                              <case value="1|2|3|4"><h3 class="match_status match_on"> <i></i> <label>进行中</label></h3></case>
+                              <case value="-1"><h3 class="match_status match_over"> <i></i> <label>已结束</label></h3></case>
+                              <default/><h3 class="match_status match_on"> <i></i> <label>{:C('game_state')[$item['game_state']]}</label></h3>
+                          </switch>
+                          <p class="match_info">
+                            <span class="match_time">{$item.game_date|strtotime|date="Y-m-d",###} {$item.game_time}</span>
+                            <span class="match_name">
+                              <switch name="item.type">
+                                  <case value='1'>1/4决赛</case>
+                                  <case value='2'>半决赛</case>
+                                  <case value='3'>决赛</case>
+                              </switch>
+                            </span>
+                          </p>
+                          <div class="match_teams">
+                            <a href="javascript:;" class="match_team mrg_r_8">
+                              <img src="{$item.home_logo}"/>
+                              <p class="mt_team_name" title="{$item.home_team_name}">{$item.home_team_name}</p>
+                              <p class="mt_team_score <switch name="item.game_state"><case value='0'>mt_team_score_gray</case><case value='1|2|3|4'>mt_team_score_pink</case><case value='-1'>mt_team_score_blue</case><default/>mt_team_score_pink</switch>">{$item.score|mb_substr=###,0,1,'utf-8'}</p>
+                              <p class="mt_team_color">主</p>
+                            </a>
+                            <a href="javascript:;" class="match_team">
+                              <img src="{$item.away_logo}" />
+                              <p class="mt_team_name" title="{$item.away_team_name}">{$item.away_team_name}</p>
+                              <p class="mt_team_score <switch name="item.game_state"><case value='0'>mt_team_score_gray</case><case value='1|2|3|4'>mt_team_score_pink</case><case value='-1'>mt_team_score_blue</case><default/>mt_team_score_pink</switch>">{$item.score|mb_substr=###,2,1,'utf-8'}</p>
+                              <p class="mt_team_color">客</p>
+                            </a>
+                          </div>
+                          <div class="match_links clearfix">
+                            <notempty name="item.highlights">
+                                <a target="_blank" href="{:U('Video/lives',['type'=>1,'game_id'=>$item['game_id'],'jj_id'=>$item['highlights']])}" class="pull-left">视频集锦</a>
+                            </notempty>
+                            <notempty name="item.photo">
+                                <a target="_blank" href="{:U('/info_p/'.$item['photo'].'')}" class="pull-left">高清图集</a>
+                            </notempty>
+                            <notempty name="item.battle">
+                                <a target="_blank" href="{:U('/info_n/'.$item['battle'].'')}" class="pull-left">战报</a>
+                            </notempty>
+                          </div>
+                        </div>
+                        <div class="match_blk_rt">
+                          <h3 class="match_rt_title">
+                            <a class="text-red" href="{:U('/info_n/'.$item['new']['id'].'')}" target="_blank">{$item['new']['title']}</a>
+                          </h3>
+                          <ul class="match_news_list">
+                            <volist name="item.news" id="item2">
+                                <li><a href="{:U('/info_n/'.$item2['id'].'')}" target="_blank">{$item2.title}</a></li>
+                            </volist>
+                          </ul>
+                        </div>
+                    </div>
+                    </volist>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!-- 右边 -->
+        	<div class="pull-right cont_right">
+            	<!-- 赛事锦集 -->
+                <div class="div04">
+                    <div class="clearfix top-title">
+                        <div class="pull-left section-title">
+                        	<h4 style="color: #264aa0;"><span><img target="_blank" src="__PUBLIC__/Home/images/special/title.png" width="4" height="18"></span>赛事锦集</h4>
+                        </div>
+                        <div class="pull-right more"><a target="_blank" href="{:U('/Highlights/')}">更多&gt;</a></div>
+                    </div>
+                    <div class="scr-vds">
+                        <ul>
+                            <volist name="highlights" id="item">
+                            <li>
+                                <a target="_blank" href="<if condition="$item.web_ischain eq 0">{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}<else/>{$item.web_url}</if>">
+                                    <div class="vds-img">
+                                        <img src="{$item.img}" width="303" height="175">
+                                        <span class="txt">{$item.title}</span>
+                                        <span class="play"></span>
+                                    </div>
+                                </a>
+                            </li> 
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 赛事锦集 -->
+                <!-- 积分 -->
+                <div class="ranking">
+                    <div class="rk_tabs clearfix">
+                        <span class="rk_tabs_on">积分榜</span>
+                        <span class="">射手榜</span>
+                    </div>
+                    <div class="rk_conts">
+                        <div class="rk_cont jf_rank" data-sudaclick="blk_championsleague_jfrank">
+                            <div class="jf_group clearfix">
+                                <span class="hvr">A</span>
+                                <span>B</span>
+                                <span>C</span>
+                                <span>D</span>
+                                <span>E</span>
+                                <span>F</span>
+                                <span>G</span>
+                                <span>H</span>
+                            </div>
+                            <div class="rk_list">
+                                <ul class="rk_list_show" data-group="A">
+                                    <li class="rk_list_title">
+                                    <label class="rk_order">排名</label>
+                                    <label class="jf_team">球队</label>
+                                    <label class="jf_count">场次</label>
+                                    <label class="rk_result">积分</label>
+                                    </li>
+                                    <li class="hvr">
+                                    <span class="rk_order">1</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">皇家马德里</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">16</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">2</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">巴黎圣日耳曼</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">13</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">3</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">顿涅茨克矿工</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">3</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">4</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">马尔默</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">3</span>
+                                    </li>
+                                </ul>
+                                <ul data-group="B" style="display: none;">
+                                    <li class="rk_list_title">
+                                    <label class="rk_order">排名</label>
+                                    <label class="jf_team">球队</label>
+                                    <label class="jf_count">场次</label>
+                                    <label class="rk_result">积分</label>
+                                    </li>
+                                    <li class="hvr">
+                                    <span class="rk_order">1</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">沃尔夫斯堡</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">12</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">2</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">埃因霍温</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">10</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">3</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">曼联</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">8</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">4</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">莫斯科中央</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">4</span>
+                                    </li>
+                                </ul>
+                                <ul data-group="C" style="display: none;">
+                                    <li class="rk_list_title">
+                                    <label class="rk_order">排名</label>
+                                    <label class="jf_team">球队</label>
+                                    <label class="jf_count">场次</label>
+                                    <label class="rk_result">积分</label>
+                                    </li>
+                                    <li class="hvr">
+                                    <span class="rk_order">1</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">马德里竞技</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">13</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">2</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">本菲卡</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">10</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">3</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">加拉塔萨雷</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">5</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">4</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">阿斯塔纳</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">4</span>
+                                    </li>
+                                </ul>
+                                <ul data-group="D" style="display: none;">
+                                    <li class="rk_list_title">
+                                    <label class="rk_order">排名</label>
+                                    <label class="jf_team">球队</label>
+                                    <label class="jf_count">场次</label>
+                                    <label class="rk_result">积分</label>
+                                    </li>
+                                    <li class="hvr">
+                                    <span class="rk_order">1</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">曼城</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">12</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">2</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">尤文图斯</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">11</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">4</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">门兴</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">5</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">3</span>
+                                    <span class="jf_team">
+                                    <a href="javascript:;">塞维利亚</a>
+                                    </span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">6</span>
+                                    </li>
+                                </ul>
+                                <ul data-group="E" style="display: none;">
+                                    <li class="rk_list_title">
+                                    <label class="rk_order">排名</label>
+                                    <label class="jf_team">球队</label>
+                                    <label class="jf_count">场次</label>
+                                    <label class="rk_result">积分</label>
+                                    </li>
+                                    <li class="hvr">
+                                    <span class="rk_order">1</span>
+                                    <span class="jf_team"><a href="javascript:;">巴塞罗那</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">14</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">2</span>
+                                    <span class="jf_team"><a href="javascript:;">罗马</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">6</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">4</span>
+                                    <span class="jf_team"><a href="javascript:;">鲍里索夫</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">5</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">3</span>
+                                    <span class="jf_team"><a href="javascript:;" >勒沃库森</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">6</span>
+                                    </li>
+                                </ul>
+                                <ul data-group="F" style="display: none;">
+                                    <li class="rk_list_title">
+                                        <label class="rk_order">排名</label>
+                                        <label class="jf_team">球队</label>
+                                        <label class="jf_count">场次</label>
+                                        <label class="rk_result">积分</label>
+                                    </li>
+                                    <li class="hvr">
+                                    <span class="rk_order">1</span>
+                                    <span class="jf_team"><a href="javascript:;">拜仁慕尼黑</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">15</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">2</span>
+                                    <span class="jf_team"><a href="javascript:;">阿森纳</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">9</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">3</span>
+                                    <span class="jf_team"><a href="javascript:;">奥林匹亚科斯</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">9</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">4</span>
+                                    <span class="jf_team"><a href="javascript:;">萨格勒布</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">3</span>
+                                    </li>
+                                </ul>
+                                <ul data-group="G" style="display: none;">
+                                    <li class="rk_list_title">
+                                    <label class="rk_order">排名</label>
+                                    <label class="jf_team">球队</label>
+                                    <label class="jf_count">场次</label>
+                                    <label class="rk_result">积分</label>
+                                    </li>
+                                    <li class="hvr">
+                                    <span class="rk_order">1</span>
+                                    <span class="jf_team"><a href="javascript:;">切尔西</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">13</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">2</span>
+                                    <span class="jf_team"><a href="javascript:;">基辅迪纳摩</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">11</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">4</span>
+                                    <span class="jf_team"><a href="javascript:;">特拉维夫马卡比</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">0</span>
+                                    </li> 
+                                    <li>
+                                    <span class="rk_order">3</span>
+                                    <span class="jf_team"><a href="javascript:;">波尔图</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">10</span>
+                                    </li>
+                                </ul>
+                                <ul data-group="H" style="display: none;">
+                                    <li class="rk_list_title">
+                                    <label class="rk_order">排名</label>
+                                    <label class="jf_team">球队</label>
+                                    <label class="jf_count">场次</label>
+                                    <label class="rk_result">积分</label>
+                                    </li>
+                                    <li class="hvr">
+                                    <span class="rk_order">1</span>
+                                    <span class="jf_team"><a href="javascript:;">泽尼特</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">15</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">2</span>
+                                    <span class="jf_team"><a href="javascript:;">根特</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">10</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">3</span>
+                                    <span class="jf_team"><a href="javascript:;">瓦伦西亚</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">6</span>
+                                    </li>
+                                    <li>
+                                    <span class="rk_order">4</span>
+                                    <span class="jf_team"><a href="javascript:;">里昂</a></span>
+                                    <span class="jf_count">6</span>
+                                    <span class="rk_result">4</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="rk_cont scorer_rank" data-sudaclick="blk_championsleague_scorerrank" style="display: none;">
+                            <div class="rk_list" style="height: 260px; overflow-y: scroll;">
+                                <ul class="rk_list_show rk_list_show">
+                                	<li class="rk_list_title">
+                                    <label class="rk_order">排名</label>
+                                    <label class="sc_team"><em>球员</em> | <em>球队</em></label>
+                                    <label class="rk_result">进球数</label>
+                                    </li>
+                                    <li class="hvr"><span class="rk_order">1</span><span class="sc_team"><a href="javascript:;">C.罗纳尔多</a> | <a href="javascript:;">皇马</a></span><span class="rk_result">16</span></li>
+                                    <li class=""><span class="rk_order">2</span><span class="sc_team"><a href="javascript:;">苏亚雷斯</a> | <a href="javascript:;">巴塞罗那</a></span><span class="rk_result">8</span></li>
+                                    <li class=""><span class="rk_order">3</span><span class="sc_team"><a href="javascript:;">莱万多夫斯基</a> | <a href="javascript:;">拜仁</a></span><span class="rk_result">8</span></li>
+                                    <li class=""><span class="rk_order">4</span><span class="sc_team"><a href="javascript:;">托马斯-穆勒</a> | <a href="javascript:;">拜仁</a></span><span class="rk_result">8</span></li>
+                                    <li class=""><span class="rk_order">5</span><span class="sc_team"><a href="javascript:;">久巴</a> | <a href="javascript:;">泽尼特</a></span><span class="rk_result">6</span></li>
+                                    <li class="hvr"><span class="rk_order">6</span><span class="sc_team"><a href="javascript:;">梅西</a> | <a href="javascript:;">巴塞罗那</a></span><span class="rk_result">6</span></li>
+                                    <li class=""><span class="rk_order">7</span><span class="sc_team"><a href="javascript:;">格列兹曼</a> | <a href="javascript:;">马竞</a></span><span class="rk_result">6</span></li>
+                                    <li class=""><span class="rk_order">8</span><span class="sc_team"><a href="javascript:;">伊布拉希莫维奇</a> | <a href="javascript:;">圣日耳曼</a></span><span class="rk_result">5</span></li>
+                                    <li class=""><span class="rk_order">9</span><span class="sc_team"><a href="javascript:;">威廉</a> | <a href="javascript:;">切尔西</a></span><span class="rk_result">5</span></li>
+                                    <li class=""><span class="rk_order">10</span><span class="sc_team"><a href="javascript:;">埃尔南德斯</a> | <a href="javascript:;">勒沃库森</a></span><span class="rk_result">5</span></li>
+                                    <li class="hvr"><span class="rk_order">11</span><span class="sc_team"><a href="javascript:;">吉鲁</a> | <a href="javascript:;">阿森纳</a></span><span class="rk_result">5</span></li>
+                                    <li class=""><span class="rk_order">12</span><span class="sc_team"><a href="javascript:;">本泽马</a> | <a href="javascript:;">皇马</a></span><span class="rk_result">4</span></li>
+                                    <li class=""><span class="rk_order">13</span><span class="sc_team"><a href="javascript:;">胡尔克</a> | <a href="javascript:;">泽尼特</a></span><span class="rk_result">4</span></li>
+                                    <li class=""><span class="rk_order">14</span><span class="sc_team"><a href="javascript:;">默罕默迪</a> | <a href="javascript:;">勒沃库森</a></span><span class="rk_result">4</span></li>
+                                    <li class=""><span class="rk_order">15</span><span class="sc_team"><a href="javascript:;">盖坦</a> | <a href="javascript:;">本菲卡</a></span><span class="rk_result">4</span></li>
+                                    <li class="hvr"><span class="rk_order">16</span><span class="sc_team"><a href="javascript:;">米利切维奇</a> | <a href="javascript:;">根特</a></span><span class="rk_result">3</span></li>
+                                    <li class=""><span class="rk_order">17</span><span class="sc_team"><a href="javascript:;">桑切斯</a> | <a href="javascript:;">阿森纳</a></span><span class="rk_result">3</span></li>
+                                    <li class=""><span class="rk_order">18</span><span class="sc_team"><a href="javascript:;">迪马利亚</a> | <a href="javascript:;">圣日耳曼</a></span><span class="rk_result">3</span></li>
+                                    <li class=""><span class="rk_order">19</span><span class="sc_team"><a href="javascript:;">帕尔多</a> | <a href="javascript:;">奥林匹克科</a></span><span class="rk_result">3</span></li>
+                                    <li class=""><span class="rk_order">20</span><span class="sc_team"><a href="javascript:;">施廷德尔</a> | <a href="javascript:;">兴门</a></span><span class="rk_result">3</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 积分 -->
+                <!-- 投票 -->
+                <div class="sec_blk">
+                    <div class="clearfix top-title">
+                        <div class="section-title">
+                        	<h4 style="color: #264aa0;"><span><img target="_blank" src="__PUBLIC__/Home/images/special/title.png" width="4" height="18"></span>投票调查</h4>
+                        </div>
+                    </div>
+                    <div class="w_cont_box">
+                        <div class="sv_cont_c12" id="SINA_SURVERY_TOPIC_EMBED_FRAME110712" needlogin="1">
+                            <form action="#">
+                                <div class="sv_title">
+                                    2015/16赛季欧冠哪支球队会夺冠？
+                                </div>
+                                <div class="sv_list">
+                                <volist name="vote" id="item" offset="0" length='8'>
+                                    <div class="sv_option">
+                                        <div class="sv_element">
+                                            <input type="radio" name="vote" value="{$item.id}">
+                                        </div>
+                                        <div class="sv_txt">{$item.name}</div>
+                                        <div class="pull-right text-red sv_votes"><span class="vote-{$item.id}">{$item.number}</span>票</div>
+                                    </div>
+                                </volist>
+                                </div>
+                                <div class="sv_buttons">
+                                    <input type="button" title="提交" value="提交" gamevote="1" class="btn btn-primary vote-submit">
+                                </div>
+                                <div class="sv_title">
+                                    2015/16赛季欧冠谁会是最佳射手？
+                                </div>
+                                <div class="sv_list">
+                                <volist name="vote" id="item" offset="8">
+                                    <div class="sv_option">
+                                        <div class="sv_element">
+                                            <input type="radio" name="vote2" value="{$item.id}">
+                                        </div>
+                                        <div class="sv_txt">{$item.name}</div>
+                                        <div class="pull-right text-red sv_votes"><span class="vote-{$item.id}">{$item.number}</span>票</div>
+                                    </div>
+                                </volist>
+                                </div>
+                                <div class="sv_buttons">
+                                    <input type="button" title="提交" value="提交" gamevote="2" class="btn btn-primary vote-submit">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- 投票 -->
+            </div>
+        </div>
+        <!-- 内容子模块 -->
+    </div>
+    <!-- 内容模块结束 -->
+</div>
+<!-- 主体内容结束 -->
+
+<!-- 返回顶部开始 -->
+<div class="return-top">
+    <a href="#">
+        <span class="ft_bg"></span>
+        <span>回顶部</span>
+    </a>
+</div>
+<!-- 返回顶部结束 -->
+<!-- 底部版权信息开始 -->
+<include file="Public:footer" />
+<!-- 底部版权信息结束 -->
+</body> 
+</html>
+<!--引入本页所需js-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/index/jquery.inview.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/special/jquery.als-1.7.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/special/kxbdSuperMarquee.js"></script>
+<script language="javascript">
+    $(function(){
+        //返回顶部
+        $(window).scroll(function(e) {
+            if($(window).scrollTop()>$(window).height()){
+                $('.return-top').fadeIn(300);
+            }else {
+                $('.return-top').fadeOut(300);
+            }
+        });
+        $('.return-top').click(function(e) {
+            $('body,html').animate({'scrollTop':'0'},500);
+
+        });
+        //比赛列表
+        $("#lista1").als({
+            visible_items: 4,
+            scrolling_items: 3,
+            orientation: "horizontal",
+            circular: "yes",
+            autoscroll: "no",
+            interval: 5000,
+            speed: 500,
+            easing: "linear",
+            direction: "right",
+            start_from: 0
+        });
+        
+        //焦点图轮播
+        $('.cont_sec_left').hover(function(e) {
+            $('.carousel-control').stop().fadeIn(500);
+            },function(){
+                $('.carousel-control').stop().fadeOut(500);
+            });
+            $('.carousel-control').hover(function(e) {
+                $(this).animate({"opacity":"0.75"},200);
+            },function(){
+               $(this).animate({"opacity":"0.5"},200);
+        });
+
+        // 动画效果 CSS3
+        $('body').on('inview', '[data-animation]', function(){
+            var $this = $(this);
+        
+            var animations = $this.data('animation');
+            // 去掉所有空格
+            animations = animations.replace(/\s+/g, '');
+            // 拆分为数组
+            animations = animations.split(',');
+            // 添加首元素
+            animations.unshift('animation');
+            // 合并为字符串 "animation-animation1-animation2-..."
+            animations = animations.join('-');
+        
+            var percent = $this.data('percent');
+        
+            $this.addClass(animations).css('width', percent);
+        });
+        // 榜单切换
+        $(".rk_tabs span").click(function(){
+            var $this = $(this), index = $this.index();
+            $this.addClass("rk_tabs_on").siblings().removeClass("rk_tabs_on");
+            $(".rk_conts .rk_cont").eq(index).show().siblings().hide();
+        })
+        // 积分榜切换
+        $(".jf_group span").mouseover(function(){
+            var $this = $(this), index = $this.index();
+            $this.addClass("hvr").siblings().removeClass("hvr");
+            $(".jf_rank .rk_list ul").eq(index).show().siblings("ul").hide();
+        })
+        // 滑过效果
+        $(".rk_list").delegate("li:not('.rk_list_title')","mouseenter",function(){
+            var $this = $(this), $img = $this.find(".jf_team img");
+            $this.addClass("hvr").siblings().removeClass("hvr");                            
+        });
+        //Marquee通告
+        $('#marquee').kxbdSuperMarquee({
+            isMarquee:true,
+            isEqual:false,
+            scrollDelay:30,
+            controlBtn:{up:'#goUM',down:'#goDM'},
+            direction:'left'
+        });
+    })
+    
+    $(".vote-submit").on('click',function(){
+        var gamevote = $(this).attr('gamevote');
+        if(gamevote == 1){
+            var vote = $("input[name='vote']:checked").val();
+        }else{
+            var vote = $("input[name='vote2']:checked").val();
+        }
+        if(vote==undefined){
+            showMsg("请选择您的投票！",0,'error');
+            return;
+        }
+        $.ajax({
+            type:'post',
+            url:"/special/addVote.html",
+            data:{gamevote:gamevote,vote:vote},
+            dataType:'json',
+            success:function(data){
+                if(data.status == 1){
+                    var number = parseInt($(".vote-"+vote).text())+1;
+                    $(".vote-"+vote).text(number);
+                    showMsg(data.info);
+                }else{
+                    showMsg(data.info,0,'error');
+                }
+            }
+        })
+    })
+    $(".change").on('click',function(){
+        $(this).parent().addClass("on");
+        $(this).parent().siblings().removeClass("on");
+        var type = $(this).attr('type');
+        $.ajax({
+            type:'post',
+            url:'/Special/changeGame.html',
+            data:{type:type},
+            dataType:'json',
+            success:function(html){
+                $(".qiehuan").html(html.info);
+                $("#lista1").als({
+                    visible_items: 4,
+                    scrolling_items: 3,
+                    orientation: "horizontal",
+                    circular: "yes",
+                    autoscroll: "no",
+                    interval: 5000,
+                    speed: 500,
+                    easing: "linear",
+                    direction: "right",
+                    start_from: 0
+                });
+            }
+        })
+    })
+</script>
+</block>
+

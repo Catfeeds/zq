@@ -1,0 +1,188 @@
+<extend name="Public/base" />
+<block name="append">
+	 <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/user/user.css">
+    <link rel="stylesheet" href="__CSS__/user/percircle.css">
+       <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="__CSS__/swiper.css">
+</block>
+<block name="header">
+    <!-- 二级头部 s -->
+    <header id="other_header"> 
+    	<a href="{:U('/expUser/'.$_GET['user_id'])}"></a>更多推荐
+    </header>
+    <!-- 二级头部 e --> 
+</block>
+<block name="nav">
+</block>
+<block name="content">
+<!-- nav s-->
+<section class="n_module">
+ <nav class="nav_list clearfix nav_num_2">
+        <a href="{:U('/expUser/'.$_GET['user_id'].'/'.1)}" <if condition="$_REQUEST.playtype eq 1 or $_REQUEST.playtype eq ''">class="on"</if>>让球</a>
+        <a href="{:U('/expUser/'.$_GET['user_id'].'/'.-1)}" <if condition="$_REQUEST.playtype eq -1">class="on"</if>>大小</a>
+ </nav>
+</section>
+<!-- nav e -->
+<section class="main">             
+	<!-- 内容 s -->
+       <div class="new_tj com_dt clearfix">
+       <ul class="posts">
+       <volist name="gamble" id="item">
+         <li class="list">
+           <if condition="($item.tradeCoin eq 0) and ($item['is_check'] neq '' or $item['user_id'] eq is_login() or $item['result'] neq 0)"><div class="free"></div></if>
+           <p class="p_1"><em style="color: {$item.union_color}">{$item.union_name}</em> {$item.home_team_name} <if condition="$item.result eq 0">VS<else/><strong style="color: red">{$item.score|str_replace='-','：',###}</strong></if> {$item.away_team_name}</p>
+           <p class="p_2">{$item.game_date|strtotime|date="m/d",###}  {$item.game_time}</p>
+           <p class="p_3">玩法：<span><if condition="$item.play_type eq 1">让球<else/>大小球</if></span></p>
+           <if condition="$item['is_check'] neq '' or $item['user_id'] eq is_login() or $item['result'] neq 0">
+               <switch name="item.result">
+                   <case value="1"><div class="win"></div></case>
+                   <case value="0.5"><div class="win_half"></div></case>
+                   <case value="2"><div class="ping"></div></case>
+                   <case value="-1"><div class="lose"></div></case>
+                   <case value="-0.5"><div class="lose_half"></div></case>
+               </switch>
+               <p class="p_4">推荐：<span>{$item.handcp} {$item.Answer}（{$item.odds}）</span></p>
+               <p class="p_5 q-two">分析：<span>{$item.desc|default='暂无分析'}</span></p>
+           <else/>
+               <a href="javascript:;" onclick="payment(this,{$item.id},{$item.tradeCoin})">
+                <if condition="$item.tradeCoin eq 0">
+                  <div class="gold2 bg_green">免费</div>
+                <else/>
+                  <div class="gold2">{$item.tradeCoin}金币</div>
+                </if>
+               </a>
+           </if>
+         </li>
+       </volist>
+       </ul>
+     </div>
+     <input type="hidden" value="{$user_auth.id}" name="user_auth" />
+     <input type="hidden" id="auto_load" value="1">
+     <div class="paged boxs">
+         <div class="load_gif fs24 text-999">
+             <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+             <span>正在加载更多的数据...</span>
+         </div>
+         <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已经全部加载完毕</a>
+     </div>
+     <!-- 内容 e -->
+     <div class="bubbleTips"></div>
+</section>
+</block>
+<block name='scripts'>
+<script type="text/javascript" src="__JS__/progress/percircle.js"></script>
+
+ <!-- Swiper JS -->
+    <script src="__JS__/swiper.js"></script>  
+    <script> 
+      //banner 切换
+      var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: 250000,
+            autoplayDisableOnInteraction: false
+        }); 
+      //查看推荐
+      function payment(obj,id,coin){
+          //判断登录
+          var is_login = $("input[name='user_auth']").val();
+          if (is_login == '')
+          {
+              $('.bubbleTips').html('请先登录!').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+              return;
+          }
+          if(coin > 0)
+          {
+            if(confirm('您确定支付'+coin+'金币查看该推荐么?') == false) return;
+          }
+          $.ajax({
+              type: "POST",
+              url: "/Guess/trade.html",
+              data: {'gamble_id':id},
+              dataType: "json",
+              success: function(data){
+                  if(data.status == 1){
+                      var game = data.info;
+                      var desc = game['desc'] != '' ? game['desc'] : "暂无分析";
+                      var html = "<p class=\"p_4\">推荐：<span>"+game['handcp']+" "+game['Answer']+"（"+game['odds']+"）</span></p>"+
+                                 "<p class=\"p_5 q-two\">分析：<span>"+desc+"</span></p>";
+                         if(game['tradeCoin']=='0'){
+                             html+='<div class="free"></div>';
+                         }
+                      $(obj).before(html);
+                      $(obj).remove();
+                  }else{
+                        $('.bubbleTips').html(data.info).stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                  }
+              }
+          });
+      }
+      $(function () {
+          $("#auto_load").val(1);
+          var p = 2;// 初始化页面，点击事件从第二页开始
+          var flag = false;
+          if ($(".list").size() < 20)
+          {
+              $("#auto_load").val(0);
+              $(".load_gif").hide();
+              $("#showLess").show();
+          }
+          $(window).scroll(function () {
+              var auto_load = $("#auto_load").val();
+              if (auto_load == 0) {
+                  return false;
+              }
+              //初始状态，如果没数据return ,false;否则
+              if ($(".list").size() <= 0)
+              {
+                  return false;
+              } else {
+                  if ($(document).height() - ($(document).scrollTop() + $(window).height()) <= 400) {
+                      if (auto_load == 1) {
+                          $("#auto_load").val(0);
+                          send();
+                      }
+                  }
+              }
+          });
+          function send() {
+              if (flag) {
+                  return false;
+              }
+              var user_id  = "{$Think.get.user_id}";
+              var playtype = "{$Think.get.playtype}";
+              $.ajax({
+                  type: 'post',
+                  url: "/Guess/more_quiz.html",
+                  data: {k: p, user_id: user_id,playtype: playtype},
+                  dataType: 'json',
+                  success: function (data) {
+                      if (data.status == 1) {
+                          var list = data.info;
+                          $(".posts li:last").after(list);
+                          if (list != null) {
+                              $("#auto_load").val(1);
+                              if (data.info.length < 10) {
+                                  $("#auto_load").val(0);
+                                  $(".load_gif").hide();
+                                  $("#showLess").show();
+                                  flag = true;
+                              }
+                          }
+                      } else {
+                          $("#auto_load").val(0);
+                          $(".load_gif").hide();
+                          $("#showLess").show();
+                          flag = true;
+                      }
+
+                  }
+              });
+              p++;
+          }
+      });
+    </script>
+</block>

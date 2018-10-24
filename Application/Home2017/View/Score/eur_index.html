@@ -1,0 +1,138 @@
+<extend name="Public:header" />
+<block name="seo">
+    <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}_欧赔赔率_百家欧指赔率_全球体育</title>
+    <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、欧赔指数,欧洲赔率,百家欧赔,欧赔比较,赔率分析"/>
+    <meta name="description" content="全球体育提供百家足球即时赔率、亚盘对比、即时盘口、百家欧赔比较、赔率变化比较、赔率分析、历史相同赔率查询、盘路走势分析"/>
+</block>
+<block name="body">
+
+<body>
+	<!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreLive/scoreLive.css?20171024">
+    <link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreData/data-common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreData/data-index.css">
+<div class="body">
+    <!-- top nav -->
+    <include file="Public:top_score"/>
+    <!-- 主体内容开始 -->
+    <div class="home clearfix">
+	<div class="home clearfix">
+        <!-- 头部比分s -->
+        <include file="Public:odd_header"/>
+        <include file="Public:odd_nav"/>
+        <!-- 头部比分额e -->
+         <!-- 欧洲指数s -->
+         <div class="compare-data">
+         	<table class="table table-bordered" width="100%" cellpadding="0" cellspacing="0">
+         		<thead>
+         			<tr bgcolor="#3f697e" class="text-fff">
+         				<td width="200">指数公司</td>
+                        <td width="100">主胜</td>
+                        <td width="100">平</td>
+                        <td width="100">客胜</td>
+                        <td width="100">主胜率</td>
+                        <td width="100">平率</td>
+                        <td width="100">客胜率</td>
+                        <td width="100">返还率</td>
+                        <td width="150" colspan="3">凯利指数</td>
+                        <td width="100">变化时间</td>
+         			</tr>
+         		</thead>
+                <tbody>
+                	<volist name="list['oo']" id="vo" key="kk">
+                        <tr bgcolor="<if condition=" $kk%2 eq 0 ">#ffffff<else/>#f2f2f7</if>">
+                            <td>{$vo.0}<eq name="vo['img']" value="1">&nbsp;<img style="vertical-align:middle;" src="/Public/Home/score/images/z.gif" width="13" height="13"></eq></td>
+                            <td class="{$vo['home_col']}">{$vo.5}</td>
+                            <td class="{$vo['draw_col']}">{$vo.6}</td>
+                            <td class="{$vo['away_col']}">{$vo.7}</td>
+                            <td>{$vo.home_rate}%</td>
+                            <td>{$vo.pin_rate}%</td>
+                            <td>{$vo.away_rate}%</td>
+                            <td>{$vo.rate}%</td>
+                            <td width="50" class="<if condition="$vo['kelly_1'] egt 1">text-red</if>">{$vo.kelly_1}</tdclass>
+                            <td width="50" class="<if condition="$vo['kelly_2'] egt 1">text-red</if>">{$vo.kelly_2}</td>
+                            <td width="50" class="<if condition="$vo['kelly_3'] egt 1">text-red</if>">{$vo.kelly_3}</td>
+                            <td>{$vo.time_day} {$vo.time_hour}</td>
+                        </tr>
+                    </volist>
+                </tbody>
+         	</table>
+         </div>
+         <!-- 欧洲指数e -->
+        </div>
+    </div>
+</div>
+<div id="small_window">
+    <volist name="list['oohis']" id="iteam">
+        <div num="{$key}" class="eurIndex" style="display:none;position: absolute; z-index: 28; top: 340px; left: 716.5px; width: 294px; border: 8px solid #c6c6c6; border: 8px solid rgba(198,198,198,0.3);">
+            <?php $num = $key?>
+            <table class="table" width="350" bgcolor="#fff" cellpadding="0" cellspacing="1" border="0" style="margin-bottom:0">
+                <tbody>
+                <tr>
+                    <td colspan="5" bgcolor="#01af63" align="center"><font color="white"><b>{$list['oo'][$key][0]} 指数变化</b></font></td>
+                </tr>
+                <tr align="center" bgcolor="#f7f7f7" class="text-666">
+                    <td width="40">主胜</td>
+                    <td width="40">和</td>
+                    <td width="40">客胜</td>
+                    <td width="" colspan="2">变化时间</td>
+                </tr>
+                <volist name="iteam" id="val" key="k">
+                    <tr bgcolor="#ffffff" align="center">
+                        <td class="{$val['home_col']}">{$val.0}</td>
+                        <td class="{$val['draw_col']}">{$val.1}</td>
+                        <td class="{$val['away_col']}">{$val.2}</td>
+                        <td>{$val.time_day}</td>
+                        <td>{$val.time_hour}</td>
+                    </tr>
+                </volist>
+                <tr>
+                    <td colspan="5" bgcolor="#f7f7f7" align="center" class="text-666">初盘参考</td>
+                </tr>
+                <tr align="center" bgcolor="#ffffff">
+                    <td>{$list['oo'][$num][2]}</td>
+                    <td>{$list['oo'][$num][3]}</td>
+                    <td>{$list['oo'][$num][4]}</td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </volist>
+</div>
+    <include file="Public:s_elevator"/>
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+    <script>
+        $(function(){
+            $('.table-bordered tbody tr').each(function (e) {
+                $(this).children('td:nth-child(2),td:nth-child(3),td:nth-child(4)').on('mousemove',function (x) {
+                    $('#small_window div').hide();
+                    var mTop = $(this).offset().top;
+                    var sTop = document.body.scrollTop;
+                    var result = mTop - sTop;//tr距离浏览器可视区域顶部的高度
+                    var butt = document.documentElement.clientHeight - result - 35;//tr距离底部的距离，用于判断
+                    var sm_w = $('#small_window div').eq(e);
+                    var sm_w_h = sm_w.height();
+                    var sm_top = 0;
+                    if(butt < sm_w_h)
+                    {
+                        sm_top = sm_w_h + 40;
+                    }
+                    sm_w.show().css({
+                        "top": x.pageY+20-sm_top,
+                        "left": x.pageX+20
+                    })
+                })
+            })
+            $('.table-bordered tbody tr td').mouseleave(function(){
+                $('#small_window div').hide();
+            });
+        })
+    </script>
+
+</body>
+</html>
+</block>

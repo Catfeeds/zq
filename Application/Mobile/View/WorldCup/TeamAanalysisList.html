@@ -1,0 +1,37 @@
+<extend name="Public/base" />
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/worldcup/competition.css?201806221825">
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file="WorldCup:topHead"/>
+</block>
+<!-- 二级头部 e -->
+<block name="nav"></block>
+<!-- 用户所有明细 -->
+<block name="content">
+    <!-- 主体内容 -->
+    <section class="wrapCon">
+        <include file="WorldCup:navHead"/>
+        <div  class="finals-box finals Ana">
+            <ul class="analyse-box">
+                <volist name="navList" id="item">
+                    <li>
+                        <h2 class="troops">{$key}组</h2>
+
+                        <volist name="item" id="vo">
+                            <a href="{:U('/WorldCupTeam/info/'.$vo['id'])}<eq name="_GET['header']" value="no">?header=no</eq>"  title="{$vo.name}">
+                                <img src="{$vo.icon}"  alt="{$vo.name}"><span class="contry" >{$vo.name}</span><span  class="entry"  ></span>
+                            </a>
+                        </volist>
+                    </li>
+                </volist>
+
+            </ul>
+        </div>
+    </section>
+</block>
+<block name='scripts'>
+    <script src="__JS__/worldcup/competition.js" type="text/javascript"></script>
+</block>

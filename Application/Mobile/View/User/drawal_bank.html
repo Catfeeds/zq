@@ -1,0 +1,228 @@
+<extend name="Public/base" />
+<block name='append'>
+
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/login/login.css">
+
+
+    <style type="text/css">
+        .login-container{ margin-bottom: 0;}
+        .u-input{ display: -webkit-box;}
+        .inputbox .ne_name_input{ -webkit-box-flex:2;}
+        .inputUser,.inputPasswd{ border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5;}
+        .inputbox .s-label{ margin-top: 0; top: 0; height: .9rem; line-height: .9rem; -webkit-box-flex:1; position: relative;width: 1.5rem}
+        .p_nioce{ height: .9rem; padding-top: .2rem; background: #f7f7f7; padding-left: .1rem;}
+        .pro_sele{border:0;background: none}
+        .inputbox .ne_name_input{padding-left:1.8rem}
+    </style>
+</block>
+<!-- 二级头部 s -->
+<block name='header'>
+    <header id="other_header">
+        <a href="{:U('User/index')}"></a>提款绑定
+    </header> 
+    <nav class="bind_nav">
+        <a href="javascript:;" class="on">银行卡</a>
+        <a href="javascript:;">支付宝</a>
+    </nav>
+</block>
+
+
+
+<block name="nav"></block>
+<!-- 二级头部 e -->
+<block name='content'>
+    <!-- 银行卡 s -->
+    <div class="login_panel">
+        <form id="login-form" action="" method="post">
+            <div class="login-container show_panel"  id="show_penel0" style='border-top:0'>
+                <div class="inputbox inputUser" >
+                    <div class="u-input">
+                        <label class="u-label s-label ne_name">开户银行</label>
+                        <select id='js-bank'  class="dlemail ne_name_input pro_sele" style='padding-left:1.2rem'>
+                            <option value ="">--请选择银行--</option>
+                            <volist name='bank' id='v'>
+                            <option value ="{$v.bank_name}">{$v.bank_name}</option>
+                            </volist>
+                        </select>
+                        <!-- <input name="username" class="dlemail ne_name_input" type="text" id="email" placeholder="用户名称" autocomplete="off"> -->
+                    </div>
+                </div>
+                <div class="inputbox inputUser" style='border-top:0'>
+                    <div class="u-input">
+                        <label class="u-label s-label ne_name">开户省份</label>
+                        <select id='js-province'  class="dlemail ne_name_input pro_sele" data-url="{:U('Common/getCity')}"  style='padding-left:1.2rem'>
+                            <option value ="">--请选择省份--</option>
+                            <volist name="province" id="vo">
+                                <option value="{$vo.region_name}" regionid="{$vo.id}">{$vo.region_name}</option>
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+                <div class="inputbox inputUser" id='city_box' style='display:none;' >
+                    <div class="u-input">
+                        <label class="u-label s-label ne_name">开户城市</label>
+                        <select id='js-city' class="dlemail ne_name_input">
+                            <option value ="">--请选择城市--</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="inputbox inputNumber" >
+                    <div class="u-input">
+                        <label class="u-label ne_name">银行卡号</label>
+                        <input class="dlemail ne_name_input re_arrows" type="number" id="bank_card" placeholder=""  autocomplete="off">
+                        <a href="javascript:;" class="ne_close"></a>
+                    </div>
+                </div>
+            </div>
+
+         <!-- 支付宝 s --> 
+         <div class="login-container show_panel"  id="show_penel1" style="display: none;"> 
+                <div class="inputbox inputNumber" >
+                    <div class="u-input">
+                        <label class="u-label ne_name">支付宝账号</label>
+                        <input class="dlemail ne_name_input re_arrows" type="text" id="alipayId" placeholder=""  autocomplete="off" style="padding-left: 1.8rem">
+                        <a href="javascript:;" class="ne_close"></a>
+                    </div>
+                </div>
+            </div> 
+           <!-- 支付宝 e -->
+
+            <p class="fs24 text-999 p_nioce" style="display: none;">提款信息绑定后不能进行修改，请您认真填写您的提款信息。</p>
+            <div class="inputbox inputUser" style="margin-top: .6rem">
+                <div class="u-input">
+                    <label class="u-label ne_name" style="margin-left:.1rem;">真实姓名</label>
+                    <input name="username" class="dlemail ne_name_input" type="text" id="true_name" maxlength='7' minlength='2' autocomplete="off" placeholder='需要与身份证真实姓名一致'>
+                </div>
+            </div>
+            <div class="inputbox inputPasswd" style='border-top:0'>
+                <div class="u-input">
+                    <label class="u-label ne_name" style="margin-left:.1rem;">提款密码</label>
+                    <input name="password" class="ycpwd ne_name_input" type="password" id="password" maxlength='6' minlength='6' placeholder="6位阿拉伯数字">
+                    <input name="password" class="xspwd ne_name_input" type="text" id="text" placeholder="6位阿拉伯数字">
+                    <a href="javascript:;" class="ne_btn no-pw"></a>
+                </div>
+            </div>
+            <div class="loginbox clearfix" style="margin-top:.4rem;padding-bottom: .2rem">
+                <a href='javascript:;' class='selector' id="dologin">确认提交</a>
+            </div>
+            <div class="form-group">
+            <label>
+              <input type="checkbox" checked="" name='agree' id="agree"> 我已阅读并接受<a  href="{:U('User/agreement')}" class="text-green" target="_blank">《全球体育服务协议》</a>
+            </label>
+        </div>
+        <div class="reminder fs22 text-999">
+            <ul>
+                <li>温馨提示：</li>
+                <li>1、为保证提款流程顺利进行，请您认真填写相关信息，提供真实有
+效的账户信息和身份姓名。</li>
+                <li>2、请妥善保存密码，方便提款。 </li>
+                <li>3、提款信息一旦绑定，就不能进行修改，请您谨慎操作。</li> 
+            </ul>
+        </div>
+        </form>
+    </div>
+    <!-- 银行卡 e --> 
+    <div id='tips_bg'></div>
+
+    
+
+</block>
+<block name='footer'></block>
+<block name='scripts'>
+    <script>
+        $(document).on('change', '#js-province', function () {
+            var ch = $(this).children('option:selected');
+            $this = $(this);
+            var url = $this.attr('data-url'),$city = $('#js-city');
+            $city.children("option:gt(0)").remove();
+            if (this.value !== '') {
+                $.post(url, {regionid: ch.attr('regionid')}, function (data) {
+                    if (data.status === 1) {
+                        $.each(data.info, function (i, o) {
+                                $city.append('<option value="' + o.region_name + '">' + o.region_name + '</option>');
+                            });
+                            $('#city_box').css('display','');
+                    }else{
+                        $('#city_box').css('display','none');
+                    }
+                }, 'json');
+            }else{
+                $('#city_box').css('display','none');
+            }
+        }).on('click','#dologin',function(){
+            var type=$('.bind_nav .on').index();
+            var alipay_id=$('#alipayId').val();
+            var bank = $('#js-bank').val();
+            var province = $('#js-province').val();
+            var city = $('#js-city').val();
+            var bank_card = $('#bank_card').val();
+            var true_name = $('#true_name').val();
+            var password = $('#password').val();
+            if( true_name=='' ||password==''){
+                 $('#tips_bg').html('请填写姓名和密码!').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                 return false;
+            }
+            if(type==1){
+                if(alipay_id==''){
+                    $('#tips_bg').html('请填写支付宝账号!').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                    return false;
+                }
+            }else{
+                if(bank=='' ||province=='' || city==''){
+                    $('#tips_bg').html('请填写银行信息!').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                    return false;
+                }
+                var bankcard=/^\d{16,20}$/;
+                if(!bankcard.test(bank_card)){
+                    $('#tips_bg').html('请输入正确的银行卡号码!').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                    return false;
+                }
+            }
+            var reg=/^([\u4e00-\u9fa5]){2,7}$/; 
+            if(!reg.test(true_name)){
+                $('#tips_bg').html('请输入真实的姓名!').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                return false;
+            }
+            if(!/^\d{6}$/.test(password)){
+                $('#tips_bg').html('请输入6位数字的提款密码!').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                return false;
+            }
+            var params={
+                type:type,
+                alipay_id:alipay_id,
+                bank:bank,
+                province:province,
+                city:city,
+                bank_card:bank_card,
+                true_name:true_name,
+                password:password,
+            };
+            $.ajax({
+                    type: "POST",
+                    url: "",
+                    data: params,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == 1) {
+                            location.href=data.url;
+                        } else {
+                            $('#tips_bg').html(data.info).stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                        }
+                    }
+                });
+        });
+
+       //银行卡支付宝切换
+        $(".bind_nav a").each(function(e){
+            $(this).click(function(){ 
+              $(this).addClass("on").siblings().removeClass("on"); 
+              $(".show_panel").hide();
+              $("#show_penel"+ e).show();
+            })
+        })
+        
+    </script>
+
+     
+</block>

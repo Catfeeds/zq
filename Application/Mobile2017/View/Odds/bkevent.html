@@ -1,0 +1,103 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>全球体育网赔率指数</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/zhishu.css">
+</block>
+<block name="header">
+    <header id="header" class="headFixed">
+        <div class="logo"><a href="{:U('Index/index')}"><img src="__IMAGES__/index/logo.png" alt="logo"></a></div>
+        <div class="posnal_list">
+          <a href="{:U('User/index')}" class="myHead"><img src="{$user_auth['head']|default='__IMAGES__/index/headImg.png'}" alt="头像"></a>
+          <a href="{:U('H5/appJump',['sign'=>'lhbd'])}">
+            <img src="__IMAGES__/index/user/app-icon.png" alt="App" class="set">
+          </a>
+          <!-- <a href="{:U('Odds/bkcompany')}" class="m_rule">公司</a> -->
+          <a href="{:U('Odds/bkevent')}" class="m_rule">赛事</a>
+        </div>
+    </header>
+</block>
+<!-- 导航 s-->
+<block name="nav">
+    <include file="Public/nav_bk"/>
+</block>
+<!-- 导航 e-->
+<!-- 内容 s -->
+<block name="content">
+    <section class="zhishu_event contentPt clearfix">
+<!--        <nav class="subnav">
+            <a href="{:U('Odds/bkcompany')}" >公司</a>
+            <a href="{:U('Odds/odds_bk')}" class="on">赛事</a>
+        </nav>-->
+
+        <!--        <nav class="subnav_level clearfix">
+                    <a href="javascript:;">一级</a>
+                    <a href="javascript:;">二级</a>
+                    <a href="javascript:;">三级</a>
+                </nav>-->
+        <nav class="subnav_list clearfix">
+            <volist name='league' id='v' key="k">
+                <a href="javascript:;"  data-key='{$key}' class='<in name="key" value="$Think.cookie.BkEvent">on</in>'>{$v[0]}</a>
+            </volist>
+        </nav>
+    </section>
+    <section class="nav_sele boxs" style="display: block;">
+        <div class="ns_l">隐藏 <span id='shai_hide'></span></div>
+        <div class="ns_r">
+            <a href="javascript:;" id="sele_confirm">确定</a>
+            <a href="{:U('Odds/odds_bk')}">取消</a>
+            <a href="javascript:;" id="sele_all">全选</a>
+            <a href="javascript:;" id="sele_all_no">不全选</a>
+        </div>
+    </section>
+    <!-- 内容 e -->
+
+    <style>
+        /*此页面隐藏底部*/
+        #footer{display: none;}
+    </style>
+
+</block>
+<block name='scripts'>
+    <script>
+        //确定
+        $("#sele_confirm").click(function () {
+            if ($(".subnav_list a.on").length < 1) {
+                alert('至少选择一项!');
+                return false;
+            }
+            var chioce = '';
+            $(".subnav_list a").each(function () {
+                $this = $(this);
+                if ($this.hasClass('on')) {
+                    chioce += $this.data('key') + ',';
+                }
+            });
+            chioce = chioce.substring(0, chioce.length - 1);
+            document.cookie = "BkEvent=" + chioce + ";path=/";
+            location.href = "odds_bk.html";
+        });
+
+        $(document).ready(function () {
+            var le0_len = $(".subnav_list .leagus0").length;
+            var le0_on_len = $(".subnav_list a[class='leagus0 on']").length;
+            if ((le0_len != 0) && (le0_len == le0_on_len)) {
+                $(".subnav_level a").eq(0).addClass("on");
+            }
+
+            var le1_len = $(".subnav_list .leagus1").length;
+            var le1_on_len = $(".subnav_list a[class='leagus1 on']").length;
+            if ((le1_len != 0) && (le1_len == le1_on_len)) {
+                $(".subnav_level a").eq(1).addClass("on");
+            }
+
+            var le2_len = $(".subnav_list .leagus2").length;
+            var le2_on_len = $(".subnav_list a[class='leagus2 on']").length;
+            if ((le2_len != 0) && (le2_len == le2_on_len)) {
+                $(".subnav_level a").eq(2).addClass("on");
+            }
+        })
+    </script>
+</block>

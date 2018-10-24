@@ -1,0 +1,146 @@
+<extend name="Public/Olympic/base" />
+<block name="seo">
+    <title>2016里约奥运会赛程_全球体育手机网</title>
+</block>
+<block name="append">
+<script type="text/javascript" src="__PUBLIC__/Home/backend_js/common/cookie.js"></script>
+</block>
+<!-- 是否只显示中国对球赛 -->
+<block name="content">
+    <section class="schedule_con">
+        <div class="only_option fs26"><a href="javascript:;" class="text-999">中国队赛程</a></div>
+        <div class="sc_con">
+            <div class="sc-container swiper-container-horizontal swiper-container-free-mode">
+                <div class="swiper-wrapper">
+                    <volist name='date_list' id='v' key="k">
+                        <if condition="($k-1)%7 eq 0">
+                            <div class="swiper-slide" >
+                                <nav class="time_list">
+                                    <ul class="clearfix">
+                                        </if>
+                                        <li onclick="getdata(this,{$v.game_date})" data-date="{$v.game_date}" class="js-date <eq name='get_date' value='$v.game_date'> on</eq>">
+                                            <a href="javascript:;">
+                                                <p class="fs24">{$v['week']}</p>
+                                                <p class="fs22">{$v['md']}</p>
+                                            </a>
+                                        </li>
+                                        <if condition="($k%7) eq 0">
+                                    </ul>
+                                </nav>
+                            </div>
+                        </if>
+                    </volist>
+                </div> 
+            </div> 
+                <!-- Add Pagination -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev swiper-button-disabled"></div>
+        </div>        
+    </section>
+    <div class="matchCon">
+        <table class="table" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <td width="25%">时间</td>
+                    <td width="20%">类型</td>
+                    <td width="35%">项目</td>
+                    <td width="20%">赛事</td>
+                </tr>
+            </thead>
+            <tbody id="js-tbody">
+            <volist name='list' id='v'>
+                <tr>
+                    <td class="fs24">{$v.game_time}</td>
+                    <td class="fs24">{$v.game_type}</td>
+                    <td class="fs24">{$v.game_name}</td>
+                    <td class="fs24">{$v.run_name}</td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+</section>
+<!-- 公共js -->
+<script type="text/javascript" src="__JS__/Olympic/common.js"></script>
+<!-- Swiper JS -->
+<script src="__JS__/euro/swiper.js"></script>  
+<script>
+    var DOMAIN = "__DOMAIN__";
+    $(function () {
+        if(Cookie.getCookie('m_china')){
+                $('.only_option a').addClass("on");
+            }
+            $('.only_option a').click(function(){
+               if($(this).hasClass("on")){
+                   Cookie.delCookie('m_china');
+               }else{
+                   Cookie.setCookie('m_china','1');
+               }
+               getdata($('.js-date.on'),$('.js-date.on').data('date'));
+            });
+            
+        $('.only_option a').click(function (e) {
+            $(this).toggleClass('on');
+        });
+        //设置时间列宽高
+        var timeList_width = $('.time_list ul li').width();//'+timeList_width +'
+        $('.time_list ul li a').css('height', '' + timeList_width + 'px');
+    });
+    function getdata($this,date){
+        
+            $.ajax({
+                type: 'post',
+                url: "",
+                data: {date:date},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status == 1) {
+                        var list = data.info;
+                        $("#js-tbody").html('');
+                        if (list != null) {
+                            var html='';
+                            $.each(list, function (k, v) {
+                                html+='<tr><td class="fs24">'+v.game_time+'</td><td class="fs24">'+v.game_type+'</td><td class="fs24">'+v.game_name+'</td><td class="fs24">'+v.run_name+'</td></tr>';
+                            });
+                            $("#js-tbody").html(html);
+                        }
+                        $('.js-date').removeClass('on');
+                        $($this).addClass('on');
+                    }else{
+                        alert(data.info);
+                    }
+                }
+            });
+    }
+    //金牌快讯
+        var swiper2 = new Swiper('.swiper-container-teacher', {
+            direction: 'vertical',
+            autoplay: 2500
+        });
+    //banner 切换
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 10000,
+        autoplayDisableOnInteraction: false
+    });
+
+    function loadSwiper() {
+        var swiper1 = new Swiper('.sc-container', {
+            slidesPerView: 1,
+            paginationClickable: true,
+            freeMode: true,
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev'
+        });
+    }
+    window.onload = loadSwiper();
+</script>
+</block>
+
+
+
+
+

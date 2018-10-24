@@ -1,0 +1,341 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/special/bk_theme.css">
+</block>
+<block name="content">
+    <!-- dj-theme -->
+    <div class="themeBox nbaTheme">
+    	<div class="themeNavBox">
+            <div class="clearfix themeNavIn">
+                <div class="pull-left themeLogo"><a href="{:U('/')}" title="全球体育"><img src="__IMAGES__/special/theme-logo.png" alt="全球体育logo" width="142" height="35"></a></div> 
+                <div class="pull-left themeNav">
+                    <ul class="clearfix">
+                        <volist name="nav" id="vo">
+                            <li class="pull-left"><a target="_blank" title="{$vo.name}" href="{$vo.url}"><span>{$vo.name} </span></a></li>
+                        </volist>
+                    </ul>                                
+                </div>
+            </div>
+        </div>   
+        <!-- main -->
+        <div class="main">
+            <div class="position">
+            	当前位置：<span class="now"><a href="{:U('/')}" title="全球体育首页">全球体育首页</a></span> &gt; NBA
+            </div>
+            <div class="themeFocus clearfix">
+            	<div class="pull-left themeNews">
+                    <volist name="shouxie" id="vo">
+                        <h2><a target="_blank" href="{$vo.0.href}" title="{$vo.0.title}">{$vo.0.title}</a></h2>
+                        <ul class="dlNews">
+                            <volist name="vo.newList" id="vo2">
+                                <li><a target="_blank" href="{$vo2.href}" title="{$vo2.title}">{$vo2.title}</a></li>
+                            </volist>
+                        </ul>
+                    </volist>
+                </div>
+            	<div class="pull-left themeMedia">
+                	<!-- banner -->
+                	<div id="myCarousel" class="carousel slide banner" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <volist name="banner" id="vo">
+                                <li data-target="#myCarousel" data-slide-to="{$key}" <if condition="$key eq 0">class="active"</if>></li>
+                            </volist>
+                        </ol>
+                        <div class="carousel-inner">
+                        <volist name="banner" id="vo">
+                            <div class="<if condition="$key eq 0">active</if> item">
+                                <a href="{$vo.url}" title="{$vo.title}" target="_blank">
+                                    <img src="{$vo.img}" alt="{$vo.title}">
+                                    <div class="fbanner-title">{$vo.title}</div>
+                                </a>
+                            </div>
+                        </volist>
+                        </div>
+                        <a class="carousel-control left" href="#myCarousel" data-slide="prev" style="display: none; opacity: 0.3;"><span></span></a>
+                        <a class="carousel-control right" href="#myCarousel" data-slide="next" style="display: none; opacity: 0.3;"><span></span></a>
+                    </div>
+                    <!-- banner -->
+                    <!-- live media-->
+                    <div class="liveList">
+                    	<div class="clearfix listTitle"><h2 class="pull-left videoTit nbaVideoTit">热点视频</h2><a href="{:U('/nba@video')}" class="text-666 pull-right moreTit">更多<span class="rightIcon"><i class="glyphicon glyphicon-menu-right"></i></span></a></div>
+                        <ul>
+                            <volist name="highlights" id="vo">
+                                <li class="clearfix">
+                                    <a target="_blank" href="{$vo.href}" title="{$vo.title}" class="pull-left liveListImg"><img src="{$vo.img}" width="140" height="96" alt="{$vo.title}"><i class="coverMask"></i><i class="playBtn"></i></a>
+                                    <div class="pull-left liveListArt">
+                                        <article><a href="{$vo.href}"><span class="video-icon"></span>{$vo.title}</a></article>
+                                        <div class="clearfix author">
+                                            <a target="_blank" href="{:U('/expuser/'.$vo['user_id'].'')}" title="{$vo.nick_name}" class="pull-left text-999 leftUser"><img class="img-circle" src="{$vo.head}" alt="{$vo.nick_name}" width="28" height="28" alt="{$vo.nick_name}">{$vo.nick_name}</a>
+                                            <span class="pull-right text-999 rightEye">{$vo.click_num}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <!-- live media-->
+                </div>
+                <div class="pull-right mainRight">
+                    <div class="poiTable">
+                        <div class="poiTitle">
+                        	<div class="clearfix bsTitle">
+                            	<div class="pull-left nav clearfix">
+                                	<a href="javascript:;" title="东部联盟" class="pull-left active" data-id='dongbu'>东部联盟</a>
+                                    <span class="text-999 pull-left">|</span>
+                                    <a href="javascript:;" title="西部联盟" class="pull-right" data-id='xibu'>西部联盟</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="poiTableCon">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th width="50">排名</th>
+                                        <th width="100">球队</th>
+                                        <th width="78">胜/负</th>
+                                        <th width="50">胜率</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dongbu">
+                                    <volist name="pointRank" id="vo">
+                                        <tr <if condition="$vo.rank eq 1">bgcolor="#fafafa"</if>>
+                                            <td><span class="noRank <elt name='vo.rank' value='3'>nbaredRank<else/>grayRank</elt>">{$vo.rank}</span></td>
+                                            <td title="{$vo.team_name}">
+                                                <if condition="$vo.rank eq 1"><div class="matchLogo"><img src="{$vo.team_logo}" width="48" height="48" alt="{$vo.team_name}"></div></if>
+                                                <p class="playerName text-hidden">{$vo.team_name}</p>
+                                            </td>
+                                            <td>{$vo.win}/{$vo.lose}</td>
+                                            <td class="strong">{$vo.win_ratio}%</td>
+                                        </tr>
+                                    </volist>
+                                </tbody>
+                                <tbody id="xibu" style="display: none">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a target="_blank" href="{$adver1.url}" title="{$adver1.title}" class="ad" style=" display: block; margin-bottom: 24px;"><img class="lazy" data-original="{$adver1.img}" alt="{$adver1.title}" width="1024" height="110"></a>
+            <div class="matListCon clearfix">
+            	<!-- 资讯模版 -->
+                <include file="Special:newsList" />
+
+            	<div class="pull-right mainRight">
+                	<div class="shoTable">
+                        <div class="shoTabBox">
+                            <div class="clearfix bsTitle">
+                            	<div class="pull-left nav">
+                                	<a href="javascript:;" class="pull-left active" data-id="defen">得分榜</a>
+                                    <span class="pull-left text-999">|</span>
+                                    <a href="javascript:;" class="pull-left" data-id="zhugong">助攻榜</a>
+                                    <span class="pull-left text-999">|</span>
+                                    <a href="javascript:;" class="pull-left" data-id="lanban">篮板榜</a>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="shoTableCon">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th width="50">排名</th>
+                                        <th width="90">球员 </th>
+                                        <th width="88">球队</th>
+                                        <th width="50" id="typeText">进球</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="defen">
+                                <volist name="archerRank" id="vo">
+                                    <tr <if condition="$vo.rank eq 1">bgcolor="#fafafa"</if>>
+                                        <td><span class="noRank <elt name='vo.rank' value='3'>nbaredRank<else/>nbablueRank</elt>">{$vo.rank}</span></td>
+                                        <td title="{$vo.player_name}">
+                                        <if condition="$vo.rank eq 1">
+                                            <div class="matchLogo"><img class="lazy" data-original="{$vo.player_logo}" width="48" height="48"></div></if>
+                                            <p class="playerName text-hidden">
+                                            {$vo.player_name}
+                                            </p>
+                                        </td>
+                                        <td title="{$vo.team_name}">
+                                            <if condition="$vo.rank eq 1"><div class="playerLogo"><img class="lazy" data-original="{$vo.team_logo}" width="48" height="48"></div></if>
+                                            <p class="teamName text-hidden">{$vo.team_name}</p>
+                                        </td>
+                                        <td class="strong">{$vo.val}</td>
+                                    </tr>
+                                </volist>
+                                </tbody>
+                                <tbody id="zhugong" style="display: none;"></tbody>
+                                <tbody id="lanban" style="display: none;"></tbody>
+                            </table>
+                        </div>
+                    </div>
+					<div class="xqWeibo">
+                    	 <div class="clearfix listTitle"><h2 class="pull-left strong xqTit nbaFxTit">球星微博</h2></div>
+                         <ul class="xqUl clearfix">
+                             <volist name="qiuxing" id="vo">
+                                <li class="pull-left"><a target="_blank" href="{$vo.url}" title="{$vo.title}"><div class="face"><img class="lazy" data-original="{$vo.img}" width="96" height="67" alt="{$vo.title}"></div><p class="text-hidden">{$vo.title}</p></a></li>
+                            </volist>
+                         </ul>
+                    </div>
+                    <notempty name="dujia">
+                        <div class="fxInfor">
+                            <div class="clearfix listTitle"><div class="pull-left fxTit nbaFxTit"><sapn class="strong">竞彩分析</sapn></div><a href="{:U('/dujia@sporttery')}?filter=192" target="_blank" class="text-666 pull-right moreTit">更多<span class="rightIcon"><i class="glyphicon glyphicon-menu-right"></i></span></a></div>
+                            <ul class="fxUl">
+                            <volist name="dujia" id="vo" offset="0" length='4'>
+                                <li class="listIma">
+                                    <a target="_blank" href="{$vo.href}" title="{$vo.title}" class="clearfix">
+                                        <div class="pull-left leftIma"><img src="{$vo.img}" width="96" height="67" alt="{$vo.title}"></div>
+                                        <div class="pull-left rigthText">
+                                            <p>{$vo.title}</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </volist>
+                            </ul>
+                            <ul class="fxUl">
+                            <volist name="dujia" id="vo" offset="4">
+                                <li class="listText"><a target="_blank" href="{$vo.href}" title="{$vo.title}" class="text-hidden">{$vo.title}</a></li>
+                            </volist>
+                            </ul>
+                        </div>
+                    </notempty>
+                </div>
+            </div>
+        </div>
+        <!-- main -->
+    </div>
+    <!-- dj-theme -->
+</block>
+<block name="friendBox">
+<notempty name="linkArr">
+<div class="friendBox">
+    <div class="friBoxMain">
+        <h4><span>友情链接</span></h4>
+        <p class="friLinkLi">
+            <foreach name="linkArr" item="v" key="k">
+                <a href="{$v['url']}" target="_blank">{$v['name']}</a>
+            </foreach>
+        </p>
+    </div>
+</div>
+</notempty>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/special/fb_theme.js"></script>
+    <script>
+        //得分榜获取
+        $('.shoTabBox .nav a').on('click',function(){
+            $(this).addClass('active').siblings().removeClass('active');
+            var type = $(this).data('id');
+            switch(type){
+                case 'defen': 
+                    var typeStr = '得分';
+                break;
+                case 'zhugong':
+                    var typeStr = '助攻';
+                    var type_id = 4;
+                break;
+                case 'lanban':
+                    var typeStr = '篮板';
+                    var type_id = 5;
+                break;
+            }
+            $('#typeText').text(typeStr);
+            $('.shoTableCon tbody:not(#'+type+')').hide();
+            $('.shoTableCon #'+type).show();
+            if(type == 'defen') return false;
+            if(type == 'zhugong' && $('#zhugong').children().length > 0){
+                return false;
+            }
+            if(type == 'lanban' && $('#lanban').children().length > 0){
+                return false;
+            }
+
+            $.ajax({
+                type: 'get',
+                url : '/getPointRank.html',
+                data: {unionId:1,type:type_id},
+                dataType:'json',
+                beforeSend:function(){
+                    $("#"+type+"").html("<tr style='text-align: center;'><td colspan='4'><img src='"+staticDomain+"/Public/Images/load.gif'> 数据加载中，请稍候...</td><tr>");
+                },
+                success:function(data){
+                    if(data.status == 1){
+                        if(data.info){
+                            var html = '';
+                            $.each(data.info,function(k,vo){
+                                var bgcolor = vo.rank == 1 ? 'bgcolor="#fafafa"' : '';
+                                var color = vo.rank <= 3 ? 'nbaredRank' : 'nbablueRank';
+                                var headStr = vo.rank == 1 ? '<div class="matchLogo"><img src="'+vo.player_logo+'" width="48" height="48"></div>' : '';
+                                var headStr2 = (vo.rank == 2 || vo.rank == 3) ? '<img src="'+vo.player_logo+'" width="24" height="24" class="img-circle" alt="'+vo.player_name+'">' : '';
+                                var teamStr = vo.rank == 1 ? '<div class="playerLogo"><img src="'+vo.team_logo+'" width="48" height="48"></div>' : '';
+                                html += '<tr '+bgcolor+'>'+
+                                        '<td><span class="noRank '+color+'">'+vo.rank+'</span></td>'+
+                                        '<td>'+headStr+
+                                            '<p class="playerName text-hidden">'+headStr2+vo.player_name+'</p>'+
+                                        '</td>'+
+                                        '<td>'+teamStr+
+                                            '<p class="teamName text-hidden">'+vo.team_name+'</p>'+
+                                        '</td>'+
+                                        '<td class="strong">'+vo.val+'</td>'+
+                                        '</tr>';
+                            });
+                            $("#"+type+"").html(html);
+                        }else{
+                            $("#"+type+"").html("<li style='text-align: center;' class='listInfor'> 暂时没有数据<li>");
+
+                        }
+                    }
+                },
+                complete:function(){
+                   $("#"+type+" .load").remove();
+                },
+            })
+        })
+        //积分榜获取
+        $('.poiTitle .nav a').on('click',function(){
+            $(this).addClass('active').siblings().removeClass('active');
+            var type = $(this).data('id');
+            $('.poiTableCon tbody:not(#'+type+')').hide();
+            $('.poiTableCon #'+type).show();
+
+            if(type == 'xibu' && $('#xibu').children().length == 0){
+                $.ajax({
+                    type: 'get',
+                    url : '/getPointRank.html',
+                    data: {unionId:1,type:2},
+                    dataType:'json',
+                    beforeSend:function(){
+                        $("#xibu").html("<tr style='text-align: center;'><td colspan='4'><img src='"+staticDomain+"/Public/Images/load.gif'> 数据加载中，请稍候...</td><tr>");
+                    },
+                    success:function(data){
+                        if(data.status == 1){
+                            if(data.info){
+                                var html = '';
+                                $.each(data.info,function(k,vo){
+                                    var bgcolor = vo.rank == 1 ? 'bgcolor="#fafafa"' : '';
+                                    var color = vo.rank <= 3 ? 'nbaredRank' : 'grayRank';
+                                    var imgStr = vo.rank == 1 ? '<div class="matchLogo"><img src="'+vo.team_logo+'" width="48" height="48"></div>' : '';
+                                    html += '<tr '+bgcolor+'>'+
+                                            '<td><span class="noRank '+color+'">'+vo.rank+'</span></td>'+
+                                            '<td>'+imgStr+
+                                            '<p class="playerName text-hidden">'+vo.team_name+'</p>'+
+                                            '</td>'+
+                                            '<td>'+vo.win+'/'+vo.lose+'</td>'+
+                                            '<td class="strong">'+vo.win_ratio+'%</td>'+
+                                            '</tr>';
+                                });
+                                $("#xibu").html(html);
+                            }else{
+                                $("#xibu").html("<li style='text-align: center;' class='listInfor'> 暂时没有数据<li>");
+
+                            }
+                        }
+                    },
+                    complete:function(){
+                       $("#xibu .load").remove();
+                    },
+                })
+            }
+        })
+    </script>
+</block>

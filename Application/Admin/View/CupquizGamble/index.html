@@ -1,0 +1,116 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/index" method="post">
+        <input type="hidden" name="startTime" value="{$_REQUEST.startTime}">
+        <input type="hidden" name="endTime" value="{$_REQUEST.endTime}">
+        <input type="hidden" name="act_name" value="{$_REQUEST.act_name}">
+        <input type="hidden" name="nickname" value="{$_REQUEST.nickname}">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label>活动名：</label>
+                    <input type="text" name="act_name" value="{$_REQUEST.act_name}">
+                </li>
+                <li>
+                    <label>发起者昵称：</label>
+                    <input type="text" name="nickname" value="{$_REQUEST.nickname}">
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <!--<li>-->
+                <!--<a class="delete" href="__URL__/settle" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="你确定要执行这些结算吗?">-->
+                    <!--<span>结算</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a title="确实要禁用用户的发起活动吗?" target="selectedTodo" target="dialog" rel="id[]" href="__URL__/forbidAll" class="delete">-->
+                    <!--<span>批量禁用</span>-->
+                <!--</a>-->
+            <!--</li>-->
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="3%"><input type="checkbox" group="id[]" class="checkboxCtrl">ID</th>
+            <th width="12%">所属活动</th>
+            <th width="5%">用户昵称</th>
+            <th width="7%">赛事名称</th>
+            <th width="5%">主队名</th>
+            <th width="6%">客队名称</th>
+            <th width="6%">比赛日期</th>
+            <th width="12%">玩法问题</th>
+            <th width="5%">用户选择</th>
+            <th width="5%">正确答案</th>
+            <th width="3%">结算结果</th>
+            <th width="7%">结算时间</th>
+            <!--<th width="4%">状态</th>-->
+            <!--<th width="5%">操作</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name="list">
+            <volist id="vo" name="list">
+                <tr target="sid_record" rel="{$vo['id']}" >
+                    <td {$vo['bg']}><input name="id[]" value="{$vo['id']}" type="checkbox">{$vo['id']}</td>
+                    <td>{$vo['title']}（ID:{$vo['act_id']}）</td>
+                    <td>{$vo['nick_name']}</td>
+                    <td>{$vo['union_name']} （ID:{$vo['game_id']}）</td>
+                    <td>{$vo['home_team_name']}</td>
+                    <td>{$vo['away_team_name']}</td>
+                    <td><if condition="$vo.gtime neq ''">{$vo['gtime']|date="Y-m-d H:i:s",###}<else/>-</if></td>
+                    <td>{$vo['play_type_name']}</td>
+                    <td>{$vo['chose_side']}</td>
+                    <td><if condition="$vo.answer neq ''">{$vo['answer']}<else/>-</if></td>
+                    <td>
+                        <switch name="vo.result">
+                            <case value="0"><div style="color:red;">-</div></case>
+                            <case value="1"><div style="color:darkgreen;">胜</div></case>
+                            <case value="-1"><div style="color:red;">负</div></case>
+                        </switch>
+                    </td>
+                    <td><if condition="$vo.result_time neq ''">{$vo['result_time']|date="Y-m-d H:i:s",###}<else/>-</if></td>
+                    <!--<td>{$vo.status|getStatus}</td>-->
+                    <!--<td>-->
+                        <!--<if condition="in_array($_SESSION['authId'], C('RBAC_LOGIN_USER'))">-->
+                            <!--<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" height="600" width="960"title="{$vo.name}编辑" rel="editPage">编辑</a>-->
+                        <!--</if>-->
+                    <!--</td>-->
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+<script>
+    //隐藏和显示对应题目的选项
+    function show(id,obj){
+        var show = $(obj).attr("show");
+        if(show == 0){
+            $(".action-"+id).show();
+        }else{
+            $(".action-"+id).hide();
+        }
+        //记录是否已展开
+        var new_show = show == 0 ? 1 : 0;
+        $(obj).attr("show",new_show);
+    }
+
+</script>
+
+

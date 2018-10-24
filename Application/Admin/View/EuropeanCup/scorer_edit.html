@@ -1,0 +1,42 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/euro_save/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="{$vo.id}" />
+		<input type="hidden" name="type" value="1" />
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>球员名称：</label>
+				<input type="text" class="required" maxlength="30" name="player" size="60" value="{$vo.player}">
+			</div>
+
+			<div class="unit">
+				<label>头像地址：</label>
+				<input type="text" class="required" maxlength="255" name="img_url" size="60" value="{$vo.img_url}">
+			</div>
+
+			<div class="unit">
+				<label>国家名称：</label>
+				<input type="text" class="required" maxlength="60" name="country_name" size="60" value="{$vo.country_name}">
+			</div>
+
+			<div class="unit">
+				<label>进球数：</label>
+				<input type="text" class="required digit number" maxlength="10" name="score" size="60" value="{$vo.score}">
+			</div>
+
+			<div class="unit">
+				<label>点球数：</label>
+				<input type="text" class="required digit number" maxlength="10" name="penalty" size="60" value="{$vo.penalty}">
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

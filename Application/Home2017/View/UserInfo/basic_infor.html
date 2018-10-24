@@ -1,0 +1,170 @@
+<include file="Public:header"/>
+
+<body>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/personal_center/basic_infor.css">
+    
+    <!-- 头部开始 -->
+    <include file="Public:top"/>
+    <!-- 头部结束 -->
+	<div class="body">
+        
+        <!-- 主体内容开始 -->
+        <div class="main">
+        	<div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+                	<!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                    	<div class="right-main">
+                        	<div class="data-graph basic-infor">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="javascript:void(0);" <if condition="$_GET['face'] neq 2">class="current"</if>>基本信息</a></li>
+                                    <li role="presentation"><a href="javascript:void(0);" id="saveFace" <if condition="$_GET['face'] eq 2">class="current"</if>>头像设置</a></li>
+                                </ul>
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div id="basic" class="line-graph" <if condition="$_GET['face'] eq 2">style="display: none;"<else/>style="display: block;"</if>>
+                                    <form>
+                                        <div class="clearfix"> 
+                                            <div class="pull-left basic-list">
+                                            	<ul style="margin-bottom:0;">
+
+                                            		<li>
+                                                        用户昵称：<em>{$UserData.nick_name}</em>
+                                                    </li>
+                                                    <li>注册时间：<em>{$UserData.reg_time|date="Y-m-d H:i",###}</em><span class="time-m"></span></li>
+                                            	</ul>
+                                            </div>
+                                            <div class="pull-right face-img">
+                                            	<div class="face"><img src="{$UserData.UserFace}" width="93" height="93"></div>
+                                                <div class="upload-con">
+                                                	<a href="javascript:;" onclick="$('#saveFace').click();">
+                                                      <label style="font-weight: normal;">编辑头像</label>
+                                                    </a>
+                                                </div>
+                                          	</div>
+                                        </div>
+                                        <!-- Tab panes -->
+                                        <div class="profile-con">
+                                        	<div>个人简介：<em>（可填写20个字符）</em></div>
+                                            <div class="profile"><textarea class="form-control grtextarea" maxlength="20" name="descript">{$UserData.descript}</textarea></div>
+                                            <div class="warning text-red" style="margin-top:10px;">（违反国家法律，涉及色情、政治、造谣、敏感等内容，或含有联系方式和外链，一经发现封号处理）</div>
+                                            <button type="submit" class="btn btn-blue preser">保存</button>
+                                        </div>
+                                    </form>
+                                    </div>
+                                    <div id="basic" class="line-graph" <if condition="$_GET['face'] eq 2">style="display: block;"<else/>style="display: none;"</if>>
+                                       <!--引入本屏所需css-->
+                                        <link rel="stylesheet" href="__PUBLIC__/Plugs/cropbox/upface.css">
+                                        <!--引入本屏js-->
+                                        <script src="__PUBLIC__/Plugs/cropbox/cropbox.js"></script>
+                                        <script src="__PUBLIC__/Plugs/cropbox/upface.js"></script>
+                                        <input name="imgData" id="imgData" type="hidden" value="" />
+                                        <input id="myFaceUrl" value="{$UserData.UserFace}" type="hidden"/>
+                                        <div class="container">
+                                            <div class="action"> 
+                                                <div class="new-contentarea tc">
+                                                    <a href="javascript:void(0)" class="upload-img">
+                                                        <label for="upload-file">选择或重传头像</label>
+                                                    </a>
+                                                    <input type="file" class="" name="upload-file" id="upload-file" />
+                                                </div>
+                                                <input type="button" id="btnCrop"  class="Btnsty_peyton" value="裁切" style="width:50px;padding:0px;"/>
+                                                <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  style="width:50px;padding:0px;font-size: 14px;font-weight:bold;outline:none;"/>
+                                                <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" style="width:50px;padding:0px;font-size: 14px;font-weight:bold;outline:none;"/>
+                                                <div class="tips" style="color: #eb0000;">温馨提示：预览框内支持鼠标滑轮缩放，点击裁切即可。</div>
+                                            </div>
+                                            <div class="imageBox" style="width:558px;">
+                                                <div class="thumbBox"></div>
+                                                <div class="spinner" style="display: none">Loading...</div>
+                                            </div>
+                                            <div class="cropped" style="right:-415px;"></div>
+                                        </div>
+                                        
+                                        <hr/>
+                                        <input type="button" value="保存" class="btn btn-blue" style="margin-left:1em;padding:6px 12px;width:150px;" onclick="checkUpFace(this);" />
+                                    </div>        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    
+    </div>
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+</body> 
+</html>
+<!--引入本页js-->
+<script>
+    $(function(){
+        var face = "{$Think.get.face}";
+        if(face){
+            $('#saveFace').click();
+        }
+        $("form").validate({
+            submitHandler:function(form){
+                var form = $(form);
+                var data = form.serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "/UserInfo/basic_infor.html",
+                    data: data,
+                    dataType:'json',
+                    beforeSend:function(){
+                        $(".preser").attr('disabled','disabled').text("正在提交...");
+                    },
+                    success: function(data){
+                      if(data.status){
+                        _alert("提示",data.info,"window.location.reload()");
+                      }else{
+                        _alert("提示",data.info);
+                      }
+                    },
+                    complete:function(){
+                        $(".preser").removeAttr('disabled').text("确定");
+                    },
+                });
+            }
+        })
+        $('.data-graph .nav-tabs>li>a').click(function(e) {
+            $(this).parent().siblings().children("a").removeClass('current');
+            $(this).addClass('current');
+            var num = $(this).parent().index();
+            $('.tab-content').children().eq(num).stop().fadeIn().siblings().hide();
+        });
+    })
+    //头像上传
+    function checkUpFace(obj){
+        var imgData = $("#imgData").val();
+        $.ajax({
+            type: "POST",
+            url: "/UserInfo/uploadFace.html",
+            data: {'imgData':imgData},
+            dataType: "json",
+            beforeSend:function(){
+                $(obj).attr('disabled','disabled').val("正在上传...");
+            },
+            success: function(data){
+                if(data.status){
+                    _alert('提示', data.info,"window.location.reload()");
+                }else{
+                    _alert('提示', data.info);
+                }
+            },
+            complete:function(){
+                $(obj).removeAttr('disabled').val("确定");
+            },
+        });
+    }
+</script>

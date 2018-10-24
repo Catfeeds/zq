@@ -1,0 +1,28 @@
+<div class="pageContent">
+
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="id" value="{$vo.id}">
+			<div class="unit">
+				<label>ip：</label>
+				<input type="text" class="required" maxlength="20" name="ip" value="{$vo.ip}">
+			</div>
+			
+			<div class="unit">
+				<label>备 注：</label>
+				<textarea class=""  name="remark" maxlength="255" rows="5" cols="57">{$vo.remark}</textarea>
+			</div>
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+
+

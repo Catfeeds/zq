@@ -1,0 +1,244 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input type="hidden" name="gameType" value="{$_REQUEST.gameType}"/>
+	<input type="hidden" name="isVideo" value="{$_REQUEST.isVideo}"/>
+	<input type="hidden" name="gtime" value="{$_REQUEST.gtime}"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li style="width: 220px;">
+				<label>比赛时间：</label>
+				<input type="text" readonly="true" datefmt="yyyyMMdd" class="date textInput readonly valid" value="{$_REQUEST.game_date}" name="game_date" size="11"><a class="inputDateButton" href="javascript:;">选择</a>
+			</li>
+			<li>
+				<label>赛事名称：</label>
+				<input type="text" value="{$_REQUEST.union_name}" placeholder="赛事名称" name="union_name">
+			</li>
+			<li>
+				<label>主队名称：</label>
+				<input type="text" value="{$_REQUEST.home_team_name}" placeholder="主队名称" name="home_team_name">
+			</li>
+			<li>
+				<label>客队名称：</label>
+				<input type="text" value="{$_REQUEST.away_team_name}" placeholder="客队名称" name="away_team_name">
+			</li>
+			<li>
+				<label>赛程ID：</label>
+				<input type="text" name="game_id" value="{$_REQUEST.game_id}">
+			</li>
+			<li style="width: 220px;">
+				<label>比赛状态：</label>
+	        	<select name="game_state" class="combox" onchange="$(form).submit()">
+	        		<option value="" selected>全部</option>
+	        		<option value="0" <if condition="$_REQUEST.game_state eq '0'">selected</if> >未开</option>
+	        		<option value="1" <if condition="$_REQUEST.game_state eq '1'">selected</if> >第一节(上半场)</option>
+	        		<option value="2" <if condition="$_REQUEST.game_state eq '2'">selected</if> >第二节</option>
+	        		<option value="50" <if condition="$_REQUEST.game_state eq '50'">selected</if> >中场</option>
+	        		<option value="3" <if condition="$_REQUEST.game_state eq '3'">selected</if> >第三节(下半场)</option>
+	        		<option value="4" <if condition="$_REQUEST.game_state eq '4'">selected</if> >第四节</option>
+	        		<option value="5" <if condition="$_REQUEST.game_state eq '5'">selected</if> >1'OT</option>
+	        		<option value="6" <if condition="$_REQUEST.game_state eq '6'">selected</if> >2'OT</option>
+	        		<option value="7" <if condition="$_REQUEST.game_state eq '7'">selected</if> >3'OT</option>
+	        		<option value="-1" <if condition="$_REQUEST.game_state eq '-1'">selected</if> >完场</option>
+	        		<option value="-2" <if condition="$_REQUEST.game_state eq '-2'">selected</if> >待定</option>
+	        		<option value="-12" <if condition="$_REQUEST.game_state eq '-12'">selected</if> >腰斩</option>
+	        		<option value="-13" <if condition="$_REQUEST.game_state eq '-13'">selected</if> >中断</option>
+	        		<option value="-14" <if condition="$_REQUEST.game_state eq '-14'">selected</if> >推迟</option>
+	        		<option value="-10" <if condition="$_REQUEST.game_state eq '-10'">selected</if> >取消</option>
+	        	</select>
+			</li>
+			<if condition="$_REQUEST.isVideo eq ''">
+			<li>
+				<label>是否直播：</label>
+	        	<select name="is_video" class="combox" onchange="$(form).submit()">
+	        		<option value="" selected>全部</option>
+	        		<option value="0" <if condition="$_REQUEST.is_video eq '0'">selected</if> >否</option>
+	        		<option value="1" <if condition="$_REQUEST.is_video eq '1'">selected</if> >是</option>
+	        	</select>
+			</li>
+			</if>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></li>
+				<li>
+					<a class="button" title="查询框" mask="true" target="dialog" href="__URL__/pageSearch.html?AgainstMatch=1&actionName=__ACTION__&{:http_build_query($_REQUEST)}&sign=1" height="420"><span>高级检索</span></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+			<a class="edit" href="__URL__/saveisVideoAll/gameType/2" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确定都设为直播吗?">
+			<span>批量设为直播</span>
+			</a>
+			</li>
+			<li class="line"></li>
+			<li>
+			<a class="edit" href="__URL__/saveisRecommendAll/gameType/2" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确定都设为直播吗?">
+			<span>批量设为直播推荐</span>
+			</a>
+			</li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th style="cursor: default;">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th orderField="game_id" <if condition="$_REQUEST._order eq 'game_id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>赛程ID</th>
+			<th>赛事名称</th>
+			<th>联盟级别 / 联盟ID</th>
+			<if condition="$_REQUEST.isVideo eq ''">
+			<th>竞猜日期</th>
+			</if>
+			<th orderField="gtime" <if condition="$_REQUEST._order eq 'gtime'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>比赛时间</th>
+			<th>比赛状态</th>
+			<th>主队</th>
+			<th>全场比分</th>
+			<th>小节比分</th>
+			<th>客队</th>
+			<if condition="$_REQUEST.isVideo eq ''">
+				<th>全场让分</th>
+				<th>全场大小</th>
+				<th>半场让分</th>
+				<th>半场大小</th>
+				<th>是否滚球</th>
+				<th>不限联盟级别</th>
+				<!-- <th width="30">前台显示</th> -->
+				<th>是否竞猜</th>
+				<th>赛程状态</th>
+				<th>操作</th>
+			<else/>
+				<th>视频源</th>
+				<th>视频源设置</th>
+				<th>添加视频集锦</th>
+				<th>直播推荐</th>
+			</if>
+			<th>是否直播</th>
+			<th>其他设置</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}" <if condition="$vo['background'] eq '1'">style="background: #ff9121;"</if> >
+					<td>
+						<div>
+							<input type="checkbox" value="{$vo.id}" name="id">
+						</div>
+					</td>
+					<td>{$vo['id']}</td>
+					<td>{$vo['game_id']}</td>
+					<td>{$vo['union_name']}</td>
+					<td>{$vo['is_sub']|default="--"}（{$vo['union_id']|default="--"}）</td>
+					<if condition="$_REQUEST.isVideo eq ''">
+					<td>{$vo['show_date']}</td>
+					</if>
+					<td>{$vo['game_date']} {$vo['game_time']}</td>
+					<td>
+					<a href="{:U('__ADMIN__/Against/saveState',['game_id'=>$vo['game_id'],'gameType'=>'2'])}" height="150" width="250" target="dialog" title="修改比赛状态" mask="true" warn="请选择赛事">
+						<if condition="$vo.game_state neq '-5'">
+							<switch name="vo.total">
+						        <case value="2">{:C('_game_state_bk')[$vo['game_state']]}</case>
+						        <case value="4">{:C('game_state_bk')[$vo['game_state']]}</case>
+						        <default />未知
+						    </switch>
+						<else />
+							未知
+						</if>
+					</a>
+					</td>
+					<td>
+						<a style="color: green" href="{:U('__ADMIN__/Against/bk_lineup',['game_id'=>$vo['game_id'],'type'=>'away'])}" height="800" width="1100" target="dialog" mask="true" warn="请选择赛事">{$vo['home_team_name']}</a>
+					</td>
+					<td>{$vo['score']|default="--"}</td>
+					<td>{$vo['half_score']|default="--"}</td>
+					<td><a style="color: green" href="{:U('__ADMIN__/Against/bk_lineup',['game_id'=>$vo['game_id'],'type'=>'away'])}" height="800" width="1100" target="dialog" mask="true" warn="请选择赛事">{$vo['away_team_name']}</a></td>
+					<if condition="$_REQUEST.isVideo eq ''">
+						<td>{$vo['fsw_exp']}</td>
+						<td>{$vo['fsw_total']}</td>
+						<td>{$vo['psw_exp']}</td>
+						<td>{$vo['psw_total']}</td>
+						<td>
+							<if condition="$vo['fsw_exp'] neq '' && $vo['fsw_total'] neq ''">
+								<eq name="vo.is_go" value='0'>
+									<a title="你确定要设为滚球吗？" href="__URL__/saveIsGo/gameType/2/id/{$vo.id}/is_go/1" target="ajaxTodo"><div style="color:red;">否</div></a>
+								<else/>
+									<a title="你确定要设为不滚球吗？" href="__URL__/saveIsGo/gameType/2/id/{$vo.id}/is_go/0" target="ajaxTodo"><div style="color:blue">是</div></a>
+								</eq>
+							</if>
+						</td>
+						<td>
+							<if condition="($vo['fsw_exp'] neq '' or $vo['fsw_total'] neq '' or $vo['psw_exp'] neq '' or $vo['psw_total'] neq '') and $vo['is_sub'] gt 2">
+								<eq name="vo.is_show" value='0'>
+									<a title="你确定要设为不限联盟级别吗？" href="__URL__/saveIsGamble/gameType/2/id/{$vo.id}/is_show/1" target="ajaxTodo"><div style="color:red;">否</div></a>
+								<else/>
+									<a title="你确定要设为限联盟级别吗？" href="__URL__/saveIsGamble/gameType/2/id/{$vo.id}/is_show/0" target="ajaxTodo"><div style="color:blue">是</div></a>
+								</eq>
+							</if>
+						</td>
+						<td>
+							<if condition="$vo['fsw_exp'] neq '' or $vo['fsw_total'] neq '' or $vo['psw_exp'] neq '' or $vo['psw_total'] neq ''">
+								<eq name="vo.is_gamble" value='0'>
+									<a title="你确定要设为竞猜吗？" href="__URL__/saveIsGamble/gameType/2/id/{$vo.id}/is_gamble/1" target="ajaxTodo"><div style="color:red;">否</div></a>
+								<else/>
+									<a title="你确定要设为不竞猜吗？" href="__URL__/saveIsGamble/gameType/2/id/{$vo.id}/is_gamble/0" target="ajaxTodo"><div style="color:blue">是</div></a>
+								</eq>
+							</if>
+						</td>
+						<td>
+							<eq name="vo.status" value='0'>
+								<a title="你确定要设为正常吗？" href="__URL__/saveIsGamble/gameType/2/id/{$vo.id}/status/1" target="ajaxTodo"><div style="color:red;">隐藏</div></a>
+							<else/>
+								<a title="你确定要设为隐藏吗？" href="__URL__/saveIsGamble/gameType/2/id/{$vo.id}/status/0" target="ajaxTodo"><div style="color:blue">正常</div></a>
+							</eq>
+						</td>
+						<td><a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" title="编辑" rel="editPage">编辑</a></td>
+					<else / >
+						<td><empty name="vo.web_video">无<else/>有</empty></td>
+						<td><a href="__URL__/addVideo/game_id/{$vo.game_id}/gameType/2" target="dialog" mask="true" height='700' width="1000"><div style="color: green">直播设置</div></a></td>
+						<td>
+							<a style="color: green" href="{:U('__ADMIN__/Highlights/add',['game_id'=>$vo['game_id'],'gameType'=>2])}" height="650" width="650" target="dialog" mask="true" warn="请选择赛事">添加集锦</a> |
+							<a href="{:U('__ADMIN__/Highlights/index',['game_id'=>$vo['game_id'],'gameType'=>2])}" target="navTab" mask="true" warn="请选择赛事">查看</a>
+						</td>
+						<td>
+							<eq name="vo.is_recommend" value='0'>
+								<a title="你确定要设为直播推荐吗？" href="__URL__/saveisRecommend/gameType/2/id/{$vo.id}/is_recommend/1" target="ajaxTodo"><div style="color:red;">否</div></a>
+							<else/>
+								<a title="你确定要取消直播推荐吗？" href="__URL__/saveisRecommend/gameType/2/id/{$vo.id}/is_recommend/0" target="ajaxTodo"><div style="color:blue">是</div></a>
+							</eq>
+						</td>
+					</if>
+					<td>
+						<eq name="vo.is_video" value='0'>
+							<a title="你确定要设为直播吗？" href="__URL__/saveisVideo/gameType/2/id/{$vo.id}/is_video/1" target="ajaxTodo"><div style="color:red;">否</div></a>
+						<else/>
+							<a title="你确定要设为不直播吗？" href="__URL__/saveisVideo/gameType/2/id/{$vo.id}/is_video/0" target="ajaxTodo"><div style="color:blue">是</div></a>
+						</eq>
+					</td>
+					<td>
+						<a style="color: blue" href="{:U('__ADMIN__/Against/bk_textliving',['game_id'=>$vo['game_id']])}" height="600" width="700" target="dialog" mask="true" title="{$vo['gtime']|date="Y-m-d H:i",###} {$vo['home_team_name']} VS {$vo['away_team_name']}">文字直播</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

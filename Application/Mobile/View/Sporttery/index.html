@@ -1,0 +1,296 @@
+<extend name="Public/base" />
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/Sporttery/index.css?v=201808231223">
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file="Public:titleHead"/>
+</block>
+<!-- 二级头部 e -->
+<block name="nav"></block>
+<!-- 主题内容 -->
+<block name="content">
+    <include file="Public:navHead"/>
+    <!-- 主体内容 -->
+    <section class="container clearfix">
+        <!-- 主体内容 -->
+        <div class="swiper-slide">
+            <!-- banner -->
+            <div class="swiper-container swiper-container1 banner-w">
+                <div class="swiper-wrapper">
+                    <volist name="banner" id="vo">
+                        <div class="swiper-slide b">
+                            <a href="{$vo.url}" title="{$vo.title}">
+                                <img src="{$vo.img}">
+                                <div class="thirdly">
+                                    <span>{$vo.title}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </volist>
+                </div>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination ban">
+                    <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+                    <span class="swiper-pagination-bullet"></span>
+                    <span class="swiper-pagination-bullet"></span>
+                </div>
+            </div>
+            <!-- Swiper JS -->
+            <script type="text/javascript">
+
+                $(function(){
+                    //banner 切换
+                    var swiper = new Swiper('.swiper-container1', {
+                        pagination: '.ban',
+                        paginationClickable: true,
+                        spaceBetween: 30,
+                        centeredSlides: true,
+                        autoplay: false,
+                        autoplayDisableOnInteraction: false
+                    });
+
+                });
+            </script>
+
+            <!-- 主体内容 -->
+            <section class="container">
+                <ul class="mysports clearfix">
+                    <li>
+                        <a title="推荐王" href="{:U('/Guess/index@m')}" class="recommend">
+                            <img src="__IMAGES__/expert/shove.png">
+                            <p>推荐王</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a title="免费看直播" href="http://m.jrssports.com" class="recommend">
+                            <img src="__IMAGES__/expert/live.png">
+                            <p>免费看直播</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a title="篮球比分" href="{:U('/Sporttery/instantBk@m')}" class="recommend">
+                            <img src="__IMAGES__/expert/basket.png">
+                            <p>篮球比分</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a title="足球比分" href="{:U('/Sporttery/fbscore@m')}" class="recommend">
+                            <img src="__IMAGES__/expert/football.png">
+                            <p>足球比分</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a title="球王推荐" href="{:U('/Intro/index')}" class="recommend">
+                            <img src="__IMAGES__/expert/tuijie.png">
+                            <p>球王推介</p>
+                        </a>
+                    </li>
+                </ul>
+                <div  class="live-big-box">
+                    <div class="live-box" >
+                        <volist name="liveList" id="vo">
+                            <span  class="live-each">
+                            <a href="{$vo.RoomUrl}">
+                                <img src="{$vo.img}" >
+                                <span class="top">
+                                <i class="live-i">
+                                    <switch name="vo.live_status">
+                                        <case value="-1"><i class="lx">离线</i></case>
+                                        <case value="0"><i class="hf">回播</i></case>
+                                        <case value="1">直播中</case>
+                                        <case value="2"><i class="live-i">暂停中</i><img src="/Public/Mobile/images/expert/ic_rk.png"></case>
+                                    </switch>
+                                </i>
+                                    <if condition="$vo['live_status'] eq 1"><img src="__IMAGES__/expert/ic_rk.png" ></if>
+                                    <if condition="$vo['live_status'] eq 0"><img src="__IMAGES__/expert/ic_rk_hf.png" ></if>
+                                    <if condition="$vo['live_status'] eq -1"><img src="__IMAGES__/expert/ic_rk_lx.png" ></if>
+                                </span>
+                                <span class="down">
+                                <i class="host-name">{$vo.nick_name}</i>
+                                <i class="host-info">{$vo.title}</i>
+                                </span>
+                             </a>
+                        </span>
+                        </volist>
+                    </div>
+                </div>
+                
+                <div class="read-more">
+                    <img src="__IMAGES__/expert/recommend.png">
+                    <a class="查看更多" href="{:U('/Guess/new_put@m')}">
+                        <span>查看更多</span>
+                        <span><img src="__IMAGES__/expert/back.png"></span>
+                    </a>
+                </div>
+                <!-- commended -->
+                <div class="swiper-container swiper-container2">
+                    <div class="swiper-wrapper commend">
+                        <volist name="jxData" id="item">
+                            <ul class="swiper-slide choiceness">
+                                <volist name="item" id="vo">
+                                    <li>
+                                        <a href="{:U('/expUser/'.$vo['user_id'].'/'.$vo['type'])}">
+                                            <img src="{$vo.head}">
+                                            <div class="lable"><img src="__IMAGES__/expert/<if condition="$vo['type'] eq 1">y<else/>o</if>.png"></div>
+                                            <div class="circle"><if condition="$vo['today_gamble'] eq 1"><img src="__IMAGES__/expert/circle.png"></if></div>
+                                            <span class="choice-name">{$vo.nick_name}</span>
+                                            <span class="choice-note">进10中{$vo.tenWin}</span>
+                                        </a>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </volist>
+                    </div>
+                    <!-- 如果需要分页器 -->
+                    <div class="swiper-pagination con">
+                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active spot"></span>
+                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active spot"></span>
+                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active spot"></span>
+                    </div>
+                </div>
+                <!-- Swiper JS -->
+                <script type="text/javascript">
+
+                    $(function(){
+                        //banner 切换
+                        var swiper = new Swiper('.swiper-container2', {
+                            pagination: '.con',
+                            paginationClickable: true,
+                            spaceBetween: 30,
+                            centeredSlides: true,
+                            autoplay: false,
+                            autoplayDisableOnInteraction: false
+                        });
+
+                    });
+                </script>
+                <if condition="$tyData neq ''">
+                <div class="experts"><img src="__IMAGES__/expert/specialist.png"></div>
+                <!-- userper -->
+                <div class="swiper-container swiper-container3">
+                    <div class="swiper-wrapper userper">
+                        <volist name="tyData" id="item">
+                            <ul class="swiper-slide card clearfix">
+                                <volist name="item" id="vo">
+                                    <li>
+                                        <a title="{$vo.nick_name}" href="{:U('/expUser/'.$vo['user_id'])}">
+                                            <div class="anomaly" style="background-image: url({$vo.face});"></div>
+                                            <img src="{$vo.face}">
+                                            <p>{$vo.nick_name}</p>
+                                            <span>{$vo.descript}</span>
+                                        </a>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </volist>
+                    </div>
+                    
+                    <!-- 如果需要分页器 -->
+                    <div class="swiper-pagination con">
+                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active spot"></span>
+                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active spot"></span>
+                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active spot"></span>
+                    </div>
+                </div>
+                </if>
+                <ul class="exclusive clearfix">
+                    <li>
+                        <a title="独家" href="{:U('/sporttery/dujia@m')}">
+                            <img src="__IMAGES__/expert/du.png">
+                            <p>独家</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a title="竞彩" href="{:U('/sporttery/jingcai@m')}">
+                            <img src="__IMAGES__/expert/jing.png">
+                            <p>竞彩</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a title="北单" href="{:U('/sporttery/beidan@m')}">
+                            <img src="__IMAGES__/expert/bei.png">
+                            <p>北单</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a title="秘笈" href="{:U('/sporttery/djmj@m')}">
+                            <img src="__IMAGES__/expert/mi.png">
+                            <p>秘笈</p>
+                        </a>
+                    </li>
+                </ul>
+
+                <!--文章图集列表-->
+                <volist name="newList" id="item">
+                    <if condition="$key%2 eq 0">
+                        <ul class="premier clearfix">
+                        <volist name="item" id="vo">
+                        <li>
+                        <a title="{$vo.title}" href="{$vo.url}">
+                        <div class="exc-left">
+                        <h2>{$vo.title}</h2>
+                        <span class="years">{$vo.time}</span>
+                        <span class="times">{$vo.click_number}</span>
+                        <span class="eyeIcon"></span>
+                        <span class="lables">{$vo.class_name}</span>
+                        </div>
+                        <div class="exc-right">
+                        <img src="{$vo.img}" alt="{$vo.title}">
+                        </div>
+                        </a>
+                        </li>
+                        </volist>
+                        </ul>
+                    <else/>
+                        <ul class="lists clearfix">
+                        <volist name="item" id="vo">
+                        <li>
+                        <a title="{$vo.title}" href="{$vo.url}">
+                        <img src="{$vo.img}" alt="{$vo.title}">
+                        <span>{$vo.imgTotal}<img src="__IMAGES__/expert/i.png"></span>
+                        <h3>{$vo.title}</h3>
+                        </a>
+                        </li>
+                        </volist>
+                        </ul>
+                    </if>
+                </volist>
+                <div class="more">
+                    <a href="{:U('/sporttery/dujia@m')}"><span>点击查看更多<img src="/Public/Mobile/images/index/more.png"></span></a>
+                </div>
+            </section>
+        </div>
+    </section>
+
+</block>
+
+<block name="footer">
+    <include file="Public/footer"/>
+</block>
+<block name="scripts">
+    <script>
+        var _time = "{:time()}";
+        var IMAGES = "__IMAGES__";
+        var pId = "{$sConfig['publishId']}";
+        var hId = "{$sConfig['videoId']}";
+        var iId = "{$sConfig['photoId']}";
+        var _domain = "{$sConfig['domain']}";
+
+        $(function(){
+            //banner 切换
+            var swiper = new Swiper('.swiper-container3', {
+                pagination: '.con',
+                paginationClickable: true,
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: false,
+                autoplayDisableOnInteraction: false
+            });
+
+        });
+    </script>
+
+    <script src="__JS__/Olympic/swiper_banner.js"></script>
+</block>

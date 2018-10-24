@@ -1,0 +1,336 @@
+<extend name="Public:layout"/>
+<block name='seo'>
+    <title>全球体育号</title>
+    <meta name="keywords" content="体育号,全球体育号">
+    <meta name="description" content="一呼百应，吹响体育号！">
+</block>
+<block name="css">
+    <link rel="stylesheet" href="__CSS__/sportuser/media-login.css">
+    <link rel="stylesheet" href="__CSS__/sportuser/reset-boot.css">
+</block>
+
+<block name="content">
+    <!-- main -->
+    <div class="main">
+        <div class="topCenter"><a href="javascript:void(0);" class="pull-left suLogo" title="全球体育号"><img src="__IMAGES__/sportuser/SportUser-logo.png" alt="全球体育号" / width="150" height="43"></a></div>
+        <div class="formMain" style="padding-bottom: 50px;">
+            <!-- formStep -->
+            <div class="formStep">
+                <ul class="clearfix">
+                    <li class="on">
+                        <div class="clearfix">
+                            <span class="pull-left step"><strong>1</strong></span>
+                            <span class="pull-left dotLine">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </span>
+                        </div>
+                        <p class="text-999">登陆注册  </p>
+                    </li>
+                    <li class="on">
+                        <div class="clearfix">
+                            <span class="pull-left step"><strong>2</strong></span>
+                            <span class="pull-left dotLine">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </span>
+                        </div>
+                        <p class="text-999">填写资料  </p>
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <span class="pull-left step"><strong>3</strong></span>
+                        </div>
+                        <p class="text-999">完成 </p>
+                    </li>
+                </ul>
+            </div>
+            <!-- formStep -->
+            <!-- form -->
+            <div class="formBox formBox02">
+                <div class="clearfix listTitle"><span class="pull-left">填写资料</span></div>
+                <form class="sport-info" enctype="multipart/form-data" action="{:U(SportUser/sportExpertInfo)}" method="post"  onsubmit="return form_submit()">
+                    {:get_form_token()}
+                    <div class="form-group clearfix">
+                        <label for="user" class="control-label pull-left">体育号名称</label>
+                        <div class="pull-left input-con">
+                            <input type="text" class="form-control" id="user" readonly="readonly"  placeholder="用户名" value="{$user['nick_name']}">
+                            <p class="text-999 noit f12">体育号不可修改</p>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="descript" class="control-label pull-left">简介</label>
+                        <div class="pull-left input-con input-position-relative">
+                            <textarea class="form-control grtextarea required descript" id="descript" maxlength="20" name="descript" placeholder=""><if condition="!(empty($user['descript']))">{$user['descript']}</if></textarea>
+                            <p class="text-999 noit f12">0-20个字<br />注：请勿填写违反国家法律,涉及色情、政治、造谣、敏感等内容,或含有联系方式和外链</p>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="up_img_WU_FILE_0" class="control-label pull-left">设置头像</label>
+                        <div class="pull-left input-con">
+                            <div class="face" id="warp">
+                                <li>
+                                    <img src="{$user['face']}" width="130" id="imgShow_WU_FILE_0" height="130" title="" alt="设置头像" style="">
+                                    <a href="javascript:void(0);" class="upload-img" title="重新上传"><label for="up_img_WU_FILE_0">重新上传</label></a>
+                                    <input type="file" class="" name="face" id="up_img_WU_FILE_0">
+                                </li>
+                            </div>
+                            <p class="text-999 f12">要求清晰、健康、代表形象的正方形图片。请勿使用二维码，最大2M</p>
+                        </div>
+                    </div>
+                    <p class="text-999 noit f12"></p>
+                    <div class="form-group clearfix">
+                        <label for="true_name" class="control-label pull-left">真实姓名</label>
+                        <div class="pull-left input-con input-position-relative">
+                            <input type="text" class="form-control required" id="true_name" placeholder="" name="true_name" <if condition="!(empty($user['true_name']))">value="{$user['true_name']}"  readonly="readonly"</if>>
+                        </div>
+                    </div>
+                    <p class="text-999 noit f12"></p>
+                    <div class="form-group clearfix">
+                        <label for="identfy" class="control-label pull-left">身份证号</label>
+                        <div class="pull-left input-con input-position-relative">
+                            <input type="text" class="form-control required" id="identfy" name="identfy"  placeholder="" <if condition="!(empty($user['identfy']))">value="{$user['identfy']}"  readonly="readonly"</if>>
+                        </div>
+                    </div>
+                    <p class="text-999 noit f12"></p>
+                    <div class="form-group clearfix">
+                        <label for="viewUploadInput_109" class="control-label pull-left">手持身份证照片</label>
+                        <div class="pull-left input-con input-position-relative">
+                            <ul class="tabImg clearfix">
+                                <li>
+                                    <input id="viewUploadInput_109" name="identfy_pic" type="file" onChange="previewImage(109)" style="display:none;"/>
+                                    <a href="javascript:void(0);" title="手持身份证照片">
+                                     <span id="viewUploadDiv_109">
+                                            <img src="__IMAGES__/common/idcard.png" alt="手持身份证照片" width="230" height="130"
+                                                 id="viewUploadImg_109"/>
+                                     </span>
+                                    </a>
+                                    <div id="poiter_109" class="poiter">
+                                        <a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_109')">添加图片</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <p class="text-999 f12">请提供本人手持身份证的正面照，证件上的信息要清晰可识别，证件照信息要求与与运营者姓名及证件号码一样</p>
+                        </div>
+                    </div>
+                    <p class="text-999 noit f12"></p>
+                    <div class="form-group clearfix">
+                        <label for="phone" class="control-label pull-left">手机号</label>
+                        <div class="pull-left input-con input-position-relative">
+                            <input type="text" class="form-control required" id="phone" name="mobile"  placeholder="" <if condition="!(empty($user['username']))">value="{$user['username']}"  readonly="readonly"</if>>
+                        </div>
+                    </div>
+                    <p class="text-999 noit f12"></p>
+                    <div class="form-group clearfix">
+                        <label for="code" class="control-label pull-left">验证码</label>
+                        <div class="pull-left input-con input-position-relative">
+                            <input type="text" class="form-control pull-left code required" id="code" name="captcha" placeholder="">
+                            <a href="javascript:void(0);" title="发送验证码" onclick="sendMobileMsg();" class="pull-left sendCode"><span id="sendMobileBtn"></span>发送验证码</a>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox" style="margin: 20px 0;">
+                                <label>
+                                    <input type="checkbox" id="agree" checked="checked"> 同意并遵守《<a target="_blank" href="{:U('Copyright/service')}" title="全球体育" class="text-green">全球体育”的专家号自媒体平台用户协议</a>》
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <div class="pull-left input-con btnBox">
+                            <a href="{:U('UserInfo/index')}" class="btn btn-default" title="取消">取消</a>
+                            <button type="submit" class="btn btn-green">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- form -->
+            <div class="linkBox text-center">
+                <a target="_blank" href="{:U('/')}" title="全球体育首页">全球体育首页</a>
+                <a target="_blank" href="{:U('SportUser/mediaManual')}" title="使用手册">使用手册</a>
+                <a target="_blank" href="{:U('SportUser/mediaManual')}" title="侵权投诉">侵权投诉</a>
+            </div>
+        </div>
+    </div>
+    <!-- main -->
+</block>
+
+<block name="js">
+    <script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+    <script type="text/javascript" src="__JS__/sportuser/uploadPreview.js"></script>
+    <script>
+        $(function(){
+            $('.tabImg li').hover(function(e) {
+                $(this).children('div').stop().animate({'top':'0'},300);
+            },function(){
+                $(this).children('div').stop().animate({'top':'130px'},300);
+            });
+        });
+        $(function(){
+            $("form.sport-info").validate({
+                onkeyup : false,
+                rules: {
+                    descript :{
+                        required:true,
+                        rangelength:[1,20]
+                    },
+                    true_name : "required",
+                    identfy: "required",
+                    mobile: "required",
+                    captcha: "required"
+                },
+                messages : {
+                    descript : {
+                        required: "简介不能为空",
+                       rangelength : "简介长度必须在1-20个字之间"
+                    },
+                    true_name :{
+                      required: "真实姓名不能为空"
+                    },
+                    identfy: "身份证号不能为空",
+                    mobile: "手机号不能为空",
+                    captcha: "验证码不能为空"
+                }
+            });
+        });
+
+        function form_submit(){
+            var img = $("#viewUploadInput_109").val();
+            if(img == '') {
+                _alert('温馨提示',"请上传证件照");
+                return false;
+            }
+
+            /**
+             身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+             */
+            var identfy = $("#identfy").val();
+            // var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; // 大陆
+            // var reg = /[A-Z]{1,2}[0-9]{6}([0-9A])/;  //香港
+            // var reg = /^[1|5|7][0-9]{6}\([0-9Aa]\)/; //澳门
+            // var reg = /[A-Z][0-9]{9}/;  台湾
+            // var reg = /^1[45][0-9]{7}|([P|p|S|s]\d{7})|([S|s|G|g]\d{8})|([Gg|Tt|Ss|Ll|Qq|Dd|Aa|Ff]\d{8})|([H|h|M|m]\d{8，10})$/; //护照
+            // if(reg.test(identfy) === false)
+            var reg =  /^\w{5,40}/i;
+            if(reg.test(identfy) === false)
+            {
+                _alert('温馨提示',"身份证输入不合法");
+                return false;
+            }
+            if($("#agree").is(':checked')==false) {
+                _alert("提示","您必须同意注册协议！");
+                return false;
+            }
+
+            var status =1;
+            var code = $("#code").val();
+            var mobile = $("#phone").val();
+            $.ajax({
+                url: "/SportUser/checkVerify.html",
+                type:'post',
+                data:{'mobile':mobile,'captcha':code},
+                async : false,
+                dataType: "json",
+                success: function(data){
+                    if(!data.status){
+                        _alert('温馨提示',data.info);
+                        status = 2;
+                    }
+                }
+            });
+            if(status === 2) {
+                return false;
+            }
+        }
+
+        /**
+         * 发送手机验证码
+         */
+        function sendMobileMsg() {
+            var mobile = $('#phone').val();
+            //验证手机
+            if(mobile == ""){
+                _alert('温馨提示',"请输入手机号码！");
+                return false;
+            }
+            if (!/^1[3456789]{1}\d{9}$/.test(mobile)){
+                _alert('温馨提示',"手机号码格式不正确，请重新输入！");
+                return false;
+            }
+            var token = $('input[name=token]').val();
+            if(typeof($("#phone").attr("readonly"))==="undefined"){
+                msgType = "registe"
+            } else {
+                msgType = "verifyPhone"
+            }
+            $.ajax({
+                url: "/User/sendMobileMsg.html",
+                type:'post',
+                data:{token:token,'mobile':mobile,'msgType': msgType},
+                dataType: "json",
+                beforeSend:function(XMLHttpRequest)
+                {
+                    $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>正在发送…").removeAttr("onclick").attr("disabled","disabled");
+                },
+                success: function(data){
+                    if(data.status){
+                        _alert('温馨提示',data.info);
+                        daojishi(60);
+                        return;
+                    }else{
+                        $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>获取验证码").attr("onclick",'sendMobileMsg()').removeAttr("disabled");
+                        _alert('温馨提示',data.info);
+                    }
+                }
+            });
+        }
+        /**
+         * 倒计时
+         */
+        function daojishi(S){
+            if (S>0){
+                var S = S-1;
+                $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>秒后重发").removeAttr("onclick").attr("disabled","disabled");
+                $("#sendMobileBtn").html(S);
+                setTimeout("daojishi("+S+")",1000);
+                return;
+            } else {
+                $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>获取验证码").attr("onclick",'sendMobileMsg()').removeAttr("disabled");
+            }
+        }
+    </script>
+</block>
+

@@ -1,0 +1,35 @@
+<!-- 数据导航s -->
+<div class="odd_nav ">
+    <ul class="clearfix">
+        <if condition="$gameInfo['game_time'] elt time()">
+            <li <if condition="ACTION_NAME eq 'event_technology'">class="on"</if>>
+            <a href="{:U('/event_technology@bf',['game_id'=>$gameId])}"><span>比赛事件</span></a>
+            </li>
+        </if>
+        <if condition="$gameInfo['is_news'] eq 1">
+            <li <if condition="ACTION_NAME eq 'news'">class="on"</if>>
+            <a href="{:U('/news@bf',['game_id'=>$gameId])}"><span>赛事情报</span></a>
+            </li>
+        </if>
+        <li <if condition="ACTION_NAME eq 'dataFenxi'">class="on"</if>>
+        <a href="{:U('/dataFenxi@bf',['game_id'=>$gameId])}"><span>数据分析</span></a>
+        </li>
+        <li <if condition="$sign eq '1' and ACTION_NAME eq 'ypOdds'">class="on"</if>>
+            <a href="{:U('/ypOdds@bf',['game_id'=>$gameId,'sign'=>1])}"><span>亚盘赔率</span></a>
+        </li>
+        <li <if condition="$sign eq '2' and ACTION_NAME eq 'ypOdds'">class="on"</if>>
+            <a href="{:U('/ypOdds@bf',['game_id'=>$gameId,'sign'=>2])}"><span>大小比较</span></a>
+        </li>
+        <li <if condition="ACTION_NAME eq 'eur_index'">class="on"</if>>
+        <a href="{:U('/eur_index@bf',['game_id'=>$gameId])}"><span>欧洲指数</span></a>
+        </li>
+        <notempty name='is_gamble'>
+            <li <if condition="ACTION_NAME eq 'gambleDetails'">class="on last-li"<else/>class="last-li"</if>>
+                <a href="{:U('/gambleDetails@bf',['game_id'=>$gameId])}"><span>推荐详情</span></a>
+            </li>
+        </notempty>
+    </ul>
+</div>
+<!-- 数据导航s -->
+
+

@@ -1,0 +1,70 @@
+<include file="Public:pagerForm" />
+<style>
+  .vali{
+    position: relative;
+  }
+  .vali .field-msg{
+    top: -0px;
+    left: 470px;
+  }
+</style>
+<form action="__URL__/exchangeSet" method="post" class="pageForm required-validate" onsubmit="return iframeCallback(this)">
+<div style="margin:40px 0px 0px 100px;">
+            <div class="vali">
+                <label>兑换限制：</label>
+                       <input type="text" name="pointLimit" class="digits" value="{$config['pointLimit']}" >&nbsp分&nbsp&nbsp (总积分达到多少才可以进行兑换)
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 0px;">
+                <label>积分兑换：</label>
+                       <input type="text" name="point2Coin1" readOnly="true" value="{$config['point2Coin1']}" >&nbsp分&nbsp&nbsp  换
+                       <input type="text" name="coin1" class="digits" value="{$config.coin1}"> 币
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 63px;">
+                       <input type="text" name="point2Coin2" readOnly="true" value="{$config['point2Coin2']}" >&nbsp分&nbsp&nbsp  换
+                       <input type="text" name="coin2" class="digits" value="{$config.coin2}"> 币
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 63px;">
+                       <input type="text" name="point2Coin3" readOnly="true" value="{$config['point2Coin3']}" >&nbsp分&nbsp&nbsp  换
+                       <input type="text" name="coin3" class="digits" value="{$config.coin3}"> 币
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 63px;">
+                       <input type="text" name="point2Coin4" readOnly="true" value="{$config['point2Coin4']}" >&nbsp分&nbsp&nbsp  换
+                       <input type="text" name="coin4" class="digits" value="{$config.coin4}"> 币
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 0px;">
+                <label>销售分成：</label>
+                       <input type="text" name="websiteSales1" class="digits" value="{$config['websiteSales1']}" >&nbsp%(网站)
+                       <input type="text" name="userSales1" class="digits" value="{$config.userSales1}">%(会员)
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 0px;">
+                <label>特殊分成：</label>
+                       <input type="text" name="websiteSales2" class="digits" value="{$config['websiteSales2']}" >&nbsp%(网站)
+                       <input type="text" name="userSales2" class="digits" value="{$config.userSales2}">%(特殊会员)
+            </div>
+
+             <div class="vali" style="margin:20px 20px 20px 0px;">
+                <label>购买设置：</label>
+                       <input type="text" name="tradeCoin1" class="digits" value="{$config['tradeCoin1']}" >金币&nbsp(周榜、月榜和季榜前10名的，普通竞猜售金币)
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 63px;">
+                       <input type="text" name="tradeCoin2" class="digits" value="{$config['tradeCoin2']}" >金币&nbsp(周榜、月榜和季榜前10名的，重点竞猜售金币)
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 63px;">
+                       <input type="text" name="tradeCoin3" class="digits" value="{$config['tradeCoin3']}" >金币&nbsp(周榜、月榜和季榜前11名——100名的，普通竞猜售金币)
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 63px;">
+                       <input type="text" name="tradeCoin4" class="digits" value="{$config['tradeCoin4']}" >金币&nbsp(周榜、月榜和季榜前11名——100名的，重点竞猜售金币)
+            </div>
+
+
+        <div class="subBar">
+            <ul>
+                <li style="margin:40px 40px 40px 400px;"><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+            </ul>
+        </div>
+
+    </div>
+    </form>
+
+
+

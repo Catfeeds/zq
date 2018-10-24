@@ -1,0 +1,140 @@
+<style>
+	.type {
+		border-bottom: 1px solid;
+		display: inline-block;
+	}
+	.type li {
+		border: 1px solid gray;
+		float: left;
+		height: 25px;
+		line-height: 25px;
+		margin-bottom: 13px;
+		margin-right: 12px;
+		overflow: hidden;
+		text-align: center;
+		width: 92px;
+	}
+	.union {
+		margin-top: 10px;
+		border-bottom: 1px solid;
+	    display: inline-block;
+	}
+	.union li {
+	    border: 1px solid gray;
+	    float: left;
+	    height: 25px;
+	    line-height: 25px;
+	    margin-bottom: 13px;
+	    margin-right: 12px;
+	    overflow: hidden;
+	    text-align: center;
+	    width: 92px;
+	}
+	.game li {
+		float: left;
+		width: 465px;
+		height: 32px;
+		margin-right: 12px;
+		line-height: 32px;
+		font-size: 13px;
+	}
+</style>
+<div class="pageContent">
+
+		<div class="pageFormContent" layoutH="58">
+
+			<ul class="type">
+				<a href="#" type="1" class="typebutton">
+					<li style="background: green" class="fb-li">
+						足球
+					</li>
+				</a>
+				<a href="#" type="2" class="typebutton">
+					<li class="bk-li">
+						篮球
+					</li>
+				</a>
+			</ul>
+			<br/>
+			<ul class="union">
+				<a href="#">
+					<li style="background: green">
+						全部
+					</li>
+				</a>
+				<volist name="fbunion" id="item">
+					<a href="#" union_id="{$item.union_id}" class="fbhidden">
+						<li>
+							{$item.union_name|switchName=0,###} ({$item.union_num})
+						</li>
+					</a>
+				</volist>
+				<volist name="bkunion" id="item">
+					<a href="#" union_id="{$item.union_id}" style="display: none;" class="bkhidden">
+						<li>
+							{$item.union_name|switchName=0,###} ({$item.union_num})
+						</li>
+					</a>
+				</volist>
+			</ul>
+			
+			<ul class="game">
+				<volist name="fbgame" id="item">
+					<li union_id="{$item.union_id}" class="fbhidden">
+						<input type="radio" name="gamble" value="{ game_type:1,game_id:'{$item.game_id}', game:'{$item.gtime|date="Y-m-d H:i",###} {$item.union_name|switchName=0,###}【{$item.home_team_name|switchName=0,###} VS {$item.away_team_name|switchName=0,###}】', fsw_exp_home:'{$item.fsw_exp_home}', fsw_exp:'{$item.fsw_exp}', fsw_exp_away:'{$item.fsw_exp_away}', fsw_ball_home:'{$item.fsw_ball_home}', fsw_ball:'{$item.fsw_ball}', fsw_ball_away:'{$item.fsw_ball_away}',union_name:'{$item.union_name}',gtime:'{$item.gtime}',home_team_name:'{$item.home_team_name}',away_team_name:'{$item.away_team_name}',home_odds:'{$item.home_odds}',draw_odds:'{$item.draw_odds}',away_odds:'{$item.away_odds}',let_exp:'{$item.let_exp}',home_letodds:'{$item.home_letodds}',draw_letodds:'{$item.draw_letodds}',away_letodds:'{$item.away_letodds}' }"><a href="#">{$item.gtime|date="m-d H:i",###} {$item.home_team_name|switchName=0,###} VS {$item.away_team_name|switchName=0,###}</a>
+						<if condition="$item['home_odds'] neq '' or $item['draw_letodds'] neq ''"><font color="blue">竞彩</font></if>
+					</li>
+				</volist>
+				<volist name="bkgame" id="item">
+					<li union_id="{$item.union_id}" style="display: none" class="bkhidden">
+						<input type="radio" name="gamble" value="{ game_type:2,game_id:'{$item.game_id}', game:'{$item.gtime|date="Y-m-d H:i",###} {$item.union_name|switchName=0,###}【{$item.home_team_name|switchName=0,###} VS {$item.away_team_name|switchName=0,###}】', fsw_exp_home:'{$item.fsw_exp_home}', fsw_exp:'{$item.fsw_exp}', fsw_exp_away:'{$item.fsw_exp_away}', fsw_ball_home:'{$item.fsw_ball_home}', fsw_ball:'{$item.fsw_ball}', fsw_ball_away:'{$item.fsw_ball_away}',union_name:'{$item.union_name}',gtime:'{$item.gtime}',home_team_name:'{$item.home_team_name}',away_team_name:'{$item.away_team_name}' }"><a href="#">{$item.gtime|date="m-d H:i",###} {$item.home_team_name|switchName=0,###} VS {$item.away_team_name|switchName=0,###}</a>
+					</li>
+				</volist>
+			</ul>
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="button"><div class="buttonContent"><button type="button" multlookup="gamble" warn="请选择赛事">确定</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+</div>
+<script>
+	$('.typebutton').on('click',function(){
+		var _type = $(this).attr('type');
+		if(_type == 1)
+		{
+			$('.bkhidden').css('display','none');
+			$('.fbhidden').css('display','');
+			$('.fb-li').css('background','green');
+			$('.bk-li').css('background','');
+
+		}else{
+			$('.bkhidden').css('display','');
+			$('.fbhidden').css('display','none');
+			$('.fb-li').css('background','');
+			$('.bk-li').css('background','green');
+		}
+	});
+	$(".game li a").click(function(){
+		$(this).siblings().attr('checked',true);
+	})
+	$(".union a").on('click',function(){
+		$(this).find('li').css('background','green');
+		$(this).siblings().find('li').css('background','');
+		$('.game li').css('display','block');
+		var union_id = $(this).attr('union_id');
+		if(union_id == undefined){
+			return;
+		}
+		$('.game li').each(function(k,v){
+			if($(this).attr('union_id') != union_id){
+				$(this).css('display','none');
+			}
+		})
+	})
+</script>
+
+
+

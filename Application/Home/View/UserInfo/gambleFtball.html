@@ -1,0 +1,352 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userInfo/football_quiz.css?v20180606">
+    <style>td {font-size: 10px;}</style>
+</block>
+<block name="content">
+    <include file="Public:top_user"/>
+    <div class="body">
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <div class="data-graph foot-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="{:U('UserInfo/gambleFtball')}" <eq name="Think.ACTION_NAME" value="gambleFtball">class="current"</eq>>足球推荐</a></li>
+                                    <li role="presentation"><a href="{:U('UserInfo/gambleBktball')}" <eq name="Think.ACTION_NAME" value="gambleBktball">class="current"</eq>>篮球推荐</a></li>
+                                    <li class="pull-right">
+                                        <a href="javascript:;" class="pull-right btn btn-danger reset-data">数据重置</a>
+                                    </li>
+                                </ul>
+                                <!-- Nav tabs -->
+                                <div class="pan_type clearfix">
+                                    <ul>
+                                        <li class="fl">
+                                            <a href="{:U('UserInfo/gambleFtball')}" <if condition="$_REQUEST['gamble_type'] eq 1 or $_REQUEST['gamble_type'] eq ''">class="on"</if>>
+                                            亚盘
+                                            </a>
+                                        </li>
+                                        <li class="fl">
+                                            <a href="{:U('UserInfo/gambleFtball',['gamble_type'=>2])}" gamble_type='2' <if condition="$_REQUEST['gamble_type'] eq 2">class="on"</if>>
+                                            竞彩
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div id="foot" class="line-graph clearfix">
+                                        <div class="record">
+                                            <ul>
+                                                <li class="re-li">
+                                                    <strong>
+                                                        <span style="float: left;">我的等级：</span><em class="myIcon fb_p level lv{$lv}"></em>
+                                                    </strong>
+                                                </li>
+                                                <li class="re-li">
+                                                    <strong>我的战绩：</strong>
+                                                    <span class="w_65" style="margin-right:20px;">赢<em class="text-red"> {$resultArr['winCount']|default=0}</em></span>
+                                                    <span class="w_65 <if condition="$_REQUEST['gamble_type'] eq 2">hidden</if>" style="margin-right:20px;">平<em class="text-8a"> {$resultArr['flatCount']|default=0}</em></span>
+                                                    <span class="w_65">输<em class="text-tie"> {$resultArr['loseCount']|default=0}</em></span>
+                                                </li>
+                                                <li class="re-li"><span class="even01 text-8a">当前连胜：<em class="text-red">{$winning.curr_victs}</em></span><span class="even02 text-8a">最大连胜：<em class="text-red">{$winning.max_victs}</em></span></li>
+                                                <li class="re-li">
+                                                    <div class="ten">
+                                                        <span class="text-8a">近10场</span>
+                                                        <volist name="TenGamble" id="item">
+                                                            <switch name="item.result">
+                                                                <case value="1"><em class="text-red">赢</em></case>
+                                                                <case value="0.5"><em class="text-red">赢半</em></case>
+                                                                <case value="2"><em class="text-8a">平</em></case>
+                                                                <case value="-1"><em class="text-tie">输</em></case>
+                                                                <case value="-0.5"><em class="text-tie">输半</em></case>
+                                                            </switch>
+                                                        </volist>
+                                                    </div>
+                                                    <div class="week clearfix">
+                                                        <div class="pull-left text-8a">周成绩</div>
+                                                        <div class="pull-left data">
+                                                            <ul class="clearfix">
+                                                                <li class="w_55"><em style="margin-right:5px;">{$footWeek.count}</em><span>场</span></li>
+                                                                <li class="w_45"><span>赢</span><em class="text-red">{$footWeek.win}</em></li>
+                                                                <li class="w_55 <if condition="$_REQUEST['gamble_type'] eq 2">hidden</if>"><span>赢半</span><em class="text-red">{$footWeek.half}</em></li>
+                                                                <li class="w_45 <if condition="$_REQUEST['gamble_type'] eq 2">hidden</if>"><span>平</span><em class="text-8a">{$footWeek.level}</em></li>
+                                                                <li class="w_45"><span>输</span><em class="text-tie">{$footWeek.transport}</em></li>
+                                                                <li class="w_55 <if condition="$_REQUEST['gamble_type'] eq 2">hidden</if>"><span>输半</span><em class="text-tie">{$footWeek.donate}</em></li>
+                                                                <li class="w_65"><span>胜率</span><em class="text-red">{$footWeek.winrate}%</em></li>
+                                                                <li><span>获得积分</span><em class="text-orange">{$footWeek.pointCount}</em></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="month clearfix">
+                                                        <div class="pull-left text-8a">月成绩</div>
+                                                        <div class="pull-left data">
+                                                            <ul class="clearfix">
+                                                                <li class="w_55"><em style="margin-right:5px;">{$footMonth.count}</em><span>场</span></li>
+                                                                <li class="w_45"><span>赢</span><em class="text-red">{$footMonth.win}</em></li>
+                                                                <li class="w_55 <if condition="$_REQUEST['gamble_type'] eq 2">hidden</if>"><span>赢半</span><em class="text-red">{$footMonth.half}</em></li>
+                                                                <li class="w_45 <if condition="$_REQUEST['gamble_type'] eq 2">hidden</if>"><span>平</span><em class="text-8a">{$footMonth.level}</em></li>
+                                                                <li class="w_45"><span>输</span><em class="text-tie">{$footMonth.transport}</em></li>
+                                                                <li class="w_55 <if condition="$_REQUEST['gamble_type'] eq 2">hidden</if>"><span>输半</span><em class="text-tie">{$footMonth.donate}</em></li>
+                                                                <li class="w_65"><span>胜率</span><em class="text-red">{$footMonth.winrate}%</em></li>
+                                                                <li><span>获得积分</span><em class="text-orange">{$footMonth.pointCount}</em></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="year clearfix">
+                                                        <div class="pull-left text-8a">季成绩</div>
+                                                        <div class="pull-left data">
+                                                            <ul class="clearfix">
+                                                                <li class="w_55"><em style="margin-right:5px;">{$footSeason.count}</em><span>场</span></li>
+                                                                <li class="w_45"><span>赢</span><em class="text-red">{$footSeason.win}</em></li>
+                                                                <li class="w_55 <if condition="$_REQUEST['gamble_type'] eq 2">hidden</if>"><span>赢半</span><em class="text-red">{$footSeason.half}</em></li>
+                                                                <li class="w_45 <if condition="$_REQUEST['gamble_type'] eq 2">hidden</if>"><span>平</span><em class="text-8a">{$footSeason.level}</em></li>
+                                                                <li class="w_45"><span>输</span><em class="text-tie">{$footSeason.transport}</em></li>
+                                                                <li class="w_55 <if condition="$_REQUEST['gamble_type'] eq 2">hidden</if>"><span>输半</span><em class="text-tie">{$footSeason.donate}</em></li>
+                                                                <li class="w_65"><span>胜率</span><em class="text-red">{$footSeason.winrate}%</em></li>
+                                                                <li><span>获得积分</span><em class="text-orange">{$footSeason.pointCount}</em></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div id='table'>
+                                            <notempty name="list">
+                                                <div class="record-list">
+                                                    <table class="table table-bordered" width="100%" cellpadding="0" cellspacing="0">
+                                                        <tbody>
+                                                        <tr class="table-header">
+                                                            <th>赛事</th>
+                                                            <th>比赛时间</th>
+                                                            <th>主队</th>
+                                                            <th>比分/半场 </th>
+                                                            <th>客队</th>
+                                                            <th>玩法</th>
+                                                            <th>
+                                                                <if condition="$_REQUEST['gamble_type'] eq 2">
+                                                                    让球(赔率)
+                                                                    <else/>
+                                                                    盘口(指数)
+                                                                </if>
+                                                            </th>
+                                                            <th>积分</th>
+                                                            <th>金币</th>
+                                                            <th>推荐(购买)</th>
+                                                            <th>结果</th>
+                                                            <th>操作</th>
+                                                        </tr>
+                                                        <volist name="list" id="item">
+                                                            <tr <if condition="$key % 2 eq 0">class="one"<else/>class="two"</if> >
+                                                            <td style="background: {$item.union_color};">
+                                                                <a style="color: #fff;" title="{$item.union_name}" href="javascript:;">{$item.union_name|msubstr=###,0,5,'utf-8'}</a>
+                                                            </td>
+                                                            <td>
+                                                                <a title="{$item.game_date|strtotime|date='Y-m-d',###} {$item.game_time}" href="javascript:;">{$item.game_date|strtotime|date="m-d",###} {$item.game_time}</a>
+                                                                <if condition="$_REQUEST['gamble_type'] eq 2">
+                                                                    <span>{$item.bet_code}</span>
+                                                                </if>
+                                                            </td>
+                                                            <td>
+                                                                <a title="{$item.home_team_name}" href="javascript:;">{$item.home_team_name|msubstr=###,0,5,'utf-8'}</a>
+                                                            </td>
+                                                            <td>
+                                                                <if condition="$item.game_state eq '-1'">
+                                                                    <span class="text-red">{$item.score|default="--"}</span>
+                                                                    ({$item.half_score|default="--"})
+                                                                    <else/>
+                                                                    <span class="text-red">--</span>
+                                                                    (--)
+                                                                </if>
+                                                            </td>
+                                                            <td>
+                                                                <a title="{$item.away_team_name}" href="javascript:;">{$item.away_team_name|msubstr=###,0,5,'utf-8'}</a>
+                                                            </td>
+                                                            <td>
+                                                                <switch name="item.play_type">
+                                                                    <case value="1">
+                                                                        <a class="text-orange" title="让球">让球</a>
+                                                                    </case>
+                                                                    <case value="-1">
+                                                                        <a class="text-orange" title="大小">大小</a>
+                                                                    </case>
+                                                                    <case value="-2">
+                                                                        <a class="text-orange" title="让球胜平负">让球胜平负</a>
+                                                                    </case>
+                                                                    <case value="2">
+                                                                        <a class="text-orange" title="胜平负">胜平负</a>
+                                                                    </case>
+                                                                </switch>
+                                                            </td>
+                                                            <td>{$item.handcp|default="--"}<span class="text-red">({$item.odds|default="--"})</span></td>
+                                                            <td>
+                                                                <if condition="$item.result eq 0">
+                                                                    {$item.vote_point}
+                                                                    <else/>
+                                                                    <em <notempty name="item.earn_point">class="text-red"</notempty> >
+                                                                    {$item.earn_point|default="--"}
+                                                                    </em>
+                                                                </if>
+                                                            </td>
+                                                            <td>{$item.tradeCoin}</td>
+                                                            <td>
+                                                                <a title="{$item.Answer}" href="javascript:;">
+                                                                    {$item.Answer|msubstr=###,0,5,'utf-8'}(<em class="text-red">{$item.quiz_number}</em>)
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <switch name="item.result">
+                                                                    <case value="1"><span class="text-red">赢</span></case>
+                                                                    <case value="0.5"><span class="text-red">赢半</span></case>
+                                                                    <case value="2"><span class="text-tie">平</span></case>
+                                                                    <case value="-1"><span class="text-lose">输</span></case>
+                                                                    <case value="-0.5"><span class="text-lose">输半</span></case>
+                                                                    <case value="-10"><span class="text-lose">取消</span></case>
+                                                                    <case value="-11"><span class="text-lose">待定</span></case>
+                                                                    <case value="-12"><span class="text-lose">腰斩</span></case>
+                                                                    <case value="-13"><span class="text-lose">中断</span></case>
+                                                                    <case value="-14"><span class="text-lose">推迟</span></case>
+                                                                    <default /><span><b>-</b><b>-</b></span>
+                                                                </switch>
+                                                            </td>
+                                                            <td>
+                                                                <a title="{$item.analysis}" class="btn btn-orange detail-btn">详情</a>
+                                                            </td>
+                                                            </tr>
+                                                        </volist>
+                                                        </tbody>
+                                                    </table>
+                                                    <!--页码开始-->
+                                                    <div class="pageNum">
+                                                        <nav aria-label="...">
+                                                            <ul class="pagination clearfix">
+                                                                {$show}
+                                                                <li>
+                                                                    <input class="form-control isTxt" type="text" value="{$_REQUEST.p|default=1}" name="p">
+                                                                </li>
+                                                                <li id="GO"><a href="javascript:void(0)">GO</a></li>
+                                                            </ul>
+                                                            <div class="">共有{$totalCount}条，每页显示：{$numPerPage}条</div>
+                                                        </nav>
+                                                    </div>
+                                                    <!--页码结束-->
+                                                </div>
+                                                <else/>
+                                                <p>&nbsp;&nbsp;&nbsp;没有推荐记录哦！ <a href="{:U('@jc')}" target="_blank"><i class="icon-arrow-right text-tie"> 去推荐大厅</i></a></p>
+                                            </notempty>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Tab panes -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+    <!-- 模态窗口开始01 -->
+    <div class="modal ditai01 fade showDetail bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="margin-top: 16%;margin-left: 40%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">竞猜详情</h4>
+            </div>
+            <div class="modal-body">
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">对阵队伍：</dt>
+                    <dd class="pull-left"><span class="mach_name" style="color:#5b8ae9;"></span><em class="game_team"></em></dd>
+                </dl>
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">比赛时间：</dt>
+                    <dd class="pull-left game_date"></dd>
+                </dl>
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">推荐玩法：</dt>
+                    <dd class="pull-left play_type"></dd>
+                </dl>
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">推荐情况：</dt>
+                    <dd class="pull-left text-red answer"></dd>
+                </dl>
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">独家分析：</dt>
+                    <dd class="pull-left text-orange desc"></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="gamble_type" value="{$_REQUEST.gamble_type}">
+</block>
+<block name='js'>
+    <script>
+        //绑定a标签
+        $("#GO").find("a").bind("click", function(){
+            var p = $("input[name='p']").val();
+            if (isNaN(p)) {
+                return;
+            } else if (p>0){
+                var gamble_type = $("input[name='gamble_type']").val();
+                if(gamble_type == ''){
+                    window.location.href="/UserGamble/gambleFtball/p/"+p+".html";
+                }else{
+                    window.location.href="/UserGamble/gambleFtball/gamble_type/"+gamble_type+"/p/"+p+".html";
+                }
+            }
+        });
+        //推荐详情框
+        $(".detail-btn").on('click',function(){
+            var union_name = $(this).parent().siblings().eq(0).find('a').attr('title');
+            var game_date  = $(this).parent().siblings().eq(1).find('a').attr('title');
+            var home_team_name = $(this).parent().siblings().eq(2).find('a').attr('title');
+            var away_team_name = $(this).parent().siblings().eq(4).find('a').attr('title');
+            var play_type = $(this).parent().siblings().eq(5).find('a').attr('title');
+            var answer = $(this).parent().siblings().eq(9).find('a').attr('title');
+            var analysis = $(this).attr('title');
+            var handcp = $(this).parent().siblings().eq(6).text();
+            //赋值赛事信息
+            $('.showDetail').find('.mach_name').text(union_name);
+            $('.showDetail').find('.game_team').text(home_team_name+" VS "+away_team_name);
+            $('.showDetail').find('.game_date').text(game_date);
+            $('.showDetail').find('.play_type').text(play_type);
+            $('.showDetail').find('.answer').text(answer +' '+ handcp);
+            var desc = analysis != '' ? analysis : "<span class='text-999'>暂无分析<span>";
+            $('.showDetail').find('.desc').html(desc);
+            $('.showDetail').modal('show');
+        })
+        $('.reset-data').on('click',function(){
+            layer.confirm('重置数据需要花费5金币，确认要重置吗？<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red">（重置后推荐数据将清空）</span>', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                var gamble_type = $("input[name='gamble_type']").val();
+                $.ajax({
+                    type:'get',
+                    data:{gamble_type:gamble_type},
+                    url : DOMAIN_URL+'/Common/resetGambleData.html',
+                    dataType : 'jsonp',
+                    jsonp:"resetdata",
+                    success : function(msg) {
+                        if(msg.status == 1){
+                            showMsg(msg.info,1500,'success');
+                        }else{
+                            showMsg(msg.info,1500,'error');
+                        }
+                    }
+                });
+            }, function(){
+                return;
+            });
+        });
+    </script>
+</block>

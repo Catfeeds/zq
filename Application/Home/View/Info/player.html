@@ -1,0 +1,555 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/info/dataDase.css">
+    <link rel="stylesheet" href="__PUBLIC__/Plugs/myscroll/jquery.mCustomScrollbar.css">
+</block>
+<block name="content">
+<!-- 顶部栏 -->
+<div class="themeBox">
+    	<div class="topBanner"></div>
+        <div class="themeNavConBox">
+            <div class="themeNavCon">
+                <div class="themeNavBox">
+                    <div class="clearfix themeNavIn">
+                        <h1 class="pull-left themeLogo"><a href="{:U('/')}" title="全球体育首页" class="skewLeft"><img class="skewRight" src="__IMAGES__/special/theme-logo.png" width="142" height="35"></a></h1>
+                        <div class="pull-left themeNav skewLeft">
+                            <ul class="clearfix skewRight">
+                                <volist name="nav" id="vo">
+                                    <li class="pull-left"><a target="_blank" href="{$vo.url}" ><span>{$vo.name}</span> </a></li>
+                                </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main -->
+        <div class="main">
+            <!-- 当前位置 -->
+            <div class="position">
+                当前位置：<span class="now"><a href="{:U('/@data')}" >资料库</a></span>&gt;<span class="text-red">{$playerInfo.player_name.0}</span>
+            </div>
+        	<div class="hotMatch">
+                <div class="clearfix title">
+                	<h2 class="pull-left">热门赛事</h2>
+                    <!--<div class="col-lg-3 pull-right hotSearch">-->
+                        <!--<div class="input-group">-->
+                            <!--<input type="text" class="form-control" placeholder="搜索">-->
+                            <!--<span class="input-group-btn">-->
+                                <!--<button class="btn" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>-->
+                            <!--</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="matchList">
+                	<ul class="clearfix">
+                        <volist name="hot_league" id="voHot">
+                            <li class="pull-left">
+                                <a href="{$voHot.jump_url}" target="_blank" title="{$voHot.name}">
+                                    <img src="{$voHot.logo}" width="30" height="20">{$voHot.name}
+                                </a>
+                            </li>
+                        </volist>
+                	</ul>
+                </div>
+            </div>
+        	
+            <!-- typeMatch -->
+            <div class="typeMatch typeMatch05 clearfix">
+            	<div class="pull-left clearfix matBox">
+                	<span class="jersey">{$playerInfo.player_number}</span>
+                    <div class="pull-left matLogo"><img class="img-circle" src="{$playerInfo.logo}" width="96" height="96"></div>
+                    <div class="pull-left matName ml20 pt10">
+                        <h3>{$playerInfo.player_name.0}</h3>
+                        <p class="text-fff matNameEn text-hidden" title="{$playerInfo.player_name.2}">英文名：{$playerInfo.player_name.2}</p>
+                        <p class="text-fff">合同截止：{$playerInfo.contract_due_date}</p>
+                    </div>
+                </div>
+                <div class="pull-right matInfo">
+                	<ul class="clearfix">
+                        <li class="pull-left clearfix column">
+                            <volist name="playerInfo['hexagon']" id="hexagon">
+                                <div class="pull-left">
+                                    <div class="progBox">
+                                        <div class="progBoxBar {$hexagon[2]}" style="height: {$hexagon[1]}%"><span>{$hexagon[1]}</span></div>
+                                    </div>
+                                    <p class="text-666 text-center mt5">{$hexagon[0]}</p>
+                                </div>
+                            </volist>
+                        </li>
+                        <li class="pull-left info">
+                        	<p>球员身价：<span class="text-blue">{$playerInfo.value}万</span>英镑</p>
+                            <p class="f12"><span class="text-666">国&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;籍：</span> {$playerInfo.country}</p>
+                            <p class="f12"><span class="text-666">出生日期：</span> {$playerInfo.birthday}</p>
+                        </li>
+                        <li class="pull-left info">
+                        	<p class="f12">身高/体重：{$playerInfo.height}cm / {$playerInfo.weight}kg</p>
+                            <p class="f12"><span class="text-666">效力球队：</span> {$playerInfo.team_name}</p>
+                            <p class="f12"><span class="text-666">场上位置：</span> {$playerInfo.position}</p>
+                        </li>
+                	</ul>
+                </div>
+            </div>
+            <!-- typeMatch -->
+            <!-- left-no-data -->
+            <!--<div class="left-no-data" style="display:none"></div>-->
+            <!-- left-no-data -->
+            <!-- content -->
+            <div class="content clearfix">
+            	<div class="pull-left dataLeft">
+
+                    <!-- tableData -->
+                    <div class="tableData tableData01">
+                    	<div class="statTit longStatTit clearfix">
+                            <h3 id="qytd" class="container-fluid title text-fff pull-left" title="球员特点"><span class="f18 mr10 strong">球员特点</span> <span class="f12 text-uppercase">Player characteristics</span></h3>
+                            <!-- Split button -->
+                            <!--<div class="btn-group pull-right mr20">-->
+                                <!--<button type="button" class="btn rouNum">第3轮</button>-->
+                                <!--<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                                    <!--<span class="caret"></span>-->
+                                    <!--<span class="sr-only">Toggle Dropdown</span>-->
+                                <!--</button>-->
+                                <!--<ul class="dropdown-menu">-->
+                                    <!--<li><a href="#">第3轮</a></li>-->
+                                    <!--<li><a href="#">第3轮</a></li>-->
+                                    <!--<li><a href="#">第3轮</a></li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                            <!-- Split button -->
+                        </div>
+                        <table class="table playerTd02" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr bgcolor="#cfd2dd">
+                                    <th width="100%" colspan="2"><span class="glyphicon glyphicon-plus text-green mr5"></span>优势</th>
+                                </tr>
+                            </thead>
+                            <tbody class="f12">
+                            <volist name="playerInfo['character'][1]" id="ch1">
+                                <tr bgcolor="#f8f9fd">
+                                    <td width="50%" class="b-r">{$ch1[0][2]}</td>
+                                    <td width="50%" class="b-r">{$ch1[1][2]}</td>
+                                </tr>
+                            </volist>
+
+                            </tbody>
+                        </table>
+                        <table class="table playerTd02" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr bgcolor="#cfd2dd">
+                                    <th width="100%" colspan="2"><span class="glyphicon glyphicon-minus text-red mr5"></span>弱点</th>
+                                </tr>
+                            </thead>
+                            <tbody class="f12">
+                                <volist name="playerInfo['character'][2]" id="ch2">
+                                    <tr bgcolor="#f8f9fd">
+                                        <td width="50%" class="b-r">{$ch2[0][2]}</td>
+                                        <td width="50%" class="b-r">{$ch2[1][2]}</td>
+                                    </tr>
+                                </volist>
+                            </tbody>
+                        </table>
+                        <table class="table playerTd02" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr bgcolor="#cfd2dd">
+                                    <th width="100%" colspan="2">风格</th>
+                                </tr>
+                            </thead>
+                            <tbody class="f12">
+                                <volist name="playerInfo['character'][3]" id="ch3">
+                                    <tr bgcolor="#f8f9fd">
+                                        <td width="50%" class="b-r">{$ch3[0][2]}</td>
+                                        <td width="50%" class="b-r">{$ch3[1][2]}</td>
+                                    </tr>
+                                </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- tableData -->
+                    <!-- tableData -->
+                    <div class="tableData tableData01">
+                    	<div class="statTit clearfix">
+                            <h3 id="jqsj" class="container-fluid title text-fff pull-left" title="近期数据"><span class="f18 mr10 strong">近期数据</span> <span class="f12 text-uppercase">Recent data</span></h3>
+                            <!-- Split button -->
+                            <div class="btn-group pull-right mr20">
+                                <button type="button" class="btn rouNum">全部赛事</button>
+                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" id="twoYearMenu">
+                                    <li><a href="javascript:void (0);" data-type="全部赛事">全部赛事</a></li>
+                                </ul>
+                            </div>
+                            <!-- Split button -->
+                        </div>
+                        <table class="table playerData" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr bgcolor="#cfd1dd">
+                                    <th width="74">赛事</th>
+                                    <th width="90">时间</th>
+                                    <th width="110">主队</th>
+                                    <th width="50">比分</th>
+                                    <th width="110">客队</th>
+                                    <th width="46">进球</th>
+                                    <th width="46">点球</th>
+                                    <th width="46">黄牌</th>
+                                    <th width="46">红牌</th>
+                                    <th width="72">评分</th>
+                                </tr>
+                            </thead>
+                            <tbody id="twoYearData">
+                                <!--<tr>-->
+                                	<!--<td colspan="12">-->
+                                    	<!--<nav aria-label="Page navigation">-->
+                                          <!--<ul class="pagination pagination-sm">-->
+                                            <!--<li>-->
+                                              <!--<a href="#" aria-label="Previous">-->
+                                                <!--<span aria-hidden="true">«</span>-->
+                                              <!--</a>-->
+                                            <!--</li>-->
+                                            <!--<li><a href="#">1</a></li>-->
+                                            <!--<li><a href="#">2</a></li>-->
+                                            <!--<li><a href="#">3</a></li>-->
+                                            <!--<li><a href="#">4</a></li>-->
+                                            <!--<li><a href="#">5</a></li>-->
+                                            <!--<li>-->
+                                              <!--<a href="#" aria-label="Next">-->
+                                                <!--<span aria-hidden="true">»</span>-->
+                                              <!--</a>-->
+                                            <!--</li>-->
+                                          <!--</ul>-->
+                                        <!--</nav>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- tableData -->
+
+                    <!-- tableData -->
+                    <div class="tableData">
+                    	<div class="statTit longStatTit clearfix">
+                            <h3 id="syzs" class="container-fluid title text-fff pull-left" title="生涯走势"><span class="f18 mr10 strong">生涯走势</span> <span class="f12 text-uppercase">Career trend</span></h3>
+                        </div>
+                        <div class="chartBox clearfix">
+                        	<div id="chartCareer" class="pull-left chartCareer"></div>
+                            <div id="chartWorth" class="pull-right chartWorth"></div>
+                        </div>
+                    </div>
+                    <!-- tableData -->
+                </div>
+
+            	<div class="pull-right dataRight">
+                    <!-- left-no-data -->
+                    <!--<div class="right-no-data"></div>-->
+                    <!-- left-no-data -->
+                	<!-- rIntro -->
+                    <if condition="$playerInfo.player_intro neq null ">
+                	<div class="rIntro">
+                    	<div class="statTit clearfix">
+                            <h3 class="title text-fff pull-left" title="球员介绍"><span class="f18 mr10 strong">球员介绍</span> <span class="f12 text-uppercase">team Introduction</span></h3>
+                        </div>
+                        <div class="introBox">
+                        	<p>{$playerInfo.player_intro}</p>
+                        </div>
+                    </div>
+                    </if>
+                    <!-- rIntro -->
+
+                    <!-- rIntro -->
+                    <if condition="$playerInfo['player_honor'] neq null ">
+                	<div class="rGlory">
+                    	<div class="statTit clearfix">
+                            <h3 class="title text-fff pull-left" title="球员荣耀"><span class="f18 mr10 strong">球员荣耀</span> <span class="f12 text-uppercase">Player glory</span></h3>
+                        </div>
+                        <ul>
+                            <volist name="playerInfo['player_honor']" id="pn">
+                                <li class="clearfix odd">
+                                    <div class="pull-left cupImg"></div>
+                                    <div class="pull-left cupInfo">
+                                        <h3>{$pn.0}</h3>
+                                        <p class="text-999"><span class="mr10">{$pn[1]}</span></p>
+                                    </div>
+                                </li>
+
+                            </volist>
+                        </ul>
+                    </div>
+                    </if>
+                    <!-- rIntro -->
+
+                    <!-- rRcState -->
+                    <div class="rRcState">
+                    	<div class="statTit clearfix">
+                            <h3 class="title text-fff pull-left" title="近期状态"><span class="f18 mr10 strong">近期状态</span> <span class="f12 text-uppercase"> The fastest progress</span></h3>
+                        </div>
+                        <div class="state">
+                        	<div id="chartState" class="chartState"></div>
+                            <span class="trend">{$playerInfo['recent_status'][1]}</span>
+                        </div>
+                    </div>
+                    <!-- rRcState -->
+
+                    <!-- rZone -->
+                    <if condition="$teammate neq null ">
+                    <div class="rZone">
+                    	<div class="statTit clearfix">
+                            <h3 class="title text-fff pull-left"><span class="f18 mr10 strong">队友</span> <span class="f12 text-uppercase">Hot zone</span></h3>
+                        </div>
+                        <ul class="zoneNav zoneNav04 clearfix">
+                            <volist name="teammate" id="tm1">
+                                <li ><a href="javascript:;" data-type="{$key}">{$key}</a></li>
+                            </volist>
+                        </ul>
+                        <div class="zoneCo">
+                            <volist name="teammate" id="tm2">
+                                <ul class="zoneBox clearfix" style="display: none;" data-type="{$key}">
+                                    <volist name="teammate[$key]" id="tm3">
+                                        <li>
+                                            <a href="/player/{$tm3.player_id}.html" target="_blank">
+                                                <div class="zoneImg"><img src="{$tm3['logo']}" width="63" height="74"></div>
+                                                <div class="zonePlayer">
+                                                    <p class="pPlayer text-hidden" title="{$tm3['player_name']}">{$tm3['player_name']}</p>
+                                                    <p class="pTeam text-hidden">{$playerInfo['team_name']}</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </volist>
+
+                                </ul>
+                            </volist>
+                        </div>
+                    </div>
+                    </if>
+                    <!-- rZone -->
+                </div>
+            </div>
+            <!-- content -->
+        </div>
+        <!-- main -->
+    </div>
+
+    <!-- manRight -->
+    <!-- <nav class="navbar navbar-inverse navbar-fixed-top manRight">
+        <div class="data-fix-im"></div>
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="#qytd" title="球员特点">球员特点</a>
+                    </li>
+                    <li>
+                        <a href="#jqsj" title="球员特点">近期数据</a>
+                    </li>
+                    <li>
+                        <a href="#syzs" title="生涯走势">生涯走势</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> -->
+    <!-- manRight -->
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/info/echarts.min.js"></script>
+    <script type="text/javascript">
+
+        try {
+            var player_id = '{$playerInfo.player_id}';
+            var league_performance = JSON.parse('{$playerInfo.league_performance|json_encode}');
+
+            var mv_data = JSON.parse('{$playerInfo.mv_data|json_encode}');
+
+            //生涯走势
+            if(league_performance){
+                var seasons = league_performance.seasons;
+                var competitionNames = league_performance.competitionNames;
+                var rateCPs = league_performance.rateCPs;
+                var rates = league_performance.rates;
+
+                var xAxisDataArr = new Array;
+                for (var i = 0; i < seasons.length; i++) {
+                    var t = seasons[i] + " \n" + competitionNames[i];
+                    xAxisDataArr.push(t);
+
+                }
+
+
+                // 基于准备好的dom，初始化echarts实例
+                var myChartCareer = echarts.init(document.getElementById('chartCareer'));
+                // 指定图表的配置项和数据
+                var option = {
+                    title: {
+                        text: '生涯评分',
+                        textStyle: {
+                            color: '#ffffff',
+                            fontSize: '16',
+                            fontWeight: 'normal'
+                        },
+                        left: '120',
+                        top: '10'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    toolbox: {
+                        show: false,
+                        feature: {
+                            dataZoom: {},
+                            dataView: {
+                                readOnly: false
+                            },
+                            magicType: {
+                                type: ['line', 'bar']
+                            },
+                            restore: {},
+                            saveAsImage: {}
+                        }
+                    },
+                    xAxis: {
+                        show: true,
+                        type: 'category',
+                        boundaryGap: false,
+                        data: xAxisDataArr.slice(-5),
+                        axisLine: {
+                            lineStyle: {
+                                color: '#ffffff',
+                                width: 1
+                            },
+                            interval: 0,
+                            rotate: -30
+                        }
+                    },
+                    yAxis: {
+                        show: false,
+                        type: 'value',
+                        axisLabel: {
+                            formatter: '{value}'
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#ffffff',
+                                width: 1
+                            }
+                        }
+                    },
+                    series: [
+                        {
+                            name: '赛季评分',
+                            type: 'line',
+                            data: rates.slice(-5)
+                        },
+                        {
+                            name: '排名',
+                            type: 'line',
+                            data: rateCPs.slice(-5),
+                            itemStyle : {
+                                normal : {
+                                    color:'#01af63',
+                                    lineStyle:{
+                                        color:'#01af63'
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChartCareer.setOption(option);
+            }
+
+
+
+            //身价浮动
+            var myChartWorth = echarts.init(document.getElementById('chartWorth'));
+
+            var seriesData = mv_data.serial;
+            if(seriesData){
+                var seriesY = new Array;
+                var xAxisYear = new Array;
+                for (var j = 0; j < seriesData.length; j++) {
+                    seriesY.push(seriesData[j]['y']);
+                    var unixTimestamp = new Date(parseInt(mv_data.categories[j] - 24 * 3600 * 1000));
+                    var xdate = unixTimestamp.toLocaleString().split(' ')[0];
+                    xAxisYear.push(xdate+'，年龄：'+seriesData[j]['age'] + '，俱乐部：'+seriesData[j]['verein'] )
+                }
+
+                var option02 = {
+                    title: {
+                        text: '身价浮动（欧元）',
+                        textStyle: {
+                            color: '#ffffff',
+                            fontSize: '16',
+                            fontWeight: 'normal',
+                        },
+                        left: '120',
+                        top: '10',
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: [
+                        {
+                            show: false,
+                            type: 'category',
+                            boundaryGap: false,
+                            data: xAxisYear
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            show: false,
+                            type: 'value',
+                            splitNumber:1000000,
+                        }
+                    ],
+                    series: [
+                        {
+                            name: '身价',
+                            type: 'line',
+                            stack: '身价',
+                            areaStyle: {normal: {}},
+                            data: seriesY
+                        },
+                    ]
+                };
+
+
+                myChartWorth.setOption(option02);
+            }
+
+            //近期状态
+            var rate = "{$playerInfo['recent_status'][0]}";
+            var trend = "{$playerInfo['recent_status'][1]}";
+            var myChartState = echarts.init(document.getElementById('chartState'));
+            var option03 = {
+                tooltip: {
+                    formatter: "{a} <br/>{b} : {c}%"
+                },
+                series: [
+                    {
+                        name: '近期状态',
+                        type: 'gauge',
+                        detail: {formatter: '{value}'},
+                        max:10,
+                        data: [{value: rate, name:""}]
+                    }
+                ]
+            };
+            myChartState.setOption(option03);
+
+        } catch (e) {
+            console.log(e)
+        }
+
+    </script>
+
+    <script type="text/javascript" src="__JS__/info/player.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Plugs/myscroll/jquery.mCustomScrollbar.concat.min.js"></script>
+</block>

@@ -1,0 +1,75 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>国家名称：</label>
+				<input type="text" name="country_name" value="{$_REQUEST.country_name}"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/euro_edit/type/2" target="dialog" mask="true" height="400"><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/euro_del/id/{sid_record}/type/2" target="ajaxTodo" title="你确定要删除吗？" warn="请选择记录"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/euro_edit/id/{sid_record}/type/2" target="dialog" mask="true" warn="请选择记录" height="400"><span>编辑</span></a></li>
+			<li><a class="add" href="__URL__/EuroIntegral" target="navTab" mask="true" title="积分榜"><span>刷新</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="30" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="50">小组字母</th>
+			<th width="50">国家名称</th>
+			<th width="50">轮次</th>
+			<th width="50">胜</th>
+			<th width="50">平</th>
+			<th width="50">负</th>
+			<th width="50">进球</th>
+			<th width="50">失球</th>
+			<th width="50">积分</th>
+			<th width="50">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['group_letter']}</td>
+					<td>{$vo['country_name']}</td>
+					<td>{$vo['round']}</td>
+					<td>{$vo['win']}</td>
+					<td>{$vo['draw']}</td>
+					<td>{$vo['lose']}</td>
+					<td>{$vo['score']}</td>
+					<td>{$vo['lose_ball']}</td>
+					<td>{$vo['integral']}</td>
+					<td>
+						<a href="__URL__/euro_edit/id/{$vo.id}/type/2" target="dialog" mask="true" title="编辑" rel="editPage" height="400">编辑</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

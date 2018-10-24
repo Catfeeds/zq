@@ -1,0 +1,99 @@
+
+/**
+ * 数据公用头部css样式文件
+ * 
+ * @author Pengjian <710348662@qq.com>
+ * @since  2016-11-02 
+**/
+
+.blWith,.compare-data,.itemTable{ background: #ffffff; padding: 20px;}
+.itemTable{ margin-bottom: 16px; box-shadow: 0 8px 10px rgba(0,0,0,0.4); -moz-box-shadow: 0 8px 10px rgba(0,0,0,0.4); -o-box-shadow: 0 8px 10px rgba(0,0,0,0.4); -webkit-box-shadow: 0 8px 10px rgba(0,0,0,0.4);}
+.itemTable .table{ margin-bottom: 0;}
+
+.saleTit{ color: #1e88d2;}
+.table>tbody>tr>td.betTit{ padding-left: 20px;}
+select{ background: #fff;}
+
+.itemTable .tb_data_fenxi tbody  tr th{ background: #3f697e; color: #fff; font-size: 18px;}
+.table > tbody > tr > td.team_zhu,.table > tbody > tr > td.team_ke{ font-size: 16px;}
+
+/*checkbox按钮*/
+.cb{text-align: right!important;padding-right: 10px!important;}
+.cb .tzChoose{ margin-left: 20px;}
+.cb .tzChoos select{ background: #fff; padding: 2px 4px; border-radius: 3px;}
+.cb .tzChoose label{ margin-bottom: 0;}
+.itemTable .tb_data_fenxi tbody  tr th .chooseSel{color: #666; font-size: 16px;}
+.itemTable .tb_data_fenxi tbody  tr th .chooseSel select{ height: 23px; border-radius: 4px; margin-left: 10px;}
+.teamName{ padding-left: 20px;}
+.sele_pl{width: 95px;height: 25px;padding-left: 25px;border:1px solid #dddddd;}
+.span_padding span{padding:0 3px;}
+/* 赛况 技术 阵容*/
+.mid-time{ background: #4d7082; color: #ffffff;}
+.table .alignRight{ text-align: right; padding-right: 20px;}
+.table .alignLeft{ text-align: left; padding-left: 20px;}
+.expand-percent{ position: relative; height: 10px; background: #ffffff;}
+.expand{ position: absolute; height: 10px; background: #4d7082;}
+.alignRight .expand{ right: 0;}
+.alignLeft .expand{ left: 0;}
+.alignRight .even{ margin-right: 20px;}
+.alignLeft .even{ margin-left: 20px;}
+.player_con em{ width: 30px; line-height: 26px; display: block; text-align: center; color: #1490d8; background: url(../../images/event/num_black.png) no-repeat 0 0;}
+.player_con .name{ line-height: 26px; }
+.player_con .place{ width: 24px; height: 26px;}
+.player_con .num_red{ background: url(../../images/event/num_red.png) no-repeat  0 0; color: #fff;}
+
+/*Fenix*/
+.pieCon{ padding: 20px 0; position: relative;}
+.proCon{ width: 710px; margin: 0 auto; background:#fff;}
+.proCon ul li{ width: 33.3%; height: 28px; line-height: 28px; color: #ffffff; text-indent: 10px;}
+.winRed{background: #ff5050;}
+.flatBlue{background: #329ae7;}
+.loseGreen{ background: #36c888;}
+
+.circle { width: 74px; height: 74px; position: absolute; top:10px; border-radius: 50%; background: #0cc; }
+.circleRight{ right: 112px; background: #6e7abe;}
+.circleLeft{ left: 112px; background: #ff5050;}
+.circle .pie_left, .circle .pie_right { width:74px;   height:74px; position: absolute; top: 0;left: 0; }
+.circleLeft .pieLeftIn,.circleLeft .pieRightIn {  width:74px;  height:74px;  background:#ffb9b9; border-radius: 50%; position: absolute; top: 0; left: 0;}
+.circleRight .pieLeftIn,.circleRight .pieRightIn {  width:74px;  height:74px;  background:#c5cae5; border-radius: 50%; position: absolute; top: 0; left: 0;}
+.circle .pie_right,.circle .pieRightIn { clip:rect(0,auto,auto,37px);}
+.circle .pie_left,.circle .pieLeftIn { clip:rect(0,37px,auto,0); }
+.circle .mask {width: 66px; height: 66px;border-radius: 50%; left: 4px; top: 4px; background: #FFF; position: absolute; text-align: center; line-height: 64px; font-size: 18px; font-weight: bold; color: #ff5050; }
+.maPro{ width: 50px; height: 24px; text-align: center; font-size: 16px; color: #666; background: #ffffff; position: absolute; bottom: -8px; left: 12px;}
+
+.warPro{ width: 200px;  margin: 0 auto;  font-size: 14px; color: #666;}
+.warPro ul li{ margin-bottom: 5px;}
+.signTitle span{ margin-right: 20px;}
+.signTitle i{ display: inline-block; margin-right: 8px; width: 10px; height: 10px;}
+.winBg{ background: #ff5050;}
+.winPanBg{ background: #6e7abe;}
+.winPent .winPentTix{ margin: 0 20px;}
+.winColor{ color: #ff5050;}
+.winPanColor{ color: #6e7abe;}
+
+/*赢盘率*/
+.circle2 { width: 100px; height: 100px; position: absolute; top:10px; border-radius: 50%;}
+.circleRight2{ right: 370px; background: #6e7abe;}
+.circleLeft2{ left: 370px; background: #6e7abe;}
+.circle2 .pie_left2, .circle2 .pie_right2 { width:100px;   height:100px; position: absolute; top: 0; left: 0; }
+.circleLeft2 .pieLeftIn2,.circleLeft2 .pieRightIn2 {  width: 100px;  height: 100px;  background:#c5cae5; border-radius: 50%; position: absolute; top: 0; left: 0;}
+.circleRight2 .pieLeftIn2,.circleRight2 .pieRightIn2 {  width: 100px;  height: 100px;  background:#c5cae5; border-radius: 50%; position: absolute; top: 0; left: 0;}
+.circle2 .pie_right2,.circle2 .pieRightIn2 { clip:rect(0,auto,auto,50px);}
+.circle2 .pie_left2,.circle2 .pieLeftIn2 { clip:rect(0,50px,auto,0); }
+.circle2 .mask2 {width: 80px; height: 80px;border-radius: 50%; left: 10px; top: 10px; background: #FFF; position: absolute; text-align: center; line-height: 64px; font-size: 18px; font-weight: bold; color: #ff5050; }
+/*胜率*/
+.circle3 { width: 78px; height: 78px; position: absolute; top:10px; border-radius: 50%; z-index: 1;}
+.circleRight3{ right: 381px; top: 21px; background: #ff5050;}
+.circleLeft3{ left: 381px; top: 21px; background: #ff5050;}
+.circle3 .pie_left3, .circle3 .pie_right3 { width: 78px;   height: 78px; position: absolute; top: 0; left: 0; }
+.circleLeft3 .pieLeftIn3,.circleLeft3 .pieRightIn3 {  width: 78px;  height: 78px;  background:#ffd1d1; border-radius: 50%; position: absolute; top: 0; left: 0;}
+.circleRight3 .pieLeftIn3,.circleRight3 .pieRightIn3 {  width: 78px;  height: 78px;  background:#ffd1d1; border-radius: 50%; position: absolute; top: 0; left: 0;}
+.circle3 .pie_right3,.circle3 .pieRightIn3 { clip:rect(0,auto,auto,39px);}
+.circle3 .pie_left3,.circle3 .pieLeftIn3 { clip:rect(0,39px,auto,0); }
+.circle3 .mask3 {width: 58px; height: 58px;border-radius: 50%; left: 10px; top: 10px; background: #FFF; position: absolute; text-align: center; line-height: 58px; font-size: 18px; font-weight: bold; color: #ff5050; }
+
+.playerStop li{ margin-left: 20px; font-size: 14px; color: #4d4d4d;}
+.player_con li{  padding: 10px; margin-left: 10px;}
+.player_con em{ width: 30px; line-height: 26px; display: block; text-align: center; color: #1490d8; background: url(../../images/event/num_black.png) no-repeat 0 0;}
+.player_con .name{ line-height: 26px; margin-left: 10px;}
+.player_con .num_red{ background: url(../../images/event/num_red.png) no-repeat  0 0; color: #fff;}

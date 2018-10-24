@@ -1,0 +1,52 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>{$seo_title}资讯_手机全球体育手机网</title>
+</block>
+<block name="append">
+<include file="Public/append-widget"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/news.css?v=20180607">
+    <link rel="stylesheet" type="text/css" href="__CSS__/special/index.css?20180420">
+    <script type="text/javascript">var DOMAIN = "{:C('MAIN')}";</script>
+</block>
+<block name="header">
+    <header id="other_header" class="headFixed">
+        <a href="{:U('/Sporttery')}"></a>
+        <span>新闻资讯</span>
+    </header>
+</block>
+<!-- 导航-->
+<block name="nav">
+    <include file="News/nav"/>
+</block>
+<!-- 内容 -->
+<block name="content">
+
+    <section class="news_con clearfix" style='padding-top: 1.7rem;'>
+        <ul class='premier News'>
+            <volist name='list' id='vo'>
+                <li>
+                    <a class="clearfix" href="{$vo.url}" title="{$vo.title}">
+                        <div class="left-part"><h2>{$vo.title}</h2>
+                            <div class="Tit-t">
+                                <span>{$vo.add_time|date="Y-m-d",###}</span>
+                                <span class="num click_number">{$vo.click_number}<img src="/Public/Mobile/images/eye-icon.png" alt="全球体育网"></span>
+                            </div>
+                        </div>
+                        <div class="right-part"><img src="{$vo.img}" alt="{$vo.title}"></div>
+                    </a>
+                </li>
+            </volist>
+        </ul>
+        <input type="hidden" id="class_id" value="{$class_id}">
+        <div class="paged boxs">
+             <a href="javascript:;" class="btn btn-green boxs" id="loadMore">加载更多</a>
+            <div class="load_gif fs24 text-999" style='display: none;'>
+                <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>数据加载中，请稍候......</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">没有更多了</a>
+        </div>
+    </section>
+    <!-- 内容 e -->
+    <script type="text/javascript" src="__PUBLIC__/Mobile/js/news_class.js"></script>
+</block>

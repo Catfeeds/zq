@@ -1,0 +1,13 @@
+.ac_details{background: url(../../images/yaoyao/ewm_bg.jpg) no-repeat left top;width: 100%;min-height: 12.06rem;background-size: 100% 100%;position: relative;}
+.ac_ewm{width: 2.26rem;height: 2.26rem;padding-top: 6.8rem;margin: 0 auto}
+.ac_ewm p{color: #fff;margin-top: .2rem}
+.ac_details_rule{position: absolute;bottom: .3rem;left: 0}
+/*rule;*/
+.ac_rule{color: #fff;width: 80%;margin: 0 auto;margin-top: .6rem;margin-left: 10%}
+.ac_rule .ac_gold{position: absolute;left: 20%;top: -.46rem;background: url(../../images/yaoyao/gold.png) no-repeat left top;width: 1.28rem;min-height: .84rem;background-size: 1.28rem .84rem;}
+.ac_gold p:first-child{font-size: .3rem}
+.get_money{margin: 0 auto;width: 5.64rem;position: absolute;top: 35%;left: 50%;margin-left: -2.82rem}
+.gm_top{background: url(../../images/yaoyao/money_bg.png) no-repeat left top;width: 5.64rem;min-height: 2.99rem;background-size: 5.64rem 2.99rem;}
+
+
+

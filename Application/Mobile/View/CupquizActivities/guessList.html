@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta charset="UTF-8">   
+        <title>竞猜记录</title>
+        <link rel="apple-touch-icon" href="">
+        <link rel="shortcut icon" href="">
+        <!-- jquery -->
+        <script type="text/javascript" src="__PUBLIC__/Mobile/js/jquery-1.11.1.min.js"></script>
+        <!-- 自适应 计算html font-size -->
+        <script type="text/javascript" src="__PUBLIC__/Mobile/js/htmlwidth.js"></script>
+        <!-- 引入公共样式 -->
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Mobile/css/base.css">
+        <!-- <link rel="stylesheet" type="text/css" href="css/common.css">  -->
+        <style>
+          .wrapCon{min-height: 100%}
+           </style>
+    </head>
+    
+    <body>
+    <div style="display: none">
+        {:htmlspecialchars_decode($site_setting['mobileJs'])}
+    </div>
+    <!-- 页面所需css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/CupquizActivities/Qrecord.css">
+        <!-- 头部 -->
+        <header class="top">
+            <ul class="headline">
+                <a onclick="history.back(-1);" class="back"><img src="__IMAGES__/CupquizActivities/last.png"></a>
+                <li class="head-portrait"><img src="{$frontFace}"></li>
+                <li><a href="JavaScript:;">{$coin}Q币</a></li>
+                <li><a href="{:U('CupquizActivities/convert')}">兑换</a></li>
+                <li ><a href="{:U('CupquizActivities/activePage')}" >今日活动</a></li>
+                <li><a href="{:U('CupquizActivities/guessList')}" class="active">预测记录</a></li>
+            </ul>
+        </header>
+        <!-- 主体内容 -->
+        <section class="wrapCon">
+            <volist name="gamble" id="itemg">
+                <if condition="$itemg.result eq 0">
+                    <div class="top-main" data-url="{$itemg.sIdUrl}">
+                        <div class="tops">
+                            <span class="time">{$itemg.end_time|date='Y-m-d H:i',###}截止</span>
+                            <span class="draw">等待结果</span>
+                            <span class="secondary">好友助攻：</span>
+                            <span class="gold">{$itemg.qcoin}<i style="font-size: .24rem">Q币</i></span>
+                        </div>
+                        <div class="bottom">
+                            <volist name="itemg.gambleT" id="itemgg" key="k">
+                            <a title="{$itemgg.0}VS{$itemgg.1}">{$itemgg.0}VS{$itemgg.1}</a>
+                            </volist>
+                        </div>
+                    </div>
+                </if>
+            </volist>
+            <ul class="wrap-main">
+                <volist name="gamble" id="itemg">
+                    <if condition="$itemg.result neq 0">
+                        <li class="lir" data-url="{$itemg.sIdUrl}">
+                            <div class="wrap-top">
+                                <span class="wrap-time">{$itemg.end_time|date='n月d日',###}</span>
+                                <span class="wrap-name">小组赛预测</span>
+                                <span class="draw"></span>
+                                <span class="friends">好友助攻：</span>
+                                <span class="wrap-gold">{$itemg.qcoin}Q币</span>
+                            </div>
+                            <div class="wrap-bottom">
+                                <volist name="itemg.gambleT" id="itemgg" key="k">
+                                    <a title="{$itemgg.0}VS{$itemgg.1}">{$itemgg.0}VS{$itemgg.1}</a>
+                                </volist>
+                                <if condition="$itemg.result eq 1"><img src="__IMAGES__/CupquizActivities/red.png" alt=""></if>
+                                <if condition="$itemg.result eq -1"><img src="__IMAGES__/CupquizActivities/black.png" alt=""></if>
+                            </div>
+                        </li>
+                    </if>
+                </volist>
+            </ul>
+        </section>
+    </body>
+    <script>
+        $(document).ready(function () {
+            $('div.top-main').click(function () {
+                window.location.href = $(this).attr('data-url');
+            });
+            $('li.lir').click(function () {
+                window.location.href = $(this).attr('data-url');
+            })
+        })
+    </script>
+</html>

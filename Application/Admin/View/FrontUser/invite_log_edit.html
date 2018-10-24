@@ -1,0 +1,45 @@
+<div class="pageContent">
+
+	<form method="post" action="__URL__/invite_log_edit" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden"  value="{$_REQUEST.id}" name="id">
+		<div class="pageFormContent" layoutH="58">
+			<if condition="$_REQUEST.id neq ''">
+				<div class="unit">
+					<label>昵称：</label>
+					<span>{$vo.nick_name}</span>
+				</div>
+			<else/>
+				<div class="unit">
+					<label>用户ID：</label>
+					<input name="userId" class="required" type="text"/>
+				</div>
+			</if>
+			<div class="unit">
+				<label>增加一级邀请：</label>
+				<input type="text" size="40" class="required digits"   maxlength="30" name="first_num" value="{$vo.first_num}" />
+			</div>
+
+			<div class="unit">
+				<label>增加二级邀请：</label>
+				<input type="text" size="40" class="required digits"  maxlength="30" name="second_num" value="{$vo.second_num}"/>
+			</div>
+
+			<div class="unit">
+				<label>增加三级邀请：</label>
+				<input type="text" size="40" class="required digits"  maxlength="30" name="third_num" value="{$vo.third_num}"/>
+			</div>
+
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+
+
+</div>
+

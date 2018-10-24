@@ -1,0 +1,65 @@
+<div class="bd_list" coin="{$val1.sale}" rate="{$val1.total_rate}" time="{$val1.pub_time}" num="{$val1.num}">
+        <a href="{:U('Intro/intro_info',['id'=>$val1['id']])}"  target="_blank">
+            <div class="bdl_title">{$val1.name}</div>
+            <div class="bdl_con">
+                <div class="bdlc_top clearfix">
+                    <div class="bdlct_left fl">
+                        <img src="{$val1.logo}" alt="">
+                        <div class="near_get">
+                            <div class="ng_zhong"><em>近10中{$val1.ten_num}</em><em class="put_out" <if condition="$val1['release'] eq 2">style="background:#ff3e63;"</if>><if condition="$val1['release'] eq 2">已发布<else /> 未发布</if></em></div>
+                            <div class="ng_price"><span>价格：{$val1.sale}</span>金币/{$val1.game_num}场</div>
+                        </div>
+                    </div>
+                    <div class="bdlct_right fr">
+                        <p class="dr_percent"><span>{$val1.total_rate}</span>%</p>
+                        <p>累计回报率</p>
+                    </div>
+                </div>
+
+                <div class="put_game">
+                    <table class="table tb_put_game">
+                        <tbody>
+                        <tr class="tr_border">
+                            <th>开赛时间</th>
+                            <th>赛事</th>
+                            <th>对阵比赛</th>
+                            <th>玩法</th>
+                            <th>推介</th>
+                        </tr>
+                        <if condition="$introgamble[$val1['id']] eq ''">
+                        <td colspan="6" class="wait"><img src="/Public/Home/images/qw/wait.png" alt="" original="/Public/Home/images/qw/wait.png">敬请期待 </td>
+                            <else />
+                        <?php foreach($introgamble[$val1['id']] as $v):?>
+                            <?php echo "<tr>";?>
+                        <?php echo '<td>'.$v['game_time'].'</td>';?>
+                        <?php echo '<td>'.$v['union_name'].'</td>';?>
+                        <?php echo '<td>'.$v['home_team_name'].'<span>';?>
+                        <?php if($v['score']):?>
+                        <?php echo $v['score']?>
+                        <?php else:?>
+                        <?php echo 'VS'?>
+                        <?php endif;?>
+                        <?php echo '</span>'.$v['away_team_name'].'</td>';?>
+                        <?php echo '<td>';?>
+                        <?php if($v['play_type'] == 1):?>
+                        <?php echo '让球</td><td class="g_result">';?>
+                                <?php if($v['chose_side'] == 1) echo $v['home_team_name'];?>
+                                <?php if($v['chose_side'] == -1) echo $v['away_team_name'];?>
+                        <?php else:?>
+                        <?php echo '大小</td><td class="g_result">';?>
+                                <?php if($v['chose_side'] == 1) echo '大球';?>
+                                <?php if($v['chose_side'] == -1) echo '小球';?>
+                        <?php endif;?>
+                        <?php echo '<em>'.$v['handcp'].'</em>(<font>'.$v['odds'].'</font>)';?>
+                        <?php if($v['photo']):?>
+                        <?php echo "<img src='__PUBLIC__/Home/images/qw/".$v['photo'].".png' alt=''>"?>
+                        <?php endif;?>
+                        <?php echo '</td></tr>';?>
+                        <?php endforeach;?>
+                            </if>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </a>
+    </div>

@@ -1,0 +1,213 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/guess.css?v=20180619">
+</block>
+
+    <!-- 二级头部 s -->
+    <block name="header">
+    <include file="Public/header_inside"/>
+    </block>
+    <!-- 二级头部 e --> 
+     <block name="nav"></block>
+     
+     <!-- 筛选 s -->
+     <block name="content">
+     <aside class="recom_new clearfix">
+       <div class="type_sele clearfix" id="type_sele">
+        <a href="javascript:;">
+         <if condition="I('cookie.playtype2') == '1'">让球
+           <elseif condition="I('cookie.playtype2') == '-1'"/>大小球
+           <else/>全部
+         </if>
+        </a>
+        <a href="javascript:;">
+         <switch name="Think.cookie.wintype">
+          <case value="">周胜率</case>
+          <case value="2">等级高</case>
+          <case value="3">人气旺</case>
+          <case value="4">连胜多</case>
+          <case value="5">高命中</case>
+          <case value="6">月胜率</case>
+         </switch>
+        </a>
+       </div>
+       <div class="sele_con" id="se_0">
+         <ul>
+           <li><a class="play-type" href="javascript:;" rel="全部"><em class="br_title"></em>全部</a></li>
+           <li><a class="play-type" playtype="1" href="javascript:;" rel="让球"><em class="br_title"></em>让球</a></li>
+           <li><a class="play-type" playtype="-1" href="javascript:;" rel="大小球"><em class="br_title"></em>大小球</a></li>
+         </ul>
+       </div>
+       <div class="sele_con" id="se_1">
+         <ul> 
+           <li><a class="order-type" href="javascript:;" rel="周胜率"><em class="br_title"></em>周胜率</a></li>
+           <li><a class="order-type" ordertype="2" href="javascript:;" rel="等级高"><em class="br_title"></em>等级高</a></li>
+           <li><a class="order-type" ordertype="3" href="javascript:;" rel="人气旺"><em class="br_title"></em>人气旺</a></li>
+           <li><a class="order-type" ordertype="4" href="javascript:;" rel="连胜多"><em class="br_title"></em>连胜多</a></li>
+           <li><a class="order-type" ordertype="5" href="javascript:;" rel="高命中"><em class="br_title"></em>高命中</a></li>
+           <li><a class="order-type" ordertype="6" href="javascript:;" rel="月胜率"><em class="br_title"></em>月胜率</a></li>
+         </ul>
+       </div>  
+     </aside>
+     <!-- 筛选 e -->
+ 
+       <!-- 内容 s -->
+       <section class="recom_hot clearfix">
+       <div id="maskLayer"></div>
+        <ul class="posts">
+        <volist name="HostUser" id="item">
+           <li class="list">
+            <a href="{:U('/expUser/'.$item['user_id'])}">
+              <div class="rg_top">
+                 <div class="rgt_left"><img src="{$item.face}"></div>
+                 <div class="rgt_right">
+                  <p><span>{$item.nick_name}</span><em class="lv lv{$item.lv}"></em> <em class="shengc">胜场：{$item.WinCount}</em></p>
+                  <p>周胜率：{$item.weekWin}%   月胜率：{$item.monthWin}%</p>
+                  <p>
+                    <span>近{$item.tennum}中{$item.tenwin}</span>
+                    <gt name="item.curr_victs" value="0"><em><img src="__IMAGES__/xing.png">{$item.curr_victs}连胜</em></gt>
+                  </p>
+                 </div>
+              </div>
+              <div class="rg_bottom"><notempty name="item.gamble">最新推荐：{$item.gamble.home_team_name|switchName=0,###} <span>VS</span> {$item.gamble.away_team_name|switchName=0,###}<else/><span>即将发布</span></notempty></div>
+            </a>
+           </li> 
+        </volist>
+        </ul>
+        <input type="hidden" id="auto_load" value="1">
+        <div class="paged boxs">
+            <div class="load_gif fs24 text-999">
+                <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>正在加载更多的数据...</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已经全部加载完毕</a>
+        </div>
+       </section>
+       </block>
+       <!-- 内容 e -->
+
+<block name="scripts">
+<script> 
+     //默认点击显示
+     $("#type_sele a").each(function(i){
+       $(this).click(function(){ 
+         $(this).addClass("on").siblings().removeClass("on");
+         $(".sele_con").hide();
+         $("#se_" + i).show();
+         $("#maskLayer").show();
+       });
+     });
+
+     //隐藏
+     function hideAll(){
+      $(".sele_con").hide();
+      $("#type_sele a").removeClass("on");
+      $("#maskLayer").hide();
+     }
+
+     //遮罩层点击
+     $("#maskLayer").click(function(){
+      hideAll();
+     });       
+     // 全部 点击
+     $("#se_0 ul li a").click(function(){
+        var a_rel = $(this).attr("rel");
+        $("#type_sele a").eq(0).html(a_rel);
+        hideAll(); 
+     })  
+     // 按时间 点击
+     $("#se_1 ul li a").click(function(){
+        var a_rel = $(this).attr("rel");
+        $("#type_sele a").eq(1).html(a_rel);
+        // 文字超长控制背景V
+        if(a_rel == "按时间"){
+          $("#type_sele a").eq(1).css("background-position","74% center");
+        }else{
+          $("#type_sele a").eq(1).css("background-position","88% center");
+        }
+        hideAll();
+     })  
+     //排序cookie处理
+     $('.play-type').on('click',function(){
+       var type = $(this).attr("playtype");
+       if(type == '1' || type == '-1'){
+         Cookie.setCookie('playtype2',type, 1);
+       }else{
+         Cookie.delCookie('playtype2');
+       }
+       window.location.reload();
+     })
+     $('.order-type').on('click',function(){
+       var type = $(this).attr("ordertype");
+       if(type == '2' || type == '3' || type == '4' || type == '5' || type == '6'){
+         Cookie.setCookie('wintype',type, 1);
+       }else{
+         Cookie.delCookie('wintype');
+       }
+       window.location.reload();
+     })  
+     $(function () {
+         $("#auto_load").val(1);
+         var p = 1;// 初始化页面，点击事件从第二页开始
+         var flag = false;
+         if ($(".list").size() <= 0)
+         {
+             $("#auto_load").val(0);
+             $(".load_gif").hide();
+             $("#showLess").show();
+         }
+         $(window).scroll(function () {
+             var auto_load = $("#auto_load").val();
+             if (auto_load == 0) {
+                 return false;
+             }
+             //初始状态，如果没数据return ,false;否则
+             if ($(".list").size() <= 0)
+             {
+                 return false;
+             } else {
+                 if ($(document).height() - ($(document).scrollTop() + $(window).height()) <= 400) {
+                     if (auto_load == 1) {
+                         $("#auto_load").val(0);
+                         send();
+                     }
+                 }
+             }
+         });
+         function send() {
+             if (flag) {
+                 return false;
+             }
+             $.ajax({
+                 type: 'post',
+                 url: "/Guess/square.html",
+                 data: {k: p},
+                 dataType: 'json',
+                 success: function (data) {
+                     if (data.status == 1) {
+                         var list = data.info;
+                         $(".posts li:last").after(list);
+                         if (list != null) {
+                             $("#auto_load").val(1);
+                             if (data.info.length < 10) {
+                                 $("#auto_load").val(0);
+                                 $(".load_gif").hide();
+                                 $("#showLess").show();
+                                 flag = true;
+                             }
+                         }
+                     } else {
+                         $("#auto_load").val(0);
+                         $(".load_gif").hide();
+                         $("#showLess").show();
+                         flag = true;
+                     }
+
+                 }
+             });
+             p++;
+         }
+     });
+</script>
+</block>

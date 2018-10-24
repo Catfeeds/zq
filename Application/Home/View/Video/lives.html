@@ -1,0 +1,150 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" type="text/css" href="__CSS__/listInfo/listInfo.css">
+    <style>
+        video::-internal-media-controls-download-button {
+            display:none;
+        }
+        video::-webkit-media-controls-enclosure {
+            overflow:hidden;
+        }
+        video::-webkit-media-controls-panel {
+            width: calc(100% + 30px);
+        }
+    </style>
+</block>
+<block name="content">
+    <include file="Public:top_user"/>
+    <!-- 主体内容开始 -->
+    <div class="main">
+        <div class="position text-666">
+            当前位置：<span class="now"><a href="{:U('/')}">首页</a></span> &gt; <span class="now"><a href="{:U('/foot@Video')}">视频专区</a></span>
+            &gt; <span>正文</span>
+        </div>
+        <div class="content-m clearfix">
+            <!-- 左边内容开始 -->
+            <div class="pull-left left">
+                <div class="long testCss">
+                    <h1 class="title">{$jijin['title']}</h1>
+                    <p><span class="f12 text-80 mr5">{$jijin['add_time']|date="Y-m-d H:i",###}</span>
+                        <span class="f12 text-80 mr5">|</span>
+                        <span class="f12 text-80">作者: {$author.name}</span>
+                    <notempty name="list.remark">
+                        <p class="abstract">摘要：{$list.remark}</p>
+                    </notempty>
+                </div>
+                <div class="cont">
+                    <div class="cont-ban">
+                        <div class="ban">
+                            <if condition="$urlType eq 'neiqian'">
+                                <div style="width: 650px; height: 500px; background: #000;">
+                                    <iframe width="100%" height="500px" scrolling="no" frameborder="0" src="{$url}"></iframe>
+                                </div>
+                                <elseif condition="$urlType eq '2'"/>
+
+                                <!--[if lte IE 8]>
+                                    <embed allowfullscreen="true" allowscriptaccess="always" bgcolor="#000000" width="650px" height="500px" id="ply"
+                                           name="ply"
+                                           quality="high"
+                                           autostart="true"
+                                           salign="lt"
+                                           src="{$url}"
+                                           type="application/x-shockwave-flash"
+                                           wmode="opaque">
+                                    </embed>
+                                <![endif]-->
+                                <video controls="controls" autoplay="autoplay"  width="650px" height="500px" >
+                                    <source src="{$url}" type="video/mp4" />
+                                </video>
+                                <else/>
+                                <embed allowfullscreen="true" allowscriptaccess="always" bgcolor="#000000" width="650px" height="500px" id="ply"
+                                       name="ply"
+                                       quality="high"
+                                       autostart="true"
+                                       salign="lt"
+                                       src="{$url}"
+                                       type="application/x-shockwave-flash"
+                                       wmode="opaque">
+                                </embed>
+                            </if>
+                        </div>
+                        <div class="ban-w">
+                            {$jijin.remark}
+                        </div>
+                        <p class="statement">{:C('user_statement')}</p>
+                        <div class="ban-b">
+                            <if condition="$jijin['label'] neq ''">
+                                <span class="b-q">标签</span>
+                                <volist name="jijin['label']" id="item">
+                                    <span class="label-s"> <a target="_blank" href="{:U('/tag/'.$item[1].'@video')}">{$item[0]}</a></span>
+                                </volist>
+                            </if>
+                        </div>
+
+                        <div class="ban-c">
+                            <span>分享到</span>
+                            <include file="Public:baiduShare"/>
+                        </div>
+                        <div class="line-ban"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- 右边内容开始  -->
+            <div class="pull-right right">
+                <div class="uInfor">
+                    <a href="{:U('/expuser/'.$author['id'])}" target="_blank" class="clearfix mb15 faceInfor">
+                        <div class="pull-left uFace"><img class="img-circle" src="{$author.head}" width="auto"
+                                                          height="auto" alt="{$author.name}"></div>
+                        <div class="pull-left pl15">
+                            <div class="uName clearfix mb10">
+                                <p class="text-hidden nameText">{$author.name}</p>
+                                <p><span class="absType">特约专家</span></p>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="text-999 uIntro">{$author['descript']}</div>
+                    <!-- 文章数 -->
+                    <div class="classBox">
+                        <ul class="clearfix classUl">
+                            <li class="pull-left artiNum">
+                                <p><strong>{$author.total}</strong></p>
+                                <p class="text-999">文章数</p>
+                            </li>
+                            <li class="pull-left fansNum">
+                                <p><strong>{$author.followNum}</strong></p>
+                                <p class="text-999">粉丝</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="artLiBox">
+                    <h2>相关视频</h2>
+                    <div class="artlist">
+                        <ul>
+                            <volist name="more_video" id="item">
+                                <li class="li-small clearfix" >
+                                        <a target="_blank" href="{$item['href']}" title="{$item.title}" class="pull-left liImg">
+                                            <img src="{$item.img}" alt="{$item.title}">
+                                        </a>
+                                        <div class="liTxt pull-left">
+                                            <h3 class="name-l"><a target="_blank" href="{$item['href']}" title="{$item.title}">{$item.title}</a></h3>
+                                            <p class="time-l">{$item.add_time|date='Y-m-d H:i:s',###}</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 主体内容结束 -->
+</block>
+<block name="js">
+    <script>
+        var user_id = '{$user_id|default=0}';
+    </script>
+    <script type="text/javascript" src="__JS__/publish_index/index.js"></script>
+</block>
+

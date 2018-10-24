@@ -1,0 +1,60 @@
+<style>
+    .table2-config tr{
+        height: 35px;
+    }
+    .table2-config td{
+        text-align: center;
+        padding:12px;
+    }
+    .inputInfo2 {
+        line-height: 21px;
+    }
+</style>
+<div class="pageContent">
+    <form method="post" action="__URL__/exception_config" class="pageForm required-validate"  onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>异常监控配置管理：</label>
+                <table class="table2-config">
+                    <tr style="background: #f2f2f2;">
+                        <td>异常类型</td>
+                        <td>监控异常时间（分钟）</td>
+                        <td>异常标准（数量）</td>
+                        <td>异常描述</td>
+
+                    </tr>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td style="float:left;">{$vo['exception_name']}</td>
+                            <if condition="$key eq '1'">
+                                <input type="hidden" size="5" name="exception_name[{$key}]" value="{$vo['section_time']}">
+                                <input type="hidden" size="5" name="standard[{$key}]" value="{$vo['standard']}">
+                                <td>--</td>
+                                <td>--</td>
+                                <td>{$vo['descs']}</td>
+                            <else/>
+                                <td> <input class="digits" type="text" size="5" name="exception_name[{$key}]" value="{$vo['section_time']}">&nbsp;<span class="inputInfo2">分钟内</span></td>
+                                <td><input  class="digits"  type="text" size="5" name="standard[{$key}]" value="{$vo['standard']}"></td>
+                                <td  style="float:left;">{$vo['descs']}</td>
+                            </if>
+
+
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+
+
+
+

@@ -1,0 +1,163 @@
+<include file="Etc/head"/>
+<link rel="stylesheet" href="__CSS__/etc/ex_prize.css">
+
+<body>
+    <!-- 导航 s-->
+<include file="Etc/nav"/>
+<!-- 导航 e-->
+
+<section class="main">
+    <div class="guess_infor">
+        <figure class="clearfix">
+            <div class="fl headImg">
+                <img <present name="user_auth">src="{$user_auth['head_url']}" alt='{$user_auth['nick_name']}'<else/>src="__IMAGES__/user/headImg.png" alt='请登录'</present>>
+            </div>
+            <figcaption class="fl head_infor">
+                <p class="name"><present name="user_auth">{$user_auth['nick_name']}<else/>-</present></p>
+                <ul class="infor_ul">
+                  <li><span class="fs24">积分：</span><em id='u_integral' class="fs22"><present name="user_auth">{$user_auth['integral']}<else/>-</present></em></li>
+                  <li><span class="fs24">推荐币：</span><em id='u_coin' class="fs22"><present name="user_auth">{$user_auth['coin']}<else/>-</present></em></li>
+                  <li><span class="fs24">排名：</span><em class="fs22"><present name="user_auth"><eq name="user_auth['rank']" value="0">-<else/>{$user_auth['rank']}</eq><else/>-</present></em></li>
+                </ul>
+            </figcaption>
+            <a href="{:U('Etc/prize_log')}" class="etc-more" style="width:1.34rem;"><img style="width:1.34rem;" src="__IMAGES__/etc/rank-link.png" alt='兑换记录'></a>
+        </figure>
+    </div>
+        <div class="inform_title">
+            <p>兑奖专区<span>实物奖励将在八强赛后开放兑换</span></p>
+    </div>
+    <div class="cai_con">
+<!--        <div class="cai_title">
+            <div id="marquee">
+                <ul>
+                    <volist name='notice' id='v'>
+                        <li><a>兑换说明：{$v.title}</a></li>
+                    </volist>
+                </ul>
+            </div>
+        </div>-->
+        <div class="cai_list_con">
+            <ul class="clearfix">
+                <volist name='list' id='v' mod='2'>
+                    <li class="<eq name='mod' value='1'>fr<else/>fl</eq> prize_list">
+                        <p class="title_p"><em class="red">{$v.title}</em></p>
+                        <figure><img src="{$v.img}" alt='{$v.title}'></figure>
+                        <a href="javascript:;"  <eq name='v.allow' value='0'>class="dis"<else/>onclick="showdiv(this);" data-sale='{$v.is_sale}' data-id='{$v.id}' data-type='{$v.type}'</eq>>{$v.price}推荐币</a>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+    <!-- 抽奖专区 -->
+    <div class="inform_title">
+        <p>抽奖专区<span>抽奖时间：即日起—2016年7月18日截止</span></p>
+    </div>
+    <a href="{:U('Etc/exchange')}" class="do_task"><img src="__IMAGES__/etc/do-luck.png" alt='参与抽奖'></a>
+    <div class="luck_list">
+        <ul class="clearfix">
+            <li>
+                <figure><img src="__IMAGES__/etc/luck1.png" alt="苹果6S"></figure>
+                <p>iPhone6S 128G</p>
+            </li>
+            <li>
+                <figure><img src="__IMAGES__/etc/luck2.png" alt="欧洲杯豪门球衣"></figure>
+                <p>欧洲杯官方球衣</p>
+            </li>
+            <li>
+                <figure><img src="__IMAGES__/etc/luck3.png" alt="行车记录仪"></figure>
+                <p>行车记录仪</p>
+            </li>
+        </ul>
+        <ul class="clearfix">
+            <li>
+                <figure><img src="__IMAGES__/etc/luck4.png" alt='恒大VS国安门票'></figure>
+                <p>恒大VS国安门票</p>
+            </li>
+            <li>
+                <figure><img src="__IMAGES__/etc/luck5.png" alt='4G流量包'></figure>
+                <p>4G流量包</p>
+            </li>
+            <li>
+                <figure><img src="__IMAGES__/etc/luck6.png" alt='积分'></figure>
+                <p>积分</p>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- 模态窗口开始 -->
+<!-- <div id="show" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" onclick="hidediv();"><span></span></button>
+            <h4 class="modal-title">推荐提示</h4>
+        </div>
+        <div class="modal-body modal_pading">
+            <form action="">
+                <ul class="modal_ul">
+                    <li>您需消耗<em id='js-coin' class="red"></em>兑换<span id='js-title'></span></li>
+                </ul>
+                <div class="form_div">
+
+                </div>
+                <div class="modal-btn">
+                    <button type="button" id='js-change' class="btn btn-orange submit fs24">确定</button>
+                    <button type="button" onclick='hidediv()' class="btn btn-default fs24" data-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="bg" class="modal-backdrop" style="z-index: 1040;"></div> -->
+<div id="show" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" onclick="hidediv();"><span></span></button>
+            <h4 class="modal-title">推荐提示</h4>
+        </div>
+        <div class="modal-body fs22" style="padding: .2rem;">
+                <ul class="modal_ul q-tc">
+                    <li>您需消耗<em id='js-coin' class="red"></em>兑换<span id='js-title'></span></li>
+                </ul>
+            <p id='info_title' class="red q-tc" style="margin-bottom: .1rem;">请正确填写以下信息</p>
+                <div class="form_div clearfix">
+                    <div class="fl input-name">姓名：</div>
+                    <div class="fr input-con">
+                        <input id="re_name" class="form-control required name" name="name" type="text">
+                    </div>
+                </div>
+                <div class="form_div clearfix">
+                    <div class="fl input-name">手机号：</div>
+                    <div class="fr input-con">
+                        <input id="re_phone" class="form-control required mobile" name="mobile" type="text">
+                    </div>
+                </div>
+                <div class="form_div clearfix">
+                    <div class="fl input-name">地址：</div>
+                    <div class="fr input-con">
+                        <input id="re_address" class="form-control required mobile" name="mobile" type="text">
+                    </div>
+                </div>
+            <input type='hidden' id='pid' value=''>
+            <input type='hidden' id='ptype' value='1'>
+                <div class="modal-btn">
+                    <button type="button" id='js-change' class="btn btn-orange submit fs24">确定</button>
+                    <button type="button" onclick='hidediv()' class="btn btn-default fs24" data-dismiss="modal">取消</button>
+                </div>
+        </div>
+    </div>
+</div>
+<div id="bg" class="modal-backdrop" style="z-index: 1040;"></div>
+<!-- 模态窗口结束 -->
+<!-- 推荐成功 -->
+<div class="bubbleTips"></div>
+<!-- 推荐成功 -->
+<!-- 推荐失败 -->
+<div class="failTips"></div>
+<!-- 推荐失败 -->
+<script src="__JS__/etc/prize.js"></script>
+</body>
+</html>
+<script>
+
+</script>

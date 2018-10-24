@@ -1,0 +1,12 @@
+/* 
+* @Author: Marte
+* @Date:   2018-03-08 17:57:51
+* @Last Modified by:   Marte
+* @Last Modified time: 2018-03-08 18:03:29
+*/
+body{ height: auto; padding-bottom: 1rem;}
+.container{}
+.swiper-container{}
+.swiper1{}
+.swiper-wrapper{ border: .01rem solid #000;}
+.swiper-slide{ padding: 0rem .3rem; border: .01rem solid #000; width: 200px;}

@@ -1,0 +1,55 @@
+<include file="Public:pagerForm" />
+<div class="pageContent">
+
+	<form action="__URL__/saveEuroNews" method="post" class="pageForm required-validate" onsubmit="return iframeCallback(this)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+			  	<textarea style="width:70%;height:690px;" name="content2">
+			  		{$EuroNews}
+			  	</textarea>
+			</div>
+			<div class="focus-con2 clearfix">
+				<!-- 新闻模版预览 -->
+				{$EuroNews|htmlspecialchars_decode}
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="reset">重置</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script>
+	$("textarea[name='content2']").bind('input propertychange',function(){
+		var html = $("textarea[name='content2']").val();
+		$(".focus-con2").html(html);
+	})
+</script>
+<style>
+/* 球队资讯 */
+.infor-list{ height: 378px; width: 364px; float: right;margin-right: 50px;}
+.infor-list h4{margin: 14px 0;}
+.infor-list{ background: #1c2e56; padding: 12px;}
+.infor-list .new-con{ border-bottom: 1px dashed #999; border-bottom: 1px dashed rgba(255, 255, 255, 0.1); padding-bottom: 5px;}
+.infor-list h4 a{ font-size: 16px; font-weight: 700; color: #f97272;}
+.infor-list h4 a:hover{ color: #6494f5; text-decoration: underline !important;}
+.infor-list .new-con .new-list ul{margin-bottom: 0}
+.infor-list .new-con .new-list ul li a{float: left; color: #eeeeee;}
+.infor-list .new-con .new-list ul li a:hover{ color: #6494f5; text-decoration: underline !important;}
+.infor-list .new-con .new-list ul li{ margin: 0 0 5px 0px; width: 100%; overflow: hidden;}
+.infor-list ul li a {
+    color: #333;
+    font: 14px/1.25 "Microsoft YaHei","Helvetica Neue",Helvetica,Arial !important;
+}
+</style>
+
+
+
+
+
+
+

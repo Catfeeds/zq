@@ -1,0 +1,64 @@
+<form id="pagerForm" action="__URL__/group" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="_order" value="{$_REQUEST['_order']}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST['_sort']|default='1'}"/>
+    <input type="hidden" name="listRows" value="{$_REQUEST['listRows']}"/>
+    <input type="hidden" name="listRows" value="{$_REQUEST['listRows']}"/>
+    <volist name="map" id="m">
+        <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+
+<div class="page">
+    <div class="pageHeader">
+        <form onsubmit="return navTabSearch(this);" action="__URL__/group" method="post">
+            <div class="searchBar">
+                <ul class="searchContent">
+                    <li>
+                        <label>分组描述:</label>
+                        <input type="text" name="group_desc" value="{$_REQUEST.group_desc}" class="medium" >
+                    </li>
+                </ul>
+                <div class="subBar">
+                    <ul>
+                        <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="pageContent">
+        <div class="panelBar">
+            <ul class="toolBar">
+                <li><a class="add" href="__URL__/groupAdd" target="dialog" mask="true" width="850" height="550"><span>添加分组</span></a></li>
+            </ul>
+        </div>
+        <table class="list" width="100%" layoutH="116">
+            <thead>
+            <tr>
+                <th width="10"><input type="checkbox" group="ids[]" class="checkboxCtrl">id</th>
+                <th width="30" >分组类型标识</th>
+                <th width="30" >分组描述</th>
+                <th width="20" >操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist id="vo" name="list">
+                <tr target="sid_node" rel="{$vo['id']}">
+                    <td><input name="ids[]" value="{$vo['id']}" type="checkbox">{$vo['id']}</td>
+                    <td>{$vo['group_type']}</td>
+                    <td>{$vo['group_desc']}</td>
+                    <td>
+                       <a href="__URL__/groupEdit/id/{$vo['id']}" target="dialog" width="850" height="550">编辑</a>
+                  </td>
+              </tr>
+          </volist>
+          </tbody>
+      </table>
+      <include file="Public:pagerNum" />
+
+  </div>
+</div>

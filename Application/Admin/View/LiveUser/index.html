@@ -1,0 +1,128 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>昵称：</label>
+				<input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+			</li>
+			<li>
+				<label>手机号：</label>
+				<input type="text" name="username" value="{$_REQUEST.username}"/>
+			</li>
+			<li>
+				<label>主播标识：</label>
+				<input type="text" name="unique_id" value="{$_REQUEST.unique_id}"/>
+			</li>
+			<li>
+				<label>直播状态：</label>
+				<select name="live_status" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="0" <if condition="$_REQUEST.live_status eq '0'">selected</if> >离线</option>
+					<option value="1" <if condition="$_REQUEST.live_status eq '1'">selected</if> >直播中</option>
+					<option value="2" <if condition="$_REQUEST.live_status eq '2'">selected</if> >暂停</option>
+				</select>
+			</li>
+			<li>
+				<label>开通主播权限：</label>
+				<select name="status" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >是</option>
+					<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >否</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true" rel="addLiveUser" height="350"><span>新增主播</span></a></li>
+			<li><a class="delete" href="__URL__/foreverdelete/id/{sid_record}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择用户"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" height="350" warn="请选择用户"><span>编辑</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="2%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th width="4%">昵称</th>
+			<th width="2%">头像</th>
+			<th width="2%">封面图</th>
+			<th width="5%">手机号码</th>
+			<th width="6%">个人简介</th>
+			<th width="5%">直播链接</th>
+			<th width="3%">主播标识</th>
+			<th width="3%">直播次数</th>
+			<th width="3%">直播总时长</th>
+			<th width="3%">用户进入统计</th>
+			<th width="3%">总打赏</th>
+			<th width="5%">直播时间说明</th>
+			<th width="3%">直播状态</th>
+			<th width="4%" orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>开通主播权限</th>
+			<th width="3%" orderField="is_stop" <if condition="$_REQUEST._order eq 'is_stop'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>直播中断</th>
+			<th width="4%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['nick_name']}</td>
+					<td><a target="_blank" href="{$vo.head}"><img width="30" height="30" src="{$vo.head}"></a></td>
+					<td><a target="_blank" href="{$vo.img}"><img width="30" height="30" src="{$vo.img}"></a></td>
+					<td>{$vo['username']}</td>
+					<td>{$vo['descript']}</td>
+					<td><a target="_blank" title="{$vo['room_url']}" href="{$vo['room_url']}">{$vo['room_url']|msubstr=0,40}</a></td>
+					<td>{$vo['unique_id']}</td>
+					<td><a style="font-weight: bold;" href="{:U('__ADMIN__/LiveLog/index',['user_id'=>$vo['user_id']])}" target="navTab" rel="{$vo['user_id']}" title="{$vo['nick_name']}-直播记录">{$vo['live_num']}</a></td>
+					<td>{$vo['live_time']}</td>
+					<td>{$vo['user_num']}</td>
+					<td>{$vo['coin']}</td>
+					<td>{$vo['live_desc']}</td>
+					<td>
+						<switch name="vo.live_status">
+							<case value="0">离线</case>
+							<case value="1">直播中</case>
+							<case value="2">暂停</case>
+						</switch>
+					</td>
+					<td>
+						<eq name="vo.status" value='0'>
+							<a title="确定开通主播权限吗？" href="__URL__/resume/id/{$vo.id}/status/1" target="ajaxTodo"><div style="color:red;">否</div></a>
+						<else/>
+							<a title="确定取消主播权限吗？" href="__URL__/forbid/id/{$vo.id}/status/0" target="ajaxTodo"><div style="color:blue">是</div></a>
+						</eq>
+					</td>
+					<td>
+						<eq name="vo.is_stop" value='1'>
+							<a title="确定恢复吗？" href="__URL__/saveStop/id/{$vo.id}/is_stop/0" target="ajaxTodo"><div style="color:red;">恢复</div></a>
+						<else/>
+							<a title="确定中断吗？" href="__URL__/saveStop/id/{$vo.id}/is_stop/1" target="ajaxTodo"><div style="color:blue">正常</div></a>
+						</eq>
+					</td>
+					<td>
+						<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" title="编辑" rel="editPage" height="460">编辑</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

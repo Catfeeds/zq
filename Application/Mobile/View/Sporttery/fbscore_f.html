@@ -1,0 +1,61 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>手机全球体育手机网_即时足球比分,比分直播,足球直播,比分预测,赔率分析</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/live_score.css">
+</block>
+<block name="header"></block>
+<block name="nav"></block>
+<block name="footer"></block>
+<!-- 内容 s -->
+<block name="content">
+    <section class="content contentPt" style="padding-top: 0;">
+        <div class="liveList">
+        </div>
+        <div id="rankListMore" class="paged boxs" style="display:block;">
+            <div class="load_gif fs24 text-999">
+                <span><img src="__IMAGES__/load.gif"></span>
+                <span>正在加载更多的数据...</span>
+            </div>
+        </div>
+
+
+        <!-- 红牌黄牌弹窗提示 -->
+        <div id='tips_box'>
+
+        </div>
+        <!-- 红牌黄牌声音提示 -->
+        <audio id="sound_card" preload="auto">
+            <source src="__VIDEO__/hy.wav" />
+            <source src="__VIDEO__/hy.mp3" />
+            <source src="__VIDEO__/hy.ogg" />
+        </audio>
+
+        <audio id="sound_score" preload="auto">
+            <source src="__VIDEO__/jq.wav" />
+            <source src="__VIDEO__/jq.mp3" />
+            <source src="__VIDEO__/jq.ogg" />
+        </audio>
+    </section>
+    <div id="bubbleTips"></div>
+    <!-- 内容 e -->
+</block>
+<block name='filtrate'>
+    <include file="Public/filtrate"/>
+</block>
+<block name="scripts">
+    <script>
+        var _language = "{$language}";
+        var sprScore = {:json_encode(C('score'),JSON_UNESCAPED_UNICODE)};
+        var company  = {:json_encode(C('DB_COMPANY_INFO'),JSON_UNESCAPED_UNICODE)};
+        var mqHost = window.location.protocol == 'https:'? 'wss://'+'{$mqttOpt.ssl_host}'+':8084':'ws://'+'{$mqttOpt.host}'+':8083';
+        var mqUser = JSON.parse('{$mqttUser|json_encode}');
+        var cookieUa = '_f';
+    </script>
+    <script type="text/javascript" src="__JS__/common/mqtt.min.js"></script>
+    <script type="text/javascript" src="__JS__/common/mqttConnect.js"></script>
+    <script type="text/javascript" src="__JS__/Sporttery/fbscore.js"></script>
+    <script type="text/javascript" src="__JS__/index.js"></script>
+</block>

@@ -1,0 +1,343 @@
+/**
+ * 全彩首页css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-12-2
+**/
+
+/* 今日比赛展示 */
+.tod-con{ width: 100%; background: #f7f7f7;}
+.tod-con .tod-show{ width: 1000px; height: 132px; margin:0 auto; padding: 15px 0;}
+.tod-left{ width: 68px; height: 100px; height: 100px; padding-top: 15px;}
+.tod-left h4{ font-size: 20px; line-height: 24px; color: #10af63; text-align: center;}
+.slide-con{ width: 932px; overflow: hidden;}
+.slide-con .slide-prev,.slide-con .slide-next{ display: block; width: 16px; height: 28px; margin-top: 35px;}
+.slide-con .slide-prev{ margin-left: 10px;  background-position: -377px -120px;}
+.slide-con .slide-prev:hover{ background-position: -377px -218px;}
+.slide-con .slide-next{ background-position: -377px -169px;}
+.slide-con .slide-next:hover{ background-position: -377px -267px;}
+.slide-list{ width: 880px; overflow: hidden; height: 100px; position: relative;}
+.slide-list .slide-ul{ overflow: hidden;  zoom: 1; position: absolute; left: 0; top: 0;}
+.slide-list .slide-ul .team-img{ display: block; margin-bottom: 4px; }
+.slide-ul li{ float: left; background: #fff; margin-left: 6px; height: 100px; width: 170px; font-size: 12px;}
+.slide-ul li .title{ height: 30px; line-height: 30px; text-align: center; margin-bottom: 0;}
+.slide-ul li .team1,.slide-ul li .team2,.slide-ul li .score{  text-align: center;width: auto;}
+.slide-ul li .team1,.slide-ul li .team2{ width: 40%; height: 49px;}
+.slide-ul li .score{ width: 20%; margin-top: 5px;}
+.slide-ul li .score p{ margin-bottom: 5px;}
+.slide-ul li .score .tv-icon{ height: 16px; width: 18px; background-position: 0 -172px; margin: 0 auto; transition: ease-out 0.3s; -moz-transition: ease-out 0.3s; -ms-transition: ease-out 0.3s; -o-transition: ease-out 0.3s; -webkit-transition: ease-out 0.3s;}
+.slide-ul li:hover .score .tv-icon{ background-position: 0 -189px;}
+.slide-ul li .fenxi{ text-align: center;}
+.slide-ul li .fenxi a{ margin: 0 2px;}
+
+/* 主体内容 */
+.body{ background: url(../../images/2017/2017mian-bg.png) no-repeat center -16px;}
+.home,.main{ width: 1000px; margin: 0 auto; background: #fff;}
+.home{width: 1060px; padding: 0 30px; margin: 0 auto; background: #fff;}
+.main{ padding-top: 20px;} 
+
+/* 焦点内容 */
+.focus-con .focus-new{ width: 385px;}
+.focus-con .new-con{padding-bottom: 12px;}
+.focus-con .new-con h3{  font-size: 18px; margin-bottom:10px; margin-top:0px;}
+.focus-con .new-con .new-list ul{margin-bottom: 0;}
+.focus-con .new-con .new-list ul li a{float: left;}
+.focus-con .new-con .new-list ul li{ float: left; margin: 0 0 10px 0px; width: 100%; overflow: hidden;}
+
+.focus-con .focus-banner{ width: 600px; }
+.focus-banner .carousel-control { display: none; height: 50px; width: 50px; background: #000; opacity: 0.5;filter: alpha(opacity=50); top: 50%; margin-top: -25px; font-size: 100px;}
+.focus-con .focus-banner .carousel-control:hover{opacity: 0.75; filter: alpha(opacity=75);}
+.focus-banner .carousel span{ display: block; width: 11px; height: 20px; margin: 15px auto; line-height: 99em; overflow: hidden; font-size: 0; background: url(../../images/index/banner-nav.png) no-repeat 0 0;}
+.focus-banner .carousel .right .banner_arrow{ background-position: -12px 0;}
+.focus-banner .carousel-indicators{ margin-bottom: 0; left: 98%!important;  bottom: 10px!important;text-align: right; z-index: 999; width: 30%;  }
+.carousel-indicators li {
+    border: none;
+    background-color: #fff;
+    -webkit-box-shadow:inset 0 0 2px rgba(0,0,0,0.5);  
+    -moz-box-shadow:inset 0 0 2px rgba(0,0,0,0.5);  
+    box-shadow:inset 0 0 2px rgba(0,0,0,0.5);  
+    margin: 0 5px;
+}
+.carousel-indicators .active { background-color: #10af63; border: 1px solid #10af63; box-shadow: none; margin: 0 5px!important}
+@media screen and (min-width: 768px){
+.carousel-indicators {
+    bottom: 10px; 
+}
+@media screen and (min-width: 768px){
+#myGs .carousel-indicators {
+    bottom: -10px; 
+}
+}
+.carousel-inner img{height: 350px!important;}
+.fbanner_title{position: absolute;bottom: 0; left: 0;z-index: 99; background: rgba(0,0,0,0.6); height: 45px; line-height: 45px;width: 100% }
+.fbanner_title a{ color: #fff; padding-left: 20px; font-size: 16px;}
+
+/*竞彩高手*/
+.gsCon{ padding-top: 20px;}
+.gsTitle{ border-bottom: 1px solid #fb8f32;}
+.left-title{ width: 165px; height: 36px; text-align: center; line-height: 36px; font-size: 20px; color: #fff; background-position: -32px -160px; position: relative; margin-bottom: -5px;}
+.right-title ul{ margin-bottom: 0; padding-top: 10px;}
+.right-title a{ color: #fb8f32;}
+.gsCon .gsCon_in .killer{min-height: 350px;}
+.leftCon{ width: 660px; padding-top: 20px;}
+.rightCon{ width: 302px; padding-top: 20px;}
+.gsUl li{ width: 33%; float: left; margin-bottom: 25px;}
+.gsUl li .face{ width: 80px; height: 80px; border-radius: 50%; overflow: hidden; text-align: center; background: #ffffff; padding: 4px; border: 1px solid #f7f7f7;  margin-top: 5px;}
+.gsUl li .face img{ width: 70px; height: 70px; border-radius: 50%;}
+.carousel-inner .gsUl .face img{ height: 70px!important;}
+.gsUl li .name{ margin-left: 10px;}
+.gsUl li .name h4{ font-size:  14px; font-weight: 700; width: 120px;}
+.gsUl li .name h4 span{ width: 85px; height: 16px; line-height: 16px; overflow: hidden; text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.gsUl li .name h4 i{ width: 30px; height: 16px;}
+.gsUl li .name .p1{ color: #666666;}
+.gsUl li .name .p2{ color: #fb8f32;}
+.gsUl li .name .p2 .span2{ margin-left: 10px;}
+
+
+.gsCon .carousel-indicators li{ width: 32px; height: 6px; background: #eeeeee; border-radius: 0; border-color: #eeeeee; -webkit-box-shadow: none;
+box-shadow: none;}
+.gsCon .carousel-indicators .active{ background: #10af63; border-color: #10af63;}
+.rightCon .data-graph{ width: 288px;}
+
+/* 资讯 */
+.football-title{ width: 100%; padding-top: 4px;margin-bottom:9px; clear: both;}
+.football-title .football-t-left{ float: left; width: 130px; }
+.football-title .football-t-left i{ float: left; width: 42px; height: 42px; margin: 0 5px;}
+.football-title .football-t-left h1{ font-weight: bold; margin-top: 0;}
+.football-title .football-t-right{width: 530px; height: 39px; float:right; padding-bottom: 3px; background:url(../../images/2017/t-right-line.png) repeat-x 0 bottom;}
+.football-title .football-t-right .en_name{ display: block; height: 39px; line-height: 39px; width: 120px; float: left; font-size: 28px; color: #333333;   }
+.football-title .football-t-right ul{ float: left; }
+.football-title .football-t-right ul li,.fitem-line li{ float: left; padding-top: 15px; margin-left: 12px; color: #8a8a8a; font-size: 12px; }
+.football-title .football-t-right ul li span,.fitem-line li span{ color: #eeeeee;}
+.football-title .football-t-right ul li a,.fitem-line a{color: #8a8a8a; font-size: 12px; padding: 3px 5px;}
+.football-title .football-t-right ul li.cur a,.fitem-line li.cur a{ background: #10af63; color: #fff;}
+.football-title .football-t-right ul li.more a{color: #ff7e00;}
+.football-title .football-t-right ul li a:hover{color: #ff8c33;}
+.football-t-right .fitem-line{ margin-top: 10px;}
+/*英超public*/
+.football-item{ width: 660px;}
+.fitem-title{ width: 100%; padding-left: 120px; border-bottom: 1px solid #fb8f32; position: relative;margin-bottom: 8px;}
+.fitem-left{ position: absolute; left: 0; top: -2px;}
+.fitem-title h4{ width: 112px; height: 38px; line-height: 38px; text-align: center; color: #fff; font-size: 16px; background-position: -283px -82px;}
+.fitem-line{float: left; height: 26px; line-height: 26px; font-size: 12px; margin-top: 15px;}
+.fitem-line li{ padding-top: 0;}
+.fitem-line a:hover{ color: #ff7e00;}
+.news-list{ float: left; width: 100%;margin-bottom: 10px;height: 165px;}
+.news-list ul li{width: 330px; float: left; padding-right: 5px; height: 33px; line-height: 33px; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.news-list ul li a{padding-left: 10px; background:url(../../images/common/li.jpg) no-repeat 0 center;}
+.news-list ul li a:hover{ text-decoration: underline !important; }
+
+/*热点专题*/
+.hotCon,.client-down{ margin-bottom: 25px;}
+.hot-news{ width: 100%; padding-top: 15px; }
+.hot-news .hot-img{width: 142px; height: 101px; float: left;}
+.hot-news .hot-des{width: 155px; height: 101px; float: right; position: relative;}
+.hot-news .hot-des .detail{ width: 66px; height: 25px; background-position: -278px -123px; position: absolute; right: 0; bottom: -10px; color: #fff; text-align: center; line-height: 25px; }
+.hot-news .hot-des .detail a{color: #fff;}
+.hot-news .hot-des h4{ font-size: 14px;margin-top: 0;}
+.hot-news .hot-des p{ font-size: 12px; color: #777777; }
+.hot-news .hot-des h4 a{display: block; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+/*独家秘笈*/
+.dujia-list{margin-bottom: 15px;}
+.dujia-list ul li{ width: 302px; height: 35px; line-height: 35px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; }
+
+/*全球体育客户端*/
+.client-down{width: 302px; border:1px solid #dddddd; padding:17px; padding-bottom: 7px;}
+.client-down .ewm_img{ width: 100px; height: 100px; float: left; }
+.client-right{ float: left;padding-left: 20px; }
+.client-right a{font-size: 12px;}
+.client-right .android{color: #40c98d;}
+.client-right .ios{color: #00a3ff;}
+
+/* 赛事集锦 */
+.macthLive{width: 100%;}
+.macthLive .match-list li{ padding: 14px 0; position: relative;}
+.macthLive .match-list li.li02{ background: #f7f7f7;}
+.macthLive .match-list .mat{ width: 33.3%; text-align: center;}
+.macthLive .match-list .mat p{ margin-bottom: 5px; font-size: 12px;}
+.macthLive .match-list .mat.team p{ margin-bottom: 0; margin-top: 5px; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.macthLive .match-list .mat .team-vs{ margin-bottom: 0; padding-top: 5px;}
+.macthLive .match-list .mat .team-vs em{ margin: 0 5px;}
+.macthLive .match-list .vds-link{ display: none; position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#99000000', endColorstr='#99000000'); line-height: 95px;}
+.macthLive .match-list .vds-link a{ float: left; width: 33.3%; text-align: center; color: #fff;}
+.macthLive .match-list .vds-link a:hover{ color: #10af63; }
+.macthLive .match-list li:hover .vds-link{ display: block;}
+
+/*视频直播*/
+.videoCon{ padding-top: 25px;}
+.game-all ul li{ float: left; margin-top: 15px; width: 302px;height: 175px; position: relative; }
+.game-all ul li span{ width: 52px; height: 52px; display: block; position: absolute;left: 50%; top:50%; background-position: -302px -231px; margin-left: -26px; margin-top: -26px; }
+.game-all ul li p{width: 100%; height: 34px;background:url(../../images/publish_index/nba-title.png) repeat-x center top;color: #fff; line-height: 34px;  position: absolute; left: 0; bottom: -10px; font-size: 12px; padding-left: 10px; }
+
+/* 竞彩指数 */
+.div02 .stat-main{ padding-top: 10px;}
+.stat-main ul{ margin-bottom: 0px;}
+.stat-main .li-list{ float: left; margin-bottom: 25px;}
+.stat-main .li-list02{ margin-left: 16px;}
+.stat-main .li-list .time{ text-align: center; font-size: 12px;}
+.stat-main .li-list .against{ width: 166px; margin: 0 2px;}
+.stat-main .li-list .against td{ text-align: center;}
+.stat-main .li-list .against .gray{ background: #f7f7f7;}
+.li-list .team1,.li-list .team2{ width: 66px; text-align: center; text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    -moz-white-space: nowrap;
+    -ms-white-space: nowrap;
+    -o-white-space: nowrap;
+    -webkit-white-space: nowrap;
+}
+  
+/* 进度条 */
+.pro-con{ margin-bottom: 10px; font-size: 12px;}
+.pro-con .zhu,.pro-con .ke{ width: 66px; text-align: center;}
+.content{ width:166px; margin:0; float:left; font-size:12px;}
+.col { width:166px;}
+#skill li{ margin-top: 4px; margin-left: 8px; position:relative; float: left; width: 75px; background:#e6e6e6; height:10px; border-radius:5px; border-left:1px solid #e6e6e6; border-top:1px solid #e6e6e6; border-right:1px solid #e6e6e6; border-bottom:1px solid #e6e6e6; box-shadow: none; margin-bottom: 0;}
+#skill li em { position:relative; top:-30px;}
+.expand { height:10px; top: -1px; border-radius:4px; background:#f28782; position:absolute;}
+#skill .left{ right: 0;}
+#skill .right{ background: #7dd9b0;}
+#skill .ft-percent-real{ width: 0px;}
+.animation-progress{
+  -webkit-transition: width 2s linear;
+     -moz-transition: width 2s linear;
+    -ms-transition: width 2s linear;
+     -o-transition: width 2s linear;
+      transition: width 2s linear;
+}
+.team-name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* 鼠标移过球队 */
+ 
+/* Effect 8 */
+.hover {
+    cursor: default;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hover:after {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    content: '';
+    -webkit-box-sizing: content-box; 
+    -moz-box-sizing: content-box; 
+    box-sizing: content-box;
+}
+
+.hover:before {
+    speak: none;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+}
+.hover {
+    background: rgba(255,255,255,0.1);
+    -webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
+    -moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
+    transition: transform ease-out 0.1s, background 0.2s;
+}
+
+.hover:after {
+    top: 0;
+    left: 0;
+    padding: 0;
+    z-index: -1;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
+    opacity: 0;
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+.hover:hover {
+    -webkit-transform: scale(0.93);
+    -moz-transform: scale(0.93);
+    -ms-transform: scale(0.93);
+    transform: scale(0.93);
+}
+
+.hover:hover:after {
+    -webkit-animation: sonarEffect 1.3s ease-out 75ms;
+    -moz-animation: sonarEffect 1.3s ease-out 75ms;
+    animation: sonarEffect 1.3s ease-out 75ms;
+}
+
+/* 排行榜 */
+.data-graph .table{ margin-bottom: 10px;}
+.data-graph .tabCon{ border: 1px solid #f7f7f7; border-top: 0 none;}
+.nav-tab li{ float: left; border: 1px solid #f7f7f7; width: 50%; background-color: #f7f7f7;}
+.nav-tab li a{ display: block; width: 100%; text-align: center; height: 35px; line-height: 35px; font-size: 16px;}
+.nav-tab .on{ background: #10af63; border-bottom: 0 none;}
+.nav-tab .on a{ color: #fff;}
+.time-tab{ padding: 5px 0;}
+.time-tab li{ float: left; width: 25%; text-align: center; padding-left: 7px;}
+.time-tab li a{ display: block; width: 58px; height: 26px; line-height: 24px; border:1px solid #e5e5e5;}
+.time-tab .current a{ color: #fff; background: #10af63; border-color: #10af63;}
+.time-tab .current a:hover{ color: #fff; background: #10af63; border-color: #10af63;}
+.rank-list{ padding-bottom: 5px;}
+.rank-list .tabList{  height: 242px; overflow: hidden;}
+.rank-list .table tr td{ padding: 5px 0px 5px 8px; border: 0 none; font-size: 12px; text-align: left;}
+.rank-list .table .td02{ display: inline-block; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.rank-list .table tr td .tdLv{ margin-left: 5px; margin-top: 3px; width: 30px; height: 16px;}
+.more-icon i{ width: 12px; height: 12px; background-position: -346px -124px; margin-top: 10px;}
+.more a{ color: #ff7e00;}
+.score-list ul{ margin-bottom: 0;}
+.score-list .table{ font-size: 12px; margin-bottom: 0;}
+.score-list .table tr{ height: 35px;}
+.score-list .table th{ border-bottom: none; padding: 10px 2px; text-align: center; font-weight: normal;}
+.score-list .table td{ padding: 4px 2px; border: 0 none; font-size: 12px; text-align: center;}
+.score-list .table td a{ color: #555;}
+.score-list .table td .face-r img{ border-radius: 50%;}
+
+
+
+.l_more a{ display: block; width: 260px; height: 28px; margin: 0 auto; line-height: 26px; border: 1px solid #e5e5e5; color: #999; webkit-transition: all .3s ease; transition: all .25s ease;}
+.l_more a:hover{color: #ff7e00;}
+.score-list .table .gz{ width: 45px; height: 30px; overflow: hidden; position: relative;}
+.score-list .table .gz span{ position: absolute; left: 0; top:0; padding-top: 5px;}
+.score-list .table .gz a{ display: block; height: 22px; width: 42px; line-height: 20px; color: #fff;  border-radius: 3px;}
+.score-list .table .gz a:hover{ color: #fff;}
+.score-list .table .gz i{ font-style: normal; display: block; margin-bottom: 5px;}
+.score-list .table td .on{ color: #ff7e00;}
+.score-list .table td a:hover{ color: #ff7e00;}
+.score-list .table .nb{ width: 20px; height: 20px; line-height: 20px; text-align: center; display: inline-block;}
+
+/*精品图库*/
+.photos-main{width: 100%; padding-top: 30px}
+.photos-main-big{ width: 540px; height: 318px; float: left; position: relative; }
+.photos-main-big .img-title{background: rgba(0,0,0,0.6);width:100%; height: 34px; font-size: 16px; text-align: center; color: #fff; line-height: 34px;  position: absolute; left: 0; bottom: -10px; padding: 0 15px;overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap; }
+.photos-main-big:hover .img-title{ height: 100%; height: 318px; line-height: 318px; }
+.photos-main-small{ width: 440px; height: 318px; float: right; }
+.photos-main-small ul li{float: left; width: 215px; height: 155px; margin: 0 10px 8px 0; position: relative;}
+.photos-main-small ul li .img-title{background: rgba(0,0,0,0.6); width:100%; height: 26px; color: #fff; line-height: 26px;  position: absolute; left: 0; bottom: -10px; padding-left: 15px }
+.photos-main-small ul li:hover .img-title{ height: 100%; height: 155px; line-height: 155px;}
+
+/* 友情链接 */
+.fs-link ul{ padding-top: 18px;}
+.fs-link ul li{ float: left; margin-right: 5px; margin-bottom: 11px;}
+.fs-link ul li a{ color: #555;}
+.fs-link ul li a:hover{ color: #ff7e00;}
+.friend-con .stat-title{ background: url(../../images/2017/t-right-line.png) repeat-x left center;margin-top: 15px;}
+.friend-con .stat-title h4{ color: #333; text-align: center;}
+.friend-con .stat-title h4 span{ background: #fff; padding: 0 10px;}
+.stat-title{ border-bottom: 1px solid #e5e5e5; background: url(../../images/2017/stat-title-bg.png) no-repeat left center; padding-left: 24px;}
+.stat-title h4{ font-size: 22px; margin: 0;  height: 40px; line-height: 40px; color: #fff;}
+.stat-title .title-nav li{ float: left; color: #8a8a8a; margin: 0 2px; padding-top: 18px; font-size: 12px;}

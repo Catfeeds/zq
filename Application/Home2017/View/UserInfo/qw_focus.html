@@ -1,0 +1,160 @@
+<include file="Public:header"/>
+
+<body>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/userinfo/qw_focus.css">
+	<div class="body">
+        <!-- 头部开始 -->
+        <include file="Public:top"/>
+        <!-- 头部结束 -->
+                
+        <!-- 主体内容开始 -->
+        <div class="qw_content clearfix">
+            <!-- 左边的主体内容 -->
+            <include file="Public:leftMenu"/>
+    <!-- left-main e -->
+
+        <!-- right_main s -->
+        <div class="right_main fr" style="min-height: 842px;">
+            <div class="morder_title"><h5>我的关注({$count|default=0})</h5></div>
+            <notempty name="followList">
+                <volist name="followList" id="vo">
+                    <div class="order_list">
+                        <div class="bdl_con">
+                            <a href="{:U('Intro/intro_info',['id'=>$vo['product_id']])}" target="_blank">
+                                <div class="bdlc_top clearfix">
+                                    <div class="bdlct_left fl">
+                                        <img src="{$vo['logo']}" alt="">
+                                        <div class="near_get">
+                                            <div class="ng_zhong"><span>{$vo['name']}</span></div>
+                                            <div class="ng_zhong"><em>近10中{$vo['ten_num']}</em><em id="type{$vo['product_id']}" class="<if condition="$vo['is_introGamble'] eq '1'"> have_put <else/> no_put </if> "><if condition="$vo['is_introGamble'] eq '1'">已发布<else/>未发布</if></em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bdlct_right fr">
+                                        <p class="dr_percent"><span>{$vo['total_rate']|default=0}</span>%</p>
+                                        <p>累计回报率</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- 简介 s -->
+                            <div class="fc_jj">
+                                简介:{$vo['desc']}
+                            </div>
+                            <!-- 简介 e -->
+                            <if condition="$vo['is_check'] eq '1'">
+                                <div class="put_game">
+                                    <table class="table tb_put_game">
+                                        <tbody>
+                                        <tr class="tr_border">
+                                            <th>开赛时间</th>
+                                            <th>赛事</th>
+                                            <th>对阵比赛</th>
+                                            <th>玩法</th>
+                                            <th>盘口/赔率</th>
+                                            <th>推介</th>
+                                        </tr>
+                                        <if condition="$vo['is_introGamble'] eq '1'">
+                                            <volist name="vo['introGamble']" id="item">
+                                                <tr>
+                                                    <td>{:date('m/d H:i',$item['gtime'])}</td>
+                                                    <td>{$item['union_name']}</td>
+                                                    <td class="game_vs">{$item['home_team_name']}<span> {$item['score']|default='VS'} </span>{$item['away_team_name']}</td>
+                                                    <td>
+                                                        <if condition="$item['play_type'] eq '1'">让球</if>
+                                                        <if condition="$item['play_type'] eq '-1'">大小</if>
+                                                    </td>
+                                                    <td>{$item['handcp']}(<font>{$item['odds']}</font>)</td>
+                                                    <td class="g_result">{$item['Answer']}({$item['odds']})
+                                                        <if condition="$item['result'] eq '1' OR $item['result'] eq '0.5' "><img src="__PUBLIC__/Home/images/qw/win.png" alt=""></if>
+                                                        <if condition="$item['result'] eq '-1' OR $item['result'] eq '-0.5' "><img src="__PUBLIC__/Home/images/qw/lose.png" alt=""></if>
+                                                        <in name="item['result']" value="2"><img src="__PUBLIC__/Home/images/qw/zou.png" alt=""></in>
+                                                        <if condition="$item['result'] eq '-10'"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_cancel.png" alt=""></if>
+                                                        <if condition="$item['result'] eq '-11'"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_pending.png" alt=""></if>
+                                                        <if condition="$item['result'] eq '-12'"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_cut.png" alt=""></if>
+                                                        <if condition="$item['result'] eq '-13'"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_interrupt.png" alt=""></if>
+                                                        <if condition="$item['result'] eq '-14'"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_putoff.png" alt=""></if>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                            <else/>
+                                            <tr>
+                                                <td colspan="6" class="wait"><img src="__PUBLIC__/Home/images/qw/wait.png" alt="">敬请期待 </td>
+                                            </tr>
+                                        </if>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <else/>
+                                <div class="nt_con clearfix" id="list{$vo['product_id']}">
+                                    <if condition="$vo['is_soldOut'] eq '1'">
+                                        <a href="javascript:;"><div class="gold_tip" onclick="qwBuyModal(this,{$vo['product_id']},1111)">{$vo['sale']|default=0}金币<span>/{$vo['game_num']}场</span></div></a>
+                                        <else/>
+                                        <a href="javascript:;"><div class="gold_tip" style="background: #cccccc">已抢光</div></a>
+                                    </if>
+
+                                    <if condition="$vo['is_introGamble'] eq '1'">
+                                        <div class="ntc_head fl">
+                                            <img src="__PUBLIC__/Home/images/qw/gs_head.png" alt="">
+                                        </div>
+                                        <div class="ntc_right">
+                                            <p class="game_sure">赛事已确认</p>
+                                            <p class="buy_tip">购买后显示推介赛事及其结果</p>
+                                            <p class="game_time">开赛时间：{:date('Y-m-d H:i',$vo['introGamble'][0]['gtime'])}</p>
+                                            <div class="buy_count">
+                                                <div class="fl"><img src="__PUBLIC__/Home/images/qw/car.png" alt="">购买人数:</div>
+                                                <div class="bc_percent fl"><em></em><i style="width: {$vo['buyPercent']|default=0}%"></i></div>
+                                            </div>
+                                            <div class="bcp_num fl">{$vo['buyNum']|default=0}/20</div>
+                                        </div>
+                                        <else/>
+                                        <div class="ntc_head fl">
+                                            <img src="__PUBLIC__/Home/images/qw/hold.png" alt="">
+                                        </div>
+                                        <div class="ntc_right">
+                                            <p class="game_sure">敬请期待</p>
+                                            <p class="buy_tip">请耐心等待，推介赛事正在准备中...</p>
+                                            <div class="buy_count">
+                                                <div class="fl"><img src="__PUBLIC__/Home/images/qw/car.png" alt="">购买人数:</div>
+                                                <div class="bc_percent fl"><em></em><i style="width: {$vo['buyPercent']|default=0}%"></i></div>
+                                            </div>
+                                            <div class="bcp_num fl">{$vo['buyNum']}/{$vo['total_num']}</div>
+                                        </div>
+                                    </if>
+
+                                </div>
+                            </if>
+
+                        </div>
+                    </div>
+                </volist>
+            <else/>
+                <div  style="padding-top: 200px; text-align: center;">
+                    <div class="uImg text-center"><img src="__PUBLIC__/Home/images/index/pImg.png" alt=""></div>
+                    <p class="text-999 text-center">暂无任何关注</p>
+                    <a href="{:U('/Intro')}" target="_blank" class="btn btn-blue">赶紧去关注>></a>
+                </div>
+            </notempty>
+
+
+        </div>
+        <!-- right_main s -->
+        </div>
+        <!-- 主体内容结束 -->
+    </div>
+
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+
+
+    <!--引入本页js-->
+    <script type="text/javascript">
+
+
+    </script>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/common/qw_buy.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/userinfo/echarts.simple.min.js"></script>
+</body>
+</html>

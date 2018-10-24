@@ -1,0 +1,65 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>{$against.home_team_name.0}vs{$against.away_team_name.0}_足球分析_足彩比分直播_足球比分_全球体育</title>
+</block>
+<block name="body">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/common.css"> 
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/team_data.css"> 
+	<!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Home/js/score/htmlwidth.js"></script>
+        <include file="Public:top_index" />
+        <include file="FbScore/against"/>
+            <include file="FbScore/subnav"/>
+    <!-- 内容 s -->
+    <section class="odds_con clearfix">
+        <!-- 数据导航s -->
+        <nav class="odd_nav">
+            <ul>
+                  <li><a href="{:U('detail_action/'.$_GET['scheid'].'@bf')}">赛况</a></li>
+                  <li><a href="{:U('detail_statistical/'.$_GET['scheid'].'@bf')}">技术</a></li>
+                  <li class="on"><a href="{:U('detail_team/'.$_GET['scheid'].'@bf')}">阵容</a></li>
+            </ul> 
+        </nav>
+        <!-- 数据导航e --> 
+        <!-- 球队统计s -->
+        <present name='list'>
+        <volist name="list" id="v" key="k">
+            <div class="data_title">
+                <eq name='k' value='1'>首发</eq>
+                <eq name='k' value='2'>替补</eq>
+            </div>
+            <div class="compare-data">
+                <div class="item">
+                    <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                        <tbody>
+                        <volist name="v" id="vo">
+                            <tr>
+                            <volist name="vo" id="val">
+                                <td width="50%" class="alignRight">
+                                    <div class="clearfix player_con">
+                                        <em class="<eq name='key' value='0'>fl<else/>fr num_red</eq> even">{$val[2]}</em>
+                                        <!--                                        <span class="fl even headImg"><img src="__IMAGES__/player.jpg"></span>-->
+                                        <span class="<eq name='key' value='0'>fl<else/>fr</eq> even name clearfix q-tl">
+                                            <div class="fs28">{$val[1]}</div>
+                                            <!--                                            <div class="text-999 fs24">门将</div>-->
+                                        </span>
+                                    </div>
+                                </td>
+                            </volist>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </volist>
+            <else/>
+            <div class="data_title">暂无数据</div>
+        </present>
+        <!-- 球队统计e -->
+
+    </section>
+    <!-- 内容 e -->
+    <include file="Public:footer"/>
+<include file="Public:return_top"/>
+</block>

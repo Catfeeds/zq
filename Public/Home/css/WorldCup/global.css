@@ -1,0 +1,56 @@
+/**
+ * World prediction of css
+ *
+ * @author Weiqq <1937025663@qq.com>
+ * 
+ * @since  2018-05-15
+ *
+**/
+body{ background-color: #fff;}
+.table > tbody > tr > td { border-top: none 0;}
+.skewRight{ -webkit-transform: skew(-30deg) translateZ(0); -moz-transform: skew(-30deg) translateZ(0); -ms-transform: skew(-30deg) translateZ(0); -o-transform: skew(-30deg) translateZ(0); transform: skew(-30deg) translateZ(0);}
+.skewLeft{ -webkit-transform: skew(30deg) translateZ(0); -moz-transform: skew(30deg) translateZ(0); -ms-transform: skew(30deg) translateZ(0); -o-transform: skew(30deg) translateZ(0); transform: skew(30deg) translateZ(0);}
+
+.themeBox{ width: 100%; height: 4229px; background: url(../../images/WorldCup/global-bg.png) no-repeat center 0;}
+.main .options{ width: 80px; margin: 470px 0px 0 -130px; position: fixed;}
+.main .options a{ width: 60px; height: 26px; line-height: 26px; background-color: #acd4e0; color: #666666; display: block; text-align: center; margin-bottom: 5px; font-size: 14px;}
+.main .options a:hover{ background-color: #9fe9ff;}
+.tit{ text-align: center !important; margin: 3650px 0 0 0;}
+.tit .headtit{ font-size: 24px !important; color: #000; height: 30px; line-height: 30px;}
+.tit .endtit{ font-size: 16px; color: #666; height: 30px; line-height: 30px;}
+
+.vote{ text-align: center; margin: 30px 0 0 0; padding: 30px 0 10px 0;}
+.vote li{ width: 90px; float: left; margin: 0 15px 0 15px;}
+
+.init{ text-align: center; margin: 30px 0 0 0; padding: 10px 0 10px 0px;}
+.init li{ width: 90px; float: left; margin: 0 20px 0 20px;}
+
+.columnar{ width: 90px;}
+.columnar:hover{ cursor: pointer;}
+.columnar span{ color: #000;}
+.columnar:hover span{ color: #000;}
+.columnar .state{ color: #000; height: 52px; line-height: 52px; font-size: 18px;}
+.columnar:hover .state{ text-decoration: underline !important; color: #d71414;}
+li .but{ cursor:pointer;width: 90px; height: 40px; line-height: 40px; color: #fff; background-color: #ff9d00; border-radius: 4px;}
+.columnar .but:hover{ background-color: #ffb43c;}
+.columnar .shape{ width: 60px; height: 150px; position: relative; margin: 0 15px 0 15px;}
+.columnar .shape span{ height: 38px; line-height: 38px;  text-align: center; top: -38px; position: absolute; width: 60px; margin-left: -30px; font-size: 16px;}
+.columnar .shape span:hover{ color: #000;}
+.columnar .but:hover{ color: #fff;}
+.one p{ width: 100%; height: 70%; background-color: #03addd; position: absolute; bottom: 0;}
+.one p:hover{ background-color: #8de3fb; color: #000;}
+.two p{ width: 100%; height: 70%; background-color: #8dbb0a; position: absolute; bottom: 0;}
+.two p:hover{ background-color: #b6dc4a;}
+.three p{ width: 100%; height: 70%; background-color: #e89901; position: absolute; bottom: 0;}
+.three p:hover{ background-color: #ffbd4d;}
+.four p{ width: 100%; height: 70%; background-color: #db5667; position: absolute; bottom: 0;}
+.four p:hover{ background-color: #f38492;}
+.five p{ width: 100%; height: 70%; background-color: #ee7130; position: absolute; bottom: 0;}
+.five p:hover{ background-color: #fd935b;} 
+.six p{ width: 100%; height: 70%; background-color: #2b9ea1; position: absolute; bottom: 0;}
+.six p:hover{ background-color: #79dacc;}
+.seven p{ width: 100%; height: 70%; background-color: #765d9b; position: absolute; bottom: 0;}
+.seven p:hover{ background-color: #cda2f8;}
+.eight p{ width: 100%; height: 70%; background-color: #c13133; position: absolute; bottom: 0;}
+.eight p:hover{ background-color: #eb8d8a;}
+.footer{ margin-top: 0 !important;}

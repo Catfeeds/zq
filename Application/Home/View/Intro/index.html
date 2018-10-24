@@ -1,0 +1,453 @@
+<extend name="Public:layout"/>
+<block name="seo">
+    <title>球王|足彩分析|足球分析|足球推荐_全球足球赛事亚盘推荐分析_全球体育网</title>
+    <meta name="keywords" content="足彩分析,足球分析,足球推荐,2018年世界杯,2018年俄罗斯世界杯,足球预测,亚盘,足球,篮球,篮球推荐网,NBA分析,NBA,NBA推荐,英超,西甲,世界杯,德甲,欧冠杯,欧洲杯"/>
+    <meta name="description" content="球王-高端专业足球分析推荐预测产品，覆盖2018年俄罗斯世界杯足球预测、五大联赛预测、世界各地大小足球联赛的预测分析，权威专家专业、深度分析，欢迎关注！"/>
+</block>
+<block name="css">
+    <link rel="stylesheet" href="__CSS__/intro/index.css">
+    <link rel="stylesheet" href="__CSS__/intro/qw_index.css">
+</block>
+<block name="content">
+    <!-- 顶部二级栏 -->
+    <include file="Public:top_user"/>
+    <!-- 主体内容开始 -->
+    <div class="qw_content clearfix">
+        <div class="banner_tmsg clearfix">
+            <!-- banner s -->
+            <div class="pull-left focus-banner">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <volist name="AdCarousel" id="item">
+                            <li data-target="#myCarousel" data-slide-to="{$key}" <if condition="$key eq 0">class="active"</if>></li>
+                        </volist>
+                    </ol>
+                    <div class="carousel-inner">
+                        <volist name="AdCarousel" id="item">
+                            <div class="<if condition='$key eq 0'>active</if> item"><a href="{$item.url}" target="_blank"><img src="{$item.img}" style="width:620px;height:354px;"></a><div class="fbanner_title"><a target="_blank" href="{$item.url}">{$item.title}</a></div></div>
+                        </volist>
+                </div>
+                    <a class="carousel-control left" href="#myCarousel" data-slide="prev" style="display: none; opacity: 0.5;"><span class="banner_arrow"></span></a>
+                    <a class="carousel-control right" href="#myCarousel" data-slide="next" style="display: none; opacity: 0.5;"><span class="banner_arrow"></span></a>
+                </div>
+            </div>
+            <!-- banner e -->
+            <!-- user_tab s-->
+            <div class="user_tab pull-right">
+                <!-- 登录 -->
+                <div class="user_info">
+                    <div class="user_main_login hidden" style="padding: 0">
+                        <div class="head_bg">会员登录</div>
+                        <form id="jsForm">
+                        <div class="login_main clearfix">
+                            <div class="lm_text fl">
+                                    <input type="password" class="hidden"/>
+                                    <input type="text" class="form-control login-input required txt_phone" name="username" autocomplete="off" placeholder="手机号码"/>
+                                    <input type="password" class="hidden"/>
+                                    <input type="password" name="password" class="form-control pwd-input itxt-error required txt_pwd" autocomplete="off" placeholder="登录密码"/>
+                            </div>
+                            <div class="lm_btn fr"><input class="lmb_main" type="button" value="登录"></div>
+                        </div>
+                        {:get_form_token()}
+                        </form>
+                        <div class="pwd_tool clearfix">
+                            <div class="fl"><a target="_blank" href="{:U('User/re_phone')}">忘记密码？</a></div>
+                            <div class="reg_bg fr"><a target="_blank" href="{:U('User/register')}">免费注册</a></div>
+                        </div>
+                    </div>
+                    <div class="user_main">
+                        <div style="text-align: center;">
+                            <img src="__PUBLIC__/Mobile/images/load.gif">
+                            <span style="margin-left: 5px;">请稍候......</span>
+                        </div>
+                    </div>
+                    <div class="user_main_intro hidden">
+                        <div class="um_head fl">
+                            <div class="um_head_img fl"></div>
+                            <div class="um_right fl">
+                                <p class="umr_name"></p>
+                                <p class="umr_gold"></p>
+                            </div>
+                        </div>
+                        <div class="ut_main">
+                            <div class="tap_list my_order"><a target="_blank" href= "{:U('UserInfo/qw_order')}">我的订购</a></div>
+                            <div class="tap_list my_at"><a target="_blank" href= "{:U('UserInfo/qw_focus')}">我的关注</a></div>
+                            <div class="tap_list last_tap"><a target="_blank" href= "{:U('UserInfo/charge')}">快速充值</a></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 登录 -->
+                <!-- 二维码 s-->
+                <div class="ewm_main">
+                    <div class="ewm_li">
+                        <img src="__STATIC__/images/qw/app_ewm.png" alt="">
+                        <p></p>
+                    </div>
+                    <div class="ewm_li">
+                        <img src="__STATIC__/images/qw/gzh_ewm.png" alt="">
+                        <p class="gzh_bg"></p>
+                    </div>
+                </div>
+                <!-- 二维码 e-->
+            </div>
+            <!-- user_tab e-->
+        </div>
+        <!-- 广告 s -->
+        <notempty name="ad">
+        <div class="qw_ad">
+            <a target="_blank" href="{$ad.url}"><img src="{$ad.img}" alt="{$ad.title}" width="997px" height="91px" /></a>
+        </div>
+        </notempty>
+        <!-- 广告 e -->
+        <!-- 淘金 s-->
+        <div class="taojin_content clearfix">
+            <div class="tjc_left fl" style="min-height: 567px">
+                <div class="tjc_nav">
+                    <ul>
+                        <volist name="intro_class" id="val">
+                            <li <if condition="$key eq '0'">class="on"</if>><a href="javascript:;">{$val.name}</a></li>
+                        </volist>
+                        <li><a href="javascript:;">我关注的</a></li>
+                    </ul>
+                </div>
+                <!-- 主要内容 s-->
+                <volist name="intro_class" id="val">
+                    <div class="tj_main" <if condition="$key eq '0'">style="display:block"</if>>
+                        <div class="tjm_top clearfix">
+                            <div class="pull-left tjmImg"><img src="{$val['logo']}" alt=""></div>
+                            <span class="pull-left tjmIfor">{$val.desc}！</span>
+                        </div>
+                        <div class="tjm_bottom">
+                            <div class="tjmb_nav">
+                                <ul>
+                                    <li class="tn_hbl on"><a href="javascript:;">回报率</a></li>
+                                    <li class="tn_xl"><a href="javascript:;">销量</a></li>
+                                    <li class="tn_put_time"><a href="javascript:;">发布时间</a></li>
+                                    <li class="tn_price"><a href="javascript:;">价格</a></li>
+                                </ul>
+                            </div>
+                            <!-- 宝典 s -->
+                            <div class="intro_list">
+                                <volist name="intro_list[$val['id']]" id="val1" key="k">
+                                <include file="Intro:intro_list" />
+                                </volist>
+                            </div>
+                            <!-- 宝典 e -->
+                        </div>
+                    </div>
+                </volist>
+                <!-- 主要内容 e-->
+                <!-- 主要内容 s-->
+                <div class="tj_main followList"></div>
+                <!-- 主要内容 e-->
+            </div>
+            <!-- right 右边  s  -->
+            <div class="fr">
+                <div class="tjc_right">
+                    <div class="tjcr_nav" id="tjcr_nav">
+                        <ul>
+                            <li class="on"><a href="javascript:;">周回报率</a></li>
+                            <li><a href="javascript:;">月回报率</a></li>
+                        </ul>
+                    </div>
+                    <div id="phb_list_con">
+                        <div class="phb_list" style="display: block;">
+                            <volist name="rank['week_remain']" id="item" key="k">
+                                <include file="Intro:index_rank" />
+                            </volist>
+                        </div>
+                        <div class="phb_list">
+                            <volist name="rank['mon_remain']" id="item" key="k">
+                                <include file="Intro:index_rank" />
+                            </volist>
+                        </div>
+                    </div>
+                </div>
+                <div class="tjc_right" style="margin-top: 20px">
+                    <div class="tjcr_nav"  id="tjcr_nav2">
+                        <ul>
+                            <li class="on"><a href="javascript:;">周命中率</a></li>
+                            <li><a href="javascript:;">月命中率</a></li>
+                        </ul>
+                    </div>
+                    <div id="phb_list_con2">
+                        <div class="phb_list" style="display: block;">
+                            <volist name="rank['week_hit']" id="item" key="k">
+                                <include file="Intro:index_rank" />
+                            </volist>
+                        </div>
+                        <div class="phb_list">
+                            <volist name="rank['mon_hit']" id="item" key="k">
+                                <include file="Intro:index_rank" />
+                            </volist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- right 右边  e  -->
+        </div>
+        <!-- 淘金 e-->
+    </div>
+</div>
+</block>
+<block name="js">
+<!--引入本页js-->
+<script type="text/javascript">
+    //淘金
+    $('.focus-banner').hover(function(e) {
+        $('.carousel-control').stop().fadeIn(500);
+    },function(){
+        $('.carousel-control').stop().fadeOut(500);
+    });
+    $('.carousel-control').hover(function(e) {
+        $(this).animate({"opacity":"0.75"},200);
+    },function(){
+       $(this).animate({"opacity":"0.5"},200);
+    });
+    $('.tjc_nav ul li').each(function(e){
+        $(this).click(function(){
+            if(e == 4)
+            {
+//                    var user_intro = "{$user_intro}";
+//                    if(!user_intro)
+//                    {
+//                        var url = "{:U("User/login")}";
+//                        window.location= url;
+//                        return false;
+//                    }else{
+//                        console.log(3333);
+//                    }
+            }
+            $('.tjc_nav ul li').removeClass('on');
+            $(this).addClass('on');
+
+            $('.tj_main').hide();
+            $('.tj_main').eq(e).show();
+            $('.tj_main').eq(e).children('.tjm_bottom').children('.tjmb_nav').children('ul').children('li').removeClass('on');
+            $('.tj_main').eq(e).children('.tjm_bottom').children('.tjmb_nav').children('ul').children('li').eq(0).addClass('on');
+            $('.tj_main').eq(e).children('.tjm_bottom').children('.baodian_content').eq(0).show();
+
+        })
+    });
+    var order_arr = new Array();
+    order_arr['tn_hbl'] = 'rate';
+    order_arr['tn_xl'] = 'num';
+    order_arr['tn_put_time'] = 'time';
+    order_arr['tn_price'] = 'coin';
+    $('.tjmb_nav ul li').each(function(e){
+        $(this).click(function(){
+            var _type = $(this).attr('class');
+            list_sort($(this).parent().parent().next(),order_arr[_type]);
+            $('.tjmb_nav ul li').removeClass('on');
+            $(this).addClass('on');
+        })
+    });
+    // 回报率
+    $('#tjcr_nav ul li').each(function(e){
+        $(this).click(function(){
+            $('#tjcr_nav ul li').removeClass('on');
+            $(this).addClass('on');
+            $('#phb_list_con').children('.phb_list').hide();
+            $('#phb_list_con').children('.phb_list').eq(e).show();
+        })
+    });
+    // 回报率
+    $('#tjcr_nav2 ul li').each(function(e){
+        $(this).click(function(){
+            $('#tjcr_nav2 ul li').removeClass('on');
+            $(this).addClass('on');
+            $('#phb_list_con2').children('.phb_list').hide();
+            $('#phb_list_con2').children('.phb_list').eq(e).show();
+        })
+    });
+    var Url =  document.domain.replace('www.','').split(".").length-1 > 1 ? '' : '/Common';
+    $(".lmb_main").on('click',function(){
+        var form = $("#jsForm");
+        var data = form.serialize();
+        var res = '';
+        $.ajax({
+            type: "POST",
+            url: Url+"/login.html",
+            data: data,
+            dataType:'json',
+            success: function(data){
+                if(data.status){
+                    window.location.reload();
+                }else{
+                    _alert('提示',data.info);
+                }
+            }
+        });
+    });
+
+    //tab
+    $('.tjc_nav ul li').click(function(e) {
+        $(this).addClass('on').siblings().removeClass('on');
+        var myNum = $(this).index();
+        if(myNum == 4){
+            $.ajax({
+                type:'get',
+                url :'/qiuwang/getIntroFollow.html',
+                dataType:'json',
+                beforeSend:function(){
+                    var load = '<div class="text-999 loadp" style="text-align: center;padding-top: 50px;">'+
+                            '<span><img src="__PUBLIC__Mobile/images/load.gif"></span>'+
+                            '<span style="margin-left: 5px;">数据加载中，请稍候......</span>'+
+                            '</div>';
+                    $(".followList").html(load);
+                },
+                success:function(data){
+                    var code = data.code;
+                    switch(code){
+                        case 1:
+                            var data = data.data;
+                            var html = '<div class="tjmb_nav">' +
+                            '<ul>' +
+                            '<li class="tn_hbl on"><a href="javascript:;">回报率</a></li>' +
+                            '<li class="tn_xl"><a href="javascript:;">销量</a></li>' +
+                            '<li class="tn_put_time"><a href="javascript:;">发布时间</a></li>' +
+                            '<li class="tn_price"><a href="javascript:;">价格</a></li>' +
+                            '</ul>' +
+                            '</div><div class="intro_list">';
+                            $.each(data,function(k,v){
+                                var color = '';
+                                if(v['release'] == 2) color = 'style="background:#ff3e63;"';
+                                        var release = '';
+                                if(v['release'] == 2)
+                                {
+                                    release = '已发布';
+                                }else{
+                                    release = '未发布';
+                                }
+                                html += '<div class="bd_list" coin="' + v['sale'] + '" rate="'+ v['total_rate'] + '" time="'+ v['pub_time'] + '" num="'+ v['num'] + '">' +
+                                        '<a href="' + v['href'] + '"  target="_blank">' +
+                                        '<div class="bdl_title">' + v['name'] + '</div>' +
+                                '<div class="bdl_con">' +
+                                '<div class="bdlc_top clearfix">' +
+                                '<div class="bdlct_left fl">' +
+                                '<img src="'+ v['logo'] +'" alt="">' +
+                                '<div class="near_get">' +
+                                '<div class="ng_zhong"><em>近10中'+ v['ten_num'] + '</em><em class="put_out" '+ color +'>'+ release +'</em></div>'+
+                                '<div class="ng_price"><span>价格：'+ v['sale'] + '</span>金币/'+ v['game_num'] + '场</div>'+
+                                '</div>'+
+                                '</div>'+
+                                '<div class="bdlct_right fr">'+
+                                '<p class="dr_percent"><span>'+ v['total_rate'] +'</span>%</p>'+
+                                '<p>累计回报率</p>'+
+                                '</div>'+
+                                '</div>'+
+                                        '<div class="put_game">'+
+                                '<table class="table tb_put_game">'+
+                                '<tbody>'+
+                                '<tr class="tr_border">'+
+                                '<th>开赛时间</th>'+
+                                '<th>赛事</th>'+
+                                '<th>对阵比赛</th>'+
+                                '<th>玩法</th>'+
+                                '<th>推介</th>'+
+                                '</tr>';
+                                var introgamble= {:json_encode($introgamble)};
+                                if(introgamble[v.id] == undefined)
+                                {
+                                    html += '<td colspan="6" class="wait"><img src="__PUBLIC__Home/images/qw/wait.png" alt="敬请期待" >敬请期待 </td>';
+                                }else{
+                                    $.each(introgamble[v.id],function(key,val){
+                                        var score = 'VS';
+                                        if(val['score'])
+                                        {
+                                            score = val['score'];
+                                        }
+                                        var play = '';
+                                        var chose_side = '';
+                                        if(val['play_type'] == 1)
+                                        {
+                                            play = '让球</td><td class="g_result">';
+                                            if(val['chose_side'] == 1)
+                                            {
+                                                play += val['home_team_name'];
+                                            }else{
+                                                play += val['away_team_name'];
+                                            }
+                                        }else{
+                                            play = '大小</td><td class="g_result">';
+                                            if(val['chose_side'] == 1)
+                                            {
+                                                play += '大球';
+                                            }else{
+                                                play += '小球';
+                                            }
+                                        }
+                                        var photo = '';
+                                        if(val['photo']) photo = '<img src="__STATIC__/images/qw/' + val['photo']+'.png">';
+                                        html += '<tr>' +
+                                                '<td>' + val['game_time'] + '</td>'+
+                                                '<td>' + val['union_name'] + '</td>'+
+                                                '<td>' + val['home_team_name'] + '<span>'+ score +
+                                                '</span>' + val['away_team_name'] +'</td>'+
+                                                '<td>'+ play +
+                                                '<em>' + val['handcp'] + '</em>(<font>' + val['odds'] + '</font>)' + photo +
+                                                '</td></tr>';
+                                    });
+                                }
+                                html += '</tbody></table></div></div></a></div>';
+                            });
+                                html += '</div>';
+                            break;
+                        case 2:
+                            var html = '<div class="uState">' +
+                            '<div class="uImg text-center"><img src="__STATIC__/images/index/uImg.png" alt=""></div>' +
+                                    '<p class="text-999 text-center">您还未登陆</p>' +
+                                    '<div style="text-align: center;width:100%"><a href="{:U('User/login')}" class="btn btn-blue" style="color:#fff;background-color:#2e87eb;border-color:#2e87eb;border-color:transparent!important;outline:none;border-radius:3px;">立即登陆>></a></div>' +
+                        '</div>';
+                            break;
+                        case 3:
+                            var html = '<div class="tabItem" style="">' +
+                                    '<div class="uState">' +
+                                    '<div class="uImg text-center"><img src="__PUBLIC__Home/images/index/pImg.png" alt="暂无任何关注"></div>' +
+                                    '<p class="text-999 text-center">暂无任何关注</p>' +
+                                    '<div style="text-align: center;width:100%"><a href="javascript:;" class="btn btn-blue" style="color:#fff;background-color:#2e87eb;border-color:#2e87eb;border-color:transparent!important;outline:none;border-radius:3px;">赶紧去关注&gt;&gt;</a></div>' +
+                                    '</div>' +
+                                    '</div>';
+                            break;
+                    }
+                    $('.followList').html(html);
+                    $('.tjmb_nav ul li').each(function(e){
+                        $(this).click(function(){
+                            var _type = $(this).attr('class');
+                            list_sort($(this).parent().parent().next(),order_arr[_type]);
+                            $('.tjmb_nav ul li').removeClass('on');
+                            $(this).addClass('on');
+                        })
+                    });
+                },
+                complete:function(){
+                    $(".loadp").remove();
+                },
+            })
+        }
+        $('.tabContent .tabItem').eq(myNum).show().siblings().hide();
+        $('.tjmb_nav ul li').each(function(e){
+            $(this).click(function(){
+                var _type = $(this).attr('class');
+                list_sort($(this).parent().parent().next(),order_arr[_type]);
+                $('.tjmb_nav ul li').removeClass('on');
+                $(this).addClass('on');
+            })
+        });
+    });
+
+    function list_sort(div_id,type) {
+        var aDiv = div_id.children(); //取容器需要重排的对象
+        var arr = [];
+        for(var i=0;i<aDiv.length;i++)
+        {
+            arr.push(aDiv[i]);  //aDiv是元素的集合，并不是数组，所以不能直接用数组的sort进行排序。
+        }
+        arr.sort(function(a,b){return b.getAttribute(type) - a.getAttribute(type)});
+        for(var i=0;i<arr.length;i++)
+        {
+            div_id.append(arr[i]); //将排好序的元素，重新塞到body里面显示。
+        }
+    }
+</script>
+</block>

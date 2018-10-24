@@ -1,0 +1,214 @@
+/**
+ * 资讯评论页css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-03-08
+**/
+
+
+.main{ width: 1000px; margin: 0 auto;}
+.f_center{text-align: center;}
+.main-right{width: 302px;margin-top: 10px;}
+.com-con .left-con{ width: 660px;}
+.sel-main{margin-top: 10px;}
+/* 当前位置 */
+.position{ height: 38px; line-height: 38px; font-size: 12px; color: #999;}
+.position .now{ font-size: 14px; color: #000;}
+
+/* 新闻介绍 */
+.title h1{ margin-top: 15px; font-size: 24px;}
+.title p{ font-size: 12px; color: #999;}
+.title p span{ margin-left: 15px;}
+.sum{ padding: 10px 10px 0 10px; background: #fffcef; border: 1px solid #f9dfc5; font-size: 12px; margin-bottom: 20px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+.sum p{ line-height: 22px; word-wrap: break-word; 28px; word-break: break-all;}
+.this{ line-height: 24px; text-indent: 28px; word-break: break-all; word-wrap: break-word; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+.p-con{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+.p-con h6{ font-size: 14px;}
+.p-con p{ line-height: 32px; text-indent: 28px; font-size: 16px;}
+.npArticle{ padding: 15px 0;}
+.npArticle span{ background: #e2e2e2; padding: 3px; margin-right: 5px;}
+.img-con{ padding: 15px 0; text-align: center;}
+.lab-con .lab-title{ border-bottom: 1px solid #e5e5e5; padding-bottom: 10px; padding-top: 10px;}
+.lab-con .lab-title .lab-name{ color: #ff7800; margin-right: 6px;}
+.lab-con h5{ font-size: 16px;}
+.lab-con .lab-list li { margin-bottom: 10px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+.lab-con .lab-list li .infor{ width: 500px; height: 18px; overflow: hidden;}
+.lab-con .lab-list li .time{ color: #999; font-size: 12px;}
+
+.linLoad{ padding: 26px 5px; border-bottom: 1px solid #e5e5e5;}
+.linLoad a{ text-align: center;}
+.labTitle,.newTile{ padding: 5px 0;}
+.labTitle{ border-bottom: 1px solid #e5e5e5;}
+.newTile .newTileDiv,.labBox .newTileDiv{ border-left: 4px solid #2e76c7; padding-left: 10px; font-size: 16px; margin: 15px 0;}
+.labList{ padding-top: 10px;}
+.labList a{ display: inline-block; padding: 3px 5px; border: 1px solid #e5e5e5; color: #999; margin: 0 5px; margin-bottom: 6px;}
+.labList a:hover{ color: #2e76c7; border-color: #2e76c7;}
+.content-list img{max-width: 600px;}
+
+/* 评论框 */
+.review-con{ padding: 20px 0;}
+.review-con .top{ margin-bottom: 12px;}
+.review-con .title-l{ font-size: 16px;}
+.review-con .title-r{ font-size: 12px;}
+.review-con .review-box{ height: 150px; border: 1px solid #2ac782;}
+.review-con .review-box textarea{border: 0 none; outline: 0 none; overflow: hidden; resize: none; z-index: 3; padding: 10px; width: 100%;}
+.review-box .textarea-wrap{ height: 40px; line-height: 34px; border-top: 1px solid #e5e5e5; padding: 0 10px; padding-top: 3px;}
+.review-box .textarea-wrap .left ul{ margin-bottom: 0;}
+.review-box .textarea-wrap .left li{ float: left; margin-left: 10px;}
+.review-box .textarea-wrap .left li span{ margin-left: 5px;}
+.review-box .textarea-wrap .left li .emotion{background:url(../../images/userIndex/publish_index/xixi.png) no-repeat -6px center; padding-left:20px;margin-left: 0px;}
+.review-box .textarea-wrap .left li .upimg{background:url(../../images/userIndex/publish_index/picture.png) no-repeat 0 center; padding-left:20px;}
+.review-box .textarea-wrap input.upload-file { opacity: 0; filter: alpha(opacity=0); width: 55px; height: 18px; outline: none; overflow: hidden; position: absolute; right: -54px; top: 7px; z-index: -1; font-size: 300px; cursor: pointer;}
+#show{ background:#fff; padding:5px; border:1px solid #e5e5e5; margin-bottom: 10px; height: 40px;}
+/* 表情笑脸 */
+.qqFace{margin-top:4px;background:#fff;padding:2px;border:1px #dfe6f6 solid;}
+.qqFace table td{padding:0px;}
+.qqFace table td img{cursor:pointer;border:1px #fff solid;}
+.qqFace table td img:hover{border:1px #0066cc solid;}
+
+/* 评论列表 */
+.ds-rounded{ margin-bottom: 20px;}
+.ds-tab-title{ line-height: 19px; margin-bottom: 10px;}
+.ds-tab-title a.on{text-decoration: underline; color: #ff7e00;}
+.ds-tab-title .line{ display: inline-block; height: 14px; border-left: 1px dashed #ddd; margin: 0 5px;}
+.ds-list{ width: 100%; border-top: 1px solid #e5e5e5;}
+.ds-list .ds-post-self { position: relative; padding: 10px 0;}
+.ds-list .reply-con .ds-post-self{ padding-bottom: 0px;} 
+.ds-list .ds-avatar{ border-radius: 50%;}
+.ds-list .ds-avatar img{ width: 50px; height: 50px; border-radius: 50%;}
+.ds-list .ds-comment-body{ font-size: 13px; width: 595px;}
+.ds-comment-header{ position: relative; width: 100%; font-size: 12px; margin-bottom: .5em;}
+.ds-comment-header em{ margin-left: 7px;}
+.ds-comment-header .np-btn-report{ position: absolute; right: 0; top: 0; display: none; cursor: pointer; z-index: 2;}
+.ds-comment-header  .report{padding-left: 15px; background: url(../../images/userIndex/publish_index/flag-icon.png) no-repeat left -30px; transition: all 0.2s;}
+.ds-comment-header  .report:hover{ background-position: 0 0; color: #eb0000;}
+.jubao:hover .np-btn-report{ display: block;}
+.ds-list .ds-comment-body p{ margin-bottom:  .5em; font-size: 14px; line-height: 1.5em; word-wrap:break-word;word-break:break-all;}
+.ds-comment-footer .ds-post-likes,.ds-comment-footer .ds-post-reply,.ds-post-likes-true{ padding-left: 22px; color: #999; transition: color .15s linear; webkit-transition: color .15s linear; -moz-transition: color .15s linear; transition: color .15s linear;}
+.ds-comment-footer a{ font-size: 12px;}
+.ds-comment-footer .ds-post-reply:hover{ color: #333;}
+.ds-comment-footer .ds-post-likes:hover{ color: #333;}
+.ds-comment-footer .ds-post-likes{ background: url(../../images/userIndex/publish_index/thumb_up.png) no-repeat left center;}
+.ds-comment-footer .ds-post-likes-true{ background: url(../../images/userIndex/publish_index/thumb_red.png) no-repeat left center; color: #eb0000;}
+.ds-comment-footer .ds-post-reply{ background: url(../../images/userIndex/publish_index/reply.png) no-repeat left center; margin-left: 10px;}
+.ds-list .reply-con{  border-top: 1px dashed #e5e5e5; margin-top: 10px;}
+.ds-list .reply-con .ds-comment-body{ width: 530px; }
+.ds-rounded .more_men{ width: 100%;}
+.review-box{ border: 1px solid #e5e5e5; margin-top: 5px; }
+
+/* 回复框 */
+.ds-rounded textarea{width: 100%; height: 50px; padding: 10px; border: 0; border-bottom: 1px solid #e5e5e5; outline: none; resize: none; display: inline-block;}
+.commtSub{height: 38px; line-height: 38px; padding-bottom: 10px; position: relative; padding: 0 10px;}
+.commtSub a{ margin-top: 2px; }
+
+/* 举报弹出框 */
+.np-report{/*box-shadow: 0 0 2px #999; border-radius: 3px;*/width:360px; border:1px solid #e5e5e5; color:#666; position:absolute; top:24px; right:0; background:#fff; z-index:10; font-family:Microsoft YaHei,Heiti SC;}
+.np-report-header{ height:38px; border-bottom:1px solid #e5e5e5; line-height:38px; padding-left: 20px;}
+.np-report-header h4{ float:left; line-height: 38px; font-size:15px; font-family:Microsoft YaHei,Heiti SC; margin: 0;}
+.np-report-header a{ float:right; width: 38px; height: 38px; text-align: center; background:url(../../images/userIndex/publish_index/icons1.png) center center no-repeat ;}
+.np-report-content{ padding-left:15px; padding-top: 20px; height:112px; border-bottom:1px solid #e5e5e5;}
+.np-report-content ul{ padding-left:13px;}
+.np-report-content li{ width:100px; float:left; height:30px; line-height:30px; margin-top:5px;}
+.np-report-content li label{ position:relative; top:-2px; margin-left:5px; font-size:14px; color:#666;}
+.np-report-content div input{ width:345px; height:28px; line-height:28px; border:1px solid #BBB; padding:0px; margin:0px; margin-top:8px; padding:0px 2px;}
+.np-report-footer{ padding: 10px; padding-right: 0;}
+.np-report-footer a{ margin-right: 15px;}
+
+.posts,.review-box{position: relative;}
+.statement{font-size:14px !important;color:#999;}
+#load{width: 50px;height: 50px;background:#000 url(../../images/userIndex/publish_index/loader.gif) no-repeat 45% 45%;position: absolute;top: 90%;left: 47%;z-index: 100;}
+#loads{width: 50px;height: 50px;background:#000 url(../../images/userIndex/publish_index/loader.gif) no-repeat 45% 45%;position: absolute;top: 30%;left: 47%;z-index: 100;}
+
+/* inforBox */
+.inforBox{ border: 1px solid #ededed; padding: 10px 20px; margin: 0 auto; margin-bottom: 30px; margin-top: 30px; width: 446px;}
+.rec_face{ width:62px; text-align:center; margin-right: 12px;}
+.rec_face img{ width:60px; height:60px; border-radius:50%; border:2px
+solid #e5e5e5}
+.rec_infor{ width: 330px;}
+.rec_infor .faceName a{ color: #343434; font-size: 16px;}
+.fan-ate { display: inline-block; padding: 0 10px; height: 22px; line-height: 22px; border-radius: 2px;}
+.timeVision{ font-size: 12px; color: #999999; padding-top: 5px;}
+.timeVision span{ border-right: 1px solid #ededed; padding-right: 10px;}
+.timeVision em,.mlc_time em{ background: url(../../images/userIndex/publish_index/icon-vision.png) no-repeat left center; padding-left: 22px; margin-left: 10px;}
+
+.matchBox{ background: #fbfbfb; border: 1px solid #e5e5e5; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin-bottom: 20px;}
+.matchIn{ width: 316px;}
+.matchTitle{ background: #e3e3e3; width: 316px; height: 28px; line-height: 28px; margin:0 auto; border-radius: 6px;}
+.matchTitle .matchName{ width: 116px; text-align: center; overflow: hidden; color: #ffffff; border-bottom-left-radius: 6px; border-top-left-radius: 6px; position: relative;}
+.matchTitle .matchName .triangleTopleft{ width: 0; height: 0; border-right: 20px solid transparent; position:absolute; left: 100%; top: 0;}
+.matchTitle .matchTime{ width: 200px; text-align:center; color: #4c4c4c;}
+.matchLogo{ width: 160px; padding-top: 15px; text-align: center;}
+.matchLogo img{ width: 100px; height: auto;}
+.matchScore{ margin: 20px 0;}
+.matchScore .teamName{ width: 108px; height: 30px; line-height: 30px; color: #4c4c4c; overflow: hidden;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    white-space: nowrap;
+    -moz-white-space: nowrap;
+    -ms-white-space: nowrap;
+    -o-white-space: nowrap;
+    -webkit-white-space: nowrap;
+}
+.matchScore .teamTime{ width: 100px; text-align: center; font-size: 22px; color: #4c4c4c;}
+.matchLink{ text-align: center;}
+.matchLink a{ padding: 4px 15px; background: #e3e3e3; border-radius: 4px; display:inline-block; margin: 0 5px;}
+
+.matchJc{ padding: 26px 126px; position: relative;}
+.matchJc .table{ margin-bottom: 0;}
+.matchJc .table tr td{ background: #f5f5f5; font: 13px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;}
+.matchJc .table .selectOdd{ background: #ffffff; color: #666666; cursor: pointer;}
+.matchJc .table .selectOdd.on{ background: #0094d5; color: #ffffff;}
+.authorNotes{ padding: 10px 0 20px 0;  color: #999999; border-bottom: 1px solid #e5e5e5;font-size: 16px;}
+.sign{ width: 52px; height: 52px; position: absolute; left: 105px; top: 5px;}
+.win{background: url(../../images/common/icon-win.png) no-repeat center center;}
+.lose{background: url(../../images/common/icon-lose.png) no-repeat center center;}
+.split{background: url(../../images/common/icon-split.png) no-repeat center center;}
+
+.winhalf{background: url(../../images/common/game_state/winhalf.png) no-repeat center center; }
+.winhalf{background: url(../../images/common/game_state/winhalf.png) no-repeat center center; }
+.losehalf{background: url(../../images/common/game_state/losehalf.png) no-repeat center center; }
+.pending{background: url(../../images/common/game_state/pending.png) no-repeat center center; }
+.putoff{background: url(../../images/common/game_state/putoff.png) no-repeat center center; }
+.cancel{background: url(../../images/common/game_state/cancel.png) no-repeat center center; }
+.interrupt{background: url(../../images/common/game_state/interrupt.png) no-repeat center center; }
+.cut{background: url(../../images/common/game_state/cut.png) no-repeat center center; }
+.flat{background: url(../../images/common/game_state/flat.png) no-repeat center center; }
+
+/* 专家主页 */
+.expertBox{ background: #fbfbfb; border: 1px solid #e5e5e5; margin: 20px 0;}
+.expertBox .expertInt{padding: 10px 20px; color: #666666; line-height: 24px;}
+.expertInforBox{ border-bottom: 1px dashed #e5e5e5; padding: 10px 20px;}
+.expertInforBox .fans{ padding-top: 8px;}
+.expertInforBox .fans span{ margin-right: 15px;}
+.expertInforBox .fans em{ color: #999999;}
+
+.listTitle{ border-bottom: 3px solid #c0c0c0;}
+.listTitle h4{font-size: 20px; margin: 0; padding: 10px 0; position: relative;}
+.listTitle h4 span{ color: #999999;}
+.listTitle h4:after{ width: 100%; height: 3px; background: #2e76c7; position: absolute; bottom: -3px; left: 0; z-index: 1; pointer-events: none; position: absolute; content: ''; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box;}
+.seletBox{ padding-top: 6px;}
+.seletArticle .btn{ background: #ffffff; color: #333; border: 1px solid #e5e5e5;}
+.seletArticle .btn1{ background: #ffffff;}
+.seletArticle .dropdown-menu{ min-width: 100%;}
+.seletArticle .dropdown-menu li{ text-align: center;}
+.seletArticle .dropdown-menu > li > a{ padding: 4px 5px;}
+.seletArticle .dropdown-menu > li > a:hover{ background: #7ebafe; color: #ffffff;}
+
+.main-left-con ul li{width:100%; padding: 20px 0; border-bottom: 1px solid #e5e5e5;}
+.main-left-con .mlc_title a{font-size: 18px; color: #2a6cb8; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;display:block;height:78px;}
+.main-left-con .mlc_des a{color: #666666; line-height: 150%;} 
+.main-left-con  .mlc_match span{ color: #2e76c7; margin-right: 15px;}
+.mlc_time{ padding-top: 10px;  color: #999999; font-size: 12px;}
+.mlc_time span{ margin-right: 15px;}
+.rec_img{ width: 162px; height: 114px; float: left;}
+.rec_img img{ width: 162px; height: 114px;  }
+.rec_right{ width: 486px; float: left; padding-left: 12px; }
+.posts{position: relative;}
+
+.pagination > .active > a{ background: #369; border-color: #369;}
+.page-con{ margin-top: 20px;}

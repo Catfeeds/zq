@@ -1,0 +1,24 @@
+<section class="score clearfix">
+    <div class="score_main"> 
+
+        <div class="s_left">
+            <div class="t_logo"><img src="{$against.home_logo}" alt="{$against.home_team_name.0}" onerror='this.src="__PUBLIC__/Home/images/common/home_def.png"'></div>
+            <p id="ag_homename" class="ag_homename"><eq name='Think.cookie.language' value='0'>{$against.home_team_name.0}<else/>{$against.home_team_name.1}</eq></p>
+        </div>
+
+        <div class="s_center">
+            <time class="time">{$against.gtime|date='y-m-d H:i',###}</time>
+            <div class="sc_score">
+                <in name="against.game_state" value="1,2,3,4,-1">{$against.score}<else/>VS</in>
+            </div>
+            <p>
+                {:C('game_state')[$against[game_state]]}
+            </p>
+        </div>
+        <div class="s_left s_right">
+            <div class="t_logo"><img src="{$against.away_logo}" alt="{$against.away_team_name.0}" onerror='this.src="__PUBLIC__/Home/images/common/away_def.png"'></div>
+            <p id="ag_awayname" class="ag_awayname"><eq name='Think.cookie.language' value='0'>{$against.away_team_name.0}<else/>{$against.away_team_name.1}</eq></p>
+        </div>
+    </div>
+    <input id="scheid" type="hidden" value="{$scheid}">
+</section>

@@ -1,0 +1,37 @@
+/* 
+* @Author: Weiqianqian
+* @Date:   2018-06-13 17:07:10
+* @Last Modified by:   Marte
+* @Last Modified time: 2018-06-20 16:18:46
+*/
+
+.wrapCon{ background: url(../../images/analysis/bg.png) no-repeat top center; background-size: 100%; top: 0; padding: .3rem .2rem 0 .2rem;}
+.enterprise{ width: 3.74rem; height: 1.5rem; position: relative; margin: 0rem 0 0 0;}
+.enterprise img{ width: 1.4rem; height: .8rem;margin-top: .3rem;}
+.grouping{ width: 1.6rem; height: .8rem; background-color: #19191987; color: #FFF; font-size: .5rem; text-align: center; position: absolute;}
+.state{ height: .8rem; padding: 0 .2rem 0 0; background-color: #19191987; color: #FFF; font-size: .5rem; text-align: center; position: absolute; max-width: 4rem; white-space: nowrap; overflow: hidden;}
+.grouping{ bottom: 0.4rem; margin-left: 1.74rem; text-align: center;}
+.state{ bottom: 0.4rem; margin-left: 3.34rem; text-align: center;}
+.Ana{display: block}
+.top-img{ margin: .3rem 0 -.1rem 0; position: relative;}
+.top-img span{ color: #fefefe; font-size: .32rem; position: absolute; top: 0; display: block; left: 40%;}
+.list{ width: 100%; padding: 0 0 .2rem 0;}
+.list li{ background-color: #fff; width: 100%; padding: .2rem .2rem .2rem .2rem; border-bottom:.1rem solid #eee;}
+.list li a{ display: block; }
+.list .top{ position: relative; border-bottom: 1px solid #eee; height: .46rem; }
+.top-l{ left: 38%; position: absolute; font-size: .26rem; color: #999;}
+.top-r{ margin-left: 5.7rem; font-size: .22rem; color: #6f8b9c;}
+.list .left,.list .middle,.list .right{ float: left; height: .8rem; line-height: .9rem;}
+.list .left,.list .right{ width: 38%;}
+.list .right{ text-align: right;}
+.list .middle{ width: 24%; text-align: center; font-size: .28rem; color: #4c4c4c;}
+.list .left span,.list .right span{ color: #666; font-size: .28rem;}
+.list .left img,.list .right img{ width: .7rem; height: .45rem;}
+.right-img{ float: left;}
+.most{ width: 1.7rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; float: left; text-align: right; margin-right: .1rem;}
+.most-t{ width: 1.7rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; float: left; margin-left: .1rem; text-align: left;}
+
+.master{ width: 100%; padding: .1rem 0 0 0;}
+.master li{ position: relative; width: 3.28rem; height: 2.4rem; border: 1px solid #fff; float: left; margin: .1rem .13rem .1rem .13rem; }
+.master a img{ width: 100%; height: 100%;}
+.predictions{ width: 1.44rem; height: .56rem; background-color:#dd0000; color: #fff; text-align: center; line-height: .56rem; font-size: .28rem; position: absolute; top: 1.86rem; left: 1.84rem;}

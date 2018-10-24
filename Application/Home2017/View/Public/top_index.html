@@ -1,0 +1,45 @@
+<include file="Public:top_include"/>
+<div class="top-center-con">
+    <div class="top-center clearfix">
+        <div class="pull-left center-left"><div class="pull-left" id="logo"><a href="{:U('/')}"><img width="193" height="65" src="__PUBLIC__/Home/images/index/logo.png"></a></div></div>
+        <div class="pull-right center-right"><a href="{:U('/Api/Index/introduce')}" target="_blank;"><img src="__PUBLIC__/Home/images/index/top_banner.png" width="752" height="96" alt="app下载"></a></div>
+    </div>
+</div>
+<div class="nav-con">
+    <div class="nav">
+        <ul class="clearfix navUl">
+            <li <eq name="Think.CONTROLLER_NAME" value="Index">class="on selected"</eq> ><a class="indexNav" href="{:U('/')}">首页</a></li>
+            <li <eq name="Think.CONTROLLER_NAME" value="PublishIndex">class="on selected"</eq>><a href="{:U('/analysts')}">资讯情报</a></li>
+            <li <eq name="Think.CONTROLLER_NAME" value="Score">class="on selected"</eq>><a target="_blank" href="{:U('/@bf')}">即时比分</a></li>
+        </ul>
+        <in name="Think.CONTROLLER_NAME" value="Index,Intro,PublishIndex,Video,Highlights,GambleHall,Score,GalleryIndex">
+            <div class="navList">
+                <ul class="clearfix <neq name="Think.CONTROLLER_NAME" value="Index">hidden<else/>selected</neq>">
+                    <li><a href="{:U('/analysts')}">资讯情报</a></li>
+                    <li><a href="{:U('/@bf')}" target="_blank">即时比分</a></li>
+                </ul>
+                <ul class="clearfix <neq name="Think.CONTROLLER_NAME" value="PublishIndex">hidden<else/>selected</neq>">
+                    <li <eq name="Think.get.class_id" value="10">class="on"</eq>><a href="{:U('/list_n/10')}">独家解盘</a></li>
+                    <li <eq name="Think.get.class_id" value="54">class="on"</eq>><a href="{:U('/list_n/54')}">竞彩前瞻</a></li>
+                    <li <eq name="Think.get.class_id" value="55">class="on"</eq>><a href="{:U('/list_n/55')}">北单推荐</a></li>
+                    <li <eq name="Think.get.class_id" value="62">class="on"</eq>><a href="{:U('/list_n/62')}">独家秘笈</a></li>
+                    <li <eq name="Think.get.class_id" value="18">class="on"</eq>><a href="{:U('/list_n/18')}">中超</a></li>
+                    <li <eq name="Think.get.class_id" value="13">class="on"</eq>><a href="{:U('/list_n/13')}">英超</a></li>
+                    <li <eq name="Think.get.class_id" value="14">class="on"</eq>><a href="{:U('/list_n/14')}">西甲</a></li>
+                    <li <eq name="Think.get.class_id" value="4">class="on"</eq>><a href="{:U('/list_n/4')}">NBA</a></li>
+                    <li class="last <eq name="Think.get.class_id" value="3"> on </eq>"><a href="{:U('/list_n/3')}">CBA</a></li>
+                </ul>
+                <ul class="clearfix <neq name="Think.CONTROLLER_NAME" value="Score">hidden<else/>selected</neq>">
+                    <li <eq name="Think.ACTION_NAME" value="index"> class="on" </eq> ><a target="_blank" href="{:U('/@bf')}">即时比分</a></li>
+                    <li <eq name="Think.ACTION_NAME" value="schedule"> class="on" </eq> ><a target="_blank" href="{:U('/schedule/@bf')}">完场赛事</a></li>
+                    <li <eq name="Think.ACTION_NAME" value="schtoday"> class="on" </eq>><a target="_blank" href="{:U('/schtoday/@bf')}">未来赛事</a></li>
+                    <li <eq name="Think.ACTION_NAME" value="indices"> class="on" </eq>><a target="_blank" href="{:U('/indices/@bf')}">即时指数</a></li>
+                    <li class="last <eq name="Think.ACTION_NAME" value="generate"> on </eq>"><a target="_blank"  href="{:U('/generate/@bf')}">免费调用</a></li>
+                </ul>
+            </div>
+        </in>
+    </div>
+</div>
+<in name="Think.CONTROLLER_NAME" value="Index,Intro,PublishIndex,Video,Highlights,GambleHall,Score,GalleryIndex">
+    <div class="gaoD" style="height: 40px;"></div>
+</in>

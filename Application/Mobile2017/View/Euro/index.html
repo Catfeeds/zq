@@ -1,0 +1,201 @@
+<extend name="Public/euro/base" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/euro/hot.css">  
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="__CSS__/euro/swiper.css">
+    <script type="text/javascript" src="__JS__/euro/index.js"></script>
+</block>
+<block name="content">    
+    <!-- banner 切换 s-->
+    <section class="main_banner">
+        <!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <volist name='recommend' id='v'>
+                    <figure class="swiper-slide">
+                        <switch name='v.type'>
+                        <case value='1' break='1'><a href="{:U('hot_detail@m',array('id'=>$v['url']))}"></case>
+                        <case value='2' ><a href="{:U('photo_detail@m',array('id'=>$v['url']))}"></case>
+                        <case value='3' ><a href="{:U('video_detail@m',array('id'=>$v['url']))}"></case>
+                        <case value='9' ><a href="{$v['url']}" target='_blank'></case>
+                        </switch>
+                            <img src="{$v.titleimg}" alt="{$v.title}"></a>
+                        <figcaption>{$v.title}</figcaption>
+                    </figure>
+                </volist>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+    <!-- banner 切换 e-->
+
+    <!-- 赛程预告 s-->
+    <section class="schedule_show">
+        <nav class="sc_sele" id="get_avg">
+            <a href="{:U('index@m',array('type'=>1,'group'=>A))}" <eq name='Think.get.type' value='1'>class="on"</eq>>小组赛</a>
+            <a href="{:U('index@m',array('type'=>2))}" <eq name='Think.get.type' value='2'>class="on"</eq>>1/8决赛</a>
+            <a href="{:U('index@m',array('type'=>3))}" <eq name='Think.get.type' value='3'>class="on"</eq>>1/4决赛</a>
+            <a href="{:U('index@m',array('type'=>4))}" <eq name='Think.get.type' value='4'>class="on"</eq>>半决赛</a>
+            <a href="{:U('index@m',array('type'=>5))}" <if condition="($Think.get.type eq 5) OR ($Think.get.type eq '')">class="on"</if>>决赛</a> 
+        </nav>
+
+        <!-- 赛程预告 content s-->
+        <section class="schedule_con">
+            <div class="line_l"></div>
+            <div class="line_r"></div>
+            <if condition="($Think.get.type eq 1)">
+                <div class="sc_con" style="display: block;">
+                    <!-- 小组赛 s-->
+                    <div class="sc_small">
+                        <nav>
+                            <a href="{:U('index@m',array('type'=>1,'group'=>A))}" <if condition="($Think.get.group eq 'A') OR ($Think.get.group eq 'a') OR ($Think.get.group eq '')">class="on"</if>>A</a>
+                            <a href="{:U('index@m',array('type'=>1,'group'=>B))}" <if condition="($Think.get.group eq 'B') OR ($Think.get.group eq 'b')">class="on"</if>>B</a>
+                            <a href="{:U('index@m',array('type'=>1,'group'=>C))}" <if condition="($Think.get.group eq 'C') OR ($Think.get.group eq 'c')">class="on"</if>>C</a>
+                            <a href="{:U('index@m',array('type'=>1,'group'=>D))}" <if condition="($Think.get.group eq 'D') OR ($Think.get.group eq 'd')">class="on"</if>>D</a>
+                            <a href="{:U('index@m',array('type'=>1,'group'=>E))}" <if condition="($Think.get.group eq 'E') OR ($Think.get.group eq 'e')">class="on"</if>>E</a>
+                            <a href="{:U('index@m',array('type'=>1,'group'=>F))}" <if condition="($Think.get.group eq 'F') OR ($Think.get.group eq 'f')">class="on"</if>>F</a>
+                        </nav> 
+                        <div class="cou_list" <if condition="($Think.get.group eq 'A') OR ($Think.get.group eq 'a') OR ($Think.get.group eq '')">style="display: block;"</if>>
+                       <em><img src="__IMAGES__/euro/fg.png" alt="法国">法国</em>
+                       <em><img src="__IMAGES__/euro/lmny.png" alt="罗马尼亚">罗马尼亚</em>
+                       <em><img src="__IMAGES__/euro/aebny.png" alt="阿尔巴尼亚">阿尔巴尼亚</em>
+                       <em><img src="__IMAGES__/euro/rs.png" alt="瑞士">瑞士</em> 
+                     </div>
+                     <div class="cou_list" <if condition="($Think.get.group eq 'B') OR ($Think.get.group eq 'b')">style="display: block;"</if>>
+                       <em><img src="__IMAGES__/euro/ygl.png" alt="英格兰">英格兰</em>
+                       <em><img src="__IMAGES__/euro/els.png" alt="俄罗斯">俄罗斯</em>
+                       <em><img src="__IMAGES__/euro/wes.png" alt="威尔士">威尔士</em>
+                       <em><img src="__IMAGES__/euro/slfk.png" alt="斯洛伐克">斯洛伐克</em> 
+                     </div>
+                     <div class="cou_list" <if condition="($Think.get.group eq 'C') OR ($Think.get.group eq 'c')">style="display: block;"</if>>
+                       <em><img src="__IMAGES__/euro/dg.png" alt="德国">德国</em>
+                       <em><img src="__IMAGES__/euro/wkl.png" alt="乌克兰">乌克兰</em>
+                       <em><img src="__IMAGES__/euro/bl.png" alt="波兰">波兰</em>
+                       <em><img src="__IMAGES__/euro/bael.png" alt="北爱尔兰">北爱尔兰</em> 
+                     </div>
+                     <div class="cou_list" <if condition="($Think.get.group eq 'D') OR ($Think.get.group eq 'd')">style="display: block;"</if>>
+                       <em><img src="__IMAGES__/euro/xby.png" alt="西班牙">西班牙</em>
+                       <em><img src="__IMAGES__/euro/jk.png" alt="捷克">捷克</em>
+                       <em><img src="__IMAGES__/euro/teq.png" alt="土耳其">土耳其</em>
+                       <em><img src="__IMAGES__/euro/kldy.png" alt="克罗地亚">克罗地亚</em> 
+                     </div>
+                     <div class="cou_list" <if condition="($Think.get.group eq 'E') OR ($Think.get.group eq 'e')">style="display: block;"</if>>
+                       <em><img src="__IMAGES__/euro/bls.png" alt="比利时">比利时</em>
+                       <em><img src="__IMAGES__/euro/ydl.png" alt="意大利">意大利</em>
+                       <em><img src="__IMAGES__/euro/ael.png" alt="爱尔兰">爱尔兰</em>
+                       <em><img src="__IMAGES__/euro/rd.png" alt="瑞典">瑞典</em> 
+                     </div>
+                     <div class="cou_list" <if condition="($Think.get.group eq 'F') OR ($Think.get.group eq 'f')">style="display: block;"</if>>
+                       <em><img src="__IMAGES__/euro/pty.png" alt="葡萄牙">葡萄牙</em>
+                       <em><img src="__IMAGES__/euro/bd.png" alt="冰岛">冰岛</em>
+                       <em><img src="__IMAGES__/euro/adl.png" alt="奥地利">奥地利</em>
+                       <em><img src="__IMAGES__/euro/xyl.png" alt="匈牙利">匈牙利</em> 
+                     </div>
+
+                    </div>
+                    <!-- 小组赛 e-->
+                </div>
+                <else/>
+                <div class="sc_con" style="display: block;">
+                    <div class="sc-container">
+                        <div class="swiper-wrapper">
+                            <volist name='group_list' id='v'>
+                                <div class="swiper-slide">
+                                    <div class="sc_top">{$v.gtime|date='m月d日 H:i',###}</div>
+                                    <div class="sc_bottom  js-event clearfix" data-href="{:U('index@m',array('type'=>$_GET['type'],'event'=>$v['game_id']))}" >
+                                        <figure class="scb_l">
+                                            <div><img src="{$v.home_logo}" alt="{$v.home_team_name.0}"></div>
+                                            <figcaption>{$v.home_team_name.0}</figcaption>
+                                        </figure>
+                                            <switch name="v.game_state">
+                                            <case value="0|-10|-11|-12|-13|-14">
+                                                <span>{:C('game_state')[$v['game_state']]}</span>
+                                            </case>
+                                            <case value="-1|1|2|3|4"><span class="red">{$v.score}</span></case>
+                                            </switch>
+                                        <figure class="scb_r">
+                                            <div><img src="{$v.away_logo}" alt="{$v.away_team_name.0}"></div>
+                                            <figcaption>{$v.away_team_name.0}</figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </volist>
+                        </div> 
+                        <!-- Add Pagination -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div> 
+                </div>
+            </if>
+        </section>
+        <!-- 赛程预告 content e-->
+    </section>
+    <!-- 赛程预告 e-->
+
+
+
+
+
+
+    <!-- 列表 s -->
+    <section class="news_con clearfix">
+        <ul id='news_list'>
+            <volist name='list' id='v'>
+                <li class="list js-list clearfix">
+                    <a href="{:U('hot_detail@m',array('id'=>$v['id']))}">
+                        <div class="n_img"><img <notempty name='v.img'>src="{$v.img}"<else/>src="__IMAGES__/default.jpg"</notempty> alt="{$v.short_title}"></div>
+                        <div class="n_des">
+                            <h3 class="q-one">{$v.short_title}</h3>
+                            <p class="q-two">{$v.remark}</p>
+                        </div> 
+                    </a>
+                </li>
+            </volist>
+        </ul>
+        <input type="hidden" id="type" value="{$Think.get.type}" />
+        <input type="hidden" id="event" value="{$Think.get.event}" />
+        <input type="hidden" id="group" value="{$Think.get.group}">
+        <input type="hidden" id="auto_load" value="1">
+        <div class="paged boxs">
+            <!--            <a href="javascript:;" class="btn btn-green boxs" id="loadMore">加载更多</a>-->
+            <div class="load_gif fs24 text-999" <empty name='list'>style='display:none;'</empty>>
+                <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>数据加载中，请稍候......</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="<notempty name='list'>display:none;</notempty>cursor:default;" id="showLess">没有更多了</a>
+        </div>
+
+    </section>
+    <!-- 列表 e -->
+    <include file="Public/app-bar"/>
+</block>
+
+<block name="scripts">
+    <!-- Swiper JS -->
+    <script src="__JS__/euro/swiper.js"></script>  
+    <script>
+        var DOMAIN = "__DOMAIN__";
+        //banner 切换
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: 10000,
+            autoplayDisableOnInteraction: false
+        });
+
+        function loadSwiper() {
+            var swiper1 = new Swiper('.sc-container', {
+                slidesPerView: 2,
+                paginationClickable: true,
+                freeMode: true,
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev'
+            });
+        }
+        window.onload = loadSwiper();
+    </script>
+</block>

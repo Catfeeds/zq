@@ -1,0 +1,337 @@
+<extend name="Public:layout"/>
+<block name='seo'>
+    <title>盈盘雷达_全球体育网</title>
+    <meta name="keywords" content="胜平负,亚盘分析,大小分析,盈利亏损,必发指数">
+    <meta name="description" content="盈盘雷达为您提供最全面及时的彩票走势图大全。包括胜平负、亚盘极限、必发交易、庄家盈利、庄家亏损、实力对抗、亚盘对抗、大小对抗、胜差异值等，方便您浏览。">
+</block>
+<block name='css'>
+    <!-- 页面所需css -->
+    <link rel="stylesheet" href="__CSS__/ypRadar/radarData.css">
+</block>
+
+<block name="content">
+    <!-- theme -->
+    <div class="themeBox rdBody">
+    	<div class="themeBanner"><div class="themeBanTet">全球体育大数据全年已经覆盖450余个各级别足球赛事，近60000场比赛，每日处理赛前数据2000万条,利用独创的大数据AI人工智能算法结合比赛基本面、球队技战术数据、赔率必发等进行分析计算给出独有的分析数据，大大提高你的胜率。</div></div>
+        <include file="YpRadar:topLink" />
+        <!-- main -->
+        <div class="main">
+            <!-- 二级菜单 --> 
+            <div class="levelNav">
+                <ul class="levelUl clearfix">
+                    <li class="pull-left"><a href="{:U('/mrjx@sporttery')}" title="胜负平">胜负平</a></li>
+                    <li class="pull-left"><a href="{:U('/mrjx@sporttery', 'playType=2')}" title="亚盘极限">亚盘极限</a></li>
+                    <li class="pull-left"><a href="{:U('/lrjy@sporttery')}" title="必发交易">必发交易</a></li>
+                    <li class="pull-left"><a href="{:U('/lrjy@sporttery', 'type=2')}" title="庄家盈利">庄家盈利</a></li>
+                    <li class="pull-left"><a href="{:U('/lrjy@sporttery', 'type=3')}" title="庄家亏损">庄家亏损</a></li>
+                    <li class="pull-left"><a href="{:U('/ypdk@sporttery')}" title="实力对抗">实力对抗</a></li>
+                    <li class="pull-left"><a href="{:U('/ypdk@sporttery', 'type=2')}" title="亚盘对抗">亚盘对抗</a></li>
+                    <li class="pull-left"><a href="{:U('/ypdk@sporttery', 'type=3')}" title="大小对抗">大小对抗</a></li>
+                    <li class="pull-left"><a href="{:U('/jccy@sporttery')}" title="胜差异值">胜差异值</a></li>
+                </ul>
+            </div>
+            <!-- 二级菜单 -->
+            
+            <!-- 当前位置 -->
+            <div class="position">
+                当前位置：<span class="now"><a href="https://www.qqty.com/" title="全球体育">全球体育首页</a></span> &gt; <span class="now"><a href="{:U('@sporttery')}" title="专家说彩">专家说彩</a></span> &gt;<span class="text-blue">盈盘雷达</span></div>
+            <!-- 当前位置 -->
+            <div class="dtTypeCon">
+                <!-- jxjxBox -->
+
+                <empty name="data">
+                    <div class="dtBox dtNoneBox clearfix">
+                        <div><img src="__IMAGES__/ypRadar/none-data-bg.jpg" width="520" height="234"></div>
+                        <p><a href="javascript:void(0);" class="text-666" title="回査数据">回査数据 >></a></p>
+                    </div>
+                    <else />
+                    <if condition="!(empty($data['jiXian1']))">
+                        <div class="dtBox jxjxBox clearfix">
+                        <span class="dtBoxType">极限精选</span>
+                        <div class="pull-left dtBoxL">
+                            <ul>
+                                <foreach name="data['jiXian1']" item="v" key="k">
+                                    <li class="clearfix list <if condition='$k eq 1'>graListL</if>">
+                                        <a class=clearfix"  target="_blank" href="{:U('/dataFenxi/game_id/'.$v['gameId'].'@bf')}" title="极限精选">
+                                        <div class="pull-left dLeft">
+                                            <div class="clearfix mb15">
+                                                <span class="pull-left f20 mr10 name text-hidden" title="<if condition="$v['winTeam'] eq 1">{$v['homeTeamName']|switchName=0,###}<else /> {$v['awayTeamName']|switchName=0,###}</if>"><if condition="$v['winTeam'] eq 1">{$v['homeTeamName']|switchName=0,###}<else /> {$v['awayTeamName']|switchName=0,###}</if></span>
+                                                <notempty  name="v['handcp']">
+                                                    <span class="pull-left spanLb">{$v['handcp']}</span>
+                                                </notempty >
+                                            </div>
+                                            <p class="text-999 mb10">{$v['unionName']|switchName=0,###}  {$v['gtime']}</p>
+                                            <p class="text-666"><span class="pull-left text-hidden homeTeam" title="{$v['homeTeamName']|switchName=0,###}">{$v['homeTeamName']|switchName=0,###}</span> <span class="pull-left text-red scoreTeam"><empty name="v['score']">VS<else />{$v['score']}</empty> </span> <span class="pull-left text-hidden awayTeam" title="{$v['awayTeamName']|switchName=0,###}">{$v['awayTeamName']|switchName=0,###}</span> </p>
+                                        </div>
+                                        <div class="pull-left dCenter">
+                                            <p class="f16 text-center mb35">当前连{$v['winType']}</p>
+                                            <p class="rowNum text-center">{$v['curMaxScore']}</p>
+                                        </div>
+                                        <div class="pull-left dRight">
+                                            <p class="f16 text-center mb35">历史最高</p>
+                                            <p class="rowNum text-center">{$v['maxScore']}</p>
+                                        </div>
+                                        </a>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                        <div class="pull-right dtBoxR">
+                            <ul>
+                                <foreach name="data['jiXian2']" item="v" key="k">
+                                    <li class="clearfix list <if condition='$k eq 1'>graListR</if>">
+                                        <a class=clearfix"  target="_blank" href="{:U('/dataFenxi/game_id/'.$v['gameId'].'@bf')}" title="极限精选">
+                                        <div class="pull-left dLeft">
+                                            <div class="clearfix mb15">
+                                                <span class="pull-left f20 mr10 name text-hidden" title="<if condition="$v['winTeam'] eq 1">{$v['homeTeamName']|switchName=0,###}<else /> {$v['awayTeamName']|switchName=0,###}</if>"><if condition="$v['winTeam'] eq 1">{$v['homeTeamName']|switchName=0,###}<else /> {$v['awayTeamName']|switchName=0,###}</if></span>
+                                                <notempty  name="v['handcp']">
+                                                    <span class="pull-left spanLb">{$v['handcp']}</span>
+                                                </notempty >
+                                            </div>
+                                            <p class="text-999 mb10">{$v['unionName']|switchName=0,###}  {$v['gtime']}</p>
+                                            <p class="text-666"><span class="pull-left text-hidden homeTeam" title="{$v['homeTeamName']|switchName=0,###}">{$v['homeTeamName']|switchName=0,###}</span> <span class="pull-left text-red scoreTeam"><empty name="v['score']">VS<else />{$v['score']}</empty> </span> <span class="pull-left text-hidden awayTeam" title="{$v['awayTeamName']|switchName=0,###}">{$v['awayTeamName']|switchName=0,###}</span> </p>
+                                        </div>
+                                        <div class="pull-left dCenter">
+                                            <p class="f16 text-center mb35">当前连{$v['winType']}</p>
+                                            <p class="rowNum text-center">{$v['curMaxScore']}</p>
+                                        </div>
+                                        <div class="pull-left dRight">
+                                            <p class="f16 text-center mb35">历史最高</p>
+                                            <p class="rowNum text-center">{$v['maxScore']}</p>
+                                        </div>
+                                        </a>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                    </div>
+                </if>
+                    <!-- jxjxBox -->
+
+                <if condition="!(empty($data['lengRe1']))">
+                <!-- lrjyBox -->
+                    <div class="dtBox lrjyBox clearfix">
+                        <span class="dtBoxType">冷热交易</span>
+                        <div class="pull-left dtBoxL">
+                            <ul>
+                                <foreach name="data['lengRe1']" item="v" key="k">
+                                    <li class="clearfix list <if condition='$k eq 1'>graListL</if>">
+                                        <div class="pull-left dLeft">
+                                            <p class="text-999 mb10">{$v['betCode']}  {$v['unionName']|switchName=0,###}  {$v['gtime']}</p>
+                                            <p class="text-666 f16 mb10 clearfix"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,0}</span></empty><span class="pull-left awayTeam text-hidden" title="{$v['homeTeamName']|switchName=0,###}">{$v['homeTeamName']|switchName=0,###}</span></p>
+                                            <p class="mb10 text-blue <notempty name="v['score']">pl15</notempty>">平局</p>
+                                            <p class="text-666 f16 clearfix"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,1}</span></empty><span class="pull-left awayTeam text-hidden" title="{$v['awayTeamName']|switchName=0,###}">{$v['awayTeamName']|switchName=0,###}</span></p>
+                                        </div>
+                                        <div class="pull-left cjj">
+                                            <p class="f16 text-center mb15 text-999">成交价</p>
+                                            <p class="rowNum text-center f12 text-666 mb10">{$v['homeDealPrice']}</p>
+                                            <p class="rowNum text-center f12 text-666 mb10">{$v['drawDealPrice']}</p>
+                                            <p class="rowNum text-center f12 text-666 mb10">{$v['awayDealPrice']}</p>
+                                        </div>
+                                        <div class="pull-left cjl">
+                                            <p class="f16 text-center mb15 text-999">成交量</p>
+                                            <p class="rowNum text-center f12 text-666 mb10">{$v['homeDealNum']}</p>
+                                            <p class="rowNum text-center f12 text-666 mb10">{$v['drawDealNum']}</p>
+                                            <p class="rowNum text-center f12 text-666 mb10">{$v['awayDealNum']}</p>
+                                        </div>
+                                        <div class="pull-left cjbl">
+                                            <p class="f16 text-center mb15 text-999"><if condition="$k eq 0">成交比例<elseif condition="$k eq 1" />盈利 <else />亏损</if></p>
+                                            <p class="rowNum text-center f12 mb10 <if condition="($v['maxSign'] eq 1 and $k eq 0) or ($v['maxSign'] eq 1 and $k eq 1)">text-red <elseif condition="$v['maxSign'] eq 1 and $k eq 2" />text-green <else /> text-666 </if>">{$v['homeDealRatio']}</p>
+                                            <p class="rowNum text-center f12 mb10 <if condition="($v['maxSign'] eq 2 and $k eq 0) or ($v['maxSign'] eq 2 and $k eq 1)">text-red  <elseif condition="$v['maxSign'] eq 2 and $k eq 2" />text-green <else /> text-666 </if>">{$v['drawDealRatio']}</p>
+                                            <p class="rowNum text-center f12 mb10 <if condition="($v['maxSign'] eq 3 and $k eq 0) or ($v['maxSign'] eq 3 and $k eq 1)">text-red <elseif condition="$v['maxSign'] eq 3 and $k eq 2" />text-green <else /> text-666 </if>">{$v['awayDealRatio']}</p>
+                                        </div>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                        <div class="pull-right dtBoxR">
+                            <ul>
+                                <foreach name="data['lengRe2']" item="v" key="k">
+                                    <li class="clearfix list <if condition='$k eq 1'>graListR</if>">
+                                        <div class="pull-left dLeft">
+                                            <p class="text-999 mb10">{$v['betCode']}  {$v['unionName']|switchName=0,###}  {$v['gtime']}</p>
+                                            <p class="text-666 f16 mb10 clearfix"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,0}</span></empty><span class="pull-left awayTeam text-hidden" title="{$v['homeTeamName']|switchName=0,###}">{$v['homeTeamName']|switchName=0,###}</span></p>
+                                            <p class="mb10 text-blue <notempty name="v['score']">pl15</notempty>">平局</p>
+                                            <p class="text-666 f16 clearfix"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,1}</span></empty><span class="pull-left awayTeam text-hidden" title="{$v['awayTeamName']|switchName=0,###}">{$v['awayTeamName']|switchName=0,###}</span></p>
+                                        </div>
+                                        <div class="pull-left cjj">
+                                            <p class="f16 text-center mb15 text-999">成交价</p>
+                                            <p class="rowNum text-center f12 text-666 mb10">{$v['homeDealPrice']}</p>
+                                            <p class="rowNum text-center f12 text-666 mb10">{$v['drawDealPrice']}</p>
+                                            <p class="rowNum text-center f12 text-666 mb10">{$v['awayDealPrice']}</p>
+                                        </div>
+                                        <div class="pull-left cjl">
+                                            <p class="f16 text-center mb15 text-999">成交量</p>
+                                            <p class="rowNum text-center f12 text-666 mb10">{$v['homeDealNum']}</p>
+                                            <p class="rowNum text-center f12 text-666 mb10">{$v['drawDealNum']}</p>
+                                            <p class="rowNum text-center f12 text-666 mb10">{$v['awayDealNum']}</p>
+                                        </div>
+                                        <div class="pull-left cjbl">
+                                            <p class="f16 text-center mb15 text-999"><if condition="$k eq 0">成交比例<elseif condition="$k eq 1" />盈利 <else />亏损</if></p>
+                                            <p class="rowNum text-center f12 mb10 <if condition="($v['maxSign'] eq 1 and $k eq 0) or ($v['maxSign'] eq 1 and $k eq 1)">text-red <elseif condition="$v['maxSign'] eq 1 and $k eq 2" />text-green <else /> text-666 </if>">{$v['homeDealRatio']}</p>
+                                            <p class="rowNum text-center f12 mb10 <if condition="($v['maxSign'] eq 2 and $k eq 0) or ($v['maxSign'] eq 2 and $k eq 1)">text-red  <elseif condition="$v['maxSign'] eq 2 and $k eq 2" />text-green <else /> text-666 </if>">{$v['drawDealRatio']}</p>
+                                            <p class="rowNum text-center f12 mb10 <if condition="($v['maxSign'] eq 3 and $k eq 0) or ($v['maxSign'] eq 3 and $k eq 1)">text-red <elseif condition="$v['maxSign'] eq 3 and $k eq 2" />text-green <else /> text-666 </if>">{$v['awayDealRatio']}</p>
+                                        </div>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                    </div>
+                </if>
+                <!-- lrjyBox -->
+
+                <!-- ypdkBox -->
+                <if condition="!(empty($data['yingPan1']))">
+                    <div class="dtBox ypdkBox clearfix">
+                        <span class="dtBoxType">赢盘对抗</span>
+                        <div class="pull-left dtBoxL">
+                            <ul>
+                                <foreach name="data['yingPan1']" item="v" key="k">
+                                    <li class="clearfix list <if condition='$k eq 1'>graListL</if>">
+                                        <a class=clearfix"  title="赢盘对抗" target="_blank"
+                                        <switch name="v['type']" >
+                                            <case value="1">href="{:U('/dataFenxi/game_id/'.$v['gameId'].'@bf')}"</case>
+                                            <case value="2">href="{:U('/ypOdds/game_id/'.$v['gameId'].'/sign/1@bf')}"</case>
+                                            <case value="3">href="{:U('/ypOdds/game_id/'.$v['gameId'].'/sign/2@bf')}"</case>
+                                        </switch>>
+                                        <div class="pull-left dLeft">
+                                            <div class="clearfix mb10">
+                                                <span class="pull-left text-999 mr10 spanMat">{$v['unionName']|switchName=0,###}  {$v['gtime']}</span>
+                                                <span class="pull-left spanLb">{$v['handcp']}</span>
+                                            </div>
+                                            <p class="text-666 f16 mb10 text-hidden" title="{$v['homeTeamName']|switchName=0,###}"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,0}</span></empty>{$v['homeTeamName']|switchName=0,###}</p>
+                                            <p class="text-666 f16 text-hidden" title="{$v['awayTeamName']|switchName=0,###}"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,1}</span></empty>{$v['awayTeamName']|switchName=0,###}</p>
+                                        </div>
+                                        <div class="pull-left sldk">
+                                            <p class="f16 text-center mb15 text-999"><eq name="v['type']" value="1">实力值<else />倾向值</eq></p>
+                                            <p class="rowNum text-center f20 text-red">{$v['homeTrend']}</p>
+                                            <p class="rowNum text-center f20 text-blue">{$v['awayTrend']}</p>
+                                        </div>
+                                        <div class="pull-right cyz">
+                                            <div class="circle circleRight left-circle{$k}">
+                                                <div class="pie_left"><div class="pieLeftIn"></div></div>
+                                                <div class="pie_right"><div class="pieRightIn"></div></div>
+                                                <div class="mask"><p><span class="left-circle{$k}-span">{$v['trendDif']}</span></p><div class="maPro">差异值</div></div>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                        <div class="pull-right dtBoxR">
+                            <ul>
+                                <foreach name="data['yingPan2']" item="v" key="k">
+                                    <li class="clearfix list <if condition='$k eq 1'>graListR</if>">
+                                        <a class=clearfix" title="赢盘对抗" target="_blank"
+                                        <switch name="v['type']" >
+                                            <case value="1">href="{:U('/dataFenxi/game_id/'.$v['gameId'].'@bf')}"</case>
+                                            <case value="2">href="{:U('/ypOdds/game_id/'.$v['gameId'].'/sign/1@bf')}"</case>
+                                            <case value="3">href="{:U('/ypOdds/game_id/'.$v['gameId'].'/sign/2@bf')}"</case>
+                                        </switch>>
+                                        <div class="pull-left dLeft">
+                                            <div class="clearfix mb10">
+                                                <span class="pull-left text-999 mr10 spanMat">{$v['unionName']|switchName=0,###}  {$v['gtime']}</span>
+                                                <span class="pull-left spanLb">{$v['handcp']}</span>
+                                            </div>
+                                            <p class="text-666 f16 mb10 text-hidden" title="{$v['homeTeamName']|switchName=0,###}"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,0}</span></empty>{$v['homeTeamName']|switchName=0,###}</p>
+                                            <p class="text-666 f16 text-hidden" title="{$v['awayTeamName']|switchName=0,###}"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,1}</span></empty>{$v['awayTeamName']|switchName=0,###}</p>
+                                        </div>
+                                        <div class="pull-left sldk">
+                                            <p class="f16 text-center mb15 text-999"><eq name="v['type']" value="1">实力值<else />倾向值</eq></p>
+                                            <p class="rowNum text-center f20 text-red">{$v['homeTrend']}</p>
+                                            <p class="rowNum text-center f20 text-blue">{$v['awayTrend']}</p>
+                                        </div>
+                                        <div class="pull-right cyz">
+                                            <div class="circle circleRight right-circle{$k}">
+                                                <div class="pie_left"><div class="pieLeftIn"></div></div>
+                                                <div class="pie_right"><div class="pieRightIn"></div></div>
+                                                <div class="mask"><p><span class="right-circle{$k}-span">{$v['trendDif']}</span></p><div class="maPro">差异值</div></div>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                    </div>
+                </if>
+                <!-- ypdkBox -->
+                <!-- jccyBox -->
+                <if condition="!(empty($data['jingCai1']))">
+                    <div class="dtBox jccyBox clearfix">
+                        <span class="dtBoxType">竞彩差异</span>
+                        <div class="pull-left dtBoxL">
+                            <ul>
+                                <foreach name="data['jingCai1']" item="v" key="k">
+                                    <li class="clearfix list <if condition='$k eq 1'>graListL</if>">
+                                        <a class=clearfix"  target="_blank" title="竞彩差异" href="{:U('/dataFenxi/game_id/'.$v['gameId'].'@bf')}">
+                                        <div class="pull-left dLeft">
+                                            <div class="clearfix mb20">
+                                                <span class="pull-left text-999 mr15">{$v['betCode']} {$v['unionName']|switchName=0,###}  {$v['gtime']}</span>
+                                            </div>
+                                            <p class="f16 mb10 text-hidden" title="{$v['homeTeamName']|switchName=0,###}"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,0}</span></empty>{$v['homeTeamName']|switchName=0,###}</p>
+                                            <p class="f16 text-hidden" title="{$v['awayTeamName']|switchName=0,###}"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,1}</span></empty>{$v['awayTeamName']|switchName=0,###}</p>
+                                        </div>
+                                        <div class="pull-left tzbl">
+                                            <p class="f16 text-center mb35 text-999">投注比例</p>
+                                            <p class="rowNum text-center">{$v['dealRatio']}</p>
+                                        </div>
+                                        <div class="pull-left gl">
+                                            <p class="f16 text-center mb35 text-999">概率</p>
+                                            <p class="rowNum text-center">{$v['probability']}</p>
+                                        </div>
+                                        <div class="pull-left cyz">
+                                            <p class="f16 text-center mb35 text-999">差异值</p>
+                                            <p class="rowNum text-center">{$v['differenceRatio']}</p>
+                                        </div>
+                                        </a>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                        <div class="pull-right dtBoxR">
+                            <ul>
+                                <foreach name="data['jingCai2']" item="v" key="k">
+                                    <li class="clearfix list <if condition='$k eq 1'>graListR</if>">
+                                        <a class=clearfix" title="竞彩差异" target="_blank" href="{:U('/dataFenxi/game_id/'.$v['gameId'].'@bf')}">
+                                        <div class="pull-left dLeft">
+                                            <div class="clearfix mb20">
+                                                <span class="pull-left text-999 mr15">{$v['betCode']}  {$v['unionName']|switchName=0,###}  {$v['gtime']}</span>
+                                                <span class="pull-left text-666">{$v['handcp']}</span>
+                                            </div>
+                                            <p class="f16 mb10 text-hidden" title="{$v['homeTeamName']|switchName=0,###}"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,0}</span></empty>{$v['homeTeamName']|switchName=0,###}</p>
+                                            <p class="f16 text-hidden" title="{$v['awayTeamName']|switchName=0,###}"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,1}</span></empty>{$v['awayTeamName']|switchName=0,###}</p>
+                                        </div>
+                                        <div class="pull-left tzbl">
+                                            <p class="f16 text-center mb35 text-999">投注比例</p>
+                                            <p class="rowNum text-center">{$v['dealRatio']}</p>
+                                        </div>
+                                        <div class="pull-left gl">
+                                            <p class="f16 text-center mb35 text-999">概率</p>
+                                            <p class="rowNum text-center">{$v['probability']}</p>
+                                        </div>
+                                        <div class="pull-left cyz">
+                                            <p class="f16 text-center mb35 text-999">差异值</p>
+                                            <p class="rowNum text-center">{$v['differenceRatio']}</p>
+                                        </div>
+                                        </a>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                    </div>
+                </if>
+                <!-- jccyBox -->
+                </empty>
+            </div>
+        </div>
+        <!-- main -->
+    </div>
+    <!-- theme -->
+</block>
+
+<block name="js">
+    <!-- 页面所需的js -->
+    <script type="text/javascript" src="__JS__/ypRadar/radarData.js"></script>
+</block>

@@ -1,0 +1,134 @@
+<include file="Etc/head"/>
+	<link rel="stylesheet" href="__CSS__/etc/coop.css">
+<body>
+	<!-- 导航 s-->
+<include file="Etc/nav"/>
+    <!-- 导航 e-->
+    <include file="Etc/user_info"/>
+    <!-- banner 切换 s-->
+   <section class="main_banner">
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <volist name="recommend" id="v">
+                <figure class="swiper-slide">
+                    <a href="{$v['url']}"><img src="{$v['titleimg']}" alt="{$v.title}"></a>
+                </figure>
+            </volist>
+        </div>
+        <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+		</div>
+	</section>
+	<!-- banner 切换 e-->
+
+	<section class="main">
+        <div class="cai_con" style="padding-top:.3rem;">
+       	  	<div class="cai_title" style="margin-top:0">
+                <div class="scroll_box fs22">
+                    <p class="fl text-fff">推荐说明: <em class="">每场推荐上限提升至5000推荐币，6点更新推荐场次；开赛前10分钟截至推荐。</em></p>
+                    <a href="{:U('Etc/rule')}" class="fr text-gold wanfa">玩法规则</a>
+                </div>
+          	</div>
+            <div class="cai_list_con">
+            	<ul>
+                    <volist name="game_list" id="v">
+            		<li class="mach_list" data-gid='{$v.game_id}'>
+                    	<div class="mach_title fs24"><span class="text-fff">欧洲杯</span><em class="text-fff gtime">{$v.gtime|date='m-d H:i',###}</em></div>
+                        <div class="mach_table">
+                        	<table class="table" cellpadding="0" cellspacing="0">
+                        		<tr>
+                                            <td width="45%" class="mach_name q-tl"><img src="{$v.home_logo}" alt='{$v.home_team_name.0}'>  <span class='home_name'>{$v.home_team_name.0}</span><neq name='v.away_let' value='0'>(<em id='js-let'>+{$v.away_let}</em>)</neq><neq name='v.home_let' value='0'>(<em id='js-let'>-{$v.home_let}</em>)</neq></td>
+                                    <td width="10%" class="mach_vs"><img src="__IMAGES__/etc/etc-vs.png" alt='vs'></td>
+                                    <td width="45%" class="mach_name q-tr"><span class='away_name'>{$v.away_team_name.0}</span>  <img src="{$v.away_logo}" alt='{$v.away_team_name.0}'></td>
+                        		</tr>
+                        	</table>
+                        </div>
+                        <div class="mach_btn clearfix fs24">
+                        	<a href="javascript:;" data-type='1'><span>胜</span><em>({$v.odds_win})</em></a>
+                        	<a href="javascript:;" data-type='2'><span>平</span><em>({$v.odds_flat})</em></a>
+                        	<a href="javascript:;" data-type='3'><span>负</span><em>({$v.odds_lose})</em></a>
+                        	<if condition="time() - $v['gtime'] gt 60">
+                                <a href="javascript:;">推荐已结束</a>
+                            <else />
+                                <a href="javascript:;"  onclick="showdiv(this);">推荐</a>
+                            </if>
+                        </div>
+                    </li>
+                    </volist>
+            	</ul>
+                <div class="load_btn fs24 text-fff">
+                	数据由全球体育提供,<a href="javascript:;" id='load_btn' class="text-gold">立即下载APP</a> ,了解更多欧洲杯战况
+                </div>
+            </div>
+            <div class="inform_con">
+            	<div class="inform_title">
+                	<div class="fl left">
+                            <a href="{:U('Euro/index')}"><h4>热门资讯</h4></a>
+                    </div>
+                	<div class="fr right">
+                    	<ul>
+                    		<li><a href="{:U('Euro/live')}">赛程</a></li>
+                    		<li><a href="{:U('Index/index')}">比分</a></li>
+                            <li><a href="{:U('Odds/index')}">赔率</a></li>
+                    	</ul>
+                    </div>
+                </div>
+                <section class="news_con">
+                    <ul class="posts">
+                        <volist name='hot_list' id='v'>
+                        <li class="list clearfix">
+                            <a href="{:U('/info_n/'.$v['id'])}">
+                                <div class="n_img"><img <notempty name='v.img'>src="{$v.img}"<else/>src="__IMAGES__/default.jpg"</notempty> alt="{$v.short_title}"></div>
+                                <div class="n_des">
+                                <h3 class="overflow">{$v.short_title}</h3>
+                                <p class="q-two">{$v.remark}</p>
+                                </div>
+                            </a>
+                        </li>
+                        </volist>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </section>
+
+    <!-- 模态窗口开始 -->
+    <div id="show" class="modal">
+    	<div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="hidediv();"><span></span></button>
+                <h4 class="modal-title">推荐提示</h4>
+            </div>
+            <div class="modal-body modal_pading">
+            	<ul class="modal_ul">
+                    <li class="mach_title"><span class="fs22">欧洲杯</span><em class="fs24"><span id='game_time'>17:45</span></em></li>
+                    <li class="fs24"><span id='home_name'></span> VS <span id='away_name'></span></li>
+                    <li class="fs24">推荐情况：<em id='bet_type' class="red"></em></li>
+                    <li class="fs24">
+                    	<label class="" for="">推荐推荐币：</label>
+                        <input id="yb" type="number" min="100" max="3000" step="100"  placeholder="推荐币">
+                        <input type='hidden' id='gid' value=''>
+                        <input type='hidden' id='gtype' value=''>
+                    </li>
+            	</ul>
+                <div class="modal-btn">
+                    <button type="button" class="btn btn-orange submit fs24">确定</button>
+                    <button type="button"  onclick="hidediv();" class="btn btn-default fs24" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="bg" class="modal-backdrop" style="z-index: 1040;"></div>
+    <!-- 模态窗口结束 -->
+    <!-- 推荐成功 -->
+    <div class="bubbleTips"></div>
+    <!-- 推荐成功 -->
+    <!-- 推荐失败 -->
+    <div class="failTips"></div>
+    <!-- 推荐失败 -->
+</body>
+<!-- Swiper JS -->
+<script src="__JS__/euro/swiper.js"></script>
+<script src="__JS__/etc/index.js"></script>
+</html>

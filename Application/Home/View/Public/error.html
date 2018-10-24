@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+    <title>404哎呀好像出错了</title>
+    <link rel="shortcut icon" href="__PUBLIC__/Home/images/icon/16X16.ico">
+</head>
+<style type="text/css">
+	*{ margin: 0; padding:0;}
+	ul{ list-style: none;}
+	.body{ min-width: 1000px; font:14px/1.25 "Microsoft YaHei", "黑体", "Helvetica Neue", Helvetica, Arial; color:#000;}
+	.pull-left{ float: left;}
+	.pull-right{ float: right;}
+	/* 清除浮动 */
+	.clearfix:after { content: ""; display: block; height: 0; clear: both; visibility: hidden; }
+	.clearfix { display: inline-table; }
+	*html .clearfix { height: 1%; }
+	.clearfix { display: block; }
+	*+html .clearfix { min-height: 1%; }
+
+	.logo-con{ width: 1000px; margin:0 auto}
+    .logo{ margin: 20px 0 0 94px;}
+	.link-con{ width: 720px; height: 240px; margin:15% auto; background: url(__PUBLIC__/Home/images/error/error-bg.jpg) no-repeat 64px center;}
+	.link-con .right-list{ width: 438px; padding-top: 30px;}
+	.link-con .right-list h3{ font-size: 24px; margin-bottom: 30px;}
+	.link-con .right-list li{ color: #999999; margin-bottom: 10px;}
+	.link-con .right-list a{ color: #10af63; text-decoration: none;}
+	.link-con .right-list a:hover{ color: #ff7e00;}
+</style>
+<body>
+	<div class="body">
+        <div class="link-con clearfix">
+        	<div class="pull-right right-list">
+            	<h3>抱歉，您访问的页面不存在！</h3>
+                <ul>
+                	<li>您可以尝试：</li>
+                    <li/>1、检查输入的网址，或者返回<a href="javascript:history.go(-1)">上一页</a></li>
+                    <li>2、快速进入
+                    <a href="{:U('/')}">首页、</a>
+                    <a href="{:U('/@bf')}">即时比分、</a>
+                    <a href="{:U('/@jc')}">推荐大厅、</a>
+                    <a href="{:U('/@photo')}">精彩图库</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

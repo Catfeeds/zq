@@ -1,0 +1,47 @@
+/*
+ * 精彩王手机页面
+ * @author Chensiren <245017279@qq.com>
+ * @since  2016-02-01
+*/
+.section-con{ background: #f7f7f7; }
+.section .title{ height: 4rem; line-height: 4rem; padding-left: 5rem; background: #eeeeee url(../images/title-icon.png) no-repeat 1.2rem center; background-size: auto 62%;}
+.section .title h1{ font-size: 1.6rem;font-weight:500}
+.section .title-con{ padding: 1rem;padding-top: 0; font-size: 1.4rem; background: #ffffff;}
+.section .title-con  ul{padding-top:1.6rem}
+.section .title-con ul li{ line-height: 2rem;color: #666666;}
+.section .title-con ul li span{color:#ff5757}
+.text-red{color:#ff5757!important}
+.section .title-con p{ text-indent: 3rem;}
+.rank-con{ padding: 0 1.4rem;}
+.exp-con ul li.exp{ width: 33.3%; height: 4.5rem; border: 2px solid #fff; background: #fffbc0 url(../images/medal02.png) no-repeat center center; background-size: auto 60%; border-left: none;}
+.exp-con ul li.exp:nth-of-type(2){ background: #fffbc0 url(../images/medal01.png) no-repeat center center; background-size: auto 60%;}
+.exp-con ul li.exp:nth-of-type(3){ background: #fffbc0 url(../images/medal03.png) no-repeat center center; background-size: auto 60%; border-right: none;}
+
+/*.rank-divide .imgIcon img{ width: 60%;}*/
+.rank-divide{padding:0 1.0rem}
+.imgIcon img{ width: 40%;}
+.table-bordered{color:#4c4c4c}
+.table-con .table-bordered tr .text-font{font-size:1.2rem;color: #666666;}
+.table-con .table-bordered tr .text-two-font{color: #808080;}
+.rank-divide .table-bordered{margin-bottom:1.8rem}
+.rank-divide .table-bordered tbody tr td span{color:#ff5757}
+.table-con .table-bordered tr td i{font-style: normal;font-size: 1.1rem;margin-left: .2rem;color:#848484}
+.rank-divide .table thead > tr > td{ background:#f2f2f2;; border:2px solid #fff;}
+.rank-divide .table-bordered{ border: none 0;}
+.rank-divide .table-bordered tbody tr td{ border-color: #fff; border-width: 2px;}
+.text-padding{padding-right: .2rem}
+.table-pading{padding:0 1.0rem!important}
+.rank-title,.rank-tit{ padding-top: 0.8rem;}
+.exp-con .exp-text li{ padding: 0.6rem 0; padding-left: 2rem; background: #f7f7f7; margin-bottom: .3rem;}
+.rank-title .title,.rank-tit .title{ width: auto; height: 7rem; text-align: center; font-size: 1.6rem; padding-top: 2rem; color: #fff; margin: 0 auto; background: url(../images/rank-title.png) no-repeat center center; background-size: 70% auto;}
+.rank-title .titleF{background: url(../images/rank-titleF.png) no-repeat center center; background-size: 70% auto;}
+.rank-title .titleL{background: url(../images/rank-titleL.png) no-repeat center center; background-size: 70% auto;}
+.rank-tit .title{ background: url(../images/rank-title-red.png) no-repeat center center; background-size: 70% auto;}
+.ic-con{ margin-bottom: 1rem;padding: 0 1.4rem}
+.ic{ padding-left: 6rem; min-height: 6.5rem; position: relative; text-indent: 28px;}
+.ic img{ width: 5rem; height: auto; position: absolute; left: 0; top: 0;}
+.table-con tr{background: #f7f7f7;}
+.table-con .table-bordered tr td{ border-color: #fff; border-width: 0.2rem; padding: 0.6rem 0.5rem; font-size: 1.4rem;}
+.warn p{ line-height: 2rem;}
+.bottom{height: 9.9rem;text-align: center;line-height: 14.9rem;font-size: 1.2rem;background: #eeeeee;color: #d8d8d8;}
+.bg-default h1 span{font-size:1.4rem}

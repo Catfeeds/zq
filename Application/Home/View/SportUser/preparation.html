@@ -1,0 +1,48 @@
+<extend name="Public:layout"/>
+<block name='seo'>
+    <title>全球体育号</title>
+    <meta name="keywords" content="体育号,全球体育号">
+    <meta name="description" content="一呼百应，吹响体育号！">
+</block>
+<block name="css">
+    <link rel="stylesheet" href="__CSS__/sportuser/media-Intro.css">
+</block>
+<block name="content">
+    <div class="section section0" id="section0">
+        <a href="{:U('/')}" class="p1_logo" title="全球体育号"><img src="__IMAGES__/sportuser/media-Intro-logo.png" width="129" height="37" alt="全球体育号"></a>
+        <div class="wrap1024">
+            <a href="{:U('/SportUser')}?status=0" class="indexBtn btnReg p1_img01" title="注册">注册</a>
+            <a href="{:U('/SportUser')}?status=1" class="indexBtn btnLog p1_img02" title="登录">登录</a>
+            <div class="introType ">
+                <div class="listType listType01 pull-left p1_img03">
+                    <div class="typeIcon typeIcon01"></div>
+                    <h4>内容发布</h4>
+                    <p>全球体育开放自媒体平台自由发布个性化内容</p>
+                </div>
+                <div class="listType listType02 pull-left p1_img03">
+                    <div class="typeIcon typeIcon02"></div>
+                    <h4>百万流量</h4>
+                    <p>对应全球体育专属主页轻松获得体育迷关注</p>
+                </div>
+                <div class="listType listType03 pull-left p1_img04">
+                    <div class="typeIcon typeIcon03"></div>
+                    <h4>推广资源</h4>
+                    <p>直达数千万全球体育球迷  数百万日常用户优质内容头条推荐</p>
+                </div>
+                <div class="listType listType04 pull-left p1_img04">
+                    <div class="typeIcon typeIcon04"></div>
+                    <h4>版权维护</h4>
+                    <p>全力维护内容版权保护版权内容</p>
+                </div>
+            </div>
+        </div>
+        <div class="linkBox text-center">
+            <a target="_blank" href="{:U('/')}" title="全球体育首页">全球体育首页</a>
+            <a target="_blank" href="{:U('SportUser/mediaManual')}" title="使用手册">使用手册</a>
+            <a target="_blank" href="{:U('SportUser/mediaManual')}" title="侵权投诉">侵权投诉</a>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/sportuser/jquery.fullPage.min.js"></script>
+</block>

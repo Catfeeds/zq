@@ -1,0 +1,30 @@
+<extend name="Public/base"/>
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/worldcup/competition.css?201806221825">
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file="WorldCup:topHead"/>
+</block>
+<!-- 二级头部 e -->
+<block name="nav"></block>
+<!-- 用户所有明细 -->
+<block name="content">
+    <!-- 主体内容 -->
+    <section class="wrapCon">
+        <include file="WorldCup:navHead"/>
+        <ul class="forecast-box">
+        </ul>
+        </div>
+    </section>
+</block>
+<block name='scripts'>
+    <script>
+        var listTime = "{:time()}";
+        var htmlData = "";
+        <eq name="_GET['header']" value="no">htmlData = '?header=no';</eq>
+
+    </script>
+    <script src="__JS__/worldcup/forecast.js" type="text/javascript"></script>
+</block>

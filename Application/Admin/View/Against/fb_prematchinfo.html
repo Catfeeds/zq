@@ -1,0 +1,56 @@
+<style>
+	.table_video td{
+		text-align: center;
+		padding: 5px;
+		width: 410px;
+	}
+</style>
+<div class="pageContent">
+	<form method="post" action="__URL__/save_pmi" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="game_id" value="{$_REQUEST.game_id}" id="game_id">
+			<div style="float: left;width:50%">
+				<table class="table_video">
+					<tr width="100%" style="background: #7CC5E5;">
+						<td>
+							<strong>主队</strong>
+						</td>
+					</tr>
+					<volist name="list.home" id="vo1">
+					<tr>
+						<td width="50" style="font-size:14px;">{$vo1}</td>
+					</tr>
+					</volist>
+					<tr>
+						<td width="50"><textarea name = 'home_w' rows="12" cols="54" style="font-size:14px;">{$list.home_w}</textarea></td>
+					</tr>
+				</table>
+			</div>
+
+			<div style="float: right;width:50%;">
+				<table class="table_video">
+					<tr width="100%" style="background: #7CC5E5;">
+						<td><strong>客队</strong></td>
+					</tr>
+					<volist name="list.away" id="vo2">
+					<tr>
+						<td width="50" style="font-size:14px;">{$vo2}</td>
+					</tr>
+					</volist>
+					<tr>
+						<td width="50"><textarea name = 'away_w' rows="12" cols="54" style="font-size:14px;">{$list.away_w}</textarea></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+

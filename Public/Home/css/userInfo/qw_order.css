@@ -1,0 +1,73 @@
+.qw_content { width: 1000px;  margin: 0 auto; padding-bottom: 50px; margin-top: 20px;}
+.right_main{width: 820px;padding:5px 15px 20px 15px}
+.morder_title{border-bottom: 1px solid #ddd;height: 30px}
+.morder_title h5{font-weight: bold;color: #2f78ca;border-bottom: 2px solid #2f78ca;width: 113px;text-align: center;height:30px }
+.morder_time{height: 30px;line-height: 30px;margin: 10px 0}
+
+.bdl_con{border: 1px solid #dbdbdb;}
+/*.bdl_con:hover{border: 1px solid #2e76c7;}*/
+.bdlc_top{padding: 20px;background: #f5f5f5}
+.bdlct_left{width: 70%;}
+.bdlct_right{width: 30%;}
+.bdlct_left img{border-radius: 6px;margin-right: 20px;width: 68px;height: 68px;float: left;}
+.near_get{float: left;}
+.ng_zhong span{padding-right: 10px;color: #131313;font-size: 24px;}
+.ng_zhong em{width: 85px;height: 25px;display: inline-block;background: #e26b6c;border-radius: 4px;line-height: 25px;color: #fff;text-align: center;margin-right: 10px}
+.near_get .ng_zhong .put_out{background: #a0a1a3}
+.ng_price{margin-top: 10px;font-size: 16px}
+.ng_price span{font-size: 20px;font-weight: bold;color: #4c4c4c}
+.bdlct_right{text-align: right;}
+.bdlct_right .dr_percent{color: #fb211a;font-size: 14px}
+.bdlct_right .put_time{color: #999999}
+.bdlct_right p{color: #666666;margin-bottom: 2px!important}
+.bdlct_right .dr_percent span{font-size: 24px;font-weight: bold;}
+.tb_put_game tr th{background: #f5f5f5;color: #666666;height: 38px;border-top: 1px solid #dddddd!important;border-bottom: 1px solid #dddddd!important;}
+.table{margin-bottom: 0}
+.tb_put_game tr .game_vs{text-align: left;padding-left: 15px}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{font-size: 14px;color: #333333;border-top: 0}
+.tb_put_game tr td{height: 50px}
+.tb_put_game tr:nth-child(even){background: #f0faff}
+.tb_put_game tr td span{color: #2e76c7;font-weight: bold;}
+.tb_put_game tr td font{color: #eb0017;font-weight: bold;}
+.tb_put_game tr .g_result{position: relative;}
+.tb_put_game tr .g_result img{position: absolute;right: 10px;top: 4px;width: 40px;height: 40px;opacity: 0.9}
+.tb_put_game tr td{border-right: 1px solid #ddd!important;}
+.tb_put_game tr td:last-child{border-right: 0!important;}
+.tb_put_game .tr_border td{border-right:0}
+
+.order_list{margin-bottom: 20px}
+.tb_put_game tr .wait{font-weight: bold;font-size: 18px;color: #666666}
+.tb_put_game tr .wait img{padding-right: 10px; font-weight: bold;font-size: 18px;margin-top: -3px}
+
+.laydate_body .laydate_bottom{padding: 15px 5px}
+.laydate_body .laydate_top{height: 32px}
+.laydate_body .laydate_table{width: 226px;*width: 220px;margin-top: 5px;margin-left: 5px}
+.laydate-icon, .laydate-icon-default, .laydate-icon-yahui, .laydate-icon-danlan, .laydate-icon-qianhuang, .laydate-icon-yalan, .laydate-icon-dahong{
+	background-position:5px center;
+	padding-left: 35px
+}
+.time_txt{width: 150px;height: 30px;border:1px solid #cccccc;}
+.time_btn{width: 75px;height: 30px;border:1px solid #b8b6b6;line-height: 28px;background: #f8f8f8;border-radius: 3px;color: #4c4c4c;margin-left: 15px}
+
+.left-main{ width: 140px !important;}
+.h3-title{ width: 140px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

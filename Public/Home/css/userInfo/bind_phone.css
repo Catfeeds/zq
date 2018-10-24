@@ -1,0 +1,16 @@
+.content-box{margin-left: 25px;margin-top: 30px;}
+.phone-padding{padding-left: 18px;padding-bottom: 10px;}
+.prompt{margin-left: 92px;margin-top: 15px;}
+.text-red { color: #eb0000;}
+form {display: block;color: #333; }
+.form-con{ padding: 40px 60px 100px 38px;}
+.form .form-in{ margin-bottom: 15px;}
+.form #phone{ width: 220px;}
+.form #password { width: 220px !important;}
+.form #ranks{ width: 124px;}
+.form .input-name{ width:100px; text-align: right; height: 34px; line-height: 34px; font-size: 14px;}
+.captcha .field-msg{left:235px;}
+.form label{ display: inline;}
+.reanks-con .btn{ width: 96px; padding: 6px;}
+.reg-btn input[type=submit]{ border-radius: 3px;}
+.reg-btn input[type=submit],.haven{ width: 220px;}

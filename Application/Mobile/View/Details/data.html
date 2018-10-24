@@ -1,0 +1,705 @@
+<extend name="Public/tpl-detail" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/data.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/scrollCss3/animateTeam.css">
+
+    <!-- 本页需要引用的js -->
+    <script type="text/javascript" src="__JS__/scrollCss3/collapsingToolbarLayout.js"></script> 
+</block>
+<!-- 内容 s -->
+<block name="content">
+    <section class="data_con clearfix"> 
+ 
+       
+
+        <!-- 联赛积分排名 s -->
+        <div class="d_title clearfix boxs"><span>联赛积分排名</span><a href="javascript:;"><img src="__IMAGES__/show.png" ></a></div>
+        <div> 
+            <present name="data['integral']">
+                <volist name="data['integral']" id='v' >
+
+                    <aside class="teamname boxs">
+                        <eq name='i' value='1'>
+                        <img src="{$against.home_logo}" alt="{$key}" onerror='this.src="__PUBLIC__/Home/images/common/home_def.png"'>{$key}
+                        <else/>
+                        <img src="{$against.away_logo}" alt="{$key}" onerror='this.src="__PUBLIC__/Home/images/common/away_def.png"'>{$key}
+                        </eq>
+                    </aside>
+                     
+                    <table class="tb_rank" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <th>全场</th>
+                                <th>赛</th>
+                                <th>胜</th>
+                                <th>平</th>
+                                <th>负</th>
+                                <th>得</th>
+                                <th>失</th>
+                                <th>净</th>
+                                <th>得分</th>
+                                <th>排名</th>
+                                <th>胜率</th>
+                            </tr>
+                        <volist name="v" id='vo' >
+                            <tr>
+                                <td>{$vo.1}</td>
+                                <td>{$vo.2}</td>
+                                <td>{$vo.3}</td>
+                                <td>{$vo.4}</td>
+                                <td>{$vo.5}</td>
+                                <td>{$vo.6}</td>
+                                <td>{$vo.7}</td>
+                                <td>{:template_minus($vo['6'],$vo['7'])}</td>
+                                <td>{$vo.8}</td>
+                                <td>{$vo.9|default='-'}</td>
+                                <td>{:template_rate($vo[3],$vo[2],1)}%</td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table> 
+                </volist>
+                <else/>
+                <p class="nodata">暂无数据</p>
+            </present>
+        </div> 
+        <!-- 联赛积分排名 e -->
+ 
+
+        <!-- 历史交战 s -->
+        <div class="d_title clearfix boxs else_cl"><span>历史交战</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input id="js-same" type="checkbox"></input> 主客相同</label><a href="javascript:;"><img src="__IMAGES__/show.png" ></a></div>
+        <div>
+            <present name="data['match_fight']">
+                <php>$count=count($data['match_fight']);
+                    $win=$winpan=$lose=$draw=$same_count=$samewin=$samelose=$same_draw=$samepan=0;
+                </php>
+                <volist name="data['match_fight']" id='v'>
+                    <php>
+                        switch ($v[13]) {
+                            case 1:
+                                $win+=1;
+                                if($against['home_team_id']==$v[4]){
+                                    $same_count+=1;
+                                    $samewin+=1;
+                                }
+                                break;
+                            case -1:
+                                $lose+=1;
+                                if($against['home_team_id']==$v[4]){
+                                    $same_count+=1;
+                                    $samelose+=1;
+                                }
+                                break;
+                            case 0:
+                                $draw+=1;
+                                if($against['home_team_id']==$v[4]){
+                                    $same_count+=1;
+                                    $same_draw+=1;
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        if($v[14]==1){
+                            $winpan+=1;
+                            if($against['home_team_id']==$v[4]){
+                                $samepan+=1;
+                            }
+                        }
+                        $win_rate=round($win/($win+$lose+$draw)*100,1).'%';
+                        $pan_rate=round($winpan/($win+$lose+$draw)*100,1).'%';
+                        $sameWinRate=round($samewin/($samewin+$samelose+$same_draw)*100,1).'%';
+                        $samePanRate=round($samepan/($samewin+$samelose+$same_draw)*100,1).'%';
+                    </php>
+                    <eq name='i' value='1'>
+                    <!--                    <aside class="teamname boxs">
+                                            <img src="__IMAGES__/zanwu.png" alt="{$v.5}">{$v.5}
+                                        </aside>-->
+                    <table class="tb_history" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <th>日期</th>
+                                <th>赛事</th>
+                                <th>主队</th>
+                                <th>比分</th>
+                                <th>客队</th>
+                                <th>盘路</th>
+                            </tr>
+                            </eq>
+                            <tr <eq name="against['away_team_id']" value="$v[4]">class='away_history'</eq>>
+                                <td><p>{$v.0|substr=0,4}</p><p>{$v.0|substr=5,5}</p></td>
+                                <td>{$v.2}</td>
+                                <td <if condition="($v[4] eq $against['home_team_id']) && ($v[8] gt $v[9])">class="red"</if>
+                                    <if condition="($v[4] eq $against['home_team_id']) && ($v[8] eq $v[9])">class="blue"</if>
+                                    <if condition="($v[4] eq $against['home_team_id']) && ($v[8] lt $v[9])">class="green"</if>
+                                >
+                                    <if condition="is_numeric(substr($v[7],strlen($v[7])-1)) ">{:substr($v[7],0,-1)}<else/>{$v[5]}</if>
+                                </td>
+                                <td><p>{$v.8}-{$v.9}</p><p class="sc">({$v.10}-{$v.11})</p></td>
+                                <td <if condition="($v[6] eq $against['home_team_id']) && ($v[8] gt $v[9])">class="green"</if>
+                                    <if condition="($v[6] eq $against['home_team_id']) && ($v[8] eq $v[9])">class="blue"</if>
+                                    <if condition="($v[6] eq $against['home_team_id']) && ($v[8] lt $v[9])">class="red"</if>
+                                >
+                                    <if condition="is_numeric(substr($v[7],strlen($v[7])-1)) ">{:substr($v[7],0,-1)}<else/>{$v[7]}</if>
+
+                                </td>
+                                <td><p>{$v.12}</p><p  class='<switch name="v.14" >
+                                    <case value="1">red</case>
+                                    <case value="-1">green</case>
+                                    <case value="0">blue</case>
+                                    <default  />
+                                    </switch>'>
+                                        <switch name="v.14" >
+                        <case value="1">赢</case>
+                        <case value="-1">输</case>
+                        <case value="0">平</case>
+                        <default  />
+                        </switch>
+                        </p></td>
+                        </tr>
+                        <if condition="$i eq count($data['match_fight'])">
+                            <tr>
+                                <td></td>
+                                <td id='history_count' colspan="4"><span >共{$count}场</span><span class="red">{$win}胜</span><span class="blue">{$draw}平</span><span class="green">{$lose}负</span>  胜率<span class="red">{$win_rate}</span> 赢盘率<span class="red">{$pan_rate}</span></td>
+                                <td id='hissame_count' colspan="4" style='display: none;'><span >共{$same_count}场</span><span class="red">{$samewin}胜</span><span class="blue">{$same_draw}平</span><span class="green">{$samelose}负</span>  胜率<span class="red">{$sameWinRate}</span> 赢盘率<span class="red">{$samePanRate}</span></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                    </table>
+                    </if>
+                </volist>
+                <else/>
+                <p class="nodata">暂无数据</p>
+            </present>
+        </div> 
+        <!-- 历史交战 e -->
+
+        <!-- 近期交战 s -->
+        <div class="d_title clearfix boxs jiaozhan"><span>近期交战</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input id="js-homeaway" type="checkbox"></input> 同主客</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input id="js-sameevent" type="checkbox"></input> 同赛事</label><a href="javascript:;"><img src="__IMAGES__/show.png" ></a></div>
+        <div> 
+            <present name="data['recent_fight']">
+                <volist name="data['recent_fight']" id='v' key='ke'>
+                    <php>$count=count($v['content']);
+                        $win=$draw=$lose=$winpan=$rateCount=0;
+                        $homeWin=$homeDraw=$homeLose=$homeCount=$homePan=$homeRCount=0;
+                        $sheWin=$sheDraw=$sheLose=$sheCount=$shePan=$sheRCount=0;
+                        $sameWin=$sameDraw=$sameLose=$sameCount=$samePan=$sameRCount=0;
+                    </php>
+                    <volist name="v.content" id='vv' key='k'>
+                        <php>
+                            switch ($vv[14]) {
+                                case 1:
+                                    $win+=1;
+                                    if(($v['name']=='recent_fight1' && $against['home_team_id'] == $vv[5]) || ($v['name']=='recent_fight2' && $against['away_team_id'] == $vv[7])){
+                                        $homeCount+=1;
+                                        $homeWin+=1;
+                                        if($vv[15]==1){
+                                            $homePan+=1;
+                                        }
+                                        if($vv[13]!=''){
+                                            $homeRCount+=1;
+                                        }
+                                        if($against['union_id'] == $vv[2]){
+                                            $sameWin+=1;
+                                            $sameCount+=1;
+                                            if($vv[15]==1){
+                                                $samePan+=1;
+                                            }
+                                            if($vv[13]!=''){
+                                                $sameRCount+=1;
+                                            }
+                                        }
+                                    }
+                                    if($against['union_id'] == $vv[2]){
+                                        $sheCount+=1;
+                                        $sheWin+=1;
+                                        if($vv[15]==1){
+                                            $shePan+=1;
+                                        }
+                                        if($vv[13]!=''){
+                                            $sheRCount+=1;
+                                        }
+                                    }
+                                break;
+                                case -1:
+                                    $lose+=1;
+                                    if(($v['name']=='recent_fight1' && $against['home_team_id'] == $vv[5]) || ($v['name']=='recent_fight2' && $against['away_team_id'] == $vv[7])){
+                                        $homeCount+=1;
+                                        $homeLose+=1;
+                                        if($vv[15]==1){
+                                            $homePan+=1;
+                                        }
+                                        if($vv[13]!=''){
+                                            $homeRCount+=1;
+                                        }
+                                        if($against['union_id'] == $vv[2]){
+                                            $sameLose+=1;
+                                            $sameCount+=1;
+                                            if($vv[15]==1){
+                                                $samePan+=1;
+                                            }
+                                            if($vv[13]!=''){
+                                                $sameRCount+=1;
+                                            }
+                                        }
+                                    }
+                                    if($against['union_id'] == $vv[2]){
+                                        $sheCount+=1;
+                                        $sheLose+=1;
+                                        if($vv[15]==1){
+                                            $shePan+=1;
+                                        }
+                                        if($vv[13]!=''){
+                                            $sheRCount+=1;
+                                        }
+                                    }
+                                break;
+                                case 0:
+                                    $draw+=1;
+                                    if(($v['name']=='recent_fight1' && $against['home_team_id'] == $vv[5]) || ($v['name']=='recent_fight2' && $against['away_team_id'] == $vv[7])){
+                                        $homeCount+=1;
+                                        $homeDraw+=1;
+                                        if($vv[15]==1){
+                                            $homePan+=1;
+                                        }
+                                        if($vv[13]!=''){
+                                            $homeRCount+=1;
+                                        }
+                                        if($against['union_id'] == $vv[2]){
+                                            $sameDraw+=1;
+                                            $sameCount+=1;
+                                            if($vv[15]==1){
+                                                $samePan+=1;
+                                            }
+                                            if($vv[13]!=''){
+                                                $sameRCount+=1;
+                                            }
+                                        }
+                                    }
+                                    if($against['union_id'] == $vv[2]){
+                                        $sheCount+=1;
+                                        $sheDraw+=1;
+                                        if($vv[15]==1){
+                                            $shePan+=1;
+                                        }
+                                        if($vv[13]!=''){
+                                            $sheRCount+=1;
+                                        }
+                                    }
+                                break;
+                                default:
+                                    break;
+                            }
+                            if($vv[15]==1){
+                                $winpan+=1;
+                            }
+                            if($vv[13]!=''){
+                                $rateCount+=1;
+                            }
+                            $win_rate=round($win/($win+$lose+$draw)*100,1).'%';
+                            $pan_rate=round($winpan/$rateCount*100,1).'%';
+                            $homeWinRate=round($homeWin/$homeCount*100,1).'%';
+                            $homePanRate=round($homePan/$homeRCount*100,1).'%';
+                            $sheWinRate=round($sheWin/$sheCount*100,1).'%';
+                            $shePanRate=round($shePan/$sheRCount*100,1).'%';
+                            $sameWinRate=round($sameWin/$sameCount*100,1).'%';
+                            $samePanRate=round($samePan/$sameRCount*100,1).'%';
+                        </php>
+                        <eq name='k' value='1'>
+                        <aside class="teamname boxs">
+                            <eq name="v['name']" value="recent_fight1">
+                            <img src="{$against.home_logo}" alt="{$vv.0}" onerror='this.src="__PUBLIC__/Home/images/common/home_def.png"'>{$vv.0}
+                            <else/>
+                            <img src="{$against.away_logo}" alt="{$vv.0}" onerror='this.src="__PUBLIC__/Home/images/common/away_def.png"'>{$vv.0}
+                            </eq>
+                        </aside>
+                        <table class="tb_history" border="0" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>  
+                                    <th>日期</th>
+                                    <th>赛事</th>
+                                    <th>主队</th>
+                                    <th>比分</th>
+                                    <th>客队</th>
+                                    <th>盘路</th>
+                                </tr>
+                                </eq>
+                                <tr <if condition="($v['name'] eq 'recent_fight1' AND $against['home_team_id'] neq $vv[5]) OR($v['name'] eq 'recent_fight2' AND $against['away_team_id'] neq $vv[7])">data-nohomeaway='1'</if> <if condition="$against['union_id'] neq $vv[2]">data-nounion='1'</if>>
+                                    <td><p>20{$vv.1|substr=0,2}</p><p>{$vv.1|substr=3,5}</p></td>
+                                    <td>{$vv.3}</td>
+                                    <td <if condition="(($v['name'] eq 'recent_fight1' AND $against.home_team_id eq $vv[5]) && ($vv[9] gt $vv[10])) OR (($v['name'] eq 'recent_fight2' AND $against.away_team_id eq $vv[5]) && ($vv[9] gt $vv[10]))">class="red"</if>
+                                        <if condition="(($v['name'] eq 'recent_fight1' AND $against.home_team_id eq $vv[5]) && ($vv[9] eq $vv[10])) OR (($v['name'] eq 'recent_fight2' AND $against.away_team_id eq $vv[5]) && ($vv[9] eq $vv[10]))">class="blue"</if>
+                                        <if condition="(($v['name'] eq 'recent_fight1' AND $against.home_team_id eq $vv[5]) && ($vv[9] lt $vv[10])) OR (($v['name'] eq 'recent_fight2' AND $against.away_team_id eq $vv[5]) && ($vv[9] lt $vv[10]))">class="green"</if>
+                                    >
+
+                                        <if condition="is_numeric(substr($vv[6],strlen($vv[6])-1)) ">{:substr($vv[6],0,-1)}<else/>{$vv[6]}</if>
+                                    </td>
+                            <td><p>{$vv.9}-{$vv.10}</p><p class="sc">({$vv.11}-{$vv.12})</p></td>
+                            <td <if condition="(($v['name'] eq 'recent_fight1' AND $against.home_team_id eq $vv[7]) && ($vv[9] gt $vv[10])) OR (($v['name'] eq 'recent_fight2' AND $against.away_team_id eq $vv[7]) && ($vv[9] gt $vv[10]))">class="green"</if>
+                                <if condition="(($v['name'] eq 'recent_fight1' AND $against.home_team_id eq $vv[7]) && ($vv[9] eq $vv[10])) OR (($v['name'] eq 'recent_fight2' AND $against.away_team_id eq $vv[7]) && ($vv[9] eq $vv[10]))">class="blue"</if>
+                                <if condition="(($v['name'] eq 'recent_fight1' AND $against.home_team_id eq $vv[7]) && ($vv[9] lt $vv[10])) OR (($v['name'] eq 'recent_fight2' AND $against.away_team_id eq $vv[7]) && ($vv[9] lt $vv[10]))">class="red"</if>
+                            >
+                                <if condition="is_numeric(substr($vv[8],strlen($vv[8])-1)) ">{:substr($vv[8],0,-1)}<else/>{$vv[8]}</if>
+
+                            </td>
+                            <td><p>{$vv.13}</p><p class='<switch name="vv.15" >
+                                <case value="1">red</case>
+                                <case value="-1">green</case>
+                                <case value="0">blue</case>
+                                <default  />
+                                </switch>'><switch name="vv.15" >
+                            <case value="1">赢</case>
+                            <case value="-1">输</case>
+                            <case value="0">平</case>
+                            <default  />
+                            </switch></p></td>
+                            </tr>
+                            <if condition="$k eq $count">
+                                <tr>
+                                    <td></td>
+                                    <td class='jinqibox' colspan="4"><span >共{$count}场</span><span class="red">{$win}胜</span> <span class="blue">{$draw}平</span>  <span class="green">{$lose}负</span>  胜率<span class="red">{$win_rate}</span>  赢盘率<span class="red">{$pan_rate}</span></td>
+                                    <td class='homeawaybox' style='display:none;' colspan="4"><span >共{$homeCount}场</span><span class="red">{$homeWin}胜</span> <span class="blue">{$homeDraw}平</span>  <span class="green">{$homeLose}负</span>  胜率<span class="red">{$homeWinRate}</span>  赢盘率<span class="red">{$homePanRate}</span></td>
+                                    <td class='shebox' style='display:none;' colspan="4"><span >共{$sheCount}场</span><span class="red">{$sheWin}胜</span> <span class="blue">{$sheDraw}平</span>  <span class="green">{$sheLose}负</span>  胜率<span class="red">{$sheWinRate}</span>  赢盘率<span class="red">{$shePanRate}</span></td>
+                                    <td class='samebox' style='display:none;' colspan="4"><span >共{$sameCount}场</span><span class="red">{$sameWin}胜</span> <span class="blue">{$sameDraw}平</span>  <span class="green">{$sameLose}负</span>  胜率<span class="red">{$sameWinRate}</span>  赢盘率<span class="red">{$samePanRate}</span></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                                
+                        </table> 
+                        </if>
+                    </volist>
+                </volist>
+                <else/>
+                <p class="nodata">暂无数据</p>
+            </present>
+        </div> 
+        <!-- 近期交战 e -->
+
+
+        <!-- 技统率 s -->
+        <div class="d_title clearfix boxs">
+          <span>技统率</span><a href="javascript:;"><img src="__IMAGES__/show.png" ></a>
+        </div>
+        <div>
+             <table class="tb_rank tb_jt tb_history" border="0" cellpadding="0" cellspacing="0">
+                   <tbody>
+                        <tr>
+                            <td>近3场/近10场</td>
+                            <td></td>
+                            <td>近3场/近10场</td>
+                        </tr>
+                         <tr>
+                            <td>{$data['skill_data'][0]['content'][0]}</td>
+                            <td>进球</td>
+                            <td>{$data['skill_data'][1]['content'][0]}</td>
+                        </tr>
+                        <tr>
+                            <td>{$data['skill_data'][0]['content'][1]}</td>
+                            <td>失球</td>
+                            <td>{$data['skill_data'][1]['content'][1]}</td>
+                        </tr>
+                        <tr>
+                            <td>{$data['skill_data'][0]['content'][2]}</td>
+                            <td>角球</td>
+                            <td>{$data['skill_data'][1]['content'][2]}</td>
+                        </tr>
+                        <tr>
+                            <td>{$data['skill_data'][0]['content'][3]}</td>
+                            <td>黄牌</td>
+                            <td>{$data['skill_data'][1]['content'][3]}</td>
+                        </tr>
+                        <tr>
+                            <td>{$data['skill_data'][0]['content'][4]}</td>
+                            <td>犯规</td>
+                            <td>{$data['skill_data'][1]['content'][4]}</td>
+                        </tr>
+                        <tr>
+                            <td>{$data['skill_data'][0]['content'][5]}</td>
+                            <td>控球率</td>
+                            <td>{$data['skill_data'][1]['content'][5]}</td>
+                        </tr>
+                   </tbody>
+            </table>
+        </div>
+        <!-- 技统率 e -->
+
+
+        <!-- 联赛盘路 s -->
+        <div class="d_title clearfix boxs"><span>联赛盘路</span><a href="javascript:;"><img src="__IMAGES__/show.png" ></a></div>
+        <div> 
+            <present name="data['panlu']">
+                <volist name="data['panlu']" id='vo'>
+                    <aside class="teamname boxs">
+                        <eq name="i" value="1">
+                            <img src="{$against.home_logo}" alt="{$key}" onerror='this.src="__PUBLIC__/Home/images/common/home_def.png"'>{$key}
+                            <else/>
+                            <img src="{$against.away_logo}" alt="{$key}" onerror='this.src="__PUBLIC__/Home/images/common/away_def.png"'>{$key}
+                        </eq>
+                    </aside>
+                    <table class="tb_history" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <th>全场</th>
+                                <th>赢盘</th>
+                                <th>走水</th>
+                                <th>输盘</th>
+                                <th>赢盘率</th>
+                                <th>大球</th>
+                                <th>大球率</th>
+                                <th>小球</th>
+                                <th>小球率</th>
+                            </tr>
+                        <volist name="vo" id="v" key="k">
+                            <if condition="$k neq count($vo)">
+                                <tr>
+                                    <td>{$v.1}</td>
+                                    <td>{$v.3}</td>
+                                    <td>{$v.4}</td>
+                                    <td>{$v.5}</td>
+                                    <td>{$v.6}</td>
+                                    <td>{$v.7}</td>
+                                    <td>{$v.8}</td>
+                                    <td>{$v.9}</td>
+                                    <td>{$v.10}</td>
+                                </tr>
+                            </if>
+                            <if condition="$k eq count($vo)">
+                                <tr>
+                                    <td>{$v.1}</td>
+                                                                        <td colspan="4">
+                                        <span <switch name='v.3|substr=0,3'><case value='赢'>class='red'</case><case value='输'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.3|substr=0,3}</span>
+                                        <span <switch name='v.3|substr=5,3'><case value='赢'>class='red'</case><case value='输'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.3|substr=5,3}</span>
+                                        <span <switch name='v.3|substr=10,3'><case value='赢'>class='red'</case><case value='输'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.3|substr=10,3}</span>
+                                        <span <switch name='v.3|substr=15,3'><case value='赢'>class='red'</case><case value='输'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.3|substr=15,3}</span>
+                                        <span <switch name='v.3|substr=20,3'><case value='赢'>class='red'</case><case value='输'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.3|substr=20,3}</span>
+                                        <span <switch name='v.3|substr=25,3'><case value='赢'>class='red'</case><case value='输'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.3|substr=25,3}</span>
+                                    </td>
+                                    <td></td>
+                                    <td colspan="3">
+                                        <span <switch name='v.6|substr=0,3'><case value='大'>class='red'</case><case value='小'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.6|substr=0,3}</span>
+                                        <span <switch name='v.6|substr=5,3'><case value='大'>class='red'</case><case value='小'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.6|substr=5,3}</span>
+                                        <span <switch name='v.6|substr=10,3'><case value='大'>class='red'</case><case value='小'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.6|substr=10,3}</span>
+                                        <span <switch name='v.6|substr=15,3'><case value='大'>class='red'</case><case value='小'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.6|substr=15,3}</span>
+                                        <span <switch name='v.6|substr=20,3'><case value='大'>class='red'</case><case value='小'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.6|substr=20,3}</span>
+                                        <span <switch name='v.6|substr=25,3'><case value='大'>class='red'</case><case value='小'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.6|substr=25,3}</span>
+                                    </td>
+<!--                                    <td colspan="4">
+                                <php>$winArr= explode(' ',$v[3]);
+                                     $bigsArr=explode(' ',$v[6]);</php>
+                                        <volist name='winArr' id='v'>
+                                            <span <switch name='v'><case value='赢'>class='red'</case><case value='输'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v}</span>
+                                        </volist>
+                                    </td>
+                                    <td></td>
+                                    <td colspan="3">
+                                        <volist name='bigsArr' id='v'>
+                                            <span <switch name='v'><case value='大'>class='red'</case><case value='小'>class='green'</case></switch>>{$v}</span>
+                                        </volist>
+                                    </td>-->
+                                </tr>
+                            </if>
+                        </volist>
+                        </tbody>
+                    </table>
+                </volist>
+                <else/>
+                <p class="nodata">暂无数据</p>
+            </present>
+        </div> 
+        <!-- 联赛盘路 e -->
+
+
+        <!-- 未来三场 s -->
+        <div class="d_title clearfix boxs"><span>未来三场</span><a href="javascript:;"><img src="__IMAGES__/show.png" ></a></div>
+        <div> 
+            <present name="data['three']">
+                <volist name="data['three']" id='vo'>
+                    <aside class="teamname boxs">
+                        <eq name="i" value="1">
+                            <img src="{$against.home_logo}" alt="{$key}" onerror='this.src="__PUBLIC__/Home/images/common/home_def.png"'>{$key}
+                            <else/>
+                            <img src="{$against.away_logo}" alt="{$key}" onerror='this.src="__PUBLIC__/Home/images/common/away_def.png"'>{$key}
+                        </eq>
+                    </aside>
+                    <table class="tb_history" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>  
+                                <th>日期</th>
+                                <th>赛事</th>
+                                <th>主队</th> 
+                                <th>客队</th>
+                                <th>间隔</th>
+                            </tr>
+                        <volist name="vo" id="v">
+                            <tr>
+                                <td><p>{$v.2|substr=0,4}</p><p>{$v.2|substr=5,5}</p></td>
+                                <td>{$v.1}</td>
+                                <td <eq name="v.3" value='主'>class="red"</eq>><eq name="v.3" value='主'>{$v.0}<else />{$v.4}</eq></td> 
+                            <td <eq name="v.3" value='客'>class="red"</eq>><eq name='v.3' value='主'>{$v.4}<else />{$v.0}</eq></td>
+                            <td>{$v.5}</td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </volist>
+                <else/>
+                <p class="nodata">暂无数据</p>
+            </present>
+        </div>
+        <!-- 未来三场 e -->
+
+        <!-- 澳彩推荐 s -->
+        <div class="d_title clearfix boxs"><span>澳彩推荐</span><a href="javascript:;"><img src="__IMAGES__/show.png" ></a></div>
+        <div> 
+            <present name="data.match_Recommend">
+            <table class="tb_history tb_yuce" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <present name="data.match_Recommend.trend">
+                    <tr>  
+                        <th><a href="#" target="_blank">球队</a></th> 
+                        <th><a href="#" target="_blank">近期走势</a></th> 
+                        <th><a href="#" target="_blank">盘路输赢</a></th> 
+                    </tr> 
+                    <volist name="data.match_Recommend.trend" id="v">
+                    <tr>
+                        <td><eq name='i' value='1'>{$against.home_team_name.0}<else/>{$against.away_team_name.0}</eq></td>
+                        <php>$v1=explode('-', $v[1]);$v2=explode('-', $v[2]);</php>
+                        <td>{$v1[1]}</td>
+                        <td>{$v2[1]}</td>
+                    </tr>
+                    </volist>
+                    </present>
+                    <present name="data.match_Recommend.viewpoint">
+                        <volist name="data.match_Recommend.viewpoint" id="v">
+                    <tr>  
+                        <td align="center" colspan="3">{$v}</td>
+                    </tr> 
+                        </volist>
+                    </present>
+                </tbody>
+            </table> 
+                <else/>
+                <p class="nodata">暂无数据</p>
+        </present>
+        </div> 
+        <!-- 澳彩推荐 e -->
+
+
+        <script>
+            $(function(){
+                if($('#js-same').is(':checked')) {
+                    $('.away_history').hide();
+                }else{
+                    $('.away_history').show();
+                }
+                if($('#js-homeaway').is(':checked')) {
+                    $('tr[data-nohomeaway]').hide();
+                }else{
+                   $('tr[data-nohomeaway]').show(); 
+                }
+                if($('#js-sameevent').is(':checked')) {
+                    $('tr[data-nounion]').hide();
+                }else{
+                   $('tr[data-nounion]').show(); 
+                   if($('#js-homeaway').is(':checked')) {
+                        $('tr[data-nohomeaway]').hide();
+                   }
+                }
+                //赛程 - 数据  隐藏和显示  
+                $(".d_title").not(".else_cl").not(".jiaozhan").each(function () {
+                    var $imgSrc = $(this).find("img");
+                    $(this).bind("click", function () {
+                        $(this).next("div").stop().fadeToggle(200, function () {
+                            $imgSrc.attr("src") == "__IMAGES__/show.png" ? $imgSrc.attr("src", "__IMAGES__/hide.png") : $imgSrc.attr("src", "__IMAGES__/show.png");
+                        })
+                    });
+                });
+
+                    //历史交战  
+                    $(document).on('click','.else_cl a', function () {
+                        var $imgSrc = $(".else_cl").find("img"); 
+                        $(".else_cl").next("div").stop().fadeToggle(200, function () {
+                            $imgSrc.attr("src") == "__IMAGES__/show.png" ? $imgSrc.attr("src", "__IMAGES__/hide.png") : $imgSrc.attr("src", "__IMAGES__/show.png");
+                        })
+                    }).on('click','#js-same',function(){
+                        if($('#js-same').is(':checked')) {
+                            $('.away_history').hide();
+                            $('#history_count').hide();
+                            $('#hissame_count').show();
+                        }else{
+                            $('#history_count').show();
+                            $('#hissame_count').hide();
+                            $('.away_history').show();
+                        }
+                    }).on('click','.jiaozhan a', function () { 
+                        //近期交战
+                        var $imgSrc = $(".jiaozhan").find("img"); 
+                        $(".jiaozhan").next("div").stop().fadeToggle(200, function () { 
+                            $imgSrc.attr("src") == "__IMAGES__/show.png" ? $imgSrc.attr("src", "__IMAGES__/hide.png") : $imgSrc.attr("src", "__IMAGES__/show.png");
+                        });
+                    }).on('click','#js-homeaway',function(){
+                        if($('#js-homeaway').is(':checked')) {
+                            $('tr[data-nohomeaway]').hide();
+                            if($('#js-sameevent').is(':checked')) {
+                                $('.samebox').show();
+                                $('.homeawaybox').hide();
+                            }else{
+                                $('.homeawaybox').show();
+                                $('.samebox').hide();
+                            }
+                            $('.shebox').hide();
+                            $('.jinqibox').hide();
+                        }else{
+                           $('tr[data-nohomeaway]').show(); 
+                           if($('#js-sameevent').is(':checked')) {
+                                $('.jinqibox').hide();
+                                $('.shebox').show();
+                            }else{
+                                $('.jinqibox').show();
+                                $('.shebox').hide();
+                            }
+                            $('.samebox').hide();
+                            $('.homeawaybox').hide();
+                        }
+                        if($('#js-sameevent').is(':checked')) {
+                            $('tr[data-nounion]').hide();
+                        }
+                    }).on('click','#js-sameevent',function(){
+                        if($('#js-sameevent').is(':checked')) {
+                            $('tr[data-nounion]').hide();
+                            if($('#js-homeaway').is(':checked')) {
+                                $('tr[data-nohomeaway]').hide();
+                                $('.samebox').show();
+                                $('.shebox').hide();
+                            }else{
+                                $('.samebox').hide();
+                                $('.shebox').show();
+                            }
+                            $('.jinqibox').hide();
+                            $('.homeawaybox').hide();
+                        }else{
+                           $('tr[data-nounion]').show(); 
+                           if($('#js-homeaway').is(':checked')) {
+                               $('tr[data-nohomeaway]').hide();
+                                $('.homeawaybox').show();
+                                $('.jinqibox').hide();
+                           }else{
+                                $('.homeawaybox').hide();
+                                $('.jinqibox').show();
+                           }
+                            $('.shebox').hide();
+                            $('.samebox').hide();
+                        }
+                        if($('#js-homeaway').is(':checked')) {
+                            $('tr[data-nohomeaway]').hide();
+                        }
+                    });
+                    
+                });
+        </script>
+    </section>
+    <!-- 内容 e -->
+
+
+</block>

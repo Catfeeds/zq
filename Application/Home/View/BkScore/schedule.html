@@ -1,0 +1,138 @@
+<extend name="Public:layout"/>
+<block name="seo">
+    <title>{$scroet|date="Y年m月d日",###}篮球赛事完场比分、NBA赛程赛果_全球体育网</title>
+    <meta name="keywords" content="NBA比分,NBA赛果,篮球比分,NBA赛程,篮球比分网,NBA比赛,CBA比分"/>
+    <meta name="description" content="全球体育网即时篮球比分直播频道为您提供最快、最准确的{$scroet|date="Y年m月d日",###}篮球/NBA完场比分、{$scroet|date="Y年m月d日",###}篮球赛程和{$scroet|date="Y年m月d日",###}篮球赛果。"/>
+</block>
+<block name="css">
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__CSS__/bkscore/scoreLive.css">
+</block>
+<block name="content">
+    <div class="body">
+        <if condition="$noHead neq 1"><include file="Public:top_score"/></if>
+        <!-- 主体内容开始 -->
+        <div class="home clearfix">
+            <!-- 导航开始 -->
+            <include file="Public:bk_score_nav"/>
+            <section class="main">
+                <!-- 筛选功能选择开始 -->
+                <div class="control-con">
+                    <!-- 筛选导航 -->
+                    <div class="control-box clearfix">
+                        <div class="pull-left control-2">
+                            <ul class="clearfix">
+                        		<li class="on"><a href="javascript:;"onclick="show()">完整</a></li>
+                                <li><a href="javascript:;" class="type-li02">竞彩</a></li>
+                                <li><a href="javascript:;" class="type-li03">NBA</a></li>
+                        	</ul>
+                        </div>
+                        <div class="pull-left control-l">
+                            <ul class="control-ul clearfix">
+                                <li class="control-li control-li01"><a href="javascript:;" class="mya pitch" type="block">保留选中</a></li>
+                                <li class="control-li control-li02"><a href="javascript:;" class="mya pitch" type="none">隐藏选中</a></li>
+                                <li class="control-li control-li03">
+                                    <a href="javascript:;" class="mya dropdown event">
+                                        赛事选择<span class="caret"></span>
+                                    </a>
+                                    <div class="box-list dropdown-menu">
+                                        <div class="clearfix">
+                                        	<div class="pull-left box-title">赛事选择</div>
+                                        	<div class="pull-right box-title"><span>隐藏 <em class="text-red count menu_count" id="test2">0</em> 场</span></div>
+                                        </div>
+                                        <div class="box-team">
+                                            <div id="menu_list">
+                                                <ul class="clearfix match-team" menu_id="1">
+                                                <volist name="union" id="item">
+                                                    <li style="border-color: {$item['union_color']};" match_level="{$item['grade']}">
+                                                        <label class="inline">
+                                                            <input type="checkbox" class="userid" id="" checked="" value="option1"  union_m="{$item['union_id']}">
+                                                            <span class="bg-ac lang_cn" title="{$item['union_name'][0]}[{$item['num']}]">{$item['union_name'][0]}</span>
+                                                            <span class="bg-ac lang_tw lang_css" title="{$item['union_name'][1]}[{$item['num']}]">{$item['union_name'][1]}</span>
+                                                            <span class="bg-ac lang_en lang_css" title="{$item['union_name'][2]?$item['union_name'][2]:$item['union_name'][1]}[{$item['num']}]">{$item['union_name'][2]?$item['union_name'][2]:$item['union_name'][1]}</span>
+                                                            <em>[{$item['num']}]</em>
+                                                        </label>
+                                                    </li>
+                                                </volist>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="btn-con clearfix">
+                                            <input type="button" id="checkAll" class="btn btn-blue pull-left" value="全选">
+                                            <input type="button" id="reverse" class="btn btn-red pull-left" value="反选" style="margin-left: 12px;">
+                                            <input type="button" id="ensures" class="btn btn-blue pull-right" style="margin-left: 12px;" value="确定">
+                                            <input type="button" id="removeAll" class="btn btn-default pull-right" value="关闭">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pull-left input-append">
+                            <input id="search_text" class="Colltext pull-left" type="text" placeholder="输入球队名/赛事名">
+                            <a class="Colladd pull-left btn-orange" href="javascript:;" id="check">查看</a>
+                        </div>
+                        <div class="pull-right control-r clearfix">
+                            <div class="dropdown pull-left odds-language">
+                                <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+                                    <span id="languageContent" language="1">简体</span>
+                                    <i class="caret"></i>
+                                </button>
+                                <ul id="languageSle" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation">
+                                        <a role="menuitem" data-language="1" tabindex="-1" href="javascript:;">简体</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a role="menuitem" data-language="2" tabindex="-1" href="javascript:;">繁体</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a role="menuitem" data-language="3" tabindex="-1" href="javascript:;">EN</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pull-right sh">
+                            <span>隐藏 <em class="text-red count">0</em> 赛事</span>
+                            <a href="javascript:;" onclick="show()">显示全部</a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- 筛选功能选择结束 -->
+
+                <!-- 时间选择开始 -->
+                <div class="time-con clearfix">
+                    <ul class="clearfix pull-left">
+                        <volist name="week" id="item">
+                            <li class=<if condition="$time_class eq $item['day']">"time-li on"<else/>"time-li"</if>><a href="{:U('/lanqiu/schedule@bf',['score_t'=>$item['time'],'header'=>$header])}" div_id="{$item['day']}">{$item['day']}({$item['week']})</a></li>
+                        </volist>
+                    </ul>
+                </div>
+                <div></div>
+                <!-- 时间选择结束 -->
+
+                <!-- 表格内容开始 -->
+                <div class="loading_gif" style="text-align: center;">
+                    <img src="__STATIC__/score/images/loading.gif" width="180">
+                </div>
+                <div class="mytable01" style="display:none;">
+                    <volist name="list" id="item" key="k">
+                        <include file="BkScore:index_list_pack"/>
+                    </volist>
+                </div>
+          	</section>
+        </div>
+
+        <!-- 主体内容开始 -->
+    </div>
+
+</block>
+<block name="js">
+    <!--引入本页所需js-->
+    <script>
+        var cookie_name = 'bc_schedule'+'{$time_class}';
+        var cookie_name_union = 'bc_schedule_union'+'{$time_class}';
+        var cookie_type = 'bc_schedule_type'+'{$time_class}';
+    </script>
+    <script type="text/javascript" src="__JS__/common/cookie.js"></script>
+    <script type="text/javascript" src="__JS__/bkscore/schedule.js"></script>
+</block>

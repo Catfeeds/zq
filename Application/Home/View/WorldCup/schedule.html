@@ -1,0 +1,114 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <!-- 页面所需css -->
+    <link rel="stylesheet" href="__CSS__/WorldCup/global.css?v=201806021421">
+</block>
+<block name="content">
+
+<!-- dj-theme -->
+    <div class="themeBox wcTheme">  
+      <!-- main -->
+      <div class="main clearfix">
+          <div class="options groupList">
+              <a href="javascript:;" title="A组" topH="500">A组</a>
+              <a href="javascript:;" title="B组" topH="890">B组</a>
+              <a href="javascript:;" title="C组" topH="1250">C组</a>
+              <a href="javascript:;" title="D组" topH="1640">D组</a>
+              <a href="javascript:;" title="E组" topH="2030">E组</a>
+              <a href="javascript:;" title="F组" topH="2420">F组</a>
+              <a href="javascript:;" title="G组" topH="2810">G组</a>
+              <a href="javascript:;" title="H组" topH="3200">H组</a>
+              <a href="javascript:;" title="投票" topH="3620">投票</a>
+          </div>
+          <div class="tit clearfix">
+              <span class="headtit">谁最有可能夺冠？</span>
+              <span class="endtit">（投票后查看投票结果）</span>
+          </div>
+          <ul class="vote clearfix" style="display: block;">
+              <li>
+                  <a href="{:U('/fifa/uruguay@sporttery')}" target="_blank" title="乌拉圭" class="columnar">
+                    <div class="shape one vote0"><p><span></span></p></div>
+                    <p class="state">乌拉圭</p>
+                  </a>
+                  <p class="but" num="0">投票</p>
+              </li>
+              <li>
+                  <a href="{:U('/fifa/spain@sporttery')}" target="_blank" title="西班牙" class="columnar">
+                    <div class="shape two vote1"><p><span></span></p></div>
+                    <p class="state">西班牙</p>
+                  </a>
+                  <p class="but" num="1">投票</p>
+              </li>
+              <li>
+                  <a href="{:U('/fifa/france@sporttery')}" target="_blank" title="法国" class="columnar">
+                    <div class="shape three vote2"><p><span></span></p></div>
+                    <p class="state">法国</p>
+                  </a>
+                  <p class="but" num="2">投票</p>
+              </li>
+              <li>
+                  <a href="{:U('/fifa/argentina@sporttery')}" target="_blank" title="阿根廷" class="columnar">
+                    <div class="shape four vote3"><p><span></span></p></div>
+                    <p class="state">阿根廷</p>
+                  </a>
+                  <p class="but" num="3">投票</p>
+              </li>
+              <li>
+                  <a href="{:U('/fifa/brazil@sporttery')}" target="_blank" title="巴西" class="columnar">
+                    <div class="shape five vote4"><p><span></span></p></div>
+                    <p class="state">巴西</p>
+                  </a>
+                  <p class="but" num="4">投票</p>
+              </li>
+              <li>
+                  <a href="{:U('/fifa/germany@sporttery')}" target="_blank" title="德国" class="columnar">
+                    <div class="shape six vote5"><p><span></span></p></div>
+                    <p class="state">德国</p>
+                  </a>
+                  <p class="but" num="5">投票</p>
+              </li>
+              <li>
+                  <a href="{:U('/fifa/belgium@sporttery')}" target="_blank" title="比利时" class="columnar">
+                    <div class="shape seven vote6"><p><span></span></p></div>
+                    <p class="state">比利时</p>
+                  </a>
+                  <p class="but" num="6">投票</p>
+              </li>
+              <li>
+                  <a href="{:U('/fifa/colombia@sporttery')}" target="_blank" title="哥伦比亚" class="columnar">
+                    <div class="shape eight vote7"><p><span></span></p></div>
+                    <p class="state">哥伦比亚</p>
+                  </a>
+                  <p class="but" num="7">投票</p>
+              </li>
+          </ul>
+      </div>
+      
+
+     
+      <!-- main -->
+    </div>
+</block>
+<block name="friendBox">
+    <div class="friendBox">
+        <div class="friBoxMain">
+            <h4><span>友情链接</span></h4>
+            <p class="friLinkLi">
+                <foreach name="linkArr" item="v" key="k">
+                    <a href="{$v['url']}" target="_blank">{$v['name']}</a>
+                </foreach>
+            </p>
+        </div>
+    </div>
+</block>
+
+<block name="js">
+    <script type="text/javascript" src="__PUBLIC__/Plugs/store/store.js"></script>
+    <script type="text/javascript" src="__JS__/WorldCup/schedule.js"></script>
+    <script>
+        $('.groupList a').on('click',function(){
+            var num = $(this).attr('topH');
+            $('body,html').animate({'scrollTop':num},500);
+        })
+    </script>
+</block>

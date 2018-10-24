@@ -1,0 +1,218 @@
+<include file="Public:pagerForm"/>
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+        <input type="hidden" name="list_id" value="{$_REQUEST.list_id}">
+        <input type="hidden" name="create_time" value="{$_REQUEST.create_time}">
+        <input type="hidden" name="product_id" value="{$_REQUEST.product_id}">
+        <input type="hidden" name="admin_id" value="{$_REQUEST.admin_id}">
+        <input type="hidden" name="xs" value="{$_REQUEST.xs}">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label>购买时间：</label>
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid"
+                           value="{$_REQUEST.startTime}" name="startTime" size="16">至
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid"
+                           value="{$_REQUEST.endTime}" name="endTime" size="16">
+                </li>
+                <li>
+                    <label>昵称：</label>
+                    <input name="nick_name" value="{$_REQUEST.nick_name}" type="text" placeholder="昵称"/>
+                </li>
+                <li>
+                    <label>手机号码：</label>
+                    <input name="username" value="{$_REQUEST.username}" type="text" placeholder="昵称"/>
+                </li>
+                <if condition="$_REQUEST.xs eq ''">
+                    <li>
+                        <label>产品名称：</label>
+                        <input name="name" value="{$_REQUEST.name}" type="text" placeholder="产品名称"/>
+                    </li>
+                    <li>
+                        <label>发布者:</label>
+                        <input type="text" name="nickname" value="{$_REQUEST.nickname}"/>
+                    </li>
+                </if>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">查询</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="javascript:;" onclick="$('.actionBuy').show();$('.showBuy').attr('showBuy',1)"><span>全部展开</span></a></li>
+            <li class="line"></li>
+            <li><a class="delete" href="javascript:;" onclick="$('.actionBuy').hide();$('.showBuy').attr('showBuy',0)"><span>全部关闭</span></a></li>
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="3%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+            <th width="10%">用户名称</th>
+            <th width="8%">产品名称</th>
+            <th width="8%">发布者</th>
+            <th width="9%">推介比赛数量</th>
+            <th width="8%">购买价格</th>
+            <th width="9%" orderField="pub_time" <if condition="$_REQUEST._order eq 'pub_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>产品发布时间</th>
+            <th width="8%" orderField="create_time" <if condition="$_REQUEST._order eq 'create_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>购买时间</th>
+            <th width="11%">平台</th>
+            <th width="6%">是否成功服务</th>
+            <th width="5%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name="list">
+            <volist id="vo" name="list">
+                <tr target="sid_record" rel="{$vo['id']}">
+                    <td>{$vo['id']}</td>
+                    <td>
+                        <a href="__ADMIN__/FrontUser/index/id/{$vo['user_id']}" target="navTab">
+                        {$vo['nick_name']}
+                        <if condition="$vo.username neq ''">（{$vo.username|is_show_mobile}）</if>
+                        </a>
+                    </td>
+                    <td>{$vo['name']}</td>
+                    <td>{$vo['nickname']}</td>
+                    <td>{$vo['game_num']}</td>
+                    <td>{$vo['price']}</td>
+                    <td><if condition="$vo.pub_time neq ''">{$vo['pub_time']|date="Y-m-d H:i:s",###}<else/>未发布</if></td>
+                    <td>{$vo['create_time']|date="Y-m-d H:i:s",###}</td>
+                    <td>
+                        <switch name="vo['platform']">
+                            <case value="1">WEB</case>
+                            <case value="2">IOS</case>
+                            <case value="3">ANDRIOD</case>
+                            <default/>
+                            --
+                        </switch>
+                    </td>
+                    <td>
+                        <switch name="vo['is_win']">
+                            <case value="1"><div style="color: green;">成功</div></case>
+                            <case value="2"><div style="color: gray;">失败</div></case>
+                            <default/>
+                            --
+                        </switch>
+                    </td>
+                    <td>
+                    <if condition="$vo['list_id'] gt 0">
+                        <a href="javascript:;" onclick="showBuy({$vo.id},this)" class="showBuy" showBuy="0">展开推荐</a>
+                    </if>
+                    </td>
+                </tr>
+                <tr class="actionBuy-{$vo.id} actionBuy" style="background: #f2f2f2;display: none;">
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>赛事名称（赛事ID）</td>
+                    <td>比赛日期</td>
+                    <td>推荐时间（玩法）</td>
+                    <td>主队</td>
+                    <td>全场（半场）</td>
+                    <td>客队</td>
+                    <td>竞猜球队【盘口（指数）】</td>
+                    <td>推荐结果</td>
+                    <td>目前结果</td>
+                </tr>
+                <volist id="gg" name="vo.gamble">
+                    <tr class="actionBuy-{$vo.id} actionBuy" style="background: #f2f2f2;display: none;">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>{$gg['union_name']|switchName=0,###}（{$gg['game_id']}）</td>
+                        <td>{$gg['gtime']|date="Y-m-d H:i",###}</td>
+                        <td>
+                            {$gg['create_time']|date="Y-m-d H:i",###}
+                            （<switch name="gg.play_type">
+                                <case value="1">让分</case>
+                                <case value="-1">大小</case>
+                                <default/>--
+                            </switch>）
+                        </td>
+                        <td>{$gg['home_team_name']|switchName=0,###}</td>
+                        <td>{$gg['score']|default='--'}（{$gg['half_score']|default='--'}）</td>
+                        <td>{$gg['away_team_name']|switchName=0,###}</td>
+                        <td>
+                            <switch name="gg.play_type">
+                                <case value="1">
+                                    <if condition="$gg['chose_side'] eq 1">{$gg['home_team_name']|switchName=0,###}<else/>{$gg['away_team_name']|switchName=0,###}</if>
+                                </case>
+                                <case value="-1">
+                                    <if condition="$gg['chose_side'] eq 1">大球<else/>小球</if>
+                                </case>
+                            </switch>
+                            【{$gg['handcp']}（{$gg['odds']}）】
+                        </td>
+                        <td>
+                            <switch name="gg.result">
+                                <case value="1"><div style="color:red;">赢</div></case>
+                                <case value="0.5"><div style="color:red;">赢半</div></case>
+                                <case value="2"><div style="color:green;">平</div></case>
+                                <case value="-1"><div style="color:blue;">输</div></case>
+                                <case value="-0.5"><div style="color:blue;">输半</div></case>
+                                <case value="-10"><div style="color:black;">取消</div></case>
+                                <case value="-11"><div style="color:black;">待定</div></case>
+                                <case value="-12"><div style="color:black;">腰斩</div></case>
+                                <case value="-13"><div style="color:black;">中断</div></case>
+                                <case value="-14"><div style="color:black;">推迟</div></case>
+                                <default/>--
+                            </switch>
+                        </td>
+                        <td>
+                        <if condition="$gg['game_state'] eq -1">
+                            <switch name="gg.show_result">
+                                <case value="1"><div style="color:red;">赢</div></case>
+                                <case value="0.5"><div style="color:red;">赢半</div></case>
+                                <case value="2"><div style="color:green;">平</div></case>
+                                <case value="-1"><div style="color:blue;">输</div></case>
+                                <case value="-0.5"><div style="color:blue;">输半</div></case>
+                                <case value="-10"><div style="color:black;">取消</div></case>
+                                <case value="-11"><div style="color:black;">待定</div></case>
+                                <case value="-12"><div style="color:black;">腰斩</div></case>
+                                <case value="-13"><div style="color:black;">中断</div></case>
+                                <case value="-14"><div style="color:black;">推迟</div></case>
+                                <default/>--
+                            </switch>
+                        <else/>
+                            {:C('game_state')[$gg['game_state']]}
+                        </if>
+                        </td>
+                    </tr>
+                </volist>
+            </volist>
+        </notempty>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum"/>
+
+</div>
+<script>
+    //隐藏和显示对应题目的选项
+    function showBuy(id,obj){
+        var showBuy = $(obj).attr("showBuy");
+        if(showBuy == 0){
+            $(".actionBuy-"+id).show();
+        }else{
+            $(".actionBuy-"+id).hide();
+        }
+        //记录是否已展开
+        var new_show = showBuy == 0 ? 1 : 0;
+        $(obj).attr("showBuy",new_show);
+    }
+</script>
+
+

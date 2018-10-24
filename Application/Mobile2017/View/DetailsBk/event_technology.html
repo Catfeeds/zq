@@ -1,0 +1,202 @@
+<extend name="Public/tpl-detail" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/bk/event.css">
+</block>
+
+<!-- 导航 s-->
+<block name="nav">
+    <include file="DetailsBk/subnavBk"/>
+</block>
+<!-- 导航 e-->
+<!-- 内容 s -->
+<block name="content">
+    <section>
+        <!-- 数据导航s -->
+        <nav class="odd_nav clearfix">
+            <ul>
+                <!--                <li><a href="#">战报</a></li>-->
+                <li><a href="{:U('DetailsBk/event_case',array('scheid'=>$scheid))}">赛况</a></li>
+                <li class="on"><a href="{:U('DetailsBk/event_technology',array('scheid'=>$scheid))}">技术</a></li>
+                <li><a href="{:U('DetailsBk/event_squad',array('scheid'=>$scheid))}">阵容</a></li>
+            </ul>
+        </nav>
+        <!-- 数据导航e -->
+        <!-- 赛况s-->
+        <empty name='data'>
+            <section class="com_nodata">
+                <img src="__IMAGES__/icon/betfair_notmore.png" alt="暂无数据">
+                <p>暂无数据</p>
+            </section>
+            <else/>
+            <div class="live_event_game clearfix">
+                <!-- 主队 s-->
+                <section class="clearfix">
+                    <div class="game_title"><h4>球员统计-{$against['home_team_name'][0]}</h4></div>
+                    <!-- 球员 不滚动-->
+                    <div class="player clearfix">
+                        <table class="table tb_scroe" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <th>球员</th>
+                                </tr>
+                            <volist name="data['content'][0]" id='v'>
+                                <tr>
+                                    <td>{$v[2]}</td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                    <table class="table tb_scroe tb_tec clearfix" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <th>首发</th>
+                                <th>时间</th>
+                                <th>得分</th>
+                                <th>篮板</th>
+                                <th>助攻</th>
+                                <th>投篮</th>
+                                <th>三分</th>
+                                <th>罚球</th>
+                                <th>抢断</th>
+                                <th>盖帽</th>
+                                <th>失误</th>
+                                <th>犯规</th>
+                            </tr>
+                        <volist name="data['content'][0]" id='v'>
+                            <tr>
+                                <td><if condition="$v[5]!=' '">是<else/>否</if></td>
+                                <td>{$v[6]}</td>
+                                <td>{$v[21]}</td>
+                                <td>{$v[15]}</td>
+                                <td>{$v[16]}</td>
+                                <td>{$v[7]}/{$v[8]}</td>
+                                <td>{$v[9]}/{$v[10]}</td>
+                                <td>{$v[11]}/{$v[12]}</td>
+                                <td>{$v[18]}</td>
+                                <td>{$v[20]}</td>
+                                <td>{$v[19]}</td>
+                                <td>{$v[17]}</td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </section>
+                <!-- 主队 e-->
+                <!-- 客队 s-->
+                <section class="clearfix">
+                    <div class="game_title"><h4>球员统计-{$against['away_team_name'][0]}</h4></div>
+                    <!-- 球员 不滚动-->
+                    <div class="player clearfix">
+                        <table class="table tb_scroe" border="0" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <th>球员</th>
+                                </tr>
+                            <volist name="data['content'][1]" id='v'>
+                                <tr>
+                                    <td>{$v[2]}</td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                    <table class="table tb_scroe tb_tec clearfix" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <th>首发</th>
+                                <th>时间</th>
+                                <th>得分</th>
+                                <th>篮板</th>
+                                <th>助攻</th>
+                                <th>投篮</th>
+                                <th>三分</th>
+                                <th>罚球</th>
+                                <th>抢断</th>
+                                <th>盖帽</th>
+                                <th>失误</th>
+                                <th>犯规</th>
+                            </tr>
+                        <volist name="data['content'][1]" id='v'>
+                            <tr>
+                                <td><if condition="$v[5]!=' '">是<else/>否</if></td>
+                                <td>{$v[6]}</td>
+                                <td>{$v[21]}</td>
+                                <td>{$v[15]}</td>
+                                <td>{$v[16]}</td>
+                                <td>{$v[7]}/{$v[8]}</td>
+                                <td>{$v[9]}/{$v[10]}</td>
+                                <td>{$v[11]}/{$v[12]}</td>
+                                <td>{$v[18]}</td>
+                                <td>{$v[20]}</td>
+                                <td>{$v[19]}</td>
+                                <td>{$v[17]}</td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </section>
+                <!-- 客队 e-->
+                <div class="game_title"><h4>球队统计</h4></div>
+                <table class="table tb_team_count" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td>{$data['total'][0][7]}</td>
+                            <td>前场篮板</td>
+                            <td>{$data['total'][1][7]}</td>
+                        </tr>
+                        <tr>
+                            <td>{$data['total'][0][8]}</td>
+                            <td>后场篮板</td>
+                            <td>{$data['total'][1][8]}</td>
+                        </tr>
+                        <tr>
+                            <td>{$data['total'][0][10]}</td>
+                            <td>助攻</td>
+                            <td>{$data['total'][1][10]}</td>
+                        </tr>
+                        <tr>
+                            <td>{$data['total'][0][12]}</td>
+                            <td>抢断</td>
+                            <td>{$data['total'][1][12]}</td>
+                        </tr>
+                        <tr>
+                            <td>{$data['total'][0][14]}</td>
+                            <td>盖帽</td>
+                            <td>{$data['total'][1][14]}</td>
+                        </tr>
+                        <tr>
+                            <td>{$data['total'][0][3]}/{$data['total'][0][4]}</td>
+                            <td>三分</td>
+                            <td>{$data['total'][1][3]}/{$data['total'][1][4]}</td>
+                        </tr>
+                        <tr>
+                            <td>{$data['total'][0][5]}/{$data['total'][0][6]}</td>
+                            <td>罚球</td>
+                            <td>{$data['total'][1][5]}/{$data['total'][1][6]}</td>
+                        </tr>
+                        <tr>
+                            <td>{$data['total'][0][13]}</td>
+                            <td>失误</td>
+                            <td>{$data['total'][1][13]}</td>
+                        </tr>
+                        <tr>
+                            <td>{$data['total'][0][11]}</td>
+                            <td>犯规</td>
+                            <td>{$data['total'][1][11]}</td>
+                        </tr>
+                        <tr>
+                            <td>{:floor($data['total'][0][1]/$data['total'][0][2]*100)}%</td>
+                            <td>命中率</td>
+                            <td>{:floor($data['total'][1][1]/$data['total'][1][2]*100)}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- 赛况e-->
+    </section>
+</div>
+</empty>
+</block>
+<!-- 内容 e -->

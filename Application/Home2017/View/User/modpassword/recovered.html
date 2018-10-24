@@ -1,0 +1,79 @@
+<include file='Public:header'/>
+
+<body>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/login/complete.css">
+    <!-- 注册头部开始 -->
+    <include file="Public:top"/>
+    <!-- 注册头部结束 -->
+    <div class="home">
+        <!-- 注册表单内容开始 -->
+        <div class="form-main">
+            <div class="form-nav">
+            	<ul class="clearfix">
+                    <li class="li1">
+                      输入手机号
+                    </li>
+                    <li class="ml li2">
+                      输入新密码
+                    </li>
+                    <li class="ml li3 cur3">
+                      成功找回密码
+                    </li>
+                </ul>
+            </div>
+            <div class="form-con">
+            	<div class="con clearfix">
+                    <div class="pull-left">
+                    	 <div class="rec-nioce"></div>
+                         <p class="jump-nioce02">恭喜您，已找回密码，
+                             <span class="text-danger">5</span>
+                             <if condition="$operation eq 'backDrawPass'">
+                                 秒后自动转到提款界面！<a class="text-red" href="{:U('/UserAccount/extract')}">跳转</a>
+                                <else/>
+                                 秒后自动转到登录界面！<a class="text-red" href="{:U('/User/login')}">跳转</a>
+                             </if>
+                         </p>
+                    </div>
+                    <div class="pull-right clearfix">
+                    	<div class="ew-ma"><img src="__PUBLIC__/Home/images/login/ew-ma.jpg" width="264" height="264"></div>
+                        <div class="ew-nioce">
+                        	<p>扫二维码，下载全彩球讯app<br/>随时获取最新信息！</p>
+                        </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- 注册表单内容结束 -->
+        
+    </div>
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+</body>
+</html>
+<script type="text/javascript">
+    $(function(){      
+        var num= 5;
+        var timer01 = null;
+        var operation = "{$Think.get.operation}";
+        var ass_operation = '{$operation}';
+        timer01 = setInterval(function(){
+            num--;
+            if(num==0){
+                num=0;
+                clearInterval(timer01);
+                timer01 = null;
+                if (operation == 'backDrawPass' || ass_operation == 'backDrawPass')
+                {
+                    window.location.href="/UserAccount/extract.html";
+                }
+                else
+                {
+                    window.location.href="/User/login.html?j=index";
+                }
+            };
+            $('.jump-nioce02 span').html(num);
+        },1000);
+    });
+</script>

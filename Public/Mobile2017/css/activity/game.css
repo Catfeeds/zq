@@ -1,0 +1,114 @@
+.banner img{width: 100%;height: 3.45rem;}
+.con_bg_top{width: 100%; height: 2.2rem;background: url(../../images/activity/gamble/topImg.jpg) no-repeat left top; background-size: 100% 100%; padding: .6rem .35rem 0 .35rem;}
+.con_bg{width: 100%;background: #0d1017;background-size: 100% 100%;}
+.g_content{margin-top: -.4rem;position: relative;}
+.content_main{padding: .15rem .35rem 1.2rem .35rem;min-height: 5rem;height: 100%;}
+.stop_time{width: 5.35rem;height:.62rem;background: url(../../images/activity/gamble/stop_time_bg.png) no-repeat left top;background-size: 5.35rem .62rem;margin: 0 auto;line-height: .6rem;text-align: center;color: #fff;}
+.timeT p:nth-child(2){ color: #f7d56d; text-align: center; padding-top: .1rem;}
+.guess_con{margin: .3rem 0;}
+.guess_list{width: 100%;height: auto; background: linear-gradient(#283144, #191c27); margin-bottom: .15rem; position: relative;}
+
+
+
+.tb_guess_con tr td{padding: .2rem;}
+.tb_guess_con tr:first-child td{padding-bottom: 0;}
+.tb_guess_con .game_vs td{font-weight: bold;}
+.tb_guess_con .game_vs td span{color: #e13f3f;}
+.tb_guess_con .game_vs td img{width: .5rem;height: auto;}
+.tb_guess_con .game_vs td:first-child{text-align: right;}
+.tb_guess_con .game_vs td:first-child img{margin-left: .1rem;}
+.tb_guess_con .game_vs td:last-child{text-align: left;}
+.tb_guess_con .game_vs td:last-child img{margin-right: .1rem;}
+.game_type span{color: #1490d8;padding-right: .2rem;}
+.game_type{color: #999999;}
+.win_sele{padding-bottom: 0!important;}
+.win_sele a{width: auto; min-width: 25%; text-align: center; padding:0 .1rem; height: .7rem;display: inline-block; line-height: .7rem; margin: 0 .1rem; border:1px solid #2b3b53; margin-bottom: .3rem;position: relative; color: #fff; background: #2b3b53; font-size: .26rem;}
+.win_sele a span{ color: #dbdbdb;}
+.win_sele a.on{background: #7bb9df;color: #fff!important;border:1px solid #7bb9df;}
+.win_sele a.on_sele{background: #7bb9df;color: #fff;border:1px solid #7bb9df;}
+.win_sele a.on_disab{ background: #53809b; color: #fff; border:1px solid #53809b;}
+.win_sele a.on_red{background: #e13f3f;color: #fff;}
+.win_sele a.res{border:1px solid #f13232;color: #ffffff;}
+.win_sele a.res em{display: block;width:.5rem;height: .5rem;position: absolute;right: 0;top: 0;background: url(../../images/activity/gamble/res.png) no-repeat left top;background-size: .5rem .5rem;}
+
+.g_state{top: 0;right: 0;}
+.lose{background: url(../../images/activity/gamble/ic_dyseal_lose.png) no-repeat left top; background-size: .94rem  .94rem;}
+.win{background: url(../../images/activity/gamble/ic_dyseal_win.png) no-repeat left top; background-size: .94rem  .94rem;}
+.flex-container{display: -webkit-flex; display: flex; -webkit-flex-wrap: nowrap; flex-wrap: nowrap; margin-bottom: .25rem;}
+.flex-item01{width: 1.2rem; height: .38rem; line-height: .38rem; text-align: center; background: #f2d06c; border-radius: .05rem; margin-right: .15rem; font-size: .24rem;}
+.flex-item02 {-webkit-flex: 1; flex: 1;}
+.flex-item02 .gold{ color: #f7d56d; font-size: .3rem;}
+.g_money .setT{ margin-bottom: .2rem;}
+.g_money p{padding-bottom: .2rem; color: #ffffff; font-size: .24rem;}
+
+
+/*提交*/
+.sub_con_2{width: 100%;height: 1.2rem;line-height: 1.2rem; background: #222633;padding: 0 .3rem; margin-bottom: .2rem;}
+.sub_con_2 span{float: left; color: #98d8ff;}
+.sub_con_2 span em{ color: #e3c467;}
+.sub_con_2 a{float: right;display: block;width: 3rem;height: .75rem;background: #e3c467;color: #272212;line-height: .75rem;text-align: center;margin-top: .2rem; border-radius: .1rem;}
+.sub_con_2 a.on{background: #e3c467; background: rgba(227, 196, 103, 0.7);}
+/*----------------------------单场----------------------------*/
+.team_vs{padding-bottom: .3rem;}
+.team_vs .timeP{ color: #e0e0e0;}
+.tr_vs td:first-child img,.tr_vs td:last-child img{width: .85rem;height: auto;}
+.tr_vs .timeP{ color: #e0e0e0;}
+.tr_vs td:nth-child(2) img{width: .85rem;height: .5rem;}
+.tr_team_name td:first-child,.tr_team_name td:last-child{color: #ffffff;font-weight: bold;}
+
+.tr_team_name td:nth-child(2){font-size: .3rem;color: #1490d8;}
+.tr_team_name td:nth-child(2).vs{ font-size: .48rem; font-weight: 700; color: #ffffff;}
+.tr_qs td{padding: .2rem!important;}
+.tr_qs td img{width:.4rem;margin-left:.2rem;}
+.tr_qs td i{ display: inline-block; width: .4rem; height: .4rem; border-radius: 50%; text-align: center; line-height: .4rem; background: #f2d06c; font-style: normal;}
+.tr_qs td span{padding-left: .2rem; color: #fff;}
+
+.head_con{
+    padding: .1rem .2rem;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+.head_con a{color:#fff;}
+.mt_fixed{margin-top: .89rem;}
+.head{color: #01af63;font-size: .32rem;}
+.head img{width: .9rem;height: .9rem; border-radius: 50%;margin-right: .2rem;}
+.rules{color: #666;line-height: .9rem;}
+.head{ width: 3.2rem; overflow:hidden;text-overflow:ellipsis;-o-text-overflow:ellipsis;-moz-text-overflow:ellipsis;-webkit-text-overflow:ellipsis;-ms-text-overflow:ellipsis;white-space:nowrap;-moz-white-space:nowrap;-ms-white-space:nowrap;-o-white-space:nowrap;-webkit-white-space:nowrap;}
+.head_con .rules a{ padding: .08rem .15rem; background: #2b3b53; border-radius: 4px;}
+
+.team_vs{padding-left: 0!important;}
+.game_type{text-align: center!important;}
+.rules_txt{line-height:150%; color: #ffffff;}
+.rules_title{
+    color: #e3c467;font-weight: bold}
+
+
+/*------------------guess_gonggao竞猜公告------------------*/
+.guess_gonggao ul li{border-bottom: 1px solid #ddd;float: left;padding: .4rem 0;width:100%}
+.gg_title{color: #999999;margin: 0 auto;margin:.4rem 0; text-align: center;margin-bottom: .2rem}
+.gg_title span{display: inline-block;color: #999999;width:1rem;border-top: 1px solid #ddd;height: .1rem;}
+.gg_title em{margin:0 .1rem;display: inline-block;}
+.gg_con{display: flex;padding: 0 .2rem}
+.ggc_img{width: 1.8rem;float: left;margin-right:3%; }
+.ggc_img img{width: 1.8rem;height: 1.45rem}
+.ggc_con{width: 70%;float: left;}
+.ggc_con p{width: 100%}
+.ggc_con p:first-child{font-size: .32rem;color: #303030;font-weight: bold;margin-bottom: .1rem}
+.ggc_con p:last-child{color: #666666;line-height: 150%}
+/*------------------分享common------------------*/
+.share{width: 80%;position: fixed;top: 30%;margin-left: 10%;z-index: 99}
+.share_con{width: 100%;background: #fff;height: 5.6rem;border-radius: .2rem;padding: 0 .4rem}
+.sc_title{text-align: center;height: 1.1rem;line-height: 1.1rem;border-bottom: 1px solid #bbbbbb;font-size: .32rem}
+.sc_list{margin-top: .2rem}
+.sc_list ul li{width: 1.2rem;margin:.2rem .25rem;display: inline-block;text-align: center;}
+.sc_list ul li:nth-child(3n){margin-right: 0}
+.sc_list ul li:nth-child(4){margin-left: 1.1rem}
+.sc_list ul li img{width: 1.2rem;height: 1.2rem;}
+.sc_list ul li p{margin-top: .1rem}
+
+
+#s_close{width: .6rem;height: .6rem;position: absolute;top: -.8rem;right: 0}
+#maskLayer{
+    z-index: 9;}

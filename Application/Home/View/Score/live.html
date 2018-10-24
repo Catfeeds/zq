@@ -1,0 +1,518 @@
+<extend name="Public:layout"/>
+<block name="seo">
+    <title>{$game.home_team_name|switchName=0,###}VS{$game.away_team_name|switchName=0,###}_足球视频直播_动画直播_全球体育</title>
+    <meta name="keywords" content="竞彩比分、足球比分、篮球比分、即时比分、完场比分、nba比分、zuqiubifen、bifenzhibo、2018世界杯"/>
+    <meta name="description" content="全球体育网是2018足球世界杯比分、竞彩比分、足球比分、篮球比分、即时比分、完场比分、nba比分、zuqiubifen、bifenzhibo的大数据比分平台"/>
+      <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+      <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel="stylesheet" href="__STATIC__/score/css/scoreLive/bootstrap-select.css">
+</block>
+<block name="css">
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__STATIC__/score/css/scoreLive/svgVideoLive.css?201809041757">
+    <link rel="stylesheet" href="__CSS__/quiz_hall/myScroll/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="__STATIC__/score/dist/css/jquery.emoji.css?201710101758"/>
+</block>
+<block name="content">
+
+    <!--<link rel="stylesheet" href="__PUBLIC__/Home/css/emoji.css">-->
+
+    <!-- top nav -->
+    <include file="Public:top_score"/>
+    <!-- top nav -->
+    <div class="liveBox clearfix">
+    	<div class="pull-left liveBoxL">
+        	<!-- live box -->
+        	<div class="animatelive">
+            	<div class="animateTile clearfix">
+                	<a href="javascript:;" class="pull-left teamName">
+                    	<div class="pull-left"><img data-original="{$game.home_logo}" class="lazy_home" title="" style="display: inline;"></div>
+                        <span class="pull-left">{$game.home_team_name|switchName=0,###}</span>
+                    </a>
+                    <div class="pull-left teamInfor">
+                    	<p>{$game.union_name|switchName=0,###} &nbsp;<a href="{:U('/dataFenxi@bf',['game_id'=>$game_id])}" target="_blank">分析</a></p>
+                        <div>
+                        	<span>开赛时间：{$game.gtime|date="Y/m/d H:i",###}</span>
+                            <span>{$game.weather}</span>
+                        </div>
+                    </div>
+                    <a href="javascript:;" class="pull-right teamName">
+                    	<div class="pull-right"><img data-original="{$game.away_logo}" class="lazy_away" title="" style="display: inline;"></div>
+                        <span class="pull-right">{$game.away_team_name|switchName=0,###}</span>
+                    </a>
+                </div>
+                  <!-- 在没有专家直播的时候就显示这个 -->
+                <!-- <div class="animateNav">
+                	<ul class="clearfix">
+                		 <li class="pull-left firstLi "><a href="javascript:;">动画直播</a></li>
+                        <li class="pull-left secondLi"><a href="javascript:;" <if condition="$game['video_url'] eq ''">style="cursor:not-allowed;"</if>>视频直播</a></li>
+                	</ul>
+                </div> -->
+                <!-- 如果有专家直播的时候就显示这个 -->
+                <div class="liveNav animateNav<if condition='$is_live gt 0'>-two</if>">
+                        <ul class="clearfix">
+                            <neq name="is_live" value="0"><li class="pull-left zeroLi"><a href="javascript:;">专家直播</a></li></neq>
+                             <li class="pull-left firstLi <if condition='$is_live eq 0'>on</if>"><a href="javascript:;">动画直播</a></li>
+                            <li class="pull-left secondLi"><a href="javascript:;" <if condition="$game['video_url'] eq ''">style="cursor:not-allowed;"</if>>视频直播</a></li>
+                        </ul>
+                    </div>
+                
+                <div class="animateCon">
+                    <if condition="true or $game['gtime'] elt time()">
+                	<div class="svglive">
+
+                        <!--美女直播区 start-->
+                        <if condition="$is_live neq 0">
+                        <div class="animateCon liveRegionClass">
+                            <div class="">
+                                <!-- <div class="small-left"><img src="__IMAGES__/LiveRoom/ic_cl.png"></div> -->
+                                <div class="complete liveRegion">
+                                    <div class="mask dplayer zb_css" style="<eq name="liveList[0]['live_status']" value="2">display: none;</eq>">
+                                        <div id="dplayer" style="width:100%; height:100%;"></div>
+                                    </div>
+
+                                    <!--主播暂停 start-->
+                                    <div class="mask quit"  style="<neq name="liveList[0]['live_status']" value="2">display: block;</neq>">
+                                    <div class="leave">
+                                        <img src="__IMAGES__/LiveRoom/time.png">
+                                        <p>主播暂时离开一会,</p>
+                                        <p>稍等片刻，马上回来~</p>
+                                        <div class="butt" onclick="location.reload();">召唤主播回来</div>
+                                    </div>
+                                    </div>
+                                    <!--主播暂停 end-->
+
+                                    <!--主播更换直播间 start-->
+                                    <div class="leave tab Projectile" style="display:none;">
+                                        <div class="Project">
+                                            <span class="close-btn-close" onclick="location.reload();"></span>
+                                            <div class="Project-down">
+                                                    <a class="goWithLive"><img src="__IMAGES__/LiveRoom/pic_ghss.png">
+                                                    <div class="tab-box">
+                                                        <div class="topic">正在直播：</div>
+                                                        <div class="topmid"></div>
+                                                        <div class="topbut">跟着主播<span>GO~</span></div>
+                                                    </div>
+                                                    </a>
+                                            </div>
+                                                
+                                        </div>
+                                       
+                                    </div>
+                                    <!--主播更换直播间 end-->
+                                    <!--视频源播放出错 start-->
+                                    <div class="liveError" style="display:none;">
+                                        <div class="mask">
+                                        </div>
+                                        <div class="leave two">
+                                            <img src="__IMAGES__/LiveRoom/xr.png">
+                                            <p>老铁，你的网络睡着了~</p>
+                                            <p class="test">请检查您的网络设置，在刷新试试吧！</p>
+                                            <div class="butt" onclick="location.reload();">刷刷刷~</div>
+                                        </div>
+                                    </div>
+                                    <!--视频源播放出错 end-->
+                                </div>
+                            </div>
+                        </div>
+                        </if>
+                        <!--美女直播区 end-->
+                        <if condition="$is_player eq 2">
+                            <div id="iframe_box" class="dh_css" style="display:none;">
+                                <iframe id="live" src="{$svg_url}" width="100%" height="100%" padding="0" margin="0" frameborder="0" scrolling="no"> </iframe>
+                            </div>
+                            <div id="video" class="zb_css" <neq name="liveList[0]" valus="">style="display:none;"</neq>></div>
+                        <else/>
+                            <div id="iframe_box" class="dh_css" <neq name="liveList[0]" valus="">style="display:none;"</neq>>
+                                <iframe id="live" src="" width="100%" height="100%" padding="0" margin="0" frameborder="0" scrolling="no"> </iframe>
+                            </div>
+                        </if>
+                    </div>
+                    <div class="hotLiveBox">
+                        <div class="hotLiveTit"><img src="__STATIC__/score/images/scoreLive/hot-live-title.png" width="47" height="26">热播赛事</div>
+                        <div class="hotLiveList mCustomScrollbar _mCS_1">
+                            <ul>
+                                <volist name="game['game_list']" id="item">
+                                    <li>
+                                        <a href="{:U('live/'.$item['game_id'].'@bf')}" class="clearfix" target="_blank">
+                                            <div class="pull-left">
+                                                <div class="teamS"><span>{$item.home_team_name|switchName=0,###}</span></div>
+                                                <div class="teamS"><span>{$item.away_team_name|switchName=0,###}</span></div>
+                                            </div>
+                                            <div class="pull-right">
+                                                <div class="teamS text-r"><img src="__STATIC__/score/images/scoreLive/icon-tv.png" width="14" height="12"></div>
+                                                <div class="teamS text-999">正在直播</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <a href="javascript:;" class="indentBtn on"></a>
+                    </div>
+                    <!--<if condition="$videolist neq ''">-->
+                        <!--<div class="souBox">-->
+                            <!--<div class="souList souList1 clearfix first"><i class="pull-left souIcon"></i><span class="pull-left">直播源</span></div>-->
+                            <!--<volist name="videolist" id="item">-->
+                                <!--<div url="{$item.weburl}" url_type="{$item.url_type}" class="videourl souList souList{$i + 1} <if condition="$i eq count($videolist)">last</if>"><a href="javascript:;" <if condition="$i eq 1"> class="cur"</if>>{$item.webname}</a></div>-->
+                            <!--</volist>-->
+                        <!--</div>-->
+                    <!--</if>-->
+            <else/>
+                    <!-- 比赛未开始 -->
+                    <div class="still-life">
+                        <img src="__STATIC__/score/images/scoreLive/still-life.jpg" width="100%" height="auto">
+                        <div class="still-text">比赛还没开始，请耐心等待……</div>
+                    </div>
+            </if>
+                </div>
+            </div>
+            <!-- live box -->
+            <div class="oddTable">
+            	<table class="table table-bordered" width="100%" align="center" cellspacing="0" border="0" cellpadding="0">
+                    <thead>
+                        <tr bgcolor="#dce2e6">
+                            <th width="140"><select name="company" id=""><option value="1">SB</option><option value="2">韦德</option><option value="3">威廉</option></select></th>
+                            <th width="305">全场</th>
+                            <th width="305">半场</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>亚盘</td>
+                            <td class="selectOdd">
+                            	<div><span></span></div>
+                            	<div><span></span></div>
+                            	<div><span></span></div>
+                            </td>
+                            <td class="selectOdd">
+                            	<div><span></span></div>
+                            	<div><span></span></div>
+                            	<div><span></span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>大小</td>
+                            <td class="selectOdd">
+                            	<!--<div><span class="up-red"></span></div>-->
+                            	<div><span></span></div>
+                            	<div><span></span></div>
+                            	<div><span></span></div>
+                            </td>
+                            <td class="selectOdd">
+                            	<div><span></span></div>
+                            	<div><span></span></div>
+                                <div><span></span></div>
+                                <!--<div><span class="down-green"></span></div>-->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="skillData">
+            	<!-- conlRate -->
+            	<div class="conlRate">
+                	<div class="conlRateTit">控球率</div>
+                    <div class="clearfix conlData">
+                    	<div class="pull-left conlRateL homeData-kql">
+                        	<h4>{$game.hold.home|default=0}</h4>
+                          	<div class="conCard clearfix">
+                            	<div class="pull-left cardNum homeData-y"><p><img src="__STATIC__/score/images/scoreLive/y-card.png" width="20" height="27"></p><span>{$game.y_card.home|default=0}</span></div>
+                                <div class="pull-left cardNum homeData-r"><p><img src="__STATIC__/score/images/scoreLive/r-card.png" width="20" height="27"></p><span>{$game.r_card.home|default=0}</span></div>
+                          	</div>
+                        </div>
+                    	<div class="pull-left conlRateC">
+                        	<div class="clearfix homeAway">
+                            	<div class="pull-left homeRate homeData-kqlt"><span style="width: <if condition="$game['hold']['home_num'] eq 0 and $game['hold']['away_num'] eq 0">100<else/>{$game.hold.home_num}</if>%;"></span><em>主</em></div>
+                            	<div class="pull-right awayRate awayData-kqlt"><span style="width: {$game.hold.away_num}%;"></span><em  <if condition="$game['hold']['away_num'] lt 12">style="color:#666"</if>>客</em></div>
+                            </div>
+                            <div class="attackRate">
+                            	<div class="homeAttack homeData-wxjg <if condition="$game['dangerous']['home'] gt $game['dangerous']['away']">yseAttack<else/>noAttack</if>" style="width:{$game.dangerous.percent}%;">
+                                	<div class="pull-left percent">{$game.dangerous.home}</div>
+                                    <div class="pull-right attackText" style="display:<if condition="$game['dangerous']['home'] gt $game['dangerous']['away']">block<else/>none</if>;">危险进攻</div>
+                                </div>
+                            	<div class="awayAttack awayData-wxjg <if condition="$game['dangerous']['home'] lt $game['dangerous']['away']">yesAttack<else/>noAttack</if>" style="width:{$game.dangerous.percent_other}%;">
+                                	<div class="pull-right percent">{$game.dangerous.away}</div>
+                                    <div class="pull-left attackText" style="display:<if condition="$game['dangerous']['home'] lt $game['dangerous']['away']">block<else/>none</if>;">危险进攻</div>
+                                </div>
+                            </div>
+                        </div>
+                    	<div class="pull-right conlRateR awayData-kql">
+                        	<h4>{$game.hold.away|default=0}</h4>
+                            <div class="conCard clearfix">
+                            	<div class="pull-left cardNum awayData-y"><p><img src="__STATIC__/score/images/scoreLive/y-card.png" width="20" height="27"></p><span>{$game.y_card.away|default=0}</span></div>
+                                <div class="pull-left cardNum awayData-r"><p><img src="__STATIC__/score/images/scoreLive/r-card.png" width="20" height="27"></p><span>{$game.r_card.away|default=0}</span></div>
+                          	</div>
+                        </div>
+                    </div>
+                    <div class="conlRateList">
+                    	<table class="table" width="100%" align="center" cellspacing="0" border="0" cellpadding="0">
+                        	<tbody>
+                            <tr>
+                                <td colspan="3" class="rateTitle">角球</td>
+                            </tr>
+                            <tr>
+                                <td width="55" class="f18 homeData-jq">{$game.corner.home|default=0}</td>
+                                <td width="600"><div class="expand-percent data-jq" style="<if condition="$game['corner']['color_other'] eq 1">background: #76b3e4;</if>"><span class="expand" style="<if condition="$game['corner']['color_other'] eq 1">border-right-color:#76b3e4;</if>width: {$game.corner.percent|default=50}%"></span></div></td>
+                                <td width="55" class="f18 awayData-jq">{$game.corner.away|default=0}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="rateTitle">射门</td>
+                            </tr>
+                            <tr>
+                                <td class="f18 homeData-sm">{$game.shoot.home|default=0}</td>
+                                <td><div class="expand-percent data-sm" style="<if condition="$game['shoot']['color_other'] eq 1">background: #76b3e4;</if>"><span class="expand" style="<if condition="$game['shoot']['color_other'] eq 1">border-right-color:#76b3e4;</if>width: {$game.shoot.percent|default=50}%"></span></div></td>
+                                <td class="f18 awayData-sm">{$game.shoot.away|default=0}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="rateTitle">射中</td>
+                            </tr>
+                            <tr>
+                                <td class="f18 homeData-sz">{$game.quiver.home|default=0}</td>
+                                <td><div class="expand-percent data-sz" style="<if condition="$game['quiver']['color_other'] eq 1">background: #76b3e4;</if>"><span class="expand" style="<if condition="$game['quiver']['color_other'] eq 1">border-right-color:#76b3e4;</if>width: {$game.quiver.percent|default=50}%"></span></div></td>
+                                <td class="f18 awayData-sz">{$game.quiver.away|default=0}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="rateTitle">犯规</td>
+                            </tr>
+                            <tr>
+                                <td class="f18 homeData-fg">{$game.foul.home|default=0}</td>
+                                <td><div class="expand-percent data-fg" style="<if condition="$game['foul']['color_other'] eq 1">background: #76b3e4;</if>"><span class="expand" style="<if condition="$game['foul']['color_other'] eq 1">border-right-color:#76b3e4;</if>width: {$game.foul.percent|default=50}%"></span></div></td>
+                                <td class="f18 awayData-fg">{$game.foul.away|default=0}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="rateTitle">任意球</td>
+                            </tr>
+                            <tr>
+                                <td class="f18 homeData-ryq">{$game.freekick.home|default=0}</td>
+                                <td><div class="expand-percent data-ryq" style="<if condition="$game['freekick']['color_other'] eq 1">background: #76b3e4;</if>"><span class="expand" style="<if condition="$game['freekick']['color_other'] eq 1">border-right-color:#76b3e4;</if>width: {$game.freekick.percent|default=50}%"></span></div></td>
+                                <td class="f18 awayData-ryq">{$game.freekick.away|default=0}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="rateTitle">越位</td>
+                            </tr>
+                            <tr>
+                                <td class="f18 homeData-yw">{$game.offside.home|default=0}</td>
+                                <td><div class="expand-percent data-yw" style="<if condition="$game['offside']['color_other'] eq 1">background: #76b3e4;</if>"><span class="expand" style="<if condition="$game['offside']['color_other'] eq 1">border-right-color:#76b3e4;</if>width: {$game.offside.percent|default=50}%"></span></div></td>
+                                <td class="f18 awayData-yw">{$game.offside.away|default=0}</td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- conlRate -->
+                
+                <!-- conEvent -->
+                <div class="conEvent">
+                	<div class="conEventList">
+                    	<div class="eventList">
+                            <ul>
+                                <if condition="!empty($detail)">
+                                    <volist name="detail" id="item">
+                                        <li>
+                                            <div class="timePoint">{$item[3]}'</div>
+                                            <div class="triangle-border">
+                                                <switch name="item[2]">
+                                                    <case value="1"><img src="__STATIC__/score/images/scoreLive/jinqiu.png" width="auto" height="auto"></case>
+                                                    <case value="2"><img src="__STATIC__/score/images/scoreLive/red-card.png" width="auto" height="auto"></case>
+                                                    <case value="3"><img src="__STATIC__/score/images/scoreLive/yellow-card.png" width="auto" height="auto"></case>
+                                                    <case value="11"><img src="__STATIC__/score/images/scoreLive/in-out.png" width="auto" height="auto"></case>
+                                                    <case value="99"><img src="__STATIC__/score/images/scoreLive/icon-corner-ball.png" width="auto" height="auto"></case>
+                                                    <case value="57"><img src="__STATIC__/score/images/scoreLive/penalty.png" width="auto" height="auto"></case>
+                                                    <case value="7"><img src="__STATIC__/score/images/scoreLive/penalty.png" width="auto" height="auto"></case>
+                                                    <default></default>
+                                                </switch>
+                                                {$item[6]}  -  (<if condition="($item[1] eq 1)">{$game['home_team_name']}<else />{$game['away_team_name']}</if>)
+                                            </div>
+                                            <span class="spotPoint <if condition="($item[1] eq 1)">homeSpot<else />awaySpot</if>"></span>
+                                        </li>
+                                    </volist>
+                                </if>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix description">
+                        <span class="pull-left lab"><img src="__STATIC__/score/images/scoreLive/icon-corner-ball.png" width="20" height="20"> 角球</span> 
+                        <span class="pull-left lab"><img src="__STATIC__/score/images/scoreLive/jinqiu.png"> 入球</span> 
+                        <span class="pull-left lab"><img src="__STATIC__/score/images/scoreLive/penalty.png"> 点球</span> 
+                        <span class="pull-left lab"><img src="__STATIC__/score/images/scoreLive/oolong.png"> 乌龙球</span> 
+                        <span class="pull-left lab"><img src="__STATIC__/score/images/scoreLive/yellow-card.png"><img src="__STATIC__/score/images/scoreLive/red-card.png">  黄红牌</span>
+                        <span class="pull-left lab"><img src="__STATIC__/score/images/scoreLive/in-out.png"> 换人</span>
+                    </div>
+                </div>
+                <!-- conEvent -->
+            </div>
+        </div>
+    	<div class="pull-right liveBoxR">
+        	<!-- conChat -->
+       	  <div class="conChat">
+                <!-- <div class="chatTit"></div> -->
+                <div class="chatTit">
+                    <if condition="$liveList eq ''">
+                    <!-- 如果没有专家的话就显示下面的 -->
+                         <span>聊球室</span>
+                        <else/>
+                    <!-- 如果有专家的话就显示下面的 -->
+                    <!-- <div class="select-box">
+
+                        <select class="selectpicker">
+                                <volist name="liveList" id="vo">
+                                    <option value="{$vo.id}" room_id="{$vo.room_id}" img="{$vo.img}" live_status="{$vo.live_status}" nick_name="{$vo.nick_name}" live_url="{$vo.live_url}" mqtt_room_topic="{$vo.mqtt_room_topic}">{$vo.nick_name}</option>
+                                </volist>
+                        </select>
+                    </div> -->
+                    <div class="select-box">
+                        <input id="ipt" type="text" placeholder="{$liveList[0]['nick_name']}" readonly/>
+                          <ul id="ul">
+                              <volist name="liveList" id="vo">
+                                  <li ids="{$vo.id}" room_id="{$vo.room_id}" img="{$vo.img}" live_status="{$vo.live_status}" nick_name="{$vo.nick_name}" live_url="{$vo.live_url}" mqtt_room_topic="{$vo.mqtt_room_topic}"><a href="javascript:;">{$vo.nick_name}</a></li>
+                              </volist>
+                            </ul>
+                        <div style="display:none;" class="liveChange" val="" ids="{$liveList[0]['id']}" room_id="{$liveList[0]['room_id']}" img="{$liveList[0]['img']}" live_status="{$liveList[0]['live_status']}" nick_name="{$liveList[0]['nick_name']}" live_url="{$liveList[0]['live_url']}" mqtt_room_topic="{$liveList[0]['mqtt_room_topic']}" ></div>
+                    </div>
+                    </if>
+                </div>
+
+            <div class="noticeCon clearfix">
+                	<div class="pull-left noticeLeft"><span>公告：</span></div>
+                	<div class="pull-left noticeRight">
+                    	<ul class="clearfix">
+                        	<volist name="ad" id="item">
+                                <li class="pull-left"><a href="{$item.url}" target="_blank">{$item.title}</a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+              <!--赛事聊天室 start-->
+                <div class="conChatList gameRoom">
+                    <div class="chatList">
+                        <ul>
+                            <!--<li class="start clearfix">-->
+                                <!--<span class="live-lb initial pull-left">-->
+                                    <!--<span class="tips">-->
+                                        <!--<span class="m-r-2">Lv</span>15-->
+                                    <!--</span>-->
+                                <!--</span>-->
+                                <!--<span class="name pull-left">-->
+                                    <!--佐助踢足球-->
+                                    <!--<span class="colon">：</span>-->
+                                    <!--<span class="shield-report">-->
+                                        <!--<a class="reportBtn">屏蔽</a>-->
+                                        <!--<a class="reportBtn">举报</a>-->
+                                    <!--</span>-->
+                                <!--</span>-->
+                                <!--<span class="content-txt">竟然进球了，还以为蛋比蛋</span>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                </div>
+              <!--赛事聊天室 end-->
+
+              <!--美女聊天室 start-->
+              <div class="conChatList liveRoom">
+                  <div class="chatList">
+                      <ul>
+                          <!--<li class="start clearfix">-->
+                          <!--<span class="live-lb initial pull-left">-->
+                          <!--<span class="tips">-->
+                          <!--<span class="m-r-2">Lv</span>15-->
+                          <!--</span>-->
+                          <!--</span>-->
+                          <!--<span class="name pull-left">-->
+                          <!--佐助踢足球-->
+                          <!--<span class="colon">：</span>-->
+                          <!--<span class="shield-report">-->
+                          <!--<a class="reportBtn">屏蔽</a>-->
+                          <!--<a class="reportBtn">举报</a>-->
+                          <!--</span>-->
+                          <!--</span>-->
+                          <!--<span class="content-txt">竟然进球了，还以为蛋比蛋</span>-->
+                          <!--</li>-->
+                      </ul>
+                  </div>
+              </div>
+              <!--美女聊天室 end-->
+
+            <div class="chatPost">
+                	<div class="btnExp">
+                    	<!--<a href="javascript:;"><img src="__STATIC__/score/images/scoreLive/icon-exp.png" width="22" height="22"></a>-->
+                        <a href="javascript:;"><img src="__STATIC__/score/images/scoreLive/icon-delete.png" width="18" height="20" onclick="clearChatLog()"></a>
+                    </div>
+               	  	<div class="clearfix textareaCon">
+                        <div class="chatTxt pull-left" id="chatTxt" contenteditable="true" style="cursor: text;"></div>
+                        <div class="chatTxt pull-left" id="chatTxt2" contenteditable="true" style="display:none"></div>
+                        <a class="btnPost pull-left" href="javascript:;">发送</a>
+                    </div>
+            </div>
+            </div>
+            <!-- conChat -->
+            
+            <!-- bigShot -->
+            <!-- bigShot -->
+      </div>
+    </div>
+    <!-- app -->
+    <div class="appEw"><img src="__STATIC__/score/images/scoreLive/app-ew.png" width="110" height="110"><p>下载全球体育APP</p> <p>随时随地掌握第一手资料</p><a href="javascript:;" class="closeApp">&times;</a></div>
+    <input type="hidden" class="liveTopic" val="" />
+</block>
+<block name="js">
+    <script>
+        var gameId = '{$game_id}';
+        var game_state = '{$game_state}';
+        var u = '{$userInfo}';
+        var esrAddress = '{$esrAddress}';
+        var client_id = '{$client_id}';
+        var userInfo = u !='' ? JSON.parse(u) : '';
+        var chatOpen = '{$chatOpen}';
+        var ip = "{$ip}";
+        var userStatus = '{$userStatus}';
+        var mqHost = window.location.protocol == 'https:'? 'wss://'+'{$mqttOpt.host}'+':8084':'ws://'+'{$mqttOpt.host}'+':8083';
+        var mqUser = JSON.parse('{$mqttUser|json_encode}');
+        var isAdmin = '';
+        var dh_url = "{$svg_url}";
+        var zb_url = "{$game.video_url}";
+        // var zb_url = "http://www.flashls.org/playlists/test_001/stream_1000k_48k_640x360.m3u8";
+        var is_player = parseInt("{$is_player}");
+        var is_live = parseInt("{$is_live}");
+        var home_team_name = "{$game['home_team_name']}";
+        var away_team_name = "{$game['away_team_name']}";
+//        var url_type = "{$game.url_type}";
+        var is_CountDown = "{$CountDown}";
+        var now_live = parseInt("{$now_live}");
+
+        if(is_CountDown == 1)
+        {
+            setTimeout("location.reload(true)", "{$timeDiff}" )
+        }
+        var sprScore = {:json_encode(C('score'),JSON_UNESCAPED_UNICODE)};
+        var company  = {:json_encode(C('DB_COMPANY_INFO'),JSON_UNESCAPED_UNICODE)};
+    </script>
+    <script type="text/javascript" src="__JS__/common/cookie.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Plugs/ckplayer/ckplayer.js"></script>
+    <script src="__STATIC__/score/js/emoji.js"></script>
+    <script type="text/javascript" src="__CSS__/quiz_hall/myScroll/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="__JS__/special/kxbdSuperMarquee.js"></script>
+    <script type="text/javascript" src="__STATIC__/score/js/animation.js?v=20180827"></script>
+    <script type="text/javascript" src="__STATIC__/score/dist/js/jquery.emoji.min.js"></script>
+    <!--<script type="text/javascript" src="__STATIC__/score/js/paho-mqtt.js"></script>-->
+    <script type="text/javascript" src="__STATIC__/score/js/mqtt.min.js"></script>
+
+    <script type="text/javascript" src="__STATIC__/score/js/mqttConnect.js?v=20180827"></script>
+    <script type="text/javascript" src="__STATIC__/score/js/mqttManager.js?v=20180827"></script>
+
+    <script src="//cdn.bootcss.com/socket.io/1.3.5/socket.io.min.js"></script>
+    <link href="__STATIC__/score/css/scoreLive/emoji.css?201710101758" rel="stylesheet" type="text/css" />
+     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+     <!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+     <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+     <script type="text/javascript" src="__STATIC__/score/js/bootstrap-select.js"></script>
+     <script type="text/javascript" src="__STATIC__/score/js/defaults-zh_CN.js"></script> -->
+     <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+     <script type="text/javascript" src="__STATIC__/score/js/bootstrap-select.js"></script>
+     <script type="text/javascript" src="__STATIC__/score/js/defaults-zh_CN.js"></script>
+</block>

@@ -1,0 +1,114 @@
+<extend name="Public/tpl-detail" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/bk/event.css">
+</block>
+<!-- 导航 s-->
+<block name="nav">
+    <include file="DetailsBk/subnavBk"/>
+</block>
+<!-- 内容 s -->
+<block name="content">
+    <section>
+        <!-- 数据导航s -->
+        <nav class="odd_nav clearfix">
+            <ul>
+                <!--                <li><a href="#">战报</a></li>-->
+                <li class="on"><a href="{:U('DetailsBk/event_case',array('scheid'=>$scheid))}">赛况</a></li>
+                <li><a href="{:U('DetailsBk/event_technology',array('scheid'=>$scheid))}">技术</a></li>
+                <li><a href="{:U('DetailsBk/event_squad',array('scheid'=>$scheid))}">阵容</a></li>
+            </ul>
+        </nav>
+        <!-- 数据导航e -->
+        <!-- 赛况s-->
+        <if condition="empty($data['score'][0][0]) && !isset($data['live'])">
+            <section class="com_nodata">
+                <img src="__IMAGES__/icon/betfair_notmore.png" alt="暂无数据">
+                <p>暂无数据</p>
+            </section>
+            <else/>
+            <div class="live_event_game">
+                <div class="game_title"><h4>球队比分</h4></div>
+                <table class="tb_scroe"  border="0" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <th width="20%">球队</th>
+                    <volist name="data['score']" id='v'>
+                        <gt name='i' value='4'>
+                        <th width="10%">OT{$i-4}</th>
+                        <else/>
+                        <th width="10%">{$i}</th>
+                        </gt>
+                    </volist>
+                    <th width="10%">总分</th>
+                    </tr>
+                    <tr>
+                        <td>{$against['home_team_name'][0]}</td>
+                    <volist name="data['score']" id='v'>
+                        <td>{$v[0]}</td>
+                    </volist>
+                        <td>{$homeScroe}</td>
+                    </tr>
+                    <tr>
+                        <td>{$against['away_team_name'][0]}</td>
+                    <volist name="data['score']" id='v'>
+                        <td>{$v[1]}</td>
+                    </volist>
+                        <td>{$awayScroe}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <div class="game_title"><h4>文字直播</h4></div>
+                <table class="table live_word" width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tbody>
+                    <volist name="data['live']" id='v'  mod="2">
+                        <tr <eq name='mod' value='1'>bgcolor="#ebeced"</eq>>
+                        <!--                        <td width="8%" class="evenImg"><img src="__IMAGES__/live/begin.png"></td>-->
+                        <td width="84%" class="alignLeft" style="text-align:left;padding-left:10px;"> <span style="color:#ef800c">{$v[0]}</span>&nbsp;-&nbsp;{$v[4]}</td>
+                        <td width="8%" class="evenImg">
+                            <switch name="v[1]">
+                        <case value="1"><img src="{$against['home_logo']}"</case>
+                        <case value="2"><img src="{$against['away_logo']}"</case>
+                        </switch>
+                        </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+                <div class="itemImgList">
+                    <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td width="25%">
+                                    <div class="imgList">
+                                        <img src="__IMAGES__/live/goal.png">进球
+                                    </div>
+                                </td>
+                                <td width="25%">
+                                    <div class="imgList">
+                                        <img src="__IMAGES__/live/t.png">技犯
+                                    </div>
+                                </td>
+                                <td width="25%">
+                                    <div class="imgList">
+                                        <img src="__IMAGES__/live/begin.png">开赛
+                                    </div>
+                                </td>
+                                <td width="25%">
+                                    <div class="imgList">
+                                        <img src="__IMAGES__/live/in.png">
+                                        <img src="__IMAGES__/live/out.png">
+                                        换人
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </if>
+        <!-- 赛况e-->
+    </section>
+</block>
+<!-- 内容 e -->

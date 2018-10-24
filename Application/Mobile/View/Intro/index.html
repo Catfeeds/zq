@@ -1,0 +1,117 @@
+<extend name="Public/base"/>
+<block name="seo">
+    <title>手机全球体育手机网_即时足球比分,比分直播,足球直播,比分预测,赔率分析</title>
+</block>
+
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/intro/index.css?v=201806051738">
+    <link rel="stylesheet" href="__CSS__/swiper.min.css">
+    <link rel="stylesheet" href="__CSS__/Olympic/swiper_banner.css">
+
+</block>
+<block name="nav">
+</block>
+<block name="header">
+    <header id="header" class="headFixed" style="background:#01af63;">
+        <div class="logo"><a href="{:U('/')}"><img src="__IMAGES__/index/logo.png" alt="logo"></a></div>
+         <span style="line-height: .60rem;margin-left: .90rem;color: #fff;font-size: .34rem;">球王推介</span>
+        <div class="posnal_list">
+            <a href="<if condition="$is_log == 1">{:U('User/index')}<else/>{:U('User/login')}</if>" class="myHead"><img src="{$user_auth['head']|default='__IMAGES__/index/headImg.png'}" alt="头像"></a>
+        </div>
+    </header>
+</block>
+
+<!-- 内容 s -->
+<block name="content">
+<style>
+.swiper-container2 {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+</style>
+    <!-- 球王 main -->
+    <section class="qw_main">
+        <!-- <section class="index_banner">
+                <img src="__IMAGES__/qw/index_banner.png" alt="banner">
+        </section> -->
+
+        <!-- banner 切换 s-->
+    <section class="main_banner " >
+        <!-- Swiper -->
+        <div class="swiper-container2 swiper-container-horizontal">
+            <div class="swiper-wrapper">
+                <volist name='banner' id='v'>
+                    <figure class="swiper-slide">
+                        <a href="{$v['url']}">
+                            <img src="{$v.img}" alt="{$v.title}">
+                        </a>
+                    </figure>
+                </volist>
+            </div>
+            <!-- Add Pagination -->
+            <if condition="$bannerCount gt 1">
+                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+
+                </div>
+            </if>
+        </div>
+    </section>
+    <!-- banner 切换 e-->
+
+        <section class="pic_qw_anment">
+            <img src="__IMAGES__/qw/pic_qw_anment.png" alt="公告" style="float: left;">
+            <section style="width: 80%;float: left;">
+                <!-- Swiper -->
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <volist name="list.notice" id="val">
+                            <div class="swiper-slide">{$val.remark}</div>
+                        </volist>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section class="index_nav">
+            <volist name="list['category']" id="val1">
+                <div class="nav_li">
+                    <a href="{:U('Intro/intro_class',['class_id'=>$val1['id']])}">
+                        <img src="{$val1['logo']}" alt="">
+                        <p>{$val1.name}</p>
+                    </a>
+                </div>
+            </volist>
+        </section>
+        <section class="index_main">
+            <volist name="list['products']" id="item">
+                <include file="intro_tab"/>
+            </volist>
+        </section>
+    </section>
+    <!-- 球王 main -->
+    <input type="hidden" id="type" value="index"/>
+    <include file="common_ajax"/>
+    <!-- Swiper JS -->
+    <script src="__JS__/swiper.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            direction: 'vertical',
+            autoplay:5000
+        });
+        var swiper = new Swiper('.swiper-container2', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: false,
+                autoplayDisableOnInteraction: false
+            });
+
+    </script>
+</block>

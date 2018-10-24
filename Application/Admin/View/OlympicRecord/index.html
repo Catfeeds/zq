@@ -1,0 +1,125 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>竞猜时间：</label>
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="10">至
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="10">
+			</li>
+
+			<li>
+                <label >手机号：</label>
+                <input type="text" name="username" value="{$_REQUEST.username}"/>
+            </li>
+            <li>
+                <label >昵称：</label>
+                <input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+            </li>
+			<li>
+				<label>赛事名称：</label>
+				<input type="text" name="union_name" value="{$_REQUEST.union_name}"/>
+			</li>
+			<li>
+				<label>竞猜标题：</label>
+				<input type="text" name="title" value="{$_REQUEST.title}"/>
+			</li>
+			<li>
+				<label>用户类型：</label>
+				<select name="is_robot" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="0" <if condition="$_REQUEST.is_robot eq '0'">selected</if> >正常用户</option>
+					<option value="1" <if condition="$_REQUEST.is_robot eq '1'">selected</if> >机器人用户</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="icon" href="__URL__/runResult" target="dialog" mask="true"><span>奥运竞猜结算</span></a></li>
+			<li class="line"></li>
+			<li><a class="icon" href="__URL__/runQuiz" target="dialog" mask="true"><span>机器人竞猜记录修改</span></a></li>
+			<li class="line"></li>
+			<li><span style="color: red">正常用户参与人数：{$userCount}</span></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="3%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="8%">赛事名称</th>
+			<th width="9%">竞猜标题</th>
+			<th width="7%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'game_time')"> class="desc"</if> orderField="game_time" <if condition="$_REQUEST._order eq 'game_time'">class="{$_REQUEST._sort}"</if>>比赛时间</th>
+			<th width="8%">用户昵称</th>
+			<th width="7%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'create_time')"> class="desc"</if> orderField="create_time" <if condition="$_REQUEST._order eq 'create_time'">class="{$_REQUEST._sort}"</if>>竞猜时间</th>
+			<th width="30%">选项/赔率</th>
+			<th width="5%">竞猜内容</th>
+			<th width="4%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'vote_point')"> class="desc"</if> ord erField="vote_point" <if condition="$_REQUEST._order eq 'vote_point'">class="{$_REQUEST._sort}"</if>>竞猜积分</th>
+			<th width="4%">结算结果</th>
+			<th width="4%">目前结果</th>
+			<th width="4%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'earn_point')"> class="desc"</if> orderField="earn_point" <if condition="$_REQUEST._order eq 'earn_point'">class="{$_REQUEST._sort}"</if>>获得积分</th>
+			<th width="3%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['union_name']}</td>
+					<td>{$vo['title']}</td>
+					<td>{$vo['game_time']|date="Y-m-d H:i",###}</td>
+					<td><a href="__ADMIN__/FrontUser/index/id/{$vo['user_id']}" target="navTab">{$vo['username']|is_show_mobile}（{$vo['nick_name']}）</a></td>
+					<td>{$vo['create_time']|date="Y-m-d H:i",###}</td>
+					<td>
+						<volist name="vo.question" id="item">
+							<span <if condition="$vo['answer'] eq $item['id']">style="background:yellow"</if>>{$i}、{$item.title}（{$item.odds}）</span>&nbsp;&nbsp;
+						</volist>
+					</td>
+
+					<td>{$vo['title_answer']}（{$vo['odds']}）</td>
+				    <td>{$vo['vote_point']}</td>
+				    <td>
+				    	<switch name="vo.result">
+	                        <case value="1"><div style="color:red;">赢</div></case>
+	                        <case value="-1"><div style="color:blue;">输</div></case>
+	                        <default/>--
+	                    </switch>
+				    </td>
+				    <td>
+				    	<switch name="vo.show_result">
+	                        <case value="1"><div style="color:red;">赢</div></case>
+	                        <case value="-1"><div style="color:blue;">输</div></case>
+	                        <default/>--
+	                    </switch>
+				    </td>
+				    <td>{$vo['earn_point']|default="--"}</td>
+				    <td>
+				    	<if condition="$vo.result eq 0">
+				    		<a href="__URL__/saveAnswer/id/{$vo.id}" target="dialog" mask="true">修改</div></a>
+				    	</if>
+				    </td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

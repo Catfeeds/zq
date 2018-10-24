@@ -1,0 +1,31 @@
+/*盘口*/
+.pankou{margin-top: 5px;}
+.pankou ul li{float: left;margin-right: 10px;}
+.pankou ul li em{width: 16px;height: 16px; display: block;background: #dddddd;float: left;}
+.pankou ul li span{float: left;line-height: 15px;padding-left: 5px;}
+.pankou ul li .up{background: #ff0000;}
+.pankou ul li .none{background: #000000;}
+.pankou ul li .down{background: #00d550;}
+
+/*checkbox按钮*/
+/*.tb_nindex .myLabel01{background: url(../../images/scoreLive/input-s.png) no-repeat left center;}*/
+/*.tb_nindex input[type=checkbox]{ vertical-align: -2px; margin: 3px 3px 0px 5px; display: none;}*/
+.tb_nindex .inline { margin-left: 8px; margin-bottom: 0; cursor: pointer; font-size: 16px;}
+.tb_nindex .th_first{ padding:10px; background-color: #d4edfa;}
+.tb_nindex .th_second,.tb_nindex .td_second{height: 40px;}
+.tb_nindex .th_second{ background: #5d8aa2; color: #ffffff;}
+.pType{ background: #4d7082; color: #fff;}
+.bgLg{ background: #e5f3fa;}
+.team_content{padding:0 10px;}
+.team_content p{width: 100%;padding-bottom: 8px; margin-bottom: 0; font-size: 16px;}
+.team_content p span{float: right;color: #0086ff;font-weight: bold;}
+.team_content .team_vs em{color: #fe0000;font-weight: bold;}
+.team_content .team_vs span{color: #ff0000;font-weight: normal;}
+
+.pk_msg{width: 100%; min-width: 140px; margin-top: 10px; text-align: center;}
+.pk_msg a{ display: inline-block; width: 26px;height: 26px; background: #4d7082; text-align: center;line-height: 26px;color: #fff;font-size: 14px; margin: 0 1px; border-radius: 4px; transition: 0.2s;}
+.pk_msg a:hover{ color: #fff600;}
+.pk_msg ul li a:hover{background: #a3003a;}
+.td_bg{background: #e9f4fe;}
+.lang_css {display:none;}
+

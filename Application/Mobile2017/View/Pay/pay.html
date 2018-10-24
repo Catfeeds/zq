@@ -1,0 +1,414 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>手机全球体育网_即时足球比分,比分直播,足球直播,比分预测,赔率分析</title>
+</block>
+
+
+<!-- 本页需要引用的css -->
+<block name="append">
+    <!-- 页面所需css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/pay/pay.css">
+
+    <script type="text/javascript" src="__JS__/common.js"></script>
+</block>
+
+<block name="nav"></block>
+<block name="header"></block>
+<block name="content">
+    <!-- 二级头部 s -->
+    <header id="other_header">
+        <a href="{:U('User/index')}"></a>充值
+    </header>
+    <!-- 二级头部 e -->
+    <section class="main">
+        <!-- 个人剩余金币信息 -->
+        <div class="user_infor">
+            <figure class="clearfix">
+                <div class="fl myHeadImg">
+                    <img src="{$user_auth['head']}">
+                </div>
+                <figcaption class="fl head_infor">
+                    <p class="fs32">{$user_auth['nick_name']}</p>
+                    <p class="text-999 fs24">金币总数：</p>
+                </figcaption>
+                <div class="fr">
+                    <span style="font-size:.6rem">{$coin}</span>
+                    <span class="text-666">个</span>
+                </div>
+            </figure>
+        </div>
+        <!-- 个人剩余金币信息 -->
+        <!-- 导航 -->
+        <section class="n_module">
+            <nav class="nav_list clearfix nav_num_2 tabs">
+                <a href="javascript:;" class="nav-item tab_item on">金币充值</a>
+                <a href="javascript:;" class="nav-item tab_item">话费换购</a>
+            </nav>
+        </section>
+        <!-- 导航 -->
+        <div class="slide_content">
+            <div class="tabslider">
+                <!-- pay-con01 -->
+                <div class="pay_con">
+                    <div class="price_list">
+                        <if condition="$rechargeConfig neq ''">
+                        <ul class="clearfix price_list_ul price_list_ul01">
+                            <foreach name="rechargeConfig" item="v" >
+                            <li class="<if condition="$v['number'] gt 0">active</if>" value="{$v['account']}" num="{$v['number']}">
+                                <a href="javascript:;">
+                                    <p><img src="__IMAGES__/icon/gold-coin-icon.png"> <em class="fs32">{$v['account']}</em> <if condition="$v['number'] gt 0"><em class="fs26">+{$v['number']}</em></if></p>
+                                    <p class="fs36">￥{$v['account']}</p>
+                                </a>
+                            </li>
+                            </foreach>
+                        </ul>
+                        </if>
+                        <form action="">
+                            <div class="other_coin ziyou">
+                                <div class="item">自由充值</div>
+                                <div class="item item-center"><input type="text" placeholder="最低充值10"></div>
+                                <div class="item item-right"> 元</div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="reminder text-999">
+                        <ul>
+                            <li>温馨提示：</li>
+                            <li>1.金币可用来购买他人的推荐内容;</li>
+                            <li>2.充值的金币不能进行提款，其他获取的金币可进行提现;</li>
+                            <li>3.兑换比例为1:1，即1元等于1金币;</li>
+                            <li>4.充值过程中遇到问题请联系我们的在线客服</li>
+                        </ul>
+                        <div class="agreeCheck">
+                            <label>
+                                <input type="hidden" name='agree' id="agree" checked="checked">我已阅读并接受
+                            </label>
+                            <a href="{:U('/User/agreement@m')}" style="color: #1490d8">《全球体育服务协议》</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- pay-con01 -->
+                <!-- pay-con02 -->
+                <div class="pay_con">
+                    <div class="price_list">
+                        <ul class="clearfix price_list_ul price_list_ul02">
+                            <li class="on">
+                                <a href="javascript:;">
+                                    <p><img src="__IMAGES__/icon/gold-coin-icon.png"> <em class="fs32">6</em></p>
+                                    <p class="fs36">￥<span>10</span></p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <p><img src="__IMAGES__/icon/gold-coin-icon.png"> <em class="fs32">10</em></p>
+                                    <p class="fs36">￥<span>18</span></p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <p><img src="__IMAGES__/icon/gold-coin-icon.png"> <em class="fs32">16</em></p>
+                                    <p class="fs36">￥<span>28</span></p>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="other_coin">
+                            <div class="item">请输入移动手机号码：</div>
+                            <div class="item item-center"><input id="phone" type="text"/></div>
+                        </div>
+                    </div>
+                    <div class="reminder text-999">
+                        <ul>
+                            <li>温馨提示：</li>
+                            <li>1.金币可用来购买他人的推荐内容;</li>
+                            <li>2.充值的金币不能进行提款，其他获取的金币可进行提现;</li>
+                            <li>3.兑换比例为1:1，即1元等于1金币;</li>
+                            <li>4.充值过程中遇到问题请联系我们的在线客服</li>
+                        </ul>
+                        <div class="agreeCheck">
+                            <label>
+                                <input type="hidden" id="bill_agree" checked="checked">我已阅读并接受
+                            </label>
+                            <a href="{:U('/User/agreement@m')}" style="color: #1490d8">《全球体育服务协议》</a>
+                        </div>
+                    </div>
+                    <form id='bill_from' action="{:U('Pay/getBillUrl')}" method='post' target="_blank" class="form form02">
+                        <div class="form_Bill">
+                            <label class="checkbox-inline on">
+                                <input type="radio" id="radio"  value="2">
+                                <img src="__IMAGES__/icon/yd-pay-icon.png">
+                            </label>
+                        </div>
+                        <input type="hidden" name='bill_phone' id="bill_phone">
+                        <input type="hidden" name='bill_price' id="bill_price">
+                        {:get_form_token()}
+                        <div class="next_con">
+                            <a href="javascript:;" class="fs34 text-fff bg-orange bill">话费支付：￥<span>10</span></a>
+                        </div>
+                    </form>
+                </div>
+                <!-- pay-con02 -->
+            </div>
+        </div>
+    </section>
+    <!-- 模态窗口开始 -->
+     <div class="modal modal1 fade">
+         <div class="modal-content">
+             <div class="modal-header clearfix">
+                 <h4 class="modal-title fl">选择支付方式</h4>
+                 <a class="close" href="javascript:;">×</a>
+             </div>
+             <div class="modal-body">
+                 <div class="price">
+                     <p class="text-999 fs30">充值金额：<span><em id="rechargePrice1"></em>元</span></p>
+                     <p id="rechargePrice2"></p>
+                 </div>
+                 <form id='pay_from' name='alipayment' action="{:U('Pay/getPayUrl')}" method='get' target="_blank">
+                     <div class="form_inline">
+                     </div>
+                     <input type="hidden" id="payType" name="payType" value="" />
+                     <input type="hidden" id="price" name="money" value="">
+                     <input type="hidden" id="give_coin" name="give_coin" value="" />
+                     <input type="hidden" id="give_num" name="give_num" value="" />
+                     {:get_form_token()}
+                     <input type="hidden" name='agree' id="recharge-agree" checked="" value="">
+                 </form>
+                 <ul class="pay_ul clearfix">
+                     <li><a href="javascript:;" class="recharge-pay" value="1"><img src="__IMAGES__/icon/icon-zfb.png"><p>支付宝支付</p></a></li>
+                     <li><a href="javascript:;" class="recharge-pay" value="2"><img src="__IMAGES__/icon/icon-wx.png"><p>微信支付</p></a></li>
+                     <!--<li><a href="javascript:;"><img src="__IMAGES__/icon/icon-hb.png"><p>和包支付</p></a></li>-->
+                 </ul>
+             </div>
+         </div>
+     </div>
+
+    <div class="modal modal2 fade">
+        <div class="modal-content">
+            <form id='pay_from2' name='alipayment' action="{:U('Pay/getPayUrl')}" method='get' target="_blank">
+            <div class="modal-header clearfix">
+                <h4 class="modal-title fl">请输入充值金额</h4>
+                <a class="close" href="javascript:;">×</a>
+            </div>
+            <div class="modal-body">
+                <div class="priceInput">
+                    <input type="text" id="free-pay" name="money" placeholder="最少10元起" value="">元
+                    <input type="hidden" id="payType2" name="payType" value="" />
+                    {:get_form_token()}
+                    <input type="hidden" name='agree' id="free-agree" checked="" value="">
+                </div>
+                <ul class="pay_ul clearfix">
+                    <li><a href="javascript:;" class="free-pay-class" value="1"><img src="__IMAGES__/icon/icon-zfb.png"><p>支付宝支付</p></a></li>
+                    <li><a href="javascript:;" class="free-pay-class" value="2"><img src="__IMAGES__/icon/icon-wx.png"><p>微信支付</p></a></li>
+                    <!--<li><a href="javascript:;"><img src="__IMAGES__/icon/icon-hb.png"><p>和包支付</p></a></li>-->
+                </ul>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="bg" class="modal-backdrop" style="z-index: 1040;"></div>
+
+</block>
+<block name="scripts">
+    <script type="text/javascript">
+        $(function(){
+            num = 0;
+            $('.tabs a').click(function () {
+                num = $(this).index();
+                var myLeft = num*-100;//'+myLeft+'
+                $(this).addClass('on').siblings().removeClass('on');
+                $('.tabslider').stop().animate({'left':''+myLeft+'%'},500);
+                if(num=="0"){
+                    $('.form01').css('z-index','99');
+                }else{
+                    $('.form01').css('z-index','0');
+                }
+            });
+
+            //价格切换选中
+            $('.price_list_ul02 li').click(function(e) {
+                $(this).addClass('on').siblings().removeClass('on');  //移除本行其他单元格的on
+                var ordtotal_fee = $(this).find('.fs36').find('span').text();
+                $('.next_con').find('span').text(ordtotal_fee);
+            });
+
+            //充值
+            $('.price_list_ul01 li').click(function(e) {
+                $(this).addClass('on').siblings().removeClass('on');  //移除本行其他单元格的on
+                var price = $(this).attr('value');
+                $('#price').val(price);
+                var give_num = $(this).attr('num');
+                var total = parseInt(price);
+                if(give_num){
+                    var total = parseInt(price) + parseInt(give_num);
+                    $('#give_num').val(give_num);
+                }
+
+                $.ajax({
+                    type: 'post',
+                    url: "/Ticket/ticketType.html",
+                    async: false,
+                    data: {coin: price, type: 2},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 1) {
+                            var list = data.info.result;
+
+                            var html = '';
+                            $.each(list, function(k, v){
+                                var span1 = '';
+                                if(v.isExpire == 1){
+                                    span1 = '<span class="fs22 willOver">即将到期</span>';
+                                }
+
+                                html += '<div class="checkbox-inline label"> <input type="radio"  value="'+v.give_coin+'" checked> <span class="fs26"><font class="text-666">充值优惠卷</font><em class="goldColor">（'+v.name+'）</em><font class="text-999">剩余'+ v.num+'张</font></span>'+span1+'</div>';
+                            });
+                            $('.form_inline').html(html);
+                            $('#rechargePrice1').html(price);
+                            $('#rechargePrice2').html('获得'+total+'金币');
+                            $('.modal-backdrop').show();
+                            $('.modal1').addClass('in');
+                        } else {
+                            alert(data.info);
+                        }
+                    }
+                });
+            });
+
+            //正常充值
+            $('.recharge-pay').click(function(){
+                var type = $(this).attr('value');
+                $('#payType').val(type);
+
+                if($('#agree').attr('checked') != 'checked') {
+                    alert("请已阅读并接受《全球体育服务协议》");
+                    return;
+                }
+
+                $('#recharge-agree').val('on');
+                var total = $('#price').val();
+                if(isNaN(total)){
+                    alert("金额格式错误！");
+                    return;
+                }
+                if(!(/^(\+|-)?\d+$/.test( total )) || total < 0){
+                    alert("充值金额必须是整数！");
+                    return;
+                }
+                if(total < 10){
+                    alert("充值金额最少10元！");
+                    return;
+                }
+                if(total > 10000){
+                    alert("充值金额最多10000元！");
+                    return;
+                }
+
+                $('#pay_from').submit();
+            });
+
+            $('.bill').click(function(){
+                if($('#bill_agree').attr('checked') != 'checked') {
+                    alert("请已阅读并接受《全球体育服务协议》");
+                    return;
+                }
+                var phone = $('#phone').val();
+                if (phone == ''){
+                    alert("手机号码不能为空");
+                    return false;
+                }
+                if (!/^1[3456789]{1}\d{9}$/.test(phone)){
+                    alert("请输入正确的手机号码");
+                    return false;
+                }
+                $("input[name='phone']").val(phone);
+                var bill_price = $('.price_list_ul02').find('.on').find('.fs32').text();
+                $('#bill_price').val(bill_price);
+                $('#bill_phone').val(phone)
+                $('#bill_from').submit();
+            });
+
+            //自由充值
+            $('.free-pay-class').click(function(){
+                var type = $(this).attr('value');
+                $('#payType2').val(type);
+
+                if($('#agree').attr('checked') != 'checked') {
+                    alert("请已阅读并接受《全球体育服务协议》");
+                    return;
+                }
+                $('#free-agree').val('on');
+
+                var total = $('#free-pay').val();
+                if(isNaN(total)){
+                    alert("金额格式错误！");
+                    return;
+                }
+                if(!(/^(\+|-)?\d+$/.test( total )) || total < 0){
+                    alert("充值金额必须是整数！");
+                    return;
+                }
+                if(total < 10){
+                    alert("充值金额最少10元！");
+                    return;
+                }
+                if(total > 10000){
+                    alert("充值金额最多10000元！");
+                    return;
+                }
+
+                $('#pay_from2').submit();
+            });
+
+            $('.ziyou input[type="text"]').focus(function(){
+                $('.modal-backdrop').show();
+                $('.modal2').addClass('in');
+                $('#free-pay').focus();
+            });
+            $('.modal .close').click(function(e) {
+                $('.modal-backdrop').hide();
+                $('.modal').removeClass('in');
+            });
+            //check 协议背景更换
+            $('.agreeCheck label').click(function(e) {
+                if($(this).hasClass('default')){
+                    $(this).removeClass('default');
+                    $(this).children('input[type="hidden"]').attr("checked",true);
+                }else{
+                    $(this).addClass('default');
+                    $(this).children('input[type="hidden"]').attr("checked",false);
+                }
+            });
+
+            //input 单选radio背景
+            $(document).on('click', '.form_inline .label', function() {
+                var price    = $('#price').val();
+                var give_num = $('#give_num').val();
+                if($(this).hasClass('on')){
+                    $(this).removeClass('on');
+                    $(this).children('input[type="radio"]').attr("checked",false);
+                    $(this).siblings().removeClass("on");
+                    $(this).siblings().children('input[type="radio"]').attr("checked",false);
+
+                    var total = parseInt(price);
+                    if(give_num){
+                        var total = parseInt(price) + parseInt(give_num);
+                    }
+                    $('#rechargePrice2').html('获得'+total+'金币');
+                    $('#give_coin').val(0);
+                }else{
+                    $(this).addClass('on');
+                    $(this).children('input[type="radio"]').attr("checked",true);
+                    $(this).siblings().removeClass("on");
+                    $(this).siblings().children('input[type="radio"]').attr("checked",false);
+
+                    var give_coin = $(this).children('input[type="radio"]').val();
+                    var total = parseInt(price) + parseInt(give_coin);
+                    $('#rechargePrice2').html('获得'+total+'金币');
+                    $('#give_coin').val(give_coin);
+                }
+            });
+
+        });
+    </script>
+</block>
+

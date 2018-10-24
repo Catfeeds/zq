@@ -1,0 +1,57 @@
+<extend name="Public/tpl-detail" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/team_data.css"> 
+</block>
+<block name="content"> 
+    <!-- 内容 s -->
+    <section class="odds_con clearfix">
+        <!-- 数据导航s -->
+        <nav class="odd_nav">
+            <ul>
+                <li><a href="{:U('Details/event_case',array('scheid'=>$_GET['scheid']))}">赛况</a></li>
+                <li><a href="{:U('Details/event_technology',array('scheid'=>$_GET['scheid']))}">技术</a></li>
+                <li class="on"><a href="{:U('Details/event_squad',array('scheid'=>$_GET['scheid']))}">阵容</a></li>
+            </ul> 
+        </nav>
+        <!-- 数据导航e --> 
+        <!-- 球队统计s -->
+        <present name='list'>
+        <volist name="list" id="v" key="k">
+            <div class="data_title">
+                <eq name='k' value='1'>首发</eq>
+                <eq name='k' value='2'>替补</eq>
+            </div>
+            <div class="compare-data">
+                <div class="item">
+                    <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                        <tbody>
+                        <volist name="v" id="vo">
+                            <tr>
+                            <volist name="vo" id="val">
+                                <td width="50%" class="alignRight">
+                                    <div class="clearfix player_con">
+                                        <em class="<eq name='key' value='0'>fl<else/>fr num_red</eq> even">{$val[2]}</em>
+                                        <!--                                        <span class="fl even headImg"><img src="__IMAGES__/player.jpg"></span>-->
+                                        <span class="<eq name='key' value='0'>fl<else/>fr</eq> even name clearfix q-tl">
+                                            <div class="fs28">{$val[1]}</div>
+                                            <!--                                            <div class="text-999 fs24">门将</div>-->
+                                        </span>
+                                    </div>
+                                </td>
+                            </volist>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </volist>
+            <else/>
+            <div class="data_title">暂无数据</div>
+        </present>
+        <!-- 球队统计e -->
+
+    </section>
+    <!-- 内容 e -->
+</block>

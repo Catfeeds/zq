@@ -1,0 +1,78 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>{$user.nick_name}的主页_全球体育网qqty.com</title>
+    <if condition="$seo eq 1">
+        <meta name="keywords" content="{$seoPart}赛前分析、足球推荐、足球分析、竞彩推荐、竞彩分析、篮球分析、篮球推荐"/>
+        <meta name="description" content="全球体育为广大彩民提供最新的足球推荐、竞彩分析、篮球预测、英超、意甲、西甲、德甲、欧冠等新闻资讯、赛事直播和比赛视频"/>
+    <else />
+        <meta name="keywords" content="{$list.seo_keys}"/>
+    </if>
+</block>
+<block name="body">
+<script type="text/javascript">
+if(navigator.userAgent.toLowerCase().indexOf("android")!= -1 || navigator.userAgent.toLowerCase().indexOf("iphone")!= -1 || navigator.userAgent.toLowerCase().indexOf("mobile")!= -1){if((navigator.userAgent.indexOf("Gecko")!= -1 || navigator.userAgent.indexOf("MQQBrowser")!= -1) && navigator.userAgent.toLowerCase().indexOf("pad") == -1){if(document.URL.toLowerCase().indexOf("from=m")!=-1){document.cookie = "from=m"}var strCook = document.cookie;if(strCook.indexOf("from=m") == -1){window.location.href = '//m.__DOMAIN__/info_n/<php>echo I('id');</php>.html'}}}
+</script>
+<body>
+
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/publish_index/infor_common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/publish_index/comment.css">
+    <script type="text/javascript" src="/min/?b=Public/Home&f=js/common/follow.js"></script>
+    <include file="Public:top_index" />
+    <!-- 主体内容开始 -->
+    <div class="main">
+        <div class="com-con clearfix">
+            <div class="pull-left left-con">
+                <div class="position">
+                    当前位置：<span class="now"><a href="https://www.qqty.com/">首页</a></span> &gt; <span class="now"><a href="https://www.qqty.com/list_n/10.html">独家解盘</a></span> &gt; 专家主页
+                </div>
+                <include file="expert_main"/>
+            </div>
+            <!-- right content-->
+            <div class="pull-right main-right">
+                <notempty name="Adver">
+                    <div style="line-height: 0;"><a target="_blank" href="{$Adver.0.url}"><img src="{$Adver.0.img}" width="302" height="221" style="display: inline;"></a></div>
+                </notempty>
+                <!-- 推荐推荐 -->
+                <div class="jingcai">
+                    <!-- 标题 -->
+                    <div class="clearfix stat-title">
+                        <div class="pull-left">
+                            <h4>热门预测</h4>
+                        </div>
+                        <div class="pull-right more-icon title-nav">
+                            <a target="_blank" class="pull-left" href="{:U('/list_n/10@news')}">更多</a>
+                            <i class="pull-left myIcon"></i>
+                        </div>
+                    </div>
+                    <!-- 标题 -->
+                    <div class="jingcai-list">
+                        <ul>
+                            <volist name="quiz" id="item">
+                                <li><a target="_blank" href="{:U('/news/'.$item['id'].'')}">{$item.title}</a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 推荐推荐 -->
+                <notempty name="yunLabelArr">
+                    <div class="labBox">
+                        <div class="labTitle"><div class="newTileDiv">标签云</div></div>
+                        <div class="labList">
+                            <volist name="yunLabelArr" id="v">
+                                <a href="{:U('/list_n/'.$v)}" title="{$v}">{$v}</a>
+                            </volist>
+                        </div>
+                    </div>
+                </notempty>
+            </div>
+            <!-- 右边内容  end-->
+        </div>
+    </div>
+    <!-- 主体内容结束 -->
+    <include file="Public:login_modal"/>
+    <include file="Public:return_top"/>
+    <include file="Public:footer" />
+    <script type="text/javascript" src="/min?b=Public/Home/js&f=publish_index/publish_class.js,index/jquery.inview.min.js,common/trade.js"></script>
+</body>
+</html>
+</block>

@@ -1,0 +1,238 @@
+<style>
+    .searchContent label{width: auto}
+    .searchContent li{width: auto !important;margin-right: 12px;}
+</style>
+<form id="pagerForm" action="__URL__" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+    <volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="" method="post">
+        <input type="hidden" name="status" value="{$_REQUEST.status}">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li >
+                    <label>ID：</label>
+                    <input type="text" name="id" value="{$_REQUEST.id}" size="5"/>
+                </li>
+                <li >
+                    <label>异常ID：</label>
+                    <input type="text" name="exception_id" value="{$_REQUEST.exception_id}" size="5"/>
+                </li>
+                <li >
+                    <label>创建时间：</label>
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd H:m" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="15" >至
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd H:m" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="15">
+                </li>
+                <li >
+                    <label>异常类型：</label>
+                    <select name="exception_class" onchange="$(form).submit()" class="combox">
+                        <option value="">全部</option>
+                        <option <if condition="$_REQUEST.exception_class eq '1'">selected </if> value="1">账户余额异常</option>
+                        <option <if condition="$_REQUEST.exception_class eq '2'">selected </if> value="2">积分兑换异常</option>
+                        <option <if condition="$_REQUEST.exception_class eq '3'">selected </if> value="3">积分获取异常</option>
+                        <option <if condition="$_REQUEST.exception_class eq '5'">selected </if> value="5">新闻资讯评论异常</option>
+                        <option <if condition="$_REQUEST.exception_class eq '6'">selected </if> value="6">发帖异常</option>
+                        <option <if condition="$_REQUEST.exception_class eq '7'">selected </if> value="7">回帖异常</option>
+                    </select>
+                </li>
+                <li >
+                    <label>异常监控时间：</label>
+                    <select name="section_time" onchange="$(form).submit()" class="combox">
+                        <option value="">全部</option>
+                        <volist name='section_time_arr' id='item'>
+                            <option <if condition="$_REQUEST.section_time eq $item">selected </if> value="{$item}">
+                                {$item}分钟
+                            </option>
+                        </volist>
+                    </select>
+                </li>
+                <li >
+                    <label>异常标准：</label>
+                    <select name="standard" onchange="$(form).submit()" class="combox">
+                        <option value="">全部</option>
+                        <volist name='standard_arr' id='item'>
+                            <option value="{$item}" <if condition="$_REQUEST.standard eq $item">selected</if>>
+                                {$item}
+                            </option>
+                        </volist>
+                    </select>
+                </li>
+                <li >
+                    <label >状态：</label>
+                    <select name="status" onchange="$(form).submit()" class="combox">
+                        <option value="">全部</option>
+                        <option <if condition="$_REQUEST.status eq '0'">selected </if> value="0">未处理</option>
+                        <option <if condition="$_REQUEST.status eq '1'">selected </if> value="1">已处理</option>
+                        <option <if condition="$_REQUEST.status eq '2'">selected </if> value="2">已忽略</option>
+                    </select>
+                </li>
+
+            </ul>
+
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+            <th>异常的ID</th>
+            <th>用户操作异常类型</th>
+            <th>监控异常时间（分钟）</th>
+            <th>异常标准（数量）</th>
+            <th>描述</th>
+            <th orderField="create_time" <if condition="$_REQUEST._order eq 'create_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>异常发生时间</th>
+            <th>状态</th>
+            <th  orderField="create_time" <if condition="$_REQUEST._order eq 'create_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>创建时间</th>
+            <th>处理人</th>
+            <th orderField="deal_time" <if condition="$_REQUEST._order eq 'deal_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>处理时间</th>
+            <th >操作</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        <volist id="vo" name="list">
+            <tr target="sid_user" rel="{$vo['id']}">
+                <td width="4%">{$vo['id']}</td>
+                <td width="4%">
+                    <if condition="$vo['exception_class'] eq '1'">
+                        <a href="__ADMIN__/AccountLog/balanceCount/user_id/{$vo['exception_id']}" target="navTab" title="{$vo['exception_name']}">{$vo['exception_id']}</a>
+                    </if>
+                    <if condition="$vo['exception_class'] eq '2'">
+                        <a href="__ADMIN__/PointLog/index/user_id/{$vo['exception_id']}" target="navTab" title="{$vo['exception_name']}">{$vo['exception_id']}</a>
+                    </if>
+                    <if condition="$vo['exception_class'] eq '3'">
+                        <a href="__ADMIN__/PointLog/index/user_id/{$vo['exception_id']}" target="navTab" title="{$vo['exception_name']}">{$vo['exception_id']}</a>
+                    </if>
+                    <if condition="$vo['exception_class'] eq '5'">
+                        <a href="__ADMIN__/Comment/index/user_id/{$vo['exception_id']}" target="navTab" title="{$vo['exception_name']}">{$vo['exception_id']}</a>
+                    </if>
+                    <if condition="$vo['exception_class'] eq '6'">
+                        <a href="__ADMIN__/CommunityPosts/index/user_id/{$vo['exception_id']}" target="navTab" title="{$vo['exception_name']}">{$vo['exception_id']}</a>
+                    </if>
+                    <if condition="$vo['exception_class'] eq '7'">
+                        <a href="__ADMIN__/CommunityComment/index/user_id/{$vo['exception_id']}" target="navTab" title="{$vo['exception_name']}">{$vo['exception_id']}</a>
+                    </if>
+                </td>
+                <td  width="10%">
+                        {$vo['exception_name']}
+                </td>
+                <td  width="8%">
+                    <if condition="$vo['section_time'] eq '0'">
+                        --
+                    <else/>
+                        {$vo['section_time']}
+                    </if>
+                </td>
+                <td  width="7%">
+                    <if condition="$vo['standard'] eq '0'">
+                        --
+                    <else/>
+                        {$vo['standard']}
+                    </if>
+                </td>
+                <td  width="15%">{$vo['descs']}</td>
+                <td  width="7%">{:date("Y-m-d H:i",$vo['exception_time'])}</td>
+                <td  width="5%">
+                    <if condition="$vo['status'] eq '0'"> <div style="color:red;">未处理</div> </if>
+                    <if condition="$vo['status'] eq '1'"> <div >已处理</div> </if>
+                    <if condition="$vo['status'] eq '2'"> <div  style="color:green;">已忽略</div> </if>
+                </td>
+
+                <td  width="7%">{:date("Y-m-d H:i",$vo['create_time'])}</td>
+
+                <td  width="10%">
+                    {$vo['nickname'] |default='--'}({$vo['account']|default='--'})
+                </td>
+                <td  width="7%">
+                    <if condition="$vo['deal_time'] eq '0'">
+                        --
+                    <else/>
+                        {:date("Y-m-d H:i",$vo['deal_time'])}
+                    </if>
+
+                </td>
+                <td>
+                    <select id="status" name="status" exception_id="{$vo['id']}"  onchange="editStatus(this)" >
+                        <option style="color:red;" value="0" <if condition="$vo.status eq '0'">selected</if>>
+                            未处理
+                        </option>
+                        <option value="1" <if condition="$vo.status eq '1'">selected</if>>
+                            已处理
+                        </option>
+                        <option style="color:green;" value="2" <if condition="$vo.status eq '2'">selected</if>>
+                            已忽略
+                        </option>
+
+                    </select>
+                </td>
+
+
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+<script>
+    function editStatus(obj) {
+
+        var exception_id = $(obj).attr('exception_id');
+        var status = $(obj).val();
+        var tr = obj.parentElement.parentElement.parentElement;
+        var td = tr.cells[7];
+        $.ajax({
+            type : 'POST',
+            url  : '__URL__/editStatus.html',
+            data : {'id':exception_id,'status':status},
+            dataType : 'json',
+            success: function(data){
+                if(data.status){
+
+                    if (status == 2) {
+                        td.innerHTML = '已忽略';
+                        td.style.color='green';
+                        // alert(status);
+                    }else if (status == 1) {
+                        td.innerHTML = '已处理';
+                        td.style.color='black';
+                        // alert(status);
+                    }else if (status == 0) {
+                        td.innerHTML = '未处理';
+                        td.style.color='red';
+                        // alert(data.info);
+                    }
+
+                }else{
+                    alert(data.info);
+                }
+            }
+
+        });
+    }
+</script>
+
+

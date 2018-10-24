@@ -1,0 +1,17 @@
+<header id="other_header">
+    <div class="search_btn"><a href="{:U('Guess/search')}"></a></div>
+    <div class="u_head"><a href="{:U('User/index')}"><img src="<present name='user_auth'>{$user_auth.head}<else/>__IMAGES__/headImg.png</present>" alt="{$user_auth.nick_name}"></a></div>
+    <a href="{:U('Index/index')}"></a>{$title|default='推荐王'}
+    <a href="javascript:;" class="share" id="more_tree"><img src="__IMAGES__/list.png"></a>
+          <!-- 更多-菜单 s -->
+      <nav class="more_tree clearfix" style="display: none;">
+        <div class="top_bg"></div>
+        <ul>   
+          <li><a href="{:U('User/myquiz')}">我的推荐</a></li>
+          <li><a href="{:U('User/mybuy')}">我的购买</a></li>
+          <li><a href="{:U('Guess/rules')}">规则玩法</a></li>
+          <li><a href="{:U('Pay/index')}">快速充值</a></li>
+        </ul>
+      </nav>
+      <!-- 更多-菜单 e -->
+</header>

@@ -1,0 +1,104 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input type="hidden" name="is_expert" value="{$_REQUEST.is_expert}">
+	<input type="hidden" name="is_robot" value="{$_REQUEST.is_robot}">
+	<input type="hidden" name="user_id" value="{$_REQUEST.user_id}">
+	<input type="hidden" name="invite_lv" value="{$_REQUEST.invite_lv}">
+	<input type="hidden" name="inviteFriend" value="{$_REQUEST.inviteFriend}">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label >昵称：</label>
+				<input type="text" name="master_name" value="{$_REQUEST.master_name}"/>
+			</li>
+
+		</ul>
+
+		<div class="subBar">
+			<ul>
+				<li>
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true" height="750"><span>新增</span></a></li>
+			<if condition="$_SESSION['is_show_mobile'] eq 1">
+				<li><a class="edit" href="__URL__/edit/id/{sid_user}" target="dialog" mask="true" warn="请选择用户" height="650"><span>编辑</span></a></li>
+			</if>
+			<li>
+				<a class="delete" href="__URL__/delAll" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要删除这些记录吗?">
+					<span>批量删除</span>
+				</a>
+			</li>
+			<li class="line"></li>
+			<li>
+				<a class="icon" href="__URL__/saveAll/status/0" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确定都设为禁用吗?">
+					<span>批量设为禁用</span>
+				</a>
+			</li>
+			<li class="line"></li>
+			<li>
+				<a class="icon" href="__URL__/saveAll/status/1" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确定都设为启用吗?">
+					<span>批量设为启用</span>
+				</a>
+			</li>
+			<li class="line"></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="2%" style="cursor: default;">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th>编号</th>
+			<th>头像</th>
+			<th>昵称</th>
+			<th width="30%">简介</th>
+			<th>胜率</th>
+			<th>排序</th>
+            <th>状态</th>
+			<th>操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<volist id="vo" name="list">
+			<tr target="sid_user" rel="{$vo['id']}">
+				<td>
+					<div>
+						<input type="checkbox" value="{$vo.id}" name="id">
+					</div>
+				</td>
+				<td>{$vo['id']}</td>
+				<td><a target="_blank" href="{$vo.head|frontUserFace=###}"><img width="30" height="30" src="{$vo.head|frontUserFace=###}"></a></td>
+				<td>{$vo['master_name']}</td>
+				<td>{$vo['descript']}</td>
+				<td>{$vo['winrate']}%</td>
+				<td>{$vo['sort']}</td>
+				<td>{$vo['status']|getStatus}</td>
+				<td>
+					{$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",''}
+						| <a href="__URL__/edit/id/{$vo.id}/bank_card_id/{$vo['bank_card_id']}" target="dialog" mask="true" title="{$vo.master_name}编辑" rel="editPage" height="850">编辑</a>
+				</td>
+			</tr>
+		</volist>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

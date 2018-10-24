@@ -1,0 +1,244 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userInfo/personal_center.css">
+    <style>
+        .userIndexAd {width: 100%;height: 110px;margin-top: 20px;padding-top: 20px;}
+        .w-z span.absType{ display: inline-block; border: 1px solid #169bee; color: #169bee; font-size: 12px; padding: 5px 10px; border-radius: 4px;}
+    </style>
+</block>
+<block name="content">
+    <include file="Public:top_user"/>
+
+    <div class="body">
+
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <!-- 个人头部信息开始 -->
+                            <div class="main-top clearfix">
+                                <div class="t-l">
+                                    <div class="l-o clearfix">
+                                        <img src="{$UserData['UserFace']}" style="width:56px;">
+                                        <div class="w-z">
+                                            <p class="q-t">{$UserData['nick_name']}</p>
+                                            <if condition="$UserData['is_expert'] eq 1"><p><span class="absType">特约专家</span></p></if>
+                                        </div>
+                                    </div>
+                                    <div class="l-t">
+                                        <p>简介：{$UserData.descript}</p>
+                                    </div>
+                                </div>
+
+                                <div class="t-r clearfix">
+                                    <dl class="r-o line">
+                                        <dt>总积分</dt>
+                                        <dd>{$UserData.point|default="0"}</dd>
+                                    </dl>
+                                    <dl class="r-o">
+                                        <dt>总金币</dt>
+                                        <dd>{$UserData['total_coin']}</dd>
+                                    </dl>
+                                    <dl class="r-o">
+                                        <dt>可提款</dt>
+                                        <dd>{$UserData['coin']}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="userIndexAd">
+                                <a target="_blank" href="{$adver1.url}" class="ad" style=" display: block; margin-bottom: 24px;"><img class="lazy" data-original="{$adver1.img}" width="846" height="105"></a>
+                            </div>
+                            <!-- 个人头部信息结束 -->
+                            <div class="data-graph">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="javascript:void(0);" class="current">账户信息</a></li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div id="infor" class="line-graph clearfix">
+                                        <div class="infor-list">
+                                            <ul>
+                                                <li class="clearfix">
+                                                    <if condition="basename($UserData['UserFace']) eq 'face.png'">
+                                                        <div class="pull-left fd">未上传</div>
+                                                        <div class="pull-left ml">个人头像</div>
+                                                        <div class="pull-left ml">上传个性化头像</div>
+                                                        <div class="pull-right"><a href="/UserInfo/basic_infor/face/1.html" class="text-red">添加</a></div>
+                                                        <else/>
+                                                        <div class="pull-left fd nb">已上传</div>
+                                                        <div class="pull-left ml">个人头像</div>
+                                                        <div class="pull-left ml">上传个性化头像</div>
+                                                    </if>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <empty name="UserData.username">
+                                                        <div class="pull-left fd">未验证</div>
+                                                        <div class="pull-left ml">手机验证</div>
+                                                        <div class="pull-left ml text-orange">非常重要：用户密码找回、接收短信通知等服务</div>
+                                                        <div class="pull-right"><a href="/UserInfo/bind_phone.html" class="text-red">添加</a></div>
+                                                        <else/>
+                                                        <div class="pull-left fd nb">已验证</div>
+                                                        <div class="pull-left ml">手机验证</div>
+                                                        <div class="pull-left ml text-orange">非常重要：用户密码找回、接收短信通知等服务</div>
+                                                    </empty>
+
+                                                </li>
+                                                <li class="clearfix">
+                                                    <empty name="UserData.identfy">
+                                                        <div class="pull-left fd">未验证</div>
+                                                        <div class="pull-left ml">身份验证</div>
+                                                        <div class="pull-left ml text-orange">非常重要：领奖或兑换时唯一的身份依据，提交后不能修改</div>
+                                                        <div class="pull-right"><a href="/UserInfo/identity.html" class="text-red">添加</a></div>
+                                                        <else/>
+                                                        <div class="pull-left fd nb">已验证</div>
+                                                        <div class="pull-left ml">身份验证</div>
+                                                        <div class="pull-left ml text-orange">非常重要：领奖或兑换时唯一的身份依据，提交后不能修改</div>
+                                                    </empty>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <empty name="UserData.bank_card_id">
+                                                        <div class="pull-left fd">未绑定</div>
+                                                        <div class="pull-left ml">银行绑定</div>
+                                                        <div class="pull-left ml">设置绑定您的银行卡，以便正常派发奖金</div>
+                                                        <div class="pull-right"><a href="/UserInfo/bindBankCard.html" class="text-red">添加</a></div>
+                                                        <else/>
+                                                        <div class="pull-left fd nb">已绑定</div>
+                                                        <div class="pull-left ml">银行绑定</div>
+                                                        <div class="pull-left ml">设置绑定您的银行卡，以便正常派发奖金</div>
+                                                    </empty>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <dl class="clearfix link-login">
+                                        <dt class="pull-left">您还可以绑定第三方账号</dt>
+                                        <dd class="pull-left">
+                                            <empty name="UserData.qq_unionid">
+                                                <a href="javascript:;" class="bind-cdk" sdk='qq'>
+                                                    <div class="link-icon"></div>
+                                                    <p class="text-red">绑定QQ</p>
+                                                </a>
+                                                <else/>
+                                                <a href="javascript:;">
+                                                    <div class="link-icon on-qq"></div>
+                                                    <p class="text-green">已绑定QQ</p>
+                                                </a>
+                                            </empty>
+                                        </dd>
+                                        <dd class="pull-left">
+                                            <empty name="UserData.sina_unionid">
+                                                <a href="javascript:;" class="bind-cdk" sdk='sina'>
+                                                    <div class="link-icon det-sina"></div>
+                                                    <p class="text-red">绑定微博</p>
+                                                </a>
+                                                <else/>
+                                                <a href="javascript:;">
+                                                    <div class="link-icon on-sina"></div>
+                                                    <p class="text-green">已绑定微博</p>
+                                                </a>
+                                            </empty>
+                                        </dd>
+                                        <dd class="pull-left">
+                                            <empty name="UserData.weixin_unionid">
+                                                <a href="javascript:;" class="bind-cdk" sdk='weixin'>
+                                                    <div class="link-icon det-wx"></div>
+                                                    <p class="text-red">绑定微信</p>
+                                                </a>
+                                                <else/>
+                                                <a href="javascript:;">
+                                                    <div class="link-icon on-wx"></div>
+                                                    <p class="text-green">已绑定微信</p>
+                                                </a>
+                                            </empty>
+                                        </dd>
+                                    </dl>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+
+    </div>
+</block>
+<block name='js'>
+    <script>
+    // stores the opened window object
+    var winMap = new Object();
+    //winMap["TestedKey"] = "TestedValue";
+    window.onunload = function() {
+        // try to close all child windows.
+        for(var propName in winMap) {
+            try {
+                winMap[propName].close();
+            }catch(e) {
+                //alert(e.message);
+            }
+        }
+    }
+    $(".bind-cdk").click(function(){
+        var type = $(this).attr('sdk');
+        var _url    = "/User/sdk_login/type/"+type;//弹出窗口的url
+        var iWidth  = 750; //弹出窗口的宽度;
+        var iHeight = 500; //弹出窗口的高度;
+        var winName = 'newwindow';
+        var win;
+        win = winMap[winName];
+        try {
+            if(!win.focus()) {
+                win = openWindow(_url,winName,iWidth,iHeight);
+                winMap[winName] = win;
+            }
+        }catch(e) {
+            win = openWindow(_url,winName,iWidth,iHeight);
+            winMap[winName] = win;
+            if(!win) {
+                alert("Sorry, fail to open the window.Some unexpected error occurs.");
+            }
+            else {
+                win.focus();
+            }
+        }
+    })
+
+    function openWindow(_url,_name,iWidth,iHeight){
+        var url    = _url;         //转向网页的地址;
+        var name   = _name;       //网页名称，可为空;
+        var iWidth = iWidth;    //弹出窗口的宽度;
+        var iHeight= iHeight;  //弹出窗口的高度;
+        //获得窗口的垂直位置
+        var iTop  = (window.screen.availHeight-30-iHeight)/2;
+        //获得窗口的水平位置
+        var iLeft = (window.screen.availWidth-10-iWidth)/2;
+        var params='width='+iWidth
+                +',height='+iHeight
+                +',top='+iTop
+                +',left='+iLeft
+                +',channelmode=yes'//是否使用剧院模式显示窗口。默认为 no
+                +',directories=yes'//是否添加目录按钮。默认为 yes
+                +',fullscreen=no'  //是否使用全屏模式显示浏览器
+                +',location=no'    //是否显示地址字段。默认是 yes
+                +',menubar=no'     //是否显示菜单栏。默认是 yes
+                +',resizable=no'   //窗口是否可调节尺寸。默认是 yes
+                +',scrollbars=yes' //是否显示滚动条。默认是 yes
+                +',status=yes'     //是否添加状态栏。默认是 yes
+                +',titlebar=yes'   //默认是 yes
+                +',toolbar=no';    //默认是 yes
+        win = window.open(url, name,params);
+        return win;
+    }
+</script>
+
+</block>

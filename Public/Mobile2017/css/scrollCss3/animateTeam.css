@@ -1,0 +1,57 @@
+/**
+ * 数据css样式文件
+ * 
+ * @Author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-10-11
+**/
+.animateHome{ overflow: hidden; transition:all 0.5s ease;-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;-o-transition:all 0.5s ease;}
+.animateHome .sc_score{ margin: 0;}
+.t_logo,.t_logo{transition:all 0.5s ease;-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;-o-transition:all 0.5s ease;}
+.animateHome .s_left .t_logo{
+    transform:translate(-100px,10px);-webkit-transform:translate(-100px,10px);
+	opacity: 0;
+    transition:all 1s ease;-webkit-transition:all 1s ease;-moz-transition:all 1s ease;-o-transition:all 1s ease;
+}
+.animateHome .s_right .t_logo{
+    transform:translate(100px,10px);-webkit-transform:translate(100px,10px);-moz-transform:translate(100px,10px);-o-transform:translate(100px,10px);
+	opacity:0;
+    transition:all 1s ease;-webkit-transition:all 1s ease;-moz-transition:all 1s ease;-o-transition:all 1s ease;
+}
+.s_center .time{
+    transition:all 0.5s ease;-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;-o-transition:all 0.5s ease;
+    display: block;
+}
+.animateHome .s_center .time{
+    transform:translate(0,-20px);-webkit-transform:translate(0,-20px);-moz-transform:translate(0,-20px);-o-transform:translate(0,-20px);
+	opacity:0;
+    display: none;
+    transition:all 0.5s ease;-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;-o-transition:all 0.5s ease;
+}
+.s_center p{
+    transition:all 0.5s ease;-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;-o-transition:all 0.5s ease;
+}
+.animateHome .s_center p{
+    transform:translate(0,-60px);-webkit-transform:translate(0,-60px);-moz-transform:translate(0,-60px);-o-transform:translate(0,-60px);
+    opacity:0;
+    transition:all 0.5s ease;-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;-o-transition:all 0.5s ease;
+}
+.ag_homename,.ag_awayname{
+    transition:all 0.5s ease;-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;-o-transition:all 0.5s ease;
+}
+.animateHome .ag_homename{
+	height: .58rem; line-height: .58rem; padding: 0;
+    transform:translate(0,-1.8rem);-webkit-transform:translate(0,-1.8rem);-moz-transform:translate(0,-1.8rem);-o-transform:translate(0,-1.8rem));
+    transition:all 0.5s ease;-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;-o-transition:all 0.5s ease;
+}
+.animateHome .ag_awayname{
+	height: .58rem; line-height: .58rem; padding: 0;
+    transform:translate(0,-1.8rem);-webkit-transform:translate(0,-1.8rem);-moz-transform:translate(0,-1.8rem);-o-transform:translate(0,-1.8rem);
+    transition:all 0.5s ease;-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;-o-transition:all 0.5s ease;
+}
+
+/* 解决iphone横屏时字体变大问题或者内容大小不一样 */
+@media screen and (max-device-width: 320px){body{-webkit-text-size-adjust:none}}
+@media screen and (max-device-width: 480px){body{-webkit-text-size-adjust:none}}
+@media only screen and (-webkit-min-device-pixel-ratio: 2){body{-webkit-text-size-adjust:none}}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px){body{-webkit-text-size-adjust:none}}

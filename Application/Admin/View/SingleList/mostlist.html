@@ -1,0 +1,117 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/mostlist" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>赛事ID：</label>
+				<input type="text" name="game_id" value="{$_REQUEST.union_name}"/>
+			</li>
+			<li style="width: 200px;">
+				<label>答案状态：</label>
+				<select name="answer" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="0" <if condition="$_REQUEST.answer eq '0'">selected</if> >已出答案</option>
+					<option value="1" <if condition="$_REQUEST.answer eq '1'">selected</if> >未出答案</option>
+				</select>
+			</li>
+			<li>
+				<label>状态：</label>
+				<select name="status" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >启用</option>
+					<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >禁用</option>
+				</select>
+			</li>
+		</ul>
+		<input type="hidden" value="{$num}" name="num"/>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/editquiz/sid/{$titleid}/type/add/mult/1" target="dialog" height="500" width="600" mask="true"><span>新增</span></a></li>
+			<li>
+				<a class="delete" href="__URL__/delAll/navTabId/SingleList" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要删除这些记录吗?">
+					<span>批量删除</span>
+				</a>
+			</li>
+			<li class="line"></li>
+			<li>
+			<a class="icon" href="__URL__/saveAll/status/0/navTabld/SingleQuiz/mult/1" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确定都设为禁用吗?">
+			<span>批量设为禁用</span>
+			</a>
+			</li>
+			<li class="line"></li>
+			<li>
+			<a class="icon" href="__URL__/saveAll/status/1/navTabld/SingleQuiz/mult/1" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确定都设为启用吗?">
+			<span>批量设为启用</span>
+			</a>
+			</li>
+			<li class="line"></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138" align="center">
+		<thead>
+		<tr>
+			<th width="2%" style="cursor: default;">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th width="3%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="8%">竞猜标题</th>
+			<th width="7%">赛事ID</th>
+			<th width="14%">主队</th>
+			<th width="14%">客队</th>
+			<th width="8%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'game_time')"> class="desc"</if> orderField="game_time" <if condition="$_REQUEST._order eq 'game_time'">class="{$_REQUEST._sort}"</if>>开赛时间</th>
+			<th width="5%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'status')"> class="desc"</if> orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}"</if>>状态</th>
+			<th width="14%">竞猜内容</th>
+			<th width="6%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>
+						<div>
+							<input type="checkbox" value="{$vo.id}" name="id">
+						</div>
+					</td>
+					<td>{$vo['id']}</td>
+					<td>{$vo['question']}</td>
+					<td>{$vo['game_id']}</td>
+					<td>{$vo['home_team_name']}</td>
+					<td>{$vo['away_team_name']}</td>
+					<td>{$vo['game_time']|date="Y-m-d H:i",###}</td>
+					<td>{$vo['status']|getStatus}</td>
+					<td>{$vo['option']}</td>
+					<td>
+					{$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",'SingleQuiz/mult/1'} |
+					<a href="__URL__/editquiz/id/{$vo.id}/type/edit/mult/1" target="dialog" mask="true" height="500" width="600" title="编辑" rel="editPage">编辑</a>|
+					<a class="delete" href="__URL__/del/id/{$vo.id}/mult/1" target="ajaxTodo" title="你确定要删除吗？">
+						<span>删除</span>
+					</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

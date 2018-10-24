@@ -1,0 +1,150 @@
+<div class="pageContent">
+    <form method="post" action="__URL__/saveTaste" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">    
+                <label style="color: red">*前台按序号升序排序</label>
+            </div>
+            <div class="unit" style="margin-left: 60px;">             
+                <table width="420" id='table'>
+                    <tr>
+                        <td>序号</td>
+                        <td>金额</td>
+                        <td>状态</td>
+                        <td>图片</td>
+                        <td>操作</td>
+                    </tr>
+                    <volist name="tasteConfig" id="vo">
+                        <tr key="{$key}">
+                            <td><input type='text' size="5" name="tic[{$key}][sort]" class="required" value="{$vo['sort']}" /></td>
+                            <td>
+                                <input type='text' size="10" name="tic[{$key}][price]" class="required" value="{$vo['price']}" />
+                            </td>
+                            <td>
+                                <select class="small bLeft"  name="tic[{$key}][status]">
+                                <option <eq name="vo['status']" value="1" >selected</eq> value="1">启用</option>
+                                <option <eq name="vo['status']" value="0" >selected</eq> value="0">禁用</option>
+                                </select>
+                            </td>
+                            <td>
+                                <ul class="tabImg">
+                                    <li>
+                                        <input type="hidden" name="tic[{$key}][url]" value="{$vo['url']}">
+                                        <input id="viewUploadInput_{$key}" name="fileInput_{$key}" type="file" onChange="previewImage({$key})" style="display:none;" />
+                                        <a href="javascript:void(0);">
+                                             <span id="viewUploadDiv_{$key}">
+                                                <empty name="vo.url">
+                                                    <img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_{$key}"/>
+                                                <else/>
+                                                    <img id="viewUploadImg_{$key}" width='80' height='80' border=0 src="{$vo.img}">
+                                                </empty>
+                                             </span>
+                                        </a>
+                                        <div id="poiter_{$key}" class="poiter_{$key}">
+                                            <empty name="vo.url">
+                                                <a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_{$key}')">添加图片</a>
+                                            <else/>
+                                                <a title="重传" onclick="selectViewUploadImg('#viewUploadInput_{$key}')">重传</a>
+                                            </empty>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <a class="buttonActive" href="javascript:;" onclick="delOption(this);">
+                                <span>删除</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>                
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><a class="buttonActive" href="javascript:addOption()"><span>添加一条选项</span></a></li>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+<style type="text/css">
+    .tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+    .poiter a:hover{color:red;}
+    .tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+    .tabImg li div a{ line-height: 80px;}
+    #table {border-collapse:   separate;   border-spacing:10px;} 
+    #table tr td{text-align: center;} 
+</style>
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+$(function(){
+    imgShow();
+});
+function imgShow()
+{
+    $('.tabImg li').hover(function(e) {
+        $(this).children('div').stop().animate({'top':'0'},300);
+    },function(){
+        $(this).children('div').stop().animate({'top':'80px'},300);
+    });
+}
+
+//添加一行选项
+function addOption(){
+    if($("#table tr").length > 21){
+        alert('最多20个选项哦!');
+        return;
+    }
+    var key = parseInt($("#table tr:last").attr('key')) + 1;
+    //添加一个题目选项
+    var str='<tr key="'+key+'">'+
+                '<td><input type="text" size="5" name="tic['+key+'][sort]" class="required" value="" /></td>'+
+                '<td>'+
+                    '<input type="text" size="10" name="tic['+key+'][price]" class="required" value="" />'+
+                '</td>'+
+                '<td>'+
+                    '<select class="small bLeft"  name="tic['+key+'][status]">'+
+                    '<option value="1">启用</option>'+
+                    '<option value="0">禁用</option>'+
+                    '</select>'+
+                '</td>'+
+                '<td>'+
+                    '<ul class="tabImg">'+
+                        '<li>'+
+                            '<input type="hidden" name="tic['+key+'][url]" value="">'+
+                            '<input id="viewUploadInput_'+key+'" name="fileInput_'+key+'" type="file" onChange="previewImage('+key+')" style="display:none;" />'+
+                            '<a href="javascript:void(0);">'+
+                                '<span id="viewUploadDiv_'+key+'">'+
+                                    '<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_'+key+'"/>'+
+                                '</span>'+
+                            '</a>'+
+                            '<div id="poiter_'+key+'" class="poiter_'+key+'">'+
+                                '<a title="添加图片" onclick="selectViewUploadImg(\'#viewUploadInput_'+key+'\')">添加图片</a>'+
+                            '</div>'+
+                        '</li>'+
+                    '</ul>'+
+                '</td>'+
+                '<td>'+
+                    '<a class="buttonActive" href="javascript:;" onclick="delOption(this);">'+
+                    '<span>删除</span>'+
+                    '</a>'+
+                '</td>'+
+            '</tr>';
+    $("#table tr:last").after(str);
+    imgShow();
+}
+//删除当前一行选项
+function delOption(obj){
+    if($("#table tr").length < 3){
+        alert('至少要一个选项!');
+        return;
+    }
+    $(obj).parents("tr").remove();
+}
+</script>
+
+
+
+

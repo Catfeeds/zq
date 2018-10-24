@@ -1,0 +1,157 @@
+/**
+ * World prediction of css
+ *
+ * @author Weiqq <1937025663@qq.com>
+ * 
+ * @since  2018-05-15
+ *
+**/
+body{ background-color: #fff;}
+.table > tbody > tr > td { border-top: none 0;}
+.skewRight{ -webkit-transform: skew(-30deg) translateZ(0); -moz-transform: skew(-30deg) translateZ(0); -ms-transform: skew(-30deg) translateZ(0); -o-transform: skew(-30deg) translateZ(0); transform: skew(-30deg) translateZ(0);}
+.skewLeft{ -webkit-transform: skew(30deg) translateZ(0); -moz-transform: skew(30deg) translateZ(0); -ms-transform: skew(30deg) translateZ(0); -o-transform: skew(30deg) translateZ(0); transform: skew(30deg) translateZ(0);}
+.themeBox{ width: 100%; min-height: 560px; background: url(../../images/WorldCup/header-bg.png) no-repeat center 0;}
+.wcTheme .themeNavCon{ width: 100%; position: relative; margin-top: -50px;}
+.wcTheme{ padding-top: 160px;}
+.themeNavIn{ position: relative; margin-top: -16px;  width: 970px; margin: 0 auto; background: #e4712b; box-shadow: 0 0 10px #595958;}
+.dec{ position: absolute; width: 36px; height: 45px; top: 0; }
+ .decL{ left: -24px; width: 0;  height: 0;  border-bottom: 45px solid #e4712b; border-left: 25px solid transparent; }
+ .decR{ right: -24px;  width: 0;  height: 0; border-top: 45px solid #e4712b;  border-right: 24px solid transparent;}
+.themeLogo a{ display: block; width: 180px; height: 45px; line-height: 45px; text-align: center;}
+.themeNav ul{ padding-left: 30px;}
+.themeNav ul li a{ display: block; height: 45px; line-height: 45px; color: #fff; font-size: 16px; padding: 0 16px; transition: .2s; -webkit-transition: .2s; -moz-transition: .2s; -o-transition: .2s;}
+.themeNav ul li a:hover{ transition: ease-out 0.3s; background: #fff; background: rgba(255,255,255,0.2);}
+.wcMain{ width: 1054px; margin: 0 auto; padding: 0 15px; padding-bottom: 30px;}
+.position { padding: 10px; color: #fff;}
+.position .now a{ color: #fff; }
+.position .now a:hover{ text-decoration: underline !important;}
+/*国家分类*/
+.grouping{ height : 430px; background: url(../../images/WorldCup/group/grouping.png) no-repeat center 0; padding: 80px 20px 0px 20px; margin-top: -20px;}
+.group-all{ width: 984px; height: 332px; display: block; position: relative; margin: 0 auto; overflow: hidden;}
+/*光效*/
+.group-all::before{ content:""; position: absolute; width: 100px; height: 100%; top: 0; left:-150px; overflow: hidden;background: -moz-linear-gradient(left, rgba(255,255,255,0)0, rgba(255,255,255,.2)50%, rgba(255,255,255,0)100%); background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255,255,255,0)), color-stop(50%, rgba(255,255,255,.2)), color-stop(100%, rgba(255,255,255,0))); background: -webkit-linear-gradient(left, rgba(255,255,255,0)0, rgba(255,255,255,.2)50%, rgba(255,255,255,0)100%); background: -o-linear-gradient(left, rgba(255,255,255,0)0, rgba(255,255,255,.2)50%, rgba(255,255,255,0)100%); -webkit-transform: skewX(-25deg); -moz-transform: skewX(-25deg);}
+.group-all.active::before{  animation: lineMove .5s; -webkit-animation: lineMove .5s ; -moz-animation: lineMove .5s ; -o-animation: lineMove .5s ; }
+@keyframes lineMove {
+    0% {
+        left: -150px;
+        transform-origin: center;
+    }
+    100% {
+        left: 100%;
+        transform-origin: center;
+    }
+}
+@-webkit-keyframes lineMove {
+    0% {
+        left: -50px;
+        transform-origin: center;
+    }
+    100% {
+        left: 100%;
+        transform-origin: center;
+    }
+}
+@-moz-keyframes lineMove {
+    0% {
+        left: -50px;
+        transform-origin: center;
+    }
+    100% {
+        left: 100%;
+        transform-origin: center;
+    }
+}
+@-o-keyframes lineMove {
+    0% {
+        left: -50px;
+        transform-origin: center;
+    }
+    100% {
+        left: 100%;
+        transform-origin: center;
+    }
+}
+
+
+.group{ color: #fff; width: 25%; height: 166px; float: left; padding-top: 10px;}
+.group span{ float: left; background: url(../../images/WorldCup/group/rectangle.png) no-repeat center 0; width: 36px; height: 36px; line-height: 36px; margin-top: 50px; margin-right: 10px; margin-left: 30px; text-align: center; font-size: 20px; padding-right: 2px; text-transform: uppercase;}
+.group a{ color: #fff; width: 74px; height: 70px; text-align: center; float: left; padding: 10px 2px 10px 2px; margin-right: 5px;}
+.group a img{ width: 42px; height: 22px;}
+.group a p{ height: 40px; line-height: 40px; font-size: 14px; overflow: hidden; white-space: nowrap;}
+.group a:hover{ color: #fff; cursor: pointer; background-color: #4a597e;}
+/*详情*/
+.article{ margin: 40px 0 38px 0;}
+.article-left:hover{ text-decoration: underline !important;}
+/*左侧*/
+.article-left{ width: 512px; height: 320px; position: relative; float: left; margin-right: 12px; overflow: hidden; }
+.article-left:hover h1{ text-decoration: underline !important;}
+.article-left img{ width:100%; height: auto; border: 1px solid #e4e4e4; -webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.article-left img:hover{ -webkit-transform: scale(1.2) translateZ(0) !important; -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1) !important; transform: scale(1.2) translateZ(0) !important; transition: transform .75s cubic-bezier(0,1,.75,1) !important;}
+.article-left h1{ position: absolute; font-size: 22px; color: #fff; bottom: 0; height: 130px; line-height: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 512px; text-align: left; padding: 0 10px 0 10px; background: -webkit-gradient(linear,1% 1%,1% 100%,color-stop(0,rgba(0,0,0,0)), color-stop(0.3,rgba(0,0,0,0.3)), color-stop(1,rgba(0,0,0,0.7)) ); dispaly: inline-block;}
+/*右侧*/
+.article-right{ width: 500px; height: 320px; display: inline-block;}
+.article-photo{ width: 242px ; height: 155px; position: relative; float: left; margin-bottom: 12px; overflow: hidden; transition: all 0.6s; }
+.article-photo:hover h2{ text-decoration: underline!important;}
+.article-photo img{ width: 100%; height: auto; border: 1px solid #e4e4e4;-webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.article-photo img:hover{transform: scale(1.2); -webkit-transform: scale(1.2) translateZ(0) !important; -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1) !important; transform: scale(1.2) translateZ(0) !important; transition: transform .75s cubic-bezier(0,1,.75,1) !important;}
+.article-photo h2{ overflow: hidden; text-overflow: ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; font-size: 16px; color: #fff; position: absolute; bottom: 0; width: 242px; line-height: 24px; text-align: left; padding: 20px 10px 0 10px; background: -webkit-gradient(linear,1% 1%,1% 100%,color-stop(0,rgba(0,0,0,0)), color-stop(0.3,rgba(0,0,0,0.3)), color-stop(1,rgba(0,0,0,0.7)) );}
+.mr{ margin-right: 12px;}
+/*广告*/
+.advertise{ width:100%; height: 100px; margin-bottom: 30px; float: left;}
+.advertise img{ width:1024px; height: 100px; }
+/*资讯*/
+.competition{ width: 1024px; float: left;}
+/*资讯左侧*/
+.competion-left{ width: 770px; float: left;}
+.competion-left .expect{ width: 362px; height: 302px; background-color: #2e303e; color: #fff; float: left; margin:0 20px 30px 0; cursor: pointer;}
+.competion-left .expect:hover{ text-decoration: underline !important;}
+.expect .number-left{ width: 70px; height: 64px; line-height: 64px; text-align: center; background-color: #3664e9; font-size: 18px; float: left; }
+.expect .triangle{ width: 0; height: 0; border-top: 9px solid transparent; border-left: 7px solid #3664e9; border-bottom: 9px solid transparent; margin-left: 0px; margin-top: 24px; float: left;}
+.expect .number-right{ width: 285px; height: 64px; line-height: 64px; text-align: left; font-size: 18px; margin-left: 70px;}
+.expect .number-right h3{ font-size: 18px; font-weight: bold; height: 30px; line-height: 30px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 10px 0 10px; }
+.expect .number-right p{ font-size: 16px; height: 34px; line-height: 34px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 10px 0 10px; color: #cecece;} 
+.magnify{ width: 362px; height: 238px; overflow: hidden; transition: all 0.6s; display: block;}
+.expect img{ width: 100%; height: auto; border: 1px solid #e4e4e4; border-top: none;-webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.expect img:hover{ -webkit-transform: scale(1.2) translateZ(0) !important; -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1) !important; transform: scale(1.2) translateZ(0) !important; transition: transform .75s cubic-bezier(0,1,.75,1) !important; }
+/*更多*/
+.more{ width: 750px; height: 40px; line-height: 40px; background-color:#eaf1fd; float: left; text-align: center; cursor: pointer;}
+/*资讯右侧*/
+.competion-right{ margin-left:24px; float: left;}
+.great{  background: url(../../images/WorldCup/nation-flag/bg.png) no-repeat center 0; width: 230px ;height: 52px; font-size: 24px; color: #fff; line-height: 52px;}
+.great img{ height: 32px; margin: 0 12px 0 14px;}
+.classify{ background-color: #eaf1fd;  width: 230px; padding: 22px 12px 12px 12px; margin-bottom: 32px; }
+.classify a{ width: 90px ; height :50px; line-height: 50px; text-align: center; float: left; background-color: #fff; margin: 0 6px 0 6px;display: block; margin-bottom: 10px;}
+.classify a:hover{ text-decoration: underline !important;}
+.seniority{ background: url(../../images/WorldCup/nation-flag/pm.png) no-repeat center 0;width: 230px ;height: 52px; font-size: 24px; color: #fff; line-height: 52px;}
+.seniority img{ height: 32px; margin: 0 12px 0 14px;}
+.tab-list{width: 230px;}
+.tab{ width: 230px; padding: 8px 8px 8px 8px; float: left; color: #fff;}
+.tab a{ color: #ed843f; font-size: 16px; height: 26px; line-height: 24px;}
+.tab .on{ background-color: #ed843f; color: #fff; }
+.tab a:hover{ background-color: #ed843f; color: #fff;}
+.tab-left{ width: 106px; height: 26px; line-height: 26px; border: 1px solid #ed843f; display: block; float: left; text-align: center; border-top-left-radius: 4px; border-bottom-left-radius: 4px;}
+.tab-right{ width: 106px; height: 26px; line-height: 26px; border: 1px solid #ed843f; display: inline-block; text-align: center; border-top-right-radius: 4px; border-bottom-right-radius: 4px;}
+.list{ background-color: #eaf1fd;  width: 230px; font-size: 16px; color: #675855; margin:0px 0 28px 0; padding: 10px 0 10px 0;}
+.list a{ float: left; padding: 10px 8px 10px 12px;}
+.list a:hover{ background-color: #f8fbff; color: #7f6d6a; border: 1px solid #dce9fe;}
+.list a img{ width: 38px; height: 38px; border-radius: 50%; float: left;}
+.list a .list-right{ width: 158px; margin-left: 50px;}
+.list a .list-right p{ height: 20px; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.list a .list-right p .username{height: 20px; max-width: 110px; overflow: hidden; text-overflow: ellipsis;  white-space: nowrap; display: block; float: left; }
+.list a .list-right p .lables{ background-color: #e26b6c; color: #fff; padding: 2px 4px 2px 4px; font-size: 12px; border-radius: 4px; margin-left: 6px; float: left; height: 20px; line-height: 16px;}
+.permit{ background-color: #eaf1fd;  width: 230px; font-size: 16px; color: #675855; margin:0px 0 28px 0px; padding: 10px 0 10px 0;}
+.permit a{ float: left; padding: 10px 8px 10px 12px;}
+.permit a:hover{ background-color: #f8fbff; color: #7f6d6a; border: 1px solid #dce9fe;}
+.permit a img{ width: 66px; height: 46px; float: left;}
+.permit a .list-right{ width: 138px; margin-left: 70px;}
+.permit a .list-right p{ font-size: 12px; line-height: 24px; height: 46px; word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+    -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+    -webkit-line-clamp: 2; /** 显示的行数 **/
+    overflow: hidden;  /** 隐藏超出的内容 **/}
+.permit a .list-right p span{ background-color: #e26b6c; color: #fff; padding: 2px 4px 2px 4px; font-size: 12px; border-radius: 4px; margin-left: 10px;}
+.artic{ background: url(../../images/WorldCup/nation-flag/dk.png) no-repeat center 0;  width: 230px ;height: 52px; font-size: 24px; color: #fff; line-height: 52px;}
+.artic img{ height: 32px; margin: 0 12px 0 14px;}
+
+

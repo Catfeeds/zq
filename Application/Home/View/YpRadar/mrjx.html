@@ -1,0 +1,152 @@
+<extend name="Public:layout"/>
+<block name='seo'>
+    <title>每日极限_全球体育网</title>
+    <meta name="keywords" content="胜平负数据,数据分析,盘口分析">
+    <meta name="description" content="全球体育胜负平频道结合历史上千万场比赛数据，依据过往历史胜平负、盘口和总进球数，通过精密的数学模型交叉分析出每只球队最全面的连胜、连平、连负、连赢、连输、连大、连小走势大全，方便您浏览。">
+</block>
+<block name='css'>
+    <!-- 页面所需css -->
+    <link rel="stylesheet" href="__CSS__/ypRadar/radarData.css">
+</block>
+
+<block name="content">
+    <!-- theme -->
+    <div class="themeBox rdBody">
+    	<div class="themeBanner"><div class="themeBanTet">全球体育大数据全年已经覆盖450余个各级别足球赛事，近60000场比赛，每日处理赛前数据2000万条,利用独创的大数据AI人工智能算法结合比赛基本面、球队技战术数据、赔率必发等进行分析计算给出独有的分析数据，大大提高你的胜率。</div></div>
+        <include file="YpRadar:topLink" />
+        
+        <!-- main -->
+        <div class="main">
+            <div class="explain">
+                <p>结合历史上千万场比赛数据，依据过往历史胜平负、盘口和总进球数，通过精密的数学模型交叉分析出每只球队最高连胜、连败反弹极限</p>
+                <p><span class="text-red">风险提示：</span>本产品所提供的数据内容仅供浏览和参考之用</p>
+            </div>
+            <!-- 当前位置 -->
+            <div class="position">
+                当前位置：<span class="now"><a href="https://www.qqty.com/" title="全球体育">全球体育首页</a></span> &gt; <span class="now"><a href="{:U('@sporttery')}" title="专家说彩">专家说彩</a></span> &gt;<span class="text-blue">盈盘雷达</span></div>
+            <!-- 当前位置 -->
+            <div class="subNav jxSubNav clearfix">
+                <div class="subNavL pull-left">
+                    <ul class="clearfi">
+                      <li class="pull-left <eq name="param['playType']" value="1">on</eq>"><a href="javascript:;" data-playType="1" title="胜负平"><span>胜负平</span> </a></li>
+                      <li class="pull-left <eq name="param['playType']" value="2">on</eq>"><a href="javascript:;" data-playType="2" title="亚盘极限"><span>亚盘极限</span></a></li>
+                      <li class="pull-left <eq name="param['playType']" value="3">on</eq>"><a href="javascript:;" data-playType="3" title="大小极限"><span>大小极限</span></a></li>
+                    </ul>
+                </div>
+                <div class="subNavR pull-right">
+                    <div class="dropdown">
+                      <a id="dLabel" title="时间筛选" class="ddTime" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        时间筛选
+                        <span class="glyphicon glyphicon-menu-down"></span>
+                      </a>
+                    
+                      <ul class="dropdown-menu" aria-labelledby="dLabel">
+                          <foreach name="week" item="v" key="k">
+                              <li <eq name="param['date']" value="$v">class="on"</eq>><a href="#" data-date="{$v}">{$k}</a></li>
+                          </foreach>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="secSubNav jxSecNav" <neq name="param['playType']" value="1">style="display: none;"</neq>>
+                <a title="连胜" href="javascript:void(0);" <eq name="param['winType']" value="1">class="on"</eq> data-winType="1">连胜</a>
+                <span>|</span>
+                <a title="连平" href="javascript:void(0);" <eq name="param['winType']" value="2">class="on"</eq> data-winType="2">连平</a>
+                <span>|</span>
+                <a title="连负" href="javascript:void(0);" <eq name="param['winType']" value="3">class="on"</eq> data-winType="3">连负</a>
+            </div>
+            <div class="secSubNav jxSecNav" <neq name="param['playType']" value="2">style="display: none;"</neq>>
+                <a title="连赢" href="javascript:void(0);" <eq name="param['winType']" value="1">class="on"</eq> data-winType="1">连赢</a>
+                <span>|</span>
+                <a title="连输" href="javascript:void(0);" <eq name="param['winType']" value="3">class="on"</eq> data-winType="3">连输</a>
+            </div>
+            <div class="secSubNav jxSecNav" <neq name="param['playType']" value="3">style="display: none;"</neq>>
+                <a title="连大" href="javascript:void(0);" <eq name="param['winType']" value="1">class="on"</eq> data-winType="1">连大</a>
+                <span>|</span>
+                <a href="javascript:void(0);" title="连小" <eq name="param['winType']" value="3">class="on"</eq> data-winType="3">连小</a>
+            </div>
+            <div class="dtTypeCon">
+                <!-- jxjxBox -->
+                <empty name="data">
+                    <div class="dtBox dtNoneBox clearfix">
+                        <div><img src="__IMAGES__/ypRadar/none-data-bg.jpg" width="520" height="234"></div>
+                        <p><a href="javascript:;" class="text-666" title="回査数据">回査数据 >></a></p>
+                    </div>
+                    <else />
+                    <div class="dtBox jxjxBox jxjxSub clearfix">
+                    <div class="pull-left dtBoxIn">
+                        <ul>
+                            <foreach name="data" item="v" key="k">
+                                <li class="clearfix list <if condition='$k%4 eq 2'>graListL<elseif condition='$k%4 eq 3'/>graListR</if>">
+                                <a class=clearfix" href="{:U('/dataFenxi/game_id/'.$v['gameId'].'@bf')}" title="每日极限" target="_blank">
+                                    <div class="pull-left dLeft">
+                                        <div class="clearfix mb15">
+                                            <span class="pull-left f20 mr10 name text-hidden" title="<if condition="$v['winTeam'] eq 1">{$v['homeTeamName']|switchName=0,###}<else /> {$v['awayTeamName']|switchName=0,###}</if>"><if condition="$v['winTeam'] eq 1">{$v['homeTeamName']|switchName=0,###}<else /> {$v['awayTeamName']|switchName=0,###}</if></span>
+                                            <notempty  name="v['handcp']">
+                                                <span class="pull-left spanLb">{$v['handcp']}</span>
+                                            </notempty >
+                                        </div>
+                                        <p class="text-999 mb10">{$v['unionName']|switchName=0,###}  {$v['gtime']}</p>
+                                        <p class="text-666"><span class="pull-left text-hidden homeTeam" title="{$v['homeTeamName']|switchName=0,###}">{$v['homeTeamName']|switchName=0,###}</span> <span class="pull-left text-red scoreTeam"><empty name="v['score']">VS<else />{$v['score']}</empty> </span> <span class="pull-left text-hidden awayTeam" title="{$v['awayTeamName']|switchName=0,###}">{$v['awayTeamName']|switchName=0,###}</span> </p>
+                                    </div>
+                                    <div class="pull-left dCenter">
+                                        <p class="f16 text-center mb35">当前连{$v['winType']}</p>
+                                        <p class="rowNum text-center">{$v['curMaxScore']}</p>
+                                    </div>
+                                    <div class="pull-left dRight">
+                                        <p class="f16 text-center mb35">历史最高</p>
+                                        <p class="rowNum text-center">{$v['maxScore']}</p>
+                                    </div>
+                                </a>
+                            </li>
+                            </foreach>
+                        </ul>
+                    </div>
+                </div>
+                </empty>
+
+                <!-- jxjxBox -->
+            </div>
+        </div>
+        <!-- main -->
+        
+    </div>
+    <!-- theme -->
+</block>
+
+<block name="js">
+    <!-- 页面所需的js -->
+    <script type="text/javascript" src="__JS__/ypRadar/radarData.js"></script>
+    <script type="text/javascript">
+        $(function(){
+
+            $('.subNavL ul li a').click(function(){
+                var playType = $(this).data('playtype');
+                var winType = 1;
+                var date = $('.dropdown-menu li.on a').data('date');
+
+                loadData(playType, winType, date);
+            });
+
+            $('.secSubNav a').click(function(){
+                var playType = $('.subNavL ul li.on a').data('playtype');
+                var winType = $(this).data('wintype');
+                var date = $('.dropdown-menu li.on a').data('date');
+
+                loadData(playType, winType, date);
+            });
+
+            $('.dropdown-menu li a').click(function(){
+                var playType = $('.subNavL ul li.on a').data('playtype');
+                var winType = $('.secSubNav a.on').data('wintype');
+                var date = $(this).data('date');
+
+                loadData(playType, winType, date);
+            });
+
+            function loadData(playType, winType, date){
+                window.location.href = '?playType='+playType+'&winType='+winType+'&date='+date;
+            }
+        })
+    </script>
+</block>

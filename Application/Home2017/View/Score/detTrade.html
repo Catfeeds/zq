@@ -1,0 +1,205 @@
+<extend name="Public:header" />
+<block name="seo">
+    <if condition="$sign eq '1'">
+        <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}_竞彩赔率_亚盘赔率_全球体育</title>
+        <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、赛前分析、足球推荐、足球分析、竞彩推荐、竞彩分析、篮球分析、篮球推荐"/>
+        <meta name="description" content="全球体育提供百家足球即时赔率、亚盘对比、即时盘口、百家欧赔比较、赔率变化比较、赔率分析、历史相同赔率查询、盘路走势分析"/>
+    <else />
+        <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、大小赔率、大小球赔率、全球体育</title>
+        <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、大小球指数、大小球赔率、大小球变化、大小球比较、大小球分析、赔率分析"/>
+        <meta name="description" content="全球体育提供百家足球即时赔率、亚盘对比、即时盘口、百家欧赔比较、赔率变化比较、赔率分析、历史相同赔率查询、盘路走势分析"/>
+    </if>
+</block>
+<block name="body">
+<body>
+<!--引入本页所需css-->
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreLive/scoreLive.css?20171024">
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreData/data-common.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreData/data-trade.css">
+<div class="body">
+    <!-- top nav -->
+    <include file="Public:top_score"/>
+    <!-- 主体内容开始 -->
+    <div class="home">
+        <!-- odd_nav -->
+        <div class="odd_nav ">
+            <ul class="clearfix">
+                <li class="<if condition="$sign eq 1">on</if>">
+                    <a href="{:U('/detTrade/game_id/'.$_GET['game_id'].'/sign/1@bf')}"><span>交易明细</span></a>
+                </li>
+                <li class="<if condition="$sign eq 2">on</if>">
+                    <a href="{:U('/detTrade/game_id/'.$_GET['game_id'].'/sign/2@bf')}"><span>主队交易</span></a>
+                </li>
+                <li class="<if condition="$sign eq 3">on</if>">
+                    <a href="{:U('/detTrade/game_id/'.$_GET['game_id'].'/sign/3@bf')}"><span>平局交易</span></a>
+                </li>
+                <li class="<if condition="$sign eq 4">on</if>">
+                    <a href="{:U('/detTrade/game_id/'.$_GET['game_id'].'/sign/4@bf')}"><span>客交易队</span></a>
+                </li>
+                <li class="<if condition="$sign eq 5">on</if>">
+                    <a href="{:U('/detTrade/game_id/'.$_GET['game_id'].'/sign/5@bf')}"><span>大球交易</span></a>
+                </li>
+                <li class="last-li <if condition="$sign eq 6">on</if>"  >
+                    <a href="{:U('/detTrade/game_id/'.$_GET['game_id'].'/sign/6@bf')}"><span>小球交易</span></a>
+                </li>
+            </ul>
+        </div>
+        <!-- odd_nav -->
+
+        <!-- tradeCon -->
+        <div class="tradeCon">
+            <table class="table table-bordered tb_data_fenxi">
+                <tbody>
+                <tr><th colspan="<if condition="$sign eq 1">14<else/>20</if>"><span>{$gameInfo.union_name} </span> <span> {$gameInfo.gtime}</span>  <span>{$gameInfo.home_team_name}VS{$gameInfo.away_team_name}</span></th></tr>
+                <if condition="$sign eq 1">
+                    <tr bgcolor="#f2f4fa">
+                        <td bgcolor="#fff" width="170" class="text-666" rowspan="2">时间</td>
+                        <td width="330" class="text-666" colspan="4"  bgcolor="#F0F4F9">主队：{$gameInfo.home_team_name}</td>
+                        <td bgcolor="#F2F2F2" width="330" class="text-666" colspan="4">平局</td>
+                        <td width="330" class="text-666" colspan="4" bgcolor="#F1F6E9">客队：{$gameInfo.away_team_name}</td>
+                    </tr>
+                    <tr bgcolor="#f2f4fa">
+                        <td bgcolor="#F0F4F9" width="62" class="text-666">价位</td>
+                        <td bgcolor="#F0F4F9" width="90" class="text-666">成交量</td>
+                        <td bgcolor="#F0F4F9" width="114" class="text-666">成交变化</td>
+                        <td bgcolor="#F0F4F9" width="64" class="text-666">属性</td>
+                        <td bgcolor="#F2F2F2" width="62" class="text-666">价位</td>
+                        <td bgcolor="#F2F2F2" width="90" class="text-666">成交量</td>
+                        <td bgcolor="#F2F2F2" width="114" class="text-666">成交变化</td>
+                        <td bgcolor="#F2F2F2" width="64" class="text-666">属性</td>
+                        <td bgcolor="#F1F6E9" width="62" class="text-666">价位</td>
+                        <td bgcolor="#F1F6E9" width="90" class="text-666">成交量</td>
+                        <td bgcolor="#F1F6E9" width="114" class="text-666">成交变化</td>
+                        <td bgcolor="#F1F6E9" width="64" class="text-666">属性</td>
+                    </tr>
+                    <volist name="data" id="item">
+                        <tr bgcolor="#f2f4fa">
+                            <td bgcolor="#fff" class="text-666">{$item.0}</td>
+                            <td bgcolor="#F0F4F9" class="text-666">{$item.1}</td>
+                            <td bgcolor="#F0F4F9" class="text-666">{$item.2}</td>
+                            <td bgcolor="#F0F4F9" class="text-666">{$item.3}</td>
+                            <td bgcolor="#F0F4F9" class="text-666">{$item.4}</td>
+                            <td bgcolor="#F2F2F2" class="text-666">{$item.5}</td>
+                            <td bgcolor="#F2F2F2" class="text-666">{$item.6}</td>
+                            <td bgcolor="#F2F2F2" class="text-666">{$item.7}</td>
+                            <td bgcolor="#F2F2F2" class="text-666">{$item.8}</td>
+                            <td bgcolor="#F1F6E9" class="text-666">{$item.9}</td>
+                            <td bgcolor="#F1F6E9" class="text-666">{$item.10}</td>
+                            <td bgcolor="#F1F6E9" class="text-666">{$item.11}</td>
+                            <td bgcolor="#F1F6E9" class="text-666">{$item.12}</td>
+                        </tr>
+                    </volist>
+                <else/>
+                    <tr bgcolor="#f2f4fa">
+                        <td bgcolor="#fff" width="170" class="text-666" rowspan="2">时间</td>
+                        <td width="330" class="text-666" colspan="4" bgcolor="#f9f6ef">
+                            <eq name="sign" value="2">主队：{$gameInfo.home_team_name}</eq>
+                            <eq name="sign" value="3">平局</eq>
+                            <eq name="sign" value="4">客队：{$gameInfo.away_team_name}</eq>
+                            <eq name="sign" value="5">主队：{$gameInfo.home_team_name}</eq>
+                            <eq name="sign" value="6">客队：{$gameInfo.away_team_name}</eq>
+                        </td>
+                        <td width="330" class="text-666" colspan="6">卖方挂牌</td>
+                        <td width="330" class="text-666" colspan="6" bgcolor="#F7FAFD">买方挂牌</td>
+                    </tr>
+                    <tr bgcolor="#f2f4fa">
+                        <td bgcolor="#f9f6ef" width="62" class="text-666">价位</td>
+                        <td bgcolor="#f9f6ef" width="90" class="text-666">成交量</td>
+                        <td bgcolor="#f9f6ef" width="114" class="text-666">成交变化</td>
+                        <td bgcolor="#f9f6ef" width="64" class="text-666">属性</td>
+                        <td width="62" class="text-666">价位</td>
+                        <td width="90" class="text-666">挂牌量</td>
+                        <td width="114" class="text-666">价位</td>
+                        <td width="64" class="text-666">挂牌量</td>
+                        <td width="62" class="text-666">价位</td>
+                        <td width="90" class="text-666">挂牌量</td>
+                        <td bgcolor="#F7FAFD" width="114" class="text-666">价位</td>
+                        <td bgcolor="#F7FAFD" width="64" class="text-666">挂牌量</td>
+                        <td bgcolor="#F7FAFD" width="62" class="text-666">价位</td>
+                        <td bgcolor="#F7FAFD" width="90" class="text-666">挂牌量</td>
+                        <td bgcolor="#F7FAFD" width="114" class="text-666">价位</td>
+                        <td bgcolor="#F7FAFD" width="64" class="text-666">挂牌量</td>
+                    </tr>
+                    <volist name="data" id="item">
+                        <tr bgcolor="#f2f4fa">
+                            <td bgcolor="#fff" class="text-666">{$item.0}</td>
+                            <td bgcolor="#f9f6ef" class="text-666">{$item.1}</td>
+                            <td bgcolor="#f9f6ef" class="text-666">{$item.2}</td>
+                            <td bgcolor="#f9f6ef" class="text-666">{$item.3}</td>
+                            <td bgcolor="#f9f6ef" class="text-666">{$item.4}</td>
+                            <td class="text-666">{$item.5}</td>
+                            <td class="text-666">{$item.6}</td>
+                            <td class="text-666">{$item.7}</td>
+                            <td class="text-666">{$item.8}</td>
+                            <td class="text-666">{$item.9}</td>
+                            <td class="text-666">{$item.10}</td>
+                            <td bgcolor="#F7FAFD" class="text-666">{$item.11}</td>
+                            <td bgcolor="#F7FAFD" class="text-666">{$item.12}</td>
+                            <td bgcolor="#F7FAFD" class="text-666">{$item.13}</td>
+                            <td bgcolor="#F7FAFD" class="text-666">{$item.14}</td>
+                            <td bgcolor="#F7FAFD" class="text-666">{$item.15}</td>
+                            <td bgcolor="#F7FAFD" class="text-666">{$item.16}</td>
+                        </tr>
+                    </volist>
+                </if>
+
+                </tbody>
+            </table>
+
+            <!--页码开始-->
+            <div class="page-con">
+                <nav>
+                    <ul class="pagination pull-right">
+                        {$show}
+                        <li>
+                            <input class="isTxtBig" type="text" value="{$_REQUEST.p|default=1}" name="p">
+                        </li>
+                        <li id="GO"><a href="javascript:void(0)">GO</a></li>
+                    </ul>
+                    <div class="pull-right" style="margin-top: 5px;">
+                        共有{$totalCount}条，每页显示：{$numPerPage}条
+                    </div>
+                </nav>
+            </div>
+            <!--页码结束-->
+        </div>
+        <div class="tradeCon">
+            <table class="table table-bordered tb_data_fenxi">
+                <tbody>
+                <tr bgcolor="#f2f4fa">
+                    <td width="170" class="text-666" rowspan="2">买单卖单汇总</td>
+                    <td width="330" class="text-666" colspan="2">主队：{$gameInfo.home_team_name}</td>
+                    <td width="330" class="text-666" colspan="2">平局</td>
+                    <td width="330" class="text-666" colspan="2">客队：{$gameInfo.away_team_name}</td>
+                </tr>
+                <tr bgcolor="#f2f4fa">
+                    <td width="200" class="text-666">交易次数</td>
+                    <td width="120" class="text-666">总额</td>
+                    <td width="200" class="text-666">交易次数</td>
+                    <td width="120" class="text-666">总额</td>
+                    <td width="200" class="text-666">交易次数</td>
+                    <td width="120" class="text-666">总额</td>
+                </tr>
+                <volist name="buy_sell" id="item">
+                    <tr>
+                        <td width="170" class="text-666">{$item.0}</td>
+                        <td width="200" class="text-666">{$item.1}</td>
+                        <td width="120" class="text-666">{$item.2}</td>
+                        <td width="200" class="text-666">{$item.3}</td>
+                        <td width="120" class="text-666">{$item.4}</td>
+                        <td width="200" class="text-666">{$item.5}</td>
+                        <td width="120" class="text-666">{$item.6}</td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+        <!-- tradeCon -->
+    </div>
+    <!-- 主体内容开始 -->
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+</div>
+</body>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/intro/echarts-all-3.js"></script>
+</block>

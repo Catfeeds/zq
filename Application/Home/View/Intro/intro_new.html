@@ -1,0 +1,112 @@
+<div class="new_tj">
+    <div class="nt_title">最新推介</div>
+    <switch name="new_list.status">
+        <case value="1">
+            <div class="nt_con clearfix">
+                <div class="gold_tip" <if condition="$products_info['count_pay'] EGT $products_info['total_num'] OR $new_list['total'] EGT $products_info['total_num'] ">style="background:#b3aeb2;">已抢光<else/>  onclick="qwBuyModal(this,{$products_info['id']},2)" style="cursor:pointer;">{$products_info.sale}金币<span>/{$products_info.game_num}场</if></span></div>
+            <div class="ntc_head fl">
+                <img src="__PUBLIC__/Home/images/qw/hold.png" alt="">
+            </div>
+            <div class="ntc_right">
+                <p class="game_sure">请耐心等待，推介赛事正在准备中...</p>
+                <p class="buy_tip"></p>
+                <p class="game_time"></p>
+                <div class="buy_count"><div class="fl"><img src="__PUBLIC__/Home/images/qw/car.png" alt="">购买人数:</div> <div class="bc_percent fl"><em></em><i style="width: <if condition="$new_list['percent'] eq ''">{$products_info['percent']}<else/>{$new_list['percent']}</if>%"></i></div></div><div class="bcp_num fl"><if condition="$new_list['total'] eq ''">{$products_info['count_pay']}<else/>{$new_list['total']}</if>/{$products_info.total_num}</div>
+            </div>
+</div>
+</case>
+<case value="2">
+    <div class="nt_con clearfix">
+        <div class="gold_tip" <if condition="$new_list['total'] EGT $products_info['total_num']">style="background:#b3aeb2;">已抢光<else/>  onclick="qwBuyModal(this,{$products_info['id']},2)" style="cursor:pointer;">{$products_info.sale}金币<span>/{$products_info.game_num}场</if></span></div>
+    <div class="ntc_head fl">
+        <img src="__PUBLIC__/Home/images/qw/gs_head.png" alt="">
+    </div>
+    <div class="ntc_right">
+        <p class="game_sure">赛事已确认</p>
+        <p class="buy_tip">购买后显示推介赛事及其结果</p>
+        <p class="game_time">开赛时间：{$new_list['gtime']|date="Y-m-d H:i",###}</p>
+        <div class="buy_count"><div class="fl"><img src="__PUBLIC__/Home/images/qw/car.png" alt="">购买人数:</div> <div class="bc_percent fl"><em></em><i style="width: {$new_list.percent}%"></i></div></div><div class="bcp_num fl">{$new_list.total}/{$products_info.total_num}</div>
+    </div>
+    </div>
+</case>
+<case value="3">
+    <table class="table tb_put_game">
+        <tbody>
+        <tr class="tr_border">
+            <th>开赛时间</th>
+            <th>赛事</th>
+            <th>对阵比赛</th>
+            <th>玩法</th>
+            <th>推介</th>
+        </tr>
+        <volist name="new_list['game_list']" id="val">
+            <tr>
+                <td>{$val['gtime']|date="m/d H:i",###}</td>
+                <td>{$val.union_name}</td>
+                <td>{$val.home_team_name}<span> <if condition="$val['score']">{$val.score}<else /> VS </if> </span>{$val.away_team_name}</td>
+                <td>
+                    <switch name="val.play_type">
+                        <case value="1">
+                            <if condition="$val['chose_side'] eq 1">让球
+                </td>
+                <td class="g_result">
+                    {$val['home_team_name']}
+                    <else/>让球
+                </td>
+                <td class="g_result">
+                    {$val['away_team_name']}
+                    </if>
+</case>
+<case value="-1">
+    <if condition="$val['chose_side'] eq 1">大小
+        </td>
+        <td class="g_result">大球
+            <else/>大小
+        </td>
+        <td class="g_result">
+            小球
+    </if>
+</case>
+</switch>
+<em>{$val.handcp}</em>(<font>{$val.odds}</font>) <if condition="$val['photo'] neq ''"><img src="__PUBLIC__/Home/images/qw/{$val['photo']}.png" alt=""></if> </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+</case>
+<case value="4">
+    <table class="table tb_put_game">
+        <tbody>
+        <tr class="tr_border">
+            <th>开赛时间</th>
+            <th>赛事</th>
+            <th>对阵比赛</th>
+            <th>推介</th>
+        </tr>
+        <volist name="new_list['game_list']" id="val">
+            <tr>
+                <td>{$val['gtime']|date="m/d H:i",###}</td>
+                <td>{$val.union_name}</td>
+                <td>{$val.home_team_name}<span> <if condition="$val['score']">{$val.score}<else /> VS </if> </span>{$val.away_team_name}</td>
+                <td class="g_result">{$val.home_team_name}({$val.handcp}) <if condition="$val['photo'] neq ''"><img src="__PUBLIC__/Home/images/qw/{$val['photo']}.png" alt=""></if> </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+</case>
+<case value="5">
+    <div class="nt_con clearfix">
+        <div class="gold_tip" style="background:#b3aeb2;">{$new_list.type}</div>
+        <div class="ntc_head fl">
+            <img src="__PUBLIC__/Home/images/qw/hold.png" alt="">
+        </div>
+        <div class="ntc_right">
+            <p class="game_sure">请耐心等待，推介赛事正在准备中...</p>
+            <p class="buy_tip"></p>
+            <p class="game_time"></p>
+            <div class="buy_count"><div class="fl"><img src="__PUBLIC__/Home/images/qw/car.png" alt="">购买人数:</div> <div class="bc_percent fl"><em></em><i style="width: {$new_list.percent}%"></i></div></div><div class="bcp_num fl">{$new_list.total}/{$products_info.total_num}</div>
+        </div>
+    </div>
+</case>
+</switch>
+</div>

@@ -1,0 +1,38 @@
+<include file="Etc/head"/>
+    <link rel="stylesheet" href="__CSS__/etc/ex_ranks.css">
+    <style type="text/css">
+    	html,body{ background: #f7f7f7;}
+		.main{ background: #f7f7f7;}
+		.prize_record_con .table  tr td{ border-bottom: 1px solid #ddd; color: #666;}
+    </style>
+<body>
+	<!-- 二级头部 s -->
+	<header id="other_header">
+    	<a href="javascript:history.go(-1);"></a>兑换记录
+    </header>
+    <!-- 二级头部 e -->
+
+	<section class="main">
+        <div class="ranks_con prize_record_con">
+            <table class="table" cellpadding="0" cellspacing="0">
+            	<thead>
+                	<tr bgcolor="#dddddd">
+                		<td width="26%">推荐币</td>
+                        <td width="26%">消耗积分</td>
+                        <td width="48%">兑换时间</td>
+                	</tr>
+                </thead>
+                <tbody>
+                <volist name="list" id="v">
+                  	<tr>
+                        <td>{$v.change_integral}</td>
+                        <td>{$v.change_integral}</td>
+                        <td>{$v.add_time|date='Y-m-d H:i',###}</td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+      </div>
+    </section>
+</body>
+</html>

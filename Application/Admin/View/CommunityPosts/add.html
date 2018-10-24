@@ -1,0 +1,157 @@
+<link href="__PUBLIC__/Plugs/emoji/emoji.css?cb=<?=time()?>" rel="stylesheet" type="text/css" />
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id" id="id">
+			<div class="unit">
+				<label>帖子标题：</label>
+				<textarea maxlength="20" class="required" name="base64_title"  rows="1" cols="47">{$vo.base64_title}</textarea>
+			</div>
+			<div class="unit">
+				<label>帖子内容：</label>
+				<textarea maxlength="10000" class="" name="base64_content"  rows="8" cols="130">{$vo.base64_content}</textarea>
+			</div>
+			<div class="unit">
+				<label>选择圈子：</label>
+				<select name="cid" class="required">
+				    <option value="" selected>请选择</option>
+				    <volist name="CommunityClass" id="item">
+				        <option value="{$item.id}" <eq name="item.id" value="$vo.cid">selected</eq> >{$item.name}</option>
+				        <notempty name="item.childs">
+				            <volist name="item.childs" id="item2">
+				                <option value="{$item2.id}" <eq name="item2.id" value="$vo.cid">selected</eq> >|_{$item2.name}</option>
+				                <notempty name="item2.childs">
+				                    <volist name="item2.childs" id="item3">
+				                        <option value="{$item3.id}" <eq name="item3.id" value="$vo.cid">selected</eq> >|__{$item3.name}</option>
+				                    </volist>
+				                </notempty>
+				            </volist>
+				        </notempty>
+				    </volist>
+				</select>
+			</div>
+
+			<div class="unit">
+				<label>选择发帖用户：</label>
+				<input name="user.id" class="required" type="hidden" value="{$vo.user_id}" />
+				<input type="text" size="30" name="user.nick_name" value="{$vo.nick_name}" readonly/>
+				<a width="800" height='600' lookupgroup="user" href="{:U('__ADMIN__/FrontUser/findFrontUser')}" class="btnLook">选择发件人</a>
+			</div>
+			<div class="unit">
+			    <label>热门推荐：</label>
+			    <input <if condition="$vo.home_recommend eq 0">checked</if> name="home_recommend" type="radio" value="0" />否
+			    <input <if condition="$vo.home_recommend eq 1">checked</if> name="home_recommend" type="radio" value="1" />是
+			</div>
+
+			<div class="unit">
+			    <label>置顶帖子：</label>
+			    <input <if condition="$vo.top_recommend eq 0">checked</if> name="top_recommend" type="radio" value="0" />否
+			    <input <if condition="$vo.top_recommend eq 1">checked</if> name="top_recommend" type="radio" value="1" />是
+			</div>
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft"  name="status">
+					<option value="1" <eq name="vo.status" value="1">selected</eq>>正常</option>
+					<option value="0" <eq name="vo.status" value="0">selected</eq>>待发布</option>
+				</select>
+			</div>
+			<div class="unit">
+				<label>&nbsp;</label>
+			</div>
+			<div class="unit">
+				<label>图片上传：</label>
+				<ul class="tabImg">
+				<empty name="vo.img">
+					<for start="1" end="10">
+						<li>
+							<input id="viewUploadInput_{$i}" name="fileInput_{$i}" type="file" onChange="previewImage({$i})" style="display:none;" />
+							<a href="javascript:void(0);">
+								<span id="viewUploadDiv_{$i}">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_{$i}"/>
+								</span>
+							</a>
+							<div id="poiter_{$i}" class="poiter">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_{$i}')">添加图片</a>
+							</div>
+						</li>
+					</for>
+				<else/>
+					<volist name="vo.img" id="item">
+						<li>
+							<input id="viewUploadInput_{$i}" name="fileInput_{$i}" type="file" onChange="previewImage({$i})" style="display:none;" />
+							<a href="javascript:void(0);">
+								<span id="viewUploadDiv_{$i}">
+								<empty name="item">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_{$i}"/>
+									<else/>
+									<img src="{$item}" width="80" height="80" id="viewUploadImg_{$i}"/>
+								</empty>
+								</span>
+							</a>
+							<div id="poiter_{$i}" class="poiter">
+								<empty name="item">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_{$i}')">添加图片</a>
+								<else/>
+								<a title="删除" onclick="delPic({$i});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_{$i}')">重传</a>
+								</empty>
+							</div>
+						</li>
+					</volist>
+				</empty>
+				</ul>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+	$(function(){
+		$('.tabImg li').hover(function(e) {
+			$(this).children('div').stop().animate({'top':'0'},300);
+		},function(){
+			$(this).children('div').stop().animate({'top':'80px'},300);
+		});
+	});
+	function delPic(number){
+		if(confirm("确认要删除吗？") == false){
+			return false;
+		}
+		//异步执行删除
+		var id = $("#id").val();
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/CommunityPosts/delPic.html",
+            data: {'id':id,'number':number},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                	$("#viewUploadInput_"+number+"").val("");
+					$("#viewUploadImg_"+number+"").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+					var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_"+number+"')\">添加图片</a>";
+					$("#poiter_"+number+"").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+</script>
+
+
+
+

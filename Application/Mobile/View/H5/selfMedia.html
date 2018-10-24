@@ -1,0 +1,48 @@
+<!-- H505 2016-12-27 -->
+<extend name="Public/base" />
+<block name="seo">
+    <title>全球体育APP</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <style type="text/css">
+        body{ background: #000;}
+        section aside{ display: block; position: relative;}
+        .btnCOn,.app-bar02{ position:absolute; left: 0; top: 0; width: 100%; height: 1.18rem;}
+        .app-bar02{ top: 80%;}
+        .app-bar01,#load_btn{display: block; overflow: hidden; width:2.25rem; height: 1rem; margin: 0 auto; background: url(__IMAGES__/h5/selfMedia/top-btn.png) no-repeat 0 0; background-size: 100% 100%; cursor: pointer;}
+        #load_btn{ width: 2.48rem;}
+        #load_btn{ background: url(__IMAGES__/h5/selfMedia/bottom-btn.png) no-repeat 0 0; background-size: 100% 100%; cursor: pointer;}
+    </style>
+
+</block>
+<block name="header"></block>
+<block name="body">
+    <body>
+</block>
+<block name="nav">
+</block>
+<block name="content">
+    <section>
+        <aside><img src="__IMAGES__/h5/selfMedia/m-img01.jpg" alt="全球体育app下载"></aside>
+        <aside><img src="__IMAGES__/h5/selfMedia/m-img02.jpg" alt="全球体育app下载">
+            <div class="btnCOn">
+                <a href="//m.qqty.com/H5/appJump/sign/jrtt.html" class="app-bar01"></a>
+            </div></aside>
+        <aside><img src="__IMAGES__/h5/selfMedia/m-img03.jpg" alt="全球体育app下载"><div class="app-bar02">
+            <a href="//m.qqty.com/H5/appJump/sign/jrtt.html" id="load_btn"></a></div></aside>
+    </section>
+</block>
+<block name="footer">
+
+</block>
+<block name="scripts">
+    <script>
+        $(function(){
+            $(document).on('click','.btnCOn,.app-bar02',function(){
+                location.href='//m.qqty.com/H5/appJump/sign/lhbd.html';
+            });
+            console.log("全球体育APP展示的体育资讯及所有竞彩分析和比赛直播仅供体育爱好者浏览。全球体育APP与球探体育比分、猎球者APP、网易彩票、QQ彩票等市面上的彩票类推荐软件一样，仅供彩民购买中国足彩参考之用。更多详情请浏览手机全球体育手机网：https://m.qqty.com/");
+        });
+    </script>
+</block>

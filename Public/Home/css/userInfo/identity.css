@@ -1,0 +1,15 @@
+/**
+ * 全彩个人中心css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-23
+**/
+/* 身份认证 */
+.input-con{position: relative;}
+.identity-con .form .form-in{ margin-bottom: 15px; font-size: 12px;}
+.identity-con .form .form-in .form-control{ font-size: 12px;}
+.identity-con .form label{ display: inline;}
+.identity-con .form .checkbox label{ font-size: 12px; color: #999;}
+.identity-con .form .input-name{ width:100px; text-align: right; height: 34px; line-height: 34px;}
+.identity-con .form #txt,.form #card{ width: 220px;}
+.identity-con .form .no-change{ width: 220px; margin-left: 100px; font-size: 12px;}

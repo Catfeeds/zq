@@ -1,0 +1,95 @@
+<extend name="Public:header" />
+<block name="seo">
+    <if condition="$sign eq '1'">
+        <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}_竞彩赔率_亚盘赔率_全球体育</title>
+        <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、赛前分析、足球推荐、足球分析、竞彩推荐、竞彩分析、篮球分析、篮球推荐"/>
+        <meta name="description" content="全球体育提供百家足球即时赔率、亚盘对比、即时盘口、百家欧赔比较、赔率变化比较、赔率分析、历史相同赔率查询、盘路走势分析"/>
+    <else />
+        <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、大小赔率、大小球赔率、全球体育</title>
+        <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、大小球指数、大小球赔率、大小球变化、大小球比较、大小球分析、赔率分析"/>
+        <meta name="description" content="全球体育提供百家足球即时赔率、亚盘对比、即时盘口、百家欧赔比较、赔率变化比较、赔率分析、历史相同赔率查询、盘路走势分析"/>
+    </if>
+</block>
+<block name="body">
+<body>
+<!--引入本页所需css-->
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreLive/scoreLive.css?20171024">
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreData/data-common.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreData/data-trade.css">
+<div class="body">
+    <!-- top nav -->
+    <include file="Public:top_score"/>
+    <!-- 主体内容开始 -->
+    <div class="home">
+        <!-- odd_nav -->
+        <div class="odd_nav ">
+            <ul class="clearfix">
+                <li class="<eq name='sign' value="0">on</eq>">
+                    <a href="{:U('/trades/game_id/'.$_GET['game_id'].'@bf')}"><span>综合</span></a>
+                </li>
+                <li class="<eq name='sign' value="1">on</eq>">
+                    <a href="{:U('/trades/game_id/'.$_GET['game_id'].'/sign/1'.'@bf')}"><span>主队</span></a>
+                </li>
+                <li class="<eq name='sign' value="2">on</eq>">
+                    <a href="{:U('/trades/game_id/'.$_GET['game_id'].'/sign/2'.'@bf')}"><span>平局</span></a>
+                </li>
+                <li class="<eq name='sign' value="3">on</eq>">
+                    <a href="{:U('/trades/game_id/'.$_GET['game_id'].'/sign/3'.'@bf')}"><span>客队</span></a>
+                </li>
+            </ul>
+        </div>
+        <!-- odd_nav -->
+
+        <!-- tradeCon -->
+        <div class="tradeCon">
+            <table class="table table-bordered tb_data_fenxi">
+                <tbody>
+                <tr><th colspan="6"><span>{$gameInfo['union_name']} </span> <span> {$gameInfo['gtime']}</span>  <span>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}</span></th></tr>
+                <tr bgcolor="#f2f4fa">
+                    <td width="116" class="text-666">综合</td>
+                    <td width="116" class="text-666">属性</td>
+                    <td width="170" class="text-666">成交量</td>
+                    <td width="120" class="text-666">价位</td>
+                    <td width="340" class="text-666">交易时间</td>
+                    <td width="260" class="text-666">交易时占比</td>
+                </tr>
+                <volist name="list" id="item">
+                    <tr>
+                        <td class="text-666">{$item.0}</td>
+                        <td class="text-666">{$item.1}</td>
+                        <td class="text-666">{$item.2}</td>
+                        <td class="text-666">{$item.3}</td>
+                        <td class="text-666">{$item.4}</td>
+                        <td class="text-red">{$item.5}</td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+
+
+            <!--页码开始-->
+            <div class="page-con">
+                <nav>
+                    <ul class="pagination pull-right">
+                        {$show}
+                        <li>
+                            <input class="isTxtBig" type="text" value="{$_REQUEST.p|default=1}" name="p">
+                        </li>
+                        <li id="GO"><a href="javascript:void(0)">GO</a></li>
+                    </ul>
+                    <div class="pull-right" style="margin-top: 5px;">
+                        共有{$totalCount}条，每页显示：{$numPerPage}条
+                    </div>
+                </nav>
+            </div>
+            <!--页码结束-->
+        </div>
+        <!-- tradeCon -->
+    </div>
+    <!-- 主体内容开始 -->
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+</div>
+</body>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/intro/echarts-all-3.js"></script>
+</block>

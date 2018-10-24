@@ -1,0 +1,66 @@
+<extend name="Public/euro/base" />
+<block name="seo">
+    <title>2016欧洲杯视频_全球体育欧洲杯专题</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/euro/hot.css"> 
+</block>
+<block name="content">
+   <!-- 视频 s-->
+     <section class="schedule_show">
+         <aside class="v_title">
+             <img src="__IMAGES__/euro/v_title.png" alt="">
+         </aside>
+         <nav class="sc_sele" id="get_avg">
+             <a href="{:U('video@m',[type=>1,group=>A])}" <if condition="($Think.get.type eq 1)">class="on"</if>>小组赛</a>
+            <a href="{:U('video@m',[type=>2])}" <eq name='Think.get.type' value='2'>class="on"</eq>>1/8决赛</a>
+            <a href="{:U('video@m',[type=>3])}" <eq name='Think.get.type' value='3'>class="on"</eq>>1/4决赛</a>
+            <a href="{:U('video@m',[type=>4])}" <eq name='Think.get.type' value='4'>class="on"</eq>>半决赛</a>
+            <a href="{:U('video@m',[type=>5])}" <if condition="($Think.get.type eq 5) OR ($Think.get.type eq '')">class="on"</if>>决赛</a> 
+         </nav> 
+         <if condition="($Think.get.type eq 1) ">
+                 <!-- 赛程预告 content s-->
+        <section class="schedule_con">
+            <div class="line_l"></div>
+            <div class="line_r"></div>
+            <div class="sc_con" style="display: block;">
+                <!-- 小组赛 s-->
+                <div class="sc_small">
+                    <nav>
+                        <a href="{:U('video@m',[type=>1,group=>A])}" <if condition="($Think.get.group eq 'A') OR ($Think.get.group eq 'a') OR ($Think.get.group eq '')">class="on"</if>>A</a>
+                        <a href="{:U('video@m',[type=>1,group=>B])}" <if condition="($Think.get.group eq 'B') OR ($Think.get.group eq 'b')">class="on"</if>>B</a>
+                        <a href="{:U('video@m',[type=>1,group=>C])}" <if condition="($Think.get.group eq 'C') OR ($Think.get.group eq 'c')">class="on"</if>>C</a>
+                        <a href="{:U('video@m',[type=>1,group=>D])}" <if condition="($Think.get.group eq 'D') OR ($Think.get.group eq 'd')">class="on"</if>>D</a>
+                        <a href="{:U('video@m',[type=>1,group=>E])}" <if condition="($Think.get.group eq 'E') OR ($Think.get.group eq 'e')">class="on"</if>>E</a>
+                        <a href="{:U('video@m',[type=>1,group=>F])}" <if condition="($Think.get.group eq 'F') OR ($Think.get.group eq 'f')">class="on"</if>>F</a>
+                    </nav> 
+                    <div class="cou_list" style="display: block;">
+                        <volist name='group_list' id='v'>
+                        <em><img src="__IMAGES__/euro/fgg.png" alt="{$v.home_team_name.0}">{$v.home_team_name.0}</em>
+                        </volist>
+                    </div>
+
+                </div>
+                <!-- 小组赛 e-->
+            </div>
+        </section>
+         </if>
+      
+       <div class="video_con">
+           <ul>
+               <volist name="list" id="v">
+               <li>
+                   <a <eq name="v.m_ischain" value="1">href="{$v.m_url}" target='_blank'<else/>href="{:U('video_detail@m',array('id'=>$v['id']))}"</eq>>
+                   <figure><img <notempty name='v.img'>src="{$v.img}"<else/>src="__IMAGES__/default.jpg"</notempty> alt="{$v.title}"></figure>
+                   <figcaption class="q-two">{$v.title}</figcaption>
+                   <em></em>
+                   </a>
+               </li>
+               </volist>
+           </ul>
+       </div>
+    </section>
+<include file="Public/app-bar"/>
+  <!-- 视频 e-->
+</block>

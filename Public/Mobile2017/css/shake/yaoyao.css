@@ -1,0 +1,42 @@
+html,body{ background: #2c366f;}
+.ac_details{background: url(../../images/shake/ewm_bg.jpg) no-repeat left top;width: 100%;min-height: 12.06rem;background-size: 100% 100%;position: relative;}
+.ac_details_rule{position: absolute;bottom: .2rem;left: 0;}
+
+
+.get_code{color: #fff;padding-top: 3.65rem;width: 75%;margin: 0 auto;}
+.get_count{width: 80%;height: .65rem;line-height: .65rem;background: #222951;text-align: center;border-radius: .1rem;margin: 0 auto;}
+.get_count span{color: #fc4146;}
+.scan{width: 75%; text-align: center; margin: .3rem auto;}
+/*h获取验证码*/
+.input_con{margin-top: .25rem;}
+.txt_pone input{width: 100%;height: .95rem;line-height: .95rem;padding: .2rem;border-radius: .1rem;color: #333;}
+.txt_getcode{margin-top: .2rem;}
+.txt_getcode .txt_code{width: 60%;height: .95rem;line-height: .95rem;padding: .2rem;border-radius: .1rem;color: #333;}
+.txt_getcode .btn_gcode{width: 30%;height: .95rem;line-height: .95rem;border-radius: .1rem;color: #724e06;background: #ffe402;text-align: center;border-bottom: .08rem solid #f6a707;}
+.sub_btn{background: url(../../images/shake/use.png) no-repeat left top;width: 100%;min-height: 1.34rem;background-size: 100% 100%;margin-top: .45rem;}
+/*rule;*/
+.ac_rule{color: #fff;width: 80%;margin: 0 auto;margin-top: .6rem; margin-bottom: .2rem;position: relative;}
+.ac_rule .ac_gold{position: absolute;left: 20%;top: -.46rem;background: url(../../images/shake/gold.png) no-repeat left top;width: 1.28rem;min-height: .84rem;background-size: 1.28rem .84rem;}
+.ac_rule p{ line-height: 22px; margin-bottom: .1rem; font-size: .26rem;}
+/*弹窗*/
+#maskLayer{opacity: .5;}
+.get_money{margin: 0 auto;width: 5.64rem;position: absolute;top: 30%;left: 50%;margin-left: -2.82rem;z-index: 99;display: none;}
+.gm_top{background: url(../../images/shake/money_bg.png) no-repeat left top;width: 5.64rem;min-height: 2.99rem;background-size: 5.64rem 2.99rem;}
+.gm_top p{padding-top: 1.1rem;text-align: center;font-size: .68rem;color: #ff4338;}
+.gm_top p span{font-size: .34rem;}
+.gm_btn{background: #fff;padding: .2rem;border-radius: 0 0 .1rem .1rem;}
+.gm_btn p{color: #ff4338;font-size: .24rem;text-align: center;}
+.gm_btn p span{color: #999999;padding-right: .1rem;}
+.use_now{background: #ff4338;width: 2.4rem;height: .7rem;line-height: .7rem;border-radius: .1rem;text-align: center;color: #fff;margin:0 auto;margin-top: .2rem;}
+/*已领取*/
+.use_over{margin: 0 auto;width: 5.64rem;position: absolute;top: 30%;left: 50%;margin-left: -2.82rem;z-index: 99;height: 4.6rem;background: #fff;border-radius: .2rem;display: none;}
+.uo_tip{width: 90%;height: .85rem;text-align: center;color: #4c4c4c;line-height: .85rem;border-bottom: 1px solid #cccccc;margin:0 auto;}
+.use_money{background: url(../../images/shake/use_bg.png) no-repeat left top;width: 2.4rem;height: 1.04rem;background-size: 2.4rem 1.04rem;text-align: center;line-height: 1.04rem;font-size: .48rem;color: #ff2525;margin: 0 auto;margin-top: .4rem;}
+.have_get{font-size: .22rem;text-align: center;color: #666666;font-size: .32rem;margin-top: .2rem;}
+
+.use_btn{width: 80%;margin:0 auto;margin-top: .5rem;}
+.use_btn .uo_btn{width: 1.7rem;height: .7rem;line-height: .7rem;background: #ff4e4e;text-align: center;color: #fff;border-radius: .1rem;}
+.use_btn .uo_btn:last-child{background: #b4b4b4;}
+
+
+

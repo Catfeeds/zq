@@ -1,0 +1,24 @@
+<div class="pageContent">
+    <form method="post" action="__URL__/setting" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>电脑版js代码 :</label>
+                <textarea name="setting[webJs]" style="width:800px;height:250px;">{$data.webJs}</textarea>
+            </div>
+            <div class="unit">
+                <label>手机版js代码 :</label>
+                <textarea name="setting[mobileJs]" style="width:800px;height:250px;">{$data.mobileJs}</textarea>
+            </div>
+            <div class="unit">
+                <label>网站meta代码 :</label>
+                <textarea name="setting[meta]" style="width:800px;height:100px;">{$data.meta}</textarea>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+</div>

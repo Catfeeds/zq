@@ -1,0 +1,133 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>链接名称：</label>
+				<input type="text" name="name" value="{$_REQUEST.name}"/>
+			</li>
+			<li>
+				<label>显示位置：</label>
+				<select name="position" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.position eq '1'">selected</if> >网站首页</option>
+					<option value="2" <if condition="$_REQUEST.position eq '2'">selected</if> >资讯首页</option>
+					<option value="3" <if condition="$_REQUEST.position eq '3'">selected</if> >即时比分</option>
+					<option value="4" <if condition="$_REQUEST.position eq '4'">selected</if> >更多友链</option>
+					<option value="5" <if condition="$_REQUEST.position eq '5'">selected</if> >web官网直通车</option>
+					<option value="6" <if condition="$_REQUEST.position eq '6'">selected</if> >英超专题</option>
+					<option value="7" <if condition="$_REQUEST.position eq '7'">selected</if> >西甲专题</option>
+					<option value="8" <if condition="$_REQUEST.position eq '8'">selected</if> >德甲专题</option>
+					<option value="9" <if condition="$_REQUEST.position eq '9'">selected</if> >意甲专题</option>
+					<option value="10" <if condition="$_REQUEST.position eq '10'">selected</if> >中超专题</option>
+					<option value="11" <if condition="$_REQUEST.position eq '11'">selected</if> >欧冠专题</option>
+					<option value="12" <if condition="$_REQUEST.position eq '12'">selected</if> >亚冠专题</option>
+					<option value="13" <if condition="$_REQUEST.position eq '13'">selected</if> >NBA专题</option>
+					<option value="14" <if condition="$_REQUEST.position eq '14'">selected</if> >CBA专题</option>
+					<option value="15" <if condition="$_REQUEST.position eq '15'">selected</if> >世界杯专题</option>
+				</select>
+			</li>
+			<li>
+				<label>状态：</label>
+				<select name="status" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >可用</option>
+					<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >停用</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true"><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/foreverdelete/id/{sid_record}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择广告"><span>删除</span></a></li>
+			<li>
+			<a class="delete" href="__URL__/delAll" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要删除这些记录吗?">
+			<span>批量删除</span>
+			</a>
+			</li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" warn="请选择用户"><span>编辑</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th style="width: 10px; cursor: default;">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th width="20" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="100">友情链接名称</th>
+			<th width="150">说明</th>
+			<th width="150">显示位置</th>
+			<th width="80">链接地址</th>
+			<th width="30">状态</th>
+			<th width="30">排序</th>
+			<th width="30">添加时间</th>
+			<th width="50">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td style="width: 10px;">
+						<div>
+							<input type="checkbox" value="{$vo.id}" name="id">
+						</div>
+					</td>
+					<td>{$vo['id']}</td>
+					<td>{$vo['name']}</td>
+					<td>{$vo['remark']}</td>
+					<td>
+						<switch name="vo.position">
+							<case value="1">网站首页</case>
+							<case value="2">资讯首页</case>
+							<case value="3">即时比分</case>
+							<case value="4">更多友链</case>
+							<case value="5">web官网直通车</case>
+							<case value="6">英超专题</case>
+							<case value="7">西甲专题</case>
+							<case value="8">德甲专题</case>
+							<case value="9">意甲专题</case>
+							<case value="10">中超专题</case>
+							<case value="11">欧冠专题</case>
+							<case value="12">亚冠专题</case>
+							<case value="13">NBA专题</case>
+							<case value="14">CBA专题</case>
+							<case value="15">世界杯专题</case>
+						</switch>
+					</td>
+					<td>{$vo['url']}</td>
+					<td>{$vo['status']|getStatus}</td>
+					<td>{$vo['sort']}</td>
+					<td>{$vo['add_time']|date="Y-m-d H:i:s",###}</td>
+					<td>
+						<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" title="{$vo.name}编辑" rel="editPage" height="350">编辑</a> |
+						{$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",'__DWZ__'}
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

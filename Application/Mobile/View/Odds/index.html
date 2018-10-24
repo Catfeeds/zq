@@ -1,0 +1,43 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>全球体育手机网赔率指数</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/zhishu.css">
+    <script type="text/javascript" src="__JS__/odds.js"></script>
+</block>
+<block name="header">
+    <header id="other_header" class="headFixed">
+        <!--<div class="logo"><a href="{:U('/')}"><img src="__IMAGES__/index/logo.png" alt="logo"></a></div>-->
+        <a href="//{:C('MAIN')}/Index.html"></a>
+        <span style="margin-left: 80px;">{$title}</span>
+        <div class="posnal_list" style="margin-top: .20rem;font-size: .28rem;">
+          <!--<a href="{:U('User/index')}" class="myHead"><img src="{$user_auth['head']|default='__IMAGES__/index/headImg.png'}" alt="头像"></a>-->
+          <!--<a href="{:U('H5/appJump',['sign'=>'lhbd'])}">-->
+            <!--<img src="__IMAGES__/index/user/app-icon.png" alt="App" class="set">-->
+          <!--</a>-->
+          <a href="{:U('Odds/company')}" class="m_rule">公司</a>
+          <a href="{:U('Odds/event')}" class="m_rule">赛事</a>
+        </div>
+    </header>
+</block>
+<block name="content">
+    <!-- 内容 s -->
+    <section class="odds_con contentPt clearfix">
+        <div class="gameLive"></div>
+        <div id="rankListMore" class="paged boxs" style="display:block;">
+            <div class="load_gif fs24 text-999">
+                <span><img src="__IMAGES__/load.gif"></span>
+                <span>正在加载更多的数据...</span>
+            </div>
+        </div>
+    </section>
+    <!-- 内容 e -->
+</block>
+<block name="scripts">
+    <script>
+        var cookieUa = '_f';
+    </script>
+    <script type="text/javascript" src="__JS__/Odds/index.js"></script>
+</block>

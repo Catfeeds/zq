@@ -1,0 +1,226 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>全球体育_比分调用_足球比分_篮球比分_即时比分_比分直播_完场比分_未来赛程_竞彩比分</title>
+    <meta name="keywords" content="竞彩比分、足球比分、篮球比分、即时比分、完场比分、nba比分、zuqiubifen、bifenzhibo、2018世界杯"/>
+    <meta name="description" content="全球体育网是2018足球世界杯比分、竞彩比分、足球比分、篮球比分、即时比分、完场比分、nba比分、zuqiubifen、bifenzhibo的大数据比分平台"/>
+</block>
+<block name="body">
+<body class="eden">
+    <style type="text/css">
+        .qianru {
+            width: 1200px;
+            margin: 0 auto;
+            font-family: "microsoft yahei";
+            color: #333;
+        }
+        .qianru .bd {
+            border: 1px solid #e9e9e9;
+            background: #fff;
+        }
+        .qianru-top {
+            margin-bottom: 10px;
+        }
+        .tabtit {
+            padding: 25px 100px;
+            border-bottom: 1px solid #e9e9e9;
+            margin: auto;
+            text-align: center;
+        }
+        .tabtit a {
+            min-width: 130px;
+            height: 32px;
+            border: 1px solid #999;
+            color: #333;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            padding: 0 5px;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .tabtit a.cur {
+            background-color: #4d7082;
+            color: #fff;
+            border: 1px solid #4d7082;
+        }
+        .tabspan .btns {
+            padding: 0 5px;
+            min-width: 50px;
+            height: 22px;
+            line-height: 22px;
+            border: 1px solid #ddd;
+            text-align: center;
+            float: left;
+            border-radius: 2px;
+            margin: 0 10px 0 0;
+            background-color: #fff;
+            color: #666;
+            text-decoration: none;
+        }
+        .tabspan .btns.cur {
+            background-color: #1681c0;
+            border-color: #1681c0;
+            color: #fff;
+        }
+        .table-item dl dt, .table-item dl dd {
+            float: left;
+            min-height: 18px;
+            padding: 10px 5px;
+            line-height: 18px;
+        }
+        .table-item dl dt {
+            text-align: right;
+            width: 200px;
+        }
+        .textareaBox {
+            width: 750px;
+            padding: 15px;
+            border: 1px solid #e9e9e9;
+            background: #f5f5f5;
+        }
+        .textarea {
+            border: 1px solid #ccc;
+            padding: 3px;
+            font-size: 12px;
+            font-family: Arial;
+            resize: none;
+            outline: 0;
+            width:720px;
+            height:198px;
+            white-space: normal;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var DOMAIN = "__DOMAIN__";
+            $(".tab a").click(function () {
+                $('#code').val('');
+                $('#dmyxg a').removeClass('cur');
+                $(this).addClass("cur").siblings().removeClass("cur")
+            });
+            //比分调用
+            $('#bfdy').click(function () {
+                $('#code').val('');
+                $('#dmyxg a').removeClass('cur');
+                $('#balltype').show();
+            });
+            $('#wcdy').click(function () {
+                $('#code').val('');
+                $('#dmyxg a').removeClass('cur');
+                $('#balltype').hide();
+            });
+            $('#wldy').click(function () {
+                $('#code').val('');
+                $('#dmyxg a').removeClass('cur');
+                $('#balltype').hide();
+            });
+            //指数调用
+            $('#zsdy').click(function () {
+                $('#code').val('');
+                $('#dmyxg a').removeClass('cur');
+                $('#balltype').hide();
+            });
+
+            //预览
+            $('#preview').click(function () {
+                $(this).addClass("cur");
+                $(this).siblings().removeClass("cur");
+                var url = '';
+                var type,subtype;
+                if ($('#bfdy').hasClass("cur")) {
+//                    var v = $('input[name="ball"]:checked').val();
+                    url = '//bf.'+DOMAIN+'/?header=no';
+                }
+                window.open(url, '_blank');
+            });
+            //生成
+            $('#generate').click(function () {
+                $(this).addClass("cur");
+                $(this).siblings().removeClass("cur");
+
+                //var width = $('#width').val();
+                var code = '';
+                if ($('#bfdy').hasClass("cur")) {
+                    var v = $('input[name="ball"]:checked').val();
+                    if (v == 1) {
+                        //足球
+                        code =
+                                '<iframe id="embed" src="//bf.'+DOMAIN+'/?header=no" width="1200" border="0" style="display: block; margin: 0 auto;" frameborder="0" scrolling="yes" onload="var ifm=' +
+                                'document.getElementById(\'embed\');ifm.height=document.documentElement.clientHeight;"></iframe>';
+                    } else if (v == 2) {
+                        //篮球
+                    }
+                }
+                $('#code').val(code);
+            });
+        });
+        function getCode(id) {
+            var _dom = document.getElementById(id);
+            var content = _dom.innerHTML || _dom.value;
+            // 复制内容
+            _dom.select();
+            // 将内容复制到剪贴板
+            document.execCommand("copy");
+        }
+    </script>
+	<!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreLive/scoreLive.css">
+    <include file="Public:top_score"/>
+    <!-- 主体内容 -->
+    <div class="qianru">
+        <!-- 导航开始 -->
+        <include file="Public:score_nav"/>
+        <div class="bd">
+            <div class="section-2">
+                <div class="qianru-top clearfix">
+                    <div class="tabtit tab">
+                        <a id="bfdy" class="cur">比分调用</a>
+                    </div>
+                </div>
+                <div class="table-item">
+                    <dl id="balltype" class="clearfix">
+                        <dt>比分选择：</dt>
+                        <dd>
+                            <label><input type="radio" name="ball" value="1" checked="checked" />单独足球比分
+                            </label>
+                            <!--<label><input type="radio" name="ball" value="2"/>单独篮球比分</label>-->
+                        </dd>
+                    </dl>
+                    <!-- <dl class="clearfix">
+                        <dt>宽度：</dt>
+                        <dd>
+                            <input id="width" type="text" value="1200"/>
+                            <span>可设置宽度范围为1000px-1200px</span>
+                        </dd>
+                    </dl> -->
+                    <dl class="clearfix">
+                        <dt>代码与效果：</dt>
+                        <dd>
+                            <span id="dmyxg" class="tabspan tab">
+                                <a id='preview' class="btns" style="cursor: pointer;">预览效果</a>
+                                <a id='generate' class="btns" style="cursor: pointer;">生成调用代码</a>
+                            </span>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix">
+                        <dt></dt>
+                        <dd>
+                            <div class="textareaBox">
+                                <textarea readonly class="textarea" onclick="select()" id="code" resize="none" wrap="off"></textarea>
+                                <input type="button" value="复制代码" onclick="getCode('code')" style="margin-top: 15px; padding: 5px 10px; cursor: pointer;"/>
+                            </div>
+                            <div style="color: #999; margin: 10px; line-height: 24px;">
+                                <p>生成调用代码：即调用页面的调用代码，只要将其放入网页中，即可显示比分信息</p>
+                            </div>
+                        </dd>
+                    </dl>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public:footer"/>
+    <!-- 主体内容 -->
+</body>
+</html>
+</block>

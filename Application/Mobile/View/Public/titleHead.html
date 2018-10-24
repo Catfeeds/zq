@@ -1,0 +1,30 @@
+<link rel="stylesheet" type="text/css" href="__CSS__/common_pack.css?v=20180611">
+<neq name="_GET['header']" value="no">
+    <header class="header">
+        <div class="f-l">
+            <a class="logo-l" href="{:U('@m')}" title="全球体育手机网"><img src="__IMAGES__/logo.png" alt=""></a>
+            <if condition="$titleHead neq ''">
+                <if condition="$sConfig['url'] eq ''">
+                    <span class="subtitle">{$titleHead}</span>
+                    <else/>
+                    <a class="subtitle" href="<neq name="sConfig['url']" value="general">{:U('/'.$sConfig['url'].'@m')}<else/>javascript:void(0);</neq>">{$titleHead}</a>
+                </if>
+                <if condition="$user['name'] neq ''">
+                    <span> > {$user['name']}</span>
+                </if>
+            </if>
+        </div>
+        <if condition="$showLogin eq 1">
+
+            <div class="f-r">
+                <a class="r-img one" href="{:U('/App/download@www')}" title="全球体育APP" class="l-img"><img src="__IMAGES__/index/det-load.png"></a>
+                <a class="r-img two" href="{:U('/User/login')}" title="登入" class="r-img"><img src="__IMAGES__/index/wd.png"></a>
+            </div>
+            <else/>
+
+            <div class="r-l">
+                <a href="{:U('/App/download@www')}" title="全球体育APP"><img src="__IMAGES__/index/det-load.png"></a>
+            </div>
+        </if>
+    </header>
+</neq>

@@ -1,0 +1,16 @@
+
+        <!--<div class="logo"><a href="{:U('Index/index')}"><img src="__IMAGES__/index/logo.png" alt="logo"></a></div>-->
+        <!--<div class="posnal_list">-->
+          <!--<a href="{:U('User/index')}" class="myHead"><img src="{$user_auth['head']|default='__IMAGES__/index/headImg.png'}" alt="头像"></a>-->
+          <!--<a href="{:U('H5/appJump',['sign'=>'lhbd'])}">-->
+            <!--<img src="__IMAGES__/index/user/app-icon.png" alt="App" class="set">-->
+          <!--</a>-->
+          <!--<a href="{:U('Guess/rules')}" class="m_rule">规则</a>-->
+        <!--</div>-->
+        <header id="header" class="headFixed" style="background:#01af63;">
+            <div class="logo"><a href="{:U('Index/index')}"><img src="__IMAGES__/index/logo.png" alt="logo"></a></div>
+            <span style="line-height: .60rem;margin-left: .90rem;color: #fff;font-size: .34rem;">推荐王</span>
+            <div class="posnal_list">
+                <a href="<if condition="$is_log == 1">{:U('User/index')}<else/>{:U('User/login')}</if>" class="myHead"><img src="{$user_auth['head']|default='__IMAGES__/index/headImg.png'}" alt="头像"></a>
+            </div>
+        </header>

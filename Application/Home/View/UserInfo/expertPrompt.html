@@ -1,0 +1,18 @@
+<!-- 右边的主体内容 -->
+
+<div class="applyTitle">入驻体育号</div>
+<div class="applyInfor reset-con">
+    <div class="noitice">
+        <div class="noitice-left">
+            <eq name="user['status']" value="2"><h4>您的体育号申请正在审核中</h4></eq>
+            <eq name="user['status']" value="3"><h4>您的体育号申请失败</h4><h4>原因：{$user['reason']}</h4></eq>
+            <eq name="user['status']" value="3"><a href="{:U('SportUser/index')}">重新申请</a></eq>
+            <if condition="$user['status'] eq 0">
+            <h4>您正在申请体育号认证，请完善</h4>
+            <notpresent  name="info['phone']"><a href="{:U('UserInfo/bind_phone')}">绑定手机</a><span></notpresent >
+            <notpresent  name="info['identfy']"><a href="{:U('UserInfo/identity')}">身份认证</a><span></notpresent >
+            <notpresent  name="info['head']"><a href="{:U('UserInfo/basic_infor?face=2')}">上传头像</a><span></notpresent >
+            </if>
+        </div>
+    </div>
+</div>

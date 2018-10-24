@@ -1,0 +1,89 @@
+<div class="pageContent">
+    <form method="post" action="__URL__/save" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="{$vo.id}" />
+        <div class="pageFormContent" layoutH="58">
+
+            <div class="unit">
+                <label>赛程ID：</label>
+                <label>{$vo.game_id}</label>
+            </div>
+            <div class="unit">
+                <label>赛事名称：</label>
+                <label>{$vo.union_name|switchName=0,###}</label>
+            </div>
+            <div class="unit">
+                <label>比赛时间：</label>
+                <label>{$vo.game_start_timestamp|date="Y-m-d H:i",###}</label>
+            </div>
+            <div class="unit">
+                <label>比赛状态：</label>
+                <label>{:C('game_state')[$vo['game_state']]}</label>
+            </div>
+            <div class="unit">
+                <label>球队信息：</label>
+                <label>{$vo['home_team_name']|switchName=0,###} VS {$vo['away_team_name']|switchName=0,###}</label>
+            </div>
+            <div class="unit">
+                <label>比分：</label>
+                <label>{$vo['score']}（{$vo['half_score']}）</label>
+            </div>
+            <div class="unit">
+                <label>盘口：</label>
+                <label>{$vo.handcp}</label>
+            </div>
+            <div class="unit">
+                <label>预测比例：</label>
+                <label>{$vo.forecast_rate}%</label>
+            </div>
+            <div class="unit">
+                <label>预测结果：</label>
+                <switch name="vo.predictive_type">
+                    <case value="1">
+                        <input type="radio" name="recommend" value="1" <eq name="vo.recommend" value="1" >checked</eq>>{$vo.home_team_name|switchName=0,###}
+                        <input type="radio" name="recommend" value="2" <eq name="vo.recommend" value="2" >checked</eq>>{$vo.away_team_name|switchName=0,###}
+                    </case>
+                    <case value="2">
+                        <input type="radio" name="recommend" value="1" <eq name="vo.recommend" value="1" >checked</eq>>大球
+                        <input type="radio" name="recommend" value="2" <eq name="vo.recommend" value="2" >checked</eq>>小球
+                    </case>
+                    <case value="3">
+                        <input type="radio" name="recommend" value="1" <eq name="vo.recommend" value="1" >checked</eq>>胜
+                        <input type="radio" name="recommend" value="2" <eq name="vo.recommend" value="2" >checked</eq>>平
+                        <input type="radio" name="recommend" value="3" <eq name="vo.recommend" value="3" >checked</eq>>负
+                        <input type="radio" name="recommend" value="4" <eq name="vo.recommend" value="4" >checked</eq>>胜-平
+                        <input type="radio" name="recommend" value="5" <eq name="vo.recommend" value="5" >checked</eq>>胜-负
+                        <input type="radio" name="recommend" value="6" <eq name="vo.recommend" value="6" >checked</eq>>平-负
+                    </case>
+                </switch>
+            </div>
+            <div class="unit">
+                <label>首页显示：</label>
+                <select class="small bLeft"  name="home_recommend">
+                    <option <eq name="vo.home_recommend" value="0" >selected</eq> value="0">否</option>
+                    <option <eq name="vo.home_recommend" value="1" >selected</eq> value="1">是</option>
+                </select>
+            </div>
+            <div class="unit">
+                <label>推荐状态：</label>
+                <select class="small bLeft"  name="status">
+                    <option <eq name="vo.status" value="1" >selected</eq> value="1">正常</option>
+                    <option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+                </select>
+            </div>
+            <div class="unit">
+                <label>付费状态：</label>
+                <select class="small bLeft"  name="pay_state">
+                    <option <eq name="vo.pay_state" value="1" >selected</eq> value="1">正常</option>
+                    <option <eq name="vo.pay_state" value="0" >selected</eq> value="0">免费</option>
+                </select>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+</div>
+

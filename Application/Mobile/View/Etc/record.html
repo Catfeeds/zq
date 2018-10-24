@@ -1,0 +1,74 @@
+<include file="Etc/head"/>
+    <link rel="stylesheet" href="__CSS__/etc/ex_record.css">
+<body>
+	<!-- 导航 s-->
+<include file="Etc/nav"/>
+    <!-- 导航 e-->
+
+	<!-- banner 切换 s-->
+   <!-- <section class="main_banner">
+        <figure class="baner">
+          <a href="#"><img src="__IMAGES__/etc/record-banner.jpg" alt=""></a>
+        </figure>
+    </section> -->
+    <!-- banner 切换 e-->
+
+	<section class="main">
+        <div class="guess_infor">
+            <figure class="clearfix">
+                <div class="fl headImg">
+                    <img <present name="user_auth">src="{$user_auth['head_url']}" alt='{$user_auth['nick_name']}'<else/>src="__IMAGES__/user/headImg.png" alt='请登录'</present>>
+                </div>
+                <figcaption class="fl head_infor">
+                    <p class="name"><present name="user_auth">{$user_auth['nick_name']}<else/>-</present></p>
+                    <ul class="infor_ul">
+                      <li><span class="fs24">积分：</span><em id='u_integral' class="fs22"><present name="user_auth">{$user_auth['integral']}<else/>-</present></em></li>
+                      <li><span class="fs24">推荐币：</span><em id='u_coin' class="fs22"><present name="user_auth">{$user_auth['coin']}<else/>-</present></em></li>
+                      <li><span class="fs24">排名：</span><em class="fs22"><present name="user_auth"><eq name="user_auth['rank']" value="0">-<else/>{$user_auth['rank']}</eq><else/>-</present></em></li>
+                    </ul>
+                </figcaption>
+                <ul class="infor_ul infor_ul02 etc-more" style="width:auto">
+                    <li><span class="fs24">盈利推荐币：</span><em id='u_integral' class="fs22"><present name="user_auth">{$user_auth['win_coin']}<else/>-</present></em></li>
+                </ul>
+            </figure>
+        </div>
+        <p class="gzh">欧洲杯精彩资讯敬请关注微信号<em class="red">“全球体育手机网”</em></p>
+        <div class="record_con">
+            <volist name='list' id='v'  mod="2">
+                <dl <eq name="mod" value="1">class="dl_g"<else/>class="dl_w"</eq>>
+             	<dt><span class="fs24">欧洲杯</span>   {$v.gtime|date='m-d H:i',###}</dt>
+                <dd>{$v.home_team_name.0}<neq name='v.away_let' value='0'>(<em class="red">+{$v.away_let}</em>)</neq><neq name='v.home_let' value='0'>(<em class="red">-{$v.home_let}</em>)</neq>
+                    <span class="text-999 fs32">
+                        <eq name='v.game_state' value="-1"><em <eq name='v.rsl' value='1'>class="red"</eq><eq name='v.rsl' value='3'>class="blue"</eq>>{$v.home_score}</em>：<em <eq name='v.rsl' value='3'>class="red"</eq>
+                                <eq name='v.rsl' value='1'>class="blue"</eq>>{$v.away_score}</em><else/>VS</eq></span>  {$v.away_team_name.0}</dd>
+                <dd class="clearfix">
+                	<ul class="fl ul_dd">
+                		<li>推荐情况：<em style="color: #d25e25;">
+                                        <switch name='v.bet_type'>
+                                        <case value='1'>胜({$v.odds_win})</case>
+                                        <case value='2'>平({$v.odds_flat})</case>
+                                        <case value='3'>负({$v.odds_lose})</case>
+                                        </switch>
+                                    </em></li>
+                        <li>推荐币数：<em class="text-orange">{$v.bet_coin}推荐币</em></li>
+                        <li>盈利结果：<em class="text-orange">
+                                <switch name='v.res'>
+                                    <case value='0'>-</case>
+                                    <case value='1'>+{:abs($v['res_coin'] - $v['bet_coin'])}推荐币</case>
+                                    <case value='2'>-{$v.bet_coin}推荐币</case>
+                                </switch>
+                            </em></li>
+                	</ul>
+                    <switch name='v.res'>
+                        <case value='0'></case>
+                        <case value='1'><div class="fr circle circle_win">赢</div></case>
+                        <case value='2'><div class="fr circle circle_lose">输</div></case>
+                    </switch>
+                </dd>
+                <dd>推荐时间：<em class="text-999">{$v.add_time|date='Y-m-d H:i',###}</em></dd>
+             </dl>
+            </volist>
+        </div>
+    </section>
+</body>
+</html>

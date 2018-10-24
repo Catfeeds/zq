@@ -1,0 +1,46 @@
+<style>
+    .table2-config tr{
+        height: 35px;
+    }
+    .table2-config td{
+        text-align: center;
+        padding:12px;
+    }
+    .inputInfo2 {
+        line-height: 21px;
+    }
+</style>
+<div class="pageContent">
+    <form method="post" action="__URL__/config" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>每日签到积分配置：</label>
+                <table class="table2-config">
+                    <foreach name="config.dailySignIn" item="v" key="k">
+                        <tr>
+                            <td>第 {$k} 天</td>
+                            <td><input type="text" size="5" name="point[]" value="{$v}">&nbsp;<span class="inputInfo2">积分</span></td>
+                         </tr>
+                    </foreach>
+                </table>
+            </div>
+            <div class="unit">
+                <label>总开关：</label>
+                <input type="radio" name="status" value="0" <eq name='config.status' value="0">checked</eq>>关 &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="status" value="1" <eq name='config.status' value="1">checked</eq>>开
+            </div>
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+
+
+
+

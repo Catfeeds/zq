@@ -1,0 +1,105 @@
+<div class="pageContent">
+
+    <form method="post" action="__URL__/deduct" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input name="deduct" class="required" type="hidden" value="1"/>
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>选择会员：</label>
+                <input name="FrontUser.id" class="required" type="hidden" id="user_id" />
+                <textarea rows="5" cols="50" name="FrontUser.nick_name" readonly/></textarea>
+                <a width="800" height='600' lookupgroup="FrontUser" href="{:U('__ADMIN__/FrontUser/findFrontUser')}" class="btnLook">选择会员</a>
+            </div>
+
+            <div class="unit" style="margin-left:130px;" >
+
+                    <a  href="javascript:void();" onclick="getCoin()" style="color:blue;text-decoration:underline;">获取余额</a>
+                     &nbsp;&nbsp;&nbsp;&nbsp;
+                     <span id="amount"></span>
+            </div>
+            <div class="unit">
+                <label>扣除金额：</label>
+                <input type="text" name="change_num" class="digits required"  id="change_num">
+
+            </div>
+            <div class="unit" style="margin-left:130px;" >
+                <span style="color:red;" id="msg"></span>
+            </div>
+            <div class="unit">
+                <label>扣除说明：</label>
+                <textarea name="desc" maxlength="255" rows="3" cols="50" class="required"></textarea>
+            </div>
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript">
+function getCoin()
+{
+    var user_id = $("#user_id").val();
+    if(user_id == "")
+    {
+        alert("请选择用户");
+    }
+    else
+    {
+        $.ajax({
+            type: "POST",
+            url: "__URL__/deduct",
+            data: {'user_id':user_id,'coin':1},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                    $("#amount").attr("style","color:red");
+                    var str = "<span >可提金币：</span><span id='coin'></span>&nbsp;&nbsp;<span>不可提金币：</span><span id='unable_coin'></span>&nbsp;&nbsp;<span>冻结金币：</span><span id='frozen_coin'></span>";
+                    $("#amount").html(str);
+                    $("#coin").html(data.message.coin);
+                    $("#unable_coin").html(data.message.unable_coin);
+                    $("#frozen_coin").html(data.message.frozen_coin);
+
+                }else{
+                    alert("获取失败！");
+                }
+            }
+        });
+    }
+
+}
+$("#change_num").blur(function(){
+    var user_id = $("#user_id").val();
+    var change_num = $("#change_num").val();
+    if(user_id == "")
+    {
+        alert("请选择用户");
+    }
+    else
+    {
+        $.ajax({
+            type: "POST",
+            url: "__URL__/deduct",
+            data: {'user_id':user_id,'deductAmount':1,'change_num':change_num},
+            dataType: "json",
+            success: function(data){
+                if(data.status)
+                {
+
+                        $("#msg").html(data.info);
+
+
+                }else{
+                    alert("非法数据！");
+                }
+            }
+        });
+    }
+});
+
+</script>
+
+

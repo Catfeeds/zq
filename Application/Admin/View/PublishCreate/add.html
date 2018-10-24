@@ -1,0 +1,550 @@
+<div class="pageContent">
+<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,navTabAjaxDone);" target="callbackframe">
+	<div class="pageFormContent" layoutH="58">
+		<input type="hidden" value="{$vo.id}" name="id">
+		<input type="hidden" value="{$vo.add_time}" name="add_time">
+		<input type="hidden" value="{$vo.app_time}" name="app_time">
+		<div class="unit">
+			<label>文章标题：</label>
+			<input maxlength="30" class="required textInput" name="title" size="57" value="{$vo.title}">
+		</div>
+		<!-- <div class="unit">
+			<label>短标题：</label>
+			<input maxlength="20" class="required textInput" name="short_title" size="57" rows="1" value="{$vo.short_title}">
+		</div> -->
+		<div class="unit">
+			<label>选择分类：</label>
+			<select name="class_id" class="required textInput changeUserUrl" onchange="dujiaGame(this)">
+				<option value="">请选择</option>
+				<volist name="PublishClass" id="item">
+					<option value="{$item.id}" <if condition="$item['id'] eq $vo['class_id'] or $item['id'] eq $_REQUEST['class_id']">selected</if> >{$item.name}</option>
+					<notempty name="item.childs">
+						<volist name="item.childs" id="item2">
+							<option value="{$item2.id}" <if condition="$item2['id'] eq $vo['class_id'] or $item2['id'] eq $_REQUEST['class_id']">selected</if> >|_{$item2.name}</option>
+							<notempty name="item2.childs">
+								<volist name="item2.childs" id="item3">
+									<option value="{$item3.id}" <if condition="$item3['id'] eq $vo['class_id'] or $item3['id'] eq $_REQUEST['class_id']">selected</if>>|__{$item3.name}</option>
+								</volist>
+							</notempty>
+						</volist>
+					</notempty>
+				</volist>
+			</select>
+			&nbsp;
+			<!--<label>选择分类：</label>-->
+			<select name="class_id2" class="textInput changeUserUrl">
+				<option value="">请选择</option>
+				<volist name="PublishClass" id="item">
+					<option value="{$item.id}">{$item.name}</option>
+					<notempty name="item.childs">
+						<volist name="item.childs" id="item2">
+							<option value="{$item2.id}">|_{$item2.name}</option>
+							<notempty name="item2.childs">
+								<volist name="item2.childs" id="item3">
+									<option value="{$item3.id}">|__{$item3.name}</option>
+								</volist>
+							</notempty>
+						</volist>
+					</notempty>
+				</volist>
+			</select>
+			<span class="inputInfo">（提示：同时选择将会在两个分类下各发布一篇）</span>
+		</div>
+		<if condition="$vo.id eq ''">
+		<div class="dujiaGame" <if condition="$_REQUEST.class_id eq '10' or $_REQUEST.class_id eq '54'"><else/>style="display:none;"</if>>
+			<div class="unit">
+				<label>选择赛事：</label>
+				<input name="game.game_id" value="" type="hidden"/>
+				<input name="game.game_type" value="" type="hidden"/>
+				<input name="game.gtime" value="" type="hidden"/>
+				<input name="game.game" type="text" size="85"  value="" readonly/>
+				<a width="1000" height="600" lookupgroup="game" href="__URL__/findGame" onclick="removeGame(this)" class="btnLook">选择赛事</a>
+			</div>
+			<div class="unit unit-game">
+				<label>选择玩法：</label>
+				<table class="play-game" width="550">
+					<tr style="background: #f2f2f2;">
+						<td>玩法</td>
+						<td>主队/大球</td>
+						<td>盘口</td>
+						<td>客队/小球</td>
+					</tr>
+					<input type="hidden" class="odd" name="game.odds" value="">
+					<input type="hidden" class="handcp" name="game.handcp" value="">
+					<input type="hidden" class="play_type" name="game.play_type" value="">
+					<input type="hidden" class="chose_side" name="game.chose_side" value="">
+
+					<tr play_type="1">
+						<td>让球</td>
+						<td chose_side="1" class="odds home"><input type="text" size="5" name="game.fsw_exp_home" value="" readonly/></td>
+						<td class="handcp draw"><input type="text" size="5" name="game.fsw_exp" value="" readonly/></td>
+						<td chose_side="-1" class="odds away"><input type="text" size="5" name="game.fsw_exp_away" value="" readonly/></td>
+					</tr>
+					<tr play_type="-1">
+						<td>大小球</td>
+						<td chose_side="1" class="odds home"><input type="text" size="5" name="game.fsw_ball_home" value="" readonly/></td>
+						<td class="handcp draw"><input type="text" size="5" name="game.fsw_ball" value="" readonly/></td>
+						<td chose_side="-1" class="odds away"><input type="text" size="5" name="game.fsw_ball_away" value="" readonly/></td>
+					</tr>
+					<tr play_type="2">
+						<td>胜平负</td>
+						<td chose_side="1" class="odds home"><input type="text" size="5" name="game.home_odds" value="" readonly/></td>
+						<td chose_side="0" class="odds draw"><input type="text" size="5" name="game.draw_odds" value="" readonly/></td>
+						<td chose_side="-1" class="odds away"><input type="text" size="5" name="game.away_odds" value="" readonly/></td>
+					</tr>
+					<tr play_type="-2">
+						<td>让球胜平负(<input id="jingchai" type="text" size="1" name="game.let_exp" value="无" readonly/>)</td>
+						<td chose_side="1" class="odds home"><input type="text" size="5" name="game.home_letodds" value="" readonly/></td>
+						<td chose_side="0" class="odds draw"><input type="text" size="5" name="game.draw_letodds" value="" readonly/></td>
+						<td chose_side="-1" class="odds away"><input type="text" size="5" name="game.away_letodds" value="" readonly/></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		</if>
+		<if condition="$show_play eq 1">
+			<div class="unit">
+				<label>赛事ID：</label>
+				<input type="text" readonly disabled class="required textInput" value="<eq name="game_id_edit['game_id_type']" value="1">足球<else/>篮球</eq>" size="2" />
+				<input type="text" readonly disabled class="required textInput" value="{$game_id_edit['game_id']}" size="25" />
+			</div>
+			<div class="unit">
+				<label>玩法：</label>
+				<select id="play_type" name="" class="required textInput" onchange="secondary(this)" disabled="disabled">
+					<option value="">请选择</option>
+					<option <eq name="vo.play_type" value="1">selected</eq> value="1">让分</option>
+					<option <eq name="vo.play_type" value="-1">selected</eq> value="-1">大小</option>
+					<option <eq name="vo.play_type" value="2">selected</eq> value="2">胜平负</option>
+					<option <eq name="vo.play_type" value="-2">selected</eq> value="-2">让球胜平负</option>
+				</select>
+				<label style="width: auto;">&nbsp;&nbsp;</label>
+				<notempty name="vo.id">
+					<select id="chose_side" name="" class="required textInput" disabled="disabled">
+						<option value="">请选择</option>
+						<if condition="$vo.play_type eq '1'">
+							<option <eq name="vo.chose_side" value="1">selected</eq> value="1">主队</option>
+							<option <eq name="vo.chose_side" value="-1">selected</eq> value="-1">客队</option>
+						</if>
+						<if condition="$vo.play_type eq '-1'">
+							<option <eq name="vo.chose_side" value="1">selected</eq> value="1">大球</option>
+							<option <eq name="vo.chose_side" value="-1">selected</eq> value="-1">小球</option>
+						</if>
+						<if condition="$vo.play_type eq '2' || $vo.play_type eq '-2'">
+							<option <eq name="vo.chose_side" value="1">selected</eq> value="1">胜</option>
+							<option <eq name="vo.chose_side" value="0">selected</eq> value="0">平</option>
+							<option <eq name="vo.chose_side" value="-1">selected</eq> value="-1">负</option>
+						</if>
+					</select>
+				</notempty>
+			</div>
+		</if>
+		<div class="unit">
+			<label>封面图片：</label>
+			<ul class="tabImg">
+				<li>
+					<input id="viewUploadInput_77" name="fileInput" type="file" onChange="previewImage(77)" style="display:none;" />
+					<a href="javascript:void(0);">
+						 <span id="viewUploadDiv_77">
+							<empty name="vo.img">
+								<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_77"/>
+							<else/>
+								<img id="viewUploadImg_77" width='80' height='80' border=0 src="{$vo.img}">
+							</empty>
+						 </span>
+					</a>
+					<div id="poiter_77" class="poiter">
+						<empty name="vo.img">
+							<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_77')">添加图片</a>
+						<else/>
+							<a title="删除" onclick="delPic({$vo.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_77')">重传</a>
+						</empty>
+					</div>
+				</li>
+			</ul>
+			<span class="inputInfo">（提示：标准尺寸为150*100）</span>
+		</div>
+		<div class="unit">
+			<label>来源：</label>
+			<input type="text" class="" name="source" value="{$vo.source|default='全球体育'}" />
+		</div>
+		<if condition="$vo.id neq ''">
+		<div class="unit">
+			<label>审核编辑：</label>
+			<input type="text" readonly disabled value="{$vo.authorName}<if condition="$vo.editorName neq ''">（{$vo['editorName']}）</if>" />
+		</div>
+		</if>
+		<div class="unit">
+			<label>专家作者：</label>
+			<input type="hidden" class="required textInput" id="user_id{$randStr}" name="user.id" value="{$vo.user_id}" />
+			<input type="text" class="required textInput" id="nick_name{$randStr}" name="user.nick_name" readonly disabled value="{$vo.nick_name}" />
+			<a width="800" height='600' lookupgroup="user" id="findFrontUser" href="{:U('__URL__/findFrontUser')}?val={$vo.class_id|default=$_REQUEST['class_id']}&descript=1" class="btnLook">选择专家</a>
+			<span class="info" style="color: red;cursor: pointer;" onclick="setFrontUser();">》》随机获取</span>
+
+			<label>&nbsp;&nbsp;&nbsp;<a href="javascript:;" style="color: blue" onclick="setPublicUser();">【全球体育小编】</a></label>
+			<label>&nbsp;&nbsp;<a href="{:U('__URL__/findFrontUser')}?val=9999"  width="800" height='600' lookupgroup="user" style="color: blue" >【运营专用列表】</a></label>
+		</div>
+		<!-- <div class="unit">
+			<label>发布时间：</label>
+			<input class="date textInput readonly valid" type="text" <notempty name="vo.add_time">value="{$vo.add_time|date='Y-m-d H:i:s',###}"</notempty> readonly datefmt="yyyy-MM-dd HH:mm:ss" name="add_time">
+			<a class="inputDateButton" href="javascript:;">选择</a>
+			<span class="info">（yyyy-MM-dd HH:mm:ss）</span>
+		</div> -->
+		<!--<div class="unit">-->
+			<!--<label>APP发布时间：</label>-->
+			<!--<input class="date textInput readonly valid" type="text" <notempty name="vo.add_time">value="{$vo.app_time|date='Y-m-d H:i:s',###}"</notempty> readonly datefmt="yyyy-MM-dd HH:mm:ss" name="app_time">-->
+			<!--<a class="inputDateButton" href="javascript:;">选择</a>-->
+			<!--<span class="info">yyyy-MM-dd HH:mm:ss</span>-->
+		<!--</div>-->
+		<div class="unit">
+			<label>是否原创：</label>
+			<input type="radio" name="is_original" value="1" checked />是
+			<input type="radio" name="is_original" value="0" <eq name="vo.is_original" value="0">checked</eq> />否
+		</div>
+        <div class="unit">
+			<label>APP首页推荐：</label>
+			<input type="radio" name="is_recommend" value="0" checked />否
+			<!--<input type="radio" name="is_recommend" value="1" <eq name="vo.is_recommend" value="1">checked</eq> />是-->
+			<input type="radio" name="is_recommend" value="2" <eq name="vo.is_recommend" value="2">checked</eq> />重点
+		</div>
+		<div class="unit">
+			<label>WEB首页推荐：</label>
+			<input type="radio" name="web_recommend" value="0" checked />否
+			<input type="radio" name="web_recommend" value="1" <eq name="vo.web_recommend" value="1">checked</eq> />是
+			<input type="radio" name="web_recommend" value="2" <eq name="vo.web_recommend" value="2">checked</eq> />重点
+		</div>
+		<div class="unit">
+			<label>栏目推荐：</label>
+			<input type="radio" name="is_channel_push" value="0" checked />否
+			<input type="radio" name="is_channel_push" value="1" <eq name="vo.is_channel_push" value="1">checked</eq> />是
+		</div>
+		<div class="unit">
+			<label>头条推荐：</label>
+			<input type="radio" name="top_recommend" value="0" checked />否
+			<input type="radio" name="top_recommend" value="1" <eq name="vo.top_recommend" value="1">checked</eq> />是
+		</div>
+		<div class="unit">
+			<label>花生地铁WIFI推荐：</label>
+			<input type="radio" name="hs_recommend" value="0" checked />否
+			<input type="radio" name="hs_recommend" value="1" <eq name="vo.hs_recommend" value="1">checked</eq> />是
+		</div>
+		<div class="unit">
+			<label>APP置顶：</label>
+			<input type="radio" name="app_recommend" value="0" checked />否
+			<input type="radio" name="app_recommend" value="1" <eq name="vo.app_recommend" value="1">checked</eq> />是
+		</div>
+		<div class="unit">
+			<label>世界杯话题推荐：</label>
+			<input type="radio" name="worldcup_recommend" value="0" checked />否
+			<input type="radio" name="worldcup_recommend" value="1" <eq name="vo.worldcup_recommend" value="1">checked</eq> />是
+		</div>
+		<div class="unit">
+			<label>是否同步：</label>
+			<input type="radio" name="is_update" value="0" checked />否
+			<input type="radio" name="is_update" value="1" <eq name="vo.is_update" value="1">checked</eq> />彩票APP
+		</div>
+		<div class="unit">
+			<label>状态：</label>
+			<input type="radio" name="status" value="1" checked />正常
+			<input type="radio" name="status" value="0" <eq name="vo.status" value="0">checked</eq> />待发布
+			<input type="radio" name="status" value="2" <eq name="vo.status" value="2">checked</eq> />待审核
+		</div>
+		<div class="unit keyWordList">
+			<label>标签：</label>
+			<input type="text" name="label[]" class="required textInput keyWord0" value="{$vo.label.0}" maxlength='24' size="12" />
+			<input type="text" name="label[]" class="required textInput keyWord1" value="{$vo.label.1}" maxlength='24' size="12" />
+			<input type="text" name="label[]" class="required textInput keyWord2" value="{$vo.label.2}" maxlength='24' size="12" />
+			<input type="text" name="label[]" class="required textInput keyWord3" value="{$vo.label.3}" maxlength='24' size="12" />
+			<input type="text" name="label[]" class="required textInput keyWord4" value="{$vo.label.4}" maxlength='24' size="12" />
+			<span class="info" style="color: red;cursor: pointer;" onclick="setKeyword('keyWord');">》》随机匹配</span>
+			<span class="info" style="color: green;cursor: pointer;" onclick="getSeoKey();">》》获取关键字</span>
+		</div>
+		<div class="unit">
+			<label>SEO标题：</label>
+			<textarea maxlength="100" class="large bLeft" name="seo_title" rows="2" cols="59">{$vo.seo_title}</textarea>
+		</div>
+		<div class="unit">
+			<label>SEO关键词：</label>
+			<textarea maxlength="120" class="large bLeft seoWord" name="seo_keys" rows="2" cols="59">{$vo.seo_keys}</textarea>
+			<span class="info" style="color: red;cursor: pointer;" onclick="setKeyword('seoWord');">》》随机匹配</span>
+			<span class="info" style="color: green;cursor: pointer;" onclick="getLabelKey();">》》获取标签</span>
+		</div>
+		<div class="unit">
+			<label>SEO描述：</label>
+			<textarea maxlength="150" class="large bLeft" name="seo_desc" rows="3" cols="59">{$vo.seo_desc}</textarea>
+		</div>
+		<div class="unit">
+			<label>文章摘要：</label>
+			<textarea maxlength="255" class="large bLeft" name="remark" rows="3" cols="59">{$vo.remark}</textarea>
+		</div>
+		<div class="unit">
+		  <label>内容：</label>
+		</div>
+		<div class="unit">
+		  <textarea id="myeditor{$randStr}" style="width:90%;height:600px;" name="content">{$vo.content}</textarea>
+		</div>
+	</div>
+			
+	<div class="formBar">
+		<ul>
+			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+			<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+		</ul>
+	</div>
+</form>
+
+</div>
+
+<script type="text/javascript">
+    //实例化编辑器
+    var editor = new UE.ui.Editor();
+    editor.render("myeditor{$randStr}");
+</script>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+    function secondary(obj){
+        $(obj).next().next().remove();
+        var play_type = $(obj).val();
+        if(play_type == 1){
+            var name1 = '主队';
+            var name2 = '客队';
+        }else if(play_type == -1){
+            var name1 = '大球';
+            var name2 = '小球';
+        }else{
+			var name1 = '胜';
+			var name2 = '平';
+			var name3 = '负';
+		}
+
+		if(play_type == 1 || play_type == -1){
+			var html = "<select class=\"required\"  name=\"chose_side\">"+
+					"<option value=\"\">请选择</option>"+
+					"<option value=\"1\">"+name1+"</option>"+
+					"<option value=\"-1\">"+name2+"</option>"+
+					"</select>";
+		}else{
+			var html = "<select class=\"required\"  name=\"chose_side\">"+
+					"<option value=\"\">请选择</option>"+
+					"<option value=\"1\">"+name1+"</option>"+
+					"<option value=\"0\">"+name2+"</option>"+
+					"<option value=\"-1\">"+name3+"</option>"+
+					"</select>";
+		}
+
+        $(obj).next().after(html);
+    }
+	$(function(){
+		$('.tabImg li').hover(function(e) {
+			$(this).children('div').stop().animate({'top':'0'},300);
+		},function(){
+			$(this).children('div').stop().animate({'top':'80px'},300);
+		});
+	});
+
+	//独家解盘选择赛事
+	function dujiaGame(obj){
+		var class_id = $(obj).val();
+
+		var href = $('#findFrontUser').attr('href').split('?')[0];
+		$('#findFrontUser').attr('href',href+'?val='+class_id+'&descript=1');
+
+		if(class_id == 10 || class_id == 54){
+			$('.dujiaGame').show();
+		}else{
+			$('.dujiaGame').hide();
+		}
+	}
+
+	function delPic(id){
+		if(confirm("确认要删除吗？") == false){
+			return false;
+		}
+		//异步执行删除
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/PublishList/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                	$("#viewUploadInput_77").val("");
+					$("#viewUploadImg_77").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+					var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_77')\">添加图片</a>";
+					$("#poiter_77").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+	//随机返回专家
+	function setFrontUser(){
+		var val = $(".changeUserUrl option:selected").val();
+		if(val == ''){
+			alert('请先选择资讯分类！');
+			return
+		}
+		$.ajax({
+			type: 'post',
+			data:{val:val},
+			url: '__ADMIN__/PublishList/setFrontUser.html',
+			dataType: 'json',
+			success:function(data){
+				if(data.status == 1){
+					$("#user_id{$randStr}").val(data.info.id);
+					$("#nick_name{$randStr}").val(data.info.nick_name);
+				}
+			}
+		})
+	}
+
+	//全球体育小编
+	function setPublicUser(){
+		$("#user_id{$randStr}").val(1850);
+		$("#nick_name{$randStr}").val('全球体育小编');
+	}
+
+</script>
+
+<!--赛事选择框样式js-->
+<style>
+	.play-game tr td{
+		padding: 5px;
+		text-align: center;
+		border:solid #add9c0;
+		border-width:0px 1px 1px 0px;
+		padding-left:10px;
+	}
+	.play-game{border:solid #add9c0; border-width:1px 0px 0px 1px;}
+	.play-game input{float: none !important;border:none;background:#fff;text-align: center;}
+	.unit-game{border-bottom: 1px solid #ccc !important;padding: 15px 0 !important;margin-bottom: 10px !important;}
+	.odds,.odds input{
+		cursor: pointer;
+	}
+</style>
+<script>
+	//重新选择赛事
+	function removeGame(obj){
+		$(obj).siblings('input').val('');
+		$(obj).parent().next().find('input').val('').css('background','');
+		$(obj).parent().next().find('td').css('background','');
+	}
+	//选择玩法赋值
+	$(".odds").on('click',function(){
+		var odd = $(this).find('input').val();
+		if(odd == '') {
+			alert('请先选择赛事！');
+			return;
+		}
+		var play_type  = $(this).parent().attr('play_type');
+		var chose_side = $(this).attr('chose_side');
+		switch(play_type){
+			case '1':
+			case '-1':
+				var handcp = $(this).siblings('.handcp').find('input').val();
+				break;
+			case '2':
+			    var handcp = 0;
+				break;
+			case '-2':
+			    var handcp = $('#jingchai').val();
+				break;
+		}
+
+		$(this).parents('table').find('input').css('background','');
+		$(this).parents('table').find('td').css('background','');
+		$(this).css('background','orange');
+		$(this).find('input').css('background','orange');
+
+		$(this).parent().siblings('.odd').val(odd);
+		$(this).parent().siblings('.handcp').val(handcp);
+		$(this).parent().siblings('.play_type').val(play_type);
+		$(this).parent().siblings('.chose_side').val(chose_side);
+	})
+
+	//ajax获取标签/Seo关键字
+	function setKeyword(type)
+	{
+		var count = editor.getContentLength(true);
+		if (count < 1) {
+			alert("请输入内容");
+			return false;
+		}
+		var content = editor.getContent();
+		$.ajax({
+			type: 'post',
+			data:{content:content},
+			url: '__ADMIN__/HotKeyword/getKeyword.html',
+			dataType: 'json',
+			success:function(data){
+				if(data.status == 1){
+					if(type == 'keyWord')
+					{
+						$('.keyWordList .textInput').val('');
+						var key = data.info.split(',');
+						for(var i = 0;i < key.length;i++)
+						{
+							$('.'+type+i).val(key[i]);
+						}
+					}else{
+						$('.'+type).val(data.info);
+					}
+				}
+			}
+		})
+
+	}
+
+	//将SEO关键字填充到标签内
+	function getSeoKey()
+	{
+		var keyWord = $('.seoWord').val();
+		if(keyWord.length>0)
+		{
+			if(keyWord.indexOf('，') > -1)
+			{
+				keyWord = keyWord.split('，');
+			}else{
+				keyWord = keyWord.split(',');
+			}
+			for(var i = 0;i<5;i++)
+			{
+				$('.keyWord'+i).val(keyWord[i]);
+			}
+		}
+	}
+
+	//将标签填充到SEO关键字内
+	function getLabelKey()
+	{
+		var data = new Array;
+		var str = '';
+		data[0] = $('.keyWord0').val();
+		data[1] = $('.keyWord1').val();
+		data[2] = $('.keyWord2').val();
+		data[3] = $('.keyWord3').val();
+		data[4] = $('.keyWord4').val();
+		console.log(data)
+		for(var i = 0;i<5;i++)
+		{
+			if(data[i].length > 0)
+			{
+				str += data[i]+',';
+			}
+		}
+		str = (str.substring(str.length-1)==',')?str.substring(0,str.length-1):str;
+		$('.seoWord').val(str);
+	}
+</script>
+
+
+
+

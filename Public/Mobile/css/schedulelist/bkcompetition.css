@@ -1,0 +1,15 @@
+/**
+ * @author Weiqianqian <1937025663@qq.com>
+ *
+ * @since  2018-03-06
+**/
+/*list*/
+.list{ width: 100%; padding:0  6.2rem 0rem .1rem; margin-top: 1px; background-color: #eee;}
+.list .shrink{ color: #666;}
+.list a{  float: left; padding: .1rem .1rem .1rem .1rem;}
+.list .on{ background-color: #0a94e4; color: #fff;}
+.list .on .shrink{ color: #fff;}
+.list .percent{ text-align: center; font-size: .24rem;background-color: #eee;}
+.list .shrink span{ color: #333;}
+
+.line-bottom-t{ width: .6rem; border-bottom: .04rem solid #0a94e4; border-radius: 20%; margin-left: .9rem; margin-top: -1px;}

@@ -1,0 +1,41 @@
+<include file="Public:pagerForm" />
+<div class="page">
+	<div class="pageContent">
+		<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxMenu)">
+			<input type="hidden" name="id" value="{$vo.id}" />
+			<div class="pageFormContent" layoutH="62">
+					<div class="unit">
+						<label>平台名称：</label>
+						<input type="text" width="100" class="required " value="{$vo['site_name']}"  name="site_name">
+					</div>
+					<div class="unit">
+						<label>链接：</label>
+						<input type="text" class=" required"  value="{$vo['url']}" style="width:350px;" name="url">
+					</div>
+					<div class="unit">
+						<label>账号：</label>
+						<input type="text" class="required" value="{$vo['account']}" name="account">
+					</div>
+					<div class="unit">
+						<label>密码：</label>
+						<input type="text" class="required" value="{$vo['pwd']}"  name="pwd">
+					</div>
+					<div class="unit">
+						<label>账号昵称：</label>
+						<input type="text" class="required" value="{$vo['nickname']}"  name="nickname" >
+					</div>
+					<div class="unit">
+						<label>备注：</label>
+						<textarea name="remark" rows="1" cols="50" maxlength="30">{$vo.remark}</textarea>
+					</div>
+			</div>
+			<div class="formBar">
+				<ul>
+					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+					<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+				</ul>
+			</div>
+		</form>
+	</div>
+</div>
+

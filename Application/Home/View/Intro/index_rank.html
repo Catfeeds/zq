@@ -1,0 +1,15 @@
+<table class="table tb_phb_list">
+    <tbody>
+    <tr>
+        <td class="td_index">
+            <if condition="$k elt '3'">
+                <i>{$k}</i>
+                <else/>
+                {$k}
+            </if>
+        </td>
+        <td class="td_user"><a href="{$item.href}" target="_blank"><img src="{$item.logo}" alt="">{$item.name}</a></td>
+        <td class="td_perc">{$item.total_num}%</td>
+    </tr>
+    </tbody>
+</table>

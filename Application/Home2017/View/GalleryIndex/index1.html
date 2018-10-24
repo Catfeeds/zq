@@ -1,0 +1,132 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>全球体育高清图集_全球体育网qqty.com</title>
+</block>
+<block name="body">
+
+<body>
+    <!--引入本页所需css-->
+ 	<link type="text/css" href="/min/?f=__PUBLIC__/Home/css/gallery_index/pic.css" rel="stylesheet" />
+	<div class="body">
+        <!-- 顶部开始 -->
+        <include file="Public:top_index" />
+        <!-- 顶部结束 -->
+        <!-- banner焦点图开始 -->
+        <div class="pic_main">
+            <div class="slide_screen">
+                <ul class="list">
+                    <li class="liA">
+                        <div class="window">
+                        <volist name="galleryClass" id="item" offset="0" length='2'>
+                            <div class="piece">
+                                <a target="_blank" href="{:U('/info_p/'.$item['id'].'')}"><img alt="" src="{$item.images}">
+                                <div class="bar">
+                                    <h3>{$item.short_title}</h3>
+                                </div>
+                                </a>
+                            </div>
+                        </volist>
+                        </div>
+                    </li>
+                    <li class="liB">
+                        <div class="window">
+                        <volist name="galleryClass" id="item" offset="2" length='2'>
+                            <div class="piece">
+                                <a target="_blank" href="{:U('/info_p/'.$item['id'].'')}"><img alt="" src="{$item.images}">
+                                <div class="bar">
+                                    <h3>{$item.short_title}</h3>
+                                </div>
+                                </a>
+                            </div>
+                        </volist>
+                        </div>
+                    </li>
+                    <li class="liC">
+                        <div class="window">
+                        <volist name="galleryClass" id="item" offset="4" length='2'>
+                            <div class="piece">
+                                <a target="_blank" href="{:U('/info_p/'.$item['id'].'')}"><img alt="" src="{$item.images}">
+                                <div class="bar">
+                                    <h3>{$item.short_title}</h3>
+                                </div>
+                                </a>
+                            </div>
+                        </volist>
+                        </div>
+                    </li>
+                    <li class="liD">
+                        <div class="window">
+                        <volist name="galleryClass" id="item" offset="6" length='2'>
+                            <div class="piece">
+                                <a target="_blank" href="{:U('/info_p/'.$item['id'].'')}"><img alt="" src="{$item.images}">
+                                <div class="bar">
+                                    <h3>{$item.short_title}</h3>
+                                </div>
+                                </a>
+                            </div>
+                        </volist>
+                        </div>
+                    </li>
+                    <li class="liE">
+                        <div class="window">
+                        <volist name="galleryClass" id="item" offset="8" length='2'>
+                            <div class="piece">
+                                <a target="_blank" href="{:U('/info_p/'.$item['id'].'')}"><img alt="" src="{$item.images}">
+                                <div class="bar">
+                                    <h3>{$item.short_title}</h3>
+                                </div>
+                                </a>
+                            </div>
+                        </volist>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="libtn">
+                    <li _index="1" class="selected"></li>
+                    <li _index="2" class=""></li>
+                </ul>
+            </div>
+        </div>
+        <!-- banner焦点图结束 -->
+        <!-- 美女类型选择开始 -->
+        <div class="mid">
+        	<div class="list_box pull-left">
+        	<a href="/list_p.html" class="btn but_label <if condition="$_REQUEST.class_id eq ''">btn-green<else/>btn-default</if>">全部</a>
+            <volist name="allClass" id="item">
+        	   <a href="/list_p/{$item['id']}.html" class="btn but_label <if condition="$_REQUEST.class_id eq $item['id']">btn-green<else/>btn-default</if>">{$item.name}</a>
+            </volist>
+        	</div>
+        </div>
+        <!-- 美女类型选择结束 -->
+        <div class="container">
+        	<ul class="row">
+            <volist name="allGallery" id="item">
+        		<li class="col-xs-3">
+                    <div class="desc_img">
+                        <a target="_blank" href="{:U('/info_p/'.$item['id'].'')}">
+                            <img src="{$item.images}" width="240" height="157">
+                            <div class="img_text clearfix"><span class="pull-left">{$item.short_title}</span><em class="pull-right img_text03">{$item.imagesCount}/张</em></div>
+                        </a>
+                    </div>
+                </li>
+            </volist>
+        	</ul>
+        </div>
+        <!-- 主体内容开始 -->
+        <div class="loadPhotos" style="text-align: center;margin-bottom: 30px;">
+            <a href="javascript:;" class="btn btn-green" id="loadMore" style="width: 999px;">加载更多</a>
+            <a href="javascript:;" class="btn btn-default" style="display:none;cursor:default;width: 999px;" id="showLess">没有更多了</a>
+        </div>
+        <!-- 返回顶部开始 -->
+        <include file="Public:return_top" />
+        <!-- 返回顶部结束 -->
+        <input type="hidden" value="{$Think.get.class_id}" id="class_id">
+        <!-- 底部版权信息开始 -->
+        <include file="Public:footer" />
+        <!-- 底部版权信息结束 -->
+    </div>
+</body>
+</html>
+<!--引入本页js-->
+<script type="text/javascript" src="/min/?b=Public/Home/js/gallery_index&f=index.js,a.js"></script>
+</block>

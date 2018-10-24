@@ -1,0 +1,95 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/Roll/rollToday.css?20180515">
+</block>
+<block name="content">
+    <include file="Public:top_user"/>
+
+    <!-- main -->
+    <div class="main">
+
+        <div class="news-lists">
+            <!-- 搜索 -->
+            <div class="seach-box">
+                <div class="seach-box-content">
+                    <p class="theme text-c">{:date('Y年m月d日',time())}<span>滚动新闻</span></p>
+                    <div class="seach">
+                        <input type="text" placeholder="输入关键字，多关键字用空格分隔" class="search-input searchKey" value="{$_REQUEST.searchKey}">
+                        <div class="filter-box select-one">
+                            <div class="filter-text">
+                                <input class="filter-title" type="text" readonly placeholder="pleace select"/>
+                                <i class="icon icon-filter-arrow"></i>
+                            </div>
+                            <select name="filter" class="searchType">
+                                <option value="1" <if condition="$_REQUEST.type neq '2'">selected</if>>按标题</option>
+                                <option value="2" <if condition="$_REQUEST.type eq '2'">selected</if>>按全文</option>
+                            </select>
+                        </div>
+                        <div class="filter-box1 select-two">
+                            <div class="filter-text">
+                                <input class="filter-title" type="text" readonly placeholder="pleace select"/>
+                                <i class="icon icon-filter-arrow"></i>
+                            </div>
+                            <select name="filter" class="searchTime">
+                                <option value="" <if condition="$_REQUEST.time eq ''">selected</if>>全部时间</option>
+                                <option value="day" <if condition="$_REQUEST.time eq 'day'">selected</if>>一天内</option>
+                                <option value="week" <if condition="$_REQUEST.time eq 'week'">selected</if>>一周内</option>
+                                <option value="mon" <if condition="$_REQUEST.time eq 'mon'">selected</if>>一月内</option>
+                            </select>
+                        </div>
+                        <span class="serch-button text-c f16">搜索</span>
+                        <span class="freshen text-c f16">刷新</span>
+                    </div>
+                </div>
+                <p class="title text-c">
+                    <span>栏目</span>
+                    <span>标题</span>
+                    <span>时间</span>
+                </p>
+
+            </div>
+            <if condition="$list neq ''">
+                <for start="0" end="7" name="num">
+                    <ul class="lists f16">
+                        <volist name="list" id="vo" offset="$num*5" length='5'>
+                            <li>
+                                <a href="{$vo.href}" target="_blank" title="{$vo.title}">
+                                    <span class="text-c over-hidden"><if condition="$vo['class_name'] neq ''">[{$vo.class_name}]</if></span>
+                                    <span class="text-l over-hidden">{$vo.title}</span>
+                                    <span class="text-r over-hidden">{:date('Y-m-d H:i',$vo['add_time'])}</span>
+                                </a>
+                            </li>
+                        </volist>
+                    </ul>
+                </for>
+            <else/>
+                <div class="insearch-kong">
+                    <h5>童鞋，木有找到相关内容~</h5>
+                    <p>请重新搜索！</p>
+                </div>
+            </if>
+
+
+            <div id="example" style="text-align: center;<if condition="$pageNone eq 1">display:none;</if>">
+                <ul id="pageLimit"></ul>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- main -->
+
+</block>
+<block name="footer"></block>
+<block name="js">
+    <!-- 页面所需的js -->
+    <script type="text/javascript" src="__PUBLIC__/Plugs/bootstrap-paginator.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Plugs/selectFilter.js"></script>
+    <script type="text/javascript">
+        //分页数据
+        var pageCount = "{$pageCount}";
+        var newP = "{$p}";
+    </script>
+    <script type="text/javascript" src="__JS__/Roll/rollToday.js"></script>
+</block>
+

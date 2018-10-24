@@ -1,0 +1,125 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			<if condition="$vo.id eq ''">
+			<div class="unit">
+				<label>选择专家用户：</label>
+				<input name="FrontUser.id" class="required" type="hidden" value="{$vo.user_id}"/>
+				<input class="required textInput" name="FrontUser.nick_name" value="{$vo.nick_name}" readonly disabled/>
+				<a width="800" height='600' lookupgroup="FrontUser" href="{:U('__ADMIN__/FrontUser/findFrontUser')}?is_expert=1&Multiselect=0" class="btnLook" rel="addLiveUser">选择主播</a>
+			</div>
+			<else/>
+				<label>主播昵称：</label>
+				<input name="FrontUser.id" class="required" type="hidden" value="{$vo.user_id}"/>
+				<label>{$vo.nick_name}</label>
+			</if>
+			<div class="unit">
+				<label>主播标识：</label>
+				<input type="text" class="required digits" name="FrontUser.live_uniqueid" value="{$vo.unique_id}"/>
+			</div>
+			<if condition="$vo.id neq ''">
+				<div class="unit">
+					<label>个人简介：</label>
+					<textarea maxlength="255" class="large bLeft" name="descript" rows="3" cols="47">{$vo.descript}</textarea>
+				</div>
+			</if>
+
+			<div class="unit iconUploads">
+				<label>封面图：</label>
+				<ul class="tabImg">
+					<li>
+						<input id="viewUploadInput_1" name="fileInput1" type="file" onChange="previewImage(1)" style="display:none;" />
+						<a href="javascript:void(0);">
+                                 <span id="viewUploadDiv_1">
+                                    <empty name="vo.img">
+                                        <img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_1"/>
+                                    <else/>
+                                        <img id="viewUploadImg_1" width='80' height='80' border=0 src="{$vo.img}">
+                                    </empty>
+                                 </span>
+						</a>
+						<div id="poiter_1" class="poiter">
+							<empty name="vo.img">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_1')">添加图片</a>
+								<else/>
+								<a title="删除" onclick="delPic({$vo.id},1);">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_1')">重传</a>
+							</empty>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="unit">
+				<label>直播时间说明：</label>
+				<textarea maxlength="255" class="large bLeft" name="live_desc" rows="3" cols="47">{$vo.live_desc}</textarea>
+			</div>
+
+			<div class="unit">
+				<label>开通主播权限：</label>
+				<select class="small bLeft"  name="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">是</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">否</option>
+				</select>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+    $(function(){
+        $('.tabImg li').hover(function(e) {
+            $(this).children('div').stop().animate({'top':'0'},300);
+        },function(){
+            $(this).children('div').stop().animate({'top':'80px'},300);
+        });
+    });
+
+    function delPic(id,num){
+        if(confirm("确认要删除吗？") == false){
+            return false;
+        }
+        //异步执行删除
+        $.ajax({
+            type: "POST",
+            url: "__ADMIN__/Nav/delPic.html",
+            data: {'id':id,'num':num},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                    $("#viewUploadInput_"+num).val("");
+                    $("#viewUploadImg_"+num).attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+                    var str = "<a title='添加图片' onclick='selectViewUploadImg('#viewUploadInput_'"+num+")'>添加图片</a>";
+                    $("#poiter_"+num).html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+    }
+
+    //APP世界杯底部导航时需上传icon图标
+    $('.UploadsIcon').on('change',function (){
+        var type = $(this).val();
+        if(type == 3){
+            $('.iconUploads').show();
+        }else{
+            $('.iconUploads').hide();
+        }
+    })
+</script>
+

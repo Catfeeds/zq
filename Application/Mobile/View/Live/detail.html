@@ -1,0 +1,28 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>手机全球体育手机网_即时足球比分,比分直播,足球直播,比分预测,赔率分析</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/live_score.css">
+    <link href="http://vjs.zencdn.net/5.10.7/video-js.css" rel="stylesheet">
+  <!-- If you'd like to support IE8 -->
+  <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+  <script src="http://vjs.zencdn.net/5.10.7/video.js"></script>
+</block>
+
+<!-- 内容 s -->
+<block name="content">
+    <section class="content">
+        <div class='live'>
+            <video id="my-video" class="video-js" controls preload="auto" style="width:100%; height:5rem;" data-setup="{}">
+              <source src="{$link}" type='application/vnd.apple.mpegurl'>
+              <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a web browser that
+                <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+              </p>
+            </video>
+        </div>
+      </section>
+    <!-- 内容 e -->
+</block>

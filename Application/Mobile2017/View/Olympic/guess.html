@@ -1,0 +1,207 @@
+<extend name="Public/Olympic/base" />
+<block name="seo">
+    <title>2016里约奥运会推荐_全球体育网</title>
+</block>
+<block name="append">
+    <link rel="stylesheet" href="__CSS__/Olympic/swiper_banner.css"> 
+</block>
+<block name="content">
+     <section class="guess_banner">
+         <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <volist name='banner' id='v'>
+                <figure class="swiper-slide">
+                        <switch name='v.type'>
+                        <case value='1' break='1'><a href="{:U('news_detail@m',array('id'=>$v['url']))}"></case>
+                        <case value='2' ><a href="{:U('photo_detail@m',array('id'=>$v['url']))}"></case>
+                        <case value='3' ><a href="{:U('video_detail@m',array('id'=>$v['url']))}"></case>
+                        <case value='9' ><a href="{$v['url']}" target='_blank'></case>
+                        </switch>
+                        <img src="{$v.titleimg}" alt="{$v.title}"></a>
+                    <figcaption>{$v.title}</figcaption>
+                </figure>
+                </volist>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+     </section>
+    
+      <section class="photo"> 
+        <div class="pt_tool pt_tool_guess">
+           <ul>
+             <li><a href="guess_rule.html"><img src="__IMAGES__/Olympic/g_list.png" alt="">规则</a></li>
+             <li><a href="guess_record.html"><img src="__IMAGES__/Olympic/g_jil.png" alt="">记录</a></li>
+             <li><a href="rank_list.html"><img src="__IMAGES__/Olympic/g_bangd.png" alt="">榜单</a></li> 
+           </ul>
+        </div>
+        <div class="guess_infor">
+          <figure class="clearfix">
+                <div class="fl headImg">
+                    <present name="user_auth">
+                    <img src="{$head|frontUserFace}" alt="{$user_auth.nick_name}"/>
+                    <else/>
+                    <a href="{:U('User/login')}">
+                    <img src="{$head|frontUserFace}" alt=""/>
+                    </a>
+                    </present>
+                </div>
+                <figcaption class="fl head_infor">
+                    <p class="name fs32">{$user_auth.nick_name}</p>
+                    <ul class="infor_ul clearfix">
+                      <li class="text-666">奥运积分：<span class="fs32">{$pointCount|default='--'}</span></li>
+                      <li class="text-666">我的排名：<em class="fs32">{$ranking|default='--'}</em></li>
+                      <present name="user_auth"><li class="text-666"><a href="{:U('Olympic/logout')}">退出</a></li></present>
+                    </ul>
+                </figcaption>
+            </figure>
+        </div>
+
+      <div class="new_tj com_dt clearfix">
+         <ul>
+         <volist name="quiz" id="item">
+           <li id="{$item.id}"> 
+             <div class="n_top">
+               <aside><img src="__IMAGES__/Olympic/gr_title.png" alt=""><span>{$item.union_name}</span> <time>{$item.game_time|date="Y-m-d H:i",###}</time></aside>
+             </div>
+             <p class="p_1">{$item.title}</p>
+             <div class="guess_vs">
+             <volist name="item.question" id="item2">
+                 <a <if condition="time() gt $item['game_time'] or $item['answer'] gt 0 "><else/>class="js-choice"</if> href="javascript:;">
+                 <p class="question" answer_id="{$item2.id}">{$item2.title}</p>
+                 <p><span>（<span class="odds">{$item2.odds}</span>）</span></p>
+               </a>
+             </volist>
+             </div>
+             <div class="<if condition="time() gt $item['game_time'] or $item['answer'] gt 0 ">guess_btn2<else/>guess_btn</if> game" game_id="{$item.id}" point="{$item.point}">
+                <a href="javascript:;">竞 猜</a>
+              </div>
+           </li> 
+         </volist>
+        </ul>
+       </div>
+      </section>
+
+    <!-- 推荐弹窗 s-->
+     <div class="guess_con">
+       <div class="gc_main clearfix">
+         <p class="title">标题</p>
+         <p>推荐：<span class="question">选项</span>（<span class="odds">赔率</span>）</p>
+         <p>推荐积分：<span class="point"></span>积分</p>
+       </div>
+       <div class="gc_btn_main"><a href="javascript:;" id="gc_btn">确 定</a><a href="javascript:;" id="gc_cancel">取 消</a></div>
+     </div>
+     <!-- 遮罩层 -->
+    <div id="maskLayer"></div>
+    <input type="hidden" value="{$user_auth.id}" name="user_auth"/>
+   <!-- 推荐弹窗 e-->
+
+</block>
+
+<!-- 金牌快讯 Swiper JS --> 
+<block name="scripts">
+<script src="__JS__/Olympic/swiper_banner.js"></script>   
+<script> 
+  //金牌快讯
+  var swiper = new Swiper('.swiper-container-teacher', { 
+    direction: 'vertical',
+    autoplay:2500
+  });
+          //banner 切换
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: 10000,
+            autoplayDisableOnInteraction: false
+        });
+  //选择
+  $(document).on('click','.js-choice',function(){
+      $(this).addClass("on").siblings().removeClass("on");
+  }).on('click','.game',function(){
+    var user_id = $('input[name=user_auth]').val();
+    if(user_id == ''){
+      alert("请先登录！");
+      location.href='//m.'+"__DOMAIN__"+'/User/login.html';
+      return;
+    }
+    if($(this).hasClass('guess_btn2')){
+        if($(this).prev().children().hasClass('on')){
+            showMsg("您已推荐过了，不能再推荐！");
+        }else{
+            showMsg("推荐已经结束，不能推荐！");
+        }
+        return;
+    }
+    var game_id  = $(this).attr("game_id");
+    var answer_id= $(this).prev().find('a.on').find('.question').attr("answer_id");
+    var title    = $(this).parent('li').find(".p_1").text();
+    var question = $(this).prev().find('a.on').find('.question').text();
+    var odds     = $(this).prev().find('a.on').find('.odds').text();
+    var point    = $(this).attr("point");
+    if(question == '' || odds == ''){
+      showMsg("请选择推荐选项！");
+      return;
+    }
+    $(".guess_con").find('#gc_btn').attr('game_id',game_id).attr('answer_id',answer_id);
+    $(".guess_con").find('.title').text(title);
+    $(".guess_con").find('.question').text(question);
+    $(".guess_con").find('.odds').text(odds);
+    $(".guess_con").find('.point').text(point);
+    $(".guess_con,#maskLayer").show();
+  });
+  //提交推荐
+  $("#gc_btn").on('click',function(){
+    var game_id   = $(this).attr('game_id');
+    var answer_id = $(this).attr('answer_id');
+    $.ajax({
+        type:'post',
+        url:"/Olympic/doGame.html",
+        data:{game_id:game_id,answer_id:answer_id},
+        dataType:'json',
+        beforeSend:function(){
+            $("#gc_btn").attr('disabled','disabled').text("正在提交...");
+        },
+        success:function(data){
+            if (data.status){
+              $(".guess_con,#maskLayer").hide();
+              $('.game[game_id="'+game_id+'"]').addClass('guess_btn2').removeClass('guess_btn');
+              $('.game[game_id="'+game_id+'"]').prev().find("p[answer_id='"+answer_id+"']").parent().addClass('on');
+              $('.game[game_id="'+game_id+'"]').prev().find('.js-choice').removeClass('js-choice');
+              showMsg(data.info);
+            }else{
+              showMsg(data.info);
+            }
+        },
+        complete:function(){
+            $("#gc_btn").removeAttr('disabled').text("确 定");
+        },
+    })
+  })
+  $("#maskLayer,#gc_cancel").click(function(){
+    $("#maskLayer").hide();
+    $(".guess_con").hide();
+  })
+  //提示弹框
+  function showMsg(msg){
+    var str = "guess_success"; 
+      var html = "<div class=\""+str+"\"></div>";
+      if($("."+str+"").length == 0){
+          $("body").append(html);
+      }
+      $('.'+str+'').html(msg).stop().fadeIn(300).animate({'top':'40%'},1500).hide(0).animate({'top':'50%'});
+  }
+  var gameRecord = {:json_encode($gameRecord)};
+  //给已经推荐过的添加已选样式
+  if (gameRecord != null){
+    for (var i = 0; i < gameRecord.length; i++){
+      $('.game[game_id="'+gameRecord[i]['quiz_id']+'"]').prev().find("p[answer_id='"+gameRecord[i]['answer_id']+"']").parent().addClass('on');
+      $('.game[game_id="'+gameRecord[i]['quiz_id']+'"]').prev().find('.js-choice').removeClass('js-choice');
+      $('.game[game_id="'+gameRecord[i]['quiz_id']+'"]').addClass('guess_btn2').removeClass('guess_btn');
+    }
+  }
+</script> 
+<!-- 公共js -->
+<script type="text/javascript" src="__JS__/Olympic/common.js"></script>
+</block>

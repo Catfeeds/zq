@@ -1,0 +1,142 @@
+<extend name="Public/base" />
+<block name="append">
+    <link rel="stylesheet" href="__CSS__/guess.css?v=201806121633">
+
+    <script>
+        var DOMAIN = "m."+"__DOMAIN__";
+        var IMAGES = "__IMAGES__";
+
+    </script>
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file='Public/header_inside'/>
+</block>
+<!-- 二级头部 e --> 
+
+<!-- nav s-->
+<block name="nav">
+    <section class="n_module">
+        <ul class="nav_list clearfix nav_list03">
+            <li><a href="{:U('',['type'=>1])}" type='1' <eq name='type' value='1'>class="on"</eq>>让球</a></li>
+            <li><a href="{:U('',['type'=>-1])}" type='-1' <eq name='type' value='-1'>class="on"</eq>>大小</a></li> 
+            <li><a href="{:U('',['type'=>2])}" type='2' <if condition="$type eq '2' OR $type eq '-2'">class="on"</if>>竞彩</a></li>
+        </ul>
+    </section>
+</block>
+<!-- nav e -->
+
+<!-- 内容 s -->
+<block name="content">
+
+
+    <section class="new_put_con clearfix">
+
+        <!-- 内容 s -->
+        <div class="new_tj com_dt clearfix">
+            <ul class="posts" id="js-list">
+                <volist name='list' id='v'>
+                    <li class="list">
+                        <!--各种样式: 赢:win 赢半:win_half 输:lose 输半:lose_half 平:ping -->
+                        <switch name="v['result']">
+                            <case value='0'></case>
+                            <case value='1'><div class="win"></div></case>
+                            <case value='-1'><div class="lose"></div></case>
+                            <case value='0.5'><div class="win_half"></div></case>
+                            <case value='-0.5'><div class="lose_half"></div></case>
+                            <case value='2'><div class="ping"></div></case>
+                        </switch>
+                        <div class="n_top clearfix">
+                            <div class="n_top_left">
+                                <a href="{:U('/expUser/'.$v['user_id'].'/'.$v['play_type'])}">
+                                    <img  class="lazy" data-original="{$v['face']}" src="__IMAGES__/index/headImg.png"   alt="{$v.nick_name}">
+                                    <span>{$v.nick_name}</span>
+                                    <if condition="$gambleType eq '2' OR $gambleType eq '-2'">
+                                        <em class="lv jc_lv{$v.lv_bet}"></em>
+                                        <else/>
+                                        <em class="lv lv{$v.lv}"></em>
+                                    </if>
+
+                                </a>
+                            </div>
+                            <div class="n_top_right">
+                                <egt name="v['tenGambleRate']" value='6'>
+                                    <em class="mingz">近10中{$v.tenGambleRate} </em>
+                                </egt>
+                                <egt name="v['curr_victs']['curr_victs']" value='2'>
+                                    <em class="lians">{$v.curr_victs.curr_victs}连胜</em>
+                                </egt>
+                            </div>
+                        </div>
+
+                        <div class="p_1">
+                            <div class="t_vs">
+                                <if condition="$v['play_type'] eq '2' OR $v['play_type'] eq '-2'">
+                                    <em>{$v['bet_code']} </em>
+                                </if>
+                                <em style="color: {$v.union_color}">{$v.union_name}</em>
+                                {$v.home_team_name}<span style='color:red'><if condition="$v['score'] eq '' or $v['score'] eq null">VS<else/>{$v.score}</if></span>
+                                {$v.away_team_name}
+                            </div>
+                            <div class="etip"><neq name="v['tradeCoin']" value="0"><span class="coins">{$v['tradeCoin']}</span><else/><span><img src="__IMAGES__/guess/free.png" alt="免费"></span></neq></div>
+                        </div>
+                        <p class="p_3">比赛时间：<span>{$v.day}<span></p>
+                        <p class="p_3">玩法：<span>
+                            <if condition="$v['play_type'] eq '1'">让球</if>
+                            <if condition="$v['play_type'] eq '-1'">大小球</if>
+                            <if condition="$v['play_type'] eq '2' OR $v['play_type'] eq '-2'">竞彩</if>
+                        </p>
+                        <if condition="$v['play_type'] eq '1' OR $v['play_type'] eq '-1'">
+                            <p class="p_4">推荐：<span>{$v.Answer} </span>&nbsp;&nbsp;{$v['handcp']}<em>（{$v['odds']}）</em></p>
+                            <else/>
+                            <p class="p_4">推荐：{$v.home_team_name} ({$v['handcp']}) <span>{$v.Answer}</span><em>（{$v['odds']}）</em></p>
+                        </if>
+
+                        <p class="p_5 q-two">分析：<span>{$v['desc']|default='暂无分析'}</span></p>
+                    </li>
+                </volist>
+            </ul>
+            <notempty name="list">
+                <div class="paged boxs">
+                    <div class="load_gif fs24 text-999" style="display: none">
+                        <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                        <span>正在加载更多的数据...</span>
+                    </div>
+                    <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已经全部加载完毕</a>
+                </div>
+                <else/>
+                <div class="paged boxs purchase-chan">
+                    <a href="javascript:;" class="btn btn-default boxs changes" style="cursor:default;">暂无记录</a>
+                    <a class="purchase" href="{:U($url)}">马上去购买</a>
+                </div>
+            </notempty>
+        </div>
+
+        <!-- 内容 e -->
+
+
+
+
+</block>
+
+
+<block name="scripts">
+    <script src="__JS__/mybuy.js"></script>
+    <script>
+        //头像懒加载
+        function lazyload(){
+            $("img.lazy").lazyload({
+                effect: "fadeIn",
+                threshold : 10,
+                failurelimit:10
+            });
+        }
+
+        $(function () {
+            //头像懒加载
+            lazyload();
+
+        });
+    </script>
+</block>

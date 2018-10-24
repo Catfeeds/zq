@@ -1,0 +1,109 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>日期：</label>
+				<input class="date textInput valid" type="text" datefmt="yyyyMMdd" name="game_date" value="{$_REQUEST.game_date}">
+				<a class="inputDateButton" href="javascript:;">选择</a>
+			</li>
+			<li>
+				<label>项目名称：</label>
+				<input type="text" name="game_name" value="{$_REQUEST.game_name}"/>
+			</li>
+			<li>
+				<label>赛事轮次：</label>
+				<input type="text" name="run_name" value="{$_REQUEST.run_name}"/>
+			</li>
+			<li>
+				<label>是否中国队：</label>
+				<select name="is_china" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.is_china eq '1'">selected</if> >是</option>
+					<option value="0" <if condition="$_REQUEST.is_china eq '0'">selected</if> >否</option>
+				</select>
+			</li>
+			<li>
+				<label>状态：</label>
+				<select name="status" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >启用</option>
+					<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >禁用</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true"><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/foreverdelete/id/{sid_record}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择记录"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" warn="请选择记录"><span>编辑</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="5%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="15%">类型</th>
+			<th width="15%">项目名称</th>
+			<th width="15%">赛事轮次</th>
+			<th width="10%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'game_date')"> class="desc"</if> orderField="game_date" <if condition="$_REQUEST._order eq 'game_date'">class="{$_REQUEST._sort}"</if>>日期</th>
+			<th width="10%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'game_time')"> class="desc"</if> orderField="game_time" <if condition="$_REQUEST._order eq 'game_time'">class="{$_REQUEST._sort}"</if>>时间</th>
+			<th width="7%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'is_china')"> class="desc"</if> orderField="is_china" <if condition="$_REQUEST._order eq 'is_china'">class="{$_REQUEST._sort}"</if>>是否中国队</th>
+			<th width="7%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'is_video')"> class="desc"</if> orderField="is_video" <if condition="$_REQUEST._order eq 'is_video'">class="{$_REQUEST._sort}"</if>>是否直播</th>
+			<th width="8%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'status')"> class="desc"</if> orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}"</if>>状态</th>
+			<th width="8%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['game_type']}</td>
+					<td>{$vo['game_name']}</td>
+					<td>{$vo['run_name']}</td>
+					<td>{$vo['game_date']}</td>
+					<td>{$vo['game_time']}</td>
+					<td>
+						<switch name="vo.is_china">
+							<case value="1">是</case>
+							<case value="0">否</case>
+						</switch>
+					</td>
+					<td>
+						<eq name="vo.is_video" value='0'>
+							<a title="你确定要设为直播吗？" href="__URL__/saveisVideo/id/{$vo.id}/is_video/1" target="ajaxTodo"><div style="color:red;">否</div></a>
+						<else/>
+							<a title="你确定要设为不直播吗？" href="__URL__/saveisVideo/id/{$vo.id}/is_video/0" target="ajaxTodo"><div style="color:blue">是</div></a>
+						</eq>
+					</td>
+					<td>{$vo['status']|getStatus}</td>
+					<td>
+					{$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",'__DWZ__'} |
+					<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" title="编辑" rel="editPage">编辑</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

@@ -1,0 +1,549 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    height:100%;
+    background: #464646;
+    overflow: hidden;
+}
+.player{
+    width:100%;
+    height:20rem;
+    background:red;
+}
+.chat-content{
+    width:100%;
+    height:40%;
+  
+}
+.Keyboard{
+    width:100%;
+    background: blue;
+}
+.remind{
+    background: #393939;
+    width:95%;
+    margin:2.8rem auto;
+    border-radius: 5px;
+    color:#fff001;
+    font-size: .9rem;
+    padding: .5rem;
+    margin-bottom:0;
+    line-height:1.2rem;
+    position:fixed;
+    z-index:1000;
+}
+.chat{
+    font-size:1.0rem;
+    line-height:2.2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding:0 2%;
+    flex-wrap: wrap;
+}
+.chat span{
+    font-size:.1.0rem;
+}
+.chat .icon{
+  width:1.4rem;
+  height:1.2rem;
+  margin-right:1.0rem;
+}
+.chat .gift-icon{
+    width:3rem;
+    height:1.5rem;
+    margin-left:.5rem;
+}
+.chat-two{
+    font-size:1.0rem;
+    /* display: flex; */
+    flex-direction: row;
+    flex-wrap: wrap;
+    background: #2d2d2e;
+    padding:2%;
+    border-radius: 3px;
+    margin-bottom:2%;
+}
+.chat-two span{
+    font-size:.1.0rem;
+}
+.chat-two .icon{
+  width:1.4rem;
+  height:1.2rem;
+  margin-right:1.0rem;
+}
+.chat-two .gift-icon{
+    width:3rem;
+    height:1.5rem;
+    margin-left:.5rem;
+}
+.name{
+    display: block;
+    margin-right: .5rem;
+    color:#fff001;
+    white-space: nowrap;
+}
+.chat-two  i{
+    color:#efb17f;
+    margin-right: .5rem;
+}
+.gift{
+    color:#a754a8;
+}
+.gift-Diamond{
+    width:1.4rem;
+    height:1.2rem;
+  margin-left:1.5rem;
+}
+.come{
+
+    color:#fff;
+}
+.chat-two .name{
+    display: inline-block;
+}
+.chat-two .come{
+    display: inline-block;
+}
+.tab{
+    width:100%;height:40px;
+}
+.back{
+    display: inline-block;
+    width:30px;
+    height:30px;
+    /* background: url('images/icon-back.png') no-repeat center center; */
+}
+.host-name{
+    position: absolute;
+    left: 50px;
+    top: .4rem;
+    z-index: 9999;
+    background: #686058;
+    height: 30px;
+    border-radius: 15px;
+    line-height: 30px;
+    color:#fff;
+    display: flex;
+
+}
+.host-name span{color:#fff;padding-left: 2px;height:30px;line-height: 30px;display: inline-block;padding: 0 10px}
+.host-name img{
+    height:30px;
+    border-radius:50%;
+}
+/* 聊天 */
+.chat-box{
+    position: relative;
+    margin-top:3.5rem;
+}
+.tab-zhezhao{
+    position: absolute;top:0;left:0;z-index:20000;width:100%;height:100%;
+}
+/* 点击去下载 */
+.mask{
+    position:absolute;width:100%;height:100%;background: rgba(0,0,0,0.4);top:0;left:0;z-index:1000000;  display: none;
+}
+.go-download{
+    width:70%;
+    height:10rem;
+    background: #fff;
+    z-index: 30000;
+    position: absolute;
+    left:15%;
+    top:20%;
+    border-radius: 3%;
+  
+   
+}
+.load-btn{
+    width: 80%;
+    height: 30%;
+    background: #0a94e4;
+    margin-left: 10%;
+    border-radius: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.0rem;
+    color:#fff;
+
+}
+.title{
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: .95rem;
+    color: #4d4d4d;
+    font-weight: 545;
+}
+.go-download .close-btn{
+    display: block;
+    width: 2.0rem;
+    height: 2.0rem;
+    border-radius: 50%;
+    background: #e8e8e8;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 1.8rem;
+    color: #bdbdbd;
+    line-height: 1.7rem;
+    text-align: center;
+    /* background: url('../images/ic_close.png') no-repeat center center; */
+}
+/* 主播切换场地 */
+.change{
+    position:absolute;width:100%;height:100%;background: rgba(0,0,0,0.4);top:0;left:0;z-index:1000000;  
+}
+.go-change{
+    width:70%;
+    height:20rem;
+    /* background: #fff; */
+    z-index: 30000;
+    position: absolute;
+    left:15%;
+    top:40%;
+    border-radius: 3%;
+}
+.go-change  .close-btn{
+    width:100%;
+    height:7rem;
+    display: block;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+
+}
+.go-change  .close-btn span img{
+   width:2rem;
+   height:2rem;
+
+}
+.go-change  .close-btn .close-icon{
+    display: flex;
+    justify-content: center;
+}
+.go-change  .close-btn .line{
+    display: block;
+    width: 50%;
+    height: 2.0rem;
+    border-right: 1px solid #fff;
+    margin-top: -5rem;
+  
+}
+.tally{
+    width:100%;
+    height:11rem;
+    background: #fff;
+    border-radius:7px; 
+}
+.title-icon{
+    width:90%;
+    height:3.7rem;
+    top:-1.3rem;
+    background: url('../../images/LiveRoom/pic.png') no-repeat center -10px;
+    background-size:100%; 
+    position: absolute;
+    left:5%;
+}
+.tally-title{
+    padding-top:2.0rem;
+    margin:0 .8rem;
+    display: flex;
+    align-items: center;
+   
+}
+.tally-title span{
+    /* border-left: 6px solid #00a8ff; */
+    padding-left: .5rem;
+    color:#00a8ff;
+    font-size:1.15rem;
+}
+.tally-title i{display: inline-block;width:4px;height:1.15rem;background:#00a8ff;border-radius: 1.5px}
+.troops{
+    text-align: center;
+    font-size: .96rem;
+    color:#4d4d4d;
+    margin:0 .8rem;
+    padding: .5rem 0 1rem 0;
+    border-bottom:1px solid #e5e5e5;
+    font-weight: bold;
+}
+.troops i{
+    color:#f03049;
+    padding:0 .5rem;
+    font-weight: normal;
+}
+.tally-load-btn{
+    margin:1rem .8rem;
+    height:3.0rem;
+    background: #00a8ff;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    text-align: center;
+    color:#fff;
+    line-height: 3.0rem;
+    
+}
+.tally-load-btn i{
+    color:#f6ff00;
+    font-size: 1.05rem;
+    padding-left: .5rem;
+}
+/* 默认图片 */
+.default{
+    width:100%;height:100%;display: inline-block;display: none
+}
+/* 主播暂停 */
+.remind-two{
+    background: #393939;
+    width:95%;
+    margin:.5rem auto;
+    border-radius: 5px;
+    color:#fff001;
+    font-size: .9rem;
+    padding: .5rem;
+    margin-bottom:0;
+}
+#pause {    
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    background: rgba(0,0,0,0);
+    display: block;
+    position: relative;
+}
+/* #pause img{
+    width:100%;
+    height:100%;
+} */
+#pause .shade{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7)
+
+}
+#pause .shade .shade-back{
+    display: flex;
+    width:100%;
+    height:30px;
+    margin-left: .6rem;
+    margin-top:3px;
+}
+#pause .shade .shade-back-btn{
+    display: inline-block;
+    width:30px;
+    height:30px;
+    border:1px solid #4d4d53;
+    border-radius: 50%;
+    background:#040106;
+    line-height: 26px;
+    text-align: center;
+    margin-top:3px;
+  
+}
+#pause .shade .shade-back-btn img{
+    width: 10px;
+    height: 20px;
+    padding-top:4px;
+}
+#pause .shade .host-name{
+    position: absolute;
+    left: 50px;
+    top: .4rem;
+    z-index: 9999;
+    background: #1d1d1d;
+    height: 30px;
+    border-radius: 15px;
+    line-height: 30px;
+    color:#fff;
+    display: flex;
+    border:1px solid #4d4d53;
+}
+#pause .shade .host-name i{color:#fff;padding-left: 2px;height:30px;line-height: 30px;display: inline-block;padding: 0 10px;font-style: normal}
+#pause .shade .host-name img{
+    height:30px;
+}
+#pause .shade .header-content{
+    width:100%;
+    height:5rem;
+    background: url('../images/time.png') no-repeat center bottom;
+    background-size: 15%;
+}
+#pause .shade .wore{
+    margin-top:.5rem;
+    color:#fff;
+    text-align: center;
+    font-size: 1rem;
+    
+}
+.messageEditor{
+    font-size: 1.0rem;
+}
+/* 网络不给力 */
+.header-icon-content{
+    width:100%;
+    height:3.5rem;
+    background: url('../images/ic_wwl.png') no-repeat center bottom;
+    background-size: 2.5rem;
+}
+.refresh{width:25%;height:2rem;background: #00a8ff;margin:.5rem auto;border-radius: 3px;font-size: .6rem;color:#fff;text-align: center;line-height: 2rem;}
+/* 第二种情况的样式 */
+#pause-two {    
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    background: rgba(0,0,0,0);
+    display: block;
+    position: relative;
+}
+#pause-two img{
+    width:100%;
+    height:160px!important;
+}
+#pause-two .shade{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:160px;
+    background:rgba(0,0,0,0.7)
+
+}
+#pause-two .shade .shade-back{
+    display: flex;
+    width:100%;
+    height:30px;
+    margin-left: .6rem;
+    margin-top:3px;
+}
+#pause-two .shade .shade-back-btn{
+    display: inline-block;
+    width:30px;
+    height:30px;
+    border:1px solid #4d4d53;
+    border-radius: 50%;
+    background:#040106;
+    line-height: 26px;
+    text-align: center;
+    margin-top:3px;
+  
+}
+#pause-two.shade .shade-back-btn img{
+    width: 10px;
+    height: 20px;
+    padding-top:4px;
+}
+#pause-two .shade .host-name{
+    position: absolute;
+    left: 50px;
+    top: .4rem;
+    z-index: 9999;
+    background: #1d1d1d;
+    height: 30px;
+    border-radius: 15px;
+    line-height: 30px;
+    color:#fff;
+    display: flex;
+    border:1px solid #4d4d53;
+}
+#pause-two .shade .host-name i{color:#fff;padding-left: 2px;height:30px;line-height: 30px;display: inline-block;padding: 0 10px;font-style: normal}
+#pause-two .shade .host-name img{
+    height:30px;
+}
+#pause-two .shade .header-content{
+    width:100%;
+    height:5rem;
+    background: url('../images/time.png') no-repeat center bottom;
+    background-size: 15%;
+}
+#pause-two .shade .wore{
+    margin-top:.5rem;
+    color:#fff;
+    text-align: center;
+    font-size: 1rem;
+    
+}
+/* 网络不好 */
+#pause-three {    
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    background: rgba(0,0,0,0);
+    display: block;
+    position: relative;
+}
+#pause-three img{
+    width:100%;
+    height:160px!important;
+}
+#pause-three .shade{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:160px;
+    background:rgba(0,0,0,0.7)
+
+}
+#pause-three .shade .shade-back{
+    display: flex;
+    width:100%;
+    height:30px;
+    margin-left: .6rem;
+    margin-top:3px;
+}
+#pause-three .shade .shade-back-btn{
+    display: inline-block;
+    width:30px;
+    height:30px;
+    border:1px solid #4d4d53;
+    border-radius: 50%;
+    background:#040106;
+    line-height: 26px;
+    text-align: center;
+    margin-top:3px;
+  
+}
+#pause-three .shade .shade-back-btn img{
+    width: 10px;
+    height: 20px;
+    padding-top:4px;
+}
+#pause-three .shade .host-name{
+    position: absolute;
+    left: 50px;
+    top: .4rem;
+    z-index: 9999;
+    background: #1d1d1d;
+    height: 30px;
+    border-radius: 15px;
+    line-height: 30px;
+    color:#fff;
+    display: flex;
+    border:1px solid #4d4d53;
+}
+#pause-three .shade .host-name i{color:#fff;padding-left: 2px;height:30px;line-height: 30px;display: inline-block;padding: 0 10px;font-style: normal}
+#pause-three .shade .host-name img{
+    height:30px;
+}
+#pause-three .shade .header-content{
+    width:100%;
+    height:5rem;
+    background: url('../images/time.png') no-repeat center bottom;
+    background-size: 15%;
+}
+#pause-three .shade .wore{
+    margin-top:.5rem;
+    color:#fff;
+    text-align: center;
+    font-size: 1rem;
+    
+}

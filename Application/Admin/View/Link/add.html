@@ -1,0 +1,61 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			<div class="unit">
+				<label>友情链接名称：</label>
+				<input type="text" class="required"  name="name" value="{$vo.name}" size="40"/>
+			</div>
+			<div class="unit">
+				<label>友情链接地址：</label>
+				<input type="text" class="required" name="url" value="{$vo.url}" size="40"/>
+			</div>
+			<div class="unit">
+				<label>排序：</label>
+				<input type="text" class="required" name="sort" value="{$vo.sort}" />
+			</div>
+			<div class="unit">
+				<label>显示位置：</label>
+				<select class="small bLeft"  name="position">
+					<option value="1"  <eq name="vo.position" value="1">selected</eq>>网站首页</option>
+					<option value="2"  <eq name="vo.position" value="2">selected</eq>>资讯首页</option>
+					<option value="3"  <eq name="vo.position" value="3">selected</eq>>即时比分</option>
+					<option value="4"  <eq name="vo.position" value="4">selected</eq>>更多友链</option>
+					<option value="5"  <eq name="vo.position" value="5">selected</eq>>web官网直通车</option>
+					<option value="6"  <eq name="vo.position" value="6">selected</eq>>英超专题</option>
+					<option value="7"  <eq name="vo.position" value="7">selected</eq>>西甲专题</option>
+					<option value="8"  <eq name="vo.position" value="8">selected</eq>>德甲专题</option>
+					<option value="9"  <eq name="vo.position" value="9">selected</eq>>意甲专题</option>
+					<option value="10" <eq name="vo.position" value="10">selected</eq>>中超专题</option>
+					<option value="11" <eq name="vo.position" value="11">selected</eq>>欧冠专题</option>
+					<option value="12" <eq name="vo.position" value="12">selected</eq>>亚冠专题</option>
+					<option value="13" <eq name="vo.position" value="13">selected</eq>>NBA专题</option>
+					<option value="14" <eq name="vo.position" value="14">selected</eq>>CBA专题</option>
+					<option value="15" <eq name="vo.position" value="15">selected</eq>>世界杯专题</option>
+				</select>
+			</div>
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft"  name="status">
+					<option value="1" <eq name="vo.status" value="1">selected</eq>>正常</option>
+					<option value="0" <eq name="vo.status" value="0">selected</eq>>待发布</option>
+				</select>
+			</div>
+			<div class="unit">
+				<label>说明：</label>
+				<textarea maxlength="255" class="large bLeft" name="remark"  rows="3" cols="47">{$vo.remark}</textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+
+
+

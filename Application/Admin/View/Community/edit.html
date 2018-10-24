@@ -1,0 +1,192 @@
+<div class="pageContent">
+    <form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+        <input type="hidden" name="id" value="{$vo.id}" />
+        <input type="hidden" name="level" value="{$vo.level|default=1}" id="level"/>
+        <div class="pageFormContent" layoutH="58">
+
+            <div class="unit">
+                <label>圈子名称：</label>
+                <input type="text" class="required" name="name" id="name" value="{$vo.name}" size="40" maxlength="8">
+                <span id="prompt" style="color:red;padding-left: 10px;"></span>
+            </div>
+            <div class="unit">
+                <label>上级：</label>
+                <select name="pid" onchange="changeLevel()" id="pid">
+                    <option value="0|1">无上级</option>
+                    <volist name="list" id="item">
+                        <option value="{$item.id}|2" <if condition="$item['id'] eq $vo['pid']">selected</if> >{$item.name}</option>
+                        <notempty name="item.childs">
+                            <volist name="item.childs" id="item2">
+                                <option value="{$item2.id}|3" <if condition="$item2['id'] eq $vo['pid']">selected</if> >|_{$item2.name}</option>
+                                <notempty name="item2.childs">
+                                    <volist name="item2.childs" id="item3">
+                                        <option value="{$item3.id}|4" <if condition="$item3['id'] eq $vo['pid']">selected</if>>|__{$item3.name}</option>
+                                    </volist>
+                                </notempty>
+                            </volist>
+                        </notempty>
+                    </volist>
+                </select>
+            </div>
+            <div class="unit">
+                <label>圈子头像：</label>
+                <ul class="tabImg">
+                    <li>
+                        <input id="viewUploadInput_77" name="fileInput" type="file" onChange="previewImage(77)" style="display:none;" />
+                        <a href="javascript:void(0);">
+                             <span id="viewUploadDiv_77">
+                                <empty name="vo.img">
+                                    <img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_77"/>
+                                <else/>
+                                    <img id="viewUploadImg_77" width='80' height='80' border=0 src="{$vo.img}">
+                                </empty>
+                             </span>
+                        </a>
+                        <div id="poiter_77" class="poiter">
+                            <empty name="vo.img">
+                                <a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_77')">添加图片</a>
+                            <else/>
+                                <a title="删除" onclick="delPic({$vo.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_77')">重传</a>
+                            </empty>
+                        </div>
+                    </li>
+                </ul>
+                <span class="inputInfo"></span>
+            </div>
+            <div class="unit">
+                <label>背景图片：</label>
+                <ul class="tabImg">
+                    <li>
+                        <input id="viewUploadInput_15" name="fileInput2" type="file" onChange="previewImage(15)" style="display:none;" />
+
+                        <a href="javascript:void(0);">
+                             <span id="viewUploadDiv_15">
+                                <empty name="vo.background">
+                                    <img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_15"/>
+                                <else/>
+                                    <img id="viewUploadImg_15" width='80' height='80' border=0 src="{$vo.background}">
+                                </empty>
+                             </span>
+                        </a>
+                        <div id="poiter_15" class="poiter">
+                            <empty name="vo.background">
+                                <a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_15')">添加图片</a>
+                            <else/>
+                                <a title="删除" onclick="delBackPic({$vo.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_15')">重传</a>
+                            </empty>
+                        </div>
+                    </li>
+                    <span style="color:red;">背景图片必须上传</span>
+                </ul>
+                <span class="inputInfo"></span>
+            </div>
+            <div class="unit">
+                <label>关注数：</label>
+                <input type="text"  class="digits required" name="follower_num" value="{$vo.follower_num}" size="40">
+            </div>
+            <div class="unit">
+                <label>帖子数：</label>
+                <input type="text" class="digits required" name="post_num" value="{$vo.post_num}" size="40">
+            </div>
+            <div class="unit">
+                <label>排序：</label>
+                <input type="text" class="digits required" name="sort" value="{$vo.sort}" size="40">
+            </div>
+            <div class="unit">
+                <label>状态：</label>
+                <select class="small bLeft"  name="status">
+                    <option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+                    <option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+                </select>
+            </div>
+            <div class="unit">
+                <label>是否推荐：</label>
+                <input type="radio" name="recommend"  value="1" <eq name="vo.recommend" value="1">checked</eq> />是
+                <input type="radio" name="recommend"  value="0" <eq name="vo.recommend" value="0">checked</eq> />否
+            </div>
+            <div class="unit">
+                <label>圈子介绍：</label>
+                <textarea class="required"  name="description" rows="3" cols="57" maxlength="200">{$vo.description}</textarea>
+            </div>
+
+            
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+    
+</div>
+<style type="text/css">
+    .tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+    .poiter a:hover{color:red;}
+    .tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+    .tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+    //同步改变level值
+    function changeLevel(){
+        var vals = $("#pid").val().split("|");
+        var level = vals[1];
+        $("#level").val(level);
+    }
+    $(function(){
+        $('.tabImg li').hover(function(e) {
+            $(this).children('div').stop().animate({'top':'0'},300);
+        },function(){
+            $(this).children('div').stop().animate({'top':'80px'},300);
+        });
+    });
+    function delPic(id){
+        if(confirm("确认要删除吗？") == false){
+            return false;
+        }
+        //异步执行删除
+        $.ajax({
+            type: "POST",
+            url: "__ADMIN__/Community/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                    $("#viewUploadInput_77").val("");
+                    $("#viewUploadImg_77").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+                    var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_77')\">添加图片</a>";
+                    $("#poiter_77").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+    }
+    function delBackPic(id){
+        if(confirm("确认要删除吗？") == false){
+            return false;
+        }
+        //异步执行删除
+        $.ajax({
+            type: "POST",
+            url: "__ADMIN__/Community/delBackPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                    $("#viewUploadInput_15").val("");
+                    $("#viewUploadImg_15").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+                    var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_15')\">添加图片</a>";
+                    $("#poiter_15").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+    }
+</script>
+

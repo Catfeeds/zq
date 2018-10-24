@@ -1,0 +1,31 @@
+/**
+ * 欧洲杯竞猜css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-06-04
+ *
+**/
+
+/* 竞猜内容 */
+.main{ background: #fff;}
+.ranks_con .ranks_int{ padding: .15rem .26rem; background: #f7f7f7;}
+.ranks_con .ranks_int .ranks_int_r img{ width: 1.4rem;}
+.ranks_con .table td{ padding: .2rem 0;}
+.ranks_con .table .rank span{ padding: 0 .1rem; background: #666666; color: #fff; border-radius: 3px;}
+.ranks_con .table .rank01 span{ background: #eb000;}
+.ranks_con .table .rank02 span{ background: #ffba00;}
+.ranks_con .table .rank03 span{ background: #97cf11;}
+.ranks_con .table .pr-70{ padding-right: .7rem;}
+
+.ranks_con .table .nameImg img{ width: .7rem; height: .7rem; border-radius: 50%; vertical-align: middle; margin-right: .1rem;}
+.record_con dl{ padding: .15rem .8rem;}
+.record_con dt{ padding-left: .4rem; margin-bottom: .1rem; background: url(../../images/etc/dt-circle.png) no-repeat 0 center; background-size: .2rem auto;}
+.record_con dd{ padding-left: .4rem; margin-bottom: .1rem;}
+.record_con dt span{ padding: .05rem .1rem; border-radius: .05rem; background: #fff44e; color: #ab2c00;}
+
+/* 弹出框 */
+.modal_pading{ padding: .15rem .1rem;}
+.modal-body .table{ margin-bottom: .1rem;}
+.modal-body .table tr td{ padding: .1rem 0;}
+

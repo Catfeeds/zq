@@ -1,0 +1,962 @@
+<include file="Public:header"/>
+
+<body>
+<!-- 客服系统 -->
+<div id="livezilla_tracking" style="display:none"></div>
+<script type="text/javascript">
+    var script = document.createElement("script");
+    script.async = true;
+    script.type = "text/javascript";
+    var src = "http://kf.qqty.com/server.php?a=ba7a1&rqst=track&output=jcrpt&el=emgtY24_&nse=" + Math.random();
+    setTimeout("script.src=src;document.getElementById('livezilla_tracking').appendChild(script)", 1);
+</script>
+<noscript>
+    <img src="http://kf.qqty.com/server.php?a=ba7a1&amp;rqst=track&amp;output=nojcrpt" width="0" height="0"
+         style="visibility:hidden;" alt="">
+</noscript>
+<script type="text/javascript" id="lz_textlink"
+        src="http://kf.qqty.com/image.php?a=6416b&amp;tl=1&amp;srv=aHR0cDovL2tmLnFxdHkuY29tL2NoYXQucGhwP2E9MmU4Y2EmZWw9ZW1ndFkyNF8_&amp;tlont=TGl2ZSBIZWxwIChTdGFydCBDaGF0KQ__&amp;tloft=TGl2ZSBIZWxwIChMZWF2ZSBNZXNzYWdlKQ__&amp;el=emgtY24_">
+</script>
+<!-- 客服系统end -->
+   <script type="text/javascript">
+    //首页添加判断跳转到m站
+    if (navigator.userAgent.toLowerCase().indexOf("android") != -1 || navigator.userAgent.toLowerCase().indexOf("iphone") != -1 || navigator.userAgent.toLowerCase().indexOf("mobile") != -1) {
+            if ((navigator.userAgent.indexOf("Gecko") != -1 || navigator.userAgent.indexOf("MQQBrowser") != -1) && navigator.userAgent.toLowerCase().indexOf("pad") == -1) {
+                if (document.URL.toLowerCase().indexOf("from=m")!=-1){
+                    document.cookie = "from=m";
+                }
+
+                var strCook = document.cookie;
+                if (strCook.indexOf("from=m") == -1) {
+                    window.location.href = "http://m.qqty.com";
+                }
+            }
+        }
+    </script>
+
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/index/index.css">
+    <!-- 登录模态窗口css -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/quiz_hall/modal_login.css">
+
+    <!-- 顶部开始 -->
+    <include file="Public:top_index" />
+    <!-- 顶部结束 -->
+    <div class="body">
+
+        <!-- 今日比赛展示开始 -->
+        <div class="tod-con">
+            <div class="tod-show">
+                <div class="pull-left tod-left">
+                    <h4>今日精彩比赛</h4>
+                </div>
+                <div class="pull-right slide-con">
+                    <a class="slide-prev pull-left" id="slide-prev" href="javascript:;"></a>
+                    <a class="slide-next pull-right" id="slide-next" href="javascript:;"></a>
+                    <div class="pull-left slide-list">
+                        <div class="slide-list-in">
+                            <ul class="clearfix slide-ul">
+                                <volist name="Marvellous" id="item" offset="0" length='20'>
+                                    <li>
+                                        <p class="title">
+                                        <span>{$item.union_name|mb_substr=###,0,5,'utf-8'}</span>&nbsp;&nbsp;
+                                        <em class="text-tie">
+                                        <if condition="$item.game_state eq 0">
+                                            {$item.game_date|mb_substr=###,6,2,'utf-8'}日 {$item.game_time}
+                                        <else/>
+                                            <switch name="item.game_state">
+                                                <case value="-1">完场</case>
+                                                <case value="1">上半场</case>
+                                                <case value="2">中场</case>
+                                                <case value="3">下半场</case>
+                                                <case value="4">加时</case>
+                                            </switch>
+                                        </if>
+                                        </em>
+                                        </p>
+                                        <div class="clearfix">
+                                            <div class="pull-left team1">
+                                                <a href="javascript:;">
+                                                <span class="team-img"><img src="{$item.home_logo}" width="24" height="24"></span>
+                                                <p class="team-name">{$item.home_team_name|mb_substr=###,0,5,'utf-8'}</p>
+                                                </a>
+                                            </div>
+                                            <div class="pull-left score">
+                                                <p style="width: 36px;"><if condition="$item.game_state neq 0"><em class="text-red"><strong>{$item.score|mb_substr=###,0,1,'utf-8'}</strong></em>&nbsp;<span>:</span>&nbsp;<em class="text-red"><strong>{$item.score|mb_substr=###,2,1,'utf-8'}</strong></em><else/>未开赛</if></p>
+                                                <div class="tv-icon"></div>
+                                            </div>
+                                            <div class="pull-right team2">
+                                                <a href="javascript:;">
+                                                <span class="team-img"><img src="{$item.away_logo}" width="24" height="24"></span>
+                                                <p class="team-name">{$item.away_team_name|mb_substr=###,0,5,'utf-8'}</p>
+                                                </a>
+                                          </div>
+                                        </div>
+                                        <p class="fenxi">
+                                            <a target="_blank" href="<if condition="$item.game_state eq 0">{:U('/analysis/'.$item['game_id'].'@bf')}<else/>{:U('/detail_action/'.$item['game_id'].'@bf')}</if>" class="text-red">析</a>
+                                            <a href="{:U('/odds_asia/'.$item['game_id'].'@bf')}" target="_blank">亚</a>
+                                            <a href="{:U('/odds_euro/'.$item['game_id'].'@bf')}" class="text-red" target="_blank">欧</a>
+                                            <a target="_blank" href="{:U('/statistics/1/'.$item['game_id'].'@jc')}">猜</a>
+                                        </p>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 今日比赛展示结束 -->
+
+        <!-- 主体内容开始 -->
+        <div class="home">
+            <section class="main">
+                <!-- 焦点新闻跟焦点图开始 -->
+                <div class="focus-con clearfix">
+                    {$HomeNews|htmlspecialchars_decode}
+                    <script>
+                        $(".new-con h3 a,.new-list ul li a").css("padding-right","6px");
+                        $(".new-con h3 a:last-child,.new-list ul li a:last-child").css("padding-right","0");
+                    </script>
+                    <div class="pull-right focus-banner">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+                            <ol class="carousel-indicators">
+                                <volist name="AdCarousel" id="item">
+                                        <li data-target="#myCarousel" data-slide-to="{$key}" <if condition="$key eq 0">class="active"</if>></li>
+                                </volist>
+                            </ol>
+                            <!-- Carousel items -->
+                            <div class="carousel-inner">
+                                <volist name="AdCarousel" id="item">
+                                    <div class="<if condition="$key eq 0">active</if> item"><a href="{$item.url}" target="_blank"><img src="{$item.img}" style="width:600px;height:350px;"></a><div class="fbanner_title"><a target="_blank" href="{$item.url}">{$item.title}</a></div>
+                                    </div>
+                                </volist>
+                            </div>
+                            <!-- Carousel nav -->
+                            <a class="carousel-control left" href="#myCarousel" data-slide="prev"><span class="banner_arrow"></span></a>
+                            <a class="carousel-control right" href="#myCarousel" data-slide="next"><span class="banner_arrow"></span></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 焦点新闻跟焦点图开始 -->
+
+
+
+
+       <!-- 资讯快报开始 -->
+                <div class="infor-con clearfix" style="padding-top: 20px">
+                    <div class="pull-left infor-main-left">
+                        <!-- 标题栏 -->
+                        <div class="clearfix stat-title">
+                            <div class="pull-left">
+                                <h4>资讯快报</h4>
+                            </div>
+                            <div class="pull-right title-nav">
+                                <ul>
+                                    <li><a target="_blank" href="{:U('/list_n/17@news')}">意甲</a></li>
+                                    <li>|</li>
+                                    <li><a target="_blank" href="{:U('/list_n/16@news')}">法甲</a></li>
+                                    <li>|</li>
+                                    <li><a target="_blank" href="{:U('/list_n/15@news')}">德甲</a></li>
+                                    <li>|</li>
+                                    <li><a target="_blank" href="{:U('/list_n/14@news')}">西甲</a></li>
+                                    <li>|</li>
+                                    <li><a target="_blank" href="{:U('/list_n/13@news')}">英超</a></li>
+                                    <li>|</li>
+                                    <li><a target="_blank" href="{:U('/list_n/9@news')}">花边体育</a></li>
+                                    <li>|</li>
+                                    <li><a target="_blank" href="{:U('/list_n/7@news')}">体育深度</a></li>
+                                    <li>|</li>
+                                    <li><a target="_blank" href="http://news.__DOMAIN__">更多</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 标题栏 -->
+
+                        <!-- 资讯分节 -->
+                        <div class="section-con clearfix">
+
+                            <div class="pull-left div01">
+                                <div class="clearfix top-title">
+                                    <div class="pull-left section-title"><h4><span><img target="_blank" src="__PUBLIC__/Home/images/index/title.jpg" width="4" height="18"></span>{$PublishClass.0.name}</h4></div>
+                                    <div class="pull-right more"><a target="_blank" href="{:U('/list_n/'.$PublishClass[0]['id'].'@news')}">更多></a></div>
+                                </div>
+                                <div class="clearfix newest">
+                                    <div class="pull-left left"><a target="_blank" href="{:U('/info_n/'.$PublishClass[0][news1][0]['id'].'@news')}"><img target="_blank" src="{$PublishClass.0.news1.0.img}" width="150" height="100"></a></div>
+                                    <volist name="PublishClass.0.news1" id="item" offset="0" length='1'>
+                                    <div class="pull-right right">
+                                        <h5><a target="_blank" href="{:U('/info_n/'.$item['id'].'@news')}">{$item.short_title|mb_substr=###,0,12,'utf-8'}</a></h5>
+                                        <p><a target="_blank" href="{:U('/info_n/'.$item['id'].'@news')}">{$item.remark}</a></p>
+                                    </div>
+                                    </volist>
+                                </div>
+                                <div class="new-list">
+                                    <ul>
+                                    <volist name="PublishClass.0.news2" id="item" offset="0" length='4'>
+                                        <li class="clearfix"><a target="_blank" href="{:U('/info_n/'.$item['id'].'@news')}" class="pull-left">{$item.title|mb_substr=###,0,23,'utf-8'}</a><span class="pull-right">{$item.update_time|date='m-d',###}</span></li>
+                                    </volist>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="pull-right div01">
+                                <div class="clearfix top-title">
+                                    <div class="pull-left section-title"><h4><span><img target="_blank" src="__PUBLIC__/Home/images/index/title02.jpg" width="4" height="18"></span>{$PublishClass.1.name}</h4></div>
+                                    <div class="pull-right more"><a target="_blank" href="{:U('/list_n/'.$PublishClass[1]['id'].'@news')}">更多></a></div>
+                                </div>
+                                <div class="clearfix newest">
+                                    <div class="pull-left left"><a target="_blank" href="{:U('/info_n/'.$PublishClass[1][news1][0]['id'].'@news')}"><img target="_blank" src="{$PublishClass.1.news1.0.img}" width="150" height="100"></a></div>
+                                    <volist name="PublishClass.1.news1" id="item" offset="0" length='1'>
+                                    <div class="pull-right right">
+                                        <h5><a target="_blank" href="{:U('/info_n/'.$item['id'].'@news')}">{$item.short_title|mb_substr=###,0,12,'utf-8'}</a></h5>
+                                        <p><a target="_blank" href="{:U('/info_n/'.$item['id'].'@news')}">{$item.remark}</a></p>
+                                    </div>
+                                    </volist>
+                                </div>
+                                <div class="new-list">
+                                    <ul>
+                                    <volist name="PublishClass.1.news2" id="item" offset="0" length='4'>
+                                        <li class="clearfix"><a target="_blank" href="{:U('/info_n/'.$item['id'].'@news')}" class="pull-left">{$item.title|mb_substr=###,0,23,'utf-8'}</a><span class="pull-right">{$item.update_time|date='m-d',###}</span></li>
+                                    </volist>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="pull-left div01">
+                                <div class="clearfix top-title">
+                                    <div class="pull-left section-title"><h4><span><img target="_blank" src="__PUBLIC__/Home/images/index/title03.jpg" width="4" height="18"></span>{$PublishClass.2.name}</h4></div>
+                                    <div class="pull-right more"><a target="_blank" href="{:U('/list_n/'.$PublishClass[2]['id'].'@news')}">更多></a></div>
+                                </div>
+                                <div class="clearfix newest">
+                                    <div class="pull-left left"><a target="_blank" href="{:U('/info_n/'.$PublishClass[2][news1][0]['id'].'@news')}"><img target="_blank" src="{$PublishClass.2.news1.0.img}" width="150" height="100"></a></div>
+                                    <volist name="PublishClass.2.news1" id="item" offset="0" length='1'>
+                                    <div class="pull-right right">
+                                        <h5><a target="_blank" href="{:U('/info_n/'.$item['id'].'@news')}">{$item.short_title|mb_substr=###,0,12,'utf-8'}</a></h5>
+                                        <p><a target="_blank" href="{:U('/info_n/'.$item['id'].'@news')}">{$item.remark}</a></p>
+                                    </div>
+                                    </volist>
+                                </div>
+                                <div class="new-list">
+                                    <ul>
+                                    <volist name="PublishClass.2.news2" id="item" offset="0" length='4'>
+                                        <li class="clearfix"><a target="_blank" href="{:U('/info_n/'.$item['id'].'@news')}" class="pull-left">{$item.title|mb_substr=###,0,23,'utf-8'}</a><span class="pull-right">{$item.update_time|date='m-d',###}</span></li>
+                                    </volist>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="pull-right div01">
+                                <div class="clearfix top-title">
+                                    <div class="pull-left section-title"><h4><span><img target="_blank" src="__PUBLIC__/Home/images/index/title04.jpg" width="4" height="18"></span>{$PublishClass.3.name}</h4></div>
+                                    <div class="pull-right more"><a target="_blank" href="{:U('/list_n/'.$PublishClass[3]['id'].'@news')}">更多></a></div>
+                                </div>
+                                <div class="clearfix newest">
+                                    <div class="pull-left left"><a target="_blank" href="{:U('/info_n/'.$PublishClass[3][news1][0]['id'].'@news')}"><img target="_blank" src="{$PublishClass.3.news1.0.img}" width="150" height="100"></a></div>
+                                    <volist name="PublishClass.3.news1" id="item" offset="0" length='1'>
+                                    <div class="pull-right right">
+                                        <h5><a target="_blank" href="{:U('/info_n/'.$item['id'].'@news')}">{$item.short_title|mb_substr=###,0,12,'utf-8'}</a></h5>
+                                        <p><a target="_blank" href="{:U('/info_n/'.$item['id'].'@news')}">{$item.remark}</a></p>
+                                    </div>
+                                    </volist>
+                                </div>
+                                <div class="new-list">
+                                    <ul>
+                                    <volist name="PublishClass.3.news2" id="item" offset="0" length='4'>
+                                        <li class="clearfix"><a target="_blank" href="{:U('/info_n/'.$item['id'].'@news')}" class="pull-left">{$item.title|mb_substr=###,0,23,'utf-8'}</a><span class="pull-right">{$item.update_time|date='m-d',###}</span></li>
+                                    </volist>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- 资讯分节-->
+
+
+                    </div>
+                    <div class="pull-right infor-main-right">
+                       <!-- 联赛榜开始 -->
+                        <div class="match-score">
+                           <div class="clearfix stat-title">
+                                <div class="pull-left">
+                                    <h4>日排行榜</h4>
+                                </div>
+                                <div class="pull-right title-nav">
+                                    <ul>
+                                        <li><a target="_blank" href="{:U('/rank@jc')}">更多</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Nav tabs -->
+                            <ul class="clearfix nav-tab match-tab02">
+                                <li class="on"><a href="javascript:void(0);">足球排行</a></li>
+                                <li><a href="javascript:void(0);">篮球排行</a></li>
+                            </ul>
+                            <!-- Nav tabs -->
+                            <div class="score-list">
+                                <ul>
+                                    <li>
+                                        <table class="table">
+                                            <tbody>
+                                            <volist name="footRedList" id="item">
+                                                <tr>
+                                                    <td width="35"><span class="nb <if condition="$item.ranking elt 3">bg-orange<else/>bg-gray</if>">{$item.ranking}</span></td>
+                                                    <td width="40"><a target="_blank" href="{:U('/userindex/'.$item['user_id'].'')}" class="face-r"><img src="{$item['face']}" width="30" height="30"></a></td>
+                                                    <td width="90" class="td02 text-l"><a target="_blank" href="{:U('/userindex/'.$item['user_id'].'')}" class="on">{$item.nick_name}</a></td>
+                                                    <td width="35" class="text-red">
+                                                    <div class="gz">
+                                                        <span><i>{$item.winrate}%</i></span>
+                                                    </div>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                    <li style="display:none;">
+                                        <table class="table">
+                                            <tbody>
+                                            <volist name="baskRedList" id="item">
+                                                <tr>
+                                                    <td width="35"><span class="nb <if condition="$item.ranking elt 3">bg-orange<else/>bg-gray</if>">{$item.ranking}</span></td>
+                                                    <td width="40"><a target="_blank" href="{:U('/userindex/'.$item['user_id'].'/2')}" class="face-r"><img src="{$item['face']}" width="30" height="30"></a></td>
+                                                    <td width="90" class="td02 text-l"><a target="_blank" href="{:U('/userindex/'.$item['user_id'].'/2')}" class="on">{$item.nick_name}</a></td>
+                                                    <td width="35" class="text-red">
+                                                    <div class="gz">
+                                                        <span><i>{$item.winrate}%</i></span>
+                                                    </div>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 联赛榜结束 -->
+
+                        <!-- 广告图 -->
+                        <div style="line-height: 0">
+                        <if condition="pathinfo($AdDatabase[0]['img'], PATHINFO_EXTENSION) eq swf">
+                            <embed width="220" height="96" wmode="opaque" type="application/x-shockwave-flash" src="{$AdDatabase.0.img}">
+                            <a style="display:block;width:220px;height:96px;margin:-96px 0 0 0;position:relative;left:0;top:0;z-index:1;background:#fff;opacity:0;filter:alpha(opacity=0);" target="_blank" href="{$AdDatabase.0.url}"></a>
+                        <else/>
+                            <a target="_blank" href="{$AdDatabase.0.url}"><img src="{$AdDatabase.0.img}" width="220" height="96"></a>
+                        </if>
+                        </div>
+                        <!-- 广告图 -->
+
+
+
+                    </div>
+                </div>
+                <!-- 资讯快报结束 -->
+
+
+                <!-- 汽车广告开始 -->
+                <div style="line-height: 0;padding-top: 20px">
+                    <if condition="pathinfo($AdCenter[0]['img'], PATHINFO_EXTENSION) eq swf">
+                        <embed width="1000" height="70" wmode="opaque" type="application/x-shockwave-flash" src="{$AdCenter.0.img}">
+                        <a style="display:block;width:1000px;height:70px;margin:-70px 0 0 0;position:relative;left:0;top:0;z-index:1;background:#fff;opacity:0;filter:alpha(opacity=0);" target="_blank" href="{$AdCenter.0.url}"></a>
+                    <else/>
+                        <a target="_blank" href="{$AdCenter.0.url}"><img src="{$AdCenter.0.img}" width="1000" height="70" /></a>
+                    </if>
+                </div>
+                <!-- 汽车广告结束 -->
+
+
+                <!-- 竞彩指数开始 -->
+                <div class="stat-con" style="padding-top: 10px">
+                    <!-- 标题栏 -->
+                    <div class="clearfix stat-title">
+                        <div class="pull-left">
+                            <h4>推荐指数</h4>
+                        </div>
+                        <div class="pull-right title-nav">
+                            <ul>
+                                <li><a target="_blank" href="http://jc.__DOMAIN__">推荐大厅</a></li>
+                                <!-- <li>|</li>
+                                <li><a href="http://score.__DOMAIN__" target="_blank">足球比分</a></li>
+                                <li>|</li>
+                                <li><a href="http://data.__DOMAIN__/odds.shtml" target="_blank">足球指数</a></li> -->
+                                <li>|</li>
+                                <li><a target="_blank" href="{:U('/rank@jc')}">排行榜</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 标题栏 -->
+
+                    <div class="stat-main clearfix">
+                        <div class="pull-left stat-main-left">
+                            <ul class="clearfix">
+                            <volist name="QuizIndex" id="item" offset="0" length='6'>
+                                <li class="li-list <if condition="$i % 2 eq 0">li-list02</if>">
+                                    <p class="time"><span class="text-555">{$item.union_name|mb_substr=###,0,5,'utf-8'}</span>&nbsp;&nbsp;<em class="text-555">{$item.game_date|mb_substr=###,6,2,'utf-8'}日 {$item.game_time}</em></p>
+                                    <div class="clearfix">
+                                        <a href="javascript:;" class="hover pull-left">
+                                        <div class="team1">
+                                            <span><img src="{$item.home_logo}" width="55" height="55"></span>
+                                            <p class="team-name">{$item.home_team_name|mb_substr=###,0,5,'utf-8'}</p>
+                                        </div>
+                                        </a>
+                                        <div class="pull-left against">
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="gray">{$item.fsw_exp_home}</td>
+                                                        <td class="gray"><if condition="$item.fsw_exp lt 0">受</if>{$item.fsw_exp|abs|handCpSpread}</td>
+                                                        <td class="gray">{$item.fsw_exp_away}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{$item.fsw_ball_home}</td>
+                                                        <td>{$item.fsw_ball|handCpTotal}</td>
+                                                        <td>{$item.fsw_ball_away}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <a href="javascript:;" class="hover pull-right">
+                                        <div class="team2">
+                                            <span><img src="{$item.away_logo}" width="55" height="55"></span>
+                                            <p class="team-name">{$item.away_team_name|mb_substr=###,0,5,'utf-8'}</p>
+                                        </div>
+                                        </a>
+                                    </div>
+                                    <div class="pro-con clearfix">
+                                        <div class="pull-left zhu"><span class="text-555">主队</span> <em class="<if condition='$item.mainNumber egt 50'>text-red<else/>text-tie</if>">{$item.mainNumber}%</em></div>
+                                        <div class="pull-left content">
+                                            <div class="col">
+                                                <ul id="skill">
+                                                    <li class="ft-percent">
+                                                        <a target="_blank" style="background: <if condition='$item.mainNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="{:U('/statistics/1/'.$item['game_id'].'/1@jc')}" class="ft-percent-real animation-progress expand left" data-percent="{$item.mainNumber}%" data-animation="progress" ></a>
+                                                    </li>
+                                                    <li class="ft-percent">
+                                                        <a target="_blank" style="background: <if condition='$item.guestNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="{:U('/statistics/1/'.$item['game_id'].'/1@jc')}" class="ft-percent-real animation-progress expand right" data-percent="{$item.guestNumber}%" data-animation="progress"></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="pull-right ke"><span class="text-555">客队</span> <em class="<if condition='$item.guestNumber egt 50'>text-red<else/>text-tie</if>">{$item.guestNumber}%</em></div>
+                                    </div>
+                                    <div class="pro-con clearfix">
+                                        <div class="pull-left zhu"><span class="text-555">大球</span> <em class="<if condition='$item.bigNumber egt 50'>text-red<else/>text-tie</if>">{$item.bigNumber}%</em></div>
+                                        <div class="pull-left content">
+                                            <div class="col">
+                                                <ul id="skill">
+                                                    <li class="ft-percent">
+                                                        <a target="_blank" style="background: <if condition='$item.bigNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="{:U('/statistics/1/'.$item['game_id'].'/-1@jc')}" class="ft-percent-real animation-progress expand left" data-percent="{$item.bigNumber}%" data-animation="progress" ></a>
+                                                    </li>
+                                                    <li class="ft-percent">
+                                                        <a target="_blank" style="background: <if condition='$item.smallNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="{:U('/statistics/1/'.$item['game_id'].'/-1@jc')}" class="ft-percent-real animation-progress expand right" data-percent="{$item.smallNumber}%" data-animation="progress"></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="pull-right ke"><span class="text-555">小球</span> <em class="<if condition='$item.smallNumber egt 50'>text-red<else/>text-tie</if>">{$item.smallNumber}%</em></div>
+                                    </div>
+                                </li>
+                            </volist>
+                            </ul>
+                        </div>
+
+                        <div class="pull-right stat-main-right">
+                            <div class="data-graph">
+                                <!-- Nav tabs -->
+                                <ul class="clearfix nav-tab match-tab">
+                                    <li class="on"><a href="javascript:void(0);">足球排行</a></li>
+                                    <li><a href="javascript:void(0);">篮球排行</a></li>
+                                </ul>
+                                <!-- Nav tabs -->
+                                <div class="tabCon">
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <ul class="clearfix time-tab time-tab-one">
+                                            <li class="current"><a href="javascript:void(0);">周榜</a></li>
+                                            <li><a href="javascript:void(0);">月榜</a></li>
+                                            <li><a href="javascript:void(0);">季榜</a></li>
+                                        </ul>
+                                        <div class="rank-list-con rank-list-con-one">
+                                            <div class="rank-list">
+                                                 <table class="table">
+                                                    <tbody>
+                                                    <volist name="footWinWeek" id="item">
+                                                        <tr>
+                                                            <td width="30">
+                                                            <switch name="item.ranking">
+                                                                <case value="1"><img src="__PUBLIC__/Home/images/index/rank01.png" width="12" height="16" /></case>
+                                                                <case value="2"><img src="__PUBLIC__/Home/images/index/rank02.png" width="12" height="16" /></case>
+                                                                <case value="3"><img src="__PUBLIC__/Home/images/index/rank03.png" width="12" height="16" /></case>
+                                                                <default />{$item.ranking}
+                                                            </switch>
+                                                            </td>
+                                                            <td class="td02"><a target="_blank" class="<if condition="$item.ranking elt 3">text-orange<else/>text-555</if>" href="{:U('/userindex/'.$item['user_id'].'')}">{$item.nick_name|msubstr=###,0,5}</a></td>
+                                                            <td class="text-555"> 推{$item.gameCount}中{$item['win'] + $item['half']}</td>
+                                                            <td class="text-red"> {$item.winrate}%</td>
+                                                        </tr>
+                                                    </volist>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="rank-list" style="display:none">
+                                                 <table class="table">
+                                                    <tbody>
+                                                        <volist name="footWinMonth" id="item">
+                                                            <tr>
+                                                                <td>
+                                                                <switch name="item.ranking">
+                                                                    <case value="1"><img src="__PUBLIC__/Home/images/index/rank01.png" width="12" height="16" /></case>
+                                                                    <case value="2"><img src="__PUBLIC__/Home/images/index/rank02.png" width="12" height="16" /></case>
+                                                                    <case value="3"><img src="__PUBLIC__/Home/images/index/rank03.png" width="12" height="16" /></case>
+                                                                    <default />{$item.ranking}
+                                                                </switch>
+                                                                </td>
+                                                                <td class="td02 <if condition="$item.ranking elt 3">text-orange<else/>text-555</if>"><a target="_blank" href="{:U('/userindex/'.$item['user_id'].'')}">{$item.nick_name|msubstr=###,0,5}</a></td>
+                                                                <td class="text-555"> 推{$item.gameCount}中{$item['win'] + $item['half']}</td>
+                                                                <td class="text-red"> {$item.winrate}%</td>
+                                                            </tr>
+                                                        </volist>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="rank-list" style="display:none">
+                                                 <table class="table">
+                                                    <tbody>
+                                                        <volist name="footWinSeason" id="item">
+                                                            <tr>
+                                                                <td>
+                                                                <switch name="item.ranking">
+                                                                    <case value="1"><img src="__PUBLIC__/Home/images/index/rank01.png" width="12" height="16" /></case>
+                                                                    <case value="2"><img src="__PUBLIC__/Home/images/index/rank02.png" width="12" height="16" /></case>
+                                                                    <case value="3"><img src="__PUBLIC__/Home/images/index/rank03.png" width="12" height="16" /></case>
+                                                                    <default />{$item.ranking}
+                                                                </switch>
+                                                                </td>
+                                                                <td class="td02 <if condition="$item.ranking elt 3">text-orange<else/>text-555</if>"><a target="_blank" href="{:U('/userindex/'.$item['user_id'].'')}">{$item.nick_name|msubstr=###,0,5}</a></td>
+                                                                <td class="text-555"> 推{$item.gameCount}中{$item['win'] + $item['half']}</td>
+                                                                <td class="text-red"> {$item.winrate}%</td>
+                                                            </tr>
+                                                        </volist>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Tab panes -->
+                                    <!-- Tab panes -->
+                                    <div class="tab-content" style="display:none;">
+                                      <ul class="clearfix time-tab time-tab-two">
+                                            <li class="current"><a href="javascript:void(0);">周榜</a></li>
+                                            <li><a href="javascript:void(0);">月榜</a></li>
+                                            <li><a href="javascript:void(0);">季榜</a></li>
+                                        </ul>
+                                        <div class="rank-list-con rank-list-con-two">
+                                            <div class="rank-list">
+                                                 <table class="table">
+                                                    <tbody>
+                                                        <volist name="BaskWinWeek" id="item">
+                                                            <tr>
+                                                                <td>
+                                                                <switch name="item.ranking">
+                                                                    <case value="1"><img src="__PUBLIC__/Home/images/index/rank01.png" width="12" height="16" /></case>
+                                                                    <case value="2"><img src="__PUBLIC__/Home/images/index/rank02.png" width="12" height="16" /></case>
+                                                                    <case value="3"><img src="__PUBLIC__/Home/images/index/rank03.png" width="12" height="16" /></case>
+                                                                    <default />{$item.ranking}
+                                                                </switch>
+                                                                </td>
+                                                                <td class="td02 <if condition="$item.ranking elt 3">text-orange<else/>text-555</if>"><a target="_blank" href="{:U('/userindex/'.$item['user_id'].'/2')}">{$item.nick_name|msubstr=###,0,5}</a></td>
+                                                                <td class="text-555"> 推{$item.gameCount}中{$item['win'] + $item['half']}</td>
+                                                                <td class="text-red"> {$item.winrate}%</td>
+                                                            </tr>
+                                                        </volist>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="rank-list" style="display:none">
+                                                 <table class="table">
+                                                    <tbody>
+                                                        <volist name="BaskWinMonth" id="item">
+                                                            <tr>
+                                                                <td>
+                                                                <switch name="item.ranking">
+                                                                    <case value="1"><img src="__PUBLIC__/Home/images/index/rank01.png" width="12" height="16" /></case>
+                                                                    <case value="2"><img src="__PUBLIC__/Home/images/index/rank02.png" width="12" height="16" /></case>
+                                                                    <case value="3"><img src="__PUBLIC__/Home/images/index/rank03.png" width="12" height="16" /></case>
+                                                                    <default />{$item.ranking}
+                                                                </switch>
+                                                                </td>
+                                                                <td class="td02 <if condition="$item.ranking elt 3">text-orange<else/>text-555</if>"><a target="_blank" href="{:U('/userindex/'.$item['user_id'].'/2')}">{$item.nick_name|msubstr=###,0,5}</a></td>
+                                                                <td class="text-555"> 推{$item.gameCount}中{$item['win'] + $item['half']}</td>
+                                                                <td class="text-red"> {$item.winrate}%</td>
+                                                            </tr>
+                                                        </volist>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="rank-list" style="display:none">
+                                                 <table class="table">
+                                                    <tbody>
+                                                        <volist name="BaskWinSeason" id="item">
+                                                            <tr>
+                                                                <td>
+                                                                <switch name="item.ranking">
+                                                                    <case value="1"><img src="__PUBLIC__/Home/images/index/rank01.png" width="12" height="16" /></case>
+                                                                    <case value="2"><img src="__PUBLIC__/Home/images/index/rank02.png" width="12" height="16" /></case>
+                                                                    <case value="3"><img src="__PUBLIC__/Home/images/index/rank03.png" width="12" height="16" /></case>
+                                                                    <default />{$item.ranking}
+                                                                </switch>
+                                                                </td>
+                                                                <td class="td02 <if condition="$item.ranking elt 3">text-orange<else/>text-555</if>"><a target="_blank" href="{:U('/userindex/'.$item['user_id'].'/2')}">{$item.nick_name|msubstr=###,0,5}</a></td>
+                                                                <td class="text-555"> 推{$item.gameCount}中{$item['win'] + $item['half']}</td>
+                                                                <td class="text-red"> {$item.winrate}%</td>
+                                                            </tr>
+                                                        </volist>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tab panes -->
+                                </div>
+                            </div>
+                            <!-- 排名列表底部广告banner -->
+                            <div style="line-height: 0">
+                            <if condition="pathinfo($AdRanking[0]['img'], PATHINFO_EXTENSION) eq swf">
+                                <embed width="220" height="150" wmode="opaque" type="application/x-shockwave-flash" src="{$AdRanking.0.img}">
+                                <a style="display:block;width:220px;height:150px;margin:-150px 0 0 0;position:relative;left:0;top:0;z-index:1;background:#fff;opacity:0;filter:alpha(opacity=0);" target="_blank" href="{$AdRanking.0.url}"></a>
+                            <else/>
+                                <a href="{$AdRanking.0.url}" target="_blank"><img src="{$AdRanking.0.img}" width="220" height="150"></a>
+                            </if>
+                            </div>
+                            <!-- 排名列表底部广告banner -->
+                        </div>
+                    </div>
+                </div>
+                <!-- 竞彩指数结束 -->
+
+
+
+                <!-- 精彩图库开始 -->
+                <div class="infor-con clearfix">
+                <!-- 图库左边 begin-->
+                <div class="pull-left infor-main-left">
+                          <!-- 标题栏 -->
+                        <div class="clearfix stat-title">
+                            <div class="pull-left">
+                                <h4>精彩图库</h4>
+                            </div>
+                            <div class="pull-right title-nav">
+                                <ul>
+                                <volist name="GalleryClass" id="item">
+                                    <li><a target="_blank" href="{:U('/list_p/'.$item['id'].'@photo')}">{$item.name}</a></li>
+                                    <li>|</li>
+                                </volist>
+                                    <li><a target="_blank" href="http://photo.__DOMAIN__">更多</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 标题栏 -->
+
+                        <!-- 精彩图库 -->
+                        <div class="gallery-con clearfix">
+                            <div class="divr">
+                                <ul class="clearfix" style="margin:0">
+                                <volist name="Gallery" id="item">
+                                    <li class="pull-left" <if condition="$key % 3 eq 0">style=" margin-left: 0;"</if>>
+                                        <a target="_blank" href="{:U('/info_p/'.$item['id'].'@photo')}"><img src="{$item.img}" width="226" height="152"><p>{$item.short_title}</p></a>
+                                    </li>
+                                </volist>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 精彩图库 -->
+                </div>
+                <!-- 图库左边 end-->
+
+                <!-- 图库右边 begin-->
+                <div class="pull-right infor-main-right">
+                     <!-- 标题栏 -->
+                        <div class="clearfix stat-title" style="margin-top: 15px;">
+                            <div class="pull-left">
+                                <h4>资料库</h4>
+                            </div>
+                        </div>
+                        <!-- 标题栏 -->
+
+                        <!-- 球队logo -->
+                        <div class="team-logo">
+                            <ul>
+                                <li>
+                                    <!-- <a href="http://info.__DOMAIN__/league/36.shtml" target="_blank"> -->
+                                        <span><img src="__PUBLIC__/Home/images/index/logo01.jpg" width="61" height="48"></span>
+                                        <h6>英超</h6>
+                                    <!-- </a> -->
+                                </li>
+                                <li>
+                                    <!-- <a href="http://info.__DOMAIN__/league/34.shtml" target="_blank"> -->
+                                        <span><img src="__PUBLIC__/Home/images/index/logo02.jpg" width="61" height="48"></span>
+                                        <h6>意甲</h6>
+                                    <!-- </a> -->
+                                </li>
+                                <li>
+                                    <!-- <a href="http://info.__DOMAIN__/league/31.shtml" target="_blank"> -->
+                                        <span><img src="__PUBLIC__/Home/images/index/logo03.jpg" width="61" height="48"></span>
+                                        <h6>西甲</h6>
+                                    <!-- </a> -->
+                                </li>
+                                <li>
+                                    <!-- <a href="http://info.__DOMAIN__/league/8.shtml" target="_blank"> -->
+                                        <span><img src="__PUBLIC__/Home/images/index/logo04.jpg" width="61" height="48"></span>
+                                        <h6>德甲</h6>
+                                    <!-- </a> -->
+                                </li>
+                                <li>
+                                    <!-- <a href="http://info.__DOMAIN__/league/11.shtml" target="_blank"> -->
+                                        <span><img src="__PUBLIC__/Home/images/index/logo05.jpg" width="61" height="48"></span>
+                                        <h6>法甲</h6>
+                                    <!-- </a> -->
+                                </li>
+                                <li>
+                                    <!-- <a href="http://info.__DOMAIN__/league/60.shtml" target="_blank"> -->
+                                        <span><img src="__PUBLIC__/Home/images/index/logo06.jpg" width="61" height="48"></span>
+                                        <h6>中超</h6>
+                                    <!-- </a> -->
+                                </li>
+                                <li>
+                                    <!-- <a href="http://nba.__DOMAIN__/normal/1.shtml" target="_blank"> -->
+                                        <span><img src="__PUBLIC__/Home/images/index/logo07.jpg" width="61" height="48"></span>
+                                        <h6>NBA</h6>
+                                    <!-- </a> -->
+                                </li>
+                                <li>
+                                    <!-- <a href="http://nba.__DOMAIN__/normal/5.shtml" target="_blank"> -->
+                                        <span><img src="__PUBLIC__/Home/images/index/logo08.jpg" width="61" height="48"></span>
+                                        <h6>CBA</h6>
+                                    <!-- </a> -->
+                                </li>
+                                <li>
+                                    <!-- <a href="http://nba.__DOMAIN__/normal/2.shtml" target="_blank"> -->
+                                        <span><img src="__PUBLIC__/Home/images/index/logo09.jpg" width="61" height="48"></span>
+                                        <h6>WNBA</h6>
+                                    <!-- </a> -->
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- 球队logo -->
+
+
+
+                        <!-- 联赛列表展示 -->
+                        <div class="match-type">
+                            <!-- <ul class=" clearfix">
+                                <li><a href="javascript:;" class="bg-jls">J联赛</a></li>
+                                <li><a href="http://info.__DOMAIN__/subleague/273.shtml" target="_blank">澳洲甲</a></li>
+                                <li><a href="http://info.__DOMAIN__/subleague/15.shtml" target="_blank" class="bg-kls">K联赛</a></li>
+                                <li><a href="http://info.__DOMAIN__/cupmatch/192.shtml" target="_blank">亚冠杯</a></li>
+                                <li><a href="http://info.__DOMAIN__/subleague/2016/26.shtml" target="_blank">瑞典超</a></li>
+                                <li><a href="http://info.__DOMAIN__/league/22.shtml" target="_blank">挪超</a></li>
+                                <li><a href="http://info.__DOMAIN__/subleague/16.shtml" target="_blank">荷甲</a></li>
+                                <li><a href="http://info.__DOMAIN__/cupmatch/103.shtml" target="_blank" class="bg-ogb">欧冠杯</a></li>
+                            </ul> -->
+                            <ul class=" clearfix">
+                                <li><a href="javascript:;" class="bg-jls">J联赛</a></li>
+                                <li><a href="javascript:;">澳洲甲</a></li>
+                                <li><a href="javascript:;" class="bg-kls">K联赛</a></li>
+                                <li><a href="javascript:;">亚冠杯</a></li>
+                                <li><a href="javascript:;">瑞典超</a></li>
+                                <li><a href="javascript:;">挪超</a></li>
+                                <li><a href="javascript:;">荷甲</a></li>
+                                <li><a href="javascript:;" class="bg-ogb">欧冠杯</a></li>
+                            </ul>
+                        </div>
+                        <!-- 联赛列表展示 -->
+                </div>
+                <!-- 图库右边 end-->
+                </div>
+                <!-- 精彩图库结束 -->
+                <!-- 友情链接开始 -->
+                <div class="friend-con">
+                    <div class="clearfix stat-title">
+                        <div>
+                            <h4>友情链接</h4>
+                        </div>
+                    </div>
+                    <div class="fs-link">
+                        <ul class="clearfix">
+                        <volist name="Link" id="item">
+                            <li><a href="{$item.url}" target="_blank">{$item.name}</a></li>
+                        </volist>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 友情链接结束 -->
+          </section>
+        </div>
+    </div>
+    <!-- 梯口模块开始 -->
+    <div id="elevator">
+        <div class="fox"></div>
+    	<ul class="backTools_list">
+    		<li>
+                <a title="公众号" class="bts_backToTop bts_moveTop" href="javascript:;">
+                    <i style="margin-top: 0px;"></i>
+                    <span style="padding:0; line-height: 35px; text-align:center;">公众号</span>
+                </a>
+            </li>
+            <li class="i02">
+                <a title="客服" class="bts_backToTop bts_moveTop" href="javascript:void(window.open('{$liveChatUrl}','','width=610,height=760,left=0,top=0,resizable=yes,menubar=no,location=no,status=yes,scrollbars=yes'))">
+                    <i style="margin-top: 0px;"></i>
+                    <span style="padding:0; line-height: 35px; text-align:center;">客服</span>
+
+                </a>
+            </li>
+            <li class="i03">
+                <a title="反馈" class="bts_backToTop bts_moveTop" target="_blank" href="{:U('Copyright/feedback')}">
+                    <i style="margin-top: 0px;"></i>
+                    <span style="padding:0; line-height: 35px; text-align:center;">反馈</span>
+                </a>
+            </li>
+            <li class="i04" style="visibility:hidden;">
+                <a title="返回顶部" class="bts_backToTop moveTop" href="javascript:;">
+                    <i style="margin-top: 0px;"></i>
+                    <span>返回顶部</span>
+                </a>
+            </li>
+    	</ul>
+        <div class="ewm"></div>
+    </div>
+    <!-- 梯口模块结束 -->
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+    <!-- 模态窗口开始01 -->
+    <include file="Public:login_modal"/>
+    <!-- 模态窗口结束01 -->
+    <!--引入本页js-->
+    <script type="text/javascript" src="__PUBLIC__/Home/js/index/jquery.inview.min.js"></script>
+    <script type="text/javascript">
+        /**
+         * 首页js文件
+         *
+         * @author Chensiren <245017279@qq.com>
+         * @since  2015-12-01
+        */
+        $(function(){
+            //首页导航
+            $('.nav-con .nav li').click(function(e) {
+                $(this).addClass('on').siblings().removeClass('on');
+            });
+            //焦点图轮播
+            $('.focus-banner').hover(function(e) {
+                $('.carousel-control').stop().fadeIn(500);
+            },function(){
+                $('.carousel-control').stop().fadeOut(500);
+            });
+			$('.carousel-control').hover(function(e) {
+                $(this).animate({"opacity":"0.75"},200);
+            },function(){
+               $(this).animate({"opacity":"0.5"},200);
+            });
+            //足球篮球排名切换
+            $('.match-tab li').hover(function(e) {
+                $(this).addClass('on').siblings().removeClass('on');
+                var myNum = $(this).index();
+                $('.tabCon .tab-content').eq(myNum).show().siblings().hide();
+            });
+            $('.time-tab-one li').hover(function(e) {
+                $(this).addClass('current').siblings().removeClass('current');
+                var myNum = $(this).index();
+                $('.rank-list-con-one .rank-list').eq(myNum).show().siblings().hide();
+            });
+            $('.time-tab-two li').hover(function(e) {
+                $(this).addClass('current').siblings().removeClass('current');
+                var myNum = $(this).index();
+                $('.rank-list-con-two .rank-list').eq(myNum).show().siblings().hide();
+            });
+            //资讯右边
+            //积分排名切换跟红人榜切换
+            var t_li = $(".match-tab02 li")
+            var c_li = $(".match-score .score-list li")
+            t_li.hover(function(){
+                var i = t_li.index($(this));
+                function way(){
+                    t_li.removeClass("on").eq(i).addClass("on");
+                    c_li.hide().eq(i).show();
+                }
+                    timer=setTimeout(way);
+            });
+            //比赛展示轮播
+			var liLengh = $('.slide-ul li').length; // li的数量
+			var	liNum = liLengh*176; //li的总长度
+			var fxNum = liNum-880;
+			//alert(fxNum)
+			var num =0;
+			var fangXiang = 880;
+			$('.slide-ul').css('width',''+liNum+'px');
+			//$('.slide-ul').append($('.slide-ul li:gt(9)').clone(true));
+			 $('.slide-con .slide-prev').click(function(e) {
+                fangXiang = 880;
+                num+= fangXiang;//'+num+'
+                if(num>0 ){
+					//$('.slide-ul').css("left",'-1760px');
+                    num = -fxNum;
+                    $('.slide-ul').css("left",''+num+'px');
+                }
+				$('.slide-ul').stop().animate({'left':''+num+'px'},1000);
+            });
+			 $('.slide-con .slide-next').click(function(e) {
+                fangXiang = -880;
+                num+= fangXiang;//'+num+'
+                if(num<-fxNum){
+                    //$('.slide-ul').css("left",'0px');
+					num = 0;
+                    $('.slide-ul').css("left",''+num+'px');
+                }
+				$('.slide-ul').stop().animate({'left':''+num+'px'},1000);
+            });
+			//梯口模块
+			$('.backTools_list li a').hover(function(e) {
+                $(this).children('i').stop().animate({"margin-top":"-50px"},300)
+				var myLi = $(this).parent('li').index();
+				if(myLi==0){
+					$('.ewm').stop().fadeIn(400);
+				}
+            },function(){
+				$(this).children('i').stop().animate({"margin-top":"0px"},300)
+				$('.ewm').stop().fadeOut(300);
+			});
+			//返回顶部
+			$(window).scroll(function(e) {
+				if($(window).scrollTop()>$(window).height()){
+					$('.backTools_list li').eq(3).css("visibility","visible");
+				}else {
+					$('.backTools_list li').eq(3).css("visibility","hidden");
+				}
+			});
+			$('.moveTop').click(function(e) {
+				$('body,html').animate({'scrollTop':'0'},500);
+
+			});
+			// 动画效果 CSS3
+			$('body').on('inview', '[data-animation]', function(){
+				var $this = $(this);
+
+				var animations = $this.data('animation');
+				// 去掉所有空格
+				animations = animations.replace(/\s+/g, '');
+				// 拆分为数组
+				animations = animations.split(',');
+				// 添加首元素
+				animations.unshift('animation');
+				// 合并为字符串 "animation-animation1-animation2-..."
+				animations = animations.join('-');
+
+				var percent = $this.data('percent');
+
+				$this.addClass(animations).css('width', percent);
+			});
+        });
+    </script>
+</body>
+</html>

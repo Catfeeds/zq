@@ -1,0 +1,25 @@
+<div class="caption-content" >
+    <a href="<if condition="$_GET['header'] eq 'no'">javascript:void(0)<else/>{:U('Details/data',['scheid'=>$vo['game_id']])}</if>" >
+    <if condition="$show_time neq 1">
+    <p class="caption-title" >
+        <span  class="title-time">{$vo.day} {$vo.week}</span>
+        <span  class="status" >{$vo.gstate}</span>
+    </p>
+    </if>
+    <p  class="team">
+                                    <span  class="team-left">
+                                        <span class="<if condition="$vo['homeLogo'] eq ''">homeLeftSize</if>">{$vo.home_team_name}</span><if condition="$vo['homeLogo'] neq ''"><img src="{$vo.homeLogo}"  alt="{$vo.home_team_name}"></if>
+                                    </span>
+        <span class="time">
+                                        <if condition="$vo['game_state'] eq 0">
+                                            {$vo.time}
+                                        <else/>
+                                            {$vo.score}
+                                        </if>
+                                    </span>
+        <span class="team-right">
+                                        <if condition="$vo['awayLogo'] neq ''"><img src="{$vo.awayLogo}" alt="{$vo.away_team_name}" ></if> <span class="<if condition="$vo['awayLogo'] eq ''">awayLeftSize</if>">{$vo.away_team_name}</span>
+                                    </span>
+    </p>
+    </a>
+</div>

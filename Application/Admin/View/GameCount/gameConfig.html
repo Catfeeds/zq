@@ -1,0 +1,109 @@
+<style>
+    .table2-config tr{
+        height: 35px;
+    }
+    .table2-config td{
+        text-align: center;
+        padding:12px;
+    }
+    .inputInfo2 {
+        line-height: 21px;
+    }
+</style>
+<div class="pageContent">
+    <form method="post" action="__URL__/gameConfig" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+        <div class="pageFormContent" layoutH="58">
+            <input type="hidden" value="{$_REQUEST.gameType}" name="gameType">
+            <div class="unit">
+                <label>等级划分管理：</label>
+                <table class="table2-config">
+                    <tr style="background: #f2f2f2;">
+                        <td>等级</td>
+                        <td>推荐场数</td>
+                        <td>胜率(%)</td>
+                        <td>销售分成(%)</td>
+                        <td>查看金币</td>
+                    </tr>
+                    <notempty name="gameConf.userLv">
+                        <volist name="gameConf.userLv" id="vo">
+                            <tr>
+                                <td>LV{$i-1}</td>
+                                <td><input type="text" size="5" name="gameTimes[]" value="{$vo['gameTimes']}">&nbsp;<span class="inputInfo2">场</span></td>
+                                <td><input type="text" size="5" name="winPercent[]" value="{$vo['winPercent']}">&nbsp;%</td>
+                                <td><input type="text" size="5" name="split[]" value="{$vo['split']}">&nbsp;%</td>
+                                <td><input type="text" size="5" name="letCoin[]" value="{$vo['letCoin']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                            </tr>
+                        </volist>
+                    <else/>
+                    <for start='1' end='11'>
+                        <tr>
+                            <td>LV{$i-1}</td>
+                            <td><input type="text" size="5" name="gameTimes[]">&nbsp;<span class="inputInfo2">场</span></td>
+                            <td><input type="text" size="5" name="winPercent[]">&nbsp;%</td>
+                            <td><input type="text" size="5" name="split[]">&nbsp;%</td>
+                            <td><input type="text" size="5" name="letCoin[]">&nbsp;<span class="inputInfo2">金币</span></td>
+                        </tr>
+                    </for>
+                    </notempty>
+                </table>
+            </div>
+            <div class="unit">
+                <label>等级结算周期：</label>
+                <input type="radio" name="userLvDays" value="1" <eq name='gameConf.userLvDays' value="1">checked</eq>>周 &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="userLvDays" value="2" <eq name='gameConf.userLvDays' value="2">checked</eq>>月
+            </div>
+            <div class="unit">
+                <label>竞猜分析赠送：</label>
+                <input type="text" name="gamble_desc" class="digits" value="{$gameConf['gamble_desc']}" ><label>积分 （0表示不赠送）</label>
+                <label>描述(赠送时使用)：</label>
+                <input type="text" name="gamble_desc_tip"  value="{$gameConf['gamble_desc_tip']}" size="40">
+            </div>
+            <div class="unit">
+                <label>竞猜分享赠送：</label>
+                <input type="text" name="gamble_share" class="digits" value="{$gameConf['gamble_share']}" ><label>积分 （0表示不赠送）</label>
+                <label>描述(赠送时使用)：</label>
+                <input type="text" name="gamble_share_tip"  value="{$gameConf['gamble_share_tip']}" size="40">
+            </div>
+            <div class="unit">
+                <label>竞猜积分：</label>
+                <input type="text" name="norm_point" class="digits" value="{$gameConf['norm_point']}" ><label>积分</label>
+                <!-- <input type="text" name="impt_point" class="digits" value="{$gameConf.impt_point}"><label style="width: 70px;">（重点）</label> -->
+            </div>
+            <div class="unit">
+                <label>竞猜次数：</label>
+                <input type="text" name="weekday_norm_times" class="digits" value="{$gameConf['weekday_norm_times']}" ><label style="width: 70px;">(周1-5)</label>
+                <input type="text" name="weekend_norm_times" class="digits" value="{$gameConf.weekend_norm_times}"><label style="width: 70px;">(周6-7)</label>
+            </div>
+            <div class="unit">
+                <label>音频分析赠送：</label>
+                <input type="text" name="gamble_voice" class="digits" value="{$gameConf['gamble_voice']}" ><label>积分 （0表示不赠送）</label>
+            </div>
+            <!-- <div class="unit">
+                <label>重点竞猜次数：</label>
+                <input type="text" name="weekday_impt_times" class="digits" value="{$gameConf['weekday_impt_times']}" ><label style="width: 70px;">(周1-4)</label>
+                <input type="text" name="weekend_impt_times" class="digits" value="{$gameConf.weekend_impt_times}"><label style="width: 70px;">(周5-7)</label>
+            </div> -->
+            <if condition="$_REQUEST.gameType eq 2">
+            <div class="unit">
+                <label>篮球显示时间段(24小时格式)：</label>
+                <label style="width:auto;"><input type="radio" name="bk_time[switch]"  value="0" <eq name="gameConf.bk_time.switch" value="0">checked</eq> />关闭 </label>
+                <label style="width:auto;"><input type="radio" name="bk_time[switch]"  value="1" <eq name="gameConf.bk_time.switch" value="1">checked</eq> />开启 </label>
+                <label style="width:auto;"><input type="text"  value="{$gameConf['bk_time']['start']}" name="bk_time[start]" size="10"></label>
+                <label style="width:auto;">到</label>
+                <label style="width:auto;"><input type="text"  value="{$gameConf['bk_time']['end']}" name="bk_time[end]" size="10"></label>
+            </div>
+            </if>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+
+
+
+

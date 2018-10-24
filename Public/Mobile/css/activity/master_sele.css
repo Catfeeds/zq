@@ -1,0 +1,64 @@
+.ms_bg{background: url(../../images/activity/masterSele/bg.png) no-repeat left top;width: 100%;min-height: 14.95rem;background-size: 100% 100%;}
+.ms_tip{padding-top: 3.5rem;color: #fff;font-size: .26rem;line-height: 190%;text-align: center;}
+.ms_tip span{font-size: .35rem;color: red;}
+/*挑选高手推介*/
+.master_list{margin-top: 1rem;height:6.5rem}
+.master_title{text-align: center;}
+.master_title img{width: 2.18rem;height: auto;}
+.ms_list_con{width: 6.25rem;margin:0 auto;}
+.ms_list_con ul li{width: 5.75rem;min-height:1.2rem;border:.07rem solid #ffc66d;border-radius: .1rem;padding:.1rem .2rem 0 .6rem;background: #fff;margin-top: .2rem;float: right;position: relative;}
+.ms_list_con ul li p{color: #666;padding-bottom: .1rem}
+.ms_list_con ul li p span{color: #333;font-weight: bold;}
+.ms_list_con ul li p em{display:inline-block;background: #ff7f00;color: #fff;padding:.02rem .2rem;border-radius: .2rem;font-size: .22rem;float: right;}
+.head{width: .9rem;height: .9rem;position: absolute;left: -.45rem;top:.07rem;z-index: 99}
+.head img{border-radius: 50%;width: .9rem;height: .9rem;border: .05rem solid #ffc66d;}
+.head_top{position: absolute;left: -0.3rem;top: -.2rem;background: url(../../images/activity/masterSele/head_top.png) no-repeat left top;width: .52rem;height: .34rem;background-size: .52rem .34rem}
+.check_box{width: .5rem;height: .5rem;border:1px solid #dddddd;position: absolute;top: 50%;margin-top: -.15rem;right: .2rem}
+.check_box.on{background: url(../../images/activity/masterSele/check_on.png) no-repeat left top;width: .5rem;height: .5rem;background-size: .5rem .5rem;border:none;}
+/*sshosh手机*/
+.tel_con{padding-top: 1.1rem;padding: 0 .6rem;background: #a7ecff;margin-top: -.05rem;padding-bottom: .5rem}
+.tel input{width: 4.7rem;height: .7rem;border:2px solid #ddd;border-radius: .5rem;display: inline-block;padding-left: .5rem;line-height: .7rem}
+.tel_tip{color: #00a2ce;margin-top: .2rem;font-size: .24rem}
+.sub_btn{width: 100%}
+.sub_btn a{display: block;width: 3.2rem;height: .8rem;background: #ff7f00;border-bottom: .05rem solid #d16800;text-align: center;color: #fff;font-size: .32rem;line-height: .8rem;border-radius: .1rem;margin: 0 auto;margin-top: .2rem}
+/*footer*/
+.footer{padding: .3rem .5rem;line-height: 160%;color: #666666;margin-bottom: 1.1rem}
+.footer div span{color: red}
+.app-bar{z-index: 99999}
+
+
+/*app下载*/ .app-bar{ overflow: hidden; position:fixed; left:0; bottom: 0; width:100%; height: 1.1rem; background: url(../../images/activity/masterSele/app-bar1.png) no-repeat center center; background-size: 100%  100%; color:#FFF; z-index:777; font-size: 12px; font-family: "Microsoft Yahei";}
+.app-bar .app-logo{float:left; width: .8rem; margin: .15rem 0 0 .5rem;}
+.app-btn{ float:right; background-color: #ff7e00; border-radius: .08rem; width: 1.8rem; height: .68rem; line-height: .68rem; font-size: 0.34rem; text-align: center; margin: .21rem .2rem 0 0; color:#FFF;}
+.app-close{ width: .38rem; height: .38rem; background: url(../../images/activity/masterSele/app-close.png) no-repeat; background-size:100%; position: absolute; left: 0; top: 0;}
+
+
+/*遮罩层*/
+#maskLayer{ width:100%; height: 100%; background-color:#000000; opacity:0.5; -moz-opacity:0.5; filter:alpha(opacity=50); position: fixed; top: 0; left: 0;z-index: 9999;display: none;}
+.sub_success{position: fixed;z-index: 99999;background: url(../../images/activity/masterSele/sc_bg.png) no-repeat left center; width: 6.57rem;height: 3.82rem;background-size: 6.57rem;height: 3.82rem;top: 35%;left: 50%;margin-left: -3.285rem;padding:.5rem .7rem}
+.sub_close{width: .5rem;height: .5rem;position: absolute;right: .5rem;top:.5rem;cursor:pointer;}
+.sub_con{margin-top: .9rem;font-size: .26rem;text-align: center;line-height: 180%;color: #fa4122}
+.sub_down{width: 80%;height: 1rem;margin:0 auto;margin-top: .2rem;}
+.sub_down a{display: block;width: 100%;height: 100%}
+
+.word_code{float: left;margin-top: .12rem}
+.txt_code{position: relative;width: 4.7rem;height: .7rem;float: left;}
+.get_code{position: absolute;right: .5rem;top: 0;border-left: 1px solid #ddd;height: .7rem;display: inline-block;line-height: .7rem;padding-left: .5rem;color: #6b533e}
+
+.gray{background-color: #999; border-bottom: #999;}
+.top_back{width: 1rem;height:1rem;position: fixed;top:.15rem;left: .15rem;z-index: 99}
+.logo{display:none;background: url(../../images/activity/masterSele/logo.png) no-repeat left center; width: 1.34rem;height:.39rem;background-size: 1.34rem .39rem;position:absolute;top:.2rem;left:.2rem;z-index: 1}
+.logo_right{width: 1rem;height:1rem; position:absolute;right:0;top:0}
+.logo_right a{display: block;
+    width:100%;
+    height:100%;}
+.get_now{width: 100%;height: auto;text-align: center;margin-bottom: .2rem}
+.get_now img{width: 1.34rem;height: auto;}
+
+.get_type{text-align: center;}
+.get_type img{width: 2.72rem;height: .66rem;}
+.get_word{padding-top: .2rem;color: #6b533e;font-size: .3rem;text-align: center;}
+.get_word span{color: #ec3636;font-size: .35rem;background: #d5f6ff;padding: 0 .05rem}
+
+.get_ewm{text-align: center;padding-top:.2rem}
+.get_ewm img{width: 2.32rem;height: 2.32rem;}

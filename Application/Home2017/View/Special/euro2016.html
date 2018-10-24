@@ -1,0 +1,1299 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>2016欧洲杯联赛_全球体育网qqty.com</title>
+</block>
+<block name="body">
+<body>
+<!--引入本页所需css-->
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/special/EURO2016.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/special/city_css.css">
+<!-- 顶部开始 -->
+<include file="Public:top_include" />
+<!-- 顶部结束 -->
+
+<!-- 主体内容开始 -->
+<div class="topic_home">
+	<!-- topic标示 -->
+  	<div class="topic_top">
+        <a target="_blank" href="//www.__DOMAIN__/Api/Index/introduce.html" class="pull-right app-btn">下载APP</a>
+  	</div>
+    <!-- topic标示 -->
+    <!-- 内容模块开始 -->
+    <div class="main">
+    	<!-- 导航 -->
+        <div class="nav-list">
+            <ul>
+                <li class="li01"><a href="javascript:;"></a></li>
+                <li class="li02"><a href="javascript:;"></a></li>
+                <li class="li03"><a href="javascript:;"></a></li>
+                <li class="li04"><a href="javascript:;"></a></li>
+                <li class="li05"><a href="javascript:;"></a></li>
+            </ul>
+        </div>
+        <!-- 导航 -->
+    	<!-- banner+球队资讯 -->
+      	<div class="cont_sec clearfix">
+        	<!-- baner -->
+        	<div class="pull-left cont_sec_left">
+            	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Carousel items -->
+                    <div class="carousel-inner">
+                    <volist name="carousel" id="item">          
+						<div class="item <if condition="$key eq 0">active</if>">
+							<a href="{$item.url}" target="_blank"><img src="{$item.img}" style="width:600px;height:366px;"></a>
+                            <div class="fbanner_title">
+                            <a href="{$item.url}" target="_blank">{$item.title}</a>
+                            </div>
+						</div>  
+                    </volist>                                                 
+ 					</div>
+                    <ol class="carousel-indicators">
+                    <volist name="carousel" id="item">   
+                        <li data-target="#myCarousel" data-slide-to="{$key}" <if condition="$key eq 4">style="margin-right:0"</if> <if condition="$key eq 0">class="active" style="margin-left:0"</if>><img src="{$item.img}" width="100%" height="100%"></li>
+                    </volist>
+                    </ol>
+                    <!-- Carousel nav -->
+                    <a class="carousel-control left" href="#myCarousel" data-slide="prev" style="display: none; opacity: 0.5;"><span class="banner_arrow"></span></a>
+                    <a class="carousel-control right" href="#myCarousel" data-slide="next" style="display: none; opacity: 0.5;"><span class="banner_arrow"></span></a>
+                </div>
+            </div>
+            <!-- 球队资讯 -->
+          	<div class="pull-right cont_sec_right">
+            	<div class="infor-title">
+                	<span class="pull-left">球队资讯  information</span>
+                    <a href="{:U('/list_n/29@news')}" target="_blank" class="pull-right">查看更多></a>
+                </div>
+                {$EuroNews|htmlspecialchars_decode}
+            </div>
+    	</div>
+        <!-- banner+球队资讯 -->
+        
+        <!-- 赛事战报 begin -->
+        <div class="event">
+        	<div class="event_title clearfix">
+            	<div class="pull-left event_left">
+                	<span>赛事战报</span>
+                    <em>Event Report</em>
+                </div>
+                <div class="pull-right event_right">
+                	<ul>
+                		<li class_id="46"><a href="javascript:;">列强</a></li>
+                        <li>|</li>
+                        <li class_id="45"><a href="javascript:;">葡萄牙 </a></li>
+                        <li>|</li>
+                        <li class_id="44"><a href="javascript:;">意大利</a></li>
+                        <li>|</li>
+                        <li class_id="43"><a href="javascript:;">德国</a></li>
+                        <li>|</li>
+                        <li class_id="42"><a href="javascript:;">西班牙</a></li>
+                        <li>|</li>
+                        <li class_id="41"><a href="javascript:;">英格兰</a></li>
+                        <li>|</li>
+                        <li class_id="40" class="on"><a href="javascript:;">法国</a></li>
+                	</ul>
+                </div>
+            </div>
+        	<div class="event_con clearfix">
+            	<div class="pull-left event_con_left">
+                    <ul class="clearfix nav-tab nav-tab4">
+                        <li class="on" style="margin-left:0"><a href="javascript:void(0);">淘汰赛</a></li>
+                        <li><a href="javascript:void(0);">小组赛</a></li>
+                        <li><a href="javascript:void(0);">积分榜</a></li>
+                        <li><a href="javascript:void(0);">射手榜</a></li>
+                    </ul>
+                    <div class="tabCon tabCon0">
+                        <div class="tab-content clearfix">
+                            <div class="mach-tab01 pull-left">
+                                <ul>
+                                    <li class="on"><a href="javascript:;">十六强</a></li>
+                                    <li><a href="javascript:;">八强</a></li>
+                                    <li><a href="javascript:;">四强</a></li>
+                                    <li><a href="javascript:;">决赛</a></li>
+                                </ul>
+                            </div>
+                            <!-- A组 -->
+                            <div class="pull-left mach-tab-con">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="110">比赛日期 </th>
+                                                <th width="110">比赛时间 </th>
+                                                <th width="110">比赛城市 </th>
+                                                <th>交战对手</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom tabBottom0">
+                                    <table class="table" cellpadding="0" cellspacing="0"> 
+                                    <volist name="shiliu" id="item">
+                                        <tr>
+                                            <td colspan="4"></td>
+                                        </tr>
+                                        <tr <if condition="$key % 2 eq 1">bgcolor="#114080"</if>>
+                                            <td width="110">{$item.gtime|date='m.d',###}</td>
+                                            <td width="110">{$item.gtime|date='H:i',###}</td>
+                                            <td width="110">
+                                                <switch name="item.game_id">
+                                                    <case value="1251744">圣埃蒂安</case>
+                                                    <case value="1252621">巴黎</case>
+                                                    <case value="1252616">朗斯</case>
+                                                    <case value="1252620">里昂</case>
+                                                    <case value="1252615">里尔</case>
+                                                    <case value="1252622">图卢兹</case>
+                                                    <case value="1251746">圣丹尼斯</case>
+                                                    <case value="1252617">尼斯</case>
+                                                </switch>
+                                            </td>
+                                            <td><span>{$item.home_team_name|switchName=0,###}</span><if condition="$item.game_state eq 0">—<else/><em class="bifen">{$item.score}</em></if><span>{$item.away_team_name|switchName=0,###}</span></td>
+                                        </tr>
+                                    </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- A组 -->
+                            <!-- B组 -->
+                            <div class="pull-left mach-tab-con" style="display:none">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="110">比赛日期 </th>
+                                                <th width="110">比赛时间 </th>
+                                                <th width="110">比赛城市 </th>
+                                                <th>交战对手</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <volist name="baqiang" id="item">
+                                            <tr>
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr <if condition="$key % 2 eq 1">bgcolor="#114080"</if>>
+                                                <td width="110">{$item.gtime|date='m.d',###}</td>
+                                                <td width="110">{$item.gtime|date='H:i',###}</td>
+                                                <td width="110">
+                                                    <switch name="item.game_id">
+                                                        <case value="1256289">马赛</case>
+                                                        <case value="1256477">里尔</case>
+                                                        <case value="1256719">波尔多</case>
+                                                        <case value="1256720">圣丹尼斯</case>
+                                                    </switch>
+                                                </td>
+                                                <td><span>{$item.home_team_name|switchName=0,###}</span><if condition="$item.game_state eq 0">—<else/><em class="bifen">{$item.score}</em></if><span>{$item.away_team_name|switchName=0,###}</span></td>
+                                            </tr>
+                                        </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- B组 -->
+                            <!-- C组 -->
+                            <div class="pull-left mach-tab-con" style="display:none">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="110">比赛日期 </th>
+                                                <th width="110">比赛时间 </th>
+                                                <th width="110">比赛城市 </th>
+                                                <th>交战对手</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <volist name="siqiang" id="item">
+                                            <tr>
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr <if condition="$key % 2 eq 1">bgcolor="#114080"</if>>
+                                                <td width="110">{$item.gtime|date='m.d',###}</td>
+                                                <td width="110">{$item.gtime|date='H:i',###}</td>
+                                                <td width="110">
+                                                    <switch name="item.game_id">
+                                                        <case value="1259383">里昂</case>
+                                                        <case value="1260130">马赛</case>
+                                                    </switch>
+                                                </td>
+                                                <td><span>{$item.home_team_name|switchName=0,###}</span><if condition="$item.game_state eq 0">—<else/><em class="bifen">{$item.score}</em></if><span>{$item.away_team_name|switchName=0,###}</span></td>
+                                            </tr>
+                                        </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- C组 -->
+                            <!-- D组 -->
+                            <div class="pull-left mach-tab-con" style="display:none">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="110">比赛日期 </th>
+                                                <th width="110">比赛时间 </th>
+                                                <th width="110">比赛城市 </th>
+                                                <th>交战对手</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <volist name="erqiang" id="item">
+                                            <tr>
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr <if condition="$key % 2 eq 1">bgcolor="#114080"</if>>
+                                                <td width="110">{$item.gtime|date='m.d',###}</td>
+                                                <td width="110">{$item.gtime|date='H:i',###}</td>
+                                                <td width="110">
+                                                    圣丹尼斯
+                                                </td>
+                                                <td><span>{$item.home_team_name|switchName=0,###}</span><if condition="$item.game_state eq 0">—<else/><em class="bifen">{$item.score}</em></if><span>{$item.away_team_name|switchName=0,###}</span></td>
+                                            </tr>
+                                        </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- D组 -->
+                        </div>
+                    </div>
+                    <div class="tabCon tabCon01" style="display:none">
+                    	<div class="tab-content clearfix">
+                        	<div class="mach-tab pull-left">
+                            	<ul>
+                            		<li class="on"><a href="javascript:;">A</a></li>
+                                    <li><a href="javascript:;">B</a></li>
+                                    <li><a href="javascript:;">C</a></li>
+                                    <li><a href="javascript:;">D</a></li>
+                                    <li><a href="javascript:;">E</a></li>
+                                    <li><a href="javascript:;">F</a></li>
+                            	</ul>
+                            </div>
+                            <!-- A组 -->
+                            <div class="pull-left mach-tab-con">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="110">比赛日期 </th>
+                                                <th width="110">比赛时间 </th>
+                                                <th width="110">比赛城市 </th>
+                                                <th>交战对手</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                    <volist name="gameArr.A" id="item">
+                                        <tr>
+                                            <td colspan="4"></td>
+                                        </tr>
+                                        <tr <if condition="$key % 2 eq 1">bgcolor="#114080"</if>>
+                                            <td width="110">{$item.gtime|date='m.d',###}</td>
+                                            <td width="110">{$item.gtime|date='H:i',###}</td>
+                                            <td width="110">
+                                                <switch name="item.game_id">
+                                                    <case value="1201866">圣丹尼斯</case>
+                                                    <case value="1201867">朗斯</case>
+                                                    <case value="1201889">巴黎</case>
+                                                    <case value="1201888">马赛</case>
+                                                    <case value="1242134">里尔</case>
+                                                    <case value="1201887">里昂</case>
+                                                </switch>
+                                            </td>
+                                            <td><span>{$item.home_team_name|switchName=0,###}</span><if condition="$item.game_state eq 0">—<else/><em class="bifen">{$item.score}</em></if><span>{$item.away_team_name|switchName=0,###}</span></td>
+                                        </tr>
+                                    </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- A组 -->
+                            <!-- B组 -->
+                            <div class="pull-left mach-tab-con" style="display:none">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="110">比赛日期 </th>
+                                                <th width="110">比赛时间 </th>
+                                                <th width="110">比赛城市 </th>
+                                                <th>交战对手</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <volist name="gameArr.B" id="item">
+                                            <tr>
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr <if condition="$key % 2 eq 1">bgcolor="#114080"</if>>
+                                                <td width="110">{$item.gtime|date='m.d',###}</td>
+                                                <td width="110">{$item.gtime|date='H:i',###}</td>
+                                                <td width="110">
+                                                    <switch name="item.game_id">
+                                                        <case value="1201868">波尔多</case>
+                                                        <case value="1201869">马赛</case>
+                                                        <case value="1201929">里尔</case>
+                                                        <case value="1201928">朗斯</case>
+                                                        <case value="1201926">圣埃蒂安</case>
+                                                        <case value="1201927">图卢兹</case>
+                                                    </switch>
+                                                </td>
+                                                <td><span>{$item.home_team_name|switchName=0,###}</span><if condition="$item.game_state eq 0">—<else/><em class="bifen">{$item.score}</em></if><span>{$item.away_team_name|switchName=0,###}</span></td>
+                                            </tr>
+                                        </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- B组 -->
+                            <!-- C组 -->
+                            <div class="pull-left mach-tab-con" style="display:none">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="110">比赛日期 </th>
+                                                <th width="110">比赛时间 </th>
+                                                <th width="110">比赛城市 </th>
+                                                <th>交战对手</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <volist name="gameArr.C" id="item">
+                                            <tr>
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr <if condition="$key % 2 eq 1">bgcolor="#114080"</if>>
+                                                <td width="110">{$item.gtime|date='m.d',###}</td>
+                                                <td width="110">{$item.gtime|date='H:i',###}</td>
+                                                <td width="110">
+                                                    <switch name="item.game_id">
+                                                        <case value="1201870">尼斯</case>
+                                                        <case value="1201871">里尔</case>
+                                                        <case value="1201933">里昂</case>
+                                                        <case value="1201932">圣丹尼斯</case>
+                                                        <case value="1201930">巴黎</case>
+                                                        <case value="1201931">马赛</case>
+                                                    </switch>
+                                                </td>
+                                                <td><span>{$item.home_team_name|switchName=0,###}</span><if condition="$item.game_state eq 0">—<else/><em class="bifen">{$item.score}</em></if><span>{$item.away_team_name|switchName=0,###}</span></td>
+                                            </tr>
+                                        </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- C组 -->
+                            <!-- D组 -->
+                            <div class="pull-left mach-tab-con" style="display:none">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="110">比赛日期 </th>
+                                                <th width="110">比赛时间 </th>
+                                                <th width="110">比赛城市 </th>
+                                                <th>交战对手</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <volist name="gameArr.D" id="item">
+                                            <tr>
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr <if condition="$key % 2 eq 1">bgcolor="#114080"</if>>
+                                                <td width="110">{$item.gtime|date='m.d',###}</td>
+                                                <td width="110">{$item.gtime|date='H:i',###}</td>
+                                                <td width="110">
+                                                    <switch name="item.game_id">
+                                                        <case value="1201872">巴黎</case>
+                                                        <case value="1201873">图卢兹</case>
+                                                        <case value="1201939">圣埃蒂安</case>
+                                                        <case value="1201938">尼斯</case>
+                                                        <case value="1201936">朗斯</case>
+                                                        <case value="1201937">波尔多</case>
+                                                    </switch>
+                                                </td>
+                                                <td><span>{$item.home_team_name|switchName=0,###}</span><if condition="$item.game_state eq 0">—<else/><em class="bifen">{$item.score}</em></if><span>{$item.away_team_name|switchName=0,###}</span></td>
+                                            </tr>
+                                        </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- D组 -->
+                            <!-- E组 -->
+                            <div class="pull-left mach-tab-con" style="display:none">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="110">比赛日期 </th>
+                                                <th width="110">比赛时间 </th>
+                                                <th width="110">比赛城市 </th>
+                                                <th>交战对手</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <volist name="gameArr.E" id="item">
+                                            <tr>
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr <if condition="$key % 2 eq 1">bgcolor="#114080"</if>>
+                                                <td width="110">{$item.gtime|date='m.d',###}</td>
+                                                <td width="110">{$item.gtime|date='H:i',###}</td>
+                                                <td width="110">
+                                                    <switch name="item.game_id">
+                                                        <case value="1201874">圣丹尼斯</case>
+                                                        <case value="1201875">里昂</case>
+                                                        <case value="1201945">图卢兹</case>
+                                                        <case value="1201944">波尔多</case>
+                                                        <case value="1201943">里尔</case>
+                                                        <case value="1201942">尼斯</case>
+                                                    </switch>
+                                                </td>
+                                                <td><span>{$item.home_team_name|switchName=0,###}</span><if condition="$item.game_state eq 0">—<else/><em class="bifen">{$item.score}</em></if><span>{$item.away_team_name|switchName=0,###}</span></td>
+                                            </tr>
+                                        </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- E组 -->
+                            <!-- F组 -->
+                            <div class="pull-left mach-tab-con" style="display:none">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="110">比赛日期 </th>
+                                                <th width="110">比赛时间 </th>
+                                                <th width="110">比赛城市 </th>
+                                                <th>交战对手</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <volist name="gameArr.F" id="item">
+                                            <tr>
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr <if condition="$key % 2 eq 1">bgcolor="#114080"</if>>
+                                                <td width="110">{$item.gtime|date='m.d',###}</td>
+                                                <td width="110">{$item.gtime|date='H:i',###}</td>
+                                                <td width="110">
+                                                    <switch name="item.game_id">
+                                                        <case value="1202023">波尔多</case>
+                                                        <case value="1202022">圣埃蒂安</case>
+                                                        <case value="1201949">马赛</case>
+                                                        <case value="1201948">巴黎</case>
+                                                        <case value="1201946">圣丹尼斯</case>
+                                                        <case value="1201947">里昂</case>
+                                                    </switch>
+                                                </td>
+                                                <td><span>{$item.home_team_name|switchName=0,###}</span><if condition="$item.game_state eq 0">—<else/><em class="bifen">{$item.score}</em></if><span>{$item.away_team_name|switchName=0,###}</span></td>
+                                            </tr>
+                                        </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- F组 -->
+                        </div>
+                    </div>
+                    <div class="tabCon tabCon02" style="display:none">
+                    	<div class="tab-content clearfix">
+                        	<div class="mach-tab mach-tab02 pull-left">
+                            	<ul>
+                            		<li class="on"><a href="javascript:;">A</a></li>
+                                    <li><a href="javascript:;">B</a></li>
+                                    <li><a href="javascript:;">C</a></li>
+                                    <li><a href="javascript:;">D</a></li>
+                                    <li><a href="javascript:;">E</a></li>
+                                    <li><a href="javascript:;">F</a></li>
+                            	</ul>
+                            </div>
+                            <!-- A组 -->
+                            <div class="pull-left mach-tab-con">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="92">名次 </th>
+                                                <th width="150">国家 </th>
+                                                <th class="score_list">
+                                                	<span>赛</span>
+                                                    <span>胜</span>
+                                                    <span>平</span>
+                                                    <span>负</span>
+                                                    <span>得</span>
+                                                    <span>失</span>
+                                                    <span>分</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom tabBottom02">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                    <volist name="integral.A" id="item">
+                                        <tr <if condition="$i % 2 eq 0">bgcolor="#114080"</if>>
+                                            <td width="92" class="rank"><if condition="$i eq 1"><img src="__PUBLIC__/Home/images/special/Golden.png" width="13" height="16" style="margin-top: -2px;"><elseif condition="$i eq 2"/><img src="__PUBLIC__/Home/images/special/Silver.png" width="13" height="16" style="margin-top: -2px;"></if><span style="font-size: 16px;">{$i}</span></td>
+                                            <td width="150">{$item.country_name}</td>
+                                            <td class="score_list">
+                                            	<span>{$item.round}</span>
+                                                <span>{$item.win}</span>
+                                                <span>{$item.draw}</span>
+                                                <span>{$item.lose}</span>
+                                                <span>{$item.score}</span>
+                                                <span>{$item.lose_ball}</span>
+                                                <span>{$item.integral}</span>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- A组 -->
+                            <!-- B组 -->
+                            <div class="pull-left mach-tab-con" style="display:none">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="92">名次 </th>
+                                                <th width="150">国家 </th>
+                                                <th class="score_list">
+                                                	<span>赛</span>
+                                                    <span>胜</span>
+                                                    <span>平</span>
+                                                    <span>负</span>
+                                                    <span>得</span>
+                                                    <span>失</span>
+                                                    <span>分</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom tabBottom02">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <volist name="integral.B" id="item">
+                                            <tr <if condition="$i % 2 eq 0">bgcolor="#114080"</if>>
+                                                <td width="92" class="rank"><if condition="$i eq 1"><img src="__PUBLIC__/Home/images/special/Golden.png" width="13" height="16" style="margin-top: -2px;"><elseif condition="$i eq 2"/><img src="__PUBLIC__/Home/images/special/Silver.png" width="13" height="16" style="margin-top: -2px;"></if><span style="font-size: 16px;">{$i}</span></td>
+                                                <td width="150">{$item.country_name}</td>
+                                                <td class="score_list">
+                                                    <span>{$item.round}</span>
+                                                    <span>{$item.win}</span>
+                                                    <span>{$item.draw}</span>
+                                                    <span>{$item.lose}</span>
+                                                    <span>{$item.score}</span>
+                                                    <span>{$item.lose_ball}</span>
+                                                    <span>{$item.integral}</span>
+                                                </td>
+                                            </tr>
+                                        </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- B组 -->
+                            <!-- C组 -->
+                            <div class="pull-left mach-tab-con" style="display:none">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="92">名次 </th>
+                                                <th width="150">国家 </th>
+                                                <th class="score_list">
+                                                	<span>赛</span>
+                                                    <span>胜</span>
+                                                    <span>平</span>
+                                                    <span>负</span>
+                                                    <span>得</span>
+                                                    <span>失</span>
+                                                    <span>分</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom tabBottom02">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <volist name="integral.C" id="item">
+                                        <tr <if condition="$i % 2 eq 0">bgcolor="#114080"</if>>
+                                            <td width="92" class="rank"><if condition="$i eq 1"><img src="__PUBLIC__/Home/images/special/Golden.png" width="13" height="16" style="margin-top: -2px;"><elseif condition="$i eq 2"/><img src="__PUBLIC__/Home/images/special/Silver.png" width="13" height="16" style="margin-top: -2px;"></if><span style="font-size: 16px;">{$i}</span></td>
+                                            <td width="150">{$item.country_name}</td>
+                                            <td class="score_list">
+                                                <span>{$item.round}</span>
+                                                <span>{$item.win}</span>
+                                                <span>{$item.draw}</span>
+                                                <span>{$item.lose}</span>
+                                                <span>{$item.score}</span>
+                                                <span>{$item.lose_ball}</span>
+                                                <span>{$item.integral}</span>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- C组 -->
+                            <!-- D组 -->
+                            <div class="pull-left mach-tab-con" style="display:none">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="92">名次 </th>
+                                                <th width="150">国家 </th>
+                                                <th class="score_list">
+                                                	<span>赛</span>
+                                                    <span>胜</span>
+                                                    <span>平</span>
+                                                    <span>负</span>
+                                                    <span>得</span>
+                                                    <span>失</span>
+                                                    <span>分</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom tabBottom02">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <volist name="integral.D" id="item">
+                                        <tr <if condition="$i % 2 eq 0">bgcolor="#114080"</if>>
+                                            <td width="92" class="rank"><if condition="$i eq 1"><img src="__PUBLIC__/Home/images/special/Golden.png" width="13" height="16" style="margin-top: -2px;"><elseif condition="$i eq 2"/><img src="__PUBLIC__/Home/images/special/Silver.png" width="13" height="16" style="margin-top: -2px;"></if><span style="font-size: 16px;">{$i}</span></td>
+                                            <td width="150">{$item.country_name}</td>
+                                            <td class="score_list">
+                                                <span>{$item.round}</span>
+                                                <span>{$item.win}</span>
+                                                <span>{$item.draw}</span>
+                                                <span>{$item.lose}</span>
+                                                <span>{$item.score}</span>
+                                                <span>{$item.lose_ball}</span>
+                                                <span>{$item.integral}</span>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- D组 -->
+                            <!-- E组 -->
+                            <div class="pull-left mach-tab-con" style="display:none">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="92">名次 </th>
+                                                <th width="150">国家 </th>
+                                                <th class="score_list">
+                                                	<span>赛</span>
+                                                    <span>胜</span>
+                                                    <span>平</span>
+                                                    <span>负</span>
+                                                    <span>得</span>
+                                                    <span>失</span>
+                                                    <span>分</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom tabBottom02">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <volist name="integral.E" id="item">
+                                        <tr <if condition="$i % 2 eq 0">bgcolor="#114080"</if>>
+                                            <td width="92" class="rank"><if condition="$i eq 1"><img src="__PUBLIC__/Home/images/special/Golden.png" width="13" height="16" style="margin-top: -2px;"><elseif condition="$i eq 2"/><img src="__PUBLIC__/Home/images/special/Silver.png" width="13" height="16" style="margin-top: -2px;"></if><span style="font-size: 16px;">{$i}</span></td>
+                                            <td width="150">{$item.country_name}</td>
+                                            <td class="score_list">
+                                                <span>{$item.round}</span>
+                                                <span>{$item.win}</span>
+                                                <span>{$item.draw}</span>
+                                                <span>{$item.lose}</span>
+                                                <span>{$item.score}</span>
+                                                <span>{$item.lose_ball}</span>
+                                                <span>{$item.integral}</span>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- E组 -->
+                            <!-- F组 -->
+                            <div class="pull-left mach-tab-con" style="display:none">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="92">名次 </th>
+                                                <th width="150">国家 </th>
+                                                <th class="score_list">
+                                                	<span>赛</span>
+                                                    <span>胜</span>
+                                                    <span>平</span>
+                                                    <span>负</span>
+                                                    <span>得</span>
+                                                    <span>失</span>
+                                                    <span>分</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom tabBottom02">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <volist name="integral.F" id="item">
+                                        <tr <if condition="$i % 2 eq 0">bgcolor="#114080"</if>>
+                                            <td width="92" class="rank"><if condition="$i eq 1"><img src="__PUBLIC__/Home/images/special/Golden.png" width="13" height="16" style="margin-top: -2px;"><elseif condition="$i eq 2"/><img src="__PUBLIC__/Home/images/special/Silver.png" width="13" height="16" style="margin-top: -2px;"></if><span style="font-size: 16px;">{$i}</span></td>
+                                            <td width="150">{$item.country_name}</td>
+                                            <td class="score_list">
+                                                <span>{$item.round}</span>
+                                                <span>{$item.win}</span>
+                                                <span>{$item.draw}</span>
+                                                <span>{$item.lose}</span>
+                                                <span>{$item.score}</span>
+                                                <span>{$item.lose_ball}</span>
+                                                <span>{$item.integral}</span>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- F组 -->
+                        </div>
+                    </div>
+                    <div class="tabCon tabCon03" style="display:none">
+                    	<div class="tab-content">
+                            <!-- A组 -->
+                            <div class="mach-tab-con">
+                                <div class="tabTop">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th width="92">名次 </th>
+                                                <th width="200">球员 </th>
+                                                <th width="80">国家</th>
+                                                <th>进球（点球）</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tabBottom tabBottom03" tabindex="0" style="overflow-y: hidden; outline: none;">
+                                    <table class="table" cellpadding="0" cellspacing="0">
+                                    <volist name="euro_scorer" id="item">
+                                        <tr <if condition="$i % 2 eq 0">bgcolor="#114080"</if>>
+                                            <td width="92" class="rank"><if condition="$i eq 1"><img src="__PUBLIC__/Home/images/special/Golden.png" width="13" height="16" style="margin-top: -2px;"><elseif condition="$i eq 2"/><img src="__PUBLIC__/Home/images/special/Silver.png" width="13" height="16" style="margin-top: -2px;"></if><span style="font-size: 16px;">{$i}</span></td>
+                                            <td width="200">{$item.player}</td>
+                                            <td width="80"><img src="{$item.img_url}" width="28" height="28"></td>
+                                            <td class="score_color">{$item.score}（{$item.penalty}）</td>
+                                        </tr>
+                                    </volist>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- A组 -->
+                        </div>
+                    </div>
+                </div>
+            	<div class="pull-right event_con_right">
+                	<ul>
+                    <volist name="report" id="item">
+                		<li><a target="_blank" href="{:U('/info_n/'.$item['id'].'')}">{$item.title}</a></li>
+                    </volist>
+                	</ul>
+                </div>
+            </div>
+        </div>
+        <!-- 赛事战报 end -->
+        <!-- 赛事锦集 -->
+        <div class="cont_vds">
+        	<div class="event_title clearfix">
+            	<div class="pull-left event_left">
+                	<span>视频集锦</span>
+                    <em>Video highlights</em>
+                </div>
+                <div class="pull-right more_right">
+                	<ul>
+                		<li><a target="_blank" href="{:U('Highlights/more',['game_type'=>1,'union_id'=>67])}">查看更多></a></li>
+                	</ul>
+                </div>
+            </div>
+            <div class="scr-vds">
+                <ul class="clearfix">
+                <volist name="highlights" id="item">
+                    <li <if condition="$key eq 0 or $key eq 4">style="margin-left:0"</if>>
+                        <a target="_blank" href="{:U('Video/lives',['type'=>1,'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}">
+                            <div class="vds-img">
+                                <img src="{$item.img}?{:rand(0,9999)}" width="230" height="130"/>
+                                <span class="play"><i></i></span>
+                            </div>
+                            <p class="txt">{$item.title}</p>
+                        </a>
+                    </li>
+                </volist>
+                </ul>
+            </div>
+        </div>
+        <!-- 赛事锦集 -->
+        
+        <!-- 城市地图 -->
+        <div class="event_title cityMap clearfix">
+            <div class="pull-left event_left">
+                <span>城市地图</span>
+                <em>City Map</em>
+            </div>
+        </div>
+        <div class="city_wrap" style="min-width:1000px;">
+              
+        <div class="city_main">
+        <div class="city_t_gb" style="right: 100px; bottom: 128px; opacity: 1;"></div>
+            <div class="city_map" style="left: 40px;">
+              <ul class="city_list">
+                <li class="city_1 cp_on">
+                  <span>巴黎</span>
+                  <em></em>
+                  <i></i>
+                </li>
+                <li class="city_2">
+                  <span>朗斯</span>
+                  <em></em>
+                  <i></i>
+                </li>
+                <li class="city_3">
+                  <span>波尔多</span>
+                  <em></em>
+                  <i></i>
+                </li>
+                <li class="city_4">
+                  <span>里尔</span>
+                  <em></em>
+                  <i></i>
+                </li>
+                <li class="city_5">
+                  <span>里昂</span>
+                  <em></em>
+                  <i></i>
+                </li>
+                <li class="city_6">
+                  <span>马赛</span>
+                  <em></em>
+                  <i></i>
+                </li>
+                <li class="city_7">
+                  <span>尼斯</span>
+                  <em></em>
+                  <i></i>
+                </li>
+                <li class="city_8">
+                  <span>圣丹尼</span>
+                  <em></em>
+                  <i></i>
+                </li>
+                <li class="city_9">
+                  <span>圣埃蒂安</span>
+                  <em></em>
+                  <i></i>
+                </li>
+                <li class="city_10">
+                  <span>图卢兹</span>
+                  <em></em>
+                  <i></i>
+                </li>
+              </ul>
+            </div>
+            <div id="city_pop">
+              <div class="cp_item" style="width: 424px; height: 272px; top: 145px; left: 540px; opacity: 1; display: block;">
+                <div class="cp_box" style="display: block;">
+                <a target="_blank" href="//www.qqty.com/info_n/20679.html">
+                  <h4 class="cp_title">巴黎&nbsp;&nbsp;王子公园球场</h4>
+                  <dl class="cp_info">
+                    <dt>
+                      <img width="178" height="100" src="//img1.qqty.com/Uploads/publish/20679.jpg"></dt>
+                    <dd>　　巴黎位于法国北部，横跨塞纳河两岸，约有248万人口，为法国首都和最大城市，亦为欧洲第二大城市，世界四大国际化都市之一。</dd></dl>
+                  <ul class="cp_pics clearfix">
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555023661565.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555024208735.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555025130960.jpg"></li>
+                  </ul>
+                  </a>
+                  <p class="cp_more">
+                    <a target="_blank" href="//www.qqty.com/info_n/20679.html">详细介绍 &gt;</a>
+                  </p>
+                </div>
+              </div>
+              <div class="cp_item" style="width: 0px; height: 0px; top: 460px; left: 310px; opacity: 0; display: none;">
+                <div class="cp_box" style="display: none;">
+                <a target="_blank" href="//www.qqty.com/info_n/20680.html">
+                  <h4 class="cp_title">朗斯&nbsp;&nbsp;博拉尔特-德勒利球场</h4>
+                  <dl class="cp_info">
+                    <dt>
+                      <img width="170" height="100" src="//img1.qqty.com/Uploads/publish/20680.jpg"></dt>
+                    <dd>　　朗斯位于法国北部的加来海峡省，是一座重要的工业城镇，人口约为三万五千。朗斯在1520年成为西班牙控制的尼德兰的一部分，1659年被并入法国。</dd></dl>
+                  <ul class="cp_pics clearfix">
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555285500802.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555286230306.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555287927453.jpg"></li>
+                  </ul>
+                  </a>
+                  <p class="cp_more">
+                    <a target="_blank" href="//www.qqty.com/info_n/20680.html">详细介绍 &gt;</a>
+                  </p>
+                </div>
+              </div>
+              <div class="cp_item" style="width: 0px; height: 0px; top: 460px; left: 310px; opacity: 0; display: none;">
+                <div class="cp_box" style="display: none;">
+                  <a target="_blank" href="//www.qqty.com/info_n/20687.html">
+                  <h4 class="cp_title">波尔多&nbsp;&nbsp;波尔多体育场</h4>
+                  <dl class="cp_info">
+                    <dt>
+                      <img width="170" height="100" src="//img1.qqty.com/Uploads/publish/20687.jpg"></dt>
+                    <dd>　　美丽的波尔多有“小巴黎”之称，位于法国西南部，是一座传统的港口城市，位于加龙河下游，是法国阿基坦大区和吉伦特省的首府，欧洲大西洋沿岸战略要地</dd></dl>
+                  <ul class="cp_pics clearfix">
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463556410803234.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463556412326155.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463556413392676.jpg"></li>
+                  </ul>
+                  </a>
+                  <p class="cp_more">
+                    <a target="_blank" href="//www.qqty.com/info_n/20687.html">详细介绍 &gt;</a></p>
+                </div>
+              </div>
+              <div class="cp_item" style="width: 0px; height: 0px; top: 460px; left: 310px; opacity: 0; display: none;">
+                <div class="cp_box" style="display: none;">
+                  <a target="_blank" href="//www.qqty.com/info_n/20681.html">
+                  <h4 class="cp_title">里尔&nbsp;&nbsp;皮埃尔-莫鲁瓦球场</h4>
+                  <dl class="cp_info">
+                    <dt>
+                      <img width="170" height="100" src="//img1.qqty.com/Uploads/publish/20681.jpg"></dt>
+                    <dd>　　历史悠久的里尔是法国北部最大的城市，亦是加莱海峡大区的首府和诺尔省的省会，约有22万人口（2011年），是法国北部经济、教育、交通和文化中心</dd></dl>
+                  <ul class="cp_pics clearfix">
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555453602500.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555455972731.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555457776975.jpg"></li>
+                  </ul>
+                  </a>
+                  <p class="cp_more">
+                    <a target="_blank" href="//www.qqty.com/info_n/20681.html">详细介绍 &gt;</a></p>
+                </div>
+              </div>
+              <div class="cp_item" style="width: 0px; height: 0px; top: 460px; left: 310px; opacity: 0; display: none;">
+                <div class="cp_box" style="display: none;">
+                  <a target="_blank" href="//www.qqty.com/info_n/20683.html">
+                  <h4 class="cp_title">里昂&nbsp;&nbsp;里昂体育场</h4>
+                  <dl class="cp_info">
+                    <dt>
+                      <img width="170" height="100" src="//img1.qqty.com/Uploads/publish/20683.jpg"></dt>
+                    <dd>　　里昂位于法国东南部，市区位于索恩河和罗讷河交汇处的多丘陵地带，属于带有大陆性的温带海洋性气候，四季温和，日照充足，雨量充沛，年均气温为11.3℃。</dd></dl>
+                  <ul class="cp_pics clearfix">
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555905746347.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555906247078.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555908289196.jpg"></li>
+                  </ul>
+                  </a>
+                  <p class="cp_more">
+                    <a target="_blank" href="//www.qqty.com/info_n/20683.html">详细介绍 &gt;</a></p>
+                </div>
+              </div>
+              <div class="cp_item" style="width: 0px; height: 0px; top: 460px; left: 310px; opacity: 0; display: none;">
+                <div class="cp_box" style="display: none;">
+                  <a target="_blank" href="//www.qqty.com/info_n/20689.html">
+                  <h4 class="cp_title">马赛&nbsp;&nbsp;韦洛德罗姆球场</h4>
+                  <dl class="cp_info">
+                    <dt>
+                      <img width="170" height="100" src="//img1.qqty.com/Uploads/publish/20689.jpg"></dt>
+                    <dd>　　拥有着2500年历史的马赛是法国第二大城市和最大的海港，是普罗旺斯省的首府，约有163万人口。马赛三面被石灰岩山丘环抱，东南部濒地中海</dd></dl>
+                  <ul class="cp_pics clearfix">
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463556847580689.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463556848188221.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463556849380777.jpg"></li>
+                  </ul>
+                  </a>
+                  <p class="cp_more">
+                    <a target="_blank" href="//www.qqty.com/info_n/20689.html">详细介绍 &gt;</a></p>
+                </div>
+              </div>
+              <div class="cp_item" style="width: 0px; height: 0px; top: 460px; left: 310px; opacity: 0; display: none;">
+                <div class="cp_box" style="display: none;">
+                  <a target="_blank" href="//www.qqty.com/info_n/20690.html">
+                  <h4 class="cp_title">尼斯&nbsp;&nbsp;尼斯体育场</h4>
+                  <dl class="cp_info">
+                    <dt>
+                      <img width="170" height="100" src="//img1.qqty.com/Uploads/publish/20690.jpg"></dt>
+                    <dd>　　尼斯是法国东南部城市，位于普罗旺斯-阿尔卑斯-蓝色海岸大区，是滨海阿尔卑斯省的省会，人口约为34万，市区南靠地中海，东邻伯龙山，西侧和北侧则为阿尔卑斯山</dd></dl>
+                  <ul class="cp_pics clearfix">
+                    <li>
+                      <img width="120" height="67" src="//2016.7m.cn/public/images/pic/20160320/20160320172417_60968.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//2016.7m.cn/public/images/pic/20160320/20160320172547_51699.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//2016.7m.cn/public/images/pic/20160320/20160320172614_76978.jpg"></li>
+                  </ul>
+                  </a>
+                  <p class="cp_more">
+                    <a target="_blank" href="//www.qqty.com/info_n/20690.html">详细介绍 &gt;</a></p>
+                </div>
+              </div>
+              <div class="cp_item" style="width: 0px; height: 0px; top: 460px; left: 310px; opacity: 0; display: none;">
+                <div class="cp_box" style="display: none;">
+                  <a target="_blank" href="//www.qqty.com/info_n/20682.html">
+                  <h4 class="cp_title">圣丹尼&nbsp;&nbsp;法兰西大球场</h4>
+                  <dl class="cp_info">
+                    <dt>
+                      <img width="170" height="100" src="//img1.qqty.com/Uploads/publish/20682.jpg"></dt>
+                    <dd>　　圣丹尼（Saint-Denis）位于距巴黎市中心10公里外的市郊，约有11万人口，是一座历史悠久的中世纪小城镇，如一本活着的历史书</dd></dl>
+                  <ul class="cp_pics clearfix">
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555675742911.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555680330003.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463555684224660.jpg"></li>
+                  </ul>
+                  </a>
+                  <p class="cp_more">
+                    <a target="_blank" href="//www.qqty.com/info_n/20682.html">详细介绍 &gt;</a></p>
+                </div>
+              </div>
+              <div class="cp_item" style="width: 0px; height: 0px; top: 460px; left: 310px; opacity: 0; display: none;">
+                <div class="cp_box" style="display: none;">
+                  <a target="_blank" href="//www.qqty.com/info_n/20685.html">
+                  <h4 class="cp_title">圣埃蒂安&nbsp;&nbsp;热奥弗鲁瓦-基查尔球场</h4>
+                  <dl class="cp_info">
+                    <dt>
+                      <img width="170" height="100" src="//img1.qqty.com/Uploads/publish/20685.jpg"></dt>
+                    <dd>　　圣埃蒂安位于法国中央高原东南部，卢瓦尔河与罗讷河两大水系的分水岭地带，是罗讷-阿尔卑斯大区卢瓦尔省的省会，约有18万人口。</dd></dl>
+                  <ul class="cp_pics clearfix">
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463556211866148.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463556212491205.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463556213623090.jpg"></li>
+                  </ul>
+                  </a>
+                  <p class="cp_more">
+                    <a target="_blank" href="//www.qqty.com/info_n/20685.html">详细介绍 &gt;</a></p>
+                </div>
+              </div>
+              <div class="cp_item" style="width: 0px; height: 0px; top: 460px; left: 310px; opacity: 0; display: none;">
+                <div class="cp_box" style="display: none;">
+                  <a target="_blank" href="//www.qqty.com/info_n/20688.html">
+                  <h4 class="cp_title">图卢兹&nbsp;&nbsp;图卢兹体育场</h4>
+                  <dl class="cp_info">
+                    <dt>
+                      <img width="170" height="100" src="//img1.qqty.com/Uploads/publish/20688.jpg"></dt>
+                    <dd>　　图卢兹位于法国西南部，拉泰拉勒-加龙运河和南运河的汇合处，是朗格多克-鲁西永大区上加龙省省会，亦是法国第四大城市。</dd></dl>
+                  <ul class="cp_pics clearfix">
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463556539186867.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463556541266099.jpg"></li>
+                    <li>
+                      <img width="120" height="67" src="//img1.qqty.com/Uploads/ueditor/image/20160518/1463556542312486.jpg"></li>
+                  </ul>
+                  </a>
+                  <p class="cp_more">
+                    <a target="_blank" href="//www.qqty.com/info_n/20688.html">详细介绍 &gt;</a></p>
+                </div>
+            </div>
+        </div>
+      </div>
+      	</div>
+        <!-- 城市地图 -->
+        <!-- 历史回顾 -->
+        <div class="history">
+        	<div class="event_title clearfix">
+                <div class="pull-left event_left">
+                    <span>历史回顾</span>
+                    <em>Historical review</em>
+                </div>
+            </div>
+        	<div class="history_con">
+            	<ul class="clearfix">
+            		<li>
+                    	<a target="_blank" href="//www.qqty.com/info_n/20678.html" class="active">
+                        	<i></i>
+                            <span>2012年波兰/乌克兰欧洲</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20678.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+                    <li>
+                    	<a target="_blank" href="//www.qqty.com/info_n/20677.html">
+                        	<i></i>
+                            <span>2008年奥地利/瑞士欧洲</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20677.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+                    <li>
+                    	<a target="_blank" href="//www.qqty.com/info_n/20676.html">
+                        	<i></i>
+                            <span>2004年葡萄牙欧洲杯</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20676.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+                    <li>
+                    	<a target="_blank" href="//www.qqty.com/info_n/20673.html">
+                        	<i></i>
+                            <span>2000年荷兰/比利时欧洲</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20673.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+                    <li>
+                    	<a target="_blank" href="//www.qqty.com/info_n/20672.html">
+                        	<i></i>
+                            <span>1996年英格兰欧洲杯</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20672.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+                    <li class="mt128">
+                    	<a target="_blank" href="//www.qqty.com/info_n/20666.html">
+                        	<i></i>
+                            <span>1976年南斯拉夫欧洲杯</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20666.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+                    <li class="mt128">
+                    	<a target="_blank" href="//www.qqty.com/info_n/20667.html">
+                        	<i></i>
+                            <span>1980年意大利欧洲杯</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20667.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+                    <li class="mt128">
+                    	<a target="_blank" href="//www.qqty.com/info_n/20668.html">
+                        	<i></i>
+                            <span>1984年法国欧洲杯</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20668.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+                    <li class="mt128">
+                    	<a target="_blank" href="//www.qqty.com/info_n/20669.html">
+                        	<i></i>
+                            <span>1988年西德欧洲杯</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20669.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+                    <li class="mt128">
+                    	<a target="_blank" href="//www.qqty.com/info_n/20671.html">
+                        	<i></i>
+                            <span>1992年瑞典欧洲杯</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20671.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+                    <li class="mt128">
+                    	<a target="_blank" href="//www.qqty.com/info_n/20665.html">
+                        	<i></i>
+                            <span>1972年比利时欧洲杯</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20665.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+                    <li class="mt128">
+                    	<a target="_blank" href="//www.qqty.com/info_n/20664.html">
+                        	<i></i>
+                            <span>1968年意大利欧洲杯</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20664.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+                    <li class="mt128">
+                    	<a target="_blank" href="//www.qqty.com/info_n/20663.html">
+                        	<i></i>
+                            <span>1964年西班牙欧洲杯</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20663.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+                    <li class="mt128">
+                    	<a target="_blank" href="//www.qqty.com/info_n/20662.html">
+                        	<i></i>
+                            <span>1960年法国欧洲杯</span>
+                            <div class="show_city"><img src="//img1.qqty.com/Uploads/publish/20662.jpg" width="148" height="92"></div>
+                        </a>
+                    </li>
+            	</ul>
+            </div>
+        </div>
+        <!-- 历史回顾 -->
+    </div>
+    <!-- 内容模块结束 -->
+</div>
+<!-- 主体内容结束 -->
+
+<!-- 返回顶部开始 -->
+<div class="return-top">
+    <a href="javascript:;">
+        <span class="ft_bg"></span>
+        <span>回顶部</span>
+    </a>
+</div>
+<!-- 返回顶部结束 -->
+<div class="copyRight">
+	<div class="copyRight_1000 clearfix">
+    	<!-- logo -->
+  		<div class="logo_img pull-left"><a href="javscript:;"><img src="__PUBLIC__/Home/images/special/logo_img01.png" width="180" height="52"></a><a href="javscript:;"><img src="__PUBLIC__/Home/images/special/logo_img02.png" width="176" height="78"></a></div>
+    	<!-- logo -->
+        <!-- 底部版权信息开始 -->
+        <div class="footer pull-left">
+            <div class="link">
+                <a href="//www.qqty.com/Home/Copyright/about.html">关于我们</a>
+                |
+                <a href="//www.qqty.com/Home/Copyright/cooperate.html">商务合作</a>
+                |
+                <a href="//www.qqty.com/Home/Copyright/recruit.html">高薪聘请</a>
+                |
+                <a href="//www.qqty.com/Home/Copyright/map.html">网站地图</a>
+                |
+                <a href="//www.qqty.com/Home/Copyright/service.html">法律声明</a>
+                |
+                <a href="//www.qqty.com/Home/Copyright/feedback.html">意见反馈</a>
+                |
+                <a href="//www.qqty.com/Home/Copyright/contact.html">联系我们</a>
+            </div>
+            <p>©2015-2016广东全彩科技有限公司 版权所有 客服热线：020-39287222  备案：<a href="//www.miibeian.gov.cn" target="_blank;">粤ICP备15006399号-3</a></p>
+            <p><a href="/Public/Home/images/wangwen.jpeg" target="_blank;">粤网文：[2015]1099-037号</a></p>
+        </div>
+        <!-- 底部版权信息结束 -->	
+    </div>
+</div>
+</body> 
+</html>
+<!--引入本页所需js-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/special/scroll_min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/special/euro2016.js"></script>
+</block>

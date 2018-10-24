@@ -1,0 +1,138 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/info/dataDase.css">
+    <link rel="stylesheet" href="__PUBLIC__/Plugs/myscroll/jquery.mCustomScrollbar.css">
+</block>
+<block name="content">
+    <!-- 顶部栏 -->
+    <div class="themeBox">
+    	<div class="topBanner"></div>
+        <div class="themeNavConBox">
+            <div class="themeNavCon">
+                <div class="themeNavBox">
+                    <div class="clearfix themeNavIn">
+                        <h1 class="pull-left themeLogo"><a href="{:U('/')}" title="全球体育首页" class="skewLeft"><img class="skewRight" src="__IMAGES__/special/theme-logo.png" width="142" height="35"></a></h1>
+                         <div class="pull-left themeNav skewLeft">
+                            <ul class="clearfix skewRight">
+                                <volist name="nav" id="vo">
+                                    <if condition='$vo.url neq "" '>
+                                        <li class="pull-left"><a target="_blank" href="{$vo.url}"><span>{$vo.name}</span> </a></li>
+                                        <else />
+                                        <li class="pull-left" ><a target="_blank" href="javascript:;" data-toggle="tooltip" data-placement="top" title="正在开发中..."><span>{$vo.name}</span> </a></li>
+                                    </if>
+
+
+                                </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <!-- main -->
+        <div class="main">
+            <!-- 当前位置 -->
+            <div class="position">
+            </div>
+        	<div class="hotMatch">
+                <div class="clearfix title">
+                	<h2 class="pull-left">热门赛事</h2>
+                </div>
+                <div class="matchList">
+                	<ul class="clearfix">
+                        <volist name="hot_league" id="voHot">
+                            <li class="pull-left">
+                                <a href="{$voHot.jump_url}" target="_blank" title="{$voHot.name}">
+                                    <img src="{$voHot.logo}" width="30" height="20">{$voHot.name}
+                                </a>
+                            </li>
+                        </volist>
+                	</ul>
+                </div>
+            </div>
+  
+            
+            <div class="statTit longStatTit clearfix">
+                <h3 class="title pull-left"><span class="f18 mr10 strong">赛事选择</span> <span class="f12 text-uppercase">Competition selection</span></h3></div>
+            <!-- match-tit -->
+            <div class="match-tit">
+                <a href="javascript:;" title="国家" class="on" data-type="0">国家</a>
+                <a href="javascript:;" title="洲际赛事" data-type="1">洲际赛事</a>
+            </div>
+            <!-- match-tit -->
+            <!-- raceBoxWrap -->
+            <div class="raceBoxWrap clearfix">
+                <div class="pull-left raceBox">
+                    <div class="raceNav clearfix">
+                        <h3 class="pull-left title">地区选择</h3>
+                        <ul class="pull-right clearfix">
+                            <volist name="continent" id="conVo">
+                                <li class="pull-left"  data-type="{$conVo.continent_id}" ><a href="javascript:void (0);">{$conVo.name}</a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <div class="raceCon">
+                        <div class="raceList">
+                            <div class="raceMain">
+                                <ul class="clearfix"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-right hotRace">
+                	<h3 class="title">今日赛事</h3>
+                    <div class="panel-group-box">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <volist name="today_games" id="gVo" key="gKey">
+                                <div class="panel">
+                                    <div class="panel-heading" role="tab" id="heading{$gVo.key}">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed <if condition='$gVo.key == 0 '>active<else /> </if>" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{$gVo.key}" aria-expanded="false" aria-controls="collapse{$gVo.key}">
+                                                <span class="pull-left">{$gVo.union_name}</span>
+                                                <span class="pull-right">{$gVo.list|count}场</span>
+                                            </a>
+                                        </h4>
+                                    </div>
+
+                                    <div id="collapse{$gVo.key}" class="panel-collapse collapse <if condition='$gVo.key == 0 '>in<else /> </if>" role="tabpanel" aria-labelledby="heading{$gVo.key}">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <volist name="gVo['list']" id="lVo">
+                                                    <li class="clearfix" gid="{$lVo.game_id}" hrefUrl = "{:U('/dataFenxi@bf',['game_id'=>$lVo['game_id']])}">
+                                                        <div class="pull-left time">{$lVo.gtime}</div>
+                                                        <a href="/team/{$lVo.home_team_id}.html"  class="pull-left homeName text-r" title="{$lVo.home_team_name}" target="_blank">{$lVo.home_team_name}</a>
+                                                        <div class="pull-left score">
+                                                            <a href="{:U('/dataFenxi@bf',['game_id'=>$lVo['game_id']])}"  class="text-r" target="_blank" title="点击跳转赛事">VS</a></div>
+                                                        <a href="/team/{$lVo.away_team_id}.html" class="pull-left awayname text-l" title="{$lVo.away_team_name}" target="_blank">{$lVo.away_team_name}</a>
+                                                    </li>
+
+                                                </volist>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </volist>
+
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- raceBoxWrap -->
+        </div>
+        <!-- main -->
+        
+        <textarea class="data_info_unions" style="display:none;">{$unions|json_encode}</textarea>
+        <textarea class="data_info_continents" style="display:none;">{$continent|json_encode}</textarea>
+        <textarea class="data_info_countryMap" style="display:none;">{$countryMap|json_encode}</textarea>
+        <textarea class="data_info_country_unions" style="display:none;">{$country_unions|json_encode}</textarea>
+		        
+    </div>
+</block>
+
+<block name="js">
+    <script type="text/javascript" src="__PUBLIC__/Plugs/myscroll/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="__JS__/info/index.js?v=20180717"></script>
+</block>
+

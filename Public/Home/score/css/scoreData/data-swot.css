@@ -1,0 +1,43 @@
+/**
+ * swot css
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2017-08-18
+**/
+
+.swotCon{ padding: 30px 20px; background: #fff;}
+.swoTitle{ margin-bottom: 20px;}
+.swotListCon{ margin-bottom: 40px;}
+.swotListCon ul li{ background: #f5f6fa; margin-bottom: 10px;}
+.swotListCon .swotLeft{padding: 15px 0 15px 20px;}
+.swotListCon .mlc_title a{font-size: 22px; color: #4c4c4c; overflow: hidden;}
+.swotListCon .mlc_des a{color: #666666; line-height: 150%;}
+.swotListCon  .mlc_match{ height: 30px;}
+.swotListCon  .mlc_match span{ color: #2e76c7; margin-right: 15px;}
+.mlc_time{ padding-top: 10px;  color: #999999;}
+.mlc_time span{ margin-right: 15px; display: inline-block; height: 28px; line-height: 28px;}
+.mlc_time span a{ display: inline-block;}
+.rec_img{ width: 158px; height: 100px; float: left; overflow: hidden;}
+.rec_right{float: left; padding-left: 12px;}
+.posts{position: relative;}
+
+.swotLook{ width: 178px; height: 129px; line-height: 129px; text-align: center; font-size: 16px; background: #e0e0e0;}
+
+.swotConWrap .columns{ width: 566px; border: 1px solid #e5e5e5;}
+.swotConWrap .colTitle{ padding: 10px 20px; border-bottom: 1px solid #e5e5e5;}
+.swotConWrap .teamFace{ width: 36px; height: 36px; border-radius: 50%;overflow: hidden;}
+.swotConWrap .teamFace img{ width: 100%; height: 100%; border-radius: 50%;}
+.swotConWrap .teamName{ line-height: 36px; margin-left: 15px;}
+.swotConWrap .homeCol{ background: #f5f6fa;}
+.swotConWrap .awayCol{ background: #ffffff;}
+.swotConWrap .columns .info-good,.swotConWrap .columns .info-bad{ margin-top: 10px;}
+.swotConWrap .info-bad p, .swotConWrap .info-good p{ font-size: 20px; margin-bottom: 20px; padding-left: 20px; margin-left: 20px; position: relative;}
+.swotConWrap .info-bad p:after, .swotConWrap .info-good p:after{ content:''; width: 4px; height: 26px; position: absolute; left: 0; top: 0; border-radius: 13px;}
+.swotConWrap .info-good p:after { background: #de1e30; border-left: 4px solid #de1e30;}
+.swotConWrap .info-bad p:after { background: #4d7082; border-left: 4px solid #4d7082;}
+.swotConWrap .info-bad ul, .swotConWrap .info-good ul { border-left: 2px solid #e9eaee; margin-left: 20px;}
+.swotConWrap .info-bad li, .swotConWrap .info-good li{ color: #777; margin: 25px 40px 25px 30px; letter-spacing: 1px; position: relative;}
+.swotConWrap li i { position: absolute; top: 8px; left: -33px; width: 4px; height: 4px; border-radius: 50%;}
+.swotConWrap .info-bad li i{ background: #4d7082;}
+.swotConWrap .info-good li i{ background: #de1e30;}
+

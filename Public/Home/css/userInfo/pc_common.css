@@ -1,0 +1,63 @@
+/**
+ * 全彩个人中心公用css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2017-08-03
+**/
+
+/* 顶部中部 */
+
+/* 内容切换开始 */
+.main{ margin: 0 auto; width: 1000px; height: auto;}
+.main .main-in{ width: 1000px; margin:0 auto; padding: 12px 0;}
+/* 左边的主体内容 */
+.left-main{ width: 142px; background: #fff;
+	border:1px solid #e5e5e5; }
+.left-main .h3-title{ font-size: 16px; text-align: center; height: 70px;line-height: 55px; padding:0;margin:0 auto; border-top:10px solid #3f446f; }
+.left-main .h3-title a{ color: #2e76c7;font-size: 20px}
+.left-main dl{ margin-top: 10px; margin-bottom: 10px;}
+.x-line{ padding: 0 10px;}
+.x-line span{ display: block; border-bottom: 1px dotted #e5e5e5;}
+.left-main dt{ padding-left: 40px; height: 32px; line-height: 32px; background: url(../../images/userInfo/ct_gl.png) no-repeat 15px 5px;background-position:15px!important;}
+.left-main .dl02 dt{ background: url(../../images/userInfo/ct_gl.png) no-repeat 15px 5px;}
+.left-main .dl03 dt{ background: url(../../images/userInfo/ct_book.png) no-repeat 15px 5px;}
+.left-main .dl01 dt{ background: url(../../images/userInfo/ct_per.png) no-repeat 15px 5px;}
+.left-main .dl04 dt{ background: url(../../images/userInfo/Football.png) no-repeat 15px 5px;}
+.left-main .dl05 dt{ background: url(../../images/userInfo/follower.png) no-repeat 15px 5px;}
+
+.left-main .dd-li a{ display: block; height: 32px; line-height: 32px; color: #666; padding-left: 35px;border-left: 2px solid transparent;}
+.left-main .dd-li a:hover{ color: #2e76c7;border-left: 2px solid #2e76c7;}
+.left-main .dd-li .current a{ background: #f7f7f7; color: #fff; color: #2e76c7; border-left: 2px solid #2e76c7; padding-left: 33px;}
+.left-main .dl02 dt{ background-position: 15px -57px;}
+.left-main .dd-li .cur a{ color: #999; font-size: 12px;}
+.left-main .dd-li .cur a:hover{ color: #107ee3;}
+.left-main .dl03 dt{ background-position: 15px -116px;}
+/* 右边的主体内容 */
+.right-main{ width: 848px; min-height: 669px; border: 1px solid #e5e5e5;}
+.right-main .tab-content{ padding: 15px;}
+.top-nav{ margin: 5px 15px 0 15px;}
+.data-graph .nav-tabs>li>a{ display: inline-block; margin-top: 10px; padding: 5px 10px; border-radius: 0; color: #666; font-size: 14px; background: #fff;}
+.data-graph .nav-tabs>li>a.current{ border-bottom: 2px solid #2e76c7; background: #fff; color: #2e76c7; font-weight: 700;}
+.data-graph .nav-tabs>li>a:hover{border-bottom: 2px solid #2e76c7; background: #fff; color: #2e76c7;}
+.tab-content{ padding: 30px; background: #fff;}
+.pan_type {
+	width: 100%;
+	margin:15px 0 0 18px;
+	width: 164px;
+}
+.pan_type a {
+	border: 1px solid #efefef;
+	width: 80px;
+	margin-left: -1px;
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background: #fff;
+}
+
+.pan_type a.on{
+	background: #2e76c7;
+	border:1px solid #2e76c7;
+	color: #fff
+}

@@ -1,0 +1,139 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>全球体育网赔率指数</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/zhishu.css">
+</block>
+<block name="header">
+    <header id="header" class="headFixed">
+        <div class="logo"><a href="{:U('Index/index')}"><img src="__IMAGES__/index/logo.png" alt="logo"></a></div>
+        <div class="posnal_list">
+          <a href="{:U('User/index')}" class="myHead"><img src="{$user_auth['head']|default='__IMAGES__/index/headImg.png'}" alt="头像"></a>
+          <a href="{:U('H5/appJump',['sign'=>'lhbd'])}">
+            <img src="__IMAGES__/index/user/app-icon.png" alt="App" class="set">
+          </a>
+          <a href="{:U('Odds/odds_bk')}" class="m_rule">公司</a>
+          <a href="{:U('Odds/bkevent')}" class="m_rule">赛事</a>
+        </div>
+    </header>
+</block>
+<!-- 导航 s-->
+<block name="nav">
+    <include file="Public/nav_bk"/>
+</block>
+<!-- 内容 -->
+<block name="content">
+
+    <!-- 内容 s -->
+    <section class="zhishu_event contentPt clearfix">
+<!--        <nav class="subnav">
+            <a href="{:U('Odds/odds_bk')}" class="on">公司</a>
+            <a href="{:U('Odds/bkevent')}" >赛事</a>
+        </nav>-->
+        <div class="nav_title">赔率选择(单选)</div>
+        <nav class="subnav_list_com clearfix" id="odds_sele">
+            <a href="javascript:;" data-key="8" <eq name='Think.cookie.M_BkOddsType' value='8'>class='on'</eq>>亚赔</a>
+            <a href="javascript:;" data-key="10" <eq name='Think.cookie.M_BkOddsType' value='10'>class='on'</eq>>大小</a>
+            <a href="javascript:;" data-key="9" <eq name='Think.cookie.M_BkOddsType' value='9'>class='on'</eq>>欧赔</a>
+        </nav>
+
+        <div class="nav_title">公司选择(最多选四家)</div>
+        <nav class="subnav_list_com clearfix" id="com_sele">
+            <volist name="company" id="v">
+                <a href="javascript:;" <in name="key" value="$Think.cookie.M_BkCompanys">class='on'</in> data-key="{$key}">{$v}</a>
+            </volist>
+        </nav>
+
+    </section>
+
+
+
+    <section class="nav_sele boxs" style="display: block;">
+        <div class="ns_l"></div>
+        <div class="ns_r">
+            <a href="javascript:;" id="sele_confirm">确定</a>
+            <a href="{:U('Odds/odds_bk')}">取消</a>
+            <a href="javascript:;" id="sele_reset">重选</a>
+        </div>
+    </section>
+
+
+    <style>
+        /*此页面隐藏底部*/
+        #footer{display: none;}
+    </style>
+
+
+
+
+    <script>
+        // 赔率选择
+        $("#odds_sele a").each(function () {
+            $(this).click(function () {
+                $("#odds_sele a").removeClass("on");
+                if ($(this).hasClass("on")) {
+                    $(this).removeClass("on");
+                } else {
+                    $(this).addClass("on");
+                }
+                if ($(".subnav_list_com .on").length >= 1) {
+                    $(".nav_sele").fadeIn();
+                } else {
+                    $(".nav_sele").fadeOut();
+                }
+            })
+        })
+        // 公司选择
+        $("#com_sele a").each(function () {
+            $(this).click(function () {
+
+                if ($(this).hasClass("on")) {
+                    $(this).removeClass("on");
+                } else {
+                    //最多选四家
+                    if ($("#com_sele .on").length >= 4) {
+                        alert("最多选四家");
+                        return false;
+                    }
+                    $(this).addClass("on");
+                }
+                if ($(".subnav_list_com .on").length >= 1) {
+                    $(".nav_sele").fadeIn();
+                } else {
+                    $(".nav_sele").fadeOut();
+                }
+            })
+        })
+        //重选
+        $("#sele_reset").click(function () {
+            $(".subnav_list_com a").removeClass("on");
+        });
+        //确定
+        $("#sele_confirm").click(function () {
+            if ($("#odds_sele .on").length < 1) {
+                alert("至少选择一项赔率");
+                return false;
+            }
+            $("#odds_sele a").each(function () {
+                $this = $(this);
+                if ($this.hasClass('on')) {
+                    document.cookie = "M_BkOddsType=" + $this.data('key') + ";path=/";
+                }
+            });
+            var chioce = '';
+            $("#com_sele a").each(function () {
+                $this = $(this);
+                if ($this.hasClass('on') && $("#com_sele .on").length <= 4) {
+                    chioce += $this.data('key') + ',';
+                }
+            });
+            chioce = chioce.substring(0, chioce.length - 1);
+            document.cookie = "M_BkCompanys=" + chioce + ";path=/";
+            location.href = "odds_bk.html";
+
+        });
+    </script>
+    <!-- 内容 e -->
+</block>

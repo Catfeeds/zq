@@ -1,0 +1,150 @@
+<extend name="Public/base" />
+<block name="append">
+	 <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/user/user.css">
+    
+    <!-- 本页需要引用的js --> 
+	<script type="text/javascript">
+    	$(function(){
+			//切换选中
+			$('.price_ul li .odd').click(function(e) {
+				$(this).parents('li').siblings().find('.odd').removeClass('on');  //移除本行其他单元格的on
+				//$(this).parents('tr').siblings('tr').find('.odd').removeClass('on');  //移除另行所有单元格的on			
+				//$(this).hasClass("on") ? $(this).removeClass("on") : $(this).addClass("on"); //条件成立执行这个语句1 ： 否则执行这个语句2
+				$(this).toggleClass('on'); //切换类
+            });
+		});
+    </script>
+ 	<style type="text/css">
+		html,body{ background: #f7f7f7;}
+    	.user_list01{ padding-top: .2rem;}
+		.user_list{ padding-bottom: .2rem;}
+		.user_list ul li:nth-child(1){ border-top: 1px solid #e5e5e5;}
+		.user_list ul li:last-child{border-bottom: 1px solid #e5e5e5;}
+		.user_list figure{display:inline-block; width: .8rem; height: .8rem; line-height: .8rem; overflow:hidden; background: #fff;}
+		.user_list figure div{width: .6rem; height: .6rem; border-radius:50%; border: 1 solid #e5e5e5; margin:0 auto;}
+		.user_list figure img{ width: 100%; min-height: 100%; border-radius:50%;}
+		.user_list li em{ margin-right: .1rem;}
+    </style>
+    </block>
+	<!-- 二级头部 s -->
+        <block name="header">
+<include file="Public/header_inside"/>
+        </block>
+    <!-- 二级头部 e -->
+    <block name="nav">
+</block>
+    <block name='content'>
+	<section class="main">
+        <!-- 用户条例 -->
+        <div class="user_list user_list01">
+        	<ul class="clearfix">
+        		<li>
+                	<a href="javascript:;">
+                        <span class="fl fs30">头像</span>
+                        <figure class="fr"><div><img src="{$user.head}"></div></figure>
+                    </a>
+                </li>
+                <li>
+                	<a href="javascript:;">
+                        <span class="fl fs30">用户昵称</span>
+                        <em class="fr fs26 text-999">{$user.nick_name}</em>
+                    </a>
+                </li>
+                <li>
+                    <if condition="$is_binding eq '0'">
+                        <a href="{:U('User/bindingPhone')}">
+                            <span class="fl fs30">手机号码</span>
+                            <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                            <em class="fr fs26 text-999">未绑定</em>
+                        </a>
+                        <else/>
+                        <a href="javascript:;">
+                            <span class="fl fs30">手机号码</span>
+                            <em class="fr fs26 text-999">{$user.username}</em>
+                        </a>
+
+                    </if>
+                </li>
+                <li>
+                	<a href="{:U('User/profile')}">
+                        <span class="fl fs30">个人简介</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                        <em class="fr fs26 text-999">{$user.descript}</em>
+                    </a>
+                </li>
+                <li>
+                	<a href="javascript:;">
+                        <span class="fl fs30">注册时间</span>
+                        <em class="fr fs26 text-999">{$user.reg_time|date='Y-m-d H:i',###}</em>
+                    </a>
+                </li>
+        	</ul>
+   		</div>
+        <div class="user_list">
+        	<ul class="clearfix">
+        		<li>
+                            <a href="<empty name="user.qq_unionid">{:U('User/sdk_login',['type'=>'qq'])}<else/>javascript:;</empty>">
+                        <span class="fl fs30">QQ</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                        <em class="fr fs26 text-999"><empty name="user.qq_unionid">未绑定<else/>已绑定</empty></em>
+                    </a>
+                </li>
+                <li>
+                    <a href="<empty name="user.weixin_unionid">{:U('User/wechat_login')}<else/>javascript:;</empty>">
+                        <span class="fl fs30">微信</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                        <em class="fr fs26 text-999"><empty name="user.weixin_unionid">未绑定<else/>已绑定</empty></em>
+                    </a>
+                </li>
+                <li>
+                	<a href="<empty name="user.sina_unionid">{:U('User/sdk_login',['type'=>'sina'])}<else/>javascript:;</empty>">
+                        <span class="fl fs30">微博</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                        <em class="fr fs26 text-999"><empty name="user.sina_unionid">未绑定<else/>已绑定</empty></em>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('User/drawal_idcard',[type=>'id'])}">
+                        <span class="fl fs30">身份认证</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                        <em class="fr fs26 text-999"><if condition="$user['true_name'] && $user['identfy']">已认证<else/>未认证</if></em>
+                    </a>
+                </li>
+                <li>
+                	<a href="{:U('User/update_pwd')}">
+                        <span class="fl fs30">修改密码</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                    </a>
+                </li>
+        	</ul>
+    	</div>
+<!--        <div class="user_list">
+        	<ul class="clearfix">
+        		<li>
+                	<a href="{:U('User/logout')}" style="text-align: center;">
+                        <span class="fs30 red">退出登录</span>
+                    </a>
+                </li>
+        	</ul>
+    	</div>-->
+        <!-- 用户条例 -->
+        <div id="dailogFixBox" class="fixBox" style="display: <if condition='$_REQUEST.status eq "no"'>block<else/>none</if>">
+            <div class="fixBoxIn clearfix">
+                <div class="tip" style="line-height: 0.8rem; "><span id="dailogContent" >已被绑定过！</span></div>
+                <a id="yesDailog" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+            </div>
+        </div>
+	</section>
+    </block>
+    <block name='footer'></block>
+<block name="scripts">
+    <script>
+        $(function () {
+           $('#yesDailog').on('click',function () {
+               $('#dailogFixBox').css('display','none');
+           }) ;
+        });
+    </script>
+</block>
+

@@ -1,0 +1,131 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>分类名称：</label>
+				<input type="text" name="name" value="{$_REQUEST.name}"/>
+			</li>
+			<li>
+				<label>状态：</label>
+				<select name="status" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >可用</option>
+					<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >停用</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" height="500" mask="true"><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/del/id/{sid_record}" target="ajaxTodo" title="你确定要删除吗？" warn="请选择用户"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" height="500" mask="true" warn="请选择用户"><span>编辑</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="30"  <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="80">分类名称</th>
+			<th width="100">分类说明</th>
+			<th width="80">二级域名</th>
+			<th width="80">二级目录</th>
+			<th width="80">层级</th>
+			<th width="50">状态</th>
+			<th width="50">是否推荐</th>
+			<th width="50"  <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'sort')"> class="desc"</if> orderField="sort" <if condition="$_REQUEST._order eq 'sort'">class="{$_REQUEST._sort}"</if>>排序</th>
+			<th width="50">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist name="list" id="item">
+				<tr target="sid_record" rel="{$item.id}">
+					<td>{$item.id}</td>
+					<td>{$item.name}</td>
+					<td>{$item.remark}</td>
+					<td>{$item.domain}</td>
+					<td>{$item.path}</td>
+					<td>{$item.level}</td>
+					<td>{$item['status']|getStatus}</td>
+					<td>
+						<switch name="item.is_recommend">
+							<case value="0">否</case>
+							<case value="1">是</case>
+						</switch>
+					</td>
+					<td>{$item.sort}</td>
+					<td>
+						<a href="{:U('__ADMIN__/PublishClass/edit',['id'=>$item['id']])}" target="dialog" mask="true" title="{$item.name} 编辑" rel="editPage" height="500">编辑</a>
+					</td>
+				</tr>
+				<notempty name="item.childs">
+					<volist name="item.childs" id="item2">
+						<tr target="sid_record" rel="{$item2.id}">
+							<td>{$item2.id}</td>
+							<td>|_{$item2.name}</td>
+							<td>{$item2.remark}</td>
+							<td>{$item2.domain}</td>
+							<td>{$item2.path}</td>
+							<td>{$item2.level}</td>
+							<td>{$item2['status']|getStatus}</td>
+							<td>
+								<switch name="item2.is_recommend">
+									<case value="0">否</case>
+									<case value="1">是</case>
+								</switch>
+							</td>
+							<td>{$item2.sort}</td>
+							<td>
+								<a href="{:U('__ADMIN__/PublishClass/edit',['id'=>$item2['id']])}" target="dialog" mask="true" title="{$item2.name} 编辑" rel="editPage" height="500">编辑</a>
+							</td>
+						</tr>
+						<notempty name="item2.childs">
+							<volist name="item2.childs" id="item3">
+								<tr target="sid_record" rel="{$item3.id}">
+									<td>{$item3.id}</td>
+									<td>|__{$item3.name}</td>
+									<td>{$item3.remark}</td>
+									<td>{$item3.domain}</td>
+									<td>{$item3.path}</td>
+									<td>{$item3.level}</td>
+									<td>{$item3['status']|getStatus}</td>
+									<td>
+										<switch name="item3.is_recommend">
+											<case value="0">否</case>
+											<case value="1">是</case>
+										</switch>
+									</td>
+									<td>{$item3.sort}</td>
+									<td>
+										<a href="{:U('__ADMIN__/PublishClass/edit',['id'=>$item3['id']])}" target="dialog" mask="true" title="{$item3.name} 编辑" rel="editPage" height="500">编辑</a>
+									</td>
+								</tr>
+							</volist>
+						</notempty>
+					</volist>
+				</notempty>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

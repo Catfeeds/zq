@@ -1,0 +1,58 @@
+
+<div class="panelBar">
+    <div class="pages">
+        <span>显示</span>
+        <select class="combox" name="numPerPage"onchange="navTabPageBreak({numPerPage:this.value})">
+        <option value="5"<eq name="numPerPage" value="5">selected=selected</eq> >5</option>
+        <option value="10"<eq name="numPerPage" value="10">selected=selected</eq> >10</option>
+        <option value="15"<eq name="numPerPage" value="15">selected=selected</eq> >15</option>
+        <option value="20"<eq name="numPerPage" value="20">selected=selected</eq> >20</option>
+        <option value="30"<eq name="numPerPage" value="30">selected=selected</eq> >30</option>
+        <option value="50"<eq name="numPerPage" value="50">selected=selected</eq> >50</option>
+        <option value="100"<eq name="numPerPage" value="100">selected=selected</eq> >100</option>
+        <option value="300"<eq name="numPerPage" value="300">selected=selected</eq> >300</option>
+        <option value="500"<eq name="numPerPage" value="500">selected=selected</eq> >500</option>
+        <option value="1000"<eq name="numPerPage" value="1000">selected=selected</eq> >1000</option>
+        </select> 
+        <span <if condition="$hiddenCount eq 1">style="display:none"</if>>共{$totalCount}条</span>
+    </div>
+    <div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10"
+         currentPage="{$currentPage}"></div>
+</div>
+<script type="text/javascript">
+$(function () {
+    //监控未处理异常
+    var excepLogCount = "{$excepLogCount}";
+    if(excepLogCount != 0 &&  excepLogCount != '') //判断是否有未处理异常消息
+    {
+        $('#notice').text('('+excepLogCount+')');
+    }
+    else
+    {
+        $('#notice').text('');
+    }
+    //监控是否有新异常
+    var new_count = '{$new_count}';
+
+    if (new_count > 0)
+    {
+        var storage = window.localStorage;
+        if (storage.hideStatus != 1)
+        {
+            $('#pop').css({
+                display: 'block'
+            });
+            $('#unDeal').html('系统发现新的用户操作异常('+new_count+')');
+        }
+    }
+
+});
+$('#popClose').click(function(event) {
+        $('#pop').css({
+            display: 'none'
+        });
+    });
+$('.searchBar .searchContent li label').on('click',function(){
+    $(this).submit()
+})
+</script>

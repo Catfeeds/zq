@@ -1,0 +1,364 @@
+<extend name="Public:layout"/>
+<block name='seo'>
+    <title>全球体育号</title>
+    <meta name="keywords" content="体育号,全球体育号">
+    <meta name="description" content="一呼百应，吹响体育号！">
+</block>
+<block name="css">
+    <link rel="stylesheet" href="__CSS__/sportuser/media-login.css?v20180523">
+    <link rel="stylesheet" href="__CSS__/sportuser/reset-boot.css">
+</block>
+
+<block name="content">
+
+    <!-- main -->
+    <div class="main">
+        <div class="topCenter"><a href="{:U('/')}" class="pull-left suLogo" title="体育号"><img src="__IMAGES__/sportuser/SportUser-logo.png" alt="体育号" / width="150" height="43"></a></div>
+        <div class="formMain">
+            <!-- formStep -->
+            <div class="formStep">
+                <ul class="clearfix">
+                    <li class="on">
+                        <div class="clearfix">
+                            <span class="pull-left step"><strong>1</strong></span>
+                            <span class="pull-left dotLine">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </span>
+                        </div>
+                        <p class="text-999">登陆注册  </p>
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <span class="pull-left step"><strong>2</strong></span>
+                            <span class="pull-left dotLine">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </span>
+                        </div>
+                        <p class="text-999">填写资料  </p>
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <span class="pull-left step"><strong>3</strong></span>
+                        </div>
+                        <p class="text-999">完成 </p>
+                    </li>
+                </ul>
+            </div>
+            <!-- formStep -->
+            <input type="hidden" value="{$status}" id="status">
+            <!-- form -->
+            <div class="formBox">
+                <ul class="clearfix formNav">
+                    <li class="pull-left text-left on"><a href="javascript:void(0);" title="注册全球体育账号">注册全球体育账号</a></li>
+                    <li class="pull-left text-right"><a href="javascript:void(0);" title="已有全球体育账号">已有全球体育账号</a></li>
+                </ul>
+                <!-- 注册 -->
+                <form class="formRegister formTab" style="width: 360px;" method="post">
+                    {:get_form_token()}
+                    <div class="form-group clearfix">
+                        <label for="txtUserName" class="control-label pull-left">用户名</label>
+                        <div class="pull-right input-con input-position-relative">
+                            <input type="text" autocomplete="off"   name="nick_name" class="form-control required" id="txtUserName" placeholder="">
+                            <p class="text-999 f12 noit">注册成功，名字不可修改</p>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="phone" class="control-label pull-left">手机</label>
+                        <div class="pull-right input-con input-position-relative">
+                            <input type="text" name="mobile" class="form-control required mobile" id="phone" placeholder="">
+                            <p class="text-999 f12 noit"></p>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix ">
+                        <label for="txtPassword" class="control-label pull-left">密码</label>
+                        <div class="pull-right input-con input-position-relative">
+                            <input type="password" class="form-control required" id="txtPassword" name="password" placeholder="">
+                            <p class="text-999 f12 noit"></p>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="code" class="control-label pull-left">手机验证</label>
+                        <div class="pull-right input-con">
+                            <input type="text" class="form-control pull-left code" name="captcha" id="code" placeholder="">
+                            <a href="javascript:void(0);" title="发送短信验证码" onclick="sendMobileMsg();" class="pull-right sendCode"><span id="sendMobileBtn"></span>发送短信验证码</a>
+                        </div>
+                    </div>
+                    <p class="text-999 f12 noit"></p>
+                    <div class="form-group clearfix">
+                        <label for="code" class="control-label pull-left">图文验证</label>
+                        <div class="pull-right input-con">
+                            <input type="text" class="form-control pull-left code" name="verify" id="verify" placeholder="">
+                            <img id="verifyImg" src="/Public/verify/" onclick="fleshVerify()" border="0" alt="点击刷新图文验证码" style="cursor:pointer;width: 130px; height: 42px; margin-bottom: 10px; margin-left: 20px;" align="absmiddle">
+                        </div>
+                    </div>
+                    <div class="form-group clearfix" style="margin-bottom: 20px;">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="agree" checked="checked"> 我已阅读并接受<a target="_blank" href="{:U('Copyright/service')}" title="全球体育服务协议" class="text-green">《全球体育服务协议》</a>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <div class="">
+                            <button type="submit" class="btn btn-green btn-register">注册</button>
+                        </div>
+                    </div>
+                    <input id="deviceID" class="form-control required" name="deviceID" type="text" style="display:none;"/>
+                </form>
+                <!-- 注册 -->
+
+                <!-- 登录 -->
+                <form class="formLogin formTab" style="width: 360px; display: none;" method="post">
+                    {:get_form_token()}
+                    <div class="form-group clearfix fgLogin">
+                        <input type="text" name="username" class="form-control" id="phone2" placeholder="手机号">
+                        <span class="userIcon"></span>
+                    </div>
+                    <p class="text-999 f12 noit"></p>
+                    <div class="form-group clearfix fgLogin">
+                        <input type="password" class="form-control" id="password2" name="password"  placeholder="登录密码">
+                        <span class="passIcon"></span>
+                    </div>
+                    <div class="form-group clearfix remeber fgLogin">
+                        <!-- <div class="pull-left checkbox" style="margin-top: 0;">
+                            <label for="checkbox"><input id="checkbox" type="checkbox" name="remember"> 保持登录</label>
+                        </div> -->
+                        <div class="pull-right">
+                            <!-- <a target="_blank" href="{:U('User/register')}">免费注册</a>
+                            <span>&nbsp;|&nbsp;</span> -->
+                            <a target="_blank" href="{:U('User/re_phone')}" title="忘记密码">忘记密码？</a>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix fgLogin">
+                        <button type="submit" class="btn btn-green">登录</button>
+                    </div>
+                    <div class="elseLogin clearfix">
+                        <a class="pull-left" href="{:U('User/sdk_login',['type'=>qq])}" target="_blank;" title="QQ登录"><img src="__IMAGES__/login/qq.png" alt="QQ登录">QQ登录</a>
+                        <a class="pull-left" href="{:U('User/sdk_login',['type'=>sina])}" target="_blank;" title="微博登录"><img src="__IMAGES__/login/sina.png" alt="微博登录">微博登录</a>
+                        <a class="pull-left" href="{:U('User/sdk_login',['type'=>weixin])}" target="_blank;" title="微信登录"><img src="__IMAGES__/login/wx.png" alt="微信登录">微信登录</a>
+                    </div>
+                </form>
+                <!-- 登录 -->
+            </div>
+            <!-- form -->
+            <div class="linkBox text-center">
+                <a target="_blank" href="{:U('/')}" title="全球体育首页">全球体育首页</a>
+                <a target="_blank" href="{:U('SportUser/mediaManual')}" title="使用手册">使用手册</a>
+                <a target="_blank" href="{:U('SportUser/mediaManual')}" title="侵权投诉">侵权投诉</a>
+            </div>
+        </div>
+    </div>
+    <!-- main -->
+</block>
+
+<block name="js">
+    <script type="text/javascript" src="__JS__/sportuser/media-login.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("form.formRegister").validate({
+                onkeyup : false,
+                rules: {
+                    mobile : {
+                        remote: {
+                            url: "/User/checkMobile.html",
+                            type: "post",
+                            data: {
+                                fieldValue: function() {
+                                    return $( "#phone" ).val();
+                                }
+                            }
+                        }
+                    },
+                    nick_name : {
+                        rangelength:[2,10],
+                        remote: {
+                            url: "/User/checkNickname.html",
+                            type: "post",
+                            data: {
+                                fieldValue: function() {
+                                    return $( "#txtUserName" ).val();
+                                }
+                            }
+                        }
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    }
+                },
+                messages : {
+                    mobile : {
+                        remote : '该手机号码已经注册，请更换'
+                    },
+                    nick_name : {
+                        rangelength: "用户昵称为2-10个字符",
+                        remote : '该用户名已经存在 或 存在关键字'
+                    },
+                    password: {
+                        required: "请输入密码",
+                        minlength: "密码不能小于6个字符"
+                    }
+                },
+                submitHandler:function(form){
+                    if($("#agree").is(':checked')==false){
+                        _alert("提示","您必须同意注册协议！");
+                        return;
+                    }
+                    var form = $(form);
+                    var data = form.serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: "/SportUser/index.html",
+                        data: data,
+                        success: function(data){
+                            if(data.status){
+                                window.location.href="/SportUser/loginSucce.html";
+                            }else{
+                                _alert('温馨提示',data.info);
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        /**
+         * 发送手机验证码
+         */
+        function sendMobileMsg(){
+            var mobile = $('#phone').val();
+            //验证手机
+            if(mobile == ""){
+                _alert('温馨提示',"请输入手机号码！");
+                return false;
+            }
+            if (!/^1[3456789]{1}\d{9}$/.test(mobile)){
+                _alert('温馨提示',"手机号码格式不正确，请重新输入！");
+                return false;
+            }
+            var token = $('input[name=token]').val();
+            $.ajax({
+                url: "/User/sendMobileMsg.html",
+                type:'post',
+                data:{token:token,'mobile':mobile,'msgType':'registe'},
+                dataType: "json",
+                beforeSend:function(XMLHttpRequest)
+                {
+                    $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>正在发送…").removeAttr("onclick").attr("disabled","disabled");
+                },
+                success: function(data){
+                    if(data.status){
+                        _alert('温馨提示',data.info);
+                        daojishi(60);
+                        return;
+                    }else{
+                        $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>获取验证码").attr("onclick",'sendMobileMsg()').removeAttr("disabled");
+                        _alert('温馨提示',data.info);
+                    }
+                }
+            });
+        }
+        /**
+         * 倒计时
+         */
+        function daojishi(S){
+            if (S>0){
+                var S = S-1;
+                $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>秒后重发").removeAttr("onclick").attr("disabled","disabled");
+                $("#sendMobileBtn").html(S);
+                setTimeout("daojishi("+S+")",1000);
+                return;
+            } else {
+                $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>获取验证码").attr("onclick",'sendMobileMsg()').removeAttr("disabled");
+            }
+        }
+        /**
+         * 登录部分
+         */
+        $(function(){
+            $("form.formLogin").validate({
+                onkeyup : false,
+                onfocusont:false,
+                submitHandler:function(form){
+                    var form = $(form);
+                    var data = form.serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: "/User/login.html",
+                        data: data,
+                        dataType:'json',
+                        success: function(data){
+                            if(data.status){
+                                window.location.href="/SportUser/loginSucce.html?" + Math.floor(Math.random() * 10000);
+                            }else{
+                                _alert('温馨提示',data.info);
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        //验证码部分
+        var handler = function (captchaObj) {
+            captchaObj.appendTo('#captcha');
+            captchaObj.onReady(function () {
+                $("#wait").addClass('hide').removeClass('show');
+            });
+            // $('.btn-register').click(function () {
+            //     var result = captchaObj.getValidate();
+            //     if (!result) {
+            //         _alert('温馨提示',"请完成验证！");
+            //         return false;
+            //     }
+            // })
+            // 更多接口说明请参见：http://docs.geetest.com/install/client/web-front/
+            window.gt = captchaObj;
+        };
+        function fleshVerify(type){
+            //重载验证码
+            var timenow = new Date().getTime();
+            // if (type){
+            //     $('#verifyImg').attr("src", '__URL__/verify/adv/1/'+timenow);
+            // }else{
+            //     $('#verifyImg').attr("src", '__URL__/verify/'+timenow);
+            // }
+            $('#verifyImg').attr('src', '/Public/verify/'+timenow);
+        }
+    </script>
+
+</block>

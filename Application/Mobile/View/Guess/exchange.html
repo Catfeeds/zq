@@ -1,0 +1,274 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->  
+    <link rel="stylesheet" href="__CSS__/guess.css?v=2018060619">
+    <link rel="stylesheet" type="text/css" href="__CSS__/exchange.css"> 
+    <link rel="stylesheet" href="__CSS__/swiper_banner.css">
+
+    <!-- 本页需要引用的css -->
+    <style type="text/css">
+        /* 弹出层 */
+        .modal{ display: block;  position: fixed;  top: 20%;  left: 50%; width: 72%; margin-left: -36%; background-color: transparent;  z-index:1050;}
+        .fullModal{ width: 100%; margin-left: -50%;}
+        .modal-backdrop {
+            /* display: none; */
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1040;
+            background-color: #000000;
+            opacity: 0.5;
+            overflow-x: hidden;
+        }
+        .newGift i{ position: absolute; right: -.36rem; top: .98rem; width: .92rem; height: .92rem; cursor: pointer;}
+        .newGift .getBtn{ position: absolute; left: 50%; bottom: .26rem; width: 72%; height: 1rem; margin-left: -36%;}
+        .ponGift p{ position: absolute; width: 100%; top: 2.4rem; text-align: center; color: #fff; font-size: .36rem;}
+        .ponGift p em{ color: #f0ee30; font-size: .32rem;}
+        .ponGift .btnBox{ position: absolute; left: 50%; bottom: .26rem; width: 60%; margin-left: -30%;}
+        .ponGift .btnBox .leftBtn,.ponGift .btnBox .rightBtn{ width: 1.9rem; height: .76rem; line-height: .76rem; background: #ffffff; text-align: center; border-radius: .38rem; border: 2xp solid #999999; color: #666666;}
+        .ponGift .btnBox .leftBtn{ background: #fabb26; color: #333333; border: 2xp solid #a97700;}
+    </style>
+</block>
+<block name="header">
+    <include file="Guess:guess_head"/>
+</block>
+<!-- 导航 s-->
+<block name="nav">
+    <include file="Guess/nav"/>
+</block>
+<!-- 导航 e-->
+<block name="content">
+    
+  <!-- banner 切换 s-->
+   <section class="main_banner contentPt">
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <volist name="banner" id="v">
+                <figure class="swiper-slide">
+                    <a href="{$v.url}">
+                        <img src="{$v['img']}" alt="{$v.title}">
+                    </a>
+                  <figcaption>{$v.title}</figcaption>
+                </figure>
+            </volist> 
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+    </section>
+    <!-- banner 切换 e-->
+
+    <!-- 快速充值 -->
+    <present name="userInfo">
+        <section class="ex_pay clearfix"> 
+            <div class="head"><a href="{:U('User/index')}"><img src="{$userInfo.head}" alt="{$userInfo.nick_name}"></a></div>
+            <div class="show_gold">
+                <a href="{:U('User/index')}">
+                    <p>{$userInfo.nick_name}</p>
+                    <p><img src="__IMAGES__/score.jpg" alt="分"><span class="userPoint">{$userInfo.point}</span><em>|</em> <img src="__IMAGES__/coins.jpg" alt="coins"><span id="coin">{$userInfo.count_coin}</span></p>
+                </a>
+            </div>
+            <div class="pay"><a href="{:U('Pay/index')}"><img src="__IMAGES__/pay.jpg" alt="快速充值"></a></div>
+        </section>
+    </present>
+
+    <!-- 内容 s-->
+    <section class="exCon">
+        <section class="exchange_con">
+            <!-- 标题 -->
+            <div class="ex_title">
+                <h4 class="q-tc"><img src="__IMAGES__/title-gold.png" alt="积分兑换金币"></h4>
+            </div>
+            <!-- 金币 -->
+            <div class="ex_gold">
+                <ul class="clearfix">
+                    <li><em>{$config['coin1']}</em><div><p><span class="js-coin">{$config['coin1']}</span>金币</p><p>需要<span class="js-point">{$config.point2Coin1}</span>积分</p><p>
+                            <if condition="isset($point) && ($point egt $config['pointLimit'] && $point egt $config['point2Coin1'])">
+                                <a href="javascript:;" data-key="1" class="js-change" disabled="disabled">我要兑换</a>
+                                <else/>
+                                <a class="on">积分不够</a>
+                            </if>
+                    </li>
+                    <li><em>{$config['coin2']}</em><div><p><span class="js-coin">{$config['coin2']}</span>金币</p><p>需要<span class="js-point">{$config.point2Coin2}</span>积分</p><p>
+                            <if condition="isset($point) && ($point egt $config['pointLimit'] && $point egt $config['point2Coin2'])">
+                                <a href="javascript:;" data-key="2" class="js-change">我要兑换</a>
+                                <else/>
+                                <a class="on">积分不够</a>
+                            </if>
+                            </p></div></li>
+                    <li><em>{$config['coin3']}</em><div><p><span class="js-coin">{$config['coin3']}</span>金币</p><p>需要<span class="js-point">{$config.point2Coin3}</span>积分</p><p>
+                            <if condition="isset($point) && ($point egt $config['pointLimit'] && $point egt $config['point2Coin3'])">
+                                <a href="javascript:;" data-key="3" class="js-change">我要兑换</a>
+                                <else/>
+                                <a class="on">积分不够</a>
+                            </if></p></div></li>
+                    <li><em>{$config['coin4']}</em><div><p><span class="js-coin">{$config['coin4']}</span>金币</p><p>需要<span class="js-point">{$config.point2Coin4}</span>积分</p><p>
+                            <if condition="isset($point) && ($point egt $config['pointLimit'] && $point egt $config['point2Coin4'])">
+                                <a href="javascript:;" data-key="4" class="js-change">我要兑换</a>
+                                <else/>
+                                <a class="on">积分不够</a>
+                            </if>
+                            </p></div></li>
+
+                </ul>
+            </div>
+            <div class="ex_tips">
+                <span class ="red">*</span>推荐积分达到5000以上可兑换金币
+            </div>
+            <div class="bubbleTips"></div>
+        </section>
+        <!-- 内容 e -->
+
+        <!-- 积分兑换礼品 s-->
+        <section class="ex_lp">
+            <!-- 标题 -->
+            <div class="ex_title">
+                <h4 class="q-tc"><img src="__IMAGES__/title-voucher.png" alt="积分兑换金币"></h4>
+            </div>
+            <div class="flex-container">
+              <div class="flex-item flex-item01"><input type="text" placeholder="请输入兑换码" id="ticket_code"></div>
+              <div class="flex-item flex-item02"><a class="btn-orange" href="javascript:;" id="exchange_action" style="background: #999;">立即兑换</a></div>
+            </div>
+
+            <if condition="$ticketConfig neq ''">
+            <ul class="clearfix ex_lp_ul">
+                <foreach name="ticketConfig" item="v" >
+                    <li>
+                        <!--<a href="javascript:;">-->
+                            <img src="{$v['url']}" />
+                        <!--</a>-->
+                    </li>
+                </foreach>
+            </ul>
+            </if>
+        </section>
+    </section>
+
+    <div class="modal in fullModal" style="display: none;">
+        <div class="modal-content">
+            <div class="ponGift">
+                <img src="__IMAGES__/coupon/pon-success.png" alt="">
+                <p>恭喜您！<br>成功获得<em>16金币</em>推荐体验券一张！</p>
+                <div class="btnBox">
+                    <a href="javascript:;" class="fl leftBtn lookBtn">查看</a>
+                    <a href="javascript:;" class="fr rightBtn closeBtn">关闭</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="bg" class="modal-backdrop" style="z-index: 1040;display: none;"></div>
+
+</block>
+<block name="scripts">
+    <script src="__JS__/swiper.js"></script>
+    <script src="__JS__/guess.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(document).on('click', '.js-change', function () {
+                if ($('.userPoint').length == 0)
+                {
+                    alert('请先登录!');
+                } else
+                {
+                    var $this = $(this);
+                    var point = $this.parent().prev().find('.js-point').html();
+                    var coin = $this.parent().prev().prev().find('.js-coin').html();
+                    var str = '用 ' + point + ' 积分兑换 ' + coin + ' 个 金币？';
+                    if (confirm(str))
+                    {
+                        $.ajax({
+                            type: "POST",
+                            url: "/Guess/exchange.html",
+                            data: {'key': $this.data('key')},
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.status == 1)
+                                {
+                                    var MyPoint = data.info.point;
+                                    $('.userPoint').html(MyPoint);
+                                    $('#coin').html(data.info.total_coin);
+                                    $('.js-change').each(function () {
+                                        var $this = $(this);
+                                        var point = parseInt($this.parent().prev().find('.js-point').html());
+                                        if (MyPoint < point || MyPoint < 5000) {
+                                            $this.html('积分不够').addClass('on').removeClass('js-change');
+                                        }
+                                    });
+                                    $('.bubbleTips').html(data.info.message).stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                                } else {
+                                    $('.bubbleTips').html(data.info).stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+//            .on('click', '.ex_lp ul li', function () {
+//                $('.bubbleTips').html('敬请期待!').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+//            });
+
+            $('#exchange_action').click(function(){
+                var code = $('#ticket_code').val();
+
+                if(code != '' && code != undefined){
+                    $.ajax({
+                        type: 'post',
+                        url: "/Ticket/exchangeTicket.html",
+                        async: false,
+                        data: {code: code},
+                        dataType: 'json',
+                        success: function (data) {
+                            if(data.status == 1){
+                                $('.fullModal').find('em').html(data.info);
+                                $('#bg').show();
+                                $('.fullModal').show();
+                            }else{
+                                $('.bubbleTips').html(data.info).stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                                if(data.url != ''){
+                                    setTimeout(function(){
+                                        window.location.href = data.url;
+                                    }, 2000);
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+
+            $('#ticket_code').keydown(function(){
+                var code = $('#ticket_code').val();
+                if(code){
+                    $('#exchange_action').css('background', '#ff9600');
+                }else{
+                    $('#exchange_action').css('background', '#999');
+                }
+            })
+
+            $('.fullModal .lookBtn').click(function(){
+                window.location.href = '/Ticket/myTicket.html';
+            });
+
+            $('.fullModal .closeBtn').click(function(){
+                $('.fullModal').find('em').html('');
+                $('#bg').hide();
+                $('.fullModal').hide();
+            });
+        });
+
+      //banner 切换
+      var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: 10000,
+            autoplayDisableOnInteraction: false
+        }); 
+     </script> 
+    
+</block>

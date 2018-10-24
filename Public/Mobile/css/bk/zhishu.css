@@ -1,0 +1,82 @@
+/**
+ * 指数css样式文件
+ *
+ * @author pengjian <710348662@qq.com>
+ *
+ * @since  2016-04-18
+**/
+
+.nav_title{  height: .54rem;line-height: .55rem; background: #f7f7f7; padding-left: .2rem;color: #4c4c4c  }
+
+/* 赛事筛选 - 列表*/
+.subnav_list_com{width: 100%;text-align: center;padding: .2rem 0;padding-left: .1rem}
+.subnav_list_com a{width: 21%;height: .68rem;line-height: .7rem; margin:.11rem; margin-bottom: .22rem;  display: inline-block;  border:1px solid #e5e5e5; text-align: center;background-color: #fff;float: left;}
+.subnav_list_com a.on{border:1px solid #ff7e00;color: #ff7e00;background: url(../images/on.png) no-repeat right bottom; background-size: .24rem .24rem;background-color: #fff}
+
+.nav_sele .ns_r a:last-child{background-color: #ff7e00;}
+
+
+
+ /*赔率 - 欧赔*/
+.zhishu_title{height: 1.04rem;width: 100%; border-bottom: .03rem solid #0a94e4;background: url(../../images/s_list.png) no-repeat 98% center;background-size: .22rem .4rem; }
+.zhishu_title p{padding-left: .2rem;height:.52rem;line-height:.52rem; }
+/*.zhishu_title p em{background: url(../images/ztitle.png) no-repeat left center;background-size: contain;  width: .15rem; height: .15rem;  display: inline-block; margin-right: .1rem}*/
+.zhishu_title p em{background: #b00900;  width: .14rem; height: .14rem; border-radius: 50%;  display: inline-block; margin-right: .1rem;   }
+.zhishu_title p:first-child{font-size: .26rem;color: #b00900;}
+.zhishu_title p:first-child span{color: #999999}
+.zhishu_title p:last-child{line-height:.4rem;}
+.zhishu_title p:last-child span{color: #ff7e00;padding: 0 .1rem}
+
+.zhishu{width: 100%;text-align: left;}
+.zhishu tr th{color: #4d4d4d;font-size: .26rem; height: .6rem;background: #f7f7f7;text-align: center;border-right:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;}
+.zhishu tr th:last-child{border-right: 0}
+
+.zhishu tr td{height: 1rem;  width: 1.4rem;text-align: center; border-right:1px solid #e5e5e5; border-bottom:1px solid #e5e5e5;font-size: .24rem }
+.zhishu tr td div{padding: .1rem 0}
+.zhishu tr td .bottom_line{border-bottom:1px solid #e5e5e5;}
+.zhishu tr td:first-child{width:2.5rem; text-align: center;}
+.zhishu tr td:first-child img{display:inline;width:.29rem;height:.29rem;}
+.zhishu tr td.on{background-color: #01af63;color: #fff}
+
+.zhishu tr td:nth-child(1){background-color: #f7f7f7}
+.zhishu tr td:last-child{border-right: 0}
+.zhishu tr td span{ padding-right: .05rem }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

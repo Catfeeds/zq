@@ -1,0 +1,137 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>全球体育手机网完场比分</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/live_score.css">
+    <link rel="stylesheet" href="__CSS__/swiper_live.css">
+</block>
+<block name="content">
+    <!-- 内容 s -->
+    <section class="content">
+        <!-- 时间导航begin -->
+        <section class="n_time swiper-container">
+           <nav class="nav_time fs22 clearfix swiper-wrapper">
+            <volist name='date_list' id='v'>
+                <a href="?date={$v['date']|date='Ymd',###}" class="swiper-slide <eq name="GetDate" value="$v['ymd']">on</eq>">
+                    <p>{$v['week']}</p>
+                    <p>{$v['date']|date='m-d',###}</p>
+                </a>
+                </volist>          
+            </nav>
+        </section>
+         <!-- Swiper JS -->
+    <script src="__JS__/swiper.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 7,
+        paginationClickable: true,
+        spaceBetween: 30
+    });
+    </script>
+        <div class="liveList">
+            <volist name="list" id="v" key='k'>
+                <in name="v[1]" value="$chioce">
+                <div class="match  js-data js-detail"  data-url="/Details/event_technology/scheid/{$v[0]}.html">
+                    <div class="top">
+                        <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                            <td width="45%" class="q-tl"><span class="match_name" style="color:{$v[3]}"><eq name='Think.cookie.language' value='0'>{$v[2][0]}<else/>{$v[2][1]}</eq></span> <em class="mach_will_time">{$v[7]}</em></td>
+                            <td width="10%" class="mach_over_time">完场</td>
+                            <td width="45%" class="corner_box q-tl jq" >全角[<span class='home_corner'>{$v[21]}</span>-<span class='away_corner'>{$v[22]}</span>]</td>
+               		  </tr>
+                        </table>
+                    </div>
+                    <div class="bottom">
+                        <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                        <td width="45%" class="q-tr">
+                            <neq name='v.19' value='0'><span class="yel_card">{$v[19]}</span></neq>
+                            <neq name='v.17' value='0'><span class="red_card">{$v[17]}</span></neq>
+                            <notempty name="v.11"><span class="teamRank">[{$v[11]}]</span></notempty>
+                        	<span class="homeTeamName"><eq name='Think.cookie.language' value='0'>{$v[9][0]}<else/>{$v[9][1]}</eq></span>
+                        </td>
+                        <td width="10%"><span class="mach_over js-score">{$v[13]}-{$v[14]}</span></td>
+                        <td width="45%" class="q-tl">
+                            <span class="guestTeamName"><eq name='Think.cookie.language' value='0'>{$v[10][0]}<else/>{$v[10][1]}</eq></span>
+                                    <notempty name="v.12"><span class="teamRank">[{$v[12]}]</span></notempty>
+                                    <neq name='v.20' value='0'><span class="yel_card">{$v[20]}</span></neq>
+                                    <neq name='v.18' value='0'><span class="red_card">{$v[18]}</span></neq>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="45%" class="q-tr">
+                            <neq name='v.23' value=''>
+                            <div class="odds rf">
+                                <span class="oddsType">让</span>
+                                <span class="addsNub">{$v[23]}</span>
+                                <span class="addsPankou">{$v[24]}</span>
+                                <span class="addsNub">{$v[25]}</span>
+                            </div>
+                            </neq>
+                         </td>
+                        <td width="10%"><em class="mach_half">({$v[15]|default='0'}-{$v[16]|default='0'})</em></td>
+                        <td width="45%" class="q-tl">
+                            <neq name='v.26' value=''>
+                            <div class="odds dx">
+                                <span class="oddsType">大</span>
+                                <span class="addsNub">{$v[26]}</span>
+                                <span class="addsPankou">{$v[27]}</span>
+                                <span class="addsNub">{$v[28]}</span>
+                            </div>
+                            </neq>
+                        </td>
+                      </tr>
+                        </table>
+                    </div>
+                </div>
+                </in>
+            </volist>
+        </div>
+    </section>
+</block>
+<block name='filtrate'>
+    <include file="Public/filtrate"/>
+</block>
+<!-- 内容 e -->
+<block name="scripts">
+    <script>
+        $(function () {
+            var scrollTop = Cookie.getCookie('scrollTop');
+            if (scrollTop) {
+                $("html, body").animate({scrollTop: scrollTop}, 500);
+                Cookie.delCookie('scrollTop');
+            }
+            $("#day_sele").on('change', function () {
+                location.href = "?date=" + $(this).val();
+            });
+            //确定
+            $("#sele_confirm").click(function () {
+                if($(".subnav_list a.on").length<1){
+                    alert('至少选择一项!');
+                    return false;
+                }
+                var chioce = '';
+                $(".subnav_list a").each(function () {
+                    $this = $(this);
+                    if ($this.hasClass('on')) {
+                        chioce += $this.data('key') + ',';
+                    }
+                });
+                chioce = chioce.substring(0, chioce.length - 1);
+                Cookie.setCookie('ScheRes', chioce);
+                window.location.reload();
+            });
+        });
+    </script>
+    <script type="text/javascript" src="__JS__/zepto.js"></script>
+    <script type="text/javascript" src="__JS__/zepto.extend.js"></script>
+    <script type="text/javascript" src="__JS__/zepto.iscroll.js"></script>
+    <script type="text/javascript" src="__JS__/zepto.ui.js"></script>
+    <script type="text/javascript" src="__JS__/widget/navigator.js"></script> 
+    <script type="text/javascript" src="__JS__/widget/navigator.iscroll.js"></script> 
+</block>

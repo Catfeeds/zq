@@ -1,0 +1,95 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>帮助中心_全球体育_即时比分,足球比分,赛事直播,足彩推荐|全球体育网qqty.com</title>
+    <meta name="keywords" content="英超直播、NBA直播、直播吧、A8直播、足球直播、极速直播、jrs直播、中超直播、比分直播、赛事直播、体育直播网、CBA直播"/>
+    <meta name="description" content="全球体育是最好的体育视频直播网站、主要提供英超直播、NBA直播、直播吧、A8直播、足球直播、极速直播、jrs直播、中超直播、比分直播、赛事直播等、力争做用户体验最好的体育直播网"/>
+</block>
+<block name="body">
+<body>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/help_center/hc_common.css">
+    
+	<div class="body">
+    	<!-- 顶部开始 -->
+        <include file="Public:top"/>
+        <!-- 顶部结束 -->
+        <!-- banner搜索开始 -->
+        <include file="search"/>
+        <!-- banner搜索结束 -->
+        <!-- 主体内容开始 -->
+        <div class="main">
+        	<div class="section-title"><h4>问题分类</h4></div>
+            <div class="q-type clearfix">
+            	<!-- 左边导航开始 -->
+            	<include file="navigate"/>
+                <!-- 左边导航结束 -->
+                <!-- 右边列表开始 -->
+                <div class="pull-right right">
+                	<div class="data-graph">
+                        <!-- Nav tabs -->
+                        <ul class="serch-title">
+                            <li>{$article.title}</li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                        	<div>
+                               <p>{$article.content|htmlspecialchars_decode}</p>
+                            </div>
+                            <!-- 上下篇章开始 -->
+                            <div class="ud-text">
+                                <p class="clearfix"><span class="pull-left"><font color="#999">上一篇：</font>
+                                    <a href="<notempty name="prevArticle">{:U('/help_detail/'.I('classId').'/'.$prevArticle[0]['class_id'].'/'.$prevArticle[0]['id'].'')}<else/>javascript:;</notempty>" class="<notempty name="prevArticle">text-blue</notempty>">{$prevArticle.0.title|default="无"}</a></span><span class="pull-right">
+                                <font color="#999">下一篇：</font>
+                                    <a href="<notempty name="nextArticle">{:U('/help_detail/'.I('classId').'/'.$nextArticle[0]['class_id'].'/'.$nextArticle[0]['id'].'')}<else/>javascript:;</notempty>" class="<notempty name="nextArticle">text-blue</notempty>">{$nextArticle.0.title|default="无"}</a></span></p>
+                                <p>客服及时在线解答&nbsp;&nbsp;<a href="javascript:void(window.open('{$liveChatUrl}','','width=610,height=760,left=0,top=0,resizable=yes,menubar=no,location=no,status=yes,scrollbars=yes'))" class="text-blue">在线客服</a></p>
+                                <p>还可致电 020-39287222</p>
+                            </div>
+                            <!-- 上下篇章结束 -->
+                        </div>
+                    </div>
+          		</div>
+            </div>
+            <!-- 右边列表结束 -->
+      	</div>
+        <!-- 主体内容开始 -->
+        <!-- 返回顶部开始 -->
+        <div class="return-top">
+            <a href="#"></a>
+        </div>
+        <!-- 返回顶部结束 -->
+        <!-- 底部版权信息开始 -->
+        <include file="Public:footer"/>
+        <!-- 底部版权信息结束 -->
+    </div>
+</body> 
+</html>
+<!--引入本页js-->
+<script type="text/javascript">
+    /**
+     * @author Chensiren <793952481@qq.com>
+     * @since  2015-01-18
+    */
+    $(function(){
+        //返回顶部
+        $(window).scroll(function(e) {
+            if($(window).scrollTop()>$(window).height()){
+                $('.return-top').fadeIn(300);
+            }else {
+                $('.return-top').fadeOut(300);
+            }
+        });
+        $('.return-top').click(function(e) {
+            $('body,html').animate({'scrollTop':'0'},500);
+
+        });
+        //左边导航
+        $(".q-slideBtn").click(function(){
+            $(this).parent('li').toggleClass("active");
+            //$(this).parent("li").siblings('li').children('a').find("i").removeClass('active');
+            $(this).parent('li').siblings().removeClass('active');
+            $(this).parent().find(".q-slideNav").stop().slideToggle();
+            $(this).parent("li").siblings('li').find("div.q-slideNav").stop().slideUp();
+        });
+    });
+</script>
+</block>

@@ -1,0 +1,97 @@
+/**
+ * 欧洲杯竞猜css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-06-01
+ *
+**/
+html,body{background: url(../../images/etc/etc-bg.jpg) repeat-y 0 0; background-size: 100% auto; padding-bottom: .1rem;}
+/*banner*/
+.swiper-pagination-bullet-active{ background: #fff44e;}
+
+/* 竞猜内容 */
+.cai_con{ padding: 0 .26rem;}
+.cai_con .cai_title{ height:  auto; width: 100%; margin-top: .3rem; margin-bottom: .12rem; background: #0054ae; -webkit-transform: skew(-20deg);-moz-transform: skew(-20deg); -o-transform: skew(-20deg); -ms-transform: skew(-20deg); transform: skew(-20deg); padding: .1rem .26rem;}
+/* 水平滚动 */
+.scroll_box {
+    overflow: hidden;
+    -webkit-transform: skew(20deg);-moz-transform: skew(20deg); -o-transform: skew(20deg); -ms-transform: skew(20deg); transform: skew(20deg);
+}
+.scroll_box p{ width: 80%;} 
+.cai_con .cai_title .wanfa{
+    width: 20%;
+    text-align: right;
+    color: #fff44e;
+}
+
+.cai_title ul li{ height: .52rem; line-height: .52rem; text-align: left; overflow:hidden;}
+.cai_con .cai_title a{ color: #fff; font-size: .24rem;}
+.cai_con .cai_title img{ width: .3rem;}
+.cai_list_con .mach_list{ padding: .2rem; background: url(../../images/etc/mach-list-bg.png) no-repeat 0 0; background-size: 100% 100%; box-shadow: 0 0 .1rem #0b2c6b; margin-bottom: .2rem; border-radius: .1rem;}
+.cai_list_con .mach_list .mach_title{ text-align: center;}
+.cai_list_con .mach_list .mach_title span{ margin-right: .05rem;}
+.mach_table .mach_name{ color: #fff;}
+.mach_table .mach_name img{ width: .98rem;}
+.mach_table .mach_vs img{ width: .48rem;}
+.mach_list .mach_btn a{ float: left; margin: 1%; width: 23%; height: .6rem; line-height: .6rem; text-align: center; background: url(../../images/etc/det-brn-bg.png) no-repeat; background-size: 100% 100%; position: relative;}
+.mach_list .mach_btn a:last-child {color: #9a2501; text-shadow: 1px 1px 1px #ffffff; background: url(../../images/etc/bet-btn.png) no-repeat; background-size: 100% 100%;}
+.mach_list .mach_btn a.on{ background: url(../../images/etc/on-btn-bg.png) no-repeat; background-size: 100% 100%;}
+.mach_list .mach_btn a em{ color: #eb0000;}
+.mach_list .mach_btn a.on span{color: #eb0000;}
+.mach_list .mach_btn .icon-tik-red{ width: .25rem; height: .25rem; background: url(../../images/etc/icon-tick-red.png) no-repeat 0 0; background-size: 100% 100%; position: absolute; right: -.05rem; top: -.05rem;}
+
+/* APP下载 */
+.load_btn{ height: .56rem; line-height: .56rem; text-align: center; border-radius: .1rem .1rem 0 0;}
+.load_btn a{ padding-left: .34rem; margin-left: .1rem; background: url(../../images/etc/icon-load.png) no-repeat 0 center; background-size: .25rem auto;}
+
+/* 新闻资讯 */
+
+/*--------------------------------- 新闻头部标题 ---------------------------------*/
+.inform_con .inform_title{ height: .7rem; background: #07215d; padding: 0 .26rem;}
+.inform_con .inform_title h4{ font-weight: normal; line-height: .7rem; color: #fff; padding-left: .56rem; background: url(../../images/etc/icon-inform.png) no-repeat 0 center; background-size: .47rem auto;}
+.inform_title .right ul li{ float: left; margin-left: .2rem; line-height: .7rem;}
+.inform_title .right ul li a{ padding: .05rem .1rem; background: #1947b3; color: #fff; transition: ease-out 0.5s;}
+.inform_title .right ul li a:hover{ background: #2773cb;}
+
+/*--------------------------------- 新闻列表 ---------------------------------*/
+.news_con { background: #2773cb; padding: 0 .26rem .1rem; }
+.news_con ul li{padding:.2rem 0; border-bottom: 1px solid #fff;}
+.news_con ul li:last-child{ border-bottom: none 0;}
+.news_con ul li .n_img{width: 2.25rem;height:1.45rem;float: left;margin-right: .2rem;}
+.news_con ul li .n_img img{width: 100%;height: 100%;display: block;border-radius: 2px}
+
+/*图片列表*/
+.news_con ul .img_list{position: relative; padding-bottom: .7rem}
+.news_con ul .img_list .n_img{width: 100%; height: 100%;float: left;padding-top: .1rem;padding-right: 0}
+.news_con ul .img_list .n_img a{float: left;display: block; width: 2.25rem; height: 1.45rem; margin-right: .17rem} 
+.news_con ul .img_list .n_img a:last-child{margin-right: 0;}
+.news_con ul .img_list .n_img a img{border-radius: 2px} 
+
+.news_con ul li .n_des{    
+	-webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: justify;
+    display: -webkit-box;
+    position: relative;
+    height: 1.45rem;
+}
+.news_con ul li .n_des h3{height: .6rem; line-height: .6rem; color: #ffffff; font-weight: normal; font-size: .3rem;}
+.news_con ul li .n_des h3 a,.news_con ul .img_list h3 a{
+width:100%;
+display:block;/*内联对象需加*/
+word-break:keep-all;/* 不换行 */
+white-space:nowrap;/* 不换行 */
+overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+
+.news_con ul li .n_des h3 a:hover{color: #01af63}
+.news_con ul li .n_des p{height: .8rem; color: #fff;line-height: 150%; font-size: .26rem;}
+.news_con ul li .n_des p a{color: #666666}
+
+.head_infor .name{ color: #fff44e;}
+.gold_bg{ display: inline-block; height: .26rem; line-height: .26rem; padding: 0 .1rem; background: #fff44e; color: #eb0000; border-radius: .05rem; margin-left: .12rem;}

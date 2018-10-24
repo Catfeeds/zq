@@ -1,0 +1,117 @@
+<include file="Public:pagerForm" />
+<div class="pageContent">
+
+	<form action="__URL__/saveFilterWords" method="post" class="pageForm required-validate" onsubmit="return iframeCallback(this)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>新增屏蔽内容：</label>
+				<textarea name="newInput" cols="80" rows="8"></textarea>
+			</div>
+
+			<div class="unit ">
+				<label>新词入库预生成：</label>
+				<div class="button"  id="inputPreView">
+					<a req-href="__URL__/inputPreView/navTabId/__DWZ__" ><span>预生成校验</span></a>
+				</div>
+			</div>
+
+			<div class="unit">
+				<label>屏蔽词预览：</label>
+			  	<textarea name="words" style="width: 80%" rows="30">{$words}</textarea>
+			</div>
+			</hr>
+			<div class="unit">
+				<label>敏感词测试：</label>
+				<textarea name="inputTest" cols="80" rows="8"></textarea>
+				<div class="button" id="inputTest">
+					<a req-href="__URL__/inputTest/navTabId/__DWZ__" ><span>测试是否含有敏感词</span></a>
+				</div>
+			</div>
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存预览</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<script>
+    $("#inputPreView").click(function(){
+        var url  = $(this).find('a').attr('req-href');
+        var data  = $("textarea[name='newInput']").val();
+        if(data.replace(/^\s+|\s+$/gm,'')){
+            $.ajax({
+                url:url,
+                dataType:'json',
+                type:'POST',
+                data:{newInput:data},
+                success:function (e) {
+                    if(e.newInput != undefined && e.newInput != '' ){
+                        var val = $("textarea[name='words']").val();
+                        $("textarea[name='words']").val(val + '|' + e.newInput);
+                    }
+                }
+            })
+		}else{
+            alert('请输入内容')
+		}
+    });
+
+    $("#inputTest").click(function(){
+        var url  = $(this).find('a').attr('req-href');
+        var data  = $("textarea[name='inputTest']").val();
+        if(data.replace(/^\s+|\s+$/gm,'')){
+            $.ajax({
+                url:url,
+                dataType:'json',
+                type:'POST',
+                data:{inputTest:data},
+                success:function (json) {
+                    DWZ.ajaxDone(json);
+                    if (json.statusCode == DWZ.statusCode.ok) {
+                        if (json.navTabId) {
+                            navTab.reloadFlag(json.navTabId);
+                        } else {
+                            var $pagerForm = $("#pagerForm", navTab.getCurrentPanel());
+                            var args = $pagerForm.size() > 0 ? $pagerForm.serializeArray() : {}
+                            navTabPageBreak(args, json.rel);
+                        }
+                        if ("closeCurrent" == json.callbackType) {
+                            setTimeout(function() {
+                                    navTab.closeCurrentTab(json.navTabId);
+                                },
+                                100);
+                        } else if ("forward" == json.callbackType) {
+                            navTab.reload(json.forwardUrl);
+                        } else if ("forwardConfirm" == json.callbackType) {
+                            alertMsg.confirm(json.confirmMsg || DWZ.msg("forwardConfirmMsg"), {
+                                okCall: function() {
+                                    navTab.reload(json.forwardUrl);
+                                },
+                                cancelCall: function() {
+                                    navTab.closeCurrentTab(json.navTabId);
+                                }
+                            });
+                        } else {
+                            navTab.getCurrentPanel().find(":input[initValue]").each(function() {
+                                var initVal = $(this).attr("initValue");
+                                $(this).val(initVal);
+                            });
+                        }
+                    }
+                }
+            })
+        }
+    });
+
+
+
+</script>
+
+
+
+
+
+

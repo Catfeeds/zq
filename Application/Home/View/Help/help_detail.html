@@ -1,0 +1,80 @@
+<extend name="Public:layout"/>
+<block name="seo">
+    <title>{$article.title}_帮助中心|全球体育网qqty.com</title>
+</block>
+<block name="css">
+    <link rel="stylesheet" href="__CSS__/help_center/hc_common.css">
+</block>
+<block name="content">
+	<div class="body">
+        <include file="search"/>
+        <!-- 主体内容开始 -->
+        <div class="main">
+        	<div class="section-title"><h4>问题分类</h4></div>
+            <div class="q-type clearfix">
+            	<!-- 左边导航开始 -->
+            	<include file="navigate"/>
+                <!-- 右边列表开始 -->
+                <div class="pull-right right">
+                	<div class="data-graph">
+                        <!-- Nav tabs -->
+                        <ul class="serch-title">
+                            <li>{$article.title}</li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                        	<div>
+                               <p>{$article.content|htmlspecialchars_decode}</p>
+                            </div>
+                            <!-- 上下篇章开始 -->
+                            <div class="ud-text">
+                                <p class="clearfix"><span class="pull-left"><font color="#999">上一篇：</font>
+                                    <a href="<notempty name="prevArticle">{:U('/help_detail/'.I('classId').'/'.$prevArticle[0]['class_id'].'/'.$prevArticle[0]['id'].'')}<else/>javascript:;</notempty>" class="<notempty name="prevArticle">text-blue</notempty>">{$prevArticle.0.title|default="无"}</a></span><span class="pull-right">
+                                <font color="#999">下一篇：</font>
+                                    <a href="<notempty name="nextArticle">{:U('/help_detail/'.I('classId').'/'.$nextArticle[0]['class_id'].'/'.$nextArticle[0]['id'].'')}<else/>javascript:;</notempty>" class="<notempty name="nextArticle">text-blue</notempty>">{$nextArticle.0.title|default="无"}</a></span></p>
+                                <p>客服及时在线解答&nbsp;&nbsp;
+									<include file="Public/customer"/>
+								</p>
+                                <p>还可致电 020-39287222</p>
+                            </div>
+                            <!-- 上下篇章结束 -->
+                        </div>
+                    </div>
+          		</div>
+            </div>
+            <!-- 右边列表结束 -->
+      	</div>
+        <!-- 主体内容结束 -->
+    </div>
+</block>
+<block name="js">
+<!--引入本页js-->
+<script type="text/javascript">
+    /**
+     * @author Chensiren <793952481@qq.com>
+     * @since  2015-01-18
+    */
+    $(function(){
+        //返回顶部
+        $(window).scroll(function(e) {
+            if($(window).scrollTop()>$(window).height()){
+                $('.return-top').fadeIn(300);
+            }else {
+                $('.return-top').fadeOut(300);
+            }
+        });
+        $('.return-top').click(function(e) {
+            $('body,html').animate({'scrollTop':'0'},500);
+
+        });
+        //左边导航
+        $(".q-slideBtn").click(function(){
+            $(this).parent('li').toggleClass("active");
+            //$(this).parent("li").siblings('li').children('a').find("i").removeClass('active');
+            $(this).parent('li').siblings().removeClass('active');
+            $(this).parent().find(".q-slideNav").stop().slideToggle();
+            $(this).parent("li").siblings('li').find("div.q-slideNav").stop().slideUp();
+        });
+    });
+</script>
+</block>

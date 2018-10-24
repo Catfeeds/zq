@@ -1,0 +1,53 @@
+/**
+ * 全彩登陆css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-17
+**/
+.form-main{ background: #000 url(../../images/login/login-bg.jpg) no-repeat center center; width: 100%; height: 480px;}
+.form-main .main-in{ width: 1000px; margin:0 auto;}
+.form{ width: 360px; height: 405px; background: #fff; padding: 20px 24px; margin-top: 45px;}
+.extra-r{ margin: 10px 0;}
+.extra-r a{ color: #e31e43;}
+.form .mt{ margin-bottom: 15px;}
+.form .item { position: relative; margin-top: 20px; background-color: white;}
+.form .form-control{ height: 42px; line-height: 42px\9; padding-left: 50px; width: 100%; outline: 0 none; font-size: 14px; background: transparent url(../../images/login/user.jpg) no-repeat 0 0; font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu; padding-bottom: 0\9;padding-top: 0\9;}
+.form .item .pwd-input{background: url(../../images/login/password.jpg) no-repeat;}
+.remeber .checkbox{ height: 40px; margin-top: 15px; }
+input::-moz-placeholder{
+color:#b4b4b4;
+}
+input::-webkit-placeholder{
+color:#b4b4b4;
+}
+
+input:-webkit-autofill{ background-color: white;}
+.login-btn input[type=submit]{ width: 100%; border-radius: 3px; font-size: 18px;}
+.form .field-msg{ left: 1%; top: -3%;}
+.msg-warn {
+    display: none;
+    background: #fff6d2 none repeat scroll 0 0;
+    border: 1px solid #ffe57d;
+    color: #666;
+    height: 28px;
+    line-height: 18px;
+    padding: 3px 10px 3px 40px;
+    position: relative;
+}
+.msg-warn b {
+    background: rgba(0, 0, 0, 0) url("//miscssl.360buyimg.com/user/passport-2015/widget/login-form/i/pwd-icons-new.png") no-repeat scroll -104px -22px;
+    display: block;
+    height: 17px;
+    left: 10px;
+    margin-top: -9px;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    width: 16px;
+}
+/*其他登录方式*/
+.else_login{padding-top: 10px}
+.else_login img{padding-right: 5px}
+.else_login a{color: #8a8a8a;padding-right: 24px}
+.else_login a:last-child{padding-right: 0px}
+.else_login a:hover{color: #ff7e00}

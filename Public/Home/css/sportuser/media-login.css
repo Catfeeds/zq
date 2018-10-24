@@ -1,0 +1,91 @@
+/**
+ * media number css
+ *
+ * @author Chensiren <245017279@qq.com>
+ * 
+ * @since  2018-02-01
+ *
+**/
+body{ background-color: #efefef; background-image: url(../../images/sportuser/SportUser-bg.png); background-repeat: no-repeat; background-position: center 38px;}
+label{ font-weight: normal; margin: 0;}
+.topCenter{ height: 110px;}
+.topCenter .suLogo{ margin-top: 50px; margin-left: 86px;}
+.formMain{ background: #fff; min-height: 800px;}
+.formStep ul{ text-align: center; padding-top: 56px;}
+.formStep ul li{ display: inline-block;}
+.formStep ul li .step{ width: 46px; height: 46px; line-height: 42px; text-align: center; color: #ccc; border: 2px solid #cccccc; border-radius: 50%; background: #fff;  margin: 0 6px;}
+.formStep ul li.on .step{ border-color: #01af63; background: #01af63; color: #fff; font-size: 18px;}
+.dotLine{ height: 46px; line-height: 42px;}
+.dotLine i{ display: inline-block; height: 2px; width: 8px; margin: 0; background: #cccccc;}
+.formStep ul li.on .dotLine i{ background: #01af63;}
+.formStep ul li p{ width: 56px; text-align: center; margin-top: 35px;}
+
+.listTitle{ margin-bottom: 50px;}
+.listTitle span{ font-size: 22px; padding-left: 12px; position: relative;}
+.listTitle span:before{ content:""; width: 6px; height: 18px; background: #01af63; position: absolute; left: 0; top: 6px;}
+
+.formBox{ width: 360px; margin: 0 auto; padding: 90px 0 0 0;}
+.formBox .formNav{ margin-bottom: 30px;}
+.formNav li{ width: 50%; border-bottom: 2px solid #e0e0e0;}
+.formNav li a{ display: block; font-size: 16px; padding: 12px 0; position: relative;}
+.formNav li.on a:after,.formNav li a:hover:after{ content:""; width: 100%; height: 2px; background: #01af63; position: absolute; left: 0; bottom: -2px;}
+
+.formBox .control-label{ font-weight: normal; margin-bottom: 0; line-height: 42px; width: 60px;}
+.formBox .input-con{ width: 280px;}
+.formBox .form-control{ height: 42px;}
+.formBox .form-group{ margin-bottom: 0px;}
+.formBox .code{ width: 130px;}
+.formBox .sendCode{ width: 130px; height: 42px; line-height: 40px; text-align: center; color: #01af63; border: 1px solid #01af63;}
+.formBox .sendCode:hover{ color: #fff; background: #0cc776; border-color: #0cc776;}
+.formBox button[type="submit"]{ width: 100%;}
+.formBox .noit{ min-height: 30px;}
+
+.formBox02{ width: 600px;}
+.formBox02 .input-con{ width: 470px;}
+.formBox02 .input-con input{ width: 280px; height: 42px;}
+.formBox02 .control-label{ width: 115px; text-align: left;}
+.formBox02 .noit{ padding-left: 0;}
+.formBox02 .grtextarea { width: 470px; height: 120px; overflow: hidden;line-height: 20px; resize: none; outline: none;}
+.formBox02 .face{ width: 130px; height: 130px; overflow: hidden; position: relative;}
+.formBox02 .face .upload-img{ position: absolute; left: 0; bottom: 0; width: 100%; background: rgba(0,0,0,0.5); color: #fff; text-align: center; padding: 5px 0;}
+.formBox02 .face .upload-img label{ margin-bottom: 0;}
+.formBox02 .face input[type="file"]{ display: none;}
+.formBox02 .input-con .code{ width: 130px; margin-right: 10px;}
+.formBox02 .btnBox{ margin-left: 112px;}
+.formBox02 .btnBox .btn{ width: 140px;}
+.formBox02 .btnBox .btn.btn-default{ margin-right: 90px;}
+
+/* 登录 */
+.remeber a,.remeber label,.remeber span{ color: #999;}
+.fgLogin{ position: relative;}
+.remeber{ padding: 5px 0;}
+.fgLogin input{ padding-left: 50px;}
+.fgLogin .userIcon,.fgLogin .passIcon { position: absolute; z-index: 3; top: 1px; left: 1px; width: 40px; height: 40px; }
+.fgLogin .userIcon{ background: url(../../images/login/user.jpg) no-repeat; background-size: 100% 100%;}
+.fgLogin .passIcon{ background: url(../../images/login/password.jpg) no-repeat; background-size: 100% 100%;}
+.elseLogin{padding: 10px 0;}
+.elseLogin img{ padding-right: 5px;}
+.elseLogin a{ width: 33.33%; text-align: center; color: #999;}
+.elseLogin a:hover{color: #ff7800;}
+
+/* 登录成功 */
+.loTitle{ width: 490px; height: 40px; line-height: 40px; text-align: center; margin: 0 auto; position: relative; margin-top: 80px; margin-bottom: 30px;}
+.loTitle:after{ content:""; width: 100%; height: 1px; background: #cccccc; position: absolute; left: 0; top: 50%; margin-top: -0.5px; z-index: 1;}
+.loTitle span{ font-size: 22px; padding: 0 10px; background: #fff; position: relative; z-index: 2;}
+.userBox{ width: 280px; margin: 0 auto;}
+.inforFace{ text-align: center;}
+.inforFace .faceImg{ width: 72px; height: 72px; border: 1px solid #ccc; border-radius: 50%; overflow: hidden; margin:0 auto; margin-bottom: 20px;}
+.inforFace .faceImg img{ width: 100%; height: 100%;}
+.inforFace .faceName{ margin-bottom: 40px;}
+.inforFace .btn{ width: 100%; margin-top: 35px;}
+
+.linkBox{ padding: 10px 0;}
+.linkBox a{ margin: 0 5px; color: #999; font-size: 12px;}
+.linkBox a:hover{ color: #01af63;}
+
+/**
+error定位
+ */
+.input-position-relative {
+    position: relative;
+}

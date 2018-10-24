@@ -1,0 +1,288 @@
+/**
+ * 全彩首页css样式文件
+ * 
+ * @author pengjian <245017279@qq.com>
+ * @since  2016-03-10
+**/
+body{overflow-x:hidden;}
+/*主体内容*/
+#nav ul{ margin-left: 585px;}
+#nav .select{width: 140px; text-align: center;}
+#nav .select, #nav .current {margin:2.6em 0 0 0; padding:0; list-style:none; display:block; float:left; }
+#nav .sub {margin:0; padding:0; list-style:none;text-align: center; margin-top: -30px;}
+#nav li {display:block; float:left; margin:0; padding:0; position:relative; z-index:100;}
+#nav .current li {z-index:50;}
+#nav .select a,
+#nav .current a {display:block; height:2.5em; float:left; width:145px;font-weight:bold; line-height:2.4em; white-space:nowrap; margin-top: -35px; height: 48px;}
+#nav .change a:hover{ -webkit-transform: skew(23deg); -moz-transform: skew(23deg); -o-transform: skew(23deg); transform: skew(23deg); background-color: #fff;}
+
+#nav .one a {width:10em; background:#fff !important;}
+#nav .two a {width:19em; padding-top: 2px;}
+#nav .three a {width:9.5em; padding-top: 2px;}
+#nav .four a {width:9em; padding-top: 2px;}
+#nav .select a b,
+#nav .current a b {height:100%; display:block; padding:0 15px 0 6px; color:#fff; font-size:18px; font-weight:600;}
+#nav .sub {display:none;}
+/* for IE5.5 and IE6 only */
+#nav table {position:absolute; border-collapse:collapse; left:0; top:0; font-size:1em;}
+#nav .select a:hover b {color:#0182de; cursor:pointer;}
+#nav .current a {background-position:0 -150px;  width:145px; text-align: center; padding-top: 5px;}
+.now-o{ -webkit-transform: skew(23deg); -moz-transform: skew(23deg); -o-transform: skew(23deg); transform: skew(23deg);}
+.now-o b{ -webkit-transform: skewX(-23deg); -moz-transform: skewX(-23deg); -o-transform: skewX(-23deg); transform: skewX(-23deg);}
+#nav .current a b {background-position:100% -150px; color:#000;}
+
+.sub-l{ width: 80px; text-align: center;}
+#nav .current .sub li{  width: 80px;}
+#nav .current .sub .current_sub a,
+#nav .current .sub a:hover {  color:#000; }
+#nav .current .sub,
+#nav .select a:hover .sub,
+#nav .select li:hover .sub {display:block; position:absolute; width:730px; top:2.5em; background:#fff; margin-top:1px; padding:10px 0px 20px 0px; }
+#nav .current .sub li a,
+#nav .select a:hover .sub li a,
+#nav .select li:hover .sub li a { display:inline; background:#fff; border-left:1px solid #e6e6e6; padding:0 10px; margin:0 10px 0 0; width:auto; white-space:nowrap; font-weight:normal; font-size:0.9em; height:2em; line-height:1.9em;}
+#nav .select a:hover,
+#nav li:hover a {background-position:0% -150px; border-color:#fff;  }
+#nav .select a:hover b,
+#nav .select li:hover a b {background-position:100% -150px; border-color:#fff; color:#000; }
+#nav .two .sub {left:-10em; margin-left:-9px;}
+#nav .three .sub {left:-29em; margin-left:-18px;}
+* html #nav .three .sub {margin-left:-9px; margin-left:-18px;}
+#nav .four .sub {left:-38.5em; margin-left:-27px; text-align: center;} 
+
+.home,.main{ width: 1024px; margin: 0 auto ;}
+.main{ padding-bottom: 15px;}
+
+/*赛事直播*/
+.live-tree{width: 174px; float: left;}
+.live-main{width: 802px; float: right;}
+
+.live-tree ul li{width: 100%; height: 58px; line-height: 58px;border:1px solid #e5e5e5; border-bottom: none;}
+.live-tree ul li a{display: block; padding-left: 29px;border-left: 4px solid #ffffff;height: 57px;}
+.live-tree ul li a:hover{color: #2a6cb8; border-left: 4px solid #2a6cb8;}
+.live-tree ul li.on a{color: #2a6cb8; border-left: 4px solid #2a6cb8;}
+
+/*时间选择*/
+.live-time{ width:100%; float: left; border:1px solid #e5e5e5; }
+.ladyScroll{width:100%;height:78px;position:relative;}
+.ladyScroll .prev,.ladyScroll .next{width:32px;height:78px;position:absolute;top:0;left:0;z-index:100; cursor:pointer; background:url(../../images/video/time-left.png) no-repeat left top;}
+.ladyScroll .next{ left:auto; right:0; background:url(../../images/video/time-right.png) no-repeat center top; }
+.ladyScroll .prev:hover{background:url(../../images/video/time-left.png) #e2e2e2 no-repeat left top; }
+.ladyScroll .next:hover{background:url(../../images/video/time-right.png) #e2e2e2 no-repeat center top;  }
+
+
+.ladyScroll .scrollWrap{width:740px;overflow:hidden;position:absolute; padding-left: 60px;}
+.ladyScroll ul li{width:90px; height:78px; margin:0 4px ;}  
+.ladyScroll ul li a{width:90px; height:78px; display: block; }  
+.ladyScroll ul li a:hover{width:90px; height:78px; display: block; background: #eeeeee; color: #333;}  
+.ladyScroll ul li.on a{background: #2a6cb8; color: #fff;}
+.ladyScroll ul li a p{ height: 25px; line-height: 25px; margin: 0;padding: 15px 0 0 20px ;}
+
+/*赛事列表*/
+.live-list{width: 100%; float: left;padding-top: 40px;}
+.showtime img{float: left;}
+.showtime span{display: block;padding-left: 10px;}
+.live-list .lange ul{ margin-bottom: 0;}
+.live-list .lange a{ border: 1px solid #2a6cb8; padding: 4px 10px; position: relative; margin-left: -1px; color: #999;}
+.live-list .lange .current{ color: #fff; background: #2a6cb8;}
+.live-list-con{ border:1px solid #e5e5e5; margin-top: 10px; border-bottom:none;  }
+.live-list-con ul li{width:100%;height: 70px; border-bottom:1px solid #e5e5e5; }
+.live-list-con ul li:hover{background:#fafafa;}
+
+.live-con{padding: 15px;}
+.lc-left,.lc-center,.lc-right{float: left; height: 42px;background:url(../../images/video/live-border.jpg) no-repeat right top;}
+.lc-left{ width: 26%; }
+.lc-center{ width: 63%;padding:0 15px; margin-top:-3px ;}
+.lc-right{ width: 11%; background: none; padding-left: 10px ;}
+
+.lc-right .zb-common{ width: 78px; height: 40px; display: block;  
+    line-height: 40px;
+    color: #eb0000; 
+    padding-left: 7px;
+    display: block;
+    text-align: center;
+    position: relative;
+ }
+
+
+.lc-right .zbz{  
+    color: #eb0000;
+    background: url(../../images/video/tv2.png) no-repeat left center;
+ }
+
+.lc-right .play{  
+    color: #1490d8;
+    line-height: 38px;
+    padding-left: 20px;
+    background: url(../../images/video/play.png) no-repeat 10px center;
+ }
+
+.lc-right .over{  
+    color: #1490d8; 
+    padding-left: 20px;
+    background: url(../../images/video/over.png) no-repeat 10px center;
+ }
+ .cdefault{ cursor:default!important; }
+.gameover{color: #999999!important;}
+
+.lc-right .tart{  
+    color: #999999;
+    padding-left: 15px;
+    cursor: default;
+    background: url(../../images/video/tart.png) no-repeat 5px center;
+ }
+ .lc-right .zbz span{background: url(../../images/video/select.png) no-repeat right center; display: block; width: 6px; height: 4px; position: absolute; right: 0; top:50%; }
+
+.lc-left span{float: left;vertical-align: middle;}
+.lc-left .s1{width:25%; line-height: 42px;}
+.lc-left .s2{width:30% ;}
+.lc-left .s3{width:40%; line-height: 42px;}
+.lc-left p{float: left; color: #a7a7a7; font-size: 12px;}
+.lc-left img{width: 40px; height: 40px;}
+
+.lc-center span{float: left;line-height: 42px; }
+.lc-center .s1{width:14%;}
+.lc-center .s2{width:30%; font-weight: bold;white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;}
+.lc-center .s2 span{float:right;padding-right: 10px;}
+.lc-center .s3{width:15%; font-weight: bold; color: #999999; text-align: center;}
+.lc-center .s3.ing{ color: #eb0000;}
+.lc-center .s3.play{ color: #1490d8;}
+.lc-center .s3.over{ color: #1490d8;}
+.lc-center .s4{width:27%;font-weight: bold;text-align: right;white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;}
+.lc-center .s4 span{padding-left: 10px;}
+.lc-center .s2 a,.lc-center .s4 a{ display: block; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.lc-center .s5{width:14%;text-align: right;} 
+.lc-center .s2 a:hover,.lc-center .s4 a:hover{cursor: default;color: #333;}
+.lc-center img{width: 40px; height: 40px;}
+
+/*直播列表*/
+.zb-list{width: 78px; height: auto; border:1px solid #e5e5e5; border-top: 1px solid #eb003b;  background: #fff; z-index: 999; position: relative; display: none;}
+.zb-list ul li{float: left;height: auto; border-bottom: 0; padding:5px 0;background: #fff;  text-align: center;}
+.zb-list ul li:hover{ background-color: #e5e5e5 ;}
+
+#nav li.change a {font-size:18px !important; font-weight:900 !important;}
+
+.now-o {background:none !important; width:133px !important;}
+
+#nav ul.select {
+    margin-top:-13px !important;
+}
+
+.video-live {
+    width:134px !important;
+    padding-left: -2px !important;
+}
+
+.video-live b {
+    color:#0182de !important;
+    padding-top:5px !important;
+}
+
+#nav > ul.select.one > li > a > b {
+    padding-top:7px !important;
+}
+
+body > div.con-main > div > div.logo > img {
+    position: relative;
+    top: -5px;
+    left: -5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*#nav a b {font-size:18px; font-weight:600;}*/
+
+/*.btn-green{color:#fff;background-color:#006ebb;border-color:#006ebb}*/
+
+/*.football-special {*/
+    /*margin-left: 115px !important;*/
+/*}*/
+/*.mouse-onback {*/
+    /*background:#fff !important;*/
+/*}*/
+
+/*.mouse-oncolor {*/
+    /*color:#0182de !important;*/
+/*}*/
+
+/*.mouse-display {*/
+    /*display:block !important;*/
+/*}*/
+
+/*.sub-l a {*/
+    /*text-align:center !important;*/
+    /*margin: 0 auto !important;*/
+    /*display:inline !important;*/
+    /*padding-left: 0px !important;*/
+    /*padding-right: 0px !important;*/
+    /*width: 100px !important;*/
+    /*border:1px solid;*/
+    /*font-weight:600 !important;*/
+    /*font-size:15px !important;*/
+/*}*/
+
+/*.sub-l a:link {*/
+    /*text-decoration: none;*/
+    /*color: #000;*/
+/*}*/
+
+/*.sub-l {*/
+    /*text-align:center;*/
+/*}*/
+
+/*.transformat a{*/
+    /*-webkit-transform: skew(23deg); -moz-transform: skew(23deg); -o-transform: skew(23deg); transform: skew(23deg);*/
+/*}*/
+
+/*div.out_transformat {*/
+    /*color:#fff;*/
+    /*font-size:18px; font-weight:600;*/
+    /*-webkit-transform: skewX(-23deg) !important; -moz-transform: skewX(-23deg); -o-transform: skewX(-23deg); transform: skewX(-23deg) !important;*/
+/*}*/
+
+/*.dianjing-font {*/
+    /*padding-top:5px;*/
+/*}*/
+
+/*#nav > ul.select.five.dianjing-ul > li > b > a {*/
+    /*margin-top: -32px !important;*/
+/*}*/
+
+
+
+
+
+
+
+
+
+

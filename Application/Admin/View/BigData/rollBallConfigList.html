@@ -1,0 +1,68 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/rollBallConfigList" method="post">
+    <input type="hidden" name="type" value="{$_REQUEST.type}" />
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>
+                <label>所属分类：</label>
+                <select name="class_type" onchange="$(form).submit()" class="combox">
+
+                    <option value="" >全部</option>
+                    <option value="1" <if condition="$class_type eq 1">selected='true' </if>>危险进攻</option>
+                    <option value="2" <if condition="$class_type eq 2">selected='true' </if>>射门数</option>
+                </select>
+            </li>
+        </ul>
+    </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="add" href="__URL__/rollBallEdit" target="dialog" mask="true" title="{$vo.name}新增" height="400" ><span>新增</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th style="width: 10px; cursor: default;">
+                <div class="gridCol" title="">
+                    <input class="checkboxCtrl" type="checkbox" group="id">
+                </div>
+            </th>
+            <th width="10">ID</th>
+            <th width="40">触发条件</th>
+            <th width="100">推送语句</th>
+            <th width="50">日期</th>
+            <th width="40">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach item="vo" name="data">
+            <tr target="sid_mission" rel="{$key}">
+                <td style="width: 10px;">
+                    <div>
+                        <input type="checkbox" value="{$vo.id}" name="id">
+                    </div>
+                </td>
+                <td>{$key}</td>
+                <td>{$vo['condition_start']} ~ {$vo['condition_end']} 次<if condition="$vo['type'] eq 1">危险进攻<else/>进球</if></td>
+                <td><if condition="$vo['team_block'] eq 1">优队<else/></if>{$vo['string']}</td>
+                <td>{$vo['update']}</td>
+                <td>
+                    <a href="__URL__/rollBallEdit/id/{$key}" target="dialog" mask="true" title="{$vo.name}编辑" rel="editPage" height="400">编辑</a>
+                    |
+                    <a class="delete" href="__URL__/delete/id/{$key}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择广告"><span>删除</span></a>
+                </td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+</div>
+
+

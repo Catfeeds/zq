@@ -1,0 +1,69 @@
+<volist name="group" id="vo">
+    <li type="{$key}"
+    <if condition="$key eq 'WEBSITE'">
+        style="display:display;"
+        <else/>
+        style="display:none;"
+    </if>>
+    <div id="leftside">
+        <div id="sidebar_s">
+            <div class="collapse">
+                <div class="toggleCollapse"><div></div></div>
+            </div>
+        </div>
+
+        <div id="sidebar">
+            <div class="accordion" fillSpace="sideBar">
+                <volist name="vo" id="list">
+                    <div class="accordionHeader">
+                        <h2><span>Folder</span>{$list.title}</h2>
+                    </div>
+                    <div class="accordionContent">
+
+                        <ul class="tree treeFolder">
+                            <volist name="menu[$list['id']]" id="item" >
+                                <eq name="item['access']" value="1">
+                                    <eq name="item.level" value="3">
+                                        <li>
+                                            <a href="__MODULE__/{$parents[$item['pid']]['name']}/{$item['name']}" target="navTab" rel="{$parents[$item['pid']]['name']}.{$item['name']}">{$item['title']}</a>
+                                        </li>
+                                    <else/>
+                                        <li>
+                                            <a href="__MODULE__/{$item['name']}" target="navTab" rel="{$item['name']}">{$item['title']}</a>
+                                        </li>
+                                    </eq>
+                                </eq>
+                                <if condition="$item['id'] eq 232">
+                                    <?php foreach ($PublishClass as $item) { ?>
+                                        <ul class="tree treeFolder">
+                                            <li><a href="__MODULE__/PublishList/index/class_id/{$item.id}" rel="news{$item.id}" target="navTab">{$item.name}</a>
+                                                <notempty name="item.childs">
+                                                        <?php foreach ($item['childs'] as $item2) { ?>
+                                                        <ul>
+                                                            <li><a href="__MODULE__/PublishList/index/class_id/{$item2.id}" target="navTab" rel="news{$item2.id}">{$item2.name}</a>
+                                                                <notempty name="item2.childs">
+                                                                    <?php foreach ($item2['childs'] as $item3) { ?>
+                                                                    <ul><li><a href="__MODULE__/PublishList/index/class_id/{$item3.id}" target="navTab" rel="news{$item3.id}">{$item3.name}</a></li></ul>
+                                                                    <?php } ?>
+                                                                </notempty>
+                                                            </li>
+                                                        </ul>
+                                                    <?php } ?>
+                                                </notempty>
+                                            </li>
+                                        </ul>
+                                    <?php } ?>
+                                </if>
+                            </volist>
+                        </ul>
+
+                    </div>
+                </volist>
+            </div>
+
+        </div>
+    </div>
+
+
+    </li>
+</volist>

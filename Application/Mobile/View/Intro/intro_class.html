@@ -1,0 +1,41 @@
+<extend name="Public/base"/>
+<block name="seo">
+    <title>手机全球体育手机网_即时足球比分,比分直播,足球直播,比分预测,赔率分析</title>
+</block>
+
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/intro/index.css">
+</block>
+<block name="header">
+</block>
+<block name="nav">
+</block>
+<!-- 内容 s -->
+<block name="content">
+    <!-- 球王 main -->
+    <section class="fenlei">
+        <header class="fenlei_head">
+            <div id="other_header">
+                <a href="{:U('Intro/index')}"></a>
+                <span>{$list.category.name}</span>
+            </div>
+            <div class="header_con">
+                <div class="img_l fl"><img src="{$list.category.logo}" alt=""></div>
+                <div class="des_r fr">简介：{$list.category.desc|mb_substr=###,0,90,'utf-8'}...</div>
+            </div>
+        </header>
+
+        <section class="index_main">
+
+            <volist name="list['products']" id="item">
+                <include file="intro_tab"/>
+            </volist>
+
+        </section>
+    </section>
+    <!-- 球王 main -->
+    <input type="hidden" id="class_id" value="{$list.category.id}"/>
+    <input type="hidden" id="type" value="class_index"/>
+    <include file="common_ajax"/>
+</block>

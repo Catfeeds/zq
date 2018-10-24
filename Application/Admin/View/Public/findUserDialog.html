@@ -1,0 +1,82 @@
+<form id="pagerForm" action="__URL__/findUser" method="post">
+	<input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+	<input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+	<input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+	<input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+	<volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+	<form rel="pagerForm" method="post" action="__URL__/findUser" onsubmit="return dwzSearch(this, 'dialog');">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>用户名:</label>
+				<input class="textInput" name="account" value="{$_REQUEST.account}" type="text">
+			</li>	
+			<li>
+				<label>昵称:</label>
+				<input class="textInput" name="nickname" value="{$_REQUEST.nickname}" type="text">
+			</li>	  
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+<div class="pageContent j-resizeGrid" style="width: 806px;">
+
+	<div class="grid">
+		<div class="gridHeader">
+			<div class="gridThead">
+				<table style="width:786px;">
+					<thead>
+						<tr>
+							<th width="50">管理员ID</th>
+							<th>用户名</th>
+							<th>昵称</th>
+							<th>真实姓名</th>
+							<th width="50">选择</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+		<div class="gridScroller" layouth="118" style="width: 806px; height: 243px; overflow: auto;">
+			<div class="gridTbody">
+				<table style="width:786px;">
+					<tbody>
+						<notempty>
+							<volist name="list" id="vo">
+							<tr>
+								<td width="50">{$vo.id}</td>
+								<td>{$vo.account}</td>
+								<td>{$vo.nickname}</td>
+								<td>{$vo.true_name}</td>
+								<td width="50">
+									<a class="btnSelect" title="选择" href="javascript:" onclick="$.bringBack({ id:'{$vo.id}', account:'{$vo.account}',nickname:'{$vo.nickname}' })">选择</a>
+								</td>
+							</tr>
+							</volist>
+						</notempty>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	<div class="resizeMarker" style="height:300px; left:57px;display:none;"></div>
+	<div class="resizeProxy" style="height:300px; left:377px;display:none;"></div>
+	</div>
+
+	<div class="panelBar">
+		<div class="pages">
+			<span>共{$totalCount}条</span>
+		</div>
+		<div class="pagination" targetType="dialog" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="5" currentPage="{$currentPage}"></div>
+	</div>
+	
+</div>

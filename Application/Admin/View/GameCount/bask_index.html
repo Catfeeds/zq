@@ -1,0 +1,115 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input type="hidden" name="gameType" value="{$_REQUEST.gameType}"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li style="width: auto;margin-right: 25px;">
+				<label>比赛时间：</label>
+				<input type="text" readonly="true" datefmt="yyyyMMdd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="11">至
+				<input type="text" readonly="true" datefmt="yyyyMMdd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="11">
+			</li>
+			<li>
+				<label>赛事名称：</label>
+				<input type="text" value="{$_REQUEST.union_name}" placeholder="赛事名称" name="union_name">
+			</li>
+			<li>
+				<label>主队名称：</label>
+				<input type="text" value="{$_REQUEST.home_team_name}" placeholder="主队名称" name="home_team_name">
+			</li>
+			<li>
+				<label>客队名称：</label>
+				<input type="text" value="{$_REQUEST.away_team_name}" placeholder="客队名称" name="away_team_name">
+			</li>
+			<li>
+				<label>赛程ID：</label>
+				<input type="text" name="game_id" value="{$_REQUEST.game_id}">
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li style="color:blue;padding-top:5px;font-size:14px;float:left;">销售总金额：</li>
+			<li style="color:blue;padding-top:5px;font-size:14px;">{$marketAccount|default=0}金币</li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="3%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th width="3%" orderField="game_id" <if condition="$_REQUEST._order eq 'game_id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>赛程ID</th>
+			<th width="6%" orderField="gtime" <if condition="$_REQUEST._order eq 'gtime'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>比赛时间</th>
+			<th width="4%">赛事名称</th>
+			<th width="4%" orderField="show_date" <if condition="$_REQUEST._order eq 'show_date'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>竞猜日期</th>
+			<th width="6%">主队</th>
+			<th width="3%">全场比分</th>
+			<th width="8%">小节比分</th>
+			<th width="6%">客队</th>
+			<th width="3%">全场让分</th>
+			<th width="3%">全场主</th>
+			<th width="3%">全场客</th>
+			<th width="3%">全场大小</th>
+			<th width="3%">全场大</th>
+			<th width="3%">全场小</th>
+			<th width="3%">半场让分</th>
+			<th width="3%">半场主</th>
+			<th width="3%">半场客</th>
+			<th width="3%">半场大小</th>
+			<th width="3%">半场大</th>
+			<th width="3%">半场小</th>
+			<th width='3%'>销售金币</th>
+			<th width="3%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['game_id']}</td>
+					<td>{$vo['gtime']|date='Y-m-d H:i',###}</td>
+				    <td>{$vo['union_name']|switchName=0,###}</td>
+					<td>{$vo['show_date']}</td>
+					<td>{$vo['home_team_name']|switchName=0,###}</td>
+					<td>{$vo['score']|default="--"}</td>
+					<td>{$vo['list_score']|default="--"}</td>
+					<td>{$vo['away_team_name']|switchName=0,###}</td>
+					<td>{$vo['homeAwayAll']}</td>
+					<td>{$vo['all_home_num']}</td>
+					<td>{$vo['all_away_num']}</td>
+					<td>{$vo['bigSmallAll']}</td>
+					<td>{$vo['all_big_num']}</td>
+					<td>{$vo['all_small_num']}</td>
+					<td>{$vo['halfHomeAwayAll']}</td>
+					<td>{$vo['half_home_num']}</td>
+					<td>{$vo['half_away_num']}</td>
+					<td>{$vo['halfBigSmall']}</td>
+					<td>{$vo['half_big_num']}</td>
+					<td>{$vo['half_small_num']}</td>
+					<td>{$vo['marketCoin']|default=0}</td>
+					<td>
+						<a href="{:U('__ADMIN__/GambleList/index',array('gameType'=>2,'game_id'=>$vo['game_id']))}" target="navTab" mask="true" rel="1{:time()}{$vo['id']}" title="{$vo['union_name']|switchName=0,###}-{$vo['home_team_name']|switchName=0,###}">查看</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

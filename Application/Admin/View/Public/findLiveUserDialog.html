@@ -1,0 +1,74 @@
+<form id="pagerForm" action="__URL__/findRoom" method="post">
+	<input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+	<input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+	<input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+	<input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+	<volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+	<form rel="pagerForm" method="post" action="__URL__/findRoom" onsubmit="return dwzSearch(this, 'dialog');">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>昵称:</label>
+				<input class="textInput" name="nick_name" value="{$_REQUEST.nick_name}" type="text">
+			</li>	  
+			<li>
+				<label>主播标识:</label>
+				<input class="textInput" name="unique_id" value="{$_REQUEST.unique_id}" type="text">
+			</li>	
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+<div class="pageContent j-resizeGrid" style="width: 806px;">
+	<table class="table" layoutH="135" style="width:786px;" targetType="dialog" >
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>昵称</th>
+				<th>主播标识</th>
+				<th>直播状态</th>
+				<th>用户进入统计</th>
+				<th width="50">选择</th>
+			</tr>
+		</thead>
+		<tbody>
+			<volist name="list" id="vo">
+			<tr>
+				<td width="50">{$vo.id}</td>
+				<td>{$vo.nick_name}</td>
+				<td>{$vo.unique_id}</td>
+				<td>
+					<switch name="vo.live_status">
+						<case value="0">离线</case>
+						<case value="1">直播中</case>
+						<case value="2">暂停</case>
+					</switch>
+				</td>
+				<td>{$vo['user_num']}</td>
+				<td width="50">
+					<a class="btnSelect" title="选择" href="javascript:" onclick="$.bringBack({ user_id:'{$vo.user_id}' ,nick_name:'{$vo.nick_name}'})">选择</a>
+				</td>
+			</tr>
+			</volist>
+		</tbody>
+	</table>
+	</div>
+
+	<div class="panelBar">
+		<div class="pages">
+			<span>共{$totalCount}条</span>
+		</div>
+		<div class="pagination" targetType="dialog" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="5" currentPage="{$currentPage}"></div>
+	</div>
+	
+</div>

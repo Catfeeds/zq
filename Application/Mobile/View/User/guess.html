@@ -1,0 +1,239 @@
+<!--  scroll  主页-->
+<div class="swiper-container swiper-container4 scroll">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide change">
+            <ul class="grade clearfix">
+                <li class="one">
+                    <span class="grade-name">亚盘等级</span>
+                    <span class="grade-photo"><img src="__IMAGES__/expert/zuan.png"></span>
+                    <span class="grade-lv blue"><p>LV</p>{$user.lv}</span>
+                </li>
+                <li class="two">
+                    <!-- <span class="grade-photo"><img src="__IMAGES__/expert/hz.png"></span>
+                    <span class="grade-lv orange"><p>LV</p>6</span>
+                    <span class="grade-arrows"><img src="__IMAGES__/expert/jian.png"></span>
+                    <span class="grade-name">竞彩等级</span> -->
+                </li>
+                <li class="three">
+                    <span class="grade-number">{$winnig.curr_victs|default='0'}</span>
+                    <span class="grade-words">当前连胜</span>
+                </li>
+            </ul>
+            <div class="slide-top">
+                <svg width="100" height="100">    
+                    <text style="fill:#eb0000; font-weight: bold;" font-size="14" x="38" y="46">50%</text>  
+                     <text style="fill:#eb0000;" font-size="12" x="34" y="64">周胜率</text>  
+                    <circle cx="50" cy="50" r="30" stroke-width="3" stroke="#C9CACA" fill="none"></circle>    
+                    <circle id="c1" cx="50" cy="50" r="30" stroke-width="3" stroke="#eb0000" fill="none" transform="matrix(0,-1,1,0,0,100)" stroke-dasharray=""></circle>
+                </svg>
+
+                <svg width="100" height="100">    
+                    <text style="fill:#ff7e00; font-weight: bold;" font-size="14" x="38" y="46">60%</text>  
+                     <text style="fill:#ff7e00;" font-size="12" x="34" y="64">周胜率</text>  
+                    <circle cx="50" cy="50" r="30" stroke-width="3" stroke="#C9CACA" fill="none"></circle>    
+                    <circle id="c2" cx="50" cy="50" r="30" stroke-width="3" stroke="#ff7e00" fill="none" transform="matrix(0,-1,1,0,0,100)" stroke-dasharray=""></circle>
+                </svg>
+
+                <svg width="100" height="100">    
+                    <text style="fill:#00af62; font-weight: bold;" font-size="14" x="38" y="46">20%</text>  
+                     <text style="fill:#00af62;" font-size="12" x="34" y="64">周胜率</text>  
+                    <circle cx="50" cy="50" r="30" stroke-width="3" stroke="#C9CACA" fill="none"></circle>    
+                    <circle id="c3" cx="50" cy="50" r="30" stroke-width="3" stroke="#00af62" fill="none" transform="matrix(0,-1,1,0,0,100)" stroke-dasharray=""></circle>
+                </svg>
+            </div>
+            <div class="slide-bottom clearfix">
+                <div class="number num-one">
+                    <p class="num">{$winnig.win|default='0'}</p>
+                    <p class="word">连胜</p>
+                </div>
+                <div class="number num-two">
+                    <p class="num">{$winnig.level|default='0'}</p>
+                    <p class="word">平场</p>
+                </div>
+                <div class="number num-three">
+                    <p class="num">{$winnig.transport|default='0'}</p>
+                    <p class="word">负场</p>
+                </div>
+                <div class="number num-four">
+                    <p class="num">{$winnig.max_victs|default='0'}</p>
+                    <p class="word">最大连胜</p>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide change">
+            <ul class="grade clearfix">
+                <li class="one">
+                    <span class="grade-name">竞彩等级</span>
+                    <span class="grade-photo"><img src="__IMAGES__/expert/hz.png"></span>
+                    <span class="grade-lv orange"><p>LV</p>{$user.lv_bet}</span>
+                </li>
+                <li class="two">
+                    <!-- <span class="grade-photo"><img src="__IMAGES__/expert/hz.png"></span>
+                    <span class="grade-lv orange"><p>LV</p>6</span>
+                    <span class="grade-arrows"><img src="__IMAGES__/expert/jian.png"></span>
+                    <span class="grade-name">竞彩等级</span> -->
+                </li>
+                <li class="three">
+                    <span class="grade-number">{$winnigRace.curr_victs|default='0'}</span>
+                    <span class="grade-words">当前连胜</span>
+                </li>
+            </ul>
+            <div class="slide-top">
+                <svg width="100" height="100">    
+                    <text style="fill:#eb0000; font-weight: bold;" font-size="14" x="38" y="46">10%</text>  
+                     <text style="fill:#eb0000;" font-size="12" x="34" y="64">周胜率</text>  
+                    <circle cx="50" cy="50" r="30" stroke-width="3" stroke="#C9CACA" fill="none"></circle>    
+                    <circle id="c4" cx="50" cy="50" r="30" stroke-width="3" stroke="#eb0000" fill="none" transform="matrix(0,-1,1,0,0,100)" stroke-dasharray=""></circle>
+                </svg>
+
+                <svg width="100" height="100">    
+                    <text style="fill:#ff7e00; font-weight: bold;" font-size="14" x="38" y="46">0%</text>  
+                     <text style="fill:#ff7e00;" font-size="12" x="34" y="64">周胜率</text>  
+                    <circle cx="50" cy="50" r="30" stroke-width="3" stroke="#C9CACA" fill="none"></circle>    
+                    <circle id="c5" cx="50" cy="50" r="30" stroke-width="3" stroke="#ff7e00" fill="none" transform="matrix(0,-1,1,0,0,100)" stroke-dasharray=""></circle>
+                </svg>
+
+                <svg width="100" height="100">    
+                    <text style="fill:#00af62; font-weight: bold;" font-size="14" x="38" y="46">78%</text>  
+                     <text style="fill:#00af62;" font-size="12" x="34" y="64">周胜率</text>  
+                    <circle cx="50" cy="50" r="30" stroke-width="3" stroke="#C9CACA" fill="none"></circle>    
+                    <circle id="c6" cx="50" cy="50" r="30" stroke-width="3" stroke="#00af62" fill="none" transform="matrix(0,-1,1,0,0,100)" stroke-dasharray=""></circle>
+                </svg>
+            </div>
+            <div class="slide-bottom clearfix">
+                <div class="number num-one">
+                    <p class="num">{$winnigRace.win|default='0'}</p>
+                    <p class="word">连胜</p>
+                </div>
+                <!--<div class="number num-two">-->
+                <!--<p class="num">{$winnigRace.level|default='0'}</p>-->
+                <!--<p class="word">平场</p>-->
+                <!--</div>-->
+                <div class="number num-three">
+                    <p class="num">{$winnigRace.transport|default='0'}</p>
+                    <p class="word">负场</p>
+                </div>
+                <div class="number num-four">
+                    <p class="num">{$winnigRace.max_victs|default='0'}</p>
+                    <p class="word">最大连胜</p>
+                </div>
+            </div>
+    </div>
+    </div>
+    
+    <!-- 如果需要分页器-->
+    <div class="swiper-pagination sco">
+        <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+        <span class="swiper-pagination-bullet"></span>
+    </div>
+</div>
+<!-- Swiper JS -->
+<script type="text/javascript">
+    $(function(){
+        //banner 切换
+        var gambleType = "{$gambleType}";
+        var initialSlide = 0;
+        if(gambleType == 2)
+        {
+            initialSlide = 1;
+        }
+        var swiper = new Swiper('.swiper-container4', {
+            initialSlide: initialSlide,
+            pagination: '.sco',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: false,
+            autoplayDisableOnInteraction: false
+        });
+    });
+</script>
+<script>
+        var circle = document.getElementById("c1");
+        var percent = 0.5, perimeter = Math.PI * 2 * 30;
+        circle.setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));
+</script>
+<script>
+        var circle = document.getElementById("c2");
+        var percent = 0.6, perimeter = Math.PI * 2 * 30;
+        circle.setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));
+</script>
+<script>
+        var circle = document.getElementById("c3");
+        var percent = 0.2, perimeter = Math.PI * 2 * 30;
+        circle.setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));
+</script>
+<script>
+        var circle = document.getElementById("c4");
+        var percent = 0.1, perimeter = Math.PI * 2 * 30;
+        circle.setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));
+</script>
+<script>
+        var circle = document.getElementById("c5");
+        var percent = 0, perimeter = Math.PI * 2 * 30;
+        circle.setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));
+</script>
+<script>
+        var circle = document.getElementById("c6");
+        var percent = 0.78, perimeter = Math.PI * 2 * 30;
+        circle.setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));
+</script>
+<!-- ta的推荐 -->
+<div class="recom">
+    <span class="recommend">TA的推荐</span>
+    <span class="field">（共{$winnig.total_times}场）</span>
+</div>
+<ul class="listbox clearfix">
+    <li>
+        <a href="{:U('/expUser/'.$user['id'].'@m')}" class="<if condition='$gambleType eq null'>on</if>" title="全部">全部</a>
+    </li>
+    <li>
+        <a href="{:U('/expUser/'.$user['id'].'/1@m')}" class="<if condition='$gambleType eq 1'>on</if>" title="让球">让球</a>
+    </li>
+    <li>
+        <a href="{:U('/expUser/'.$user['id'].'/-1@m')}" class="<if condition='$gambleType eq -1'>on</if>" title="大小">大小</a>
+    </li>
+    <li>
+        <a href="{:U('/expUser/'.$user['id'].'/2@m')}" class="<if condition='$gambleType eq 2'>on</if>" title="竞彩">竞彩</a>
+    </li>
+</ul>
+<div class="new_tj com_dt clearfix">
+    <ul class="posts">
+    </ul>
+</div>
+<script>
+    var gambleType = "{$gambleType}";
+    function getList() {
+        var user_id   = $("input[name='user_id']").val();
+        var play_type = $("input[name='play_type']").val();
+        $.ajax({
+            type: 'post',
+            url: "/Guess/other_page.html",
+            data: {k: page,user_id:expId,type:gambleType},
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == 1) {
+                    var list = data.info;
+                    $(".posts").append(list);
+                    if (list != null) {
+                        $("#auto_load").val(1);
+                        if (data.info.length < 10) {
+                            $("#auto_load").val(0);
+                            $(".load_gif").hide();
+                            $("#showLess").show();
+                            flag = true;
+                        }
+                    }
+                } else {
+                    $("#auto_load").val(0);
+                    $(".load_gif").hide();
+                    $("#showLess").show();
+                    flag = true;
+                }
+
+            }
+        });
+        page++;
+    }
+</script>
+<script src="__JS__/common/trade.js"></script>

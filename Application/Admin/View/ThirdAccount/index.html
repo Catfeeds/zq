@@ -1,0 +1,77 @@
+
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+
+        <div class="searchBar">
+            <ul class="searchContent">
+                 <li>
+                    <label>平台名称：</label>
+                    <input type="text" name="site_name" value="{$_REQUEST.site_name}">
+                </li>
+                <li>
+                    <label>账号：</label>
+                    <input type="text" name="account" value="{$_REQUEST.account}">
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="__URL__/save" target="dialog" mask="true"><span>新增</span></a></li>
+				<li>
+					<li>
+						<a class="delete" href="__URL__/foreverdelete/id/{sid_record}/navTabId/__MODULE__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择角色">
+							<span>删除</span>
+						</a>
+					</li>
+				</li>
+				<li>
+					<a class="edit" href="__URL__/save/id/{sid_record}" target="dialog" mask="true" warn="请选择对象">
+						<span>编辑</span>
+					</a>
+				</li>
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="5%">编号</th>
+			<th width="10%">平台名称</th>
+			<th width="30%">链接</th>
+			<th width="10%">账号</th>
+			<th width="10%">密码</th>
+			<th width="10%">账号昵称</th>
+			<th width="20%">备注</th>
+			<th width="10%">操作</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name='list'>
+            <volist name='list' id='vo'>
+                <tr target="sid_record" rel="{$vo['id']}">
+                    <td>{$vo['id']}</td>
+					<td>{$vo['site_name']}</td>
+					<td><a href="{$vo['url']}" title="{$vo['site_name']}" target="_blank" target="navTab">{$vo['url']}</a></td>
+					<td>{$vo['account']}</td>
+					<td>{$vo['pwd']}</td>
+					<td>{$vo['nickname']}</td>
+					<td>{$vo['remark']}</td>
+					<td><a href="__URL__/save/id/{$vo['id']}/sign/1" target="dialog">编辑</a></td>
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+</table>
+</div>

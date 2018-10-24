@@ -1,0 +1,125 @@
+/*
+ * @author Weiqianqian <1937025663@qq.com>
+ *
+ * @since  2018-03-06
+**/
+body{ margin: 0; padding: 0;}
+.container{ padding: .2rem .2rem .1rem .2rem;}
+/*标题*/
+.head-tit{ border-bottom: 1px solid #eee; overflow: hidden; text-overflow: -o-ellipsis-lastline; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; padding: .05rem 0rem .32rem 0rem;}
+.head-tit h1{font-size: .4rem; line-height: .6rem;}
+
+/*用户信息*/
+.user-generated{ border-bottom: .01rem solid #eee; width: 100%;  padding: .28rem 0 .25rem 0;}
+.user-phone{float:left; display: block;}
+.user-phone img{ width: .7rem; height: .7rem; border-radius: 50%; }
+.user-n{ font-size: .24rem;}
+.userall{ width: 5rem; float: left; padding: 0 0 0 .2rem;}
+.label-n{ color: #0a94e4; font-size: .18rem; border: 1px solid; border-radius: .1rem; padding: 1px; margin-left: .1rem;}
+.time-n{ font-size: .2rem; color: #999; line-height: .4rem;}
+/*ligue*/
+.ligue{ border: 1px solid #eeeeee; border-radius: 4px; width: 100%; margin-top: .4rem; background-color: #fbfbfb; height: 2.7rem;}
+.single{ float: left; width: 100%;}
+.single .left{  float: left; padding: .2rem .2rem .2rem .2rem;}
+.single .left img{ width: 1rem; padding: .2rem 0 0 0; float: left;}
+.single .middle{ padding: .3rem 0rem .2rem 0rem; float: left; width: 4.2rem;}
+.single .mtop{ float: left;}
+.mtop .fajia{font-size: .26rem; color: #0a94e4; border-right: 1px solid; padding: 0 .2rem 0 .1rem; line-height: .3rem;}
+.mtop .week{ font-size: .24rem; color: #999999; padding: 0 .1rem 0 .14rem; line-height: .3rem; overlow: hidden; width: 2.8rem;}
+.single .mbottom{  float: left;}
+.mbottom .monicker{ width: 1.6rem; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: .3rem 0; font-size: .26rem; color: #4c4c4c;}
+.mbottom .vs{ font-size: .32rem; color: #cf0e0e; padding: .3rem .2rem;}
+.mbottom .reputation{ width: 1.6rem; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: .3rem 0; font-size: .26rem; color: #4c4c4c; }
+.single li{ float: left;}
+.mbottom li{ float: left;}
+.single .right{ float: left; padding: .2rem .18rem .2rem .18rem;}
+.single .right img{ width: 1rem; float: left; padding: .2rem 0 0 0;text-align: center;}
+
+.twin{ padding: 0 .1rem .2rem .1rem;}
+.twin li{ float: left;}
+.twin li a{ width: 1.56rem ; height: .68rem; background-color: #e5e5e5; border-radius: 5px; display: block; text-align: center; padding: .12rem 0;}
+.twin li a:hover{ background-color: #cecece;}
+.twin .move a{margin-right: .2rem; }
+
+.RacingDiscuss{ width: 100%; padding: .2rem 0 .2rem 0;}
+.RacingDiscuss .article_main p{ line-height: .6rem; font-size: .32rem;}
+.RacingDiscuss dl dd{ padding: 0 0 0 0; font-size: .32rem; line-height: .52rem; width: 100%;}
+.RacingDiscuss dl dt{ color: #999; font-size: .34rem; padding: .2rem 0;}
+.RacingDiscuss dl dt .gruy{ font-size: .32rem ; color: #333;}
+.article_main{ width: 100%;}
+
+.frame{ margin: .2rem 0 .4rem 0; margin-top: -.3rem;}
+table{ width: 100%; font-size: .26rem;}
+table .f{ background-color: #fbfbfb;}
+table td{  width: 6rem; height: .6rem; text-align: center; border: 1px solid #eeeeee;}
+table .changes{ border-bottom: none;}
+table .move{ border-right: none;}
+
+.state{ color: #999; font-size: .24rem; padding: .18rem 0 .3rem 0;}
+
+.lick img{ width: .35rem; margin: -.1rem .1rem 0rem 0;}
+.lick { text-align: center; border-bottom: .01rem solid #eee; padding: .4rem 0 .6rem 0; }
+.lick .nem{ background-color: #f8f8f8; padding: .2rem .3rem; font-size: .28rem; border-radius: .1rem;}
+.lick .one{ font-size: .24rem ; color: #666666; padding: .23rem 1rem; margin-right: .2rem; border-radius: .1rem; }
+
+.tally{ padding: .5rem 0rem;  }
+.tally span{ padding: .16rem .24rem; border: 1px solid #eee; border-radius: .1rem; margin: 0 .08rem;display:inline-block;margin-bottom: 0.2rem;}
+h2{ color: #ea1f1f; font-size: .38rem; padding: .38rem 0 .18rem 0; width: 100%; border-top: 1px solid #eee;}
+.popular a{ width: 100%; padding: .2rem 0 .2rem 0; border-bottom: 1px solid #eee;}
+.pleft{ width: 2.36rem; height: 1.48rem; float: left; margin-left: .1rem;}
+.pleft img{ width: 2.36rem; height: 1.48rem;}
+.pright{ width: 65%;  float: left;}
+h3{ font-size: 17px; height:1rem; line-height: 26.5px; text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical; font-weight: 300; font-family: "PingFangSC-Medium", "Source Han Sans CN", sans-serif; text-align: justify;}
+.pright .ptime{ color: #999; font-size: .24rem; height: .56rem ; line-height: .5rem;}
+.hours{ width: 3rem; float: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.read{ width: 1.6rem; float: left; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.read img{ width: .34rem; margin-bottom: 2px; margin-right: .2rem;}
+
+.comment{ padding: .35rem .2rem; float: left; width: 105.5%; margin-left: -.2rem; border-top: solid #eee .01rem; }
+.comment li{ list-style-type: none;}
+.comment .every-last{ border-bottom: .01rem solid #eee; float: left;}
+.tit-user li{ float: left; padding: .2rem 0;}
+.t-user{ overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 6.2rem; font-size: .28rem; font-weight: bold;}
+.t-user img{ width: .5rem; border-radius: 50%; margin: -.1rem .2rem 0 0;}
+.like{ font-size: .22rem ; color: #999; padding-top: .05rem;}
+.like img{ width: .28rem; margin-right: .08rem;}
+
+.discuss{ padding: 0rem .32rem .2rem .7rem; float: left;}
+.discuss p{ font-size: .32rem; color: #666; line-height: .5rem; }
+.discuss span{ font-size: .22rem; color: #999;}
+
+.foot-discuss{ width: 100%; background-color: #f9f9fa;  position: fixed; left: 0; bottom: 0; width: 100%; padding: .12rem 0; z-index: 3; text-align: center;}
+.foot-discuss .back img{ width: .16rem;}
+.foot-discuss .share img{ width: .28rem;}
+.foot-discuss input {margin: 0 .44rem; width: 4.8rem ; height: .52rem; background-color: #e6e7e7; font-size: .28rem; padding: .2rem .2rem .2rem .6rem; border-radius: .08rem; outline: 0; }
+.gameInfo .selectOdd.on{background:#0094d5;color:#fff;}
+.article_main{ position: relative; margin-bottom: .5rem;}
+.article_main img{
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    height: auto !important;
+    width: 100% !important;
+}
+.RacingDiscuss .hit{ position: relative; padding: .8rem 0 .5rem 0; text-align: center; color: #0a94e4; font-size: .32rem; width: 100%; background: -webkit-gradient(linear,1% 1%,1% 100%,color-stop(0.6,rgba(255,255,255,0.6)), color-stop(0.8,rgba(255,255,255,0.8)), color-stop(1,rgba(255,255,255,1)) ); margin-top: -.8rem;}
+.RacingDiscuss .hit span{cursor: pointer; display: inline-block; font-size: .32rem; padding: .2rem 0; color: #10a1f4; }
+.RacingDiscuss .hit img{ width: .32rem !important; height: .32rem !important; border-radius: 50%; margin-left: .2rem; } 
+
+
+.tableHead{ height: .82rem; background-color: #f2f3f7; line-height: .82rem; margin-top: .3rem;}
+.tableLeft{ width: 41%; height: .8rem; float: left;}
+.tableLeft img{ height: .6rem !important; max-width: .5rem !important; float: left; margin-top: .1rem; margin-left: .18rem;}
+.tableLeft p{ font-size: .28rem !important; display: inline-block; margin-left: .2rem; width: 2rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; height: .8rem; padding-top: .1rem;}
+.tableMiddle{ height:.8rem; width: 18%; display: block; float: left; text-align: center; padding-top: .14rem; color: #df5050; font-size: .3rem !important; font-weight: bold;}
+.tableRight{ width:41%; float: left;}
+.tableRight p{ font-size: .28rem !important; width: 2rem; float: left; margin-right: .18rem;height: .8rem; padding-top: .1rem; text-align: center;  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: right;}
+.tableRight img{ height: .6rem !important; max-width: .5rem !important; float: left; margin-top: .1rem;}
+.tableProgress{ margin-bottom: .3rem;}
+.unit{ width: 100%; height: .3rem; margin: .12rem 0 .12rem 0; }
+.unitLeft{ float: left; width: .64rem; height: .30rem; line-height: .3rem; font-size: .24rem !important; text-align: center;}
+.progressLeft{ width: 2.3rem; height: .3rem;float: left; position: relative; background-color: #f2f3f7; transform:skew(30deg); -webkit-transform: skew(30deg); -moz-transform: skew(30deg); -o-transform: skew(30deg); -ms-transform(30deg); margin: 0 auto;}
+.progressLeft span{ height: .3rem; background-color: #df5050; float: left; right: 0; position: absolute;}
+.unitWords{ width: 1.26rem; height: .3rem; float: left; text-align: center; font-size: .24rem; line-height: .3rem;} 
+.progressRight{ width: 2.3rem; height: .3rem; float: left; background-color: #f2f3f7; transform:skew(-30deg); -webkit-transform: skew(-30deg); -moz-transform: skew(-30deg); -o-transform: skew(-30deg); -ms-transform(-30deg); margin: 0 auto;}
+.progressRight span{ height: .3rem; background-color: #5095df; float: left; }
+.unitRight{ text-align: center; font-size:.24rem !important;}

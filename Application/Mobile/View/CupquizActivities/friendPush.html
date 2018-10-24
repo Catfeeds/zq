@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta charset="UTF-8">   
+        <title>世界杯预测赢大奖</title>
+        <link rel="apple-touch-icon" href="">
+        <link rel="shortcut icon" href="">
+        <!-- jquery -->
+        <script type="text/javascript" src="__PUBLIC__/Mobile/js/jquery-1.11.1.min.js"></script>
+        <!-- 自适应 计算html font-size -->
+        <script type="text/javascript" src="__PUBLIC__/Mobile/js/htmlwidth.js"></script>
+        <!-- layer -->
+        <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/layer/theme/default/layer.css">
+        <!-- swiper of css -->
+        <!-- 引入公共样式 -->
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Mobile/css/base.css">
+        <!-- <link rel="stylesheet" type="text/css" href="css/common.css">  -->
+        <style>
+         .wrapCon{min-height: 100%}
+        </style>
+    </head>
+    
+    <body>
+    <div style="display: none">
+        {:htmlspecialchars_decode($site_setting['mobileJs'])}
+    </div>
+    <!-- 页面所需css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/CupquizActivities/goPredict.css?v=20180627">
+    <link rel="stylesheet" type="text/css" href="__CSS__/CupquizActivities/head.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/CupquizActivities/shareSuccess.css?v=20180627">
+            <!-- 头部 -->
+            <header class="top">
+                    <ul class="headline">
+                        <a onclick="history.back(-1);" class="back" ><img src="__IMAGES__/CupquizActivities/last.png"></a>
+                        <li class="head-portrait"><img src="{$frontFace}"></li>
+                        <li><a href="JavaScript:;">{$coin}Q币</a></li>
+                        <li><a href="{:U('CupquizActivities/convert')}">兑换</a></li>
+                        <li><a href="{:U('CupquizActivities/activePage')}" class="active">今日活动</a></li>
+                        <li><a href="{:U('CupquizActivities/guessList')}">预测记录</a></li>
+                    </ul>
+                </header>
+        <!-- 主体内容 -->
+       
+        <section class="wrapCon wrapCon-content">
+                <p class="banner" > </p>
+          <div class="down-time">
+              <h6>此轮倒计时</h6>
+              <p class="time"><span id="hourO">0</span><span id="hourT">0</span><span class="change">:</span><span id="minuteO">0</span><span id="minuteT">0</span><span class="change">:</span><span id="secondO" >0</span><span id="secondT">0</span></p>
+              <if condition="$helped">
+                  <p class="testimonials">谢谢，感觉人生巅峰又近了一点</p>
+                  <p class="accumulated">好友此轮奖池已累积{$may} Q币</p>
+              <else/>
+                  <p class="testimonials">我正和{$pNum}人一起免费预测世界杯</p>
+                  <p class="accumulated">帮我助力，我将获得的奖金就越高</p>
+              </if>
+          </div>
+            <if condition="$helped">
+                <a href="{:U('CupquizActivities/activePage')}" class="invitation-button" data-id="{$cupS.id}">我也去预测</a>
+                <else/>
+                <a class="invitation-button nowhelp" data-id="{$cupS.id}" data-active="{:U('CupquizActivities/activePage')}" data-type="0" data-url="{:U('CupquizActivities/helpPush')}">立即帮他助力</a>
+            </if>
+
+         <p class="remind">上轮活动最高获奖者得{$top}Q币</p>
+         <div class="power-list">
+            <h2>-好友助力榜-</h2>
+             <volist name="helper" id="item" key="k">
+                 <switch name="k">
+                     <case value="1"><p><span><img src="__IMAGES__/CupquizActivities/medal-1.png"><i class="name">{$item.nick_name}</i><i class="brother">最佳老铁</i></span><span><i class="number">{$item.qcoin}</i>Q币</span></p></case>
+                     <case value="2"><p><span><img src="__IMAGES__/CupquizActivities/medal-2.png"><i class="name">{$item.nick_name}</i></span><span><i class="number">{$item.qcoin}</i>Q币</span></p></case>
+                     <case value="3"><p><span><img src="__IMAGES__/CupquizActivities/medal-3.png"><i class="name">{$item.nick_name}</i></span><span><i class="number">{$item.qcoin}</i>Q币</span></p></case>
+                     <default /><p><span><i class="four">{$k}</i><i class="name">{$item.nick_name}</i></span><span><i class="number">{$item.qcoin}</i>Q币</span></p>
+                 </switch>
+             </volist>
+          </div>
+        </section>
+    <div class="cover" id="cover" style="display: none">
+        <div class="cover-bg">
+            <span class="close" id="close">x</span>
+            <p><span><i class="maybe">11</i>Q币</span></p>
+        </div>
+        <div class="cover-bg-2">
+            <p>
+                <span class="num">恭喜！帮好友助力1Q币</span>
+                <span>谢谢，感觉离人生巅峰又进了一步</span>
+            </p>
+            <a href="{:U('CupquizActivities/activePage')}" class="share">我也去预测</a>
+        </div>
+    </div>
+    <script>
+        var _tk = '{$_tk}';
+        var starttime = new Date("{$activity.end_time|date='Y/m/d H:i',###}");
+        var _indexUrl = "{:U('CupquizActivities/activePage')}";
+        setInterval(function () {
+            var nowtime = new Date();
+            var time = starttime - nowtime;
+            if(time > 0){
+                var day = parseInt(time / 1000 / 60 / 60 / 24);
+                var hour = parseInt(time / 1000 / 60 / 60 % 24) + day * 24;
+                var minute = parseInt(time / 1000 / 60 % 60);
+                var seconds = parseInt(time / 1000 % 60);
+                //console.log(hour + "小时" + minute + "分钟" + seconds + "秒");
+                if(hour >= 10){
+                    $('#hourO').html(hour.toString()[0]);
+                    $('#hourT').html(hour.toString()[1]);
+                }else {
+                    $('#hourO').html(0);
+                    $('#hourT').html(hour);
+                }
+                if(minute >= 10){
+                    $('#minuteO').html(minute.toString()[0]);
+                    $('#minuteT').html(minute.toString()[1]);
+                }else {
+                    $('#minuteO').html(0);
+                    $('#minuteT').html(minute);
+                }
+                if(seconds >= 10){
+                    $('#secondO').html(seconds.toString()[0]);
+                    $('#secondT').html(seconds.toString()[1]);
+                }else {
+                    $('#secondO').html(0);
+                    $('#secondT').html(seconds);
+                }
+            }else{
+
+            }
+
+        }, 1000);
+        $(document).ready(function () {
+            $('.nowhelp').click(function () {
+                var post_url = $(this).attr('data-url');
+                var data = {
+                    'id': $(this).attr('data-id'),
+                    '_tk':_tk
+                };
+                var that = $(this);
+                var data_type = that.attr('data-type');
+                if(data_type == 0){
+                    $.post(post_url, data, function (data,status) {
+                        if(data.err == 0){
+                            that.html('我也去预测');
+                            that.attr('data-type', 1);
+                            $('i.maybe').html(data.num);
+                            $('span.num').html('恭喜！帮好友助力'+data.num+'Q币');
+                            $('#cover').show();
+                        }else if(data.err == 7){
+                            layer.open({
+                                content: data.msg
+                                ,btn: '确定'
+                            });
+                            setTimeout(function () {
+                                window.location.href = _indexUrl;
+                            }, 2000);
+                        }else if(data.err == -1){
+                            layer.open({
+                                content: data.msg
+                                ,btn: '确定'
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 2000);
+
+                        }else{
+                            layer.open({
+                                content: data.msg
+                                ,btn: '确定'
+                            });
+                        }
+                    })
+                }else if(data_type == 1){
+                    setTimeout(function () {
+                        window.location.href = that.attr('data-active');
+                    }, 2000);
+                }
+
+            });
+            $('#cover').click(function () {
+                $(this).hide();
+            })
+        })
+    </script>
+    </body>
+
+</html>

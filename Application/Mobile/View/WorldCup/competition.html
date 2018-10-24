@@ -1,0 +1,67 @@
+<extend name="Public/base"/>
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/worldcup/competition.css?201806221825">
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file="WorldCup:topHead"/>
+</block>
+<!-- 二级头部 e -->
+<block name="nav"></block>
+<!-- 用户所有明细 -->
+<block name="content">
+    <!-- 主体内容 -->
+    <section class="wrapCon">
+        <include file="WorldCup:navHead"/>
+        <div class="table">
+            <p>
+                     <span>
+                        <a  class="choice" href="javascript:void(0)" style="color:#fff04e">日程赛</a>
+                        <a  class="choice" href="javascript:void(0)">小组赛</a>
+                        <a class="choice"  href="javascript:void(0)">淘汰赛</a>
+                     </span>
+            </p>
+        </div>
+        <div  class="finals-box finals" style="display: block;">
+            <volist name="dayData" id="item">
+                <div class="eight-finals" >
+                    <h2 class="caption">{$key}</h2>
+                    <volist name="item" id="vo">
+                        <?php $show_time = 1;?>
+                        <include file="WorldCup:game_list_pack"/>
+                    </volist>
+                </div>
+            </volist>
+
+        </div>
+        </div>
+        <div class="finals-box group finals">
+            <volist name="groupData" id="item">
+                <div class="eight-finals" >
+                    <h2 class="caption">{$key}组</h2>
+                    <volist name="item" id="vo">
+                        <?php $show_time = 2;?>
+                        <include file="WorldCup:game_list_pack"/>
+                    </volist>
+                </div>
+            </volist>
+        </div>
+        <div class="finals-box weed-out finals">
+            <volist name="taotai" id="item">
+                <div class="eight-finals" >
+                    <h2 class="caption">{$key}组</h2>
+                    <volist name="item" id="vo">
+                        <include file="WorldCup:game_list_pack"/>
+                    </volist>
+                </div>
+            </volist>
+        </div>
+    </section>
+</block>
+<block name='scripts'>
+    <script>
+        var listTime = "{:time()}";
+    </script>
+    <script src="__JS__/worldcup/competition.js" type="text/javascript"></script>
+</block>

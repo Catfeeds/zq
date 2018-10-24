@@ -1,0 +1,156 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>手机全球体育手机网_即时足球比分,比分直播,足球直播,比分预测,赔率分析</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/live_score.css">
+    <style type="text/css">
+        .top,.middle{ }
+        .f7{ background: #f7f7f7}
+        .ff{ background: #fff}
+        .march_scroe_color{color: #1f88c1; font-size: .2rem;}
+        .asc_hand_bg{background: #ff9492;}
+        .desc_hand_bg{background: #8eddb9;}
+        .goal_scroe_bg{background: #f1bf8d;}
+    </style>
+</block>
+<block name="nav">
+    <include file="Public/nav_bk"/>
+</block>
+<block name="header">
+    <include file="Public/header_score"/>
+</block>
+<!-- 内容 s -->
+<block name="content">
+    <section  class="content contentPt">
+        <div class="liveList">
+            <volist name="list" id="v" mod="2" key="k">
+                <div id="scheid{$v.0}" class="match js-data ios_touch <eq name='mod' value='1'>f7<else/>ff</eq>" data-key="{$k}" data-id="{$v[0]}"
+                     <switch name='v[5]'>
+                    <case value='1|2|3|4|5|6|50'>data-url='/DetailsBk/event_case/scheid/{$v[0]}.html'</case>
+                    <case value='-1'>data-url='/DetailsBk/event_technology/scheid/{$v[0]}.html'</case>
+                    <default />data-url='/DetailsBk/data/scheid/{$v[0]}.html'
+                    </switch>>
+<!--                     data-url='/DetailsBk/data/scheid/{$v[0]}'>-->
+                    <div class="top">
+                        <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td width="8%"></td>
+                                    <td width="27%" class="q-tl"><span class="match_name" style="color:{$v[3]}"><eq name='language' value='0'>{$v[2][0]}<else/>{$v[2][1]}</eq></span> <em class="mach_will_time">{$v[7]}</em></td>
+                                    <td width="23%" class="fs20 mach_will_time q-tl" <if condition="$v['5'] GT '0'">style="color:#ef800c"</if>>
+                                        <time id="gameStatus{$v.0}" <eq name='v[5]' value='-1'>class="red"</eq>>{:C('game_state_bk')[$v[5]]}</time>
+                                        <gt name="v[8]" value="0"><span id="gameTime{$v.0}">({$v[8]})</span></gt></td>
+                                    <td width="42%" class="q-tl sec_score"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="middle">
+                        <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td width="8%" rowspan="2" class="star_img"></td>
+                                    <td width="40%" class="q-tl"><span class="homeTeamName"><eq name='language' value='0'>{$v[9][0]}<else/>{$v[9][1]}</eq></span></td>
+                                    <td id="homeScore{$v.0}" width="42%" class="sec_score">
+                                        <ul class="clearfix">
+                                            <li>{$v[15]}</li>
+                                            <li>{$v[17]}</li>
+                                            <li>{$v[19]}</li>
+                                            <li>{$v[21]}</li>
+                                            <for start="0" end="$v[23]">
+                                                <li>{$v[24][$i]}</li>
+                                            </for>
+
+                                        </ul>
+                                    </td>
+                                    <td id="homeTotalScore{$v.0}" width="10%" <if condition="$v[5] eq '-1'">class="q-tr mach_begin_time" <else/>class="q-tr march_scroe_color"</if>>{$v[13]}</td>
+                                </tr>
+                                <tr>
+                                    <td width="37%" class="q-tl"><span class="guestTeamName"><eq name='language' value='0'>{$v[10][0]}<else/>{$v[10][1]}</eq></span></td>
+                                    <td id="awayScore{$v.0}" width="45%" class="sec_score">
+                                        <ul class="clearfix">
+                                            <li>{$v[16]}</li>
+                                            <li>{$v[18]}</li>
+                                            <li>{$v[20]}</li>
+                                            <li>{$v[22]}</li>
+                                            <for start="0" end="$v[23]">
+                                                <li>{$v[25][$i]}</li>
+                                            </for>
+                                        </ul>
+                                    </td>
+                                    <td id="awayTotalScore{$v.0}" width="10%" <if condition="$v[5] eq '-1'">class="q-tr mach_begin_time " <else/>class="q-tr march_scroe_color"</if>>{$v[14]}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <neq name='v[34]' value=''>
+                    <div class="bottom">
+                        <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td width="8%"></td>
+                                    <td width="40%" class="q-tl">
+                                        <div class="odds rf">
+                                            <span class="oddsType">让</span>
+                                            <span id="homeAdds{$v.0}" class="addsNub js-home-asian ">{:number_format($v[34], 2)}</span>
+                                            <span id="handcp{$v.0}" class="addsPankou js-all-asian ">{$v[35]}</span>
+                                            <span id="awayAdds{$v.0}" class="addsNub js-away-asian">{:number_format($v[36], 2)}</span>
+                                        </div>
+                                    </td>
+                                    <td width="42%" class="q-tl">
+                                        <div class="odds dx" id="list{$v.0}">
+                                            <if condition="$v[37] neq '' OR $v[38] neq '' OR $v[39] neq ''">
+                                                <span class="oddsType">总</span>
+                                                <span id="homeTotalAdds{$v.0}" class="addsNub js-home-ball " style="">{:number_format($v[37], 2)}</span>
+                                                <span id="totalAdds{$v.0}" class="addsPankou js-all-ball">{$v[38]}</span>
+                                                <span id="awayTotalAdds{$v.0}" class="addsNub js-away-ball" style="">{:number_format($v[39], 2)}</span>
+                                            </if>
+
+                                        </div>
+                                    </td>
+                                    <td width="10%"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </neq>
+                </div>
+            </volist>
+        </div>
+    </section>
+</block>
+<block name='filtrate'>
+    <include file="Public/bk_filtrate"/>
+</block>
+<!-- 内容 e -->
+<block name="scripts">
+    <script type="text/javascript" src="__JS__/bk/bk_index.js"></script>
+    <script>
+        $(function () {
+            var scrollTop = Cookie.getCookie('scrollTop');
+            if (scrollTop) {
+                $("html, body").animate({scrollTop: scrollTop}, 500);
+                Cookie.delCookie('scrollTop');
+            }
+            //确定
+            $("#sele_confirm").click(function () {
+                var chioce = '';
+                if($(".subnav_list a.on").length<1){
+                    alert('至少选择一项!');
+                    return false;
+                }
+                $(".subnav_list a").each(function () {
+                    $this = $(this);
+                    if ($this.hasClass('on')) {
+                        chioce += $this.data('key') + ',';
+                    }
+                });
+                chioce = chioce.substring(0, chioce.length - 1);
+                Cookie.setCookie('NowBk', chioce);
+                window.location.reload();
+            });
+        });
+    </script>
+</block>

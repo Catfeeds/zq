@@ -1,0 +1,248 @@
+<style>
+	.addsingle table tr{
+		height: 35px;
+	}
+	.addsingle table tr td{
+		width: 80px;
+	}
+	.addsingle .answer{
+		text-align: center;
+	}
+</style>
+<div class="pageContent addsingle">
+	<form method="post" action="__URL__/editquiz/type/post" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" value="{$titleId}" name="titleId" />
+		<input type="hidden" value="{$vo.id}" name="id" />
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>关联活动：</label>
+				<input type="text" class="required"  name="single_title" value="{$vo.single_title}" disabled size="45"/>
+			</div>
+			
+			<if condition="$mult eq 1">
+				<div class="unit">
+					<label>赛事类型：</label>
+					<select class="small bLeft"  name="game_type" id="gametype">
+						<option <eq name="vo.game_type" value="1" >selected</eq> value="1">足球</option>
+						<option <eq name="vo.game_type" value="2" >selected</eq> value="2">篮球</option>
+					</select>
+				</div>
+
+				<div class="unit">
+					<label>赛事ID：</label>
+					<input type="text" class="required" name="gameid" id="game_id" value="{$vo.game_id}" onBlur="gameinfo()"/>
+				</div>
+
+				<div class="unit">
+					<label>赛事信息：</label>
+					<table width="400" id='gameinfo'>
+						<tr>
+							<if condition="$vo['str']">
+								{$vo['str']}
+								<else/>
+								<td>请输入赛事ID</td>
+							</if>
+						</tr>
+					</table>
+				</div>
+			</if>
+
+			<div class="unit">
+				<label>排序：</label>
+				<input type="text" class="digits" name="sort" value="{$vo.sort}" />
+			</div>
+			<div class="unit">
+				<label>竞猜标题：</label>
+				<input type="text" class="required" name="question" value="{$vo.question}" size="45"/>
+			</div>
+			<div class="unit">
+				<label>竞猜选项：</label>
+				<table width="400" id='table'>
+					<tr>
+						<td>选项</td>
+						<td>虚拟人数</td>
+						<td>实际人数</td>
+						<td style="text-align: center;">正确答案</td>
+						<td>操作</td>
+					</tr>
+					<notempty name="vo.option">
+						<volist name="vo.option" id="item">
+							<tr>
+								<td>
+									<input type="hidden" value="{$item.id}" name="ids[]"/>
+									<input type='text' size="8" name="option[]" class="required" value="{$item.option}" />
+								</td>
+								<td><input type='text' size="8" name="num[]" class="required" value="{$item.num}" /></td>
+								<td>{$item.peop}</td>
+								<td class="answer"><input type='radio' name='answer' value="{$key}" <if condition="$item['aid'] eq $vo['re_answer']">checked</if>></td>
+								<td>
+									<a class="buttonActive" href="javascript:;" onclick="delOption(0, this);">
+										<span>删除</span>
+									</a>
+								</td>
+							</tr>
+						</volist>
+						<else/>
+						<tr>
+							<td>
+								<input type="hidden" value="" name="ids[]"/>
+								<input type='text' size="8" name="option[]" class="required" value="" />
+							</td>
+							<td><input type='text' size="8" name="num[]" class="required" value="" /></td>
+							<td>0</td>
+							<td class="answer"><input type='radio' name='answer' value="0"></td>
+							<td>
+								<a class="buttonActive" href="javascript:;" onclick="delOption(0, this);">
+									<span>删除</span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="hidden" value="" name="ids[]"/>
+								<input type='text' size="8" name="option[]" class="required" value="" />
+							</td>
+							<td><input type='text' size="8" name="num[]" class="required" value="" /></td>
+							<td>0</td>
+							<td class="answer"><input type='radio' name='answer' value="1"></td>
+							<td>
+								<a class="buttonActive" href="javascript:;" onclick="delOption(0, this);">
+									<span>删除</span>
+								</a>
+							</td>
+						</tr>
+					</notempty>
+				</table>
+			</div>
+			<div class="unit">
+				<label>&nbsp;</label>
+				<a class="buttonActive" href="javascript:addOption()"><span>点击添加一条选项</span></a>
+				<label>&nbsp;</label>
+				<a class="buttonActive" id="cancel" href="javascript:clean()"><span>去除答案</span></a>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<script>
+	//遍历input对象
+	function eachTr(){
+		$(".answer input").each(function(index){
+			$(this).val(index);
+		});
+	}
+
+	function getinfo($id) {
+		var table = $(".field-success option:selected").val();
+		if(table == undefined) table = 1;
+		var result;
+		//用ajax的“同步方式”调用一般处理程序
+		$.ajax({
+			url: "__URL__/ajaxget",
+			async: false,//改为同步方式
+			type: "GET",
+			data: "gid="+$id+"&type=" + table,
+			success: function (courseDT4) {
+				result = courseDT4;
+			}
+		});
+		return result;
+	}
+	$('#gametype').change(function() {gameinfo();});
+	function gameinfo()
+	{
+		var gameid = $('#game_id').val();
+		var data = getinfo(gameid);
+		var res = eval('(' + data + ')');
+		if(typeof(res) == "string")
+		{
+			$("#gameinfo").html(res);
+		}else{
+			var str = "<tr>"+
+					"<td>对阵赛事: "+ res['home'] + "&nbsp;<font color='red'>VS</font>&nbsp;"+ res['away'] +"</td>"+
+					"</tr>"+
+					"<tr>"+
+					"<td>开赛时间: " + res['gtime'] + "</td>"+
+					"</tr>";
+			$("#gameinfo").html(str);
+		}
+
+		eachTr();
+	}
+	//添加一行选项
+	function addOption(){
+		if($("#table tr").length > 20){
+			alert('最多20个选项哦!');
+			return;
+		}
+		//添加一个题目选项
+		var str="<tr>"+
+				"<td>"+
+				"<input type=\"hidden\" value='' name=\"ids[]\"/>"+
+				"<input type='text' size=\"8\" name=\"option[]\" class=\"required\" value='' />"+
+				"</td>"+
+				"<td><input type='text' size=\"8\" name=\"num[]\" class=\"required\" value='' /></td>"+
+				"<td>0</td>" +
+				"<td class=\"answer\"><input type='radio' name='answer' value=''></td>"+
+				"<td>"+
+				"<a class=\"buttonActive\" href=\"javascript:;\" onclick=\"delOption(0, this);\">"+
+				"<span>删除</span>"+
+				"</a>"+
+				"</td>"+
+				"</tr>";
+		$("#table tr:last").after(str);
+		eachTr();
+	}
+	function clean()
+	{
+		var $answer = $("input[name=answer]");
+		var $cancel = $("#cancel");
+		$cancel.click(function(e){
+			// 移除属性,两种方式都可
+			$answer.removeAttr("checked");
+		});
+	}
+
+	//删除当前一行选项
+	function delOption(id, obj ,pid){
+		if (confirm('确定删除该选项吗？')==false){
+			return;
+		}
+		if($("#table tr").length < 4){
+			alert('至少要两个选项!');
+			return;
+		}
+		if (id=='0'){
+			$(obj).parent().parent().remove();
+			eachTr();
+			return;
+		}
+		$.ajax({
+			type:'post',
+			url:'__ADMIN__/OlympicQuiz/delOption.html',
+			data:{id:id,pid:pid},
+			dataType:'json',
+			success:function(msg){
+				msg = parseInt(msg);
+				if (msg==1){
+					$(obj).parent().parent().remove();
+					eachTr();
+				} else {
+					alert('删除失败！');
+				}
+			}
+		});
+		eachTr();
+	}
+</script>
+
+
+
+

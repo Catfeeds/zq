@@ -1,0 +1,34 @@
+/**
+ * 全彩个人中心css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-23
+**/
+
+/* 充值 */
+.draw-list dl{ font-size: 12px;}
+.draw-list dt{ font-weight: normal;}
+.draw-list .noitice{ height: 500px; background: url(../../images/UserInfo/draw-bg.png) no-repeat right center; padding: 100px 0 020px;}
+.draw-list .noitice-left{ width: 364px; height: 220px; background: url(../../images/UserInfo/noitice-bg.png) no-repeat; text-align: center; padding: 60px 0 0 0; font-size: 16px;}
+.draw-list .noitice-left span{ margin: 0 5px;}
+.draw-list .noitice-left a{ text-decoration: underline!important; color: #eb0000;}
+/* 充值记录 */
+.recharge-record-list .table .table-header th{ text-align: center; background: #f7f7f7;}
+.recharge-record-list .table .one{ text-align: center; background: #ffffff;}
+.recharge-record-list .table .two{ text-align: center; background: #f7f7f7;}
+.recharge-record-list .table .begin-time em{ margin-left: 10px;}
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td { border: 1px solid #fff; font-size: 12px;}
+
+/* 绑定银行卡 */
+.form .form-in{ margin-bottom: 15px;}
+.form .form-in .band{ width: 260px;}
+.form .form-in .city{ width: 122px;}
+.form .form-in .city02{ margin-left: 10px;}
+.form label{ display: inline;}
+.form .checkbox label{ font-size: 12px; color: #000;}
+.form .input-name{ width:100px; text-align: right; height: 34px; line-height: 34px; font-size: 12px;}
+.form #txtUserName,.form #paw,.form #pawOk{ width: 260px;}
+.form .reg-btn{ width: 260px; margin-left: 100px;}
+.form .reg-btn input[type=submit]{ width: 260px;}
+.form .no-change{ display: block; width: 260px; text-align: center; margin-left: 100px;}
+.form-in .input-con .hint{ font-size: 12px; color: #eb0000; display: none;}

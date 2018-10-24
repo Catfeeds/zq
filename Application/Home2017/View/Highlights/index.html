@@ -1,0 +1,205 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>全球体育_全球彩经_NBA直播_英超直播_直播吧_极速直播_中超直播_西甲体育_欧冠视频_jrs直播</title>
+    <meta name="keywords" content="英超直播、NBA直播、直播吧、A8直播、足球直播、极速直播、jrs直播、中超直播、比分直播、赛事直播、体育直播网、CBA直播"/>
+    <meta name="description" content="全球体育是最好的体育视频直播网站、主要提供英超直播、NBA直播、直播吧、A8直播、足球直播、极速直播、jrs直播、中超直播、比分直播、赛事直播等、力争做用户体验最好的体育直播网"/>
+</block>
+<block name="body">
+<body>
+<link rel="stylesheet" href="__PUBLIC__/Home/css/highlights/videoList.css">
+<include file="Public:top_index" />
+<!-- 主体内容 -->
+<div class="main">
+    <!-- 当前位置标题 -->
+    <div class="position">
+       
+        <span class="now">当前位置：</span> <span class="now"><a href="{:U('/')}">  首页></a></span> <span class="now"><a href="{:U('/')}">视频直播  ></a></span> <span class="now"><a href="{:U('/Video/')}">视频集锦 > </a></span> <span>足球篮球</span>
+    </div>
+
+    <!-- 焦点轮播+焦点集锦 -->
+    <div class="video_banner_con clearfix">
+        <div class="pull-left cont_sec_left">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <volist name="carousel" id="item">
+                        <li data-target="#myCarousel" data-slide-to="{$key}" <if condition="$key eq 0">class="active"</if>></li>
+                    </volist>
+                </ol>
+                <div class="carousel-inner">
+                    <volist name="carousel" id="item">
+                        <div class="item <if condition="$key eq 0">active</if>">
+                        <a href="{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}" target="_blank"><img class="lazy" src="{$item.img}" alt="{$item.title}"></a>
+                        <div class="fbanner_title">
+                            <a href="{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}" target="_blank">{$item.title}</a>
+                        </div>
+                </div>
+                </volist>
+            </div>
+            <a class="carousel-control left" href="#myCarousel" data-slide="prev" style="display: none; opacity: 0.5;"><span class="banner_arrow"></span></a>
+            <a class="carousel-control right" href="#myCarousel" data-slide="next" style="display: none; opacity: 0.5;"><span class="banner_arrow"></span></a>
+        </div>
+    </div>
+    <div class="pull-right video_banner_r">
+        <ul class="clearfix" style="padding-left:0px;">
+            <volist name="recommend" id="item">
+                <li>
+                    <a href="<if condition="$item.web_ischain eq 0">{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}<else/>{$item.web_url}</if>" target="_blank" class="figure" tabindex="-1">
+                    <img class="lazy" src="{$item.img}" width="192" height="106" alt="{$item.title}">
+                    <div class="hover_mask">
+                        <div class="title">{$item.title}</div>
+                        <div class="mask_con clearfix">
+                                    <span class="mask_time pull-left">
+                                        <span class="info_inner">{$item.add_time|format_date}</span>
+                                    </span>
+                            <span class="mask_mub pull-right click_num">
+                                        <i class="ico_play_12"></i>
+                                        <span class="mask_fans">{$item.click_num}</span>
+                                    </span>
+                        </div>
+                    </div>
+                    </a>
+                </li>
+            </volist>
+        </ul>
+    </div>
+</div>
+<!-- 焦点轮播+焦点集锦 -->
+<!-- 集锦list -->
+<div class="video_list_con">
+    <div class="list_title_new"><img class="lazy" src="__PUBLIC__/Home/images/list_title.png" alt=""><span>最新视频</span><img class="lazy" src="__PUBLIC__/Home/images/new.png" alt=""></div>
+    <div class="line-l"></div>
+    <div class="list_box mod_figures">
+        <ul class="clearfix">
+            <volist name="new" id="item">
+                <li class="list_item">
+                    <a href="<if condition="$item.web_ischain eq 0">{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}<else/>{$item.web_url}</if>" target="_blank" class="figure" tabindex="-1">
+                    <img class="lazy" src="{$item.img}" width="186" height="104" alt="{$item.title}" />
+                    </a>
+                    <strong class="figure_title">
+                        <a href="<if condition="$item.web_ischain eq 0">{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}<else/>{$item.web_url}</if>" target="_blank">{$item.title}</a>
+                    </strong>
+                    <div class="figure_info">
+                            <span class="figure_info_brand">
+                                <span class="info_inner">{$item.add_time|format_date}</span>
+                            </span>
+                        <span class="figure_info_play figure_info_right click_num">
+                                <i class="ico_play_12"></i>
+                                <span class="info_inner">{$item.click_num}</span>
+                            </span>
+                    </div>
+                </li>
+            </volist>
+        </ul>
+    </div>
+</div>
+<!-- 集锦list -->
+<div class="video_list_con" id="v">
+    <!-- 类别标题 -->
+    <div class="list_title_new"><img class="lazy" src="__PUBLIC__/Home/images/list_title.png" alt=""><span>精彩视频</span></div>
+    <div class="line-s"></div>
+    <!-- <div class="video_type">
+        <ul>
+            <volist name="union_list" id="val">
+                <li>
+                    <a href="javascript:;" union_id="{$val[0]}" <if condition="$val[0] eq $anchorName">class='on'</if>>{$val[1]}</a>
+                </li>
+            </volist>
+        </ul>
+    </div> -->
+</div>
+<!-- 集锦list -->
+<div class="gall_list">
+    <volist name="gallery" id="val">
+        <div class="video_list_con" list_id="{$val['union_id']}"
+            <if condition="$val['union_id'] neq $anchorName">style="display:none"</if>
+        >
+            <!-- 列表 -->
+            <div class="list_box mod_figures">
+                <ul class="clearfix">
+                    <volist name="val['list']" id="item" offset="0" length='30'>
+                        <li class="list_item">
+                            <a href="<if condition="$item.web_ischain eq 0">{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}<else/>{$item.web_url}</if>" target="_blank" class="figure" tabindex="-1">
+                            <img class="lazy" src="{$item.img}" width="186" height="104" alt="{$item.title}">
+                            </a>
+                            <strong class="figure_title">
+                                <a href="<if condition="$item.web_ischain eq 0">{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}<else/>{$item.web_url}</if>" target="_blank">{$item.title}</a>
+                            </strong>
+                            <div class="figure_info">
+                                <span class="figure_info_brand">
+                                    <span class="info_inner">{$item.add_time|format_date}</span>
+                                </span>
+                                <span class="figure_info_play figure_info_right click_num">
+                                    <i class="ico_play_12"></i>
+                                    <span class="info_inner">{$item.click_num}</span>
+                                </span>
+                            </div>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+            <!-- 列表 -->
+            <!-- 加载更多 s-->
+            <div class="loading_more clearfix">
+                <div class="load_line"></div>
+                <div class="load_more"><a target="_blank" href="{:U('Highlights/more',['game_type'=>$val['game_type'],'union_id'=>$val['union_id']])}">查看更多</a></div>
+                <div class="load_line"></div>
+            </div>
+        </div>
+    </volist>
+</div>
+<!-- 集锦list -->
+<!-- 主体内容 -->
+<include file="Public:footer" />
+
+<div class="return-top">
+    <a href="#">
+        <span class="ft_bg"></span>
+        <span>回顶部</span>
+    </a>
+</div>
+
+</body>
+</html>
+<!--引入本页所需js-->
+<script>
+    $(function(){
+        $('.video_type ul li').each(function(e){
+            $(this).click(function(){
+                $(this).children('a').addClass('on').parents('li').siblings().children('a').removeClass('on');
+                var union_id = $(this).children().attr('union_id');
+                $(".gall_list").children().hide();
+                $(".gall_list").children().each(function(){
+                    if($(this).attr('list_id') == union_id)
+                    {
+                        $(this).css('display','');
+                    }
+                });
+            })
+        })
+        //$(".click_num").css("display","none");
+    })
+    //焦点图轮播
+    $('.cont_sec_left').hover(function(e) {
+        $('.carousel-control').stop().fadeIn(500);
+    },function(){
+        $('.carousel-control').stop().fadeOut(500);
+    });
+    $('.carousel-control').hover(function(e) {
+        $(this).animate({"opacity":"0.75"},200);
+    },function(){
+        $(this).animate({"opacity":"0.5"},200);
+    });
+    //返回顶部
+    $(window).scroll(function(e) {
+        if($(window).scrollTop()>$(window).height()){
+            $('.return-top').fadeIn(300);
+        }else {
+            $('.return-top').fadeOut(300);
+        }
+    });
+    $('.return-top').click(function(e) {
+        $('body,html').animate({'scrollTop':'0'},500);
+
+    });
+</script>
+</block>

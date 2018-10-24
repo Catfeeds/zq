@@ -1,0 +1,224 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <style type="text/css">
+        html,body{ background: #f7f7f7;}
+        .infom_list{ background: #fff;}
+        .infom_list .table tr td{ padding: .25rem 0; border-bottom: 1px solid #e5e5e5;}
+        .infom_list .table .td1,.infom_list .table .td2{ text-align: left; padding-left: .2rem;}
+        .infom_list .table .td3{ text-align: right; padding-right: .2rem;}
+        .infom_list .table .td1 span{ margin-right: .1rem;}
+        .infom_list .table .td2 span{ margin-right: .2rem;}
+        .infom_list ul li.on{ background: url(images/icon/icon-on-inform.png) no-repeat .2rem center; background-size: .68rem auto;}
+
+        .infom_list ul li figure{ margin-bottom: .1rem;}
+
+        .user_nav_con{ height: 1.2rem;}
+        .user_nav_con ul li{ float: left; width: 25%; height: 1.2rem; line-height: .48rem; text-align: center; color: #4d4d4d;  background: #c9d7e3; padding: .1rem 0; cursor: pointer;}
+        .user_nav_con ul li a{ color: #4d4d4d;}
+        .user_nav_con ul li.on{ background: #95b9d5; color: #fff;}
+        .user_nav_con ul li.on a{color: #fff;}
+        .user_nav_con ul li:last-child,.user_list ul li:last-child{ border: none 0;}
+    </style>
+    <!-- 本页需要引用的js -->
+    <script type="text/javascript">
+//        $(function () {
+//            $('.user_nav_con ul li').click(function (e) {
+//                $(this).addClass('on').siblings().removeClass('on');
+//                var listNum = $(this).index();
+//                $('.infom_list').eq(listNum).show().siblings('.infom_list').hide();
+//            });
+//        })
+    </script>
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <header id="other_header">
+        <a href="{:U('User/index')}"></a>
+        {$title}
+    </header>
+</block>
+<!-- 二级头部 e -->
+<block name="nav"></block>
+<!-- 用户所有明细 -->
+<block name="content">
+    <section class="main">
+        <!-- 用户导航 -->
+        <div class="user_nav_con">
+            <ul class="clearfix">
+                <li <if condition="($type eq 0) OR ($type eq '')">class="on"</if>>
+                <a href="{:U([])}">
+                    <p>{$totalNum}</p>
+                    <p>总金币</p>
+                </a>
+                </li>
+                <li <eq name='type' value='3'>class="on"</eq>>
+                    <a href="{:U([],array('type'=>3))}">
+                        <p>{$wjsNum}</p>
+                        <p>待结算</p>
+                    </a>
+                </li>
+                <li <eq name='type' value='1'>class="on"</eq>>
+                    <a href="{:U([],array('type'=>1))}">
+                        <p>-{$exNum}</p>
+                        <p>支出</p>
+                    </a>
+                </li>
+                <li <eq name='type' value='2'>class="on"</eq>>
+                    <a href="{:U([],array('type'=>2))}">
+                        <p>+{$inNum}</p>
+                        <p>收入</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 用户导航 -->
+        <div class="infom_list posts">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <volist name='list' id='v'>
+                    <tr class='list'>
+                        <!-- <td width="40%" class="td1 fs22"><span>{$v.log_date}</span> <em class="text-999">{$v.log_times}</em></td> -->
+                        <td width="75%" class="td2 fs26 text-666">
+                        <p style="color: #333333"><if condition="$v['log_type_name']">{$v.log_type_name}<else/>&nbsp;</if></p>
+                        <span style="color: #999999">{$v.desc} </span> <!-- <em 
+                                <switch name='v.log_status'>
+                                    <case value='1'> class="green">成功</case>
+                                    <case value='2'> class="red">不通过</case>
+                                    <case value='0'> class="gray">申请中</case>
+                                    <case value='3'> class="gray">待汇款</case>
+                                    <case value='4'> class="red">驳回</case>
+                                    <case value='5'> class="gray">冻结</case>
+                                </switch>
+                            </em>  -->
+<p style="color: #999999"><span>{$v.log_date} {$v.log_times}</span></p>
+                            </td>
+                        <td width="25%" class="td3 <switch name='v.type'><case value='1'>green</case><case value='2'>red</case></switch> fs26"><switch name='v.type'><case value='1'>-</case><case value='2'>+</case></switch>{$v.change_num}</td>
+                    </tr>
+                </volist>
+            </table>
+        </div>
+        <input type="hidden" id="auto_load" value="1">
+        <input type="hidden" id="type" value="{$type}">
+        <div class="paged boxs">
+            <div class="load_gif fs24 text-999">
+                <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>正在加载更多的数据...</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已经全部加载完毕</a>
+        </div>
+    </section>
+</block>
+<block name='scripts'>
+    <script>
+        $(function () {
+            $("#auto_load").val(1);
+            var p = 2;// 初始化页面，点击事件从第二页开始
+            var flag = false;
+            if ($(".list").size() < 20)
+            {
+                $("#auto_load").val(0);
+                $(".load_gif").hide();
+                $("#showLess").show();
+            }
+            $(window).scroll(function () {
+                var auto_load = $("#auto_load").val();
+                if (auto_load == 0) {
+                    return false;
+                }
+                //初始状态，如果没数据return ,false;否则
+                if ($(".list").size() <= 0)
+                {
+                    return false;
+                } else {
+                    if ($(document).height() - ($(document).scrollTop() + $(window).height()) <= 400) {
+                        if (auto_load == 1) {
+                            $("#auto_load").val(0);
+                            send();
+                        }
+                    }
+                }
+            });
+            function send() {
+                if (flag) {
+                    return false;
+                }
+                $.ajax({
+                    type: 'post',
+                    url: "",
+                    data: {page: p, type: $('#type').val()},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 1) {
+                            var list = data.info;
+                            if (list != null) {
+                            $.each(list, function (k, v) {
+                                var status_html = ' class="gray">申请中';
+                                var symbol = '+';
+                                var color='';
+                                switch (v.log_status) {
+                                    case '1':
+                                        status_html = ' class="green">成功';
+                                        break;
+                                    case '2':
+                                        status_html = ' class="red">不通过';
+                                        break;
+                                    case '0':
+                                        status_html = ' class="gray">申请中';
+                                        break;
+                                }
+                                switch (v.type) {
+                                    case 1:
+                                        color='green';
+                                        symbol = '-';
+                                        break;
+                                    case 2:
+                                        color='red';
+                                        symbol = '+';
+                                        break;
+                                }
+                                var _type = '';
+                                if(v.log_type_name)
+                                {
+                                    _type = v.log_type_name;
+                                }else{
+                                    _type = '&nbsp;';
+                                }
+                                var html = '<tr class="list">' +
+                                        '<td width="75%" class="td2 fs26 text-666">' +
+                                        '<p style="color: #333333">' + _type + '</p>' +
+                                        '<span style="color: #999999">' + v.desc + '</span>' +
+                                        '<p style="color: #999999"><span>' + v.log_date + ' ' + v.log_times + '</span></p>' +
+                                        '</td>' +
+                                        '<td width="25%" class="td3 '+color+' fs26">' + symbol + v.change_num + '</td></tr>';
+
+                                $(".posts .list:last").after(html);
+                            });
+                            
+                                $("#auto_load").val(1);
+                                if (data.info.length < 20) {
+                                    $("#auto_load").val(0);
+                                    $(".load_gif").hide();
+                                    $("#showLess").show();
+                                    flag = true;
+                                }
+                            }else{
+                                $("#auto_load").val(0);
+                                $(".load_gif").hide();
+                                $("#showLess").show();
+                                flag = true;
+                            }
+                        } else {
+                            $("#auto_load").val(0);
+                            $(".load_gif").hide();
+                            $("#showLess").show();
+                            flag = true;
+                        }
+
+                    }
+                });
+                p++;
+            }
+        });
+    </script>
+</block>

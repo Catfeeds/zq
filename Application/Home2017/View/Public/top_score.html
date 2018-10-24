@@ -1,0 +1,40 @@
+<div class="liveTop qqtyLiveTop">
+  <div class="liveTopIn clearfix">
+        <div class="pull-left"><a href="{:U('/')}"><img src="__PUBLIC__/Home/score/images/scoreLive/live-logo.png" width="145" height="50" alt=""></a></div>
+        <div class="pull-left liveTopNav">
+            <ul class="clearfix">
+                <li class="pull-left"><a href="{:U('/')}">网站首页</a></li>
+                <li class="pull-left"><a target="_blank" href="{:U('@bf')}">足球比分</a></li>
+                <li class="pull-left"><a target="_blank" href="{:U('/lanqiu@bf')}">篮球比分</a></li>
+                <!-- <li class="pull-left"><a target="" href="#">篮球比分</a></li> -->
+                <!--<li class="pull-left">-->
+                    <!--<span class="pull-left dropdown dropdown-top">-->
+                        <!--<a href="javascript:;">比分直播</a>-->
+                        <!--<span class="caret"></span>-->
+                         <!--<ul class="dropdown-menu scoreType">-->
+                            <!--<li><a target="_blank" href="{:U('@bf')}">足球比分</a></li>-->
+                            <!--&lt;!&ndash; <li><a target="_blank" href="https://www.qqty.com/UserInfo/basic_infor.html" style="border-bottom: 1px solid #e5e5e5;">篮球比分</a></li> &ndash;&gt;-->
+                        <!--</ul>-->
+                    <!--</span>-->
+                <!--</li>-->
+            </ul>
+        </div>
+        <div class="pull-right clearfix liveTopLogin">
+            <if condition="!session('user_auth')">
+                <a href="{:U('User/login')}" class="pull-left loginLink">登录</a>
+                <span class="pull-left SslLine">/</span>
+                <a href="{:U('User/register')}" class="pull-left loginLink">注册</a>
+                <a href="javascript:;" class="pull-left headImg"><img src="{:frontUserFace()}" width="34" height="34"></a>
+            <else/>
+                <span class="pull-left dropdown dropdown-top user-name">
+                    <a target="_blank" href="{:U('UserInfo/index')}" class="pull-left nav on" title="{:session('user_auth')['nick_name']}">{:session('user_auth')['nick_name']}</a>
+                    <span class="caret"></span>
+                    <ul class="dropdown-menu">
+                        <li><a target="_blank" href="{:U('UserInfo/index')}">个人中心</a></li><li><a target="_blank" href="{:U('UserInfo/basic_infor')}">帐号设置</a></li><li><a href="{:U('User/logout')}">退出</a></li>
+                    </ul>
+                </span>
+                <a href="{:U('UserInfo/index')}" class="pull-left headImg"><img src="{:session('user_auth')['head']}" width="34" height="34"></a>
+            </if>
+        </div>
+    </div>
+</div>

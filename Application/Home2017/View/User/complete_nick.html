@@ -1,0 +1,115 @@
+<include file='Public:header'/>
+
+<body>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/login/tpperfect.css">
+    <!-- 注册头部开始 -->
+    <include file="Public:top"/>
+    <!-- 注册头部结束 -->
+    <div class="home">
+        <!-- 注册表单内容开始 -->
+        <div class="form-main">
+            <div class="form-nav">
+              <ul class="clearfix">
+                <li class="li1 cur1">
+                  完善基本资料
+                </li>
+              </ul>
+            </div>
+            <div class="guide">
+             请您填写昵称
+            </div>
+            <div class="pull-left face">
+              <img src="{$head_img}" alt="头像" width="200" height="200" />
+            </div>
+            <div class="form-con">
+              <div class="con clearfix">
+                    <div class="pull-left form">
+                        <div class="data-graph basic-infor pull-left">
+
+                              <!-- Tab panes -->
+                              <form action="#" method="post">
+                              <div class="tab-content" style="margin-top:30px;">
+                                <div class="line-graph">
+                                       <div class="form-in clearfix">
+                                           <div class="pull-left input-name">昵&nbsp;&nbsp;&nbsp;称：</div>
+                                           <div class="pull-left input-con">
+                                               <input class="form-control" name="nick_name" type="text" value="{$user_info.randName}" placeholder="请输入昵称"/>
+                                           </div>
+                                       </div>
+                                      <div class="form-in clearfix">
+                                        <span class="text-red" style="font-size:12px;padding-left:50px;">提交之后昵称不能再修改，请谨慎！</span>
+                                      </div>
+                                       <div class="reg-btn clearfix form-in">
+                                           <input type="submit" class="btn btn-orange pull-right" value="确认提交" />
+                                       </div>
+                                </div>
+
+                              </form>
+                          </div>
+
+                    </div>
+                    <div class="pull-right clearfix" style="margin-left:110px;">
+                      <div class="ew-ma"><img src="__PUBLIC__/Home/images/login/ew-ma.jpg" width="264" height="264"></div>
+                        <div class="ew-nioce">
+                          <p>扫二维码，下载全球体育APP<br/>随时获取最新信息！</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 注册表单内容结束 -->
+    </div>
+    <input type="hidden" value="{$is_complete}" id="is_complete">
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+</body>
+</html>
+<script type="text/javascript">
+  $(function(){
+    $("form").validate({
+      onkeyup : false,
+      rules: {
+        nick_name : {
+          required:true,
+          rangelength:[2,10],
+          remote: {
+            url: "/User/checkNickname.html",
+            type: "post",
+            dataType: "json",
+            data: {
+              fieldValue: function() {
+                return $("input[name='nick_name']").val();
+              },
+            }
+          }
+        },
+      },
+      messages : {
+        nick_name : {
+          required:"请输入昵称",
+          rangelength: "昵称为2-10个字符",
+          remote : '该昵称已被使用',
+        },
+      },
+      submitHandler:function(form){
+            var form = $(form);
+            var data = form.serialize();
+            $.ajax({
+                type: "POST",
+                url: "/User/complete_nick.html",
+                dataType: "json",
+                data: data,
+                success: function(data){
+                  if(data.status){
+                    window.location.href="/UserInfo/index.html";
+                  }else{
+                    _alert("温馨提示",data.info);
+                  }
+                }
+            });
+        }
+    });
+  })
+</script>

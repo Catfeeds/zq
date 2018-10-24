@@ -1,0 +1,52 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/copyright/com_link.css">
+</block>
+<block name="content">
+	<div class="body">
+        <div class="top">
+            <div class="top-center">
+              <div class="pull-left center-left">
+                    <div class="pull-left" id="logo" style="margin-top:0px;"><h1><a href="{:U('/')}"><img src="__PUBLIC__/Home/images/common/sec-top-logo.png"></a></h1></div>
+              </div>
+                <div class="pull-right center-right">
+                    <div class="pull-right center-right">
+                        <span class="kefu-icon pull-right">
+							<include file="Public/customer"/>
+						</span>
+                        <span class="number pull-right">020-39287222</span>
+                        <span class="pull-right">客服热线：</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 导航开始 -->
+        <div class="nav-con">
+            <div class="nav">
+                <ul class="clearfix">
+                    <li <eq name="Think.CONTROLLER_NAME" value="Index">class="on"</eq> ><a href="{:U('/')}">首页</a></li>
+                    <li <eq name="Think.ACTION_NAME" value="cooperate">class="on"</eq>><a href="#">友情链接</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 顶部结束a -->
+        <!-- 主体内容开始 -->
+        <div class="home clearfix" style="min-height:436px; ">
+            <div class="navs-con">
+            	<ul class="navs-con-ul">
+                    <volist name="listArr" id="vo" key="k">
+                        <li class="navs-list bg-gray" style="<if condition='$k%2 eq 0'>background: #f7f7f7</if>">
+                            <dl class="clearfix">
+                                <dd class="pull-left" style="width:956px">
+                                   <volist id="v" name="vo">
+                                        <a href="{$v['url']}" target="_blank"><font font-family:"serif" >{$v['name']}</font></a>
+                                   </volist>
+                                </dd>
+                            </dl>
+                        </li>
+                    </volist>
+            	</ul>
+            </div>
+        </div>
+    </div>
+</block>

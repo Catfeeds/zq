@@ -1,0 +1,71 @@
+<div class="pageContent">
+
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this,navTabAjaxDone);">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			<div class="unit">
+				<label>问题标题：</label>
+				<input type="text" class="required" maxlength="30" name="title" value="{$vo.title}" size="30"/>
+			</div>
+
+			<div class="unit">
+				<label>选择分类：</label>
+				<select name="class_id" class="required">
+					<option value="">请选择</option>
+					<volist name="HelpClass" id="item">
+						<option value="{$item.id}" <if condition="$item['id'] eq $vo['class_id']">selected</if> >{$item.name}</option>
+						<notempty name="item.childs">
+							<volist name="item.childs" id="item2">
+								<option value="{$item2.id}" <if condition="$item2['id'] eq $vo['class_id']">selected</if> >|_{$item2.name}</option>
+								<notempty name="item2.childs">
+									<volist name="item2.childs" id="item3">
+										<option value="{$item3.id}" <if condition="$item3['id'] eq $vo['class_id']">selected</if>>|__{$item3.name}</option>
+									</volist>
+								</notempty>
+							</volist>
+						</notempty>
+					</volist>	
+				</select>
+			</div>
+
+            <div class="unit">
+				<label>是否推荐：</label>
+				<input type="radio" name="is_recommend"  value="1" <eq name="vo.is_recommend" value="1">checked</eq> />是
+                <input type="radio" name="is_recommend"  value="0" <eq name="vo.is_recommend" value="0">checked</eq> />否
+			</div>
+
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft"  name="status">
+					<option value="1" <eq name="vo.status" value="1">selected</eq>>正常</option>
+					<option value="0" <eq name="vo.status" value="0">selected</eq>>禁用</option>
+				</select>
+			</div>
+
+			<div class="unit">
+			  <label>内容：</label>
+			</div>
+
+			<div class="unit">
+			  <textarea id="helpEditor" style="width:90%;height:600px;" name="content">{$vo.content}</textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+<script type="text/javascript">
+    //实例化编辑器
+    var editor = new UE.ui.Editor();
+    editor.render("helpEditor");
+</script>
+
+
+
+

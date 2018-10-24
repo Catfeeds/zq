@@ -1,0 +1,147 @@
+<style>
+	.table_video tr{
+		height: 35px;
+	}
+	.table_video td{
+		text-align: center;
+		padding: 5px;
+	}
+</style>
+<div class="pageContent">
+
+	<form method="post" action="__URL__/addVideo" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="game_id" value="{$_REQUEST.game_id}" id="game_id">
+			<input type="hidden" name="gameType" value="{$_REQUEST.gameType}" id="gameType">
+			<div class="unit">
+				<label>视频介绍：</label>
+				<textarea maxlength="255" class="large bLeft" name="video_brief"  rows="2" cols="83">{$video_brief}</textarea>
+			</div>
+			<div class="unit">
+				<label>标签：</label>
+				<input type="text" name="label" value="{$label}" maxlength='30' size="78" />
+				<span class="inputInfo">（标签,以逗号隔开）</span>
+			</div>
+			<div class="unit">
+				<label>web视频源：</label>
+			</div>
+			<div class="unit">
+				<table class="table_video">
+					<tr>
+						<td width="50">排序</td>
+						<td width="50">视频源名称</td>
+						<td width="250">视频源地址</td>
+						<td width="30">视频源</td>
+						<td width="30">格式</td>
+					</tr>
+					<volist name="web_video" id="item">
+						<tr>
+							<td>{$i}</td>
+							<td><input type="text" name="webname[{$i}]" value="{$item.webname}" /></td>
+							<td><input type="text" name="weburl[{$i}]" size="80" value="{$item.weburl}" /></td>
+							<td>
+								<select name="web_ischain[{$i}]">
+									<!--<option value="4" <if condition="$item.webtype eq '4'">selected</if>>5chajian</option>-->
+									<!--<option value="15" <if condition="$item.webtype eq '15'">selected</if>>jrs正方形</option>-->
+									<option value="3" <if condition="$item.web_ischain eq '3'">selected</if>>b8b8</option>
+									<!--<option value="13" <if condition="$item.webtype eq '13'">selected</if>>哔哩哔哩</option>-->
+									<!--<option value="14" <if condition="$item.webtype eq '14'">selected</if>>视听网</option>-->
+									<!--<option value="2" <if condition="$item.webtype eq '2'">selected</if>>jrs无空白</option>-->
+									<option value="1" <if condition="$item.web_ischain eq '1'">selected</if>>乐视腾讯</option>
+									<!--<option value="6" <if condition="$item.webtype eq '6'">selected</if>>jrs空白1</option>-->
+									<!--<option value="7" <if condition="$item.webtype eq '7'">selected</if>>jrs空白2</option>-->
+									<!--<option value="8" <if condition="$item.webtype eq '8'">selected</if>>外链</option>-->
+									<!--<option value="9" <if condition="$item.webtype eq '9'">selected</if>>比赛吧</option>-->
+									<!--<option value="16" <if condition="$item.webtype eq '16'">selected</if>>腾讯NBA</option>-->
+									<option value="12" <if condition="$item.web_ischain eq '12'">selected</if>>否</option>
+								</select>
+							</td>
+							<td>
+								<select name="webformat[{$i}]">
+									<option value="rtmp" <if condition="$item.webformat eq 'rtmp'">selected</if>>内嵌</option>
+									<option value="m3u8" <if condition="$item.webformat eq 'm3u8'">selected</if>>m3u8</option>
+								</select>
+							</td>
+						</tr>
+					</volist>
+				</table>
+			</div>
+			<div class="unit">
+				<label>app视频源：</label>
+			</div>
+			<div class="unit">
+				<table class="table_video">
+					<tr>
+						<td width="50">排序</td>
+						<td width="50">视频源名称</td>
+						<td width="250">视频源地址</td>
+						<td width="30">视频源</td>
+						<td width="30">是否浏览器</td>
+						<!--<td width="30">格式</td>-->
+					</tr>
+					<volist name="app_video" id="item">
+						<tr>
+							<td>{$i}</td>
+							<td><input type="text" name="appname[{$i}]" value="{$item.appname}" /></td>
+							<td><input type="text" name="appurl[{$i}]" size="80" value="{$item.appurl}" /></td>
+							<td>
+								<select name="app_ischain[{$i}]">
+									<option value="0" <if condition="$item.app_ischain eq '0'">selected</if>>M3U8</option>
+									<option value="1" <if condition="$item.app_ischain eq '1'">selected</if>>外跳</option>
+									<option value="2" <if condition="$item.app_ischain eq '2'">selected</if>>内嵌</option>
+								</select>
+							</td>
+							<td>
+								<select name="app_isbrowser[{$i}]">
+									<option value="0" <if condition="$item.app_isbrowser eq '0'">selected</if>>否</option>
+									<option value="1" <if condition="$item.app_isbrowser eq '1'">selected</if>>是</option>
+								</select>
+							</td>
+							<!--<td>-->
+								<!--<select name="appformat[{$i}]">-->
+									<!--<option value="live" <if condition="$item.appformat eq 'live'">selected</if>>url</option>-->
+									<!--<option value="m3u8" <if condition="$item.appformat eq 'm3u8'">selected</if>>m3u8</option>-->
+								<!--</select>-->
+							<!--</td>-->
+						</tr>
+					</volist>
+				</table>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<script>
+//删除当前一行视频源
+function delSource(key,type,obj){
+	if (confirm('确定删除该选项吗？')==false){
+		return;
+	}
+	var game_id  = $("#game_id").val();
+	var gameType = $("#gameType").val();
+	$.ajax({
+		type:'post',
+		url:'__ADMIN__/Against/delSource.html',
+		data:{k:key,game_id:game_id,gameType:gameType,type:type},
+		dataType:'json',
+		success:function(msg){
+			if (msg.status==1){
+				$(obj).parent().siblings().find('input').val('');
+				alert('删除成功！');
+			} else {
+				alert('删除失败！');
+			}
+		}
+	});	
+}
+</script>
+
+
+

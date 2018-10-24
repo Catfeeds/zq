@@ -1,0 +1,62 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label >手机号：</label>
+				<input type="text" name="phone" value="{$_REQUEST.phone}"/>
+			</li>
+			<li>
+				<label >昵称：</label>
+				<input type="text" name="fullname" value="{$_REQUEST.fullname}"/>
+			</li>
+		</ul>
+
+		<div class="subBar">
+			<ul>
+				<li>
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="8%">工单号</th>
+			<th width="8%">昵称</th>
+			<th width="8%">手机号</th>
+			<th >问题描述</th>
+
+			<th width="10%">图示</th>
+			<th width="10%">创建时间</th>
+		</tr>
+		</thead>
+		<tbody>
+		<volist id="vo" name="list">
+			<tr target="sid_user" rel="{$vo['id']}">
+				<td>{$vo['ticket_id']}</td>
+				<td>{$vo['fullname']}</td>
+				<td>{$vo['phone']|is_show_mobile}</td>
+				<td>{$vo['text']}</td>
+				<td><a target="_blank" href="//kf.qqty.com/uploads/{$vo.value}"><img width="30" height="30" src="//kf.qqty.com/uploads/{$vo.value}"></a></td>
+				<td>{$vo['created']|date="Y-m-d H:i:s",###}</td>
+			</tr>
+		</volist>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

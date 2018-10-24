@@ -1,0 +1,108 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input type="hidden" name="user_id" value="{$_REQUEST.user_id}"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>昵称：</label>
+				<input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+			</li>
+			<li>
+				<label>直播标题：</label>
+				<input type="text" name="title" value="{$_REQUEST.title}"/>
+			</li>
+			<li>
+				<label>房间号：</label>
+				<input type="text" name="room_id" value="{$_REQUEST.room_id}"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" warn="请选择用户"><span>编辑</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="2%" orderField="i9d" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th width="5%">昵称</th>
+			<th width="15%">直播标题</th>
+			<th width="8%">房间号</th>
+			<th width="3%">直播封面图</th>
+			<th width="6%">直播开始时间</th>
+			<th width="6%">直播结束时间</th>
+			<th width="4%">直播时长（m）</th>
+			<th width="4%">用户进入统计</th>
+			<th width="2%">打赏</th>
+			<th width="3%">是否显示</th>
+			<th width="3%">关联赛事</th>
+			<th width="5%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['nick_name']}</td>
+					<td>{$vo['title']}</td>
+					<td>
+						{$vo['room_id']} |
+						<a href="{$vo.room_url}" target="_blank">
+							<if condition="$vo.live_status eq 1">
+								直播中
+								<else/>
+								回放
+							</if>
+						</a>
+					</td>
+					<td><a target="_blank" href="{$vo.img}"><img width="30" height="30" src="{$vo.img}"></a></td>
+					<td><if condition="$vo.start_time neq ''">{$vo['start_time']|date="Y-m-d H:i",###}</if></td>
+					<td><if condition="$vo.end_time neq ''">{$vo['end_time']|date="Y-m-d H:i",###}</if></td>
+					<td>{$vo['live_time']}</td>
+					<td>{$vo['user_num']}</td>
+					<td><a style="font-weight: bold;" href="{:U('__ADMIN__/LiveAccount/index',['log_id'=>$vo['id']])}" target="navTab" rel="{$vo['id']}" title="{$vo['title']}-打赏记录">{$vo['coin']}</a></td>
+					<td>
+						<eq name="vo.status" value='0'>
+							<a title="确定显示吗？" href="__URL__/resume/id/{$vo.id}/status/1" target="ajaxTodo"><div style="color:red;">否</div></a>
+						<else/>
+							<a title="确定不显示吗？" href="__URL__/forbid/id/{$vo.id}/status/0" target="ajaxTodo"><div style="color:blue">是</div></a>
+						</eq>
+					</td>
+					<td>
+						<eq name="vo.link_game" value='0'>
+							<div style="color:red;">否</div>
+							<else/>
+							<div style="color:blue;">是</div>
+						</eq>
+					</td>
+					<td>
+						<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" title="编辑" rel="editPage">编辑</a>
+						<if condition="in_array($vo['id'],$LiveNotice)">
+							<a style="font-weight: bold;" width="800" height='600' lookupgroup="LiveNotice" href="{:U('__ADMIN__/LiveLog/LiveNotice',['log_id'=>$vo['id']])}" rel="LiveNotice">| 文字广播</a>
+						</if>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

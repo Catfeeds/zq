@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta charset="UTF-8">
+	<title>欧洲杯门票生成器-全球体育手机网</title>
+	  <!-- 引入公共样式 -->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Mobile/css/base.css">
+	  <!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Mobile/js/htmlwidth.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Mobile/js/jquery-1.11.1.min.js"></script>
+
+
+</head>
+<body>
+      <style>
+        body{background: url("__PUBLIC__/Mobile/images/activity/bg.jpg") no-repeat left top; background-size: 7.5rem auto;  width: auto; min-height: 13rem; margin: 0 auto;position: relative;}
+        .input_main{ position: absolute; top: 5.8rem; left: 1.5rem; width: 4.8rem}
+        .input_main .txt{width: 2.05rem; height: .55rem;line-height: .58rem; border-radius: .2rem;padding-left: .2rem;margin-right: .2rem;}
+        .input_main .btn{width: 4.4rem; height: .66rem; line-height: .68rem; border-radius: .5rem;background: #7ac115;margin-top: .4rem;color: #fff;font-size: .32rem;font-family: "\5FAE\8F6F\96C5\9ED1";font-weight: bold;}
+        .tip{width: 5rem; position:absolute;top:8.1rem;left: 2.1rem;color: #fff;font-weight: bold;}
+        .pic_main img{width: 5rem;height: 4rem; background: #fff;position:absolute;top:8.5rem;left: 1.2rem;padding: 2px;border-radius: .05rem}
+        #p_con{display: none;}
+      </style>
+
+       <section class="input_main">
+          <input type="text" class="txt" id="txt_xing" placeholder="姓">
+          <input type="text" class="txt" id="txt_ming" placeholder="名">
+          <input type="button" class="btn" id="get_tic" value="领取门票" >
+       </section>
+
+       <section id="p_con">
+         <aside class="tip">长按本图片保存到手机</aside>
+         <section class="pic_main">
+
+         </section>
+       </section>
+
+       <script>
+         $("#get_tic").click(function(){
+             if($("#txt_xing").val()=="" || $("#txt_ming").val()=="")
+             {
+              alert("姓名都要写全哦");
+              return false;
+             }
+             $("#p_con").show();
+
+             $.ajax({
+                type:'post',
+                url:'/Activity/getEtickets.html?'+ Math.random(),
+                data:'name='+$("#txt_xing").val()+$("#txt_ming").val(),
+                success:function(data){
+                    console.log(data);
+                    $('.pic_main').html(data);
+              },
+
+
+        })
+
+         })
+       </script>
+
+</body>
+</html>

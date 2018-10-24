@@ -1,0 +1,179 @@
+<style>
+    .table-config tr{
+        height: 35px;
+    }
+    .table-config td{
+        text-align: center;
+        padding-right: 10px;
+    }
+    .android {
+        border: 1px solid #f2f2f2;
+        padding: 5px;
+        margin-bottom: 5px;
+    }
+    .inputInfo {color: red !important;}
+</style>
+<div class="pageContent">
+    <form method="post" action="__URL__/saveAndroid/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+        <div class="pageFormContent" layoutH="58">
+            <input type="hidden" value="{$vo.id}" name="id">
+            <div class="unit">
+                <label>APP基础Id：</label>
+                <input type="text" class="required" name="baseAppId" value="{$vo.baseAppId}" size="30"/>
+            </div>
+            <div class="unit">
+                <label>热修复备注：</label>
+                <textarea  name="remark" rows="2" cols="57">{$vo.remark}</textarea>
+            </div>
+            <div class="unit">
+                <label>状态：</label>
+                <select class="small bLeft"  name="status">
+                    <option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+                    <option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+                </select>
+            </div>
+            <div class="unit">
+                <label>是否强制更新：</label>
+                <input type="radio" name="isMustUpdate" value="0" checked>否
+                <input type="radio" name="isMustUpdate" value="1" <if condition="$vo.isMustUpdate eq 1">checked</if>>是
+            </div>
+
+            <div class="android">
+                <div class="unit">
+                    <label>⒈ 补丁Id：</label>
+                    <input type="text"  name="data[1][patchId]" value="{$data[1][patchId]}" size="30"/>
+                </div>
+                <div class="unit">
+                    <label>渠道号：</label>
+                    <input type="text"  name="data[1][channel]" value="{$data[1][channel]}" size="30"/>
+                    <span class="inputInfo">（英文逗号隔开）</span>
+                </div>
+                <div class="unit">
+                    <label>&nbsp;</label>
+                    <input type="file"  name="patchUrl_1" accept="application/vnd.android.package-archive,application/zip"/>
+                    <input type="hidden" value="{$data[1][patchUrl]}" name="data[1][patchUrl]">
+                    <br/>
+                    <if condition="$data[1][patchUrl] != ''">
+                        <span style="margin-left:50px;color: green">已上传：{$data[1][patchUrl]}</span>
+                    </if>
+                </div>
+            </div>
+
+            <div class="android">
+                <div class="unit">
+                    <label>⒉ 补丁Id：</label>
+                    <input type="text"  name="data[2][patchId]" value="{$data[2][patchId]}" size="30"/>
+                </div>
+                <div class="unit">
+                    <label>渠道号：</label>
+                    <input type="text"  name="data[2][channel]" value="{$data[2][channel]}" size="30"/>
+                     <span class="inputInfo">（英文逗号隔开）</span>
+                </div>
+                <div class="unit">
+                    <label>&nbsp;</label>
+                    <input type="file"  name="patchUrl_2" accept="application/vnd.android.package-archive,application/zip"/>
+                    <input type="hidden" value="{$data[2][patchUrl]}" name="data[2][patchUrl]">
+                    <br/>
+                    <if condition="$data[2][patchUrl] != ''">
+                        <span style="margin-left:50px;color: green">已上传：{$data[2][patchUrl]}</span>
+                    </if>
+                </div>
+            </div>
+                
+            <div class="android">
+                <div class="unit">
+                    <label>⒊ 补丁Id：</label>
+                    <input type="text"  name="data[3][patchId]" value="{$data[3][patchId]}" size="30"/>
+                </div>
+                <div class="unit">
+                    <label>渠道号：</label>
+                    <input type="text"  name="data[3][channel]" value="{$data[3][channel]}" size="30"/>
+                     <span class="inputInfo">（英文逗号隔开）</span>
+                </div>
+                <div class="unit">
+                    <label>&nbsp;</label>
+                    <input type="file"  name="patchUrl_3" accept="application/vnd.android.package-archive,application/zip"/>
+                    <input type="hidden" value="{$data[3][patchUrl]}" name="data[3][patchUrl]">
+                    <br/>
+                    <if condition="$data[3][patchUrl] != ''">
+                        <span style="margin-left:50px;color: green">已上传：{$data[3][patchUrl]}</span>
+                    </if>
+                </div>
+            </div>
+
+            <div class="android">
+                <div class="unit">
+                    <label>⒋ 补丁Id：</label>
+                    <input type="text"  name="data[4][patchId]" value="{$data[4][patchId]}" size="30"/>
+                </div>
+                <div class="unit">
+                    <label>渠道号：</label>
+                    <input type="text"  name="data[4][channel]" value="{$data[4][channel]}" size="30"/>
+                     <span class="inputInfo">（英文逗号隔开）</span>
+                </div>
+                <div class="unit">
+                    <label>&nbsp;</label>
+                    <input type="file"  name="patchUrl_4" accept="application/vnd.android.package-archive,application/zip"/>
+                    <input type="hidden" value="{$data[4][patchUrl]}" name="data[4][patchUrl]">
+                    <br/>
+                    <if condition="$data[4][patchUrl] != ''">
+                        <span style="margin-left:50px;color: green">已上传：{$data[4][patchUrl]}</span>
+                    </if>
+                </div>
+            </div>
+            
+            <div class="android">
+                <div class="unit">
+                    <label>⒌ 补丁Id：</label>
+                    <input type="text"  name="data[5][patchId]" value="{$data[5][patchId]}" size="30"/>
+                    <span class="inputInfo">（其它渠道）</span>
+                </div>
+                <div class="unit">
+                    <label>&nbsp;</label>
+                    <input type="file"  name="patchUrl_5" accept="application/vnd.android.package-archive,application/zip"/>
+                    <input type="hidden" value="{$data[5][patchUrl]}" name="data[5][patchUrl]">
+                    <br/>
+                    <if condition="$data[5][patchUrl] != ''">
+                        <span style="margin-left:50px;color: green">已上传：{$data[5][patchUrl]}</span>
+                    </if>
+                </div>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+<script>
+    function delPic(id){
+        if(confirm("确认要删除吗？") == false){
+            return false;
+        }
+        //异步执行删除
+        $.ajax({
+            type: "POST",
+            url: "__ADMIN__/AdverList/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                    $("#viewUploadInput_88").val("");
+                    $("#viewUploadImg_88").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+                    var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_88')\">添加图片</a>";
+                    $("#poiter_88").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+    }
+</script>
+
+
+
+

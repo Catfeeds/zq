@@ -1,0 +1,61 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>{$seo_title}资讯_手机全球体育网</title>
+</block>
+<block name="append">
+    <include file="Public/append-widget"/>
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Mobile/css/news.css">
+    <script type="text/javascript">
+        var DOMAIN = "{:C('MAIN')}";
+    </script>
+</block>
+<block name="header">
+    <if condition="$_GET['header'] eq ''">
+    <header id="other_header" class="headFixed">
+        <a href="{:U('/')}"></a>
+        <span>新闻资讯</span>
+    </header>
+    </if>
+</block>
+<!-- 顶部结束 -->
+<!-- 导航-->
+<block name="nav">
+    <if condition="$_GET['header'] eq ''">
+    <include file="News/nav"/>
+    </if>
+</block>
+
+<!-- 内容 s -->
+<block name="content">
+    <section class="news_hot clearfix">
+        <ul class='posts' <if condition="$_GET['header'] eq ''">style="margin-top: 0.7rem;"</if>>
+            <volist name="list" id="v">
+                <li class="list clearfix">
+                    <a href="<if condition="$v['is_original'] eq 0">{:U('/info_n/'.$v['id'].'@m')}<else/>{:U('/news/'.$v['id'])}</if><if condition="$_GET['header'] neq ''">?header=no</if>
+                    ">
+                        <div class="nh_top clearfix">
+                            <aside><img <notempty name='v.head'>src="{$v.head|frontUserFace=###}"<else/>src="__IMAGES__/default_head.png"</notempty> alt="{$v.nick_name}"></aside>
+                            <div class="nht_right boxf">
+                                <p><span>{$v.nick_name}</span></p>
+                                <h3>{$v.title}</h3>
+                            </div>
+                        </div>
+                        <!-- <p class="nt_des q-two">{$v.remark}</p> -->
+                    </a>
+                </li>
+            </volist>
+        </ul>
+        <input type="hidden" id="class_id" value="{$class_id}">
+        <div class="paged boxs">
+             <a href="javascript:;" class="btn btn-green boxs" id="loadMore">加载更多</a>
+            <div class="load_gif fs24 text-999" style='display:none;'>
+                <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>数据加载中，请稍候......</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">没有更多了</a>
+        </div>
+    </section>
+    <!-- 内容 e -->
+    <script type="text/javascript" src="__PUBLIC__/Mobile/js/news_class.js"></script>
+</block>

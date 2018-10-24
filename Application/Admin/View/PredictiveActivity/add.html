@@ -1,0 +1,36 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="{$vo.id}" />
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			<div class="unit">
+				<label>活动标题：</label>
+				<textarea maxlength="255" class="large bLeft required" name="title"  rows="2" cols="50">{$vo.title}</textarea>
+			</div>
+
+			<div class="unit">
+			    <label>免费时间</label>
+			    <input type="text" size="15" readonly="true" datefmt="yyyy-MM-dd H:m" class="date textInput readonly required valid" value="<if condition='$vo.start_time eq 0'>{:date('Y-m-d H:i:s')}<else/>{$vo.start_time|date='Y-m-d H:i',###}</if>" name="start_time"> <label style="width:15px">至</label>
+			    <input type="text" size="15" readonly="true" datefmt="yyyy-MM-dd H:m" class="date textInput readonly required valid" value="<if condition='$vo.end_time gt 0'>{$vo.end_time|date='Y-m-d H:i',###}</if>" name="end_time">
+			</div>
+
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft"  name="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+				</select>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+
+

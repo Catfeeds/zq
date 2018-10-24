@@ -1,0 +1,94 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input type="hidden" name="Type" value="{$_REQUEST.Type}">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li style="width: 380px">
+				<label>日期：</label>
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="15">至
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="15">
+			</li>
+			<if condition="$_REQUEST.Type eq 1">
+				<li>
+					<label>编辑人员：</label>
+					<input type="text" name="nickname" value="{$_REQUEST.nickname}"/>
+				</li>
+			<else/>
+				<li>
+					<label>栏目名称：</label>
+					<input type="text" name="name" value="{$_REQUEST.name}"/>
+				</li>
+			</if>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="30" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="70">编辑日期</th>
+			<if condition="$_REQUEST.Type eq 1">
+				<th width="70">编辑人员</th>
+			<else/>
+				<th width="70">资讯栏目名称</th>
+			</if>
+			<th width="70"><if condition="$_REQUEST.Type eq 1 or $_REQUEST.Type eq 2">资讯<else/>图库</if>发布数量</th>
+			<th width="70"><if condition="$_REQUEST.Type eq 1 or $_REQUEST.Type eq 2">资讯<else/>图库</if>阅读量</th>
+
+			<if condition="$_REQUEST.Type eq 1">
+				<th width="70">图库发布数量</th>
+				<th width="70">图库阅读量</th>
+			</if>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist name="list" id="item">
+				<tr target="sid_record" rel="{$item.id}">
+					<td>{$item.id}</td>
+					<td>
+						<if condition="$_REQUEST.startTime eq '' and $_REQUEST.endTime eq ''">
+							{:date('Y-m-d')}
+						<else/>
+							{$_REQUEST.startTime} 至 {$_REQUEST.endTime}
+						</if>
+					</td>
+					<if condition="$_REQUEST.Type eq 1">
+						<td>{$item.nickname}（{$item.account}）</td>
+					<else/>
+						<td>{$item.name}</td>
+					</if>
+					<td>{$item.news.number}</td>
+					<td>{$item.news.click_number}</td>
+
+					<if condition="$_REQUEST.Type eq 1">
+						<td>{$item.gallery.number}</td>
+						<td>{$item.gallery.click_number}</td>
+					</if>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

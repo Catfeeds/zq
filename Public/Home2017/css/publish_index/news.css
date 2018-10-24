@@ -1,0 +1,306 @@
+/**
+ * 全彩首页css样式文件
+ * 
+ * @author pengjian <245017279@qq.com>
+ * @since  2016-03-8
+**/
+
+
+/*主体内容*/
+.home,.main{ width: 1000px; margin: 0 auto }
+.main{ padding-top: 25px;padding-bottom: 15px}
+
+/*焦点新闻*/
+.focus-left{ width: 632px; float: left; }
+
+.slideBox{ width:632px; height:410px; overflow:hidden; position:relative;  }
+.slideBox .hd{ height:56px; width: 70px; overflow:hidden; position:absolute; right:0px; bottom:0px; z-index:1;background: #333333; color: #fff; line-height: 56px;font-size: 18px; text-align: center;  }
+
+.slideBox .bd{ position:relative; height:100%; z-index:0;  }
+.slideBox .bd li{ zoom:1; vertical-align:middle; } 
+        
+.slideBox .prev,
+.slideBox .next{ position:absolute; left:3%; top:50%; margin-top:-25px; display:block; width:27px; height:50px; background:url(../../images/publish_index/btn-left.png) no-repeat; filter:alpha(opacity=50);opacity:0.5;   }
+.slideBox .next{ left:auto; right:3%; background:url(../../images/publish_index/btn-right.png) no-repeat }
+.slideBox .prev:hover,
+.slideBox .next:hover{ filter:alpha(opacity=100);opacity:1;  }
+ 
+.slideBox .bd ul li .pic{ text-align:center; }
+.slideBox .bd ul li .pic img{ width:632px; height:354px; display:block; }
+.slideBox .bd ul li .title{ line-height:24px;   width: 562px; height: 56px;background: #666666; position:absolute; bottom: 0; left: 0; line-height: 56px; padding-left: 30px;  }
+.slideBox .bd ul li .title a{color: #fff; font-size: 18px}
+
+/*名师解盘*/
+.teacher-right{width: 356px; float: left; padding-left: 12px;}
+.teacher-title h4 {
+    font-size: 18px;
+    width: 356px; 
+    background: url(../../images/publish_index/t-title-bg.jpg) no-repeat right center;
+    margin-top: 0
+}
+.teacher-title h4 span{ padding-right: 10px }
+.teacher-item{ width:356px; height: 90px; position: relative; padding:8px; box-sizing:border-box;-moz-box-sizing:border-box; /* Firefox */-webkit-box-sizing:border-box; /* Safari */ margin-bottom: 7px;  }
+.teacher-item .tuij-top{ display: block; width: 50px; height: 50px; position: absolute;right: 0;top:0; background:url(../../images/publish_index/tuij-top.png) no-repeat;  }
+.teacher-item .img-l{float: left; width:70px; height: 70px;
+    margin: 0 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
+    background: #ffffff;
+    padding: 3px;
+    padding-top: 4px;
+    border: 1px solid #e5e5e5; }
+   .teacher-item .img-l img{ width:60px; height: 60px; border-radius:50%;} 
+.teacher-item .des-r{float: left; width:250px; height: auto; padding-left: 0;}
+.teacher-item .des-r h4{ font-size: 14px; margin: 0 ; display: block; float: left}
+.teacher-item .des-r h4 a{color:#2a6cb8;padding-right:10px;float: left; display:block;overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.teacher-item .des-r p{color: #888888;font-size: 12px;float: left; margin-bottom: 5px;margin-top: 2px }
+.teacher-item .des-r .sm_des{color: #eb0000;}
+.teacher-item .des-r p span{color: #eb0000;font-size: 12px }
+.teacher-item .des-r .des-title{   font-size: 14px; color: #333333; float: left; width: 100%;
+display:block;/*内联对象需加*/
+word-break:keep-all;/* 不换行 */
+white-space:nowrap;/* 不换行 */
+overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/ }
+.teacher-item:first-child{border-top: 1px solid #f2f2f2}
+
+
+/*广告*/
+.ads{ padding-top: 13px }
+
+/*足球*/
+.football{ padding-top: 20px; }
+
+.football-left{width: 660px; float: left;}
+.football-title{float: left; width: 100%}
+.football-title .football-t-left{ float: left; width: 130px; }
+.football-title .football-t-left img{ vertical-align: middle;float: left; padding: 0 5px }
+.football-title .football-t-left h1{ font-weight: bold; margin-top: 0 }
+.football-title .football-t-right{width: 530px; height: 39px; float:right; border-bottom: 3px solid #2a6cb8; }
+.football-title .football-t-right span{ display: block; height: 39px; line-height: 39px; width: 120px; float: left; font-size: 28px; color: #333333;   }
+.football-title .football-t-right ul{ float: right; }
+.football-title .football-t-right ul li{ float: left; padding-top: 15px; padding-left: 23px; color: #8a8a8a; font-size: 12px; }
+.football-title .football-t-right ul li a{color: #8a8a8a; font-size: 12px;}
+.football-title .football-t-right ul li a:hover{color: #ff8c33 }
+
+/*public*/
+.infor-con{ padding-top: 20px;}
+.fitem-title{ width: 100%; height: 64px; border-bottom: 2px solid #2e76c7; position: relative;margin-bottom: 20px;}
+.fitem-left{ position: absolute; left: 0; top: -1px;}
+.fitem-title h4{ width: 206px; height: 64px; padding-top: 20px; padding-left: 28px;  text-align: center; color: #fff; font-size: 24px; background: url(../../images/index/big-title-bg.png) no-repeat 0 0; margin: 0;}
+.fitem-title h4 span{ padding-top: 3px;}
+.fitem-left .tj{ width: 35px; height: 35px; background: url(../../images/index/tj-icon.png) no-repeat 0 center; margin-right: 4px;}
+.fitem-left .qb{ width: 35px; height: 35px; background: url(../../images/index/qb-icon.png) no-repeat 0 center; margin-right: 4px;}
+.fitem-left .zx{ width: 35px; height: 35px; background: url(../../images/index/zx-icon.png) no-repeat 0 center; margin-right: 4px;}
+.fitem-left .tp{ width: 35px; height: 35px; background: url(../../images/index/tp-icon.png) no-repeat 0 center; margin-right: 4px;}
+.fitem-line{ margin-top: 36px;}
+.fitem-line li{ float: left;}
+.fitem-line li a{ padding: 0 14px;}
+.fitem-line li.on a{ color:#2a6cb8}
+.more-icon{ margin-left: 36px;}
+.more-icon i{ width: 20px; height: 20px; background: url(../../images/index/more-icon.png) no-repeat 0 0;}
+
+/*英超public*/
+.news-list{ float: left; width: 100%;margin-bottom: 20px }
+.news-list ul li{width: 330px; float: left; padding-right: 20px; height: 33px; line-height: 33px; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.news-list ul li a{padding-left: 6px;}
+.news-list ul li a:hover{ text-decoration: underline !important; }
+
+.img-list{ width: 100%; float: left; padding-top: 10px;margin-bottom: 30px; }
+.img-list ul li{ float: left; width: 210px; height: 146px; position: relative; margin-right: 15px }
+.img-list ul li .img-type{ background: #ff8c33; width: 46px; height: 24px; position: absolute; top:0; left: 0; text-align: center; color: #fff; line-height: 24px; font-size: 12px }
+.img-list ul li .video-type{ background: #29c782; width: 46px; height: 24px;position: absolute; top:0; left: 0;text-align: center; color: #fff; line-height: 24px; font-size: 12px }
+.img-list ul li .img-title{background:url(../../images/publish_index/img-bg.png) repeat-x center top; width:100%; height: 26px; color: #fff; line-height: 26px;  position: absolute; left: 0; bottom: -10px; padding-left: 15px;display: block; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap; }
+
+/*足球-右边*/
+.football-right{ width: 302px; float: right; }
+/*热点专题*/
+.hot-news{ width: 100%; padding-top: 15px; float: left;  }
+.hot-news .hot-img{width: 142px; height: 101px; float: left;}
+.hot-news .hot-des{width: 155px; height: 101px; float: right; position: relative;}
+.hot-news .hot-des .detail{ width: 66px; height: 25px; position: absolute; right: 0; bottom: -10px;background:url(../../images/publish_index/hot-bg.jpg) no-repeat center top; color: #fff; text-align: center; line-height: 25px; }
+.hot-news .hot-des .detail a{color: #fff}
+.hot-news .hot-des h4{ font-size: 14px;margin-top: 0  }
+.hot-news .hot-des p{ font-size: 12px; color: #777777 }
+.hot-news .hot-des h4 a{display: block; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+/*竞彩*/
+.jingcai{width: 100%; float: left; padding: 20px 0 10px 0}
+.jingcai-list{float: left;}
+.jingcai-list ul li{ width: 302px; height: 35px; line-height: 35px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; }
+.jingcai-list ul li img{padding-right: 5px}
+.jingcai-list ul li a:hover{ text-decoration: underline !important; }
+
+/*全球体育客户端*/
+.client-down{width: 302px; border:1px solid #dddddd; padding:17px 65px; float: left; margin-top: 7px;margin-bottom: 15px;}
+.client-down .ewm{ width: 100px; height: 100px; float: left }
+.client-right{ float: left;padding-left: 27px }
+.client-right a{font-size: 12px}
+.client-right .android{color: #40c98d}
+.client-right .ios{color: #00a3ff}
+
+/*篮球*/
+.basketball{ padding-top: 40px }
+.basketball-left {
+    width: 660px;
+    float: left;
+}
+.basketball-right{ width: 302px; float:right; padding-top: 5px;}
+.game-all ul li{ float: left; margin-top: 20px; width: 302px;height: 175px; position: relative; }
+.game-all ul li span{ width: 52px; height: 52px; display: block; position: absolute;left: 50%; top:50%; background:url(../../images/publish_index/btn-video.png) no-repeat center top; margin-left: -26px; margin-top: -26px; }
+.game-all ul li p{width: 100%; height: 34px;background:url(../../images/publish_index/nba-title.png) repeat-x center top;color: #fff; line-height: 34px;  position: absolute; left: 0; bottom: -10px; font-size: 12px; padding-left: 10px; }
+/*篮球广告*/
+.ads-basketball{margin-top: 30px; float: left;}
+
+/*综合体育*/
+
+.synthetic{width: 100%; float: left; padding-top: 40px}
+.synthetic-con{ width: 100%; float: left; padding-top: 20px }
+.sy-con-left{ width: 315px; float: left; }
+.syc-left-top{padding-top: 10px}
+.sy-con-left img{  }
+.sy-con-left p{ float: left; height: 32px; line-height: 32px; width: 100%; background: #666666;color: #fff; padding-left: 10px; font-size: 16px  }
+.syc-left-bottom{float: left;width: 100%; padding-top: 23px}
+.syc-left-bottom ul li{width: 315px; float: left;  height: 33px; line-height: 33px; box-sizing: border-box;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.syc-left-bottom ul li img{padding-right: 5px}
+.syc-left-bottom ul li a:hover{ text-decoration: underline !important; }
+
+/*综合体育-图集视频*/
+.sy-con-right{width: 665px; float: right;}
+.sy-con-right ul li{width: 320px; float: left;  height: 34px; line-height: 34px; box-sizing: border-box;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; margin-right: 25px}
+.sy-con-right ul li img{padding-right: 5px}
+.sy-con-right ul li a:hover{ text-decoration: underline !important; }
+.sy-con-right ul .line{border-bottom: 1px solid #e5e5e5;height: 10px; margin-bottom: 10px}
+.sy-imglist{padding-top: 20px}
+.sy-imglist ul li{width: 184px; height: 128px; padding-right: 20px}
+.sy-imglist ul li img{width: 184px; height: 128px;}
+
+/*彩票-新闻列表*/
+.Lottery-news{width: 655px; float: left;padding-top: 20px}
+.Lottery-news ul li{width: 315px; float: left;  height: 33px; line-height: 33px; box-sizing: border-box;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; margin-right: 25px}
+.Lottery-news ul li img{padding-right: 5px}
+.Lottery-news ul li a:hover{ text-decoration: underline !important; }
+
+/*广告*/
+.ads-Lottery{ padding-top: 20px; float: right; }
+
+/*精品图库*/
+/*.photos-main{width: 100%; float: left; padding-top: 30px}
+.photos-main-big{ width: 540px; height: 318px; float: left; position: relative; }
+.photos-main-big .img-title{background: rgba(0,0,0,0.6);width:100%; height: 34px; text-align: center; color: #fff; line-height: 34px;  position: absolute; left: 0; bottom: -10px; padding: 0 15px;overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap; }
+.photos-main-big:hover .img-title{ height: 100%; height: 318px; line-height: 318px; }
+
+.photos-main-small{ width: 440px; height: 318px; float: right; }
+.photos-main-small ul li{float: left; width: 215px; height: 155px; margin: 0 10px 8px 0; position: relative;}
+.photos-main-small ul li .img-title{background: rgba(0,0,0,0.6); width:100%; height: 26px; color: #fff; line-height: 26px;  position: absolute; left: 0; bottom: -10px; padding-left: 15px }
+.photos-main-small ul li:hover .img-title{ height: 100%; height: 155px; line-height: 155px;}*/
+
+/* 友情链接 */
+.fs-link ul{ padding-top: 18px;}
+.fs-link ul li{ float: left; margin-right: 27px; margin-bottom: 12px;}
+.fs-link ul li a{ color: #555;}
+.fs-link ul li a:hover{ color: #ff7e00;}
+.friend-con .stat-title{ background: url(../../images/index/b-line.png) repeat-x left center;}
+.friend-con .stat-title h4{ color: #333; text-align: center;}
+.friend-con .stat-title h4 span{ background: #fff; padding: 0 10px;}
+.stat-title{ border-bottom: 1px solid #e5e5e5; background: url(../../images/index/stat-title-bg.png) no-repeat left center; padding-left: 24px;}
+.stat-title h4{ font-size: 22px; margin: 0;  height: 40px; line-height: 40px; color: #fff;}
+.stat-title .title-nav li{ float: left; color: #8a8a8a; margin: 0 2px; padding-top: 18px; font-size: 12px;}
+ 
+/*右边顶部标题*/
+.section-title h4{ font-size: 16px; padding-right: 175px; background: url(../../images/publish_index/title_bg.png) no-repeat right center;}
+.section-title h4 span{ margin-right: 5px;}
+.more{ padding-top: 10px;}
+.more a{ color: #8a8a8a; font-size: 12px;}
+.more a:hover{ color: #ff7e00;}
+
+
+/* 鼠标移过球队 */
+.hover {
+	cursor: default;
+	border-radius: 50%;
+	text-align: center;
+	position: relative;
+	z-index: 1;
+}
+
+.hover:after {
+	pointer-events: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	content: '';
+	-webkit-box-sizing: content-box; 
+	-moz-box-sizing: content-box; 
+	box-sizing: content-box;
+}
+
+.hover:before {
+	speak: none;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+}
+.hover {
+	background: rgba(255,255,255,0.1);
+	-webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
+	-moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
+	transition: transform ease-out 0.1s, background 0.2s;
+}
+
+.hover:after {
+	top: 0;
+	left: 0;
+	padding: 0;
+	z-index: -1;
+	box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
+	opacity: 0;
+	-webkit-transform: scale(0.9);
+	-moz-transform: scale(0.9);
+	-ms-transform: scale(0.9);
+	transform: scale(0.9);
+}
+
+.hover:hover {
+	-webkit-transform: scale(0.93);
+	-moz-transform: scale(0.93);
+	-ms-transform: scale(0.93);
+	transform: scale(0.93);
+}
+
+.hover:hover:after {
+	-webkit-animation: sonarEffect 1.3s ease-out 75ms;
+	-moz-animation: sonarEffect 1.3s ease-out 75ms;
+	animation: sonarEffect 1.3s ease-out 75ms;
+}
+
+/* 赛事直播 */
+.div03{width: 100%; float: left;}
+.div03 .match-list li{ padding: 14px 0; position: relative;}
+.div03 .match-list li.li02{ background: #f7f7f7;}
+.div03 .match-list .mat{ width: 33.3%; text-align: center;}
+.div03 .match-list .mat p{ margin-bottom: 5px; font-size: 12px;}
+.div03 .match-list .mat.team p{ margin-bottom: 0; margin-top: 5px; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.div03 .match-list .mat .team-vs{ margin-bottom: 0; padding-top: 5px;}
+.div03 .match-list .mat .team-vs em{ margin: 0 5px;}
+.div03 .match-list .vds-link{ display: none; position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#99000000', endColorstr='#99000000'); line-height: 95px;}
+.div03 .match-list .vds-link a{ float: left; width: 33.3%; text-align: center; color: #fff;}
+.div03 .match-list .vds-link a:hover{ color: #10af63; }
+.div03 .match-list li:hover .vds-link{ display: block;}
+/* 小标点 */
+.news-list ul li img{ width: 3px;height: 3px; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

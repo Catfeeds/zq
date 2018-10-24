@@ -1,0 +1,141 @@
+/**
+ * jquery.validate 自定义插件 样式
+ * 
+ * @author Ansion <1572309495@qq.com>
+ * @since  2015-6-16
+ */
+.field-msg{
+	position: absolute;
+	top: 50%;
+	margin-left: 10px;
+	margin-top: -10px;
+	left: 100%;
+	white-space: nowrap;
+	min-width: 72px;
+	text-align: center;
+	height: 20px;
+	line-height: 15px;
+	font-size: 12px;
+	padding: 3px 6px;
+	background-color: #A94442;
+	color: #fff!important;
+	border-radius: 3px;
+	display: inline-block;
+	z-index:1000
+}
+.field-msg:after {
+	content: '';
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border: 5px solid #A94442;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+	border-left: 0;
+	position: absolute;
+	left: -5px;
+	top: 50%;
+	margin-top: -5px;
+}
+label.field-warning {
+	background:#387aaf;
+}
+label.field-warning:after{
+	content: '';
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border: 5px solid #387aaf;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+	border-left: 0;
+	position: absolute;
+	left: -5px;
+	top: 50%;
+	margin-top: -5px;
+}
+label.field-success{
+	background:#3c763d;
+}
+label.field-success:after{
+	content: '';
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border: 5px solid #3c763d;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+	border-left: 0;
+	position: absolute;
+	left: -5px;
+	top: 50%;
+	margin-top: -5px;
+}
+input.field-error,textarea.field-error,select.field-error{
+	border-color: #e61c15 !important;
+	/*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #e61c15;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #e61c15;*/
+}
+input.field-warning,textarea.field-warning,select.field-warning{
+	border-color: #387aaf !important;
+	/*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #66afe9;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #66afe9;*/
+}
+input.field-success,textarea.field-success,select.field-success{
+	border-color: #3c763d !important;
+	/*-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 2px #83f384;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 2px #83f384;*/
+}
+/*为兼容后台设置如下css*/
+span.field-error {
+	background:#A94442;
+	height:20px;
+	line-height:18px;
+	padding:0px;
+	margin:0px;
+	left:400px;
+}
+span.field-warning {
+	background:#387aaf;
+	height:20px;
+	line-height:18px;
+	padding:0px;
+	margin:0px;
+	left:400px;
+}
+span.field-warning:after{
+	content: '';
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border: 5px solid #387aaf;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+	border-left: 0;
+	position: absolute;
+	left: -5px;
+	top: 50%;
+	margin-top: -5px;
+}
+span.field-success{
+	background:#3c763d;
+	height:20px;
+	line-height:18px;
+	padding:0px;
+	margin:0px;
+	left:400px;
+}
+span.field-success:after{
+	content: '';
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border: 5px solid #3c763d;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+	border-left: 0;
+	position: absolute;
+	left: -5px;
+	top: 50%;
+	margin-top: -5px;
+}

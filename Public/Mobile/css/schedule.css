@@ -1,0 +1,48 @@
+/**
+ * 赛程css样式文件
+ * 
+ * @author pengjian <710348662@qq.com>
+ *
+ * @since  2016-04-11
+**/
+
+/*日期选择*/
+.day{padding: .05rem 0;width: 100%;position: relative; text-align: center;}
+.day .day_sele{width:3.7rem;height: .68rem;line-height: .68rem;font-size: .28rem; border:1px solid #dddddd; border-radius: 5px; padding-left:.2rem; }
+.day .today{width: .9rem; height: .68rem; line-height: .68rem; background: #eeeeee; border-radius: 5px; text-align: center;position: absolute;right: .2rem;bottom: .05rem}
+
+/*赛程列表*/
+.ball_type{ width: 100%; height: .44rem;background: #e5e5e7;padding-left: .2rem;font-size: .26rem;-webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+   box-sizing: border-box;  }
+.ball_type img{vertical-align: middle;padding-right: .15rem;float: left;padding-top: .14rem; }
+.ball_type em{
+	background: url(../images/football.png) no-repeat left center; 
+	background-size: .18rem .18rem;  
+    display: block;
+    width: .18rem;
+    height: 100%;
+    float: left;padding-right: .1rem
+}
+.ball_type span{display: block;float: left; line-height: .44rem;}
+.color_dmj{color: #7c7cff}
+.color_bxj{color: #0fdb00}
+.color_mxl{color: #ed07da}
+
+.color_dj{color: #1385fa}
+.color_yc{color: #fc7c7c}
+.color_yj{color: #00bcf2}
+
+.color_U19{color: #dfc700}
+
+.ball_list{height: .95rem;background: url(../images/s_list.png) no-repeat 98% center ; background-size: .22rem .4rem;  }
+.ball_list a{display: block; width: 100%;height: 100%}
+.ball_list .time{width: 1rem; height: 100%;line-height: .95rem; border-right: 3px solid #e5e5e7;float: left; text-align: center;margin-right: .3rem}
+.t_list{font-size: .26rem; height: .3rem; line-height: .3rem;padding-top: .15rem}
+.t_list:last-child{padding-top: .1rem}
+.t_list span{display: block; float: left; }
+.t_list .s1{width: 68%;}
+.t_list .s2{width: 10%;color: #eb0000;padding-right: 2%}
+.t_list .s3{width: 10%}
+
+

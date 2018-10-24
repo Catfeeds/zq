@@ -1,0 +1,81 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>{$unionName}_视频集锦_视频直播_全球体育qqty.com</title>
+    <meta name="keywords" content="{$unionName},赛前分析、足球推荐、足球分析、竞彩推荐、竞彩分析、篮球分析、篮球推荐"/>
+    <meta name="description" content="{$unionName},全球体育为广大彩民提供最新的足球推荐、竞彩分析、篮球预测、英超、意甲、西甲、德甲、欧冠等新闻资讯、赛事直播和比赛视频"/>
+</block>
+<block name="body">
+<body>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/highlights/videoList.css">
+    <script>
+        var DOMAIN = "__DOMAIN__";
+    </script>
+    <!-- 顶部开始 -->
+    <include file="Public:top_index" />
+    <!-- 顶部结束 -->
+	
+    <!-- 主体内容 -->
+    <div class="main">
+    	<!-- 当前位置标题 -->
+        <div class="position">
+            当前位置：<span class="now"><a href="//__DOMAIN__">首页</a></span> > <span class="now"><a href="{:U('/Video/')}">视频直播</a></span> > <span class="now"><a href="{:U('/Highlights')}">视频集锦</a></span> > <span>{$unionName}</span>
+        </div>
+        <!-- 当前位置标题 -->
+        
+        <!-- 集锦list -->
+        <div class="video_list_con">
+            <!-- 列表 -->
+        	<div class="list_box mod_figures">
+            	<ul class="clearfix posts">
+                <volist name="highlights" id="item">
+            		<li class="list_item">
+                        <a href="<if condition="$item.web_ischain eq 0">{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}<else/>{$item.web_url}</if>" target="_blank" class="figure" tabindex="-1"> 
+                            <img class="lazy" src="{$item.img}" width="186" height="104" alt="NBA">
+                        </a>          
+                        <strong class="figure_title">
+                            <a href="<if condition="$item.web_ischain eq 0">{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}<else/>{$item.web_url}</if>" target="_blank">{$item.title}</a>
+                        </strong>
+                        <div class="figure_info">
+                            <span class="figure_info_brand">
+                                <span class="info_inner">{$item.add_time|format_date}</span>
+                            </span>
+                            <span class="figure_info_play figure_info_right">
+                                <i class="ico_play_12"></i>
+                                <span class="info_inner">{$item.click_num}</span>
+                            </span>
+                        </div>
+                    </li>
+                </volist>
+            	</ul>
+            </div>
+            <!-- 列表 -->
+        </div>
+        <!-- 集锦list -->
+  		<div class="paged">
+            <a href="javascript:;" class="btn btn-green" id="loadMore">显示更多</a>
+            <a href="javascript:;" class="btn btn-default" style="display:none;cursor:default;" id="showLess">没有更多了</a>
+        </div>
+        <input type="hidden" id="game_type" value="{$Think.get.game_type}">
+        <input type="hidden" id="union_id" value="{$Think.get.union_id}">
+    </div>
+    <!-- 主体内容 -->
+    
+    <!-- 返回顶部开始 -->
+    <div class="return-top">
+        <a href="#">
+        	<span class="ft_bg"></span>
+        	<span>回顶部</span>
+        </a>
+    </div>
+    <!-- 返回顶部结束 -->
+ 
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer" />
+    <!-- 底部版权信息结束 -->
+
+</body>
+</html>
+<!--引入本页所需js-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/highlights/highlights.js"></script>
+</block>

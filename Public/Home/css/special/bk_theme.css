@@ -1,0 +1,284 @@
+/**
+ * index css
+ *
+ * @author Chensiren <245017279@qq.com>
+ * 
+ * @since  2018-01-16
+ *
+**/
+.table > tbody > tr > td { border-top: none 0;}
+.skewRight{ -webkit-transform: skew(-30deg) translateZ(0); -moz-transform: skew(-30deg) translateZ(0); -ms-transform: skew(-30deg) translateZ(0); -o-transform: skew(-30deg) translateZ(0); transform: skew(-30deg) translateZ(0);}
+.skewLeft{ -webkit-transform: skew(30deg) translateZ(0); -moz-transform: skew(30deg) translateZ(0); -ms-transform: skew(30deg) translateZ(0); -o-transform: skew(30deg) translateZ(0); transform: skew(30deg) translateZ(0);}
+.glyphicon{display: inline;}
+.themeBox{ width: 100%; padding-top: 111px; min-height: 500px;}
+
+/* 联赛背景 theme-banner */
+.nbaTheme{ background: url(../../images/special/theme-banner/nba-theme-banner.png?20180615) no-repeat center 0;}
+.cbaTheme{ background: url(../../images/special/theme-banner/cba-theme-banner.png?20180615) no-repeat center 0;}
+.nbaTheme{ padding-top: 112px;}
+
+.themeNavBox{ width: 1024px; margin: 0 auto; -webkit-transform: skew(30deg) translateZ(0); -moz-transform: skew(30deg) translateZ(0); -ms-transform: skew(30deg); -o-transform: skew(30deg) translateZ(0); transform: skew(30deg) translateZ(0);}
+
+.nbaTheme .themeNavBox{ background: #c3122e;}
+.cbaTheme .themeNavBox{ background: #a13518;}
+
+.themeNavIn{ -webkit-transform: skew(-30deg) translateZ(0); -moz-transform: skew(-30deg) translateZ(0); -ms-transform: skew(-30deg) translateZ(0); -o-transform: skew(-30deg) translateZ(0); transform: skew(-30deg) translateZ(0);}
+.themeLogo a{ display: block; width: 210px; height: 48px; line-height: 48px; text-align: center; webkit-transform: skew(30deg); -moz-transform: skew(30deg);
+ -ms-transform: skew(30deg); -o-transform: skew(30deg); transform: skew(30deg);}
+ 
+.nbaTheme .themeLogo a{ background: #c3122e;}
+.cbaTheme .themeLogo a{ background: #a13518;}
+ 
+.themeLogo a img{ -webkit-transform: skew(-30deg) translateZ(0); -moz-transform: skew(-30deg) translateZ(0); -ms-transform: skew(-30deg) translateZ(0); -o-transform: skew(-30deg) translateZ(0); transform: skew(-30deg) translateZ(0);}
+.themeNav{ height: 48px; webkit-transform: skew(30deg) translateZ(0); -moz-transform: skew(30deg) translateZ(0); -ms-transform: skew(30deg) translateZ(0); -o-transform: skew(30deg) translateZ(0); transform: skew(30deg) translateZ(0);}
+
+.nbaTheme .themeNav{ background: #c3122e;}
+.cbaTheme .themeNav{ background: #a13518;}
+
+.themeNav ul{ padding-left: 30px; -webkit-transform: skew(-30deg) translateZ(0); -moz-transform: skew(-30deg) translateZ(0); -ms-transform: skew(-30deg) translateZ(0); -o-transform: skew(-30deg) translateZ(0); transform: skew(-30deg) translateZ(0);}
+.themeNav ul li a{ display: block; height: 48px; line-height: 48px; color: #fff; font-size: 16px; padding: 0 20px; transition: .2s; -webkit-transition: .2s; -moz-transition: .2s; -o-transition: .2s;}
+
+.themeNav ul li.on, .themeNav ul li:hover {
+    -webkit-transform: skew(30deg) translateZ(0);
+    -moz-transform: skew(30deg) translateZ(0);
+    -ms-transform: skew(30deg) translateZ(0);
+    -o-transform: skew(30deg) translateZ(0);
+    transform: skew(30deg) translateZ(0);
+    transition: ease-out 0.3s;
+}
+.themeNav ul li.on span, .themeNav ul li:hover span {
+    display: inline-block;
+    -webkit-transform: skew(-30deg) translateZ(0);
+    -moz-transform: skew(-30deg) translateZ(0);
+    -ms-transform: skew(-30deg) translateZ(0);
+    -o-transform: skew(-30deg) translateZ(0);
+    transform: skew(-30deg) translateZ(0);
+    transition: ease-out 0.3s;
+}
+.themeNav ul li.on a, .themeNav ul li a:hover { background: #fff; background: rgba(255,255,255,0.2); transition: ease-out 0.3s;}
+
+.position { padding: 10px; margin-top: 12px;}
+.liveList{ margin-bottom: 28px;}
+.liveList .roundList{ height: 116px; line-height: 116px; color: #fff; text-align: center; width: 72px;}
+
+.nbaTheme .liveList .roundList{ background: #c3122e;}
+.cbaTheme .liveList .roundList{ background: #a13518;}
+
+.liveList .liveScroll{ width: 952px; height: 116px;}
+.liveList .liveScroll .prev,.liveList .liveScroll .next{ height: 100%; width: 24px; line-height: 116px; text-align: center; color: #fff;}
+
+.nbaTheme .liveList .liveScroll .prev,.nbaTheme .liveList .liveScroll .next{ background: #006cb7;}
+.cbaTheme .liveList .liveScroll .prev,.cbaTheme .liveList .liveScroll .next{ background: #c08019;}
+
+.liveList .scrollWrap{ width: 904px; overflow: hidden; position: relative;}
+.liveList .scrollWrap ul{ position: relative;}
+.liveList .scrollWrap ul li{ float: left; height: 116px; position: relative;}
+.liveList .scrollWrap ul li a{ display: block; width: 113px; height: 116px; border-right: 1px solid #f0f0f0;}
+.liveList .timeBox{ text-align: center; padding: 2px 0;}
+
+.nbaTheme  .liveList .timeBox{ background: #e0e0e0;}
+.cbaTheme  .liveList .timeBox{ background: #e0e0e0;}
+
+.nbaTheme .liveList .scrollWrap ul li a:hover{ border: 1px solid #c3122e;}
+.cbaTheme .liveList .scrollWrap ul li a:hover{ border: 1px solid #a13518;}
+
+.liveList .teamHome,.liveList .teamAway{ margin-bottom: 4px; padding: 4px 6px; color: #4c4c4c;}
+.liveList .teamHome .teamName,.liveList .teamAway .teamName{ max-width: 72px;}
+.liveList .liveTypeCon{ padding: 3px 0 3px 10px; background: #f6f6f6;}
+.liveList .endType{ color: #999;}
+.liveList .noStatType{ color: #333333;}
+.liveList .liveType{ color: #de0000;}
+
+/*新闻*/
+.themeNews{ width: 308px;}
+.dlNews{ padding-bottom: 10px;}
+.themeNews h2{ font-size: 18px; word-break: break-all; font-weight: 700;}
+.themeNews h2,.dlNews li{ margin-bottom: 10px;}
+.themeNews h2 a{height: 26px; line-height: 26px; display: block; word-break: break-all; overflow: hidden; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis;}
+.dlNews li a{ overflow: hidden; word-break:keep-all; white-space:nowrap; display:block; text-overflow: ellipsis; -webkit-text-overflow: ellipsis;}
+.dlNews li span{ margin-top: -4px; color: #fff; padding: 2px 4px; margin-right: 3px;}
+.dlNews li span.red-tip{background: #de0000;}
+.dlNews li span.blue-tip{background: #368def;}
+
+.themeMedia{ width: 400px; margin-left: 25px;}
+.themeMedia .banner{ width: 400px;}
+.themeMedia .carousel-inner img{width: 400px !important;height: 250px !important;-webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.themeMedia .carousel-inner img:hover{-webkit-transform: scale(1.2) translateZ(0); -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1); transform: scale(1.2) translateZ(0); transition: transform .75s cubic-bezier(0,1,.75,1);}
+.themeMedia .carousel-control { display: block; height: 90px; width: 34px; background: #000; opacity: 0.3; filter: alpha(opacity=30); top: 50%; margin-top: -45px;}
+.themeMedia .carousel-control:hover{opacity: 0.75; filter: alpha(opacity=75);}
+.themeMedia .carousel span{ display: block; width: 100%; height: 100%; overflow: hidden; }
+.themeMedia .carousel .left span{ background: url(../../images/index/prev-arrow.png) no-repeat center center;}
+.themeMedia .carousel .right span{ background: url(../../images/index/next-arrow.png) no-repeat center center;}
+.themeMedia .carousel-indicators{ margin-bottom: 0; left: 98%!important;  bottom: 10px!important;text-align: right; z-index: 999; width: 30%;}
+.carousel-indicators li { border: none; background-color: #fff; margin: 0 0;margin-left: 5px;}
+.carousel-indicators .active { width: 10px; height: 10px; background-color: #1078c0; border: 1px solid #1078c0; box-shadow: none; margin: 0 0;margin-left: 5px;}
+.fbanner-title{position: absolute;bottom: 0; left: 0;z-index: 99; background: rgba(0,0,0,0.6); height: 45px; line-height: 45px; width: 100%;display: block; color: #fff; padding-left: 10px; font-size: 16px;overflow: hidden;text-overflow: ellipsis;word-break: keep-all;white-space: nowrap;}
+
+.themeMedia .liveList{ padding-top: 25px;}
+.themeMedia .liveList ul li{ margin-bottom: 20px;}
+.themeMedia .liveList ul li:last-child{ margin-bottom: 0;}
+.themeMedia .liveList .listTitle{ font-size: 18px; margin-bottom: 15px; position: relative;}
+.themeMedia .liveList .listTitle .moreTit{ line-height: 32px; font-size: 14px;}
+.themeMedia .liveList .listTitle .rightIcon{ padding: 0 1px; margin-left: 4px; color: #fff; font-size: 12px;}
+.themeMedia .liveList .listTitle .videoTit{ width: 120px; height: 32px; line-height: 32px; font-size: 18px; padding-left: 17px; font-weight: 700;}
+
+.nbaTheme .liveList .listTitle{ border-bottom: 2px solid #e5e5e5; color: #fff;}
+.cbaTheme .liveList .listTitle{ border-bottom: 2px solid #e5e5e5; color: #fff;}
+
+.nbaVideoTit,.nbaFxTit{ background: url(../../images/special/nba-tit.png) no-repeat 0 center;}
+.cbaVideoTit,.cbaFxTit{ background: url(../../images/special/cba-tit.png) no-repeat 0 center;}
+
+.nbaTheme .rightIcon{background: #bf000c;}
+.cbaTheme .rightIcon{background: #a13518;}
+
+.themeMedia .liveList .liveListImg{width: 140px; height: 96px; overflow: hidden; position: relative;}
+.themeMedia .liveList .coverMask {position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: #000; opacity: 0; filter: alpha(opacity=0); -webkit-transition: opacity .5s; transition: opacity .5s;}
+.themeMedia .liveList a:hover .coverMask{opacity: .2; filter: alpha(opacity=20); -webkit-transition: opacity .5s; transition: opacity .5s;}
+.themeMedia .liveList .liveListImg img { -webkit-transform: scale(1) translateZ(0); -webkit-transition: -webkit-transform .75s; transform: scale(1) translateZ(0); transition: transform .75s;}
+.themeMedia .liveList a:hover .liveListImg img {-webkit-transform: scale(1.2) translateZ(0); -webkit-transition: -webkit-transform .75s cubic-bezier(0,1,.75,1); transform: scale(1.2) translateZ(0); transition: transform .75s cubic-bezier(0,1,.75,1);}
+.themeMedia .liveList .playBtn {position: absolute; left: 50%; top: 50%; margin-left: -15px; margin-top: -15px; width: 30px; height: 30px; background: url(../../images/special/play-btn.png) no-repeat 0 0; filter: alpha(opacity=0); opacity: 0; -webkit-transform: scale(.7); -webkit-transition-property: opacity,-webkit-transform;-webkit-transition-duration: .5s; transform: scale(.7); transition-property: opacity,transform; transition-duration: .5s; zoom: 1;}
+.themeMedia .liveList a:hover .playBtn{ opacity: .9; -webkit-transform: scale(1); -webkit-transition-property: opacity,-webkit-transform; -webkit-transition-duration: .5s; transform: scale(1); transition-property: opacity,transform; transition-duration: .5s; cursor: pointer;}
+.themeMedia .liveList .liveListArt{ width: 260px; padding-left: 12px;}
+.themeMedia .liveList .liveListArt article{ font-size: 16px; height: 60px; overflow: hidden; line-height: 30px; margin-bottom: 8px; word-wrap: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; -moz-box-orient: vertical; word-break: break-all;}
+.themeMedia .liveList .liveListArt article .video-icon{ display: inline-block; width: 14px; height: 14px; color: #e82929; top: 2px; margin-right: 4px; background: url(../../images/common/red-video-icon.png) no-repeat 0 0; position: relative;}
+.themeMedia .liveList .author{ height: 28px; line-height: 28px;}
+.themeMedia .liveList .author img{ margin-right: 10px;}
+.themeMedia .liveList .liveListArt .rightEye{ padding-left: 20px; background: url(../../images/special/eye-icon.png) no-repeat 0 center; color: #999;}
+
+.lMatList{ width: 680px;}
+.lMatList .navList{ border-bottom: 2px solid #e5e5e5; margin-bottom: 20px;}
+
+.lMatList .navList{ border: 1px solid #e5e5e5;}
+ 
+.lMatList .navList ul li{ position: relative; z-index: 5;}
+.lMatList .navList ul li a{height: 48px; line-height: 48px; color: #333; padding: 0 20px; font-size: 20px; display: block; position: relative;}
+
+.navList .nbaNavList .navLink:after,.navList .nbaNavList .navLink:before,.navList .cbaNavList .navLink:after,.navList .cbaNavList .navLink:before{ transition: .2s; -webkit-transition: .2s; -moz-transition: .2s; -o-transition: .2s; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; -moz-transform-style: preserve-3d; -o-transform-style: preserve-3d; content: ''; position: absolute; bottom: -2px; width: 0%; height: 2px;}
+
+.navList .nbaNavList .navLink:after,.navList .nbaNavList .navLink:before{ background-color: #bf000c;}
+.navList .cbaNavList .navLink:after,.navList .cbaNavList .navLink:before{ background-color: #a13518;}
+
+.navList .nbaNavList.active .navLink:after,.navList .nbaNavList.active .navLink:before,.navList .cbaNavList.active .navLink:after,.navList .cbaNavList.active .navLink:before{ width: 50%; font-weight: 700;}
+
+.navList .nbaNavList .navLink:before,.navList .cbaNavList .navLink:before { right: 50%;}
+.navList .nbaNavList .navLink:after,.navList .cbaNavList .navLink:after { left: 50%;}
+
+.navList .active .navLink,.navList ul li.nbaNavList:hover>.navLink,.navList ul li.cbaNavList:hover>.navLink{ font-weight: 700;}
+
+.navList ul li.nbaNavList:hover>.navLink:after,.navList ul li.nbaNavList:hover>.navLink:before,.navList ul li.cbaNavList:hover>.navLink:after,.navList ul li.cbaNavList:hover>.navLink:before{ width: 50%;}
+
+.matListBox .listInfor{ margin-bottom: 30px;}
+.matListBox .listInfor a.inforLink{ display: block;}
+.matListBox .listInfor .inforArt{ width: 500px; padding-left: 20px;}
+.matListBox .listInfor .inforArt h2{ font-size: 20px; margin-bottom: 10px; font-weight: 700;}
+.matListBox .listInfor .inforArt .inforArtP{ height: 40px; margin-bottom: 15px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; -moz-box-orient: vertical; word-break: break-all;}
+.matListBox .listInfor .author{ height: 28px; line-height: 28px;}
+.matListBox .listInfor .author img{ margin-right: 10px;}
+.matListBox .listInfor .rightEye{ padding-left: 20px; background: url(../../images/special/eye-icon.png) no-repeat 0 center; color: #999;}
+.matListBox .listInfor .listInUl{ margin: 0 -2px; padding: 30px 0; border-bottom: 1px solid #e5e5e5; border-top: 1px solid #e5e5e5;}
+.matListBox .listInfor .listInUl li{ margin: 0 6px;}
+.matListBox .listInfor .listInUl li a{display: block; width: 216px; position: relative; color: #ffffff; overflow: hidden;}
+.matListBox .listInfor .listInUl li p{position: absolute; left: 0; bottom: 0; width: 100%; padding: 5px 8px; background: rgba(0,0,0,0.5);}
+.matListBox .more { display: block; height: 50px; line-height: 48px; text-align: center; font-size: 16px; color: #aeaeae; border: 1px solid #f0f0f0;}
+.matListBox .more:hover { background: #f4f4f4; border: 1px solid #f4f4f4; color: #828282;}
+
+.mainRight{ width: 280px;}
+
+.noRank{ display: inline-block; width: 18px; height: 18px; line-height: 18px; font-weight: 700;}
+.grayRank{ background: #999999; color: #fff;}
+.redRank{ background: #bf000c; color: #fff;}
+.goldRank{ background: #d4b207; color: #fff;}
+.nbaredRank{ background: #dd362e; color: #fff;}
+.nbablueRank{ background: #006cb7; color: #fff;}
+.cbaredRank{ background: #a13518; color: #fff;}
+.cbazongRank{ background: #c08019; color: #fff;}
+
+.poiTable,.shoTable{ border: 1px solid #dbdbdb; margin-bottom: 20px; padding-bottom: 10px;}
+.poiTable .table, .shoTable .table{ margin-bottom: 0;}
+.poiTable .poiTitle{ padding: 10px 0; border-bottom: 1px solid #dbdbdb;}
+.poiTable .bsTitle .nav{ width: 100%;}
+.poiTable .poiTitle h2{ padding-left: 12px; font-size: 20px; position: relative;}
+.poiTable .poiTitle h2 i{ position: absolute; left: 0; top: 5px; width: 6px; height: 18px;}
+
+.cbaTheme .poiTable .poiTitle h2 i{ background: #a13518;}
+
+.poiTable .bsTitle{ padding: 0;}
+.poiTable .bsTitle .nav span{ line-height: 28px;}
+.poiTable .bsTitle .nav a{ width: 48%; text-align: center; padding: 0 10px; font-size: 20px; color: #333; position: relative;}
+.poiTable .bsTitle .nav a:after,.poiTable .bsTitle .nav a:before { transition: .2s; -webkit-transition: .2s; -moz-transition: .2s; -o-transition: .2s; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; -moz-transform-style: preserve-3d; -o-transform-style: preserve-3d; content: ''; position: absolute; bottom: -12px; width: 0%; height: 2px;}
+
+.poiTable .bsTitle .nav a:after,.poiTable .bsTitle .nav a:before{ background-color: #bf000c;}
+
+.poiTable .bsTitle .nav a:before { right: 50%;}
+.poiTable .bsTitle .nav a:after { left: 50%;}
+.poiTable .bsTitle .nav a.active:after,.poiTable .bsTitle .nav a.active:before{ width: 50%; font-weight: 700;}
+.poiTable .bsTitle .nav a.active{ font-weight: 700;}
+.poiTable .bsTitle .nav a:hover::after,.poiTable .bsTitle .nav a:hover::before { width: 50%;}
+
+.poiTable .poiTitle .endRound,.shoTable .shoTitle .endRound{ margin: 10px 10px 0 0; font-size: 12px; font-weight: 700;}
+.poiTable .poiTableCon .playerName{ width: 84px;}
+.poiTable .table > thead > tr > th,.poiTable .table > tbody > tr > td,.shoTable .table > thead > tr > th, .shoTable .table > tbody > tr > td{ padding: 11px 8px;}
+
+.shoTable .aveTabBox{padding: 10px 0; border-bottom: 1px solid #dbdbdb;}
+.shoTable .aveTabBox a{width: 48%; text-align: center; padding: 0 10px; font-size: 16px; font-weight: 700; color: #333; position: relative;}
+
+.nbaTheme .shoTable .aveTabBox a.active,.shoTable .aveTabBox a:hover{ color: #bf000c;}
+.cbaTheme .shoTable .aveTabBox a.active,.shoTable .aveTabBox a:hover{ color: #a13518;}
+
+.shoTable .shoTabBox{border-bottom: 1px solid #dbdbdb;}
+.shoTable .bsTitle  .nav{ width: 100%;}
+.shoTable .bsTitle .nav a{ width: 32%; text-align: center; padding: 10px; font-size: 20px; color: #333; background: #fff; position: relative;}
+.shoTable .bsTitle .nav a.active{ background: #fff; font-weight: 700;}
+.shoTable .bsTitle .nav span{ line-height: 48px; background: #fff;}
+
+.shoTable .shoTabBox .nav a:after,.shoTable .shoTabBox .nav a:before { transition: .2s; -webkit-transition: .2s; -moz-transition: .2s; -o-transition: .2s; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; -moz-transform-style: preserve-3d; -o-transform-style: preserve-3d; content: ''; position: absolute; bottom: 0px; width: 0%; height: 2px;}
+
+.nbaTheme .shoTable .shoTabBox .nav a:after,.nbaTheme .shoTable .shoTabBox .nav a:before{ background-color: #bf000c;}
+.cbaTheme .shoTable .shoTabBox .nav a:after,.cbaTheme .shoTable .shoTabBox .nav a:before{ background-color: #a13518;}
+
+.shoTable .shoTabBox .nav a:before { right: 50%;}
+.shoTable .shoTabBox .nav a:after { left: 50%;}
+.shoTable .shoTabBox .nav a.active:after,.shoTable .shoTabBox .nav a.active:before{ width: 50%; font-weight: 700;}
+.shoTable .shoTabBox .nav a:hover:after,.shoTable .shoTabBox .nav a:hover:before { width: 50%;}
+.shoTable .shoTabBox .nav a:hover{ background: #fff;}
+.shoTable .shoTableCon .playerName{ width: 74px;}
+.shoTable .shoTableCon .teamName{ width: 72px;}
+
+.xqWeibo{ margin-bottom: 20px;}
+.xqWeibo p{ text-align: center;}
+.xqWeibo .fxTitle { padding: 10px 0; border-bottom: 1px solid #dbdbdb; margin-bottom: 15px;}
+.xqWeibo .fxTitle .fxTit { width: 120px; height: 32px; line-height: 32px; padding-left: 17px; font-size: 18px;}
+.xqWeibo .listTitle{ font-size: 18px; position: relative;}
+.xqWeibo .listTitle .xqTit { width: 120px; height: 32px; line-height: 32px; padding-left: 17px; font-size: 18px;}
+.xqWeibo .listTitle .fxTit{ width: 120px; height: 32px; line-height: 32px; padding-left: 17px; font-size: 18px;}
+.xqWeibo .listTitle .rightIcon{ padding: 0 1px; margin-left: 4px; color: #fff; font-size: 12px;}
+.xqWeibo .listTitle .moreTit{ line-height: 32px; font-size: 14px;}
+
+.fxInfor .fxTitle { padding: 10px 0; border-bottom: 1px solid #dbdbdb; margin-bottom: 15px;}
+.fxInfor .fxTitle .fxTit { width: 120px; height: 32px; line-height: 32px; padding-left: 17px;}
+.fxInfor .listTitle{ font-size: 18px; position: relative;}
+.fxInfor .listTitle .fxTit{ width: 120px; height: 32px; line-height: 32px; padding-left: 17px;}
+.fxInfor .listTitle .rightIcon{ padding: 0 1px; margin-left: 4px; color: #fff; font-size: 12px;}
+.fxInfor .listTitle .moreTit{ line-height: 32px; font-size: 14px;}
+
+.nbaTheme .xqWeibo .listTitle,.nbaTheme .fxInfor .listTitle{ border-bottom: 2px solid #e5e5e5; color: #fff;}
+.cbaTheme .xqWeibo .listTitle,.cbaTheme .fxInfor .listTitle{ border-bottom: 2px solid #e5e5e5; color: #fff;}
+
+.nbaTheme .xqWeibo .listTitle,.nbaTheme .fxInfor .listTitle{ margin-bottom: 15px;}
+.cbaTheme .xqWeibo .listTitle,.cbaTheme .fxInfor .listTitle{ margin-bottom: 15px;}
+
+.fxInfor .fxTitle h2 { padding-left: 12px; font-size: 20px; position: relative;}
+.fxInfor .fxTitle h2 i {position: absolute; left: 0; top: 5px; width: 6px; height: 18px;}
+
+.xqUl li{ margin: 0 11px; margin-bottom: 15px;}
+.xqUl li a{ display: block; width: 48px;}
+.xqUl .face{ width: 48px; height: 48px; text-align: center; line-height: 48px; border-radius: 50%; overflow: hidden;}
+.xqUl .face img{ width: 100%; height: 100%;}
+
+.fxUl .listIma{ margin-bottom: 10px;}
+.fxUl .listIma .leftIma{ width: 96px; height: 67px; overflow: hidden;}
+.fxUl .listIma .rigthText{ width: 184px;height: 40px; overflow: hidden; word-wrap: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; -moz-box-orient: vertical; word-break: break-all; padding-left: 5px; margin-top: 5px;}
+.fxInfor .fxUl .listText{ margin-bottom: 8px;}
+.fxInfor .fxUl .listText a{ display: block; position: relative;}
+
+

@@ -1,0 +1,148 @@
+<!--<include file="Public:pagerForm" />-->
+<form id="pagerForm" action="__URL__" method="post">
+	<input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+	<input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+	<input type="hidden" name="user_id" value="{$user_id}"/>
+	<input type="hidden" name="nick_name" value="{$game_id}"/>
+	<input type="hidden" name="username" value="{$username}"/>
+	<input type="hidden" name="content" value="{$content}"/>
+	<input type="hidden" name="_order" value="{$_REQUEST['_order']}"/>
+	<input type="hidden" name="_sort" value="{$_REQUEST['_sort']|default='1'}"/>
+	<input type="hidden" name="listRows" value="{$_REQUEST['listRows']}"/>
+	<volist name="map" id="m">
+		<input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+	</volist>
+</form>
+
+<link rel="stylesheet" href="__PUBLIC__/Home/css/emoji.css">
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>用户id：</label>
+				<input type="text" name="user_id" value="{$_REQUEST.user_id}"/>
+			</li>
+			<li>
+				<label>用户昵称：</label>
+				<input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+			</li>
+			<li>
+				<label>用户名：</label>
+				<input type="text" name="username" value="{$_REQUEST.username}"/>
+			</li>
+			<li>
+				<label>内容：</label>
+				<input type="text" name="content" value="{$_REQUEST.content}"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+			<a class="delete" href="__URL__/recoverAll" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要删除这些记录吗?">
+			<span>批量恢复</span>
+			</a>
+			</li>
+		</ul>
+	</div>
+
+	<table class="list" width="100%" layoutH="116">
+		<thead>
+		<tr>
+			<th width="2%">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th width="2%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th width="7%">被屏蔽的用户</th>
+			<th >内容</th>
+			<th width="23%">房间</th>
+			<th width="7%">记录类型</th>
+			<th width="7%">举报人</th>
+			<th width="7%">录入时间</th>
+			<th width="5%">当前状态</th>
+			<th width="5%">操作员</th>
+			<th width="7%">操作时间</th>
+			<th width="7%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>
+						<div>
+							<input type="checkbox" value="{$vo.id}" name="id">
+						</div>
+					</td>
+					<td>{$vo['id']}</td>
+					<td>{$vo['forbid_nick']}</td>
+					<td title="{$vo['content']}">{$vo['content']|mb_substr=###,0,150,'utf-8'}</td>
+					<td>{$vo['room']}</td>
+					<td>
+						<if condition="$vo.type eq '1'">
+							屏蔽
+							<elseif condition="$vo.type eq '3'" />
+							踢出/限时禁言
+							<elseif condition="$vo.report_type eq '1'" />
+							举报-广告举报
+							<elseif condition="$vo.report_type eq '2'" />
+							举报-不文明发言
+							<elseif condition="$vo.report_type eq '3'" />
+							举报-刷屏
+							<elseif condition="$vo.report_type eq '4'" />
+							举报-其他
+							<elseif condition="$vo.report_type eq '0'" />
+							举报-其他
+						</if>
+					</td>
+					<td>{$vo['from_nick']}</td>
+					<td>{$vo['create_time']|date="Y-m-d H:i",###}</td>
+					<td >
+						<if condition="$vo.forbid_status eq '1'">
+							{$vo['forbid_status']|getStatus}
+							<else/>
+							<!--<a href="__URL__/delete/user_id/{$vo.user_id}" target="navTabTodo" title="解除禁言？">{$vo['forbid_status']|getStatus}</a>-->
+							{$vo['forbid_status']|getStatus}{$vo.forbid_status_desc}
+						</if>
+					</td>
+					<td>{$vo['forbid_operator']}</td>
+					<td>{$vo['operate_time']}</td>
+					<td>
+						<switch name="vo.forbid_status">
+							<case value="0">
+								<a href="__URL__/save/user_id/{$vo.user_id}/status/2" target="navTabTodo"  title="将删除该用户的屏蔽记录？">恢复</a>
+							</case>
+							<case value="1">
+								<a href="__URL__/save/id/{$vo.id}/type/1" target="navTabTodo" title="踢出并屏蔽发言？">屏蔽</a>
+								<a href="__URL__/save/id/{$vo.id}/type/3" target="navTabTodo" title="踢出并禁言10分钟？">踢出</a>
+							</case>
+							<case value="2">
+								已恢复 |
+								<a href="__URL__/save/id/{$vo.id}/type/1" target="navTabTodo" title="踢出并屏蔽发言？">屏蔽</a>
+								<a href="__URL__/save/id/{$vo.id}/type/3" target="navTabTodo" title="踢出并禁言10分钟？">踢出</a>
+							</case>
+						</switch>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

@@ -1,0 +1,172 @@
+<div class="pageContent">
+
+	<form method="post" action="__URL__/addList" class="pageForm required-validate"  onsubmit="return validateCallback(this,navTabAjaxDone);">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$_REQUEST.product_id}" name="product_id">
+			<input type="hidden" value="{$product.game_num}" name="game_num">
+			<input type="hidden" value="{$product.total_num}" name="total_num">
+			<input type="hidden" value="{$product.name}" id="product_name">
+			<div class="unit">
+				<label>产品名称：</label>
+				<span class="inputInfo" style="color: blue;font-weight: bold;">{$product.name}</span>
+			</div>
+			<for start="1" end="$product.game_num" comparison="elt">
+				<div class="unit">
+					<label>选择赛事（{$i}）：</label>
+					<input name="game{$i}.game_id" value="" type="hidden"/>
+					<input name="game{$i}.union_id" value="" type="hidden"/>
+					<input id="game{$i}" type="text" size="85" name="game{$i}.game" value="" readonly/>
+					<a width="1000" height="600" lookupgroup="game{$i}" href="__URL__/findGame" onclick="removeGame(this)" class="btnLook">选择赛事</a>
+				</div>
+				<div class="unit unit-game">
+					<label>选择玩法：</label>
+					<table class="play-game" width="550">
+						<tr style="background: #f2f2f2;">
+							<td>玩法</td>
+							<td>主队/大球</td>
+							<td>盘口</td>
+							<td>客队/小球</td>
+						</tr>
+						<input type="hidden" class="odd" name="game{$i}.odds" value="">
+						<input type="hidden" class="odds_other" name="game{$i}.odds_other" value="">
+						<input type="hidden" class="handcp" name="game{$i}.handcp" value="">
+						<input type="hidden" class="union_name" name="game{$i}.union_name" value="">
+						<input type="hidden" class="gtime" name="game{$i}.gtime" value="">
+						<input type="hidden" class="home_team_name" name="game{$i}.home_team_name" value="">
+						<input type="hidden" class="away_team_name" name="game{$i}.away_team_name" value="">
+						<input type="hidden" class="play_type" name="game{$i}.play_type" value="">
+						<input type="hidden" class="chose_side" name="game{$i}.chose_side" value="">
+						<input type="hidden" id="answer{$i}" class="answer" value="">
+						<tr play_type="1">
+							<td>让球</td>
+							<td chose_side="1" class="odds"><input type="text" size="5" name="game{$i}.fsw_exp_home" value="" readonly/></td>
+							<td class="handcp"><input type="text" size="5" name="game{$i}.fsw_exp" value="" readonly/></td>
+							<td chose_side="-1" class="odds"><input type="text" size="5" name="game{$i}.fsw_exp_away" value="" readonly/></td>
+						</tr>
+						<tr play_type="-1">
+							<td>大小球</td>
+							<td chose_side="1" class="odds"><input type="text" size="5" name="game{$i}.fsw_ball_home" value="" readonly/></td>
+							<td class="handcp"><input type="text" size="5" name="game{$i}.fsw_ball" value="" readonly/></td>
+							<td chose_side="-1" class="odds"><input type="text" size="5" name="game{$i}.fsw_ball_away" value="" readonly/></td>
+						</tr>
+					</table>
+				</div>
+			</for>
+			
+			<!-- <div class="unit">
+				<label>&nbsp;</label>
+				<div class="button"><div class="buttonContent"><button type="button" onclick="getMsg()">生成短信</button></div></div>
+			</div>
+
+			<div class="unit">
+				<label>短信推送：</label>
+				<textarea maxlength="255" class="required large bLeft mobile-msg" name="msg" rows="4" cols="90"></textarea>
+			</div> -->
+
+			<div class="unit">
+				<label>定时发布：</label>
+				<input class="date textInput readonly valid" type="text" <notempty name="vo.pub_time">value="{$vo.pub_time|date='Y-m-d H:i:s',###}"</notempty> readonly datefmt="yyyy-MM-dd HH:mm:ss" name="pub_time">
+				<a class="inputDateButton" href="javascript:;">选择</a>
+				<span class="info">&nbsp;不填默认30分钟后</span>
+			</div>
+
+
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+<style>
+	.play-game tr td{
+		padding: 5px;
+		text-align: center;
+		border:solid #add9c0; 
+		border-width:0px 1px 1px 0px; 
+		padding-left:10px;
+	}
+    .play-game{border:solid #add9c0; border-width:1px 0px 0px 1px;}
+    .play-game input{float: none !important;border:none;background:#fff;text-align: center;}
+    .unit-game{border-bottom: 1px solid #ccc !important;padding: 15px 0 !important;margin-bottom: 10px !important;}
+    .odds,.odds input{
+    	cursor: pointer;
+    }
+</style>
+<script>
+	//重新选择赛事
+	function removeGame(obj){
+		$(obj).siblings('input').val('');
+		$(obj).parent().next().find('input').val('').css('background','');
+		$(obj).parent().next().find('td').css('background','');
+	}
+	//选择玩法赋值
+	$(".odds").on('click',function(){
+		var odd = $(this).find('input').val();
+		if(odd == '') {
+			alert('请先选择赛事！');
+			return;
+		}
+		var odds_other = $(this).siblings('.odds').find('input').val();
+		var play_type  = $(this).parent().attr('play_type');
+		var chose_side = $(this).attr('chose_side');
+		var home_team_name = $(this).parent().siblings('.home_team_name').val().split(',')[0];
+		var away_team_name = $(this).parent().siblings('.away_team_name').val().split(',')[0];
+		if(play_type == 1){
+			var answer = chose_side == 1 ? home_team_name : away_team_name;
+		}else{
+			var answer = chose_side == 1 ? '大球' : '小球';
+		}
+		var handcp = $(this).siblings('.handcp').find('input').val();
+		$(this).parents('table').find('input').css('background','');
+		$(this).parents('table').find('td').css('background','');
+		$(this).css('background','orange');
+		$(this).find('input').css('background','orange');
+		$(this).parent().siblings('.odd').val(odd);
+		$(this).parent().siblings('.odds_other').val(odds_other);
+		$(this).parent().siblings('.handcp').val(handcp);
+		$(this).parent().siblings('.play_type').val(play_type);
+		$(this).parent().siblings('.chose_side').val(chose_side);
+		$(this).parent().siblings('.answer').val(answer +' '+ handcp+'('+odd+')');
+	})
+	function getMsg(){
+		var name = $("#product_name").val();
+		var val1 = $('#game1').val();
+		var val2 = $('#game2').val();
+		var val3 = $('#game3').val();
+		var msg = '';
+		if(val1 != undefined){
+			var answer1 = $('#answer1').val();
+			if(answer1 == ''){
+				alert('请先选择赛事推荐（1）');
+				return;
+			}
+			var game_num = $("input[name='game_num']").val();
+			var num = game_num == 3 ? '一' : '';
+			msg = name+'推介'+num+'：'+val1.substring(5)+answer1;
+		}
+		if(val2 != undefined){
+			var answer2 = $('#answer2').val();
+			if(answer2 == ''){
+				alert('请先选择赛事推荐（2）');
+				return;
+			}
+			msg += ';推介二：'+val2.substring(5)+answer2;
+		}
+		if(val3 != undefined){
+			var answer3 = $('#answer3').val();
+			if(answer3 == ''){
+				alert('请先选择赛事推荐（3）');
+				return;
+			}
+			msg += ';推介三：'+val3.substring(5)+answer3;
+		}
+		$('.mobile-msg').val(msg);
+	}
+</script>
+
+
+

@@ -1,0 +1,241 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>资讯情报_赛事资讯_推荐分析_新闻情报_全球体育网</title>
+    <meta name="keywords" content="足球资讯、足球新闻、赛前分析、足球推荐、足球分析、竞彩分析、竞彩推荐、足彩推荐、足彩分析"/>
+    <meta name="description" content="全球体育为广大彩民提供最新的足球推荐、竞彩分析、篮球预测、英超、意甲、西甲、德甲、欧冠等新闻资讯、赛事实况和比赛数据"/>
+</block>
+<block name='css'><link rel="stylesheet" href="/min/?b=Public/Home/css&f=publish_index/index2016.css,publish_index/analysts.css"></block>
+<block name="body">
+<body>
+<include file="Public:top_index" />
+<div class="body">
+    <!-- 主体内容开始 -->
+    <div class="home">
+        <section class="main">
+            <!-- 焦点新闻跟焦点图开始 -->
+            <div class="focus-con clearfix">
+                <!-- 新闻模版 -->
+                {$intelligence|htmlspecialchars_decode}
+                <script>
+                    $(".new-con h3 a,.new-list ul li a").css("padding-right","6px");
+                    $(".new-con h3 a:last-child,.new-list ul li a:last-child").css("padding-right","0");
+                </script>
+                <div class="pull-left focus-banner">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <volist name="adIndex" id="item">
+                                <li data-target="#myCarousel" data-slide-to="{$key}" <if condition="$key eq 0">class="active"</if>></li>
+                            </volist>
+                        </ol>
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+                            <volist name='adIndex' id='vo'>
+                                <div class="<if condition="$key eq 0">active</if> item">
+                                    <a href="{$vo['url']}" target="_blank">
+                                        <img class="lazy" src="{$vo['img']}" style="width:600px;height:350px;">
+                                    </a>
+                                    <div class="fbanner_title">
+                                        <a target="_blank" href="{$vo['url']}">
+                                            {$vo['title']}
+                                        </a>
+                                    </div>
+                                </div>
+                            </volist>
+                        </div>
+                        <!-- Carousel nav -->
+                        <a class="carousel-control left" href="#myCarousel" data-slide="prev"><span class="banner_arrow"></span></a>
+                        <a class="carousel-control right" href="#myCarousel" data-slide="next"><span class="banner_arrow"></span></a>
+                    </div>
+                </div>
+            </div>
+            <!-- 焦点新闻跟焦点图开始 -->
+            <!-- 资讯快报开始 -->
+            <div class="infor-con clearfix">
+                <!-- 左边主体内容s -->
+                <div class="pull-left leftCon">
+                    <div class="ana_nav">
+                        <ul class="clearfix">
+                            <li class="frist on"><a href="javascript:;">独家解盘</a></li>
+                            <li><a href="javascript:;">竞彩前瞻</a></li>
+                            <li><a href="javascript:;">北单推荐</a></li>
+                        </ul>
+                    </div>
+                    <div class="main-left-con">
+                        <div class="itemList clearfix">
+                            <ul id="teacher" class="posts">
+                                <volist name="teacher_list" id="vo">
+                                    <li class="ds-list clearfix">
+                                        <div class="rec_face">
+                                            <a target="_blank" href="{:getNewsUrl($vo['id'],$vo['is_original'])}"><img class="lazy" src="{$vo['face']}" style="display: inline;"><p><strong>{$vo['nick_name']|msubstr=###,0,6}</strong></p></a>
+                                        </div>
+                                        <div class="rec_right rec_right2">
+                                            <p class="mlc_title"><a target="_blank" href="{:getNewsUrl($vo['id'],$vo['is_original'])}">{$vo['title']}</a></p>
+                                            <p class="mlc_des"><a target="_blank" href="{:getNewsUrl($vo['id'],$vo['is_original'])}">{$vo['remark']|msubstr=0,65}</a></p>
+                                            <div class="mlc_share">
+                                                <span>{$vo.add_time|date="Y-m-d H:i",###}</span>
+                                                
+                                                <em class="pinl"> {$vo['click_number']}</em>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </volist>
+                            </ul>
+                            <div class="paged">
+                                <a target="_blank" href="{:U('/list_n/10')}" class="btn btn-blue">查看更多</a>
+                            </div>
+                        </div>
+                        <div class="itemList clearfix" style="display:none">
+                            <ul id="race" class="posts">
+                                <volist name="race_list" id='vo'>
+                                    <li class="ds-list clearfix">
+                                        <div class="rec_img">
+                                            <a target="_blank" href="{:getNewsUrl($vo['id'],$vo['is_original'])}">
+                                                <img class="lazy" src="{$vo['img']}" style="display: inline;">
+                                            </a>
+                                        </div>
+                                        <div class="rec_right">
+                                            <p class="mlc_title"><a target="_blank" href="{:getNewsUrl($vo['id'],$vo['is_original'])}">{$vo['title']}</a></p>
+                                            <p class="mlc_des"><a target="_blank" href="{:getNewsUrl($vo['id'],$vo['is_original'])}">{$vo['remark']|msubstr=0,65}</a></p>
+                                            <div class="mlc_share">
+                                                <span>{$vo.add_time|date="Y-m-d H:i",###}</span>
+                                                
+                                                <em class="pinl"> {$vo['click_number']}</em>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </volist>
+                            </ul>
+                            <div class="paged">
+                                <a target="_blank" href="{:U('/list_n/54')}" class="btn btn-blue">查看更多</a>
+                            </div>
+                        </div>
+                        <div class="itemList clearfix" style="display:none">
+                            <ul id="north" class="posts">
+                                <volist name="north_list" id='vo'>
+                                    <li class="ds-list clearfix">
+                                        <div class="rec_img">
+                                            <a target="_blank" href="{:getNewsUrl($vo['id'],$vo['is_original'])}">
+                                                <img class="lazy" src="{$vo['img']}" style="display: inline;">
+                                            </a>
+                                        </div>
+                                        <div class="rec_right">
+                                            <p class="mlc_title"><a target="_blank" href="{:getNewsUrl($vo['id'],$vo['is_original'])}">{$vo['title']}</a></p>
+                                            <p class="mlc_des"><a target="_blank" href="{:getNewsUrl($vo['id'],$vo['is_original'])}">{$vo['remark']|msubstr=0,65}</a></p>
+                                            <div class="mlc_share">
+                                                <span>{$vo.add_time|date="Y-m-d H:i",###}</span>
+                                                
+                                                <em class="pinl"> {$vo['click_number']}</em>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </volist>
+                            </ul>
+                            <div class="paged">
+                                <a target="_blank" href="{:U('/list_n/55')}" class="btn btn-blue">查看更多</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 右边主体内容s -->
+                <div class="pull-right rightCon">
+                    <div class="div02">
+                        <!-- 热门推荐 -->
+                        <div class="clearfix stat-title">
+                            <div class="pull-left">
+                                <h4>热门推荐</h4>
+                            </div>
+                            <div class="pull-right title-nav">
+                                <ul>
+                                     <li class="more"><a target="_blank" href="javascript:;">HOT QUIZ</a></li> 
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 推荐指数 -->
+                        <div class="stat-main">
+                            <ul class="clearfix">
+                                <volist name="Marvellous" id="item" offset="0" length='3'>
+                                    <a href="javascript:;">
+                                        <li class="li-list ">
+                                            <p class="time"><span class="text-555">{$item.union_name|mb_substr=###,0,5,'utf-8'}</span>&nbsp;&nbsp;<em class="text-555">{$item.gtime|date='d日 H:i',###}</em></p>
+                                            <div class="clearfix">
+                                                <a href="javascript:;" class="hover pull-left">
+                                                    <div class="team1">
+                                                        <span><img class="lazy" src="{$item.homeTeamLogo}" width="55" height="55"></span>
+                                                        <p class="team-name">{$item.home_team_name}</p>
+                                                    </div>
+                                                </a>
+                                                <div class="pull-left against">
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="gray">{$item.fsw_exp_home}</td>
+                                                            <td class="gray"><if condition="$item.fsw_exp lt 0">受</if>{$item.fsw_exp|abs|handCpSpread}</td>
+                                                            <td class="gray">{$item.fsw_exp_away}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{$item.fsw_ball_home}</td>
+                                                            <td>{$item.fsw_ball|handCpTotal}</td>
+                                                            <td>{$item.fsw_ball_away}</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <a href="javascript:;" class="hover pull-right">
+                                                    <div class="team2">
+                                                        <span><img class="lazy" src="{$item.awayTeamLogo}" width="55" height="55"></span>
+                                                        <p class="team-name">{$item.away_team_name}</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="pro-con clearfix">
+                                                <div class="pull-left zhu"><span class="text-555">主队</span> <em class="<if condition='$item.mainNumber egt 50'>text-red<else/>text-tie</if>">{$item.mainNumber}%</em></div>
+                                                <div class="pull-left content">
+                                                    <div class="col">
+                                                        <ul id="skill">
+                                                            <li class="ft-percent">
+                                                                <a style="background: <if condition='$item.mainNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="javascript:;" class="ft-percent-real animation-progress expand left" data-percent="{$item.mainNumber}%" data-animation="progress" ></a>
+                                                            </li>
+                                                            <li class="ft-percent">
+                                                                <a style="background: <if condition='$item.guestNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="javascript:;" class="ft-percent-real animation-progress expand right" data-percent="{$item.guestNumber}%" data-animation="progress"></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right ke"><span class="text-555">客队</span> <em class="<if condition='$item.guestNumber egt 50'>text-red<else/>text-tie</if>">{$item.guestNumber}%</em></div>
+                                            </div>
+                                            <div class="pro-con clearfix">
+                                                <div class="pull-left zhu"><span class="text-555">大球</span> <em class="<if condition='$item.bigNumber egt 50'>text-red<else/>text-tie</if>">{$item.bigNumber}%</em></div>
+                                                <div class="pull-left content">
+                                                    <div class="col">
+                                                        <ul id="skill">
+                                                            <li class="ft-percent">
+                                                                <a style="background: <if condition='$item.bigNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="javascript:;" class="ft-percent-real animation-progress expand left" data-percent="{$item.bigNumber}%" data-animation="progress" ></a>
+                                                            </li>
+                                                            <li class="ft-percent">
+                                                                <a style="background: <if condition='$item.smallNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="javascript:;" class="ft-percent-real animation-progress expand right" data-percent="{$item.smallNumber}%" data-animation="progress"></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right ke"><span class="text-555">小球</span> <em class="<if condition='$item.smallNumber egt 50'>text-red<else/>text-tie</if>">{$item.smallNumber}%</em></div>
+                                            </div>
+                                        </li>
+                                    </a>
+                                </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 资讯快报结束 -->
+        </section>
+    </div>
+</div>
+<!-- 梯口模块开始 -->
+<include file="Public:footer" />
+<include file="Public:elevator"/>
+<!--引入本页js-->
+<script type="text/javascript" src="/min/?b=Public/Home/js&f=index/jquery.inview.min.js,publish_index/analysts.js"></script>
+</body>
+</html>
+</block>

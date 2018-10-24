@@ -1,0 +1,165 @@
+<extend name="Public/Olympic/base" />
+<block name="seo">
+    <title>2016年里约奥运会新闻滚动_全球体育网</title>
+</block>
+<block name="append">
+    <link rel="stylesheet" href="__CSS__/Olympic/swiper_banner.css"> 
+
+</block>
+<block name="content">
+    <!-- banner 切换 s-->
+    <section class="main_banner">
+        <!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <volist name='banner' id='v'>
+                <figure class="swiper-slide">
+                        <switch name='v.type'>
+                        <case value='1' break='1'><a href="{:U('news_detail@m',array('id'=>$v['url']))}"></case>
+                        <case value='2' ><a href="{:U('photo_detail@m',array('id'=>$v['url']))}"></case>
+                        <case value='3' ><a href="{:U('video_detail@m',array('id'=>$v['url']))}"></case>
+                        <case value='9' ><a href="{$v['url']}" target='_blank'></case>
+                        </switch>
+                        <img src="{$v.titleimg}" alt="{$v.title}"></a>
+                    <figcaption>{$v.title}</figcaption>
+                </figure>
+                </volist>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+    <!-- banner 切换 e-->
+
+    <!-- 今日头条 -->
+    <section class="imsg_main">
+        <div class="ititle"><a href="javascript:;">今日头条</a></div>
+        <div class="imgs_list">
+            <ul>
+                {$top_news|htmlspecialchars_decode}
+            </ul>
+        </div>
+    </section>
+
+ <!-- 中国金牌项目 -->
+ <section class="imsg_main" id="imsg_main">
+        <div class="ititle ititle_2"><a href="{:U('Olympic/news_info',['class_id'=>'金牌项目'])}">中国金牌项目</a></div>
+
+    <!-- 导航 -->
+    <div id="nav-smartSetup" class="ui-navigator nav_list">
+        <ul class="ui-navigator-list"> 
+            <volist name='obj_news' id='v'>
+                <li><a href="javascript:;" >{$v.name}</a></li>
+            </volist>
+        </ul>
+    </div>
+
+  <!-- 内容 -->
+  <volist name='obj_news' id='v'>
+        <div class="imgs_list">
+            <ul>
+                <volist name="v['_news']" id='vv'  offset="0" length='6'>
+                <li><a href="{:U('Olympic/news_detail',['id'=>$vv['id']])}">{$vv.title}</a></li>
+                </volist>
+            </ul>
+            <p><a href="{:U('Olympic/news_info',['class_id'=>$v['id']])}">更多相关资讯...</a></p>
+        </div> 
+  </volist>
+
+
+</section>
+
+
+    <!-- 综合资讯 -->
+    <section class="imsg_main">
+        <div class="ititle ititle_3"><a href="{:U('Olympic/news_info',['class_id'=>'综合资讯'])}">综合资讯</a></div>
+        <div class="imgs_list">
+            <ul>
+                <volist name='all_news' id='v'>
+                <li><a href="{:U('Olympic/news_detail',['id'=>$v['id']])}">{$v.title}</a></li>
+                </volist>
+            </ul>
+        </div>
+    </section>
+</block>
+
+
+
+<block name="scripts">
+    <!-- 金牌快讯 Swiper JS --> 
+    <script src="__JS__/Olympic/swiper_banner.js"></script>   
+    <script>
+        //金牌快讯
+        var swiper = new Swiper('.swiper-container-teacher', {
+            direction: 'vertical',
+            autoplay: 2500
+        });
+        //banner 切换
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: 10000,
+            autoplayDisableOnInteraction: false
+        });
+
+       
+        //中国金牌项目 点击切换  
+        $("#imsg_main .imgs_list").eq(0).show();
+        $(".ui-navigator-list li a").each(function (e) {
+            $(this).click(function () {  
+                //内容
+                $("#imsg_main .imgs_list").hide();
+                $("#imsg_main .imgs_list").eq(e).show();
+            })
+        })
+    </script>
+
+    <!-- 公共js -->
+    <script type="text/javascript" src="__JS__/Olympic/common.js"></script>
+
+
+
+
+<!-- 中国金牌项目 导航 -->
+<link rel="stylesheet" href="__CSS__/navigator/navigator.css">
+<link rel="stylesheet" href="__CSS__/navigator/navigator.default.css">
+<link rel="stylesheet" href="__CSS__/navigator/navigator.iscroll.css">
+<link rel="stylesheet" href="__CSS__/navigator/navigator.iscroll.default.css">
+<style type="text/css">
+    .ui-navigator{  
+    height: .7rem; 
+    line-height: .7rem;  
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    }
+    .ui-navigator .ui-navigator-list li a{
+    font-size: .3rem!important;
+    display: block!important;
+    padding:0;
+    min-width: 1.43rem;
+    margin: 0 1%;
+    } 
+</style>
+
+
+<script type="text/javascript" src="__JS__/zepto.js"></script>
+<script type="text/javascript" src="__JS__/zepto.extend.js"></script>
+<script type="text/javascript" src="__JS__/zepto.iscroll.js"></script>
+<script type="text/javascript" src="__JS__/zepto.ui.js"></script>
+<script type="text/javascript" src="__JS__/widget/navigator.js"></script> 
+<script type="text/javascript" src="__JS__/widget/navigator.iscroll.js"></script> 
+
+<script type="text/javascript">
+    // 使用另一个库的 $ 的代码
+    $(function () {
+        /*组件初始化js begin*/
+        Zepto('#nav-smartSetup').navigator(); 
+        //smart setup方式创建 推荐方式
+    });
+</script> 
+
+
+
+</block>

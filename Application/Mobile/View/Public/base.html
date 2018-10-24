@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <block name="seo"><title>{$seo['seo_title']|default='足球比赛_足球比分网_足球即时比分_足球推荐_足球比分直播网-全球体育手机网'}</title>
+    <meta name="keywords" content="{$seo['seo_keys']|default='足球比赛,足球比分网,足球即时比分,足球推荐,足球比分直播网'}">
+    <meta name="description" content="{$seo['seo_desc']|default='全球体育手机网为您提供专业足球推荐,足球比赛新闻，是广大球迷们获取足球比分，足球即时比分资讯的足球比分直播网。'}"></block>
+    <link rel="dns-prefetch" href="//img1.qqty.com" />
+    <link rel="dns-prefetch" href="//static.qqty.com" />
+    <link rel="dns-prefetch" href="//hm.baidu.com" />
+    <link href="{$canonical}" rel="canonical" />
+    <link rel="apple-touch-icon"  href="__PUBLIC__/Api/images/app-logo.png" />
+    <link rel="shortcut icon" href="__PUBLIC__/Home/images/icon/16X16.ico">
+    <script type="text/javascript" src="__JS__/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Mobile/Plugs/jquery.lazyload.min.js"></script>
+    <script type="text/javascript" src="__JS__/htmlwidth.js"></script>
+    <!-- 公共js -->
+	<script type="text/javascript" src="__JS__/common.js?20180713"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/common/cookie.js"></script>
+	<script src="__JS__/footer.js?v=20180803"></script>
+	<script src="__PUBLIC__/layer/mobile/layer.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Api/Home/picDetail/js/panDuan.js"></script>
+    <link rel="stylesheet" type="text/css" href="__CSS__/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css">
+    <block name="conflict"><link rel="stylesheet" type="text/css" href="__CSS__/common.css?v=20180619"></block>
+    <!-- 引入礼包样式 ，以后可以删掉-->
+    <link rel="stylesheet" type="text/css" href="__CSS__/gift.css">
+    <script>
+    	var DOMAIN = "__DOMAIN__";
+    	var IMAGES = "__IMAGES__";
+    	var gift1_after  = "{$gift1['after_img']}";
+        var gift1_open   = "{$gift1['open']}";
+        var gift1_close  = "{$gift1['close']}";
+        var gift2_before = "{$gift2['before_img']}";
+        var gift2_after  = "{$gift2['after_img']}";
+        var gift2_close  = "{$gift2['close']}";
+        var gift2_frame  = "{$gift2_frame}";
+        var user_auth    = "{$user_auth}";
+    </script>
+    {//附加}
+    <block name="append"></block>
+</head>
+
+<body>
+    <block name="body"></block>
+    
+    <!-- 模态窗口注册赠送 -->
+    <div class="modalReisger" id="gift1-class" style="background-color: transparent;display: none;">
+        <div class="modal-content">
+            <div class="newGift">
+                <img src="" alt="">
+                <i class="closedTbn"><img src="__IMAGES__/coupon/closedBtn.png"></i>
+                <a href="javascript:;" class="getBtn"></a>
+            </div>
+        </div>
+    </div>
+    <!-- 模态窗口活动赠送 -->
+    <div class="modalReisger" id="gift2-class" style="background-color: transparent;display: none;">
+        <div class="modal-content">
+            <div class="newGift">
+                <img src="" alt="">
+                <i class="closedTbn"><img src="__IMAGES__/coupon/closedBtn.png"></i>
+                <a href="javascript:;" class="getBtn"></a>
+            </div>
+        </div>
+    </div>
+    <div id="bg-gift" class="modal-backdrop" style="z-index: 1040;display: none;"></div>
+    <div id="cnzz">
+        {:htmlspecialchars_decode($site_setting['mobileJs'])}
+    </div>
+
+{//头部}
+<block name="header">
+    <include file="Public/header"/>
+</block>
+{//导航}
+<block name="nav">
+    <include file="Public/nav"/>
+</block>
+{//主内容区域}
+<block name="content"></block>
+{//底部}
+<block name="footer">
+    <include file="Public/footer"/>
+</block>
+{//赛事筛选}
+<block name='filtrate'>
+</block>
+
+<block name="download">
+    
+</block>
+<block name="scripts"></block>
+</body>
+</html>

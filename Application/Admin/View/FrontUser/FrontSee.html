@@ -1,0 +1,91 @@
+<style>
+    .searchContent label{width: auto}
+    .searchContent li{width: auto !important;margin-right: 12px;}
+</style>
+<form id="pagerForm" action="__URL__/FrontSee" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+    <volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/FrontSee" method="post">
+	
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>浏览时间：</label>
+				<input type="text" readonly="true" datefmt="yyyyMMdd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="10">至
+				<input type="text" readonly="true" datefmt="yyyyMMdd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="10">
+			</li>
+			<li>
+				<label >昵称：</label>
+				<input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+			</li>
+		</ul>
+
+		<div class="subBar">
+			<ul>
+				<li>
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="2%">编号</th>
+			<th width="6%">日期</th>
+			<th width="5%">昵称</th>
+			<th width="5%">总数量</th>
+			<th width="5%">app数量</th>
+			<th width="5%">web数量</th>
+			<th width="5%">m站数量</th>
+			<th width="5%">足球购买数</th>
+			<th width="5%">蓝球购买数</th>
+		</tr>
+		</thead>
+		<tbody>
+		<volist id="vo" name="list">
+			<tr target="sid_user" rel="{$vo['id']}">
+				<td>{$vo['id']}</td>
+				<td>{$_REQUEST.startTime} 至 {$_REQUEST.endTime}</td>
+				<td>{$vo['nick_name']}（{$vo['username']|is_show_mobile}）</td>
+				<td>{$vo['count_number']}</td>
+				<td>{$vo['app_number']}</td>
+				<td>{$vo['web_number']}</td>
+				<td>{$vo['m_number']}</td>
+				<td>
+					<a title="足球购买数" target="navTab" href="__ADMIN__/GambleList/buyDetails/cover_id/{$vo.user_id}<if condition="$_REQUEST['startTime'] neq ''">/startTime/{$_REQUEST.startTime}</if><if condition="$_REQUEST['endTime'] neq ''">/endTime/{$_REQUEST.endTime}</if>">
+						{$vo['fb_num']}
+					</a>
+				</td>
+				<td>
+					<a title="蓝球购买数" target="navTab" href="__ADMIN__/GambleList/buyDetails/cover_id/{$vo.user_id}/gameType/2<if condition="$_REQUEST['startTime'] neq ''">/startTime/{$_REQUEST.startTime}</if><if condition="$_REQUEST['endTime'] neq ''">/endTime/{$_REQUEST.endTime}</if>">
+						{$vo['bk_num']}
+					</a>
+				</td>
+			</tr>
+		</volist>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

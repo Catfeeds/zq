@@ -1,0 +1,108 @@
+<include file="Etc/head"/>
+    <link rel="stylesheet" href="__CSS__/etc/ex_ranks.css">
+<body>
+	<!-- 导航 s-->
+<include file="Etc/nav"/>
+    <!-- 导航 e-->
+
+	<!-- banner 切换 s-->
+   <!-- <section class="main_banner">
+        <figure class="baner">
+          <a href="#"><img src="__IMAGES__/etc/record-banner.jpg" alt=""></a>
+        </figure>
+    </section> -->
+    <!-- banner 切换 e-->
+
+	<section class="main">
+        <div class="guess_infor">
+            <figure class="clearfix">
+                <div class="fl headImg">
+                    <img <present name="user_auth">src="{$user_auth['head_url']}" alt='{$user_auth['nick_name']}'<else/>src="__IMAGES__/user/headImg.png" alt='请登录'</present>>
+                </div>
+                <figcaption class="fl head_infor">
+                    <p class="name"><present name="user_auth">{$user_auth['nick_name']}<else/>-</present></p>
+                    <ul class="infor_ul">
+                      <li><span class="fs24">积分：</span><em id='u_integral' class="fs22"><present name="user_auth">{$user_auth['integral']}<else/>-</present></em></li>
+                      <li><span class="fs24">推荐币：</span><em id='u_coin' class="fs22"><present name="user_auth">{$user_auth['coin']}<else/>-</present></em></li>
+                      <li><span class="fs24">排名：</span><em class="fs22"><present name="user_auth"><eq name="user_auth['rank']" value="0">-<else/>{$user_auth['rank']}</eq><else/>-</present></em></li>
+                    </ul>
+                </figcaption>
+                <ul class="infor_ul infor_ul02 etc-more" style="width:auto">
+                    <li><span class="fs24">盈利推荐币：</span><em id='u_integral' class="fs22"><present name="user_auth">{$user_auth['win_coin']}<else/>-</present></em></li>
+                </ul>
+            </figure>
+        </div>
+        <div class="ranks_con">
+        	<div class="fs24 text-999 ranks_int clearfix">
+            	<span class="fl">说明：盈利榜周期6.11-7.11；奖品请到“全球体育”APP进行兑换。</span>
+                <a href="javascript:;" class="fr ranks_int_r" onclick="showdiv();"><img src="__IMAGES__/etc/prize-int.png" alt='奖品介绍'></a>
+            </div>
+            <p class="gzh">欧洲杯精彩资讯敬请关注微信号<em class="red">“全球体育网”</em></p>
+            <table class="table" cellpadding="0" cellspacing="0">
+                <tbody>
+                <volist name="list" id="v" mod="2">
+                    <tr <eq name="mod" value="1">bgcolor="#f7f7f7"<else/>bgcolor="#fff"</eq>>
+                        <td width="16%" class="rank
+                            <switch name='i'>
+                                <case value='1'>rank01</case>
+                                <case value='2'>rank02</case>
+                                <case value='3'>rank03</case>
+                            </switch>
+                            "><span>{$i}</span></td>
+                        <td class="nameImg q-tl"><img src="{$v.head_url}" alt="{$v.nick_name}">{$v.nick_name}</td>
+                        <td class="text-666 q-tr pr-70"><em class="red">{$v.win_coin}</em>推荐币</td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+      </div>
+    </section>
+    <!-- 模态窗口开始 -->
+    <div id="show" class="modal">
+    	<div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="hidediv();"><span></span></button>
+                <h4 class="modal-title">推荐提示</h4>
+            </div>
+            <div class="modal-body modal_pading">
+                <p class="fs22" style="text-indent: .44rem; line-height: .38rem; padding-bottom: .2rem;">盈利榜将根据用户赢得的推荐币进行排行，活动结束后，盈利榜前100名可获7月24日恒大VS国安门票、恒大正版球衣及欧洲杯纪念周边等。</p>
+            	<table class="table fs22" cellpadding="0" cellspacing="0">
+            		<tbody>
+            			<tr bgcolor="#f1fdd3">
+            				<td>排名<em class="red">1-3</em>名 </td>
+                            <td>恒大 VS 国安门票</td>
+            			</tr>
+                        <tr>
+            				<td>排名<em class="red">4-10</em>名 </td>
+                            <td>恒大正版球衣</td>
+            			</tr>
+                        <tr bgcolor="#f1fdd3">
+            				<td>排名<em class="red">11-50</em>名 </td>
+                            <td>50元话费</td>
+            			</tr>
+                        <tr>
+            				<td>排名<em class="red">50-100</em>名 </td>
+                            <td>球迷抱枕</td>
+            			</tr>
+            		</tbody>
+            	</table>
+                <div class="modal-btn">
+                    <button type="button"  onclick='hidediv()' class="btn btn-orange submit fs24">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="bg" class="modal-backdrop" style="z-index: 1040;"></div>
+    <!-- 模态窗口结束 -->
+</body>
+</html>
+<script>
+    function showdiv() {
+        document.getElementById("bg").style.display ="block";
+		document.getElementById("show").style.display ="block";
+    }
+    function hidediv() {
+        document.getElementById("bg").style.display ='none';
+		document.getElementById("show").style.display ='none';
+    }
+    </script>

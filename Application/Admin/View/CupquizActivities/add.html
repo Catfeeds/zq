@@ -1,0 +1,199 @@
+<div class="page">
+    <div class="pageContent">
+        <form method="post" id="myform" action="__URL__/update" class="pageForm required-validate"
+              onsubmit="return validateCallback(this, dialogAjaxDone)">
+            <input type="hidden" name="id" value="{$_REQUEST.id}">
+            <div class="pageFormContent" layoutH="58">
+
+                <div class="unit">
+                    <label>活动标题：</label>
+                    <textarea name="title" class="required" rows="4" cols="60"></textarea>
+                </div>
+
+                <div class="unit">
+                    <label>活动描述：</label>
+                    <textarea name="desc" class="required" rows="4" cols="60">{$vo.desc}</textarea>
+                </div>
+
+                <!--<div class="unit">-->
+                    <!--<label>当前发起者人数：</label>-->
+                    <!--<input type="text" class="required" name="sponsor" value="0" size="45"/>-->
+                <!--</div>-->
+
+                <div class="unit">
+                    <label>设置最大发起者人数：</label>
+                    <input type="text" class="required" name="limit_num" value="9999" size="45"/>
+                </div>
+
+                <div class="unit">
+                    <label>开始时间：</label>
+                    <input class="date textInput readonly valid required" type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm"
+                           name="start_time" value=""><a class="inputDateButton" href="javascript:;">选择</a>
+                </div>
+
+                <div class="unit">
+                    <label>结束时间：</label>
+                    <input class="date textInput readonly valid required" type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm"
+                           name="end_time" value="">
+                    <a class="inputDateButton" href="javascript:;">选择</a>
+                </div>
+
+                <div class="unit">
+                    <label>状态：</label>
+                    <select class="small bLeft" name="status">
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </div>
+                <div class="unit">
+
+                </div>
+
+                <div class="unit actGames">
+                    <label>赛事玩法：</label>
+                    <table class="play-game" width="780">
+                        <tr style="background: #f2f2f2;border:none">
+                            <td width="20%" style="font-weight: 600">赛事</td>
+                            <td width="40%" style="font-weight: 600">问题玩法</td>
+                            <td width="30%" style="font-weight: 600">答案选项</td>
+                            <td>操作</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="unit addGame">
+                    <label>新增赛事玩法：</label>
+                    <table class="play-game" width="780">
+                        <tr style="background: #f2f2f2;border:none">
+                            <td width="40%" style="font-weight: 600">选择赛事</td>
+                            <td width="50%" style="font-weight: 600">选择玩法</td>
+                            <td >操作</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select class="small bLeft" id="selGame" style="width: 100%;border: none;">
+                                    <option value="">选择赛事</option>
+                                    <volist name="today_games" id="gVo">
+                                        <option value="{$gVo.game_id}">{$gVo.home_team_name} VS {$gVo.away_team_name}</option>
+                                    </volist>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select class="small bLeft" id="selPlayType"  style="width: 100%;border: none;">
+                                    <option value="">选择玩法</option>
+                                    <volist name="play_types" id="tVo">
+                                        <option value="{$tVo.id}">{$tVo.name}</option>
+                                    </volist>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="button" id="addGame"><span>增加</span></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="unit" id="gInput">
+                </div>
+            </div>
+            <div class="formBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">保存</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="button">
+                            <div class="buttonContent">
+                                <button type="button" class="close">取消</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+<style>
+    .play-game tr td{
+        padding: 5px;
+        text-align: center;
+        border:solid #add9c0;
+        border-width:0px 1px 1px 0px;
+        padding-left:10px;
+    }
+    .play-game{border:solid #add9c0; border-width:1px 0px 0px 1px;}
+    .play-game input{float: none !important;border:none;background:#fff;text-align: center;}
+    .unit-game{border-bottom: 1px solid #ccc !important;padding: 15px 0 !important;margin-bottom: 10px !important;}
+    .odds,.odds input{
+        cursor: pointer;
+    }
+</style>
+<script type="text/javascript">
+    var games = JSON.parse('{$today_games|json_encode}');
+
+    var playTypes = JSON.parse('{$play_types|json_encode}');
+    $(document).ready(function () {
+        //选择赛事
+        var selectGameId = null;
+        var selectType = null;
+        var selectTypeName = null;
+
+        $("#selGame").on('change',function(){
+            selectGameId = $(this).val();
+        });
+
+        //选择玩法
+        var answer = '';
+        $("#selPlayType").on('change',function(){
+            selectType = $(this).val();
+            selectTypeName = playTypes[selectType]['name'];
+            var opions = playTypes[selectType]['options'];
+            answer = '';
+            $.each(opions,function (k, v) {
+                answer += '<input type="radio" name="answer'+selectGameId+selectType+'" value="'+v[0]+'"> '+v[1];
+            })
+        });
+
+        //添加玩法
+        $('#addGame').click(function () {
+            if(!selectGameId || !selectType){
+                alert('请选择赛事、玩法');return;
+            }
+
+            var vv = selectGameId + ',' + selectType;
+
+            var Has = true;
+            $("input[name='game_options[]']").each(function () {
+                var v = $(this).val();
+                if(v == vv){
+                    Has = false;
+                }
+            });
+
+            if(Has === true){
+                $('#gInput').append('<input type="hidden" name="game_options[]" value="'+vv+'" id="actGame'+selectGameId + selectType+'"/>');
+                var html = '<tr> ' +
+                    '<td>'+games[selectGameId].home_team_name+' <strong>VS</strong> '+games[selectGameId].away_team_name+'</td> ' +
+                    '<td>'+selectTypeName+'</td> ' +
+                    '<td>'+answer+'</td> ' +
+                    '<td><span style="color:red;cursor: pointer" data-id="actGame'+selectGameId + selectType+'">删除</span></td> ' +
+                    '</tr>';
+                $('.actGames table').append(html);
+            }else{
+                alert('赛事玩法重复');return;
+            }
+        });
+
+        //移除玩法
+        $(document).on('click', '.actGames table tr td span', function () {
+            $(this).parents('tr').remove();
+            var id = $(this).attr('data-id');
+            $('#'+id).remove();
+        })
+    });
+</script>

@@ -1,0 +1,39 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>手机全球体育网_即时足球比分,比分直播,足球直播,比分预测,赔率分析</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/live_score.css">
+    <style>
+        .live ul li{ padding: 0.2rem; border-bottom:1px solid #ccc;}
+    </style>
+</block>
+
+<!-- 内容 s -->
+<block name="content">
+    <section class="content">
+        <div class="live" >
+            <ul>
+                <li><a href="{:U('Live/detail',['type'=>'euro'])}">欧洲足球</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'cctv5hd'])}">CCTV-5体育HD</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'cctv5bq'])}">CCTV-5体育标清</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'fengyun'])}">风云足球</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'beijing'])}">北京体育HD</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'cctv5hdd'])}">CCTV-5+体育HD</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'zhibo7'])}">“赛事直播7”</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'zhibo8'])}">“赛事直播8”</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'hk'])}">香港足球台</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'gdty'])}">广东体育</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'wlzb1'])}">网络直播1</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'wlzb4'])}">网络直播4</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'wlzb5'])}">网络直播5</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'wlzb7'])}">网络直播7</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'wlzb8'])}">网络直播8</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'wlzb9'])}">网络直播9</a></li>
+                <li><a href="{:U('Live/detail',['type'=>'wlzb10'])}">网络直播10</a></li>
+            </ul>
+        </div>
+    </section>
+    <!-- 内容 e -->
+</block>

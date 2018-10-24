@@ -1,0 +1,103 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" href="__CSS__/guess.css?v=20180619">
+    <link rel="stylesheet" href="__CSS__/play_rank.css?v=20180619">
+    <!-- 本页需要引用的js --> 
+
+    <style>
+        .hidden{display: none;}
+    </style>
+</block>
+<block name="header">
+    <include file="Guess:guess_head"/>
+</block>
+
+<!-- 导航 s-->
+<block name="nav">
+    <include file="Guess/nav"/>
+</block>
+<block name="content">
+    <section class="main contentPt">
+        <nav id="navTab" class="jc_type clearfix">
+          <a id="yp" data-gambletype="1" href="{:U('/Guess/rank',['data'=>4,'type'=>1])}" <if condition='($listType eq 1)'>class="on"<else/>class="jc"</if>><i></i>亚盘</a>
+          <a id="jc" data-gambletype="2" href="{:U('/Guess/rank',['data'=>4,'type'=>2])}" <if condition='($listType eq 2) '>class="on"<else/>class="jc"</if>><i></i>竞彩</a>
+        </nav>
+        <div id='ypContent' style="display: block;">
+            <div id="ypRankNav" class="rank_nav">
+                <ul class="clearfix">
+                    <li  class="fl <if condition='$listData eq 4'>on</if>">
+                        <a href="{:U('/Guess/rank',['data'=>4,'type'=>1])}" data-ranktype="4">日榜</a>
+                    </li>
+                    <li  class="fl <if condition='$listData eq 1'>on</if>">
+                        <a href="{:U('/Guess/rank',['data'=>1,'type'=>1])}" data-ranktype="1">周榜</a>
+                    </li>
+                    <li  class="fl <if condition='$listData eq 2'>on</if>">
+                        <a href="{:U('/Guess/rank',['data'=>2,'type'=>1])}" data-ranktype="2">月榜</a>
+                    </li>
+                    <li  class="fl <if condition='$listData eq 3'>on</if>">
+                        <a href="{:U('/Guess/rank',['data'=>3,'type'=>1])}" data-ranktype="3">季榜</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="ypTable" class="rank_item" >
+
+                <table class="table" width="100%" cellpadding="0" cellspacing="0"></table>
+            </div>
+            <div id="rankListMore" class="paged boxs" style="display:none;">
+                <div class="load_gif fs24 text-999">
+                    <span><img src="__IMAGES__/load.gif"></span>
+                    <span>正在加载更多的数据...</span>
+                </div>
+            </div>
+            <div id="showLess" class="paged boxs" style="display:none;">
+                <div class="load_gif fs24 text-999">
+                    <span>已经全部加载完毕</span>
+                </div>
+            </div>
+        </div>
+        <div id='jcContent' style="display: none;">
+            <div id="jcRankNav" class="rank_nav">
+                <ul class="clearfix">
+                    <li  class="fl <if condition='$listData eq 4'>on</if>">
+                        <a href="{:U('/Guess/rank',['data'=>4,'type'=>2])}" data-ranktype="4">日榜</a>
+                    </li>
+                    <li  class="fl <if condition='$listData eq 1'>on</if>">
+                        <a href="{:U('/Guess/rank',['data'=>1,'type'=>2])}" data-ranktype="1">周榜</a>
+                    </li>
+                    <li  class="fl <if condition='$listData eq 2'>on</if>">
+                        <a href="{:U('/Guess/rank',['data'=>2,'type'=>2])}" data-ranktype="2">月榜</a>
+                    </li>
+                    <li  class="fl <if condition='$listData eq 3'>on</if>">
+                        <a href="{:U('/Guess/rank',['data'=>3,'type'=>2])}" data-ranktype="3">季榜</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="jcTable" class="rank_item" >
+                <table class="table" width="100%" cellpadding="0" cellspacing="0"></table>
+            </div>
+            <div id="jcRankListMore" class="paged boxs" style="display:none;">
+                <div class="load_gif fs24 text-999">
+                    <span><img src="__IMAGES__/load.gif"></span>
+                    <span>正在加载更多的数据...</span>
+                </div>
+            </div>
+            <div id="jcShowLess" class="paged boxs" style="display:none;">
+                <div class="load_gif fs24 text-999">
+                    <span>已经全部加载完毕</span>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+</block>
+<block name="scripts">
+    <script>
+        var DOMAIN = "m."+"__DOMAIN__";
+        var IMAGES = "__IMAGES__";
+        var gambleType = "{$listType}";
+        var dateType = "{$listData}";
+    </script>
+    <script src="__JS__/guess.js?20180730"></script>
+</block>

@@ -1,0 +1,55 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>{$against.home_team_name.0}vs{$against.away_team_name.0}_足球分析_足彩比分直播_足球比分_全球体育</title>
+</block>
+<block name="body">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/common.css"> 
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/odds.css"> 
+	<!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Home/js/score/htmlwidth.js"></script>
+        <include file="Public:top_index" />
+        <include file="FbScore/against"/>
+            <include file="FbScore/subnav"/>
+
+<!-- 内容 s -->
+<block name="content">
+    <section class="odds_con clearfix">
+
+        <!-- 导航切换 s-->
+        <nav class="odds_nav clearfix">
+            <ul>
+                <li class="on"><a href="{:U('odds_asia/'.$_GET['scheid'].'@bf')}">亚赔</a></li>
+                <li><a href="{:U('odds_euro/'.$_GET['scheid'].'@bf')}">欧赔</a></li>
+                <li><a href="{:U('odds_bigs/'.$_GET['scheid'].'@bf')}">大小</a></li>
+            </ul> 
+        </nav> 
+        <!-- 导航切换 e-->
+
+
+        <table class="tb_odds_euro" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <th>公司</th>
+                    <th>初/即</th>
+                    <th>主队</th>
+                    <th>让球</th>
+                    <th>客队</th>
+                </tr>
+                <volist name='data' id='v'>
+                <tr>
+                    <td><span>{$v.0}</span></td>
+                    <td><div class="bottom_line">初盘</div><div class="red">即盘</div></td>
+                    <td><div class="bottom_line">{$v.1}</div><div <gt name='v.4' value='$v.1'>class='red'</gt><lt name='v.4' value='$v.1'>class='green'</lt>>{$v.4}</div></td>
+                    <td><div class="bottom_line">{$v.2}</div><div <gt name='v.res_now' value='$v.res_star'>class='red'</gt><lt name='v.res_now' value='$v.res_star'>class='green'</lt>>{$v.5}</div></td>
+                    <td><div class="bottom_line">{$v.3}</div><div <gt name='v.6' value='$v.3'>class='red'</gt><lt name='v.6' value='$v.3'>class='green'</lt>>{$v.6}</div></td>
+                </tr>
+                </volist>
+            </tbody>
+        </table> 
+
+    </section>
+    <!-- 内容 e -->
+    <include file="Public:footer"/>
+<include file="Public:return_top"/>
+</block>

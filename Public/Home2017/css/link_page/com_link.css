@@ -1,0 +1,43 @@
+/**
+ * 全彩公用css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-17
+**/
+/* 首页导航 */
+.nav-con{ width: 100%; min-width: 1000px; height: 42px; background: #10af63; box-shadow: 0 2px 3px 1px rgba(0,0,0,0.2);}
+.nav-con .nav { width: 1000px; margin:0 auto; }
+.nav-con .nav ul li{ float: left; text-align: center; position: relative;}
+.nav-con .nav ul li .hot-new{ position: absolute; right: 20px; top: -5px; width: 22px; height: 12px; background: url(../../Home/images/index/hot-new.gif) no-repeat;}
+.nav-con .nav ul li a{position: relative; display: block; height: 42px; padding: 0 25px; color: #fff; font-size: 16px; line-height: 42px; text-decoration: none; }
+.nav-con .nav ul li a:hover{ background: #2db77b;}
+.nav-con .nav .on a{ background: #108f58;}
+.nav-con .nav .on a:hover{background: #108f58;}
+
+.body{ min-width: 1000px;}
+.top{ width: 100%; *width: auto; background: #fff;}
+/* 顶部头部 */
+/* 顶部中部 */
+.top-center{ width: 1000px; height: 90px; margin:0 auto; padding: 10px 0;}
+#logo h1{ margin: 10px 0 0 0;}
+.top-center .center-left .show{ margin-top: 10px;}
+.top-center .center-right{ width: 416px; height: 70px; line-height: 70px; text-align: right;}
+.top-center .center-right .number{ font-size: 24px; color: #ff7e00; margin: 0 5px;}
+.top-center .center-right .kefu-icon{ line-height: 68px;}
+/* 底部版权信息 */
+.footer{ width: 100%; padding-top: 15px; border-top: 1px solid #d7d7d7; background: #fff; text-align: right; color: #555; font-size: 12px;}
+.footer .footer-in{ width: 1000px; margin:0 auto;}
+.footer .link{ margin-bottom: 10px; }
+.footer .link a{ color: #555;}
+.footer .link a:hover{ color: #ff7e00;}
+.footer .footer-in p{ color:#8a8a8a;}
+/* 梯口模块 */
+#elevator{ position: fixed; top: 350px; right: 10px;}
+#elevator .ewm{ width: 166px; height:166px; position: absolute; left: -168px; top: -106px; background: url(../images/index/ewm.png) no-repeat; display: none;}
+.backTools_list li {margin-bottom: 1px; height: 50px; overflow: hidden;}
+.backTools_list li a{ display: block; width: 50px; height: 100px;color: #fff; text-align: center;}
+.backTools_list li a i{ display: block; height: 50px; background:url(../images/index/elevator.png) no-repeat 0 0;}
+.backTools_list .i02{ background-position: 0 -51px;}
+.backTools_list .i03{ background-position: 0 -102px;}
+.backTools_list .i04{ background-position: 0 -153px;}
+.backTools_list li a span{ display: block; height: 50px; padding: 6px; background-color: #10af63;}

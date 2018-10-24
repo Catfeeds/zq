@@ -1,0 +1,44 @@
+<extend name="Public/euro/base" />
+<block name="seo">
+    <title>2016欧洲杯赛程_全球体育欧洲杯专题</title>
+</block>
+<block name="append">
+<!-- 本页需要引用的css --> 
+<link rel="stylesheet" type="text/css" href="__CSS__/euro/euro2016.css">
+<!-- 本页需要引用的js -->  
+</block>
+    
+
+<!-- 二级导航 s-->
+<block name="sub_nav">
+    <include file="Euro/live_nav"/>
+</block>
+<!-- 二级导航 e-->
+ 	
+    <!-- 内容 s -->
+    <block name="content">
+   <section class="content plan_main">
+		<div class="plan_con clearfix">
+       	  	<div class="fl plan">
+                    <a class="plan_list A" href="{:U('Euro/live_lists@m',array('group'=>'A'))}"></a>
+          	</div>
+        	<div class="fl plan">
+            	<a class="plan_list B" href="{:U('live_lists@m',array('group'=>'B'))}"></a>
+            </div>
+        	<div class="fl plan">
+            	<a class="plan_list C" href="{:U('live_lists@m',array('group'=>'C'))}"></a>
+            </div>
+        	<div class="fl plan">
+            	<a class="plan_list D" href="{:U('live_lists@m',array('group'=>'D'))}"></a>
+            </div>
+        	<div class="fl plan">
+            	<a class="plan_list E" href="{:U('live_lists@m',array('group'=>'E'))}"></a>
+            </div>
+        	<div class="fl plan">
+            	<a class="plan_list F" href="{:U('live_lists@m',array('group'=>'F'))}"></a>
+            </div>
+        </div>
+   </section>
+        <include file="Public/app-bar"/>
+    </block>
+   <!-- 内容 e -->

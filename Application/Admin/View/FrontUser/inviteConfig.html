@@ -1,0 +1,71 @@
+<style>
+    .table2-config tr{
+        height: 35px;
+    }
+    .table2-config td{
+        text-align: center;
+        padding:12px;
+    }
+    .inputInfo2 {
+        line-height: 21px;
+    }
+</style>
+<div class="pageContent">
+    <form method="post" action="__URL__/inviteConfig" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>判断有效用户条件：</label>
+                <input type="text" name="login_days" size="5" class="digits" value="{$inviteConfig['login_days']}" ><label>天</label>
+                <input type="text" name="login_times" size="5" class="digits" value="{$inviteConfig['login_times']}" ><label>次</label>
+            </div>
+
+            <div class="unit">
+                <label>注册人获得金币数量：</label>
+                <input type="text" name="register" size="5" class="digits" value="{$inviteConfig[0]}" ><label>金币</label>
+            </div>
+
+            <div class="unit">
+                <label>各级用户获得金币数：</label>
+                <table class="table2-config">
+                    <tr style="background: #f2f2f2;">
+                        <td>情景</td>
+                        <td>顶级用户</td>
+                        <td>一级用户</td>
+                        <td>二级用户</td>
+                        <td>三级用户</td>
+                    </tr>
+                    <foreach name="inviteConfig" item="v" key="k">
+                        <if condition="$k gt 0 && $k neq 'login_days' && $k neq 'login_times'">
+                        <tr>
+                            <td>{$k}</td>
+                            <td><input type="text" size="5" name="top[]" value="{$v['top']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                            <td><input type="text" size="5" name="first[]" value="{$v['first']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                            <td><input type="text" size="5" name="second[]" value="{$v['second']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                            <td><input type="text" size="5" name="third[]" value="{$v['third']}">&nbsp;<span class="inputInfo2">金币</span></td>
+                        </tr>
+                        </if>
+                    </foreach>
+                </table>
+            </div>
+
+            <p style="width: 800px; line-height: 150%;">
+                <font color="red">举例说明：注册时候有三种情景，（以下金币数目具体请参考上面配置信息）</font><br />
+                情景一：注册时用的邀请码的邀请人没有上级，这时结果就只有两个，注册人和邀请人分别获得金币各2，二、三级都为0；<br />
+                情景二：注册时用的邀请码的邀请人只有一个上级，这时结果有三个，注册人和邀请人分别获得金币各2，邀请人的上级获得1金币，三级为0；<br />
+                情景三：注册时用的邀请码的邀请人有二个上级，这时结果有四个，注册人和邀请人分别获得金币各2，邀请人的上级获得1金币，上上级获得1金币；
+            </p>
+        </div>
+
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+
+
+
+

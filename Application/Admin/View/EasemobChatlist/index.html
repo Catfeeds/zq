@@ -1,0 +1,127 @@
+<include file="Public:pagerForm" />
+<form id="pagerForm" action="__URL__" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="room_type" value="{$room_type}"/>
+    <input type="hidden" name="room_id" value="{$room_id}"/>
+    <input type="hidden" name="_order" value="{$_REQUEST['_order']}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST['_sort']|default='1'}"/>
+    <input type="hidden" name="listRows" value="{$_REQUEST['listRows']}"/>
+    <volist name="map" id="m">
+        <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label>房间类型：</label>
+                    <select class="combox" name="type_room">
+                        <option value="">全部</option>
+                        <option value="1" <if condition="$_REQUEST.type_room eq '1'">selected</if> >足球</option>
+                        <option value="2" <if condition="$_REQUEST.type_room eq '2'">selected</if> >篮球</option>
+                        <option value="live" <if condition="$_REQUEST.type_room eq 'live'">selected</if> >主播</option>
+                    </select>
+                </li>
+                <li>
+                    <label>房间号：</label>
+                    <input type="text" name="room_id" value="{$room_id}"/>
+                </li>
+                <li>
+                    <label>用户昵称：</label>
+                    <input type="text" name="nick_name" value="{$nick_name}"/>
+                </li>
+                <li>
+                    <label>发言内容：</label>
+                    <input type="text" name="content" value="{$content}"/>
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">查询</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a title="确实要屏蔽消息并且永久禁言用户吗?" target="selectedTodo" target="dialog" rel="id[]" href="__URL__/saveAll/type/1"
+                   class="delete"><span>屏蔽消息</span></a></li>
+            <li><a title="确实要禁用用户吗?" target="selectedTodo" target="dialog" rel="id[]" href="__URL__/saveAll/type/2"
+                   class="delete"><span>禁用用户</span></a></li>
+        </ul>
+    </div>
+    <table class="list" width="100%" layoutH="116">
+        <thead>
+        <tr>
+            <th width="5%"><input type="checkbox" group="id[]" class="checkboxCtrl">id</th>
+            <th width="8%">发言用户</th>
+            <th>聊天内容</th>
+            <th width="23%">房间</th>
+            <th width="8%">聊言时间</th>
+            <th width="5%">聊天状态</th>
+            <th width="6%">屏蔽操作员</th>
+            <th width="8%">操作时间</th>
+            <th width="4%">用户状态</th>
+            <th width="4%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist id="vo" name="list">
+            <tr target="sid_node" rel="{$vo['id']}">
+                <td><input name="id[]" value="{$vo['id']}" type="checkbox">{$vo['id']}</td>
+                <td>{$vo['nick_name']}（{$vo['user_id']}）</td>
+                <td title="{$vo['content']}">{$vo['content']|mb_substr=###,0,150,'utf-8'}</td>
+                <td <if condition="$vo.room_type eq '2'">style="background-color: #f4f5df"</if>>{$vo['room']}</td>
+                <td>{$vo['chat_time']|date="Y-m-d H:i:s",###}</td>
+                <td>
+                    <if condition="$vo.forbid_status eq '1'">
+                        {$vo['forbid_status']|getStatus}
+                        <else/>
+                        <a href="__URL__/recover/user_id/{$vo.user_id}" target="navTabTodo" title="解除禁言？">{$vo['forbid_status']|getStatus}</a>
+                        {$vo['forbid_status_desc']}
+                    </if>
+
+                </td>
+                <td>{$vo['forbid_operator']}</td>
+                <td>{$vo['operate_time']}</td>
+                <td>
+                    <if condition="$vo.user_status eq 1">
+                        <a href="__URL__/save/user_id/{$vo.user_id}/user_status/0" target="navTabTodo"
+                           title="确定禁用该用户吗？">{$vo['user_status']|getStatus}</a>
+                        <else/>
+                        <a href="__URL__/save/user_id/{$vo.user_id}/user_status/1" target="navTabTodo"
+                           title="确定恢复用户状态未正常吗？">{$vo['user_status']|getStatus}</a>
+                    </if>
+                </td>
+                <td>
+                    <switch name="vo.status">
+                        <case value="normal">
+                            <a href="__URL__/save/user_id/{$vo.user_id}/id/{$vo.id}/status/1" target="navTabTodo"
+                               title="踢出并屏蔽发言？">屏蔽</a>
+                            <a href="__URL__/save/user_id/{$vo.user_id}/id/{$vo.id}/status/3" target="navTabTodo"
+                               title="踢出并禁言10分钟？">踢出</a>
+                        </case>
+                        <case value="hidden">
+                            消息已处理
+                        </case>
+                    </switch>
+                </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+    <include file="Public:pagerNum"/>
+
+</div>

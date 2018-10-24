@@ -1,0 +1,104 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userInfo/qw_order.css?v=20180801">
+    <link rel="stylesheet" href="__CSS__/userInfo/liveHistory.css?v=201808016">
+    <script type="text/javascript" src="__JS__/common/laydate/laydate.js"></script>
+    <script type="text/javascript" src="__JS__/common/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="__CSS__/userInfo/viewer.min.css">
+   
+</block>
+<block name="content">
+       
+    <div class="body" >
+        <!-- 头部开始 -->
+        <include file="Public:top_user"/>
+        <!-- 头部结束 -->
+        <!-- 主体内容开始 -->
+        <div class="qw_content clearfix" id="qw_content">
+            <!-- 左边的主体内容 -->
+            <include file="Public:leftMenu"/>
+            <!-- left-main e -->
+
+            <!-- right_main s -->
+            <div class="right_main fr" style="min-height: 842px; color: #4c4c4c; font-size: 16px; padding-left: 10px;">
+                <form action="/UserInfo/liveHistory.html" method="POST">
+                      日期 <input id="startTime" name="startTime" value='<if condition="$_REQUEST['startTime'] neq ''">{$_REQUEST['startTime']}</if>' class="one laydate-icon time_txt" onclick="laydate(laydate({elem: '#startTime', istime: true, format: 'YYYY-MM-DD hh:mm'}))">&nbsp; — &nbsp;
+                    <input id="endTime" name="endTime" value='<if condition="$_REQUEST['endTime'] neq ''">{$_REQUEST['endTime']}</if>' class="two laydate-icon time_txt" onclick="laydate({elem: '#endTime', istime: true, format: 'YYYY-MM-DD hh:mm'})">
+                      直播标题 <input type="text" name="title"  class="three" value='<if condition="$_REQUEST['title'] neq ''">{$_REQUEST['title']}</if>'>
+                      <input type="submit" value="查询" style="width: 82px; height: 44px; border-radius: 10px; background-color: #4bbaff; border: 1px solid #4bbaff; color: #fff;">
+                </form>
+                <if condition="$totalCount eq ''">
+                    <table border="1" >
+                        <tr>
+                            <td class="one">暂无数据</td>
+                        </tr>
+                        
+                    </table>
+                <else/>
+                    <table border="1" id="dialog">
+                        <tr>
+                            <td class="one">直播标题</td>
+                            <td class="two">直播时间</td>
+                            <td class="three">直播时间</td>
+                            <td class="four">查看</td>
+                        </tr>
+                        <volist name="liveLog" id="vo">
+                            <tr>
+                                <td class="one">
+                                    <div class="user">
+                                        <a><img src="{$vo.img}" data-original="{$vo.img}"></a>
+                                        <h1>{$vo.title}</h1>
+                                    </div>
+                                </td>
+                                <td class="two"><h2>{$vo['start_time']|date="Y/m/d H:i",###}<if condition="$vo['end_time'] neq ''"> -- {$vo['end_time']|date="Y/m/d H:i",###}</if></h2></td>
+                                <td class="three"><h3>{$vo['live_time']}分钟</h3></td>
+                                <td class="four <if condition="$vo['live_status'] neq 0">on</if>">
+                                    <a target="_blank" href="<if condition="$vo['game_id'] eq '' || $vo['live_status'] eq 0">{:U('/liveRoom/'.$vo['room_id'])}<else/>{:U('/live/'.$vo['game_id'].'@bf')}?is_live=1</if>">
+                                    <button type="text" value="but"><if condition="$vo['live_status'] eq 0">直播回放<else/>直播中<img src="__IMAGES__/live.png" style="width: 15px; height: 12px; margin: 0 0 0 5px;"></if></button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </volist>
+                    </table>
+                    <!--页码开始-->
+                    <div class="pageNum">
+                        <nav aria-label="...">
+                            <ul class="pagination clearfix">
+                                {$show}
+                                <li>
+                                    <input class="form-control isTxt" type="text" value="{$_REQUEST.p|default=1}" name="p">
+                                </li>
+                                <li id="GO"><a href="javascript:void(0)">GO</a></li>
+                            </ul>
+                            <div class="">共有{$totalCount}条，每页显示：{$numPerPage}条</div>
+                        </nav>
+                    </div>
+                </if>
+                <!--页码结束-->
+            </div>
+            <!-- right_main s -->
+
+        </div>
+        <!-- 主体内容结束 -->
+    </div>
+
+</block>
+<block name='js'>
+    <script type="text/javascript" src="__JS__/userInfo/viewer.min.js"></script>
+    <script type="text/javascript">
+    $('#dialog').viewer();
+    $('#dialog').viewer({url:"data-original"});
+
+    //绑定a标签
+    $("#GO").find("a").bind("click", function(){
+        var p = $("input[name='p']").val();
+        if (isNaN(p)) {
+
+        } else if (p>0){
+            var dateType = $(".form-control").val();
+            window.location.href="/UserInfo/liveHistory/p/"+p+".html";
+        }
+    });
+    </script>
+</block>
+

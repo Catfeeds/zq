@@ -1,0 +1,53 @@
+<div class="pageContent">
+
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this,navTabAjaxDone);">
+		<div class="pageFormContent" layoutH="58">
+            <input type="hidden" name="id" value="{$vo.id}">
+			<div class="unit">
+				<label>招聘标题：</label>
+				<input type="text" class="required"  name="title" value="{$vo.title}" size="40"/>
+			</div>
+			<div class="unit">
+                <label>选择分类：</label>
+                <select name="class_id" class="required">
+                    <option value="">请选择</option>
+                    <volist name="RecruitClass" id="item">
+                        <option value="{$item.id}" <eq name="item.id" value="$vo.class_id">selected</eq> >{$item.name}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="unit">
+                <label>排序：</label>
+                <input type="text" class="digits" name="sort" value="{$vo.sort}">
+            </div>
+			<div class="unit">
+                <label>状态：</label>
+                <select class="small bLeft"  name="status">
+                    <option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+                    <option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+                </select>
+            </div>
+			<div class="unit">
+			  <label>内容：</label>
+			</div>
+			<div class="unit">
+			  <textarea id="myeditor1" style="width:90%;height:600px;" name="content">{$vo.content}</textarea>
+			</div>
+		</div>
+		<div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+	</form>
+
+</div>
+
+<script type="text/javascript">
+    //实例化编辑器
+    var editor = new UE.ui.Editor();
+    editor.render("myeditor1");
+</script>
+
+

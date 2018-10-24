@@ -1,0 +1,65 @@
+/*
+ * 精彩王手机页面
+ * @author Chensiren <245017279@qq.com>
+ * @since  2016-02-01
+*/
+
+
+
+/**
+ * 手机微信端公用css样式文件
+ * 
+ * @author Chensiren <793952481@qq.com>
+ * @since  2016-02-01
+**/
+
+.section-con{ background: #f7f7f7; padding-bottom: 1rem;}
+.section .title{ height: 4rem; line-height: 4rem; padding-left: 5rem; background: #f7f7f7 url(../images/title-icon.png) no-repeat 1.2rem center; background-size: auto 62%;}
+.section .title h1{ font-size: 1.6rem;}
+.section .title-con{ padding: 1rem;padding-top: 0; font-size: 1.4rem; background: #ffffff;}
+.section .title-con ul li{ line-height: 2rem;}
+.section .title-con p{ text-indent: 3rem;}
+.rank-con{ padding: 0 1rem;}
+.exp-con ul li.exp{ width: 33.3%; height: 4.5rem; border: 2px solid #fff; background: #fffbc0 url(../images/medal02.png) no-repeat center center; background-size: auto 60%; border-left: none;}
+.exp-con ul li.exp:nth-of-type(2){ background: #fffbc0 url(../images/medal01.png) no-repeat center center; background-size: auto 60%;}
+.exp-con ul li.exp:nth-of-type(3){ background: #fffbc0 url(../images/medal03.png) no-repeat center center; background-size: auto 60%; border-right: none;}
+
+.rank-divide .imgIcon img{ width: 60%;}
+.rank-divide .table thead > tr > td{ background:#d1e4ff; border: none 0;}
+.rank-divide .table-bordered{ border: none 0;}
+.rank-divide .table-bordered tbody tr td{ border-color: #e5e5e5; border-width: 1px;}
+
+.rank-title,.rank-tit{ padding-top: 0.8rem;}
+.exp-con .exp-text li{ padding: 0.6rem 0; padding-left: 2rem; background: #f7f7f7; margin-bottom: .3rem;}
+.rank-title .title,.rank-tit .title{ width: auto; height: 7rem; text-align: center; font-size: 1.6rem; padding-top: 2rem; color: #fff; margin: 0 auto; background: url(../images/rank-title.png) no-repeat center center; background-size: 70% auto;}
+.rank-tit .title{ background: url(../images/rank-title-red.png) no-repeat center center; background-size: 70% auto;}
+.ic-con{ margin-bottom: 1rem;}
+.ic{ padding-left: 6rem; min-height: 6.5rem;  position: relative;font-size: 1.4rem}
+.ic img{ width: 5rem; height: auto; position: absolute; left: 0; top: 0;}
+.table-con .table-bordered tr td{ border-color: #fff; border-width: 0.2rem; padding: 0.6rem 0; font-size: 1.4rem;}
+.warn p{ line-height: 2rem; font-size: 1.4rem}
+
+#other_header {
+    width: 100%;
+    height: 4.2rem;
+    line-height: 4.2rem;
+    text-align: center;
+    color: #fff;
+    font-size: 1.6rem;
+    background: #01af63 url(../images/back.png) no-repeat 1.5rem center;
+    background-size: 1.22rem 2rem;
+    text-indent: -1rem;
+}
+
+#other_header a {
+    width: 3rem;
+    height: 100%;
+    display: block;
+    float: left; 
+}
+
+
+
+.li_pl{padding-left: 1.8rem}
+.li_pl_2{padding-left: 5.2rem}
+

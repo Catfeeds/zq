@@ -1,0 +1,23 @@
+<section class="score clearfix">
+    <div class="score_main"> 
+
+        <div class="s_left">
+            <div class="t_logo"><img src="{$against.home_logo}" alt="{$against.home_team_name.0}"></div>
+            <p><eq name='Think.cookie.language' value='0'>{$against.home_team_name.0}<else/>{$against.home_team_name.1}</eq></p>
+        </div>
+
+        <div class="s_center">
+            <div class="sc_score">
+                <in name="against.game_state" value="1,2,3,4,-1">{$against.score}</in>
+            </div>
+            <time>{$against.time|date='y-m-d H:i',###}</time>
+            <p>
+                {:C('game_state')[$against[game_state]]}
+            </p>
+        </div>
+        <div class="s_left s_right">
+            <div class="t_logo"><img src="{$against.away_logo}" alt="{$against.away_team_name.0}"></div>
+            <p><eq name='Think.cookie.language' value='0'>{$against.away_team_name.0}<else/>{$against.away_team_name.1}</eq></p>
+        </div>
+    </div>
+</section>

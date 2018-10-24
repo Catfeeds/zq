@@ -1,0 +1,65 @@
+/**
+ * 数据css样式文件
+ * 
+ * @author pengjian <710348662@qq.com>
+ *
+ * @since  2016-04-13
+**/
+table tr th{font-size: .24rem}
+table tr td{font-size: .22rem}
+.nodata{color: #999;padding:.2rem;}
+/*.d_title + div{display: none;}
+.d_title:first-child + div{display: block}*/
+
+/*联赛积分排名*/
+.data_con{padding-top: .1rem; clear: both; width: 100%; position: relative; overflow-y: scroll; -webkit-overflow-scrolling: touch;}
+.data_con2{padding-top: .1rem; clear: both; width: 100%; }
+.tb_rank{width: 100%;text-align: left;}
+.tb_rank tr th{color: #cb945c;font-size: .26rem; height: .6rem;background: #ffefe0;text-align: center;}
+.tb_rank tr td{height: .8rem;text-align: center;} 
+.tb_rank tr td:first-child{width: 1.4rem;text-align: center;}
+/*.tb_rank tr:nth-child(2n+3){background-color: #f2f2f2}*/
+.tb_rank tr td span{ float: left;padding-right: .05rem }
+
+/*标题*/
+.d_title{ width: 100%;height: .9rem;line-height: .9rem; background-color: #f7f7f7;border-top: 1px solid #dddddd;padding:0 .2rem; font-size: .3rem; position: relative; font-weight: bold;}
+.d_title span{float: left;height: .89rem; font-size: .24rem}
+.d_title a{float: right;
+    height: .89rem;
+    min-width: 4rem;
+    display: block;
+    text-align: right;}
+.d_title a img{width: .48rem; height: .48rem}
+.jiaozhan a{ min-width: 3rem;}
+/*球队logo*/
+.teamname{width: 100%; height: .7rem;line-height: .7rem;padding:0 .2rem;font-size: .24rem;float: left}
+.teamname img{vertical-align: middle;padding-right: .13rem;width:.48rem;height:auto; }
+
+ /*近期交战 and 历史交战 and... */
+.tb_history{width: 100%;text-align: left; }
+.tb_history tr th{color: #cb945c;font-size: .26rem; height: .6rem;background: #ffefe0;text-align: center;}
+.tb_history tr td{height: .8rem;text-align: center;} 
+.tb_history tr td:first-child{width: 1.4rem;text-align: center;}
+.tb_history tr td:first-child p{color:#666;}
+/*.tb_history tr:nth-child(2n+3){background-color: #f2f2f2}*/
+.tb_history tr td{border-bottom: 1px solid #dddddd} 
+.tb_history tr td .sc{color: #999999}
+/*.tb_history tr:last-child td{border-bottom: 0}*/
+
+.tb_history tr:last-child td{border-bottom:.1rem solid #f7f7f7 }
+.tb_history:last-child tr:last-child td{border-bottom: 0}
+.tb_history tr td span{padding-right: .1rem}
+
+.tb_yuce th{font-weight: normal;}
+.tb_yuce th a{color: #cb945c!important}
+
+.tb_tuij tr td{text-align: left!important;padding-left: .2rem}
+
+/*技统率 2016年9月8日 11:21:21 by pengj*/
+.tb_jt tr td{width: 33.3333%}
+.tb_jt tr td:nth-child(2){}
+.d_title {
+    float: left;
+    height: .89rem;
+    font-size: .24rem;
+}

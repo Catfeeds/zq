@@ -1,0 +1,27 @@
+<div class="pageContent">
+
+	<form method="post" action="__URL__/saveState" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="game_id" value="{$_REQUEST.game_id}">
+			<input type="hidden" name="gameType" value="{$_REQUEST.gameType}">
+			<div class="unit">
+				<label>比赛状态：</label>
+				<select name="game_state">
+					<volist name="game_state" id="item">
+						<option value="{$key}" <if condition="$key eq $vo['game_state']">selected</if>>{$item}</option>
+					</volist>
+				</select>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+
+

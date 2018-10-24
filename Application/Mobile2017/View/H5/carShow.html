@@ -1,0 +1,48 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <style type="text/css">
+        html,body{ background: #2b074d;}
+        .inMain{ padding: 0 .25rem .4rem .25rem;}
+        .topBanner{ position: relative;}
+        .car{ width: 100%; height: 2.16rem;  position: absolute; z-index: 1; bottom: -.5rem; background: url(__IMAGES__/h5/car.png) no-repeat center bottom; background-size: 90% auto;}
+        .li01,.li02{ padding: .4rem .25rem; background: #0e88c6; margin-bottom: .2rem;}
+        .li02{ background: #02a3b4;}
+        .rule{ background: #cfe7f4; padding: .28rem;}
+        .rule ul { margin-bottom: .3rem;}
+        .rule ul li{ font-size: .24rem; color: #424242; margin-bottom: .1rem;}
+        .ruleTile{ width: 2.2rem; height: .5rem; line-height: .5rem; text-align: center; margin:0 auto; margin-bottom: .2rem; font-size: .26rem; color: #fff; background: #ee206a; border-radius: 3px;}
+        .li02 h4{ font-weight: normal; font-size: .26rem; color: #fff; margin-bottom: .3rem;}
+        .li02 ul li{ color: #393939; margin-bottom: .1rem; font-size: .24rem;}
+        .li02 ul li span{ color: #007e8b;}
+        .li02 ul{ background: #ccedf0; padding: .2rem .24rem;}
+    </style>
+</block>
+<block name="header"></block>
+<block name="nav"></block>
+<block name="body">
+    <body>
+    	<div class="topBanner"><img src="__IMAGES__/h5/topBanner.jpg"><div class="car"></div></div>
+        <div class="inMain">
+        	<ul>
+            	<li class="li01">
+               	  <div class="rule">
+                   	<div class="ruleTile">活动规则</div>
+                    	<ul>
+                            <li>1、在全球体育APP充值200元以上就可获赠2017五一华南国际车展门票一张</li>
+                            <li>2、活动参与时间：2017年4月19日-26日</li><li>3、免费门票数量有限，赠完即止！</li>
+                            <li>4、充值成功后请联系全球体育APP客服，填写资料以便领取</li>
+                        </ul>
+    				  	<a href="http://cs.ecqun.com/mobile/rand?id=4710516"><img src="__IMAGES__/h5/kefu.png"></a>
+                    </div>
+                </li>
+                <li class="li02">
+                	<h4>小贴士：2017国际车展时间和地址</h4>
+                    <ul><li><span>4月29日-5月1日</span> 广州国际采购中心(广州琶洲车展)</li><li><span>4月29日-5月2日</span> 广州白云国际会议中心(广州白云车展)</li><li><span>4月29日-5月2日</span> 东莞市南城区东莞国际会展中心(东莞车展)</li><li><span>4月29日-5月1日</span> 佛山陈村花卉世界展览中心(佛山车展)</li><li style="color: #ff342c;">两地车展一票通用</li></ul>
+                </li>
+            </ul>
+        </div>
+    </body>
+    </html>
+</block>
+<block name="footer"></block>

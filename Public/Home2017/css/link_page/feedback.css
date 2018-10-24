@@ -1,0 +1,24 @@
+/**
+ * 全彩关于我们css样式文件
+ *
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-12-25
+**/
+/* 主体内容 */
+.home,.main{ width: 1000px; margin: 0 auto; margin-top: 12px\9; margin-bottom: 12px\9}
+.main{ margin: 12px 0; display: block}
+.home h2{ margin: 38px 0 50px 0;}
+.main h2{ margin: 38px 0 50px 0;}
+.main h2 img{ display: block}
+.feedback dl{ margin-bottom: 0;}
+.feedback dt{ margin-bottom: 5px; font-weight:normal;}
+.feedback dl .textarea{ padding-right: 200px; background: url(../../images/link_page/cof.png) no-repeat 725px 119px; position: relative;}
+.feedback dl .textarea .posi-p{ position: absolute; left: 30px; top: 20px; line-height: 24px; color: #999;  z-index: 2;}
+.feedback dl .textarea span{ width: 280px; height: 147px; position: absolute; right: 0; top: -64px; background: url(../../images/link_page/posi.png) no-repeat 0 0; z-index: 999;}
+.feedback dl .textarea .text-con{ background: #fff; width: 735px; height: 220px; overflow: auto; border: 1px solid #e5e5e5;  overflow: hidden; margin-bottom: 10px;}
+.feedback dl .textarea .focus {border-color: #a3e3c8;}
+.feedback dl .textarea .text-con textarea{ padding:10px; width: 735px; height: 220px; border: none; padding-right: 65px; resize: none; outline: 0;  z-index: 99;}
+.sub-con{ margin-bottom: 80px;}
+.sub-con input[type=submit]{ height: 40px; width: 130px; font-size: 16px; border: none; color: #fff; outline: none; border-radius: 3px; margin-left: 64px; margin-top: 30px;}
+.text-con label{width: 100px;left: 4px;top:-10%;}
+.phone2 .field-msg{ left: 65px; top: 48px;}

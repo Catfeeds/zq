@@ -1,0 +1,105 @@
+<form id="pagerForm" action="__URL__/fb_betodds" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+    <volist name="map" id="m">
+        <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/fb_betodds" method="post">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li style="width: auto !important;padding-right: 15px;">
+                    <label style="width: auto !important;">赛程ID：</label>
+                    <input type="text" name="game_id" value="{$_REQUEST.game_id}">
+                </li>
+                <li style="width: auto !important;padding-right: 15px;">
+                    <label style="width: auto !important;">竞彩标志码</label>
+                    <select name="code" class="combox" onchange="$(form).submit()">
+                        <option value="">全部</option>
+                        <option <if condition="$_REQUEST.code eq '1'">selected</if> value="1">周一</option>
+                        <option <if condition="$_REQUEST.code eq '2'">selected</if> value="2">周二</option>
+                        <option <if condition="$_REQUEST.code eq '3'">selected</if> value="3">周三</option>
+                        <option <if condition="$_REQUEST.code eq '4'">selected</if> value="4">周四</option>
+                        <option <if condition="$_REQUEST.code eq '5'">selected</if> value="5">周五</option>
+                        <option <if condition="$_REQUEST.code eq '6'">selected</if> value="6">周六</option>
+                        <option <if condition="$_REQUEST.code eq '7'">selected</if> value="7">周日</option>
+                    </select>
+                </li>
+                <li style="width: auto !important;">
+                    <label style="width: auto !important;">比赛时间：</label>
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="11">至
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="11">
+                </li>
+
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+            <th <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'game_id')"> class="desc"</if> orderField="game_id" <if condition="$_REQUEST._order eq 'game_id'">class="{$_REQUEST._sort}"</if>>赛程ID</th>
+            <th>赛程名称</th>
+            <th>新赛事ID</th>
+            <th>标志码</th>
+            <th>来源网站ID</th>
+            <th>不让球主胜赔率<span style="color: red;">(竞猜人数)</span></th>
+            <th>不让球平胜赔率<span style="color: red;">(竞猜人数)</span></th>
+            <th>不让球客胜赔率<span style="color: red;">(竞猜人数)</span></th>
+            <th>让球</th>
+            <th>让球主胜赔率<span style="color: red;">(竞猜人数)</span></th>
+            <th>让球平赔率<span style="color: red;">(竞猜人数)</span></th>
+            <th>让球客胜赔率<span style="color: red;">(竞猜人数)</span></th>
+            <th>更新时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name="list">
+            <volist id="vo" name="list">
+                <tr target="sid_record" rel="{$vo['id']}">
+
+                    <td>{$vo['id']}</td>
+                    <td>{$vo['game_id']}</td>
+                    <td>{$vo['union_name']}</td>
+                    <td>{$vo['game_id_new']}</td>
+                    <td>{$vo['bet_code']}</td>
+                    <td>{$vo['from_id']|default = '--'} </td>
+
+                    <td>{$vo['home_odds']|default = '--'}(<span style="color: red;">{$vo['win_num']|default = '--'}</span>)</td>
+                    <td>{$vo['draw_odds']|default = '--'}(<span style="color: red;">{$vo['draw_num']|default = '--'}</span>)</td>
+                    <td>{$vo['away_odds']|default = '--'}(<span style="color: red;">{$vo['lose_num']|default = '--'}</span>)</td>
+                    <td>{$vo['let_exp']}</td>
+                    <td>{$vo['home_letodds']|default = '--'} (<span style="color: red;">{$vo['letwin_num']|default = '--'}</span>)</td>
+                    <td>{$vo['draw_letodds']|default = '--'} (<span style="color: red;">{$vo['letdraw_num']|default = '--'}</span>)</td>
+                    <td>{$vo['away_letodds']|default = '--'} (<span style="color: red;">{$vo['letlose_num']|default = '--'}</span>)</td>
+
+                    <td>{$vo['update_time']|date = 'Y-m-d H:i',###}</td>
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

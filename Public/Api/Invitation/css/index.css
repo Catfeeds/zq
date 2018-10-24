@@ -1,0 +1,130 @@
+.banner{background: url(../images/banner.jpg) no-repeat left center; background-size: 100% 4.83rem;width: 100%;height: 4.83rem;position: relative;}
+.banner_ios{background: url(../images/banner_ios.jpg) no-repeat left center; background-size: 100% 4.83rem;width: 100%;height: 4.83rem;position: relative;}
+
+/*内页 - 二级头部*/
+#other_header{width: 100%; height: 1.04rem;line-height: 1.04rem;text-align: center;color: #333;font-size: .40rem; color: #fff;position: absolute;top: 0;left: 0;background: url(../images/title_bg.png) no-repeat left center; background-size: 100% 1.04rem;}
+#other_header a{width: .6rem;height: 100%;display: block;float: left; background: url(../images/back-gary.png) no-repeat .25rem center; background-size: .22rem .4rem; text-indent: -.44rem} 
+.banner #rules{display: block;width:100%;height: 1.3rem;position: absolute;left:0;bottom:0}
+.banner_ios #rules{display: block;width:100%;height: 1.3rem;position: absolute;left:0;bottom:0}
+
+/*邀请码*/
+.yaoqing{padding: .35rem 0;text-align: center;}
+.yaoqing figure img{width: 2.35rem; height: 2.35rem}
+.yaoqing figcaption{color: #666666;margin-top: .2rem;font-size: .32rem;margin-bottom: .5rem}
+.yaoqing figcaption span{color: #ff2929;font-size: .36rem}
+.yaoqing figure a{width: 5.7rem; height: .85rem;line-height: .85rem; display: block;background: #ffd324;margin: 0 auto;margin-top: .2rem;border-radius: 2rem;border:1px solid #222222;font-size: .32rem;}
+.yaoqing figure a em{color: #ff2929;font-size: .36rem}
+
+/*邀请的人*/
+.yq_count{width: 100%;height: 4.68rem;background: url(../images/yq_bg.png) no-repeat left center; background-size: 100% 4.68rem;margin-top: .3rem}
+.yq_count .man{height: 3rem;position: relative;}
+.yq_count .man em{display: block;width: 2rem;height: .6rem;position: absolute;top:1.55rem; text-align: center;font-size: .54rem;}
+.yq_count .man em:first-child{left: 0.87rem;color: #fff}
+.yq_count .man em:last-child{right: 0.87rem;color:#f34b1e;}
+
+/*.yq_count .man_lv{height: 1.6rem;}
+.yq_count .man_lv p{height:.4rem;line-height:.4rem;margin-bottom: .145rem;position: relative;}
+.yq_count .man_lv p em{position: absolute;top: 0;font-size: .3rem} 
+.yq_count .man_lv p em:first-child{left: 2.8rem;color: #fff}
+.yq_count .man_lv p em:last-child{left: 5.7rem;color: #f34b1e}
+.yq_count .man_lv p em span{color: #000002;padding-left: .05rem;}*/
+
+.yq_count .man_lv p{height:.4rem;line-height:.4rem;margin-bottom: .155rem;position: relative;}
+.yq_count .man_lv p img{width: .48rem;height: .26rem;margin-top: -.08rem;margin-right: .05rem}
+.yq_count .man_lv p em{position: absolute;top: 0;font-size: .3rem} 
+.yq_count .man_lv p em:first-child{left: .5rem;}
+.yq_count .man_lv p em:first-child span{color: #fff;padding-right: .05rem;}
+.yq_count .man_lv p em:last-child{left: 4.6rem;}
+.yq_count .man_lv p em:last-child span{color: #f34b1e;padding-right: .05rem;}
+
+/*邀请达人榜*/
+.yq_daren{width: 100%;height: 4.6rem; padding: .4rem .3rem;}
+.yq_daren .dr_title{width: 100%;height: .5rem;line-height: .5rem}
+.yq_daren .dr_title span{float: left;font-size: .38rem;}
+.yq_daren .dr_title span img{width: .29rem;height: auto;margin-right: .1rem}
+.yq_daren .dr_title em{float: right;font-size: .30rem;}
+.yq_daren .dr_title em img{width: .35rem;height: auto;margin-left: .1rem}
+
+.dr_rank{margin-top: .4rem;}
+.dr_rank .dr_con{float: left;width: 33.3%; text-align: center;margin-top: .2rem;}
+.dr_rank .dr_con figure .head{width: 1.5rem; height: 1.5rem;border-radius: 50%;border:3px solid #fff;}
+.dr_rank .dr_con_gold figure .head{ width: 1.7rem}
+.dr_rank .dr_con figure figcaption{margin-top: .4rem;}
+.dr_rank .dr_con figure figcaption p{margin-bottom: .1rem;}
+.dr_rank .dr_con figure figcaption img{ width:.26rem;height: auto;margin-right: .05rem;}
+.dr_rank .dr_con figure figcaption span{color: #fb2118;font-size: .36rem;}
+.dr_rank .dr_con_gold{ width: 33.3%; margin-top: 0;}
+.dr_rank .dr_con_gold figure .head{height: 1.7rem;}
+
+/*邀请达人列表*/
+.dr_list{}
+.dr_list ul li{padding: .2rem 0; width: 100%; float: left;border-bottom: 2px solid #f8cf3f}
+.dr_list ul li em{float: left;padding-left: .3rem}
+.dr_list ul li em img{width: .8rem; height: .8rem;border-radius: 50%;margin-right: .25rem;border:3px solid #f8cf3f;}
+.dr_list ul li span{float: right;font-size: .24rem;padding-right: .3rem;margin-top: .15rem}
+.dr_list ul li span i{ font-style: normal;color: #eb0000;font-size: .32rem }
+
+/*遮罩层*/
+ #maskLayer{ width:100%; height: 100%; background-color:#000000; opacity:0.8; -moz-opacity:0.8; filter:alpha(opacity=80); position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1;display: none;z-index: 999; overflow: hidden;}
+.rules_con{display: block;position: fixed;z-index: 999;left: 50%;top: 10%;width: 6.8rem; height: 80%; background: #fff;margin-left:-3.4rem;padding: .5rem;display: none; overflow-y:scroll; overflow-y: auto; -webkit-overflow-scrolling: touch;}
+.rules_con p{padding-bottom: .2rem;line-height: 180%}
+.rules_con h2{font-style: normal;text-align: center;padding-bottom: .3rem}
+.rules_con #close{position: absolute;top: 0;right: 0;width: .81rem;height: .81rem;background: url(../images/close.png) no-repeat left center; background-size: .81rem .81rem;}
+
+
+/*邀请好友修改 2016年10月18日 10:37:09 by pengj*/
+.shareClick em{font-size: .37rem;color: #ff2929}
+/*我的信息*/
+.my_msg_bg{background:url(../images/my_msg_bg.png) no-repeat left top; background-size: 100% .65rem;width: 100%;height: .65rem} 
+.my_msg_con{background: #ee6363;padding:.2rem .4rem; }
+.mmc_main{border:.08rem solid #ffd274;border-radius: .2rem;min-height: 2rem;background: #fff9e9; position: relative;padding-bottom: .2rem}
+.ding{position: absolute;left: .1rem; bottom: -.8rem;background:url(../images/ding.png) no-repeat left top; background-size: .40rem 1.28rem;width: .44rem;height: 1.28rem;z-index: 9 }
+.my_msg_title{background:url(../images/my_msg.png) no-repeat left top; background-size: 1.93rem .5rem;width: 1.93rem;height: .5rem;margin-top: .2rem;line-height: .5rem;padding-left: .2rem;color: #fff;z-index: 99;    position: relative;}
+.line{border-bottom: 1px dashed #fc850f;position: absolute;top: .44rem;left: 0;width: 100%;z-index: 1}
+/*我的信息table*/
+.tb_my_msg tr td{text-align: left!important;padding:.3rem 0 0 .4rem;font-size: .24rem}
+.tb_my_msg tr td img{width: .32rem;margin-right: .15rem}
+.tb_my_msg tr td em{color: #e5555c;}
+.my_yaoq{background:url(../images/my_yaoq.png) no-repeat left top;background-size: 1.89rem .5rem;text-align: center;padding-left: 0;margin: 0 auto;margin-top: .4rem;}
+.line2{top:.64rem;}
+/*我的邀请table*/
+.tb_yaoq tr td{padding: .2rem 0}
+.tb_yaoq tr td img{width: 1.1rem;}
+.tb_yaoq tr td:last-child a{ background:url(../images/view.png) no-repeat left top;background-size: 1.08rem .5rem;width: 1.08rem;height: .5rem;display: block;}
+/*.tb_yaoq tr td:last-child a:hover{background:url(../images/view_on.png) no-repeat left top;background-size: 1.08rem .5rem;width: 1.08rem;height: .5rem;}
+*/
+.tb_yaoq tr td:nth-child(1){width: 20%}
+.tb_yaoq tr td:nth-child(2){text-indent: -.2rem}
+.tb_yaoq tr td:nth-child(3){width: 20%}
+.tb_yaoq tr td em{color: #e5555c;}
+
+/*邀请达人榜*/
+.rank_lay{margin-top: -1rem;z-index: 999;position: relative;}
+.rank_bg{background:url(../images/rank_bg.png) no-repeat left top; background-size: 100% .65rem;width: 100%;height: .65rem} 
+.rank_con{background: #f8cf3f;min-height: 2rem}
+
+.rank_list{padding: .4rem;}
+.rank_list_con{background: #fff;min-height: 1rem;border-radius: .2rem}
+
+/*日期选择*/
+.day_sele{margin-top: .2rem;border-bottom: 1px solid #ee6363;padding-bottom: .75rem}
+.ds_left{float: left;}
+.ds_left span{font-weight: bold;}
+.sele_input{width: 1.85rem;height: .5rem;border:1px solid #f8cf3f;line-height: .5rem; font-size: .24rem;margin: 0 .1rem;padding-left: .45rem;background:#fff url(../images/day.png) no-repeat .1rem center!important;background-size: .24rem .24rem!important;}
+.txt_btn{width: 1rem;height: .5rem;line-height: .5rem;background: #ee6363;border:none;color: #fff;border-radius: .1rem;font-weight: bold;float: left;}
+
+.tb_yaoq_view tr th{padding-top: .1rem}
+.tb_yaoq_view tr td{padding: .1rem 0}
+
+
+.in_head{margin-bottom:.3rem;background:url(../images/back.png) no-repeat left top; background-size: .33rem .35rem;width: auto;height: .35rem }
+.in_head a{padding-left: .5rem;color: #fff}
+
+.top_cloud{background:url(../images/top_cloud.png) no-repeat left top;background-size: 100% .6rem;width: 100%;height: .6rem;position: absolute;bottom: -.05rem;left: 0}
+
+/*我的邀请码*/
+.my_code{display: inline-block;}
+.copy_btn{display: block;padding: .1rem .2rem;background: #e65b55;width: 2rem;margin:0 auto;margin-top: .2rem;color: #fff;border-radius: .2rem;color: #fff!important;display: inline-block;margin-left: .3rem}
+
+
+

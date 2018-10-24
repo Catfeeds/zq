@@ -1,0 +1,84 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/index" method="post">
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>
+                <label>有效时间：</label>
+                <input type="text" readonly="true"  class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="15">至
+                <input type="text" readonly="true"  class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="15">
+            </li>
+            <li>
+                <label>合作商名称：</label>
+                <input type="text"name="shop_name" value="{$_REQUEST.shop_name}">
+            </li>
+
+            <li>
+                <label>用户名称：</label>
+                <input type="text"name="nick_name" value="{$_REQUEST.nick_name}">
+            </li>
+            <li>
+                <label>兑换状态：</label>
+                <select name="is_use" onchange="$(form).submit()" class="combox">
+                    <option value="">全部</option>
+                    <option <if condition="$_REQUEST.is_use eq '1'">selected </if> value="1">是</option>
+                    <option <if condition="$_REQUEST.is_use eq '0'"> selected </if> value="0">否</option>
+                </select>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="__URL__/addCode" target="dialog" mask="true"><span>新增</span></a></li>
+            <li><a class="add" href="__URL__/tasteConfig" target="dialog" height='500' mask="true"><span>安卓兑换劵设置</span></a></li>
+            <li><a class="add" href="__URL__/iosConfig" target="dialog" height='500' mask="true"><span>IOS兑换劵设置</span></a></li>
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="3%">ID</th>
+            <th width="10%">合作商名称</th>
+            <th width="5%" orderField="price" <if condition="$_REQUEST._order eq 'price'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>推荐价格</th>
+            <th width="8%" orderField="add_time" <if condition="$_REQUEST._order eq 'add_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>添加时间</th>
+            <th width="8%" orderField="over_time" <if condition="$_REQUEST._order eq 'over_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>券有效时间</th>
+            <th width="5%" orderField="ticket_num" <if condition="$_REQUEST._order eq 'ticket_num'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>兑换码数量</th>
+            <th width="5%">已兑换数量</th>
+            <th width="5%">已使用数量</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name="list">
+            <volist id="vo" name="list">
+                <tr target="sid_record" rel="{$vo['id']}" >
+                    <td>{$vo['id']}</td>
+                    <td>{$vo['shop_name']}</td>
+                    <td>{$vo['price']}金币体验卷</td>
+                    <td>{$vo['add_time']|date="Y-m-d H:i:s",###}</td>
+                    <td>{$vo['over_time']|date="Y-m-d",###}</td>
+                    <td style="font-weight: bold;"><a title="{$vo.shop_name}兑换码数量" target="navTab" href="__URL__/codeLog/partner_id/{$vo.id}">{$vo['ticket_num']}</a></td>
+                    <td style="font-weight: bold;"><a title="{$vo.shop_name}兑换码数量" target="navTab" href="__URL__/codeLog/partner_id/{$vo.id}/is_use/1">{$vo['use_num']}</a></td>
+                    <td style="font-weight: bold;"><a title="{$vo.shop_name}已使用数量" target="navTab" href="__ADMIN__/TicketConf/ticketLog/partner_id/{$vo.id}/is_use/1">{$vo['code_num']}</a></td>
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+
+</div>
+
+

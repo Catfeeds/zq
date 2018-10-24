@@ -1,0 +1,22 @@
+<tr class="games" <if condition="$key gt 9">style="display:none;"</if>>
+    <td class="text-fff" bgcolor="{$item.4}">{$item.3}</td>
+    <td>{$item.1}</td>
+    <td class="{$item.home_c}">{$item.6}</td>
+    <td>
+        <font color="{$item['h_col']}">{$item[9]}</font>:<font color="{$item['a_col']}">{$item[10]}</font>
+        <if condition="$item[11] neq '' && $item[12] neq ''">
+            (<font color="#999999">{$item[11]}</font>:<font color="#999999">{$item[12]}</font>)
+        </if>
+    </td>
+    <td class="{$item.away_c}">{$item.8}</td>
+    <td class="{$item.game_res_col}">{$item.game_res}</td>
+    <td class="text-999"><if condition="$item[22] neq '' and $item[23] neq ''">{$item[22]}-{$item[23]}<else/>--</if></td>
+    <td bgcolor="#fafafc" class="{$item.y_home_c}"><if condition="$item['sb'] eq ''">--<else/>{$item[20]}</if></td>
+    <td bgcolor="#fafafc"><if condition="$item[20] neq '' and $item[21] neq ''">{$item['sb']|default="--"}<else/>--</if></td>
+    <td bgcolor="#fafafc" class="{$item.y_away_c}"><if condition="$item['sb'] eq ''">--<else/>{$item[21]}</if></td>
+    <td class="<if condition="$item['sb'] neq ''">{$item.pan_col}</if>"><if condition="$item['sb'] eq ''">--<else/>{$item['pan']}</if></td>
+    <td class="{$item['h_col_s']}">{$item[17]|default="--"}</td>
+    <td class="{$item['p_col_s']}">{$item[18]|default="--"}</td>
+    <td class="{$item['a_col_s']}">{$item[19]|default="--"}</td>
+    <td <if condition="$item[17] neq '' and $item[19] neq ''">class="{$item.ball_col}"</if>><if condition="$item[17] neq '' and $item[19] neq ''">{$item['ball']}<else/>--</if></td>
+</tr>

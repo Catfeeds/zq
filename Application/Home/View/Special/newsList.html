@@ -1,0 +1,51 @@
+<div class="pull-left lMatList">
+    <div class="navList">
+        <ul class="clearfix newsList">
+            <li onclick="changeNews(this)" class="pull-left active" data-classid="{$class_id}" data-top='all'><a href="javascript:;" title="全部" class="navLink">全部</a></li>
+            <volist name="publishClass._child" id="vo">
+                <li id="{$vo.id}" onclick="changeNews(this)" class="pull-left" data-classid="{$vo.id}"><a href="javascript:;" title="{$vo.name}" class="navLink">{$vo.name}</a></li>
+            </volist>
+        </ul>                               
+    </div>
+    <div class="matListBox">
+        <ul class="newsAll">
+        <volist name="news_all.news" id="vo" offset="0" length='6'>
+            <li class="clearfix listInfor">
+                <a target="_blank" href="{$vo.href}" title="{$vo.title}" class="pull-left inforImg"><img src="{$vo.img}" width="180" height="124" alt="{$vo.title}"></a>
+                <div class="pull-left inforArt">
+                    <h2 class="text-hidden"><a target="_blank" href="{$vo.href}" title="{$vo.title}">{$vo.title}</a></h2>
+                    <p class="text-999 inforArtP">{$vo.remark}</p>
+                    <div class="clearfix author">
+                        <span class="pull-left text-999 leftUser"><a target="_blank" title="{$vo.nick_name}" href="{:U('/expuser/'.$vo['user_id'].'')}" class="text-999"><img class="img-circle lazy" data-original="{$vo.head}" alt="{$vo.nick_name}" width="28" height="28">{$vo.nick_name}</a>&nbsp;&nbsp;&nbsp;{$vo.add_time}</span>
+                        <span class="pull-right text-999 rightEye">{$vo.click_number}</span>
+                    </div>
+                </div>
+            </li>
+        </volist>
+        <notempty name="photo">
+            <li class="listInfor photoList">
+                <ul class="listInUl clearfix">
+                <volist name="photo" id="vo">
+                    <li class="pull-left"><a target="_blank" href="{$vo.href}" title="{$vo.title}"><img src="{$vo.images}" alt="{$vo.title}" width="216" height="148"><p class="text-hidden">{$vo.title}</p></a></li>
+                </volist>
+                </ul>
+            </li>
+        </notempty>
+        <volist name="news_all.news" id="vo" offset="6" length='24'>
+            <li class="clearfix listInfor">
+                <a target="_blank" href="{$vo.href}" title="{$vo.title}" class="pull-left inforImg"><img src="{$vo.img}" width="180" height="124" alt="{$vo.title}"></a>
+                <div class="pull-left inforArt">
+                    <h2><a class="text-hidden" target="_blank" href="{$vo.href}" title="{$vo.title}">{$vo.title}</a></h2>
+                    <p class="text-999 inforArtP">{$vo.remark}</p>
+                    <div class="clearfix author">
+                        <span class="pull-left text-999 leftUser"><a target="_blank" title="{$vo.nick_name}" href="{:U('/expuser/'.$vo['user_id'].'')}" class="text-999"><img class="img-circle lazy" data-original="{$vo.head}" alt="{$vo.nick_name}" width="28" height="28">{$vo.nick_name}</a>&nbsp;&nbsp;&nbsp;{$vo.add_time}</span>
+                        <span class="pull-right text-999 rightEye">{$vo.click_number}</span>
+                    </div>
+                </div>
+            </li>
+        </volist>
+        <li class="listInfor"><a target="_blank" href="{$news_all.classUrl}" class="more">查看更多</a></li>
+        </ul>
+        <ul class="ajaxLoadNews" style="display:none;"></ul>
+    </div>
+</div>

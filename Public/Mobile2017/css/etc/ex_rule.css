@@ -1,0 +1,21 @@
+/**
+ * 欧洲杯竞猜css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-06-04
+ *
+**/
+html,body{background: url(../../images/etc/etc-bg.jpg) repeat-y 0 0; background-size: 100% auto; padding-bottom: .1rem;}
+/* 规则 */
+.rule_con{padding-top: .3rem; border-bottom: 1px solid rgba(255,255,255,0.2);}
+.rule_con_in{padding: 0 .26rem; border-bottom: 1px solid rgba(0,0,0,0.4);}
+.rule{ padding-top: .2rem;}
+.rule01{ background:url(../../images/etc/rule-dl01.png) no-repeat right 0; background-size: .98rem auto;}
+.rule02{ background:url(../../images/etc/rule-dl02.png) no-repeat right 0; background-size: .98rem auto;}
+.rule03{ background:url(../../images/etc/rule-dl03.png) no-repeat right 0; background-size: .98rem auto;}
+
+.rule dt{ width: 3.56rem; height: .6rem; line-height: .6rem; font-size: #.26rem; color: #fff; background: #f26197; padding-left: .3rem; border-radius: .3rem; margin-bottom: .4rem;}
+.rule dd{ font-size: .24rem; color: #fff; margin-bottom: .3rem;}
+
+

@@ -1,0 +1,127 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			<div class="unit">
+				<label>礼品名称：</label>
+				<input type="text" class="required"  name="name" value="{$vo.name}" size="40"/>
+			</div>
+
+			<div class="unit">
+				<label>购买金币：</label>
+				<input type="text" class="digits" name="coin" value="{$vo.coin}" size="40"/>
+			</div>
+
+			<div class="unit">
+				<label>购买积分：</label>
+				<input type="text" class="digits" name="point" value="{$vo.point}" size="40"/>
+			</div>
+
+			<div class="unit">
+				<label>外链地址：</label>
+				<input type="text" class="" name="url" value="{$vo.url}" size="50"/>
+			</div>
+
+			<div class="unit">
+				<label>是否可兑换：</label>
+				<select class="small bLeft"  name="valid">
+					<option <eq name="vo.valid" value="1" >selected</eq> value="1">是</option>
+					<option <eq name="vo.valid" value="0" >selected</eq> value="0">否</option>
+				</select>
+			</div>
+
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft"  name="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+				</select>
+			</div>
+
+			<div class="unit">
+				<label>排序：</label>
+				<input type="text" class="digits" name="sort" value="{$vo.sort}" />
+			</div>
+
+			<div class="unit">
+				<label>广告图片：</label>
+				<ul class="tabImg">
+					<li>
+						<input id="viewUploadInput_88" name="fileInput" type="file" onChange="previewImage(88)" style="display:none;" />
+						<a href="javascript:void(0);">
+							 <span id="viewUploadDiv_88">
+								<empty name="vo.titleimg">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_88"/>
+								<else/>
+									<if condition="pathinfo($vo['titleimg'], PATHINFO_EXTENSION) eq swf">
+										<embed width="80" height="80" id="viewUploadImg_88" wmode="opaque" type="application/x-shockwave-flash" src="{$vo.titleimg}">
+									<else/>
+									    <img id="viewUploadImg_88" width='80' height='80' border=0 src="{$vo.titleimg}">
+									</if>
+								</empty>
+							 </span>
+						</a>
+						<div id="poiter_88" class="poiter">
+							<empty name="vo.titleimg">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_88')">添加图片</a>
+							<else/>
+								<a title="删除" onclick="delPic({$vo.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_88')">重传</a>
+							</empty>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+	$(function(){
+		$('.tabImg li').hover(function(e) {
+			$(this).children('div').stop().animate({'top':'0'},300);
+		},function(){
+			$(this).children('div').stop().animate({'top':'80px'},300);
+		});
+	});
+	function delPic(id){
+		if(confirm("确认要删除吗？") == false){
+			return false;
+		}
+		//异步执行删除
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/Prize/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                	$("#viewUploadInput_88").val("");
+					$("#viewUploadImg_88").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+					var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_88')\">添加图片</a>";
+					$("#poiter_88").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+</script>
+
+
+
+

@@ -1,0 +1,92 @@
+/**
+ * 图库css文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-12-21
+*/
+
+/* banner */
+.pic_main{ width: 100%; background-color: #F7F7F7;}
+.modeA{padding:9px 0 10px;margin-bottom:15px;border-top:1px solid #383838;background:#2f2f2f;zoom:1}
+.list{height:342px}
+.slide_screen{width:990px;margin:0 auto;overflow:hidden;zoom:1; padding-top: 12px;}
+.slide_screen li{float:left;overflow:hidden;position:relative;margin-right:4px}
+.slide_screen li.liA{width:583px;height:342px}
+.slide_screen li.liB, .slide_screen li.liC{width:199px;height:169px}
+.slide_screen li.liD{width:198px;height:342px;margin-top:-173px}
+.slide_screen li.liA .window{width:1166px}
+.slide_screen li.liB .window,.slide_screen li.liC .window{width:398px}
+.slide_screen li.liD .window{width:396px}
+.slide_screen li.liE .window{width:396px}
+.slide_screen li img{display:block}
+.slide_screen li .piece{float:left;position:relative;overflow:hidden;zoom:1}
+.slide_screen li.liA,.slide_screen li.liA .piece,.slide_screen li.liA img{width:583px;height:342px}
+.slide_screen li.liB,.slide_screen li.liB .piece,.slide_screen li.liB img{width:199px;height:169px}
+.slide_screen li.liC,.slide_screen li.liC .piece,.slide_screen li.liC img{width:199px;height:169px}
+.slide_screen li.liD,.slide_screen li.liD .piece,.slide_screen li.liD img{width:198px;height:169px;margin-right:0}
+.slide_screen li.liE,.slide_screen li.liE .piece,.slide_screen li.liE img{width:198px;height:169px;margin-right:0}
+.slide_screen li.liB img,.slide_screen li.liC img,.piece,.slide_screen li.liD img,.piece,.slide_screen li.liE img{ height: 100%; width: auto;}
+.slide_screen li.liB{margin-bottom:4px}
+.slide_screen li .bar{ text-align: center; width:537px;padding:0 10px;height:45px;position:absolute;bottom:0;left:0;filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#CC000000', endColorstr='#CC000000');background:rgba(0,0,0,0.8);color:#fff;font-weight:bold;font-size:12px}
+.slide_screen li.liB .bar,.slide_screen li.liC .bar{width:153px}
+.slide_screen li.liD .bar{width:152px}
+.slide_screen li.liE .bar{width:152px}
+.slide_screen li .bar h3{/*padding-top:4px;*/font-size:14px}
+.slide_screen li .bar p{font-weight:normal}
+.slide_screen li .bar span{display:block;width:28px;height:28px;overflow:hidden;position:absolute;top:8px;right:4px;background:url(../../images/gallery_index/icon_play.png) no-repeat;
+_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='../../images/gallery_index/icon_play.png')}
+.slide_screen li .bar a{display:block;width:583px;height:45px;position:absolute;top:0;left:0;z-index:10;font-size:0}
+.slide_screen li.liB .bar a,.slide_screen li.liC .bar a{width:199px}
+.slide_screen li.liC .bar a{width:198px}
+.slide_screen li.liA .bar,.slide_screen li.liB .bar, .slide_screen li.liC .bar,.slide_screen li.liD .bar,.slide_screen li.liE .bar {width: 100%;}
+.slide_screen li.liB .bar h3, .slide_screen li.liC .bar h3 ,.slide_screen li.liD .bar h3,.slide_screen li.liE .bar h3{ font-size: 12px; margin: 5px 0 0 0; text-align: left; line-height: 18px;}
+.libtn{width:240px;text-align:center;margin:10px auto 10px}
+.libtn li{width:45px;height:11px;border:1px solid #00af62;margin:0 4px;float: none;display:inline-block;*display:inline;zoom:1;overflow:hidden;cursor:pointer}
+.libtn li.selected{background:#00af62}
+/* 美女列表 */
+.mid{ margin: 0 auto; width: 1000px; margin-top: 10px; margin-bottom: 50px;}
+.list_box{ width: 100%; overflow: hidden;}
+.but_label{ border-radius: 3px;font-size: 12px;margin: 4px;}
+.but_label:focus{ outline: none;}
+.container{
+	width: 1000px !important;
+}
+.container .col-xs-3{ margin: 10px 5px 5px 5px; padding: 0; overflow: hidden; width: 240px;}
+.container .col-xs-3:hover .img_text{ height: 100%; line-height: 157px; transition: all 0.2s;}
+.mr03{
+	margin-right:3px ;
+}
+
+.desc_img {
+    width: 240px;
+    position: relative;
+	overflow: hidden;
+}
+.img_text{
+	position: absolute;
+	overflow: hidden;
+	width: 100%;
+	bottom: 0px;
+	height:40px ;
+	line-height: 40px;
+	text-align: center;
+	padding: 0 10px;
+	background: rgba(0, 0, 0, 0.50);
+	color: #ffffff;
+	background: url(../../images/gallery_index/trans-bg.png)\9;
+}   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+<div class="htc_list">
+    <div class="put_time">发布于：{$item['time']|date="Y-m-d H:i",###}</div>
+    <div class="game_con">
+        <table class="table tb_put_game">
+            <tbody>
+            <tr class="tr_border">
+                <th>开赛时间</th>
+                <th>赛事</th>
+                <th>对阵比赛</th>
+                <th>玩法</th>
+                <th>推介</th>
+            </tr>
+            <volist name="item['list']" id="val">
+            <tr>
+                <td>{$val['gtime']|date="m/d H:i",###}</td>
+                <td>{$val.union_name}</td>
+                <td>{$val.home_team_name}<span> <if condition="$val['score']">{$val.score}<else /> VS </if> </span>{$val.away_team_name}</td>
+                <td>
+                    <switch name="val.play_type">
+                        <case value="1">
+                            <if condition="$val['chose_side'] eq 1">让球
+                                </td>
+                                <td class="g_result">
+                                    {$val['home_team_name']}
+                            <else/>让球
+                                </td>
+                                <td class="g_result">
+                                    {$val['away_team_name']}
+                            </if>
+                        </case>
+                        <case value="-1">
+                            <if condition="$val['chose_side'] eq 1">大小
+                                </td>
+                                <td class="g_result">大球
+                            <else/>大小
+                                </td>
+                                <td class="g_result">
+                                小球
+                            </if>
+                        </case>
+                    </switch>
+                                    <em>{$val.handcp}</em>(<font>{$val.odds}</font>) <if condition="$val['photo'] neq ''"><img src="__PUBLIC__/Home/images/qw/{$val['photo']}.png" alt=""></if> </td>
+            </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+</div>

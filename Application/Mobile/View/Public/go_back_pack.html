@@ -1,0 +1,24 @@
+<style>
+    .foot-discussB {
+        position: fixed;
+        right: .8rem;
+        bottom: 3rem;
+        z-index: 999;
+        width: .8rem;
+        height: .8rem;
+    }
+    .foot-discussB img{
+        width: .8rem;
+        height: .8rem;
+    }
+    .foot-discussB img{border: 1px solid #999;border-radius: 20px!important;}
+    .foot-discussB a:nth-child(2) img{margin-top: 0.2rem;}
+</style>
+<div class="foot-discussB clearfix">
+    <eq name="name" value="">
+    <a href="javascript:;" onClick="history.back(-1);"><img src="__IMAGES__/index/go_back.png" /></a>
+    <else/>
+    <a href="{:U('/'.$name)}<if condition="$_GET['header'] eq 'no'">?header=no</if>"><img src="__IMAGES__/index/go_back.png"></a>
+    </eq>
+    <a href="{:U('/2018worldcup')}<if condition="$_GET['header'] eq 'no'">?header=no</if>"><img src="__IMAGES__/index/go_home.png"></a>
+</div>

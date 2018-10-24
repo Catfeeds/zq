@@ -1,0 +1,34 @@
+<div class="page">
+    <div class="pageContent">
+
+        <form method="post" action="__URL__/groupEdit/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+            <input type="hidden" class="required" name="id" value="{$list.id}">
+            <div class="pageFormContent" layoutH="58">
+                <div class="unit">
+                    <label>分组标识：</label>
+                    <input type="text"  name="group_type" value="{$list.group_type}">
+                </div>
+                <div class="unit">
+                    <div class="unit">
+                        <label>分组标题（描述）：</label>
+                        <input type="text" class="required" name="group_desc" value="{$list.group_desc}">
+                        （标题尽可能简短）
+                    </div>
+                </div>
+                <div class="unit">
+                    <label>填写用户id：</label>
+                    <textarea name="userids"  editor="{:uniqid()}" cols="80" rows="15">{$list.user_id}</textarea>
+                    （选填，填写id值，多个id，请用英文逗号分隔）
+                </div>
+            </div>
+
+            <div class="formBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+                    <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+                </ul>
+            </div>
+        </form>
+
+    </div>
+</div>

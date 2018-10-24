@@ -1,0 +1,49 @@
+<div class="pageContent">
+
+	<form method="post" action="__URL__/recharge" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">			
+			<div class="unit">
+				<label>选择会员：</label>
+				<input name="FrontUser.id" class="required" type="hidden"/>
+				<textarea rows="4" cols="50" name="FrontUser.nick_name" readonly/></textarea>
+				<a width="800" height='600' lookupgroup="FrontUser" href="{:U('__ADMIN__/FrontUser/findFrontUser')}" class="btnLook">选择会员</a>
+			</div>
+			<div class="unit">
+				<label>充值金额：</label>
+				<input type="text" name="coin" class="digits required">
+			</div>
+			<div class="unit">
+				<label>充值类型：</label>
+				<select name="log_type" class="combox required">
+                    <option value="">请选择</option>
+                    <option value="1">营销支出</option>
+                    <option value="7">充值收入</option>
+                    <option value="24">充值回退</option>
+                </select>
+			</div>
+			<div class="unit">
+				<label>金额类型：</label>
+				<select name="coinType" class="combox required">
+                    <option value="">请选择</option>
+                    <option value="1">可提现</option>
+                    <option value="2">不可提现</option>
+                </select>
+			</div>
+			<div class="unit">
+				<label>充值说明：</label>
+				<textarea name="desc" class="required" maxlength="255" rows="3" cols="50"></textarea>
+			</div>
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+
+

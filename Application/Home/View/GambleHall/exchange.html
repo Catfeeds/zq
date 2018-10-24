@@ -1,0 +1,133 @@
+<extend name="Public:layout"/>
+<block name="seo">
+    <title>兑换中心_全球体育网</title>
+    <meta name="keywords" content="如何兑奖,竞猜兑奖中心"/>
+    <meta name="description" content="全球体育网是一家大型体育新闻网，竞猜兑奖会员在全球体育可以通过积分来兑换，可以金币兑换、礼品兑换等。"/>
+</block>
+<block name="css">
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__CSS__/quiz_hall/qh_common.css">
+    <link rel="stylesheet" href="__CSS__/quiz_hall/exchange.css">
+</block>
+<block name="content">
+<div class="con-main">
+    <div class="guess_content">
+        <include file="Public:top_gamble"/>
+        <!-- 导航结束 -->
+        <div class="main-box">
+        	<div class="top-login">
+            	<div class="pull-left">
+                    <img src="{$face}" width="42" height="42">
+                </div>
+            	<div class="pull-left nioce">
+                    <present name="point">
+                        您当前的积分:  <span class="userPoint">{$point}</span>
+                    <else/>
+                        <a href="javascript:;" class="text-red" data-toggle="modal" data-target=".myLogin">登录</a> 查看您的积分
+                    </present>
+                </div>
+            </div>
+            <div class="cur-score" style="color:red;font-size:16px;">总积分到达{$config['pointLimit']}才可进行金币兑换</div>
+            <div class="part">
+            	<div class="section-title"><h4>金币兑换</h4></div>
+                <div class="cash-list">
+                	<ul class="clearfix">
+                		<li class="pull-left nb-top nb-left nb-bottom">
+                        	<div class="cash-img"><img src="__IMAGES__/quiz_hall/cash-5.png" width="92" height="93"></div>
+                        	<div class="sco"><strong class="text-red" coin="{$config['coin1']}">{$config.point2Coin1}</strong>积分兑换</div>
+                            <if condition="isset($point) && ($point lt $config['pointLimit'] || $point lt $config['point2Coin1'])">
+                                <a class="disab" disabbled="disabbled">积分不够</a>
+                            <else/>
+                                <a href="javascript:;" data-key="1" class="sco-btn">我要兑换</a>
+                            </if>
+                      	</li>
+                        <li class="pull-left nb-top nb-bottom">
+                        	<div><img src="__IMAGES__/quiz_hall/cash-10.png" width="92" height="93"></div>
+                        	<div class="sco"><strong class="text-red" coin="{$config['coin2']}">{$config['point2Coin2']}</strong>积分兑换</div>
+                            <if condition="isset($point) && ($point lt $config['pointLimit'] || $point lt $config['point2Coin2'])">
+                                <a class="disab" disabbled="disabbled">积分不够</a>
+                            <else/>
+                                <a href="javascript:;" data-key="2" class="sco-btn">我要兑换</a>
+                            </if>
+                      	</li>
+                        <li class="pull-left nb-top nb-bottom">
+                        	<div><img src="__IMAGES__/quiz_hall/cash-20.png" width="92" height="93"></div>
+                        	<div class="sco"><strong class="text-red" coin="{$config['coin3']}">{$config['point2Coin3']}</strong>积分兑换</div>
+                            <if condition="isset($point) && ($point lt $config['pointLimit'] || $point lt $config['point2Coin3'])">
+                                <a class="disab" disabbled="disabbled">积分不够</a>
+                            <else/>
+                                <a href="javascript:;" data-key="3" class="sco-btn">我要兑换</a>
+                            </if>
+                      	</li>
+                        <li class="pull-left nb-top nb-right nb-bottom">
+                        	<div><img src="__IMAGES__/quiz_hall/cash-50.png" width="92" height="93"></div>
+                        	<div class="sco"><strong class="text-red" coin="{$config['coin4']}">{$config['point2Coin4']}</strong>积分兑换</div>
+                            <if condition="isset($point) && ($point lt $config['pointLimit'] || $point lt $config['point2Coin4'])">
+                                <a class="disab" disabbled="disabbled">积分不够</a>
+                            <else/>
+                                <a href="javascript:;" data-key="4" class="sco-btn">我要兑换</a>
+                            </if>
+                      	</li>
+                	</ul>
+                </div>
+            </div>
+            <div class="part">
+            	<div class="section-title"><h4>礼品兑换</h4></div>
+                <div class="pack">
+                	<div class="packing">工作人员正在打包中……</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+    $(function(){
+        $('.sco-btn').click(function() {
+            if ($('.userPoint').length == 0)
+            {
+                modalLogin();
+            }
+            else
+            {
+                var $this=$(this);
+                var tag = $this.siblings('.sco').find('strong');
+                var point = tag.text();
+                var coin = tag.attr('coin');
+                var str  = '用 <b>'+point+'</b> 积分兑换 <b>'+coin+'</b> 个 金币？';
+
+                layer.confirm(str, {
+                    btn: ['是','否'] //按钮
+                }, function(){
+                    $.ajax({
+                        type: "POST",
+                        url: "/exchange.html",
+                        data: {'key':$this.data('key')},
+                        dataType: "json",
+                        success: function(data){
+                            if(data.status == 1)
+                            {
+                                _alert('温馨提示',data.info,"window.location.reload()");
+                            }
+                            else
+                            {
+                                if (data.info == -1)
+                                {
+                                    modalLogin();
+                                }
+                                else
+                                {
+                                    _alert('温馨提示',data.info);
+                                }
+                            }
+                        }
+                    });
+                }, function(){
+                    return;
+                });
+            }
+        });
+    });
+</script>
+</block>

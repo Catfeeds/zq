@@ -1,0 +1,72 @@
+<div class="matchCon clearfix">
+    <!-- 新闻 -->
+    <ul class="premier newsList">
+    </ul>
+</div>
+<script>
+    var type = "{$listType}"
+    //获取资讯列表
+    function getList()
+    {
+        $.ajax({
+            url:'/User/expUserList.html',
+            type:'get', //GET
+            async:false,    //或false,是否异步
+            data:{
+                id:expId,page:page,type:type,time:listtime
+            },
+            timeout:5000,    //超时时间
+            dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            beforeSend:function(e){
+                $(".load_gif").css('display','block');
+            },
+            success:function(data,textStatus,jqXHR){
+                if(data.code == 200)
+                {
+                    var res = data.data;
+                    var html = '';
+                    for(var i = 0;i<res.length;i++)
+                    {
+                        var _logo = '';
+                        if(type == 1)
+                        {
+                            if(res[i]['name'] != undefined && res[i]['name'] != '')
+                            {
+                                _logo = '<span class="s-pl">'+res[i]['name']+'</span>';
+                            }
+                        }
+                        var _hot = '';
+                        if(res[i]['is_hot'] == 1)
+                        {
+                            _hot = '<span class="hot"><img src="'+IMAGES+'/user/hot.png" alt="全球体育网"></span>';
+                        }
+                        html += '<li>' +
+                                '<a class="clearfix" href="'+res[i]['url']+'" title="'+res[i]['title']+'">' +
+                                '<div class="left-o">' +
+                                '<h2>'+res[i]['title']+'</h2>' +
+                                '<div class="Tit-t">' +
+                                _hot +
+                                '<span>'+res[i]['add_time']+'</span>' +
+                                '<span class="num">'+res[i]['click_number']+'<img src="'+IMAGES+'/eye-icon.png" alt="全球体育网"></span>' +
+                                _logo+
+                                '</div>' +
+                                '</div>' +
+                                '<div class="right-o">' +
+                                '<img class="imgCover" src="'+res[i]['img']+'" alt="'+res[i]['title']+'">' +
+                                '</div>' +
+                                '</a>' +
+                                '</li>';
+                    }
+                    $('.newsList').append(html);
+                }else{
+                    $("#showLess").show();
+                    $(".load_gif").css('display','none');
+                }
+            },
+            complete:function(){
+                $(".load_gif").css('display','none');
+                page++;
+            }
+        });
+    }
+</script>

@@ -1,0 +1,310 @@
+/**
+ * 足球比分css样式文件
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-12-11 
+**/
+/*全局控制*/
+body{ width:100%; min-height:1040px; background-attachment:fixed; background-position:center top; background-color: #f4f4f4; background-image: url(../../images/scoreLive/the-ball-background.png); background-repeat: no-repeat; background-position: center top;}
+.home{ background: #ffffff; width: 1200px; margin: 0 auto; margin-top: 12px\9; margin-bottom: 12px\9;min-height: 550px;}
+.main{width: 100%;}
+.footer{margin-top: 120px;}
+.top-head-in{width: 1200px !important;}
+.main input[type=radio],.main input[type=checkbox]{ vertical-align: -2px;}
+ul,ol{ margin-bottom: 0;}
+select{ outline: none; border: 1px solid #e5e5e5;}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{font:14px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;}
+a:active, a:hover {outline: 0;color: #4d7082;}
+.table > tbody + tbody{border-top:0;}
+/*固定功能选项样式*/
+.div-fixed {position: fixed;top: 0; left: 0;width: 100%; border-bottom: 2px solid #113f6c; z-index: 999;}
+/*liveTop*/
+.liveTop{ width: 100%; min-width: 1200px; background: #ffffff; margin-bottom: 6px;}
+.liveTopIn{ width: 1200px; margin: 0 auto; padding: 6px 0;}
+.liveTopNav{ margin-left: 50px; padding: 10px 0; font-size: 16px;}
+.liveTopNav ul li{ margin: 0 12px; height: 30px; line-height: 30px;}
+.scoreType{ width: 100px; border: 1px solid #e5e5e5; border-radius: 4px;}
+.scoreType li a{ text-align: center; line-height: 24px;}
+.liveTopNav .dropdown-top:hover .dropdown-menu{ display:block; border: 1px solid #e5e5e5;}
+/*梯块样式修改*/
+#elevator{margin-left:605px;}
+.scoreNav{ background: #ffffff; border-bottom: 6px solid #4d7082; padding: 0 15px;}
+.scoreNav ul li{ margin: 0 20px;}
+.scoreNav ul li a{ display: block; padding: 12px 0; color: #808080; position: relative; transition: .2s; -webkit-transition: .2s; -moz-transition: .2s; -o-transition: .2s; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; -moz-transform-style: preserve-3d; -o-transform-style: preserve-3d; font-size: 16px; transition-delay: 0s;}
+.scoreNav ul li a:hover,.scoreNav ul li.on a{ color: #396377;font-size: 16px;font-weight: bold;}
+.navLink:after { transition: .2s; -webkit-transition: .2s; -moz-transition: .2s; -o-transition: .2s; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; -moz-transform-style: preserve-3d;  -o-transform-style: preserve-3d; content: '';  position: absolute; left: 50%; bottom: 0; margin-left: -10px;; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #4d7082; opacity: 0;}
+.scoreNav ul .on .navLink:after{ opacity: 1;}
+.scoreNav ul li:hover>.navLink:after{ opacity: 1;}
+.scoreNav ul li a i{ margin: 0 auto; margin-bottom: 5px; display: block; width: 21px; height: 21px; background: url(../../images/scoreLive/navLink-bg.png) no-repeat;}
+.scoreNav .liveState{ background-position: 0 0;float: left;margin-right: 5px}
+.scoreNav .overState{ background-position: -31px 0;float: left;margin-right: 5px}
+.scoreNav .willState{ background-position: -62px 0;float: left;margin-right: 5px}
+.scoreNav .liveIndex{ background-position: -91px 0;float: left;margin-right: 5px}
+.scoreNav .freeUse{ background-position: -122px 0;float: left;margin-right: 5px}
+.scoreNav .on .liveState,.scoreNav ul li a:hover .liveState{ background-position: 0 -30px;}
+.scoreNav .on .overState,.scoreNav ul li a:hover .overState{ background-position: -31px -30px;}
+.scoreNav .on .willState,.scoreNav ul li a:hover .willState{ background-position: -62px -30px;}
+.scoreNav .on .liveIndex,.scoreNav ul li a:hover .liveIndex{ background-position: -91px -30px;}
+.scoreNav .on .freeUse,.scoreNav ul li a:hover .freeUse{ background-position: -122px -30px;}
+
+/* nav001 */
+.main-nav{ margin:0 auto; background: #f7f7f7; border-top: 1px solid #e5e5e5; border-left: 1px solid #e5e5e5; border-right: 1px solid #e5e5e5}
+.main-nav .nav li{ margin-left: 25px;}
+.main-nav .nav a{ display: block; padding: 10px 16px; background: #f7f7f7; color: #999999; font-size: 16px;}
+.main-nav .nav .current a{ color:#333; border-bottom: 2px solid #ff7e00;}
+
+.main-nav .lange{ padding: 6px; border-right: 1px solid #e5e5e5;}
+.main-nav .lange label{ margin-bottom: 0;}
+.main-nav .lange input[type=radio]{ vertical-align: -2px;}
+
+/* 筛选导航 */
+.control-con,.time-con{border-right: 1px solid #e5e5e5; border-left: 1px solid #e5e5e5; padding: 8px 6px;}
+.control-con{ background: #ffffff; border-top: 1px solid #d2d4d6;}
+.control-box .control-l .control-ul .control-li{ float: left; margin-left: 10px; position: relative;}
+.control-box .control-l .control-ul  .control-li01{ margin-left: 0;}
+.control-box .control-l .control-ul  .control-li01 .mya,.control-box .control-l .control-ul  .control-li02 .mya,.control-box .control-l .control-ul  .control-li03 .mya,.control-box .control-l .control-ul  .control-li04 .mya{display: inline-block; height: 33px; line-height: 33px; text-align: center; background: #ffffff; border: 1px solid #e5e5e5; padding: 0 4px; border-radius: 6px;}
+.control-box .control-l .control-ul  .control-li .caretCon{padding-left: 5px;}
+.control-box .control-l .control-ul  .control-li03 .mya,.control-box .control-l .control-ul  .control-li04 .mya{ }
+.control-box .control-l .control-ul  .control-li01 .active,.control-box .control-l .control-ul  .control-li02 .active{ }
+.control-box .control-l .control-ul  .control-li01 a:hover,.control-box .control-l .control-ul  .control-li02 a:hover{ }
+.control-box .control-l .control-ul  .control-li03 .active,.control-box .control-l .control-ul  .control-li04 .active{ }
+.control-box .control-l .control-ul  .control-li03 a:hover,.control-box .control-l .control-ul  .control-li04 a:hover{ }
+.control-box .control-l .control-ul  .control-li03 .unionLevel a:hover{background: none;}
+
+.control-box .control-2 { background: #4d7082;  border-radius: 6px; margin-right: 10px;}
+.control-box .control-2 ul li{ float: left; padding: 5px 0;}
+.control-box .control-2 ul li a{ display: block; height: 22px; line-height: 22px; padding: 0 10px; color: #dbdbdb;}
+.control-box .control-2 ul li span{ color: #ffffff;}
+.control-box .control-2 ul li.on a,.control-box .control-2 ul li a:hover,.control-box .control-2 ul li.on a:hover{color: #fff600;}
+.control-box .control-2 ul li .type-li01{ border-top-left-radius: 14px; border-bottom-left-radius: 14px; padding-left: 14px;}
+.control-box .control-2 ul li .type-li04{ border-top-right-radius: 14px; border-bottom-right-radius: 14px; padding-right: 14px;}
+
+.control-box .box-list,.control-box .layer-list,.control-box .gs-list{ position: absolute; left: -1px; top: 40px; border: 2px solid #3985da; color: #000; z-index: 999; background: #fff; padding: 8px 12px;}
+.control-box .box-list,.control-box .gs-list{ width: 608px; padding: 0; background: #f7f7f7;}
+.control-box .gs-list{ width: 404px;}
+.control-box .box-list .box-title,.control-box .gs-list .box-title{ padding: 4px 12px;}
+.control-box .box-list .btn,.control-box .gs-list .btn{ font-size: 12px;}
+.control-box .box-list .box-team,.control-box .gs-list .box-team{ background: #ffffff;}
+.control-box .box-list .box-team .box-rank{ text-align: center;}
+.control-box .box-list .box-team .rank-ul li{ display: inline-block; overflow: hidden; text-align: center;}
+.control-box .box-list .box-team .rank-ul li .iconType{ display: inline-block; width: 32px; height: 35px;  overflow: hidden;}
+.control-box .box-list .box-team .rank-ul-li01.on .iconType{ background: url(../../images/scoreLive/on-one.png) no-repeat center center;}
+.control-box .box-list .box-team .rank-ul-li02.on .iconType{ background: url(../../images/scoreLive/on-two.png) no-repeat center center;}
+.control-box .box-list .box-team .rank-ul-li03.on .iconType{ background: url(../../images/scoreLive/on-three.png) no-repeat center center;}
+.control-box .box-list .box-team .rank-ul-li01 .iconType{ background: url(../../images/scoreLive/one.png) no-repeat center center;}
+.control-box .box-list .box-team .rank-ul-li02 .iconType{ background: url(../../images/scoreLive/two.png) no-repeat center center;}
+.control-box .box-list .box-team .rank-ul-li03 .iconType{ background: url(../../images/scoreLive/three.png) no-repeat center center;}
+.control-box .box-list .box-team .rank-ul li.on a{ color: #418ee5;}
+.control-box .box-list .box-team .rank-ul li.on a:hover{ color: #418ee5;}
+.control-box .box-list .box-team .rank-ul li a{ display: block; width: 100px;}
+.control-box .box-list .box-team .rank-ul li a:hover{ color: inherit;}
+.control-box .box-list .match-team{ height: 360px; overflow: hidden; overflow: auto;}
+.control-box .box-list .match-team li,.control-box .gs-list .match-team li{ overflow: hidden;float: left; width: 106px; height: 28px; margin-right: 6px; border-left: 6px solid #00cccc; margin-bottom: 6px;}
+.control-box .gs-list .match-team li{ border-left: 6px solid #ffffff;}
+.control-box .box-list .match-team li label,.control-box .gs-list .match-team li label{ border: 1px solid #e5e5e5; border-left: none 0; padding-left: 5px; display: block; height: 28px; line-height: 26px; background: #fff;}
+.control-box .box-list .box-team,.control-box .gs-list .box-team{ padding: 8px 12px;}
+.control-box .box-list .box-team span{ padding: 0px 4px;}
+.control-box .box-list .btn-con { padding: 10px 12px; background: #f7f7f7;}
+.control-box .box-list .btn-con input{ outline: none; width: 80px;}
+.control-box .layer-list{ width: 118px; padding-top: 15px;}
+.control-box .layer-list .feat-select label{ display: block; margin-bottom: 0;}
+.control-box .layer-list .bts{ position: absolute; right: 10px; top: 0;}
+.control-box .layer-list .btn{ width:11px; height: 11px; padding: 0; background: #ffb400 url(../../images/scoreLive/bts-close.png) no-repeat 0 -1px;}
+.control-box .sh{ height: 36px; line-height: 36px; margin-left: 6px;}
+.control-box .sh a{ color: #2da5e3;}
+
+.control-box .cb{ height: 36px; line-height: 36px; margin-left: 10px;}
+.control-box .cb ul li{ float: left;}
+.control-box .cb .inline{ margin-left: 8px; margin-bottom: 0; padding-right: 20px; cursor: pointer; background: url(../../images/scoreLive/input-s.png) no-repeat right center;}
+.control-box .cb .myLabel01{background: url(../../images/scoreLive/input-s.png) no-repeat right center;}
+.control-box .cb .myLabel02{background: url(../../images/scoreLive/input-d.png) no-repeat right center;}
+.control-box .cb input[type=checkbox]{ vertical-align: -2px; margin: 3px 3px 0px 5px; display: none;}
+.control-box .cb a{ display: inline-block; height: 26px; line-height: 28px; border: 1px solid #ccc;}
+
+.control-box .control-r{ padding: 3px 0;}
+.control-box .control-r .dropdown{ margin-left: 8px;}
+.control-box .control-r .dropdown .btn{ padding: 0 2px; text-align: center; height: 26px; line-height: 24px; border: 1px solid #cccccc; background: #f7f7f7;}
+.control-box .control-r .dropdown-menu{ background: #fff; border: 1px solid #e5e5e5; box-shadow: none;}
+.control-box .control-r .dropdown-menu > li > a{ padding: 0; margin-left: 0; background: #fff; border: none 0; display: block;  text-align: center; height: 26px; line-height: 24px;}
+.control-box .control-r .dropdown-menu > li > a:hover{ background: #10af63; color: #fff;}
+.control-box .control-r .dropdown-menu{ width: 62px; min-width: 62px;}
+
+.control-box02{ height: 30px; line-height: 30px; margin: 12px 0 0 0;font-size: 12px;}
+.control-box02 .atten{ margin-left: 8px;}
+
+.control-con .input-append{ margin-left: 8px; margin-top: 3px; position: relative;}
+.control-con .input-append .Colltext{width: 240px; height: 30px; border:1px solid #ddd; border-radius: 6px; padding-left: 10px; background: #f2f2f3; color: #666666;}
+
+.control-con .input-append .Colltext:focus{ outline: none;}
+.control-con  .input-append .Colladd{ width: 60px; height: 30px; line-height: 28px; text-align: center; color: #4d7082; position: relative; top: 0px\9; margin-left: 8px; background: #ffffff; border-radius: 6px; border: 1px solid #e5e5e5;}
+.control-con  .input-append .Colladd:hover{ background: #4d7082; color: #ffffff;}
+.control-con  .input-append .btn_rang{width: 75px}
+.control-con  .input-append .Collname{ width: 170px; height: 300px; overflow: auto; position: absolute; left: 0; top: 33px; z-index: 99; border: 1px solid #10af63; display: none; background: #fff;}
+.control-con  .input-append .Collname li{ padding: 0 10px;}
+.control-con  .input-append .Collname li:hover{ background: #10af63; color: #fff;}
+
+/* 赛果时间选择 */
+.time-con { border-top: 1px solid #e5e5e5;}
+.time-con .time-li{ width: 96px; float: left; margin-right: 10px;}
+.time-con .time-li a{ display: block; height: 24px; line-height: 22px; border: 1px solid #cccccc; background: #ffffff; text-align: center; color: #666666; font-size: 12px; border-radius: 6px;}
+.time-con .time-li.on a{ color: #ffffff; background: #4d7082; border-color: #4d7082;}
+
+/* 完场赛事选择 */
+.left-match-select{ width: 92px; border-right: none 0; position: relative;}
+.left-match-select dl{ margin-bottom: 0; position: absolute; left: 0; top: 0; width: 74px; background: #fff;}
+.left-match-select dt{text-align: center; height: 34px; line-height: 34px; border-bottom: 1px solid #e5e5e5; background: #e6e6eb; font-weight: normal; color: #666; margin-bottom: 10px;}
+.left-match-select dd{ padding: 0 10px; text-align: center;}
+.left-match-select dd a{ text-align: center; height:22px; line-height:20px; display: block; margin:0 auto; color: #666666; margin-bottom: 20px; border-radius: 6px; border: 1px solid #cccccc; overflow: hidden; font-size: 12px;}
+.left-match-select dd a:hover,.left-match-select dd a.on{ color: #ff7e00; border-color: #ff7e00;}
+.left-match-select .list_all a,.left-match-select .list_all a.on,.left-match-select .list_all a:hover{ color: #ff7e00; border: 1px solid #ff7e00;}
+.dd-gray{ background: #f7f7f7;}
+.dd-white{ background: #ffffff;}
+.right-finish-match{ width: 1127px;}
+
+/* 直播内容 */
+.no-table-bordered > tbody > tr > td{ border: none 0;}
+.b-l{ border-left: 1px solid #dee6ec !important;}
+.b-r{ border-right: 1px solid #dee6ec!important;}
+.b-t{ border-top: 1px solid #dee6ec!important;}
+.b-b{ border-bottom: 1px solid #dee6ec!important;}
+.no-b-l{ border-left: none 0!important;}
+.no-b-r{ border-right: none 0!important;}
+.no-b-t{ border-top: none 0!important;}
+.no-b-b{ border-bottom: none 0!important;}
+.text-jq{ color: #1360b8;}
+.dataLink{ width: 76px;}
+.dataLink a{ margin: 0px 6px;float: left;}
+.text-bblue{ color: #296bb5;}
+.text-green{ color:#00b983;}
+/*icon-weather*/
+.icon-weather .tip {
+    position: absolute;
+    display: none;
+    width: 70px;
+    bottom: 100%;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #777;
+    font-size: 12px;
+    padding: 5px 0;
+    text-align: center;
+    font-style: initial;
+    line-height: 22px;
+    left: 50%;
+    margin: 0 0 7px -35px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+.icon-weather{
+	background-image: url(../../images/scoreLive/weather.png);
+	cursor: pointer;
+	display: inline-block;
+	height: 30px;
+	position: relative;
+	vertical-align: middle;
+	width: 32px;
+}
+.weather-qt  {background-position: 2px 0px;}   /*晴天*/
+.weather-yt  {background-position: -26px -3px;}/*阴天*/
+.weather-dy  {background-position: -59px -3px;}/*多云*/
+.weather-sy  {background-position: -88px -3px;}/*少云*/
+.weather-zy  {background-position: 30px -7px;} /*阵雨*/
+.weather-yw  {background-position: 31px 29px;} /*烟雾*/
+.weather-l   {background-position: 31px 29px;} /*霾*/
+.weather-w   {background-position: 31px 29px;} /*雾*/
+.weather-mmy {background-position: 67px -7px;} /*毛毛雨*/
+.weather-jbdy{background-position: -59px -3px;}/*局部多云*/
+.weather-lsly{background-position: 1px 31px;}  /*零散雷雨*/
+.weather-dx  {background-position: 128px 33px;}/*大雪*/
+.weather-xx  {background-position: 100px 33px;}/*小雪*/
+
+/* 红黄牌 */
+.red-card{ padding: 2px 3px; background: #df1e30; color: #fff; border-radius: 3px;}
+.yellow-card{ padding: 2px 3px; background: #fdc103; color: #fff; border-radius: 3px;}
+
+/* 足球比分表格 */
+.mytable01 { position: relative; font: 12px/22px tahoma,arial,宋体,sans-serif;}
+.mytable01 .table{ font-size: 12px;}
+.mytable01 .table th,.mytable01 .table td{ text-align: center; display: table-cell; vertical-align: inherit; padding: 0 1px;}
+.mytable01 .table td.p10{ padding: 5px 0 5px 8px; color: #999999;font-size: 16px;}
+.mytable01 .table td.p10 span{ float: left; height: 30px; line-height: 30px;}
+.mytable01 .table td.liveTxt span{ padding-left: 35px; background: url(../../images/scoreLive/icon-Whistle.png) no-repeat left center;}
+.mytable01 .table td.notBeginTxt span{ padding-left: 25px; background: url(../../images/scoreLive/icon-clock.png) no-repeat left center;}
+.mytable01 .table td.endTxt span{ padding-left: 25px; background: url(../../images/scoreLive/icon-end.png) no-repeat left top;}
+.mytable01 .table .table-header th{ padding: 5px 0; font-weight: normal; color: #666666;}
+.mytable01 .table td .tdBtn{ display: inline-block; width: 13px; height: 17px; background: url(../../images/scoreLive/sprite.png) no-repeat left top;}
+.mytable01 .table td .icon-default{background-position: left top;}
+.mytable01 .table td .icon-top{ background-position: left -24px;}
+.mytable01 .table .event a{ display: block; width: 100%; height: 100%; padding: 10px 0;}
+.mytable01 .table .oddss span{ display: inline-block; padding:0;}
+.mytable01 .table .ypCheck,.mytable01 .table .sizeCheck,.mytable01 .table .ouCheck{color: #4c4c4c;line-height: 16px; font-size: 12px;border-radius: 3px;font-family: Tahoma, 微软雅黑;}
+.mytable01 .table .oddss{width: 50px}
+.mytable01 .table .oddss .ypCheck,.mytable01 .table .oddss .sizeCheck,.mytable01 .table .oddss .ouCheck{width: 40px; margin: 1px auto;}
+.jqColor{ color: #808080;}
+.bcColor{ color: #ff0000;}
+
+/* 鼠标移到盘口出现demo01 */
+.livetab .table > thead > tr > th, .livetab .table > tbody > tr > th, .livetab .table > tfoot > tr > th,.livetab .table > thead > tr > td, .livetab .table > tbody > tr > td, .livetab .table > tfoot > tr > td{ border-top-color: #fff;}
+.mytable01 .table .pankou,.mytable01 .table .oddss{ position: relative;}
+.livetab{ border: 2px solid #4d7082; position: absolute; z-index: 8; top: 3px; left: -540px;}
+.table01 tr td,.table03 .tr01 td{ background: #4d7082; color: #ffffff;}
+.mytable01 .table .pankou:hover .livetab{ visibility: visible;}
+.livetab .table{ margin-bottom: 0;}
+.livetab .table tbody{ font-size:12px;}
+.livetab .table th,.livetab .table td{ text-align: center; display: table-cell; vertical-align: inherit; padding: 4px 2px;}
+.livetab .table .event a{ display: block; height: 32px; line-height: 31px; padding:0;}
+.livetab .table03 td,.livetab .table04 td{ border: 1px solid #fff;}
+.livetab .table03 .no-b-l{ border-left: none;}
+.livetab .table03 .no-b-r{ border-right: none;}
+.down-green{ background: #49d894; color: #fff !important;}
+.up-red{ background: #f36969; color: #fff !important;}
+.change-blue{ color:#0076fb; color: #fff !important;}
+.show_score,.record_score,.show_handcp{ cursor: pointer;}
+.mytable01 .table .overtime-data{ padding-right: 357px; min-height: 28px; padding-left: 10px; color: #df1c1c; position: relative;}
+.mytable01 .table .overtime-data::before{ content: ""; position: absolute; left: 415px; top: -8px; width: 0; height: 0; border-bottom: 8px solid #e6e6eb; border-right: 8px solid transparent; border-left: 8px solid transparent;}
+.mytable01 .table .overtime-data2{ padding-right: 228px; min-height: 28px; padding-left: 10px; color: #df1c1c; position: relative;}
+.mytable01 .table .overtime-data2::before{ content: ""; position: absolute; left: 445px; top: -8px; width: 0; height: 0; border-bottom: 8px solid #e6e6eb; border-right: 8px solid transparent; border-left: 8px solid transparent;}
+
+/* 鼠标移到上半场比分 */
+#winScore { background: #fff; border: 8px solid #ccc;  border: 2px solid #4d7083; position: absolute; z-index: 28; top: 80px; left: 160px; width: 600px; font-size:12px;display: none;}
+#winScore .table tr td, #winScore .table tr th{ padding: 1px 0;}
+#winScore .table:first-child tr td{ background: #4d7083; color: #ffffff; border-top: none;}
+#winScore .table-bordered tr td, #winScore .table-bordered tr th{border: 1px solid #fff;}
+#noScore{position: absolute; z-index: 28; top: 80px; left: 246px;  width: 276px; height: 32px; box-shadow: 0 0 1px 1px rgba(0,0,0,0.1); display: none;}
+#noScore .table tr td, #noScore .table tr th{ padding: 1px 0;}
+#noScore .table-bordered tr td, #noScore .table-bordered tr th{border: 1px solid #fff;}
+
+/* 比分事件 */
+#jinq_box{ background: #fff;position: absolute; z-index: 28; top: 80px; left: 142px; width:500px; font-size:12px;box-shadow: 0 0 1px 2px rgba(0,0,0,0.1); display: none;}
+#jinq_box table{ margin-bottom: 0;}
+#jinq_box .table-bordered{ border: 2px solid #4d7083}
+#jinq_box .table tr td, #winScore .table tr th{ padding: 1px 0;}
+#jinq_box .table-bordered tr td, #winScore .table-bordered tr th{border: 1px solid #fff;}
+
+/* 进球提示 */
+.jinqiu .table tr td, #winScore .table tr th{ padding: 5px 0; text-align: center}
+.jinqiu .table-bordered tr td, #winScore .table-bordered tr th{border: 1px solid #fff;}
+.title{ color: #ffffff; padding: 5px;text-align: center;font-size: 15px;font-weight: bold;}
+.title .close{ position: absolute; right: 2px; top: 1px; width: 14px; height: 13px; background: url(../../images/scoreLive/jinqiu-close-btn.png) no-repeat;}
+.table p{ margin-bottom: 0;}
+.match-name a{ display: block; padding: 5px 0; color: #fff;}
+
+
+.rank{font-size: 12px;}
+
+/*重置body table字样大小跟字体样式*/
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: 13px;
+}
+
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  font: 13px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  
+}
+
+.rec_img img{width: 100%;height: 100%;}

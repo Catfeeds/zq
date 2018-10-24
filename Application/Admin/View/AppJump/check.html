@@ -1,0 +1,60 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/check" method="post">
+	<input type="hidden" name="startTime" value="{$_REQUEST.startTime}">
+	<input type="hidden" name="endTime" value="{$_REQUEST.endTime}">
+	<input type="hidden" name="sign" value="{$_REQUEST.sign}">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>来源ip：</label>
+				<input type="text" name="ip" value="{$_REQUEST.ip}"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="delete" href="__URL__/foreverdelete/id/{sid_record}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择用户"><span>删除</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="10%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th width="20%">来源标记</th>
+			<th width="20%">来源ip</th>
+			<th width="20%" orderField="number" <if condition="$_REQUEST._order eq 'number'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>点击次数</th>
+			<th width="30%" orderField="time" <if condition="$_REQUEST._order eq 'time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>点击时间</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['sign']}</td>
+					<td>{$vo['ip']}</td>
+					<td>{$vo['number']}</td>
+					<td>{$vo['time']|date='Y-m-d H:i:s',###}</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

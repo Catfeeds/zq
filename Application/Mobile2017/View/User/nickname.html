@@ -1,0 +1,75 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/login/login.css">
+</block>
+<block name="header">
+    <!-- 顶部开始 -->
+    <header id="other_header" style="background: #01af63  no-repeat .25rem center;">
+        {$title}
+    </header>
+    <!-- 顶部结束 -->
+</block>
+
+<block name="nav">
+
+</block>
+<block name="content">
+    <div class="login_panel">
+        <form id="login-form" action="" method="post">
+            <div class="login-container">
+                <div class="inputbox inputUser" id="account-box">
+                    <div class="u-input">
+                        <label class=""></label>
+                        <input name="nickname" value="{$_REQUEST.sdk_name}" class="dlemail" type="text" id="nickname" placeholder="请输入昵称" autocomplete="off">
+                        <a href="javascript:;" class="ne_close"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loginbox clearfix">
+                <a href='javascript:;' id="dologin">确&nbsp;&nbsp;定</a>
+                <p style="color: red">昵称只能修改一次，请谨慎！</p>
+            </div>
+        </form>
+    </div>
+    <div id="dailogFixBox" class="fixBox" style="display: none">
+        <div class="fixBoxIn clearfix">
+            <div class="tip" style="line-height: 0.8rem; "><span id="dailogContent" ></span></div>
+            <a id="yesDailog" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+        </div>
+    </div>
+</block>
+<block name='scripts'>
+    <script>
+        $(function(){
+
+//            //清空input的值
+//            $('input').val();
+
+            $('#yesDailog').on('click',function () {
+                $('#dailogFixBox').css('display','none');
+            });
+
+            $('#dologin').click(function(){
+                var nickname = $('#nickname').val();
+                if(nickname == ''){
+                    $('#dailogContent').html('用户昵称必须大于2位,小于10位！');
+                    $('#dailogFixBox').css('display','block');
+                    return false;
+                }
+
+                $.post('/User/nickname',{nickname:nickname}, function (data) {
+                    if (data.status === 1) {
+                        window.location.href = data.url;
+                    }else{
+                        $('#dailogContent').html(data.msg);
+                        $('#dailogFixBox').css('display','block');
+                    }
+                }, 'json');
+                return false;
+            });
+        })
+    </script>
+</block>
+

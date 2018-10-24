@@ -1,0 +1,52 @@
+<include file="Public:header"/>
+
+<!--引入本页所需css-->
+<link rel="stylesheet" href="__PUBLIC__/Home/css/personal_center/pc_common.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/publish_index/comment.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/personal_center/myExpertList.css?20171024">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/personal_center/change_password.css">
+
+<body>
+    <!-- 顶部开始 -->
+    <include file="Public:top"/>
+    <!-- 顶部结束 -->
+
+    <div class="body">
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main <eq name="user['type']" value="index">mainList</eq>">
+                            <eq name="user['type']" value="index"><include file="PublishIndex:expert_main"/></eq>
+                            <eq name="user['type']" value="article"><include file="expertArticle"/></eq>
+                            <eq name="user['type']" value="ident"><include file="expertIdent"/></eq>
+                            <eq name="user['type']" value="prompt"><include file="expertPrompt"/></eq>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+    <script>
+        //函数跳转到指定页面
+        $("#GO").on('click',function(){
+            var p = $(".isTxtBig").val();
+            var url = DOMAIN_URL + '/Expert/list_e/p/' + p +'.html';
+            location.href = url;
+        });
+    </script>
+</body>
+</html>

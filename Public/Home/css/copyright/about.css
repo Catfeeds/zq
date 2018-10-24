@@ -1,0 +1,19 @@
+/**
+ * 全彩关于我们css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-12-25
+**/
+/* 主体内容 */
+.home,.main{ width: 1000px; margin: 0 auto; margin-top: 12px\9; margin-bottom: 12px\9;}
+.main{ margin: 12px 0; display: block;}
+.home h2{ margin: 38px 0 0 0;}
+.main h2{ margin: 38px 0 0 0;}
+.main h2 img{ display: block;}
+.ab-banner{ width: 1000px; height: 210px; overflow: hidden; background: url(../../images/copyright/about-banner.jpg) no-repeat center bottom; position: relative;}
+.ab-banner .ab-left,.ab-banner .ab-right{ position: absolute; bottom: 45px; padding-left: 10px; font-size: 32px; letter-spacing: 3px;}
+.ab-banner .ab-left span,.ab-banner .ab-right span{ font-size: 42px;}
+.ab-banner .ab-right{ right: 13px; bottom: 108px; padding-right: 10px;}
+.p-con{ padding-top: 50px;}
+.p-con p{ text-indent: 28px; line-height: 24px; margin-bottom: 30px;}
+.img-con{ width: 878px; margin:0 auto;}

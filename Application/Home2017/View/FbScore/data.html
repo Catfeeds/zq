@@ -1,0 +1,406 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>{$against.home_team_name.0}vs{$against.away_team_name.0}_足球分析_足彩比分直播_足球比分_全球体育</title>
+</block>
+<block name="body">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/common.css"> 
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/data.css"> 
+    <style>
+        .blue{color:#0085c7;}
+    </style>
+	<!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Home/js/score/htmlwidth.js"></script>
+        <include file="Public:top_index" />
+        <include file="FbScore/against"/>
+            <include file="FbScore/subnav"/>
+<!-- 内容 s -->
+    <section class="data_con clearfix">
+        <!--友情提示: 如果改变了images/hide.png的路径，需要相应改变下面js的img路径 -->
+        <!-- 联赛积分排名 s -->
+        <div class="d_title boxs"><span>联赛积分排名</span><a href="javascript:;"><img src="__PUBLIC__/Mobile/images/show.png" ></a></div>
+        <div> 
+            <present name="data['integral']">
+                <volist name="data['integral']" id='v' >
+
+                    <aside class="teamname boxs">
+                        <eq name='i' value='1'>
+                        <img src="{$against.home_logo}" alt="{$key}">{$key}
+                        <else/>
+                        <img src="{$against.away_logo}" alt="{$key}">{$key}
+                        </eq>
+                    </aside>
+                     
+                    <table class="tb_rank" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <th>全场</th>
+                                <th>赛</th>
+                                <th>胜</th>
+                                <th>平</th>
+                                <th>负</th>
+                                <th>得</th>
+                                <th>失</th>
+                                <th>净</th>
+                                <th>得分</th>
+                                <th>排名</th>
+                                <th>胜率</th>
+                            </tr>
+                        <volist name="v" id='vo' >
+                            <tr>
+                                <td>{$vo.1}</td>
+                                <td>{$vo.2}</td>
+                                <td>{$vo.3}</td>
+                                <td>{$vo.4}</td>
+                                <td>{$vo.5}</td>
+                                <td>{$vo.6}</td>
+                                <td>{$vo.7}</td>
+                                <td>{:template_minus($vo['6'],$vo['7'])}</td>
+                                <td>{$vo.8}</td>
+                                <td>{$vo.9|default='-'}</td>
+                                <td>{$vo['3']/$vo['2']*100|substr=0,4}%</td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table> 
+                </volist>
+                <else/>
+                <p class="nodata">暂无数据</p>
+            </present>
+        </div> 
+        <!-- 联赛积分排名 e -->
+
+        <!-- 历史交战 s -->
+        <div class="d_title boxs"><span>历史交战</span><a href="javascript:;"><img src="__PUBLIC__/Mobile/images/show.png" ></a></div>
+        <div>
+            <present name="data['match_fight']">
+                <php>$count=count($data['match_fight']);
+                    $win=$winpan=$lose=$draw=0;
+                </php>
+                <volist name="data['match_fight']" id='v'>
+                    <php>
+                        switch ($v[13]) {
+                        case 1:
+                        $win+=1;
+                        break;
+                        case -1:
+                        $lose+=1;
+                        break;
+                        case 0:
+                        $draw+=1;
+                        break;
+                        default:
+                        break;
+                        }
+                        if($v[14]==1){
+                        $winpan+=1;
+                        }
+                        $win_rate=round($win/($win+$lose+$draw)*100,1).'%';
+                        $pan_rate=round($winpan/($win+$lose+$draw)*100,1).'%';
+                    </php>
+                    <eq name='i' value='1'>
+                    <!--                    <aside class="teamname boxs">
+                                            <img src="__PUBLIC__/Mobile/images/zanwu.png" alt="{$v.5}">{$v.5}
+                                        </aside>-->
+                    <table class="tb_history" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>  
+                                <th>日期</th>
+                                <th>赛事</th>
+                                <th>主队</th>
+                                <th>比分</th>
+                                <th>客队</th>
+                                <th>盘路</th>
+                            </tr>
+                            </eq>
+                            <tr>
+                                <td><p>{$v.0|substr=0,4}</p><p>{$v.0|substr=5,5}</p></td>
+                                <td style="color:{$v.3}">{$v.2}</td>
+                                <td <if condition="($v[4] eq $against['home_team_id']) && ($v[8] gt $v[9])">class="red"</if><if condition="($v[4] eq $against['home_team_id']) && ($v[8] eq $v[9])">class="blue"</if><if condition="($v[4] eq $against['home_team_id']) && ($v[8] lt $v[9])">class="green"</if>>{$v.5}</td>
+                                <td><p>{$v.8}-{$v.9}</p><p class="sc">({$v.10}-{$v.11})</p></td>
+                                <td <if condition="($v[6] eq $against['home_team_id']) && ($v[8] gt $v[9])">class="green"</if><if condition="($v[6] eq $against['home_team_id']) && ($v[8] eq $v[9])">class="blue"</if><if condition="($v[6] eq $against['home_team_id']) && ($v[8] lt $v[9])">class="red"</if>>{$v.7}</td>
+                                <td class='<switch name="v.14" >
+                                    <case value="1">red</case>
+                                    <case value="-1">green</case>
+                                    <case value="0">blue</case>
+                                    <default  />
+                                    </switch>'><p>{$v.12}</p><p>
+                                        <switch name="v.14" >
+                        <case value="1">赢</case>
+                        <case value="-1">输</case>
+                        <case value="0">平</case>
+                        <default  />
+                        </switch>
+                        </p></td>
+                        </tr>
+                        <if condition="$i eq count($data['match_fight'])">
+                            <tr>
+                                <td></td>
+                                <td colspan="4"><span class="red">{$win}胜</span><span class="blue">{$draw}平</span><span class="green">{$lose}负</span>  胜率 <span class="red">{$win_rate}</span> 赢盘率 <span class="red">{$pan_rate}</span></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                    </table>
+                    </if>
+                </volist>
+                <else/>
+                <p class="nodata">暂无数据</p>
+            </present>
+        </div> 
+        <!-- 历史交战 e -->
+
+        <!-- 近期交战 s -->
+        <div class="d_title boxs"><span>近期交战</span><a href="javascript:;"><img src="__PUBLIC__/Mobile/images/show.png" ></a></div>
+        <div> 
+            <present name="data['recent_fight']">
+                <volist name="data['recent_fight']" id='v'>
+                    <php>$count=count($v['content']);
+                        $rateCount=0;
+                        $win=$winpan=$lose=$draw=0;
+                        foreach($v['content'] as $val){
+                        switch ($val[14]) {
+                        case 1:
+                        $win+=1;
+                        break;
+                        case -1:
+                        $lose+=1;
+                        break;
+                        case 0:
+                        $draw+=1;
+                        break;
+                        default:
+                        break;
+                        }
+                        if($val[15]==1){
+                        $winpan+=1;
+                        }
+                        }
+                        $win_rate=round($win/($win+$lose+$draw)*100,1).'%';
+                    </php>
+                    <volist name="v.content" id='vv' key='k'>
+                        <php>
+                        if($vv[13]!=''){
+                            $rateCount+=1;
+                        }
+                        $pan_rate=round($winpan/$rateCount*100,1).'%';
+                        </php>
+                        <eq name='k' value='1'>
+                        <aside class="teamname boxs">
+                            <eq name="v['name']" value="recent_fight1">
+                            <img src="{$against.home_logo}" alt="{$vv.0}">{$vv.0}
+                            <else/>
+                            <img src="{$against.away_logo}" alt="{$vv.0}">{$vv.0}
+                            </eq>
+                        </aside>
+                        <table class="tb_history" border="0" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>  
+                                    <th>日期</th>
+                                    <th>赛事</th>
+                                    <th>主队</th>
+                                    <th>比分</th>
+                                    <th>客队</th>
+                                    <th>盘路</th>
+                                </tr>
+                                </eq>
+                                <tr>
+                                    <td><p>20{$vv.1|substr=0,2}</p><p>{$vv.1|substr=3,5}</p></td>
+                                    <td style="color:{$vv.4}">{$vv.3}</td>
+                                    <td <if condition="(($v['name'] eq 'recent_fight1' AND $against.home_team_id eq $vv[5]) && ($vv[9] gt $vv[10])) OR (($v['name'] eq 'recent_fight2' AND $against.away_team_id eq $vv[5]) && ($vv[9] gt $vv[10]))">class="red"</if><if condition="(($v['name'] eq 'recent_fight1' AND $against.home_team_id eq $vv[5]) && ($vv[9] eq $vv[10])) OR (($v['name'] eq 'recent_fight2' AND $against.away_team_id eq $vv[5]) && ($vv[9] eq $vv[10]))">class="blue"</if><if condition="(($v['name'] eq 'recent_fight1' AND $against.home_team_id eq $vv[5]) && ($vv[9] lt $vv[10])) OR (($v['name'] eq 'recent_fight2' AND $against.away_team_id eq $vv[5]) && ($vv[9] lt $vv[10]))">class="green"</if>>{$vv.6}</td>
+                            <td><p>{$vv.9}-{$vv.10}</p><p class="sc">({$vv.11}-{$vv.12})</p></td>
+                            <td <if condition="(($v['name'] eq 'recent_fight1' AND $against.home_team_id eq $vv[7]) && ($vv[9] gt $vv[10])) OR (($v['name'] eq 'recent_fight2' AND $against.away_team_id eq $vv[7]) && ($vv[9] gt $vv[10]))">class="green"</if><if condition="(($v['name'] eq 'recent_fight1' AND $against.home_team_id eq $vv[7]) && ($vv[9] eq $vv[10])) OR (($v['name'] eq 'recent_fight2' AND $against.away_team_id eq $vv[7]) && ($vv[9] eq $vv[10]))">class="blue"</if><if condition="(($v['name'] eq 'recent_fight1' AND $against.home_team_id eq $vv[7]) && ($vv[9] lt $vv[10])) OR (($v['name'] eq 'recent_fight2' AND $against.away_team_id eq $vv[7]) && ($vv[9] lt $vv[10]))">class="red"</if>>{$vv.8}</td>
+                            <td class='<switch name="vv.15" >
+                                <case value="1">red</case>
+                                <case value="-1">green</case>
+                                <case value="0">blue</case>
+                                <default  />
+                                </switch>'><p>{$vv.13}</p><p><switch name="vv.15" >
+                            <case value="1">赢</case>
+                            <case value="-1">输</case>
+                            <case value="0">平</case>
+                            <default  />
+                            </switch></p></td>
+                            </tr>
+                            <if condition="$k eq $count">
+                                <tr>
+                                    <td></td>
+                                    <td colspan="4"><span class="red">{$win}胜</span> <span class="blue">{$draw}平</span>  <span class="green">{$lose}负</span>  胜率 <span class="red">{$win_rate}</span>  赢盘率 <span class="red">{$pan_rate}</span></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                        </table> 
+                        </if>
+                    </volist>
+                </volist>
+                <else/>
+                <p class="nodata">暂无数据</p>
+            </present>
+        </div> 
+        <!-- 近期交战 e -->
+
+
+        <!-- 联赛盘路 s -->
+        <div class="d_title boxs"><span>联赛盘路</span><a href="javascript:;"><img src="__PUBLIC__/Mobile/images/show.png" ></a></div>
+        <div> 
+            <present name="data['panlu']">
+                <volist name="data['panlu']" id='vo'>
+                    <aside class="teamname boxs">
+                        <eq name="i" value="1">
+                            <img src="{$against.home_logo}" alt="{$key}">{$key}
+                            <else/>
+                            <img src="{$against.away_logo}" alt="{$key}">{$key}
+                        </eq>
+                    </aside>
+                    <table class="tb_history" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <th>全场</th>
+                                <th>赢盘</th>
+                                <th>走水</th>
+                                <th>输盘</th>
+                                <th>赢盘率</th>
+                                <th>大球</th>
+                                <th>大球率</th>
+                                <th>小球</th>
+                                <th>小球率</th>
+                            </tr>
+                        <volist name="vo" id="v" key="k">
+                            <if condition="$k neq count($vo)">
+                                <tr>
+                                    <td>{$v.1}</td>
+                                    <td>{$v.3}</td>
+                                    <td>{$v.4}</td>
+                                    <td>{$v.5}</td>
+                                    <td>{$v.6}</td>
+                                    <td>{$v.7}</td>
+                                    <td>{$v.8}</td>
+                                    <td>{$v.9}</td>
+                                    <td>{$v.10}</td>
+                                </tr>
+                            </if>
+                            <if condition="$k eq count($vo)">
+                                <tr>
+                                    <td>{$v.1}</td>
+                                    <td colspan="4">
+                                        <span <switch name='v.3|substr=0,3'><case value='贏'>class='red'</case><case value='輸'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.3|substr=0,3}</span>
+                                        <span <switch name='v.3|substr=5,3'><case value='贏'>class='red'</case><case value='輸'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.3|substr=5,3}</span>
+                                        <span <switch name='v.3|substr=10,3'><case value='贏'>class='red'</case><case value='輸'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.3|substr=10,3}</span>
+                                        <span <switch name='v.3|substr=15,3'><case value='贏'>class='red'</case><case value='輸'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.3|substr=15,3}</span>
+                                        <span <switch name='v.3|substr=20,3'><case value='贏'>class='red'</case><case value='輸'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.3|substr=20,3}</span>
+                                        <span <switch name='v.3|substr=25,3'><case value='贏'>class='red'</case><case value='輸'>class='green'</case><case value='走'>class='blue'</case></switch>>{$v.3|substr=25,3}</span>
+                                    </td>
+                                    <td></td>
+                                    <td colspan="3">
+                                        <span <switch name='v.6|substr=0,3'><case value='大'>class='red'</case><case value='小'>class='green'</case></switch>>{$v.6|substr=0,3}</span>
+                                        <span <switch name='v.6|substr=5,3'><case value='大'>class='red'</case><case value='小'>class='green'</case></switch>>{$v.6|substr=5,3}</span>
+                                        <span <switch name='v.6|substr=10,3'><case value='大'>class='red'</case><case value='小'>class='green'</case></switch>>{$v.6|substr=10,3}</span>
+                                        <span <switch name='v.6|substr=15,3'><case value='大'>class='red'</case><case value='小'>class='green'</case></switch>>{$v.6|substr=15,3}</span>
+                                        <span <switch name='v.6|substr=20,3'><case value='大'>class='red'</case><case value='小'>class='green'</case></switch>>{$v.6|substr=20,3}</span>
+                                        <span <switch name='v.6|substr=25,3'><case value='大'>class='red'</case><case value='小'>class='green'</case></switch>>{$v.6|substr=25,3}</span>
+                                    </td>
+                                </tr>
+                            </if>
+                        </volist>
+                        </tbody>
+                    </table>
+                </volist>
+                <else/>
+                <p class="nodata">暂无数据</p>
+            </present>
+        </div> 
+        <!-- 联赛盘路 e -->
+
+
+        <!-- 未来三场 s -->
+        <div class="d_title boxs"><span>未来三场</span><a href="javascript:;"><img src="__PUBLIC__/Mobile/images/show.png" ></a></div>
+        <div> 
+            <present name="data['three']">
+                <volist name="data['three']" id='vo'>
+                    <aside class="teamname boxs">
+                        <eq name="i" value="1">
+                            <img src="{$against.home_logo}" alt="{$key}">{$key}
+                            <else/>
+                            <img src="{$against.away_logo}" alt="{$key}">{$key}
+                        </eq>
+                    </aside>
+                    <table class="tb_history" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>  
+                                <th>日期</th>
+                                <th>赛事</th>
+                                <th>主队</th> 
+                                <th>客队</th>
+                                <th>间隔</th>
+                            </tr>
+                        <volist name="vo" id="v">
+                            <tr>
+                                <td><p>{$v.2|substr=0,4}</p><p>{$v.2|substr=5,5}</p></td>
+                                <td>{$v.1}</td>
+                                <td <eq name="v.3" value='主'>class="red"</eq>><eq name="v.3" value='主'>{$v.0}<else />{$v.4}</eq></td> 
+                            <td <eq name="v.3" value='客'>class="red"</eq>><eq name='v.3' value='主'>{$v.4}<else />{$v.0}</eq></td>
+                            <td>{$v.5}</td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </volist>
+                <else/>
+                <p class="nodata">暂无数据</p>
+            </present>
+        </div>
+        <!-- 未来三场 e -->
+
+        <!-- 澳彩推荐 s -->
+        <div class="d_title boxs"><span>澳彩推荐</span><a href="javascript:;"><img src="__PUBLIC__/Mobile/images/show.png" ></a></div>
+        <div> 
+            <present name="data.match_Recommend">
+            <table class="tb_history tb_yuce" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <present name="data.match_Recommend.trend">
+                    <tr>  
+                        <th><a href="#" target="_blank">球队</a></th> 
+                        <th><a href="#" target="_blank">近期走势</a></th> 
+                        <th><a href="#" target="_blank">盘路输赢</a></th> 
+                    </tr> 
+                    <volist name="data.match_Recommend.trend" id="v">
+                    <tr>
+                        <td><eq name='i' value='1'>{$against.home_team_name.0}<else/>{$against.away_team_name.0}</eq></td>
+                        <php>$v1=explode('-', $v[1]);$v2=explode('-', $v[2]);</php>
+                        <td>{$v1[1]}</td>
+                        <td>{$v2[1]}</td>
+                    </tr>
+                    </volist>
+                    </present>
+                    <present name="data.match_Recommend.viewpoint">
+                        <volist name="data.match_Recommend.viewpoint" id="v">
+                    <tr>  
+                        <td align="center" colspan="3">{$v}</td>
+                    </tr> 
+                        </volist>
+                    </present>
+                </tbody>
+            </table> 
+                <else/>
+                <p class="nodata">暂无数据</p>
+        </present>
+        </div> 
+        <!-- 澳彩推荐 e -->
+
+
+        <script>
+            //赛程 - 数据  隐藏和显示  
+            $(".d_title").each(function () {
+                var $imgSrc = $(this).find("img");
+                $(this).bind("click", function () {
+                    $(this).next("div").stop().fadeToggle(200, function () {
+                        $imgSrc.attr("src") == "__PUBLIC__/Mobile/images/show.png" ? $imgSrc.attr("src", "__PUBLIC__/Mobile/images/hide.png") : $imgSrc.attr("src", "__PUBLIC__/Mobile/images/show.png");
+                    })
+                });
+            })
+        </script>
+    </section>
+    <!-- 内容 e -->
+<include file="Public:footer"/>
+<include file="Public:return_top"/>
+
+</block>

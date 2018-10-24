@@ -1,0 +1,107 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/login/login.css?v=20180613">
+</block>
+<block name="header">
+    <include file="Public/header_inside"/>
+</block>
+<block name="nav"> 
+<nav class="bind_nav">
+        <a href="javascript:;" class="on">登录密码修改</a>
+        <a href="javascript:;">提款密码修改</a>
+</nav>
+</block>
+<block name="content">
+    <div class="login_panel">
+        <form id="login-form" action="" method="post">
+            <div class="login-container" id="show_penel0">
+                <div class="inputbox inputUser" id="account-box">
+                    <div class="u-input">
+                        <label class="u-label ne_passwd"></label>
+                        <input class="dlemail" type="password" id="old_pwd" placeholder="请输入原密码" autocomplete="off">
+                        <a href="javascript:;" class="ne_close"></a>
+                    </div>
+                </div>
+                <div class="inputbox inputPasswd" id="inputbox">
+                    <div class="u-input">
+                        <label class="u-label ne_passwd"></label>
+                        <input name="password" class="ycpwd" type="password" id="password" placeholder="请输入6-15位数字或者字母">
+                        <input name="password" class="xspwd" type="text" id="text" placeholder="请输入6-15位数字或者字母">
+                        <a href="javascript:;" class="ne_btn no-pw" id="ne_btn"></a>
+                    </div>
+                </div>
+                <div class="inputbox inputPasswd" style="border-top: 1px solid #ddd;">
+                    <div class="u-input">
+                        <label class="u-label ne_code"></label>
+                        <input name="code" class="code" type="code" id="code" placeholder="请输入验证码">
+                        <a href="javascript:;" class="made_code fs30">获取验证码</a>
+                    </div>
+                </div>
+                <div class="loginbox clearfix">
+                  <a href="javascript:;" class="dologin" id="dologin">确认提交</a>
+                </div>
+            </div>
+           <div class="login-container" id="show_penel1" style="display: none;">
+                <div class="inputbox inputUser" id="account-box">
+                    <div class="u-input">
+                        <label class="u-label ne_passwd"></label>
+                        <input class="dlemail" type="password" id="old_pwd2" placeholder="请输入原密码" autocomplete="off">
+                        <a href="javascript:;" class="ne_close"></a>
+                    </div>
+                </div>
+                <div class="inputbox inputPasswd" id="inputbox2">
+                    <div class="u-input">
+                        <label class="u-label ne_passwd"></label>
+                        <input name="password2" class="ycpwd" type="password" id="password2" placeholder="请输入6为数字的新密码">
+                        <input name="password2" class="xspwd" type="text" id="text2" placeholder="请输入6为数字的新密码">
+                        <a href="javascript:;" class="ne_btn no-pw" id="ne_btn2"></a>
+                    </div>
+                </div>
+                <div class="inputbox inputPasswd" style="border-top: 1px solid #ddd;">
+                    <div class="u-input">
+                        <label class="u-label ne_code"></label>
+                        <input name="code" class="code" type="code" id="code2" placeholder="请输入验证码">
+                        <a href="javascript:;" class="made_code fs30">获取验证码</a>
+                    </div>
+                </div>
+                <div class="loginbox clearfix">
+                  <a href="javascript:;" class="dologin" id="dologin2">确认提交</a>
+                </div>
+            </div>
+            <input id="mobile" type="hidden" value="{$mobile}"/>
+            <input id="extrpwd" type="hidden" value="{$extrpwd}"/>
+            
+        </form>
+        <div id="dailogFixBox" class="fixBox" style="display: none">
+            <div class="fixBoxIn clearfix">
+                <div class="tip" style="line-height: 0.8rem; "><span id="dailogContent" ></span></div>
+                <a id="yesDailog" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="footer">
+<include file="Public/footer_phone"/>
+</block>
+<block name='scripts'>
+    <script type="text/javascript" src="__JS__/user/update_pwd.js"></script>
+    <script>
+       //密码修改切换
+        $(".bind_nav a").each(function(e){
+            $(this).click(function(){
+              if($(this).index()=='1'){
+                  var extrpwd=$('#extrpwd').val();
+                  if(extrpwd==0 || extrpwd==''){
+                      $('#dailogContent').html('请完善提款信息！');
+                      $('#dailogFixBox').css('display','block');
+                      return false;
+                  }
+              }
+              $(this).addClass("on").siblings().removeClass("on"); 
+              $(".login-container").hide();
+              $("#show_penel"+ e).show();
+            })
+        });
+    </script>
+</block>

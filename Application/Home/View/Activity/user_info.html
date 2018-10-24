@@ -1,0 +1,14 @@
+
+<div class="fl head">
+    <a <if condition="is_login() neq ''">href="{:U('UserInfo/index')}<else/>href="{:U('User/login')}</if> ">
+    <img src="{$userInfo['head']|default='__PUBLIC__/Home/images/gamble/headImg.png'}" alt="头像">
+    <if condition="is_login() neq ''">
+        {$userInfo['nick_name']}
+        <else/>
+        登录/注册
+    </if>
+
+    </a>
+
+
+</div>

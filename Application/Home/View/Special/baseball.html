@@ -1,0 +1,111 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/special/sn_theme.css">
+</block>
+<block name="content">
+    <!-- dj-theme -->
+    <div class="themeBox bqTheme">
+    	<div class="themeNavCon">
+            <div class="themeNavBox">
+                <div class="clearfix themeNavIn">
+                    <div class="pull-left themeLogo"><a href="{:U('/')}" title="全球体育"><img src="__IMAGES__/special/theme-logo.png" alt="全球体育logo" width="142" height="35"></a></div>
+                    <div class="pull-left themeNav">
+                        <ul class="clearfix">
+                            <volist name="nav" id="vo">
+                                <li class="pull-left"><a target="_blank" href="{$vo.url}"><span>{$vo.name}</span> </a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div> 
+            </div> 
+        </div>
+        <!-- main -->
+        <div class="main">
+            <div class="position">
+            	当前位置：<span class="now"><a href="{:U('/')}" title="全球体育首页">全球体育首页</a></span> &gt; 棒球</div>
+            <div class="themeFocus clearfix">
+            	<div class="pull-left themeBanner">
+                	<!-- banner -->
+                	<div id="myCarousel" class="carousel slide banner" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <volist name="banner" id="vo">
+                                <li data-target="#myCarousel" data-slide-to="{$key}" <if condition="$key eq 0">class="active"</if>></li>
+                            </volist>
+                        </ol>
+                        <div class="carousel-inner">
+                            <volist name="banner" id="vo">
+                                <div class="<if condition="$key eq 0">active</if> item">
+                                <a href="{$vo.url}" target="_blank"><img src="{$vo.img}" alt="{$vo.title}"></a>
+                                <div class="fbanner-title"><a class="text-hidden" target="_blank" href="{$vo.url}">{$vo.title}</a></div>
+                                </div>
+                            </volist>
+                        </div>
+                        <a class="carousel-control left" href="#myCarousel" data-slide="prev" style="display: none; opacity: 0.3;"><span></span></a>
+                        <a class="carousel-control right" href="#myCarousel" data-slide="next" style="display: none; opacity: 0.3;"><span></span></a>
+                    </div>
+                    <!-- banner -->
+                </div>
+                <div class="pull-left themeNews">
+                    <volist name="shouxie" id="vo">
+                        <h2><a target="_blank" href="{$vo.0.href}" title="{$vo.0.title}">{$vo.0.title}</a></h2>
+                        <ul class="dlNews">
+                            <volist name="vo.newList" id="vo2">
+                                <li><a target="_blank" href="{$vo2.href}" title="{$vo2.title}">{$vo2.title}</a></li>
+                            </volist>
+                        </ul>
+                    </volist>
+                </div>
+                <div class="pull-right themeVideo">
+                	<!-- live media-->
+                    <div class="liveList">
+                        <ul>
+                            <volist name="highlights" id="vo">
+                                <li>
+                                    <a target="_blank" href="{$vo.href}" class=" liveListImg"><img src="{$vo.img}" width="192" height="117" alt="{$vo.title}"><i class="coverMask"></i><i class="playBtn"></i></a>
+                                    <a target="_blank" href="{$vo.href}" class="liveListArt">
+                                        <article><span class="video-icon"></span>{$vo.title}</article>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <!-- live media-->
+                </div>
+            </div>
+            <div class="matListCon clearfix">
+                <!-- 资讯模版 -->
+                <include file="Special:newsList" />
+
+                <div class="pull-right mainRight">
+                    <div class="rmMatch">
+                        <div class="clearfix listTitle">
+                            <h2 class="pull-left tit">精彩视频</h2>
+                            <span class="bSkew skewRight"></span> <span class="sSkew skewRight"></span>
+                        </div>
+                        <ul class="rmUl">
+                            <volist name="highlights2" id="vo">
+                                <li class="listIma">
+                                    <a target="_blank" href="{$vo.href}" class="clearfix">
+                                        <div class="rmIma">
+                                            <img class="lazy" data-original="{$vo.img}" width="280" height="170" alt="{$vo.title}">
+                                            <i class="coverMask"></i>
+                                            <i class="playBtn"></i>
+                                            <div class="rmText text-hidden">
+                                                <span>{$vo.title}</span> 
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main -->
+    </div>
+    <!-- dj-theme -->
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/special/fb_theme.js"></script>
+</block>

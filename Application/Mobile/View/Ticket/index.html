@@ -1,0 +1,217 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>手机全球体育手机网_即时足球比分,比分直播,足球直播,比分预测,赔率分析</title>
+</block>
+
+<!-- 本页需要引用的css -->
+<block name="append">
+    <!-- 页面所需css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/coupon/coupon.css?v=20180615">
+</block>
+
+<block name="nav">
+
+</block>
+<block name="header"></block>
+<!-- 内容 -->
+<block name="content">
+    <header id="other_header">
+        <a href="{:U('User/index')}"></a>
+        我的优惠券
+        <a href="javascript:;" id="complete" class="buy" style="font-size:.3rem;">购买</a>
+    </header>
+    <section class="n_module">
+        <!-- <ul class="nav_list clearfix nav_num_2">
+            <a href="javascript:;" class="nav-item <if condition='$type eq 0'>on</if>" value="0">可用 ({$num1})</a>
+            <a href="javascript:;" class="nav-item <if condition='$type eq 1'>on</if>" value="1">不可用 ({$num2})</a>
+        </ul> -->
+        <ul class="nav_list clearfix nav_num_2 nav_list02">
+            <li><a href="javascript:;" class="nav-item <if condition='$type eq 0'>on</if>" value="0">可用 ({$num1})</a></li>
+            <li><a href="javascript:;" class="nav-item <if condition='$type eq 1'>on</if>" value="1">不可用 ({$num2})</a></li>
+        </ul>
+    </section>
+    <section class="conBlock">
+        <ul class="clearfix">
+            <li class="conList" value="0">
+                <if condition="count($list) gt 0">
+                    <div class="couponBox" id="js-list">
+                        <foreach name="list" item="v" >
+                            <a href="javascript:;" type="{$v['type']}" class="item clearfix" <if condition="$type eq 1">disabled="disabled"</if>>
+                                <div class="fl itemLeft <if condition="$type eq 1">ponDet<else />ponOn</if>">
+                                    <p><span>{$v['give_coin']}</span>金币</p>
+                                    <p>{$v['name']}</p>
+                                </div>
+                                <div class="fl itemRight">
+                                    <p><span class="fs38">{$v['remark']}</span><span class="text-999">（{$v['get_type']}）</span></p>
+                                    <p class="text-666 fs24">有效期至{$v['over_time']} <if condition="$type eq 0"><span class="useNoice">立即使用</span></if></p>
+                                </div>
+                                <if condition="($v['isExpire'] eq 1) AND ($type eq 0)">
+                                    <i class="ponWill"></i>
+                                <elseif condition="($v['is_use'] eq 1) AND ($type eq 1)" />
+                                    <i class="ponUsed"></i>
+                                <elseif condition="($v['deadline'] eq 1) AND ($v['is_use'] eq 0)AND ($type eq 1)" />
+                                    <i class="ponOver"></i>
+                                </if>
+                            </a>
+                        </foreach>
+                    </div>
+                <else />
+
+                    <div class="couponBox">
+                        <div class="noPonCon">
+                            <i class="noPon"></i>
+                            <p class="text-999 q-tc fs34">暂无优惠卷</p>
+                            <a href="{:U('/Ticket/ticketList')}" class="buyTicket">立即抢购</a>
+                        </div>
+                    </div>
+                    <input type="hidden" name="noticket" id="noticket" value="1" />
+                </if>
+            </li>
+        </ul>
+    </section>
+    <input type="hidden" name="type" id="type" value="{$type}" />
+    <input type="hidden" name="page" id="page" value="{$page}" />
+    <input type="hidden" id="auto_load" value="1">
+
+    <div class="paged boxs" style="display: none">
+        <div class="load_gif fs24 text-999" >
+            <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+            <span>正在加载更多的数据...</span>
+        </div>
+    </div>
+
+</block>
+
+<block name="scripts">
+    <script type="text/javascript">
+        $(function(){
+            num = 0;
+            $('.nav_list a').click(function () {
+                num = $(this).index();
+                var myLeft = num*-100;//'+myLeft+'
+                $(this).addClass('on').siblings().removeClass('on');
+                $('.conBlock ul').stop().animate({'left':''+myLeft+'%'},500);
+
+                var type = $(this).attr('value');
+                window.location.href = '/Ticket/myTicket.html?type='+type;
+            });
+
+            $('.buyTicket').click(function(){
+                window.location.href = '/Ticket/ticketList.html';
+            })
+
+            $('.buy').click(function(){
+                window.location.href = '/Ticket/ticketList.html';
+            })
+
+            $('.item').click(function(){
+                var type  = $('#type').val();
+                var ttype = $(this).attr('type');
+                if(type == 0){
+                    var url = '/Pay/index.html';
+                    if(ttype == 1){
+                        url = '/Guess/new_put.html';
+                    }
+
+                    window.location.href = url;
+                }
+            })
+        });
+
+        //加载更多方法
+        $(function () {
+            //没有优惠券就不显示
+            var noticket = $('#noticket').val();
+            if(noticket == 1){
+                $(".paged").hide();
+                return false;
+            }
+
+            $("#auto_load").val(1);
+            var flag = false;
+
+            if ($(".item").size() <= 10 && $('#type').val() == 0)
+            {
+                $("#auto_load").val(0);
+                $(".paged").show();
+                $(".load_gif").hide();
+                $("#showLess").show();
+            }
+
+            //滚动加载滚动---亚盘、竞彩
+            $(window).scroll(function () {
+                var auto_load = $("#auto_load").val();
+                if (auto_load == 0) {
+                    $(".paged").show();
+                    return false;
+                }
+
+                //初始状态，如果没数据return ,false;否则
+                if ($(".item").size() <= 0) {
+                    $(".paged").show();
+                    return false;
+                } else {
+                    //$(window).scrollTop()这个方法是当前滚动条滚动的距离
+                    //$(window).height()获取当前窗体的高度
+                    //$(document).height()获取当前文档的高度
+                    var bot = 100; //bot是底部距离的高度
+                    //当底部基本距离+滚动的高度〉=文档的高度-窗体的高度时；
+                    if (($(window).scrollTop()) >= ($(document).height() - $(window).height() - bot)) {
+                        if (auto_load == 1) {
+                            $("#auto_load").val(0);
+                            getListMore();
+                        }
+                    }
+                }
+            });
+
+            function getListMore(){
+                // 初始化页面，点击事件从第二页开始
+                var page = $('#page').val();
+                var type = $('#type').val();
+                page++;
+
+                $.ajax({
+                    type: 'post',
+                    url: "/Ticket/myTicket.html",
+                    async : false,
+                    data: {type: type, page: page},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 1)
+                        {
+                            var list = data.list;
+                            if (list != '') {
+                                $('#js-list').append(list);
+                                $("#auto_load").val(1);
+
+                                if (data.num < 20) {
+                                    $("#auto_load").val(0);
+                                    $(".paged").show();
+                                    $(".load_gif").hide();
+                                    $("#showLess").show();
+                                    flag = true;
+                                }
+                            } else{
+                                $("#auto_load").val(0);
+                                $(".paged").show();
+                                $(".load_gif").hide();
+                                $("#showLess").show();
+                                flag = true;
+                            }
+                        }else {
+                            $('#dailogContent').html('连接失败');
+                            $('#dailogFixBox').css({'display':'block'});
+                        }
+                    },
+
+                    complete:function () {
+                        $('#page').val(page);
+                    }
+                });
+            }
+        });
+    </script>
+</block>
+
+

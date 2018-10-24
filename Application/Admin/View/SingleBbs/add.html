@@ -1,0 +1,81 @@
+<style>
+    table tr{
+        height: 35px;
+    }
+    table tr td{
+        width: 80px;
+    }
+    .answer{
+        text-align: center;
+    }
+</style>
+<div class="pageContent">
+    <form method="post" action="__URL__/add" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <div class="pageFormContent" layoutH="58">
+
+
+            <div class="unit">
+                <label>关联文章ID：</label>
+                <input type="number" class="required" name="id" value="{$vo.id}" onBlur="gameinfo(this.value)"/>
+            </div>
+
+
+            <div class="unit">
+                <label>文章标题：</label>
+                <table width="400" id='table'>
+                    <tr>
+                        <if condition="$vo['str']">
+                            {$vo['str']}
+                            <else/>
+                            <td>请输入文章ID</td>
+                        </if>
+                    </tr>
+                </table>
+            </div>
+
+
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+<script>
+    function getinfo($id) {
+        var result;
+        //用ajax的“同步方式”调用一般处理程序
+        $.ajax({
+            url: "__URL__/gettitle",
+            async: false,//改为同步方式
+            type: "GET",
+            data: { pid:$id },
+            success: function (courseDT4) {
+                result = courseDT4;
+            }
+        });
+        return result;
+    }
+
+    function gameinfo($id)
+    {
+        var data = getinfo($id);
+        if(typeof(data) == "string")
+        {
+            var str = "<tr>"+
+                    "<td>"+ data +"</td>"+
+                    "</tr>";
+            $("#table").html(str);
+        }
+
+    }
+
+</script>
+
+
+
+

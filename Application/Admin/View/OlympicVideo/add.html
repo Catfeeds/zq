@@ -1,0 +1,112 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			<div class="unit">
+				<label>标题：</label>
+				<input type="text" class="required" maxlength="15" name="title" value="{$vo.title}" size="30"/>
+			</div>
+			<div class="unit">
+				<label>描述：</label>
+				<textarea maxlength="255" class="large bLeft" name="remark"  rows="2" cols="57">{$vo.remark}</textarea>
+			</div>
+			<div class="unit">
+				<label>播放次数：</label>
+				<input type="text" class="digits" name="click_num" value="{$vo.click_num}" size="30"/>
+			</div>
+			<div class="unit">
+				<label>排序：</label>
+				<input type="text" class="digits" name="sort" value="{$vo.sort}" size="30"/>
+			</div>
+			<div class="unit">
+				<label>m站视频地址：</label>
+				<input type="text" name="m_url" value="{$vo.m_url}" size="70"/>
+			</div>
+			<div class="unit">
+				<label>m站是否外链：</label>
+				<input type="radio" name="m_ischain" value="0" checked>否
+				<input type="radio" name="m_ischain" value="1" <if condition="$vo['m_ischain'] eq 1">checked</if>>是
+			</div>
+			<div class="unit">
+				<label>标签：</label>
+				<input type="text" name="label" value="{$vo.label}" size="30"/>
+				<span class="inputInfo">（标签,以英文逗号隔开）</span>
+			</div>
+			<div class="unit">
+				<label>视频图片：</label>
+				<ul class="tabImg">
+					<li>
+						<input id="viewUploadInput_71" name="fileInput" type="file" onChange="previewImage(71)" style="display:none;" />
+						<a href="javascript:void(0);">
+							 <span id="viewUploadDiv_71">
+								<empty name="vo.img">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_71"/>
+								<else/>
+									<img id="viewUploadImg_71" width='80' height='80' border=0 src="{$vo.img}">
+								</empty>
+							 </span>
+						</a>
+						<div id="poiter_71" class="poiter">
+							<empty name="vo.img">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_71')">添加图片</a>
+							<else/>
+								<a title="删除" onclick="delPic({$vo.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_71')">重传</a>
+							</empty>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+	$(function(){
+		$('.tabImg li').hover(function(e) {
+			$(this).children('div').stop().animate({'top':'0'},300);
+		},function(){
+			$(this).children('div').stop().animate({'top':'80px'},300);
+		});
+	});
+	function delPic(id){
+		if(confirm("确认要删除吗？") == false){
+			return false;
+		}
+		//异步执行删除
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/OlympicVideo/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                	$("#viewUploadInput_71").val("");
+					$("#viewUploadImg_71").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+					var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_71')\">添加图片</a>";
+					$("#poiter_71").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+</script>
+
+
+
+

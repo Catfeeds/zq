@@ -1,0 +1,39 @@
+/**
+ * 模态窗口登录css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-12-1
+**/
+
+/* 模态窗口 */
+@media (min-width: 768px){
+.modal-sm { width: 362px;}
+}
+.modal { margin-left: -215px;}
+.modal-header { margin-bottom: 8px; }
+.modal-header .close{ color: #10af63; opacity: 1;}
+.modal-header .close:hover{ color: #ccc; opacity: 1;}
+.modal-header h4{ color: #10af63;}
+.modal-body-jc{ padding: 20px 50px;}
+.modal-body form .mt{ margin-bottom: 15px;}
+.modal-body form .item-fore1 {z-index: 6;}
+.modal-body form .item-fore1, .form .item-fore2 { border: 1px solid #ddd; height: 35px; width: 100%;}
+.modal-body form .item { position: relative; margin-bottom: 10px; z-index: 1; width: 262px;}
+.modal-body form .item .name-label { background-position: 0 0;}
+.modal-body form .item .login-label { position: absolute; z-index: 3; top: 0; left: 0; width: 34px; height: 34px; border-right: 1px solid #ddd; background: url(../../images/login/user02.jpg) no-repeat;}
+.modal-body form .item .pwd-label{background: url(../../images/login/password014.jpg) no-repeat;}
+.modal-body form .itxt { height: 32px; border: 0; padding: 5px 0 5px 50px; width: 100%; outline: 0 none; float: none; overflow: hidden; font-size: 14px;}
+.modal-body form .remeber{ color: #8a8a8a;}
+.modal-body form .remeber label{ color: #8a8a8a;}
+.modal-body form .remeber a{ color: #8a8a8a;}
+.modal-body form .remeber a:hover{ color: #ff7e00;}
+.modal-body form .remeber input[type=checkbox]{ vertical-align: -2px;}
+.login-btn { margin-top: 10px;}
+.login-btn input[type=submit]{ width: 100%; font-size: 16px; border-radius: 3px;}
+.item.item-fore1.item-fore2{ margin-top: 25px; }
+.field-msg{ left: 1%; top: -49%;}
+
+.else_login{padding-top: 20px}
+.else_login img{padding-right: 5px}
+.else_login a{font-size: 12px; padding:0 6px 0 8px;color: #8a8a8a}
+.else_login a:hover{color: #ff7800}

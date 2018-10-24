@@ -1,0 +1,138 @@
+/**
+ * 支付css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-06-02
+ *
+**/
+
+body,html{ background: #f7f7f7;}
+
+/* face-infor */
+.user_infor { padding: .15rem .24rem; background: #fff; border-bottom: 1px solid #e5e5e5; margin-bottom: .15rem;}
+figcaption.head_infor{ margin-left: .2rem;}
+.user_infor figure .myHeadImg{display:inline-block; width: .9rem; height: .9rem; border-radius:50%; border: 2px solid #e5e5e5; background: #fff; margin-bottom: .05rem; position:relative;}
+.user_infor img{ width: 100%; min-height: 100%; border-radius:50%;}
+figcaption.head_infor p:nth-child(1){ margin-bottom: .1rem;}
+/* navtab */
+.n_module{ background: #fff; line-height: .8rem; height: .8rem;}
+.nav_num_2 { width: 100%; border-bottom: 1px solid #e5e5e5; padding: 0;}
+.nav_num_2 .nav-item{ display: block; position: relative; text-align: center; margin: 0; width: 50%; height: .8rem; font-size: .34rem;}
+.nav_list a.on{ border-bottom: 3px solid #01af63; color: #01af63;}
+
+.slide_content{ width: 100%; overflow: hidden; background-color: none; position: relative; width: 100%;}
+.tabslider{ width: 200%;  position: relative; overflow: hidden;}
+
+/* 充值选择 */
+.pay_con{ width: 50%; float: left; margin: 0px; position: relative;}
+.pay_con .price_list{ padding: .2rem; background: #f7f7f7;}
+.pay_con .price_list ul li{ float: left; margin: 0 1%; width: 31.333%; text-align: center; margin-bottom: .2rem; border-radius: 4px; overflow: hidden;}
+.pay_con .price_list li a{ display: block; border: 1px solid #e5e5e5; padding: .15rem 0; border-radius: 4px; background: #fff;}
+.pay_con .price_list li.active a{ background: #fff url(/Public/Mobile/images/icon/activity-icon.png) no-repeat top right; background-size: .56rem auto;}
+.pay_con .price_list ul li p:nth-child(1){ height: .45rem; line-height: .45rem; text-align: center; color: #f1c83a; margin-bottom: .1rem;}
+.pay_con .price_list ul li p:nth-child(1) em{ line-height: .45rem; text-align: center;}
+.pay_con .price_list ul li p:nth-child(1) img{ width: .44rem; margin-top: -.05rem;}
+.pay_con .price_list li.on a{ border-color: #ff7e00;}
+.pay_con .price_list li.on p:nth-child(2){ color: #ff7e00;}
+
+/* 其他价格充值选择 */
+.other_coin{ padding: .15rem .2rem; background: #fff; border: 1px solid #e5e5e5; border-radius: 5px; display: -webkit-box; display: -ms-flexbox; display: flex; position: relative;  justify-content: space-around; flex-justify-content: space-around;}
+.other_coin .item{ height: .5rem; line-height: .5rem; font-size: .32rem;}
+.other_coin .item-right{ text-align: left;}
+.other_coin .item-center{display: block; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; padding-left: .2rem; padding-right: .1rem;}
+.other_coin .item-center input{ width: 100%; text-align: right;}
+.other_coin .item input::input-placeholder{ text-align: right;}
+.other_coin .item input::-ms-input-placeholder{text-align: right;}
+.other_coin .item input::-webkit-input-placeholder{text-align: right;} 
+
+/* agreement */
+.agreeCheck { text-align: center; padding: .2rem;}
+.agreeCheck label{ padding-left: .4rem; background: url(/Public/Mobile/images/icon/on-check-icon.png) no-repeat left center; background-size: .3rem auto; cursor: pointer;}
+.agreeCheck label.default{ background: url(/Public/Mobile/images/icon/check-icon.png) no-repeat left center; background-size: .3rem auto;}
+.agreeCheck input[type=hidden]{ visibility: hidden; display: none; border: 1px solid #333;}
+.reminder{ padding: .2rem;}
+
+/* pay-type-radio */
+
+.form_Bill{ background: #fff; text-align: center; padding: .25rem}
+.form_Bill label{ display: inline-block; width: 32.5%; text-align: left; padding-left: .4rem; background: url(/Public/Mobile/images/icon/radio-icon.png) no-repeat left center; background-size: .3rem auto; cursor: pointer;}
+.form_Bill label.on{ background: url(/Public/Mobile/images/icon/on-radio-icon.png) no-repeat left center; background-size: .3rem auto; cursor: pointer;}
+.form_Bill label img{ width: auto; height: .48rem;}
+.form_Bill label input[type=radio]{ visibility: hidden; display: none;} */
+
+/* submit btn */
+.next_con{  padding: .2rem; width: 100%; background: #fff;}
+.next_con .submit{ width:100%; height: .9rem; border-radius: .05rem; cursor: pointer; outline: none; font-family: 'STHeiti','Microsoft YaHei',Helvetica,Arial,sans-serif; font-size: .3rem;}
+.next_con .submit:hover{ background: #ff9229;}
+.next_con a,.isseued_btn a{ display: block; height: 1rem; line-height: 1rem; text-align: center; border-radius: .05rem;}
+.isseued_btn{ height: 1.2rem; padding: 0 .2rem; width: 100%;}
+
+/* modal */
+.modal{ display: block; position: fixed;  top: 30%;  left: 50%; width: 90%; border-radius: 5px; margin-left: -45%; background-color: #fff;  z-index:1050;}
+.modal-header{ padding: .2rem;}
+.modal-header .modal-title{  text-align: center; font-size: .36rem; font-weight: normal; margin-bottom: 0;}
+.modal-header .close {
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+	font-size: .5rem;
+    -webkit-appearance: none;
+    float: right;
+    font-weight: bold;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+.modal-body{ padding: 0 .2rem;}
+.modal-body .price p{ padding-bottom: .1rem;}
+.modal-body .price p:nth-child(1) span{ color: #4c4c4c;}
+.modal-body .price p:nth-child(1) em{ font-size: .44rem; }
+.modal-body .price p:nth-child(2){ color: #ff9700;}
+.modal-body .priceInput { padding-bottom: .2rem; border-bottom: 1px solid #e5e5e5;}
+.modal-body .priceInput input[type="text"]{ border: 1px solid #e5e5e5; border-radius: 2px; padding: .1rem; margin-right: .1rem;}
+
+.form{ width: 100%;}
+.form_inline{ background: #fff; text-align: center; padding: .1rem; border-bottom: 1px solid #e5e5e5; border-top: 1px solid #e5e5e5;}
+.form_inline .label{ display: block; text-align: left; padding-left: .4rem; background: url(/Public/Mobile/images/icon/radio-icon.png) no-repeat left center; background-size: .3rem auto; cursor: pointer; margin-bottom: .2rem;}
+.form_inline .label.on{ background: url(/Public/Mobile/images/icon/on-radio-icon.png) no-repeat left center; background-size: .3rem auto; cursor: pointer;}
+.form_inline .label .goldColor{ color: #ff9700;}
+.form_inline .label .willOver{ padding: 2px 4px; background: #ff5b2b; color: #fff; border-radius: 2px;}
+.form_inline .label input[type=radio]{ visibility: hidden; display: none;}
+.pay_ul li{float: left; width: 33.333%;}
+.pay_ul li a{ display: block; color: #666666; text-align: center; padding: .2rem 0;}
+.pay_ul li a img{ width: 1.1rem;}
+
+.modal-backdrop,.modal-bgpay {
+	display: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1040;
+	background-color: #000000;
+	opacity: 0.5;
+	overflow-x: hidden;
+}
+
+.modal.fade {
+    top: -100%;
+    -webkit-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
+    transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
+}
+
+.fade{
+	opacity: 0;
+    -webkit-transition: opacity 0.15s linear;
+    -o-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;	
+}
+.modal.fade.in{ top: 30%; opacity: 1;}

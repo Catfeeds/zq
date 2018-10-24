@@ -1,0 +1,107 @@
+<div data-key="{$k}" game_status="{$item['info'][0]['game_status']}" class="list_teble" union_id="{$item['info'][0]['union_id']}" g_id="{$item['info'][0]['game_id']}" g_time="{$item['info'][0]['game_time']}" is_sport="{$item['info'][0]['is_sporttery']}" nba="<if condition="$item['info'][0]['union_name'][0] eq 'NBA'">1</if>">
+<table class="table table-bordered">
+    <thead>
+    <tr class="table-header" bgcolor="#e6e6eb">
+        <th width="30">选</th>
+        <th width="74">赛事</th>
+        <th width="46">时间</th>
+        <th width="50">状态</th>
+        <if condition="isset($status)"><th width="40">直播</th></if>
+        <th width="190">球队</th>
+        <th width="246">
+            <table width="100%">
+                <tr class="score_header">
+                    <volist name="item['head']" id="vo">
+                        <td width="25">{$vo}</td>
+                    </volist>
+                </tr>
+            </table>
+        </th>
+        <th width="60">半场</th>
+        <th width="60">全场</th>
+        <th width="60">分差</th>
+        <th width="60">总分</th>
+        <th width="50">欧赔</th>
+        <th width="80">让分盘</th>
+        <th width="94">大小分</th>
+        <td width="60">
+            <a href="javascript:;" class="tdBtn icon-default placeToTop"></a>
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="item['info']" id="vo" key="kk">
+        <tr class="gameList <if condition="$kk eq 1">home_tr<else/>away_tr</if>" bgcolor="#ffffff">
+            <if condition="$kk eq 1">
+                <td class="no-b-r" rowspan="2"><input class="gameId" type="checkbox" value="3"></td>
+                <td class="match-name no-b-r no-b-l" rowspan="2">
+                    <a href="javascript:;" style="background: {$vo['union_color']};">
+                        <span class="lang_cn">{$union[$vo['union_id']]['union_name'][3]|default=$vo['union_name'][0]}</span>
+                        <span class="lang_tw lang_css">{$union[$vo['union_id']]['union_name'][4]|default=$vo['union_name'][1]}</span>
+                        <span class="lang_en lang_css">{$union[$vo['union_id']]['union_name'][5]|default=$vo['union_name'][1]}</span>
+                    </a>
+                </td>
+                <td rowspan="2" class="no-b-r no-b-l">
+                    <div>{$vo['game_time']|date="m-d",###}</div>
+                    <div>{$vo['game_time']|date="H:i",###}</div>
+                </td>
+                <td rowspan="2" class="<if condition="$vo['game_status'] eq 0">text-999<else/>text-red</if> no-b-r no-b-l game_status">
+                    <div> {:C('game_state_bk')[$vo['game_status']]}</div>
+                    <div>{$vo.quarter_time}</div>
+                </td>
+                <if condition="isset($status)">
+                    <td rowspan="2" class="no-b-l">
+                        <a class="hint--top" data-hint="正在开发" target="_blank" href="javascript:;"><img src="__PUBLIC__/Home/bkscore/images/scoreLive/playing.png" width="24" height="24" alt=""></a>
+                    </td>
+                </if>
+            </if>
+
+            <td class="text-l <if condition="$kk eq 1">gameHomeName<else/>gameAwayName</if>">
+            <span class="lang_cn">{$vo['team_name'][0]} {$vo['team_rank']}</span>
+            <span class="lang_tw lang_css">{$vo['team_name'][1]} {$vo['team_rank']}</span>
+            <span class="lang_en lang_css">{$vo['team_name'][2]} {$vo['team_rank']}</span>
+            </td>
+            <td class="baskScoreTd">
+                <table width="100%" class="<if condition="$i eq 1">table</if> baskScore">
+                    <tbody>
+                    <tr class="score_info">
+                        <volist name="vo['score']" id="vv">
+                            <td width="25">{$vv}</td>
+                        </volist>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td class="half_score"><if condition="$item['info'][0]['game_status'] neq 0">{$vo['half']}</if></td>
+            <td class="all_court {$vo['res_col']|default='text-blue'} strong"> <if condition="$item['info'][0]['game_status'] neq 0">{$vo['all_court']} </if></td>
+            <td class="bk_match"> <if condition="$item['info'][0]['game_status'] neq 0">{$vo['bk_match']} </if></td>
+            <td class="all_match"> <if condition="$item['info'][0]['game_status'] neq 0">{$vo['all_match']}</if> </td>
+            <td class="no-b-r our_odds"><if condition="$vo['our'] neq 0.00">{$vo['our']}</if></td>
+            <td class="no-b-r oddss text-r rang_score"><span>{$rang[$vo['game_id']][$kk][0]}</span> <span class="text-red">{$rang[$vo['game_id']][$kk][1]}</span></td>
+            <td class="no-b-r oddss big_score"><if condition="$rang[$vo['game_id']][$kk][2] neq ''"><if condition="$kk eq 1">大<else/>小</if></if><span>{$rang[$vo['game_id']][$kk][2]}</span> <span class="text-red">{$rang[$vo['game_id']][$kk][3]}</span></td>
+            <if condition="$vo['game_time'] neq ''">
+                <td rowspan="2" class="data-a">
+                    <div class="dataLink">
+                        <a href="#" target="_blank" class="hint--top" data-hint="正在开发">亚</a>
+                        <a href="#" target="_blank" class="hint--top" data-hint="正在开发">欧</a>
+                        <a href="#" target="_blank"  class="hint--top" data-hint="正在开发">析</a>
+                        <if condition="$vo[49] eq 1">
+                            <a href="" class="text-bblue" target="_blank">猜</a>
+                            <else/><a href="javascript:;" class="text-red">&nbsp;&nbsp;&nbsp;</a>
+                        </if>
+                    </div>
+                </td>
+            </if>
+        </tr>
+    </volist>
+    </tbody>
+</table>
+
+<table class="table">
+    <tr bgcolor="#f2f2f7">
+        <td colspan="15" class="text-l no-b-t pl10">
+            <span class="eventText textlive">{$item.text}</span>
+        </td>
+    </tr>
+</table>
+</div>

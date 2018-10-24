@@ -1,0 +1,92 @@
+/**
+ * 数据公用头部css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2017-08-21 
+**/
+
+/* 对阵头部 */
+.home{ background: transparent;}
+.tongji{width: 1200px;margin:0 auto;}
+.gameHeadTop{ background: #fff; background: rgba(0,0,0,0.2); -ms-filter:"progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=#50000000,endColorstr=#50000000)";filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#50ffffff, endColorstr=#50ffffff); border-top-left-radius: 8px; border-top-right-radius: 8px; padding: 20px 0;}
+.t_core{width: 1128px; height: 248px; margin:0 auto; background: url(../../images/bkscore/scoreLive/lawn-bg.png) no-repeat 5px 20px;}
+.t_sele{width: 400px;margin: 0 auto;margin-top: 20px;}
+.t_sele ul li{height: 28px;background: #666666;padding: 0 25px; display: inline-block;float: left;line-height: 28px; }
+.t_sele ul li a{color: #fff;}
+.t_sele ul li.on{background: #fff;color: #333333;}
+.t_sele ul li.on a{color: #333333;}
+.t_sele ul .f_li{border-radius: 20px 0 0 20px;}
+.t_sele ul .l_li{border-radius: 0 20px 20px 0;}
+
+.t_show{background: #3f697e; border-top: 1px solid #dddddd; font-size: 20px; padding: 10px 0; color: #fff; text-align: center;}
+
+.team_name{width: 412px; height: auto; float: left; text-align: center;}
+.team_name.fl{ padding-right: 10px; text-align: right;}
+.team_name.fl .teamNameTxt{ padding-right: 10px; padding-top: 40px;}
+.team_name.fr .teamNameTxt{ padding-left: 10px; padding-top: 40px;}
+.team_name.fr{ padding-left: 10px; text-align: left;}
+.teamNameTxt p{ font-size: 24px; color: #fff; width: 240px; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.team_name img{ text-align: center; width: 138px; height: 138px;margin: 0 auto }
+.tc_main{float: left;width: 304px; text-align: center;}
+.tc_main .p1 span{ width: 60px; height: 24px; line-height: 24px; color: #fff; text-align: center; background: #4d7082; background: rgba(0,0,0,0.6); border-radius: 4px; margin-top: 18px;}
+.tc_main .p1 div{ width: 122px; font-size: 48px; color: #fff; padding: 0 20px;height: 60px;line-height: 60px;}
+.tc_main .p3{font-size: 18px; color: #ff0000;}
+.tc_main .p4{ width: 90px; height: 36px; line-height: 36px; border-radius: 4px; font-size: 16px; margin: 0 auto; color: #fff; margin-bottom: 10px; overflow: hidden;}
+.tc_main .p5{color: #fff;font-size: 18px;}
+.liveBtn { display: block; width: 96px; height: 32px; background: url(../../images/bkscore/scoreLive/live-btn.png) no-repeat 0 0; margin: 0 auto;}
+
+/* 篮球对阵头部 */
+.bGameHeadTop{ padding: 10px 0; background: rgba(0,0,0,0.4); -ms-filter:"progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=#50000000,endColorstr=#50000000)";filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#50ffffff, endColorstr=#50ffffff);}
+.b_core{ background: url(../../images/bkscore/scoreLive/baskLog-bg.png) no-repeat center 55px;}
+.b_core .tc_main{ width: 400px;}
+.b_core .tc_main .p4{ margin-bottom: 5px;}
+.b_core .tc_main .p2{ margin-bottom: 15px;}
+.b_core .tc_main .scoreBox{ border-radius: 5px; overflow: hidden; background: rgba(0,0,0,0.5); -ms-filter:"progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=#50000000,endColorstr=#50000000)";filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#50ffffff, endColorstr=#50ffffff); margin-bottom: 20px;}
+.b_core .tc_main .scoreBox .table{ margin-bottom: 0;}
+.b_core .team_name{ width: 364px; padding-top: 15px;}
+.b_core .homeLogo{ margin-left: 66px;}
+.b_core .awayLogo{ margin-right: 66px;}  
+.b_core .homeScore,.b_core .awayScore{ width: 150px; height: 138px; line-height: 220px; text-align: center; font-size: 60px; color: #fff;} 
+.b_core .team_name.fl .teamNameTxt,.b_core .team_name.fr .teamNameTxt{ padding-top: 10px;}
+.b_core .teamNameTxt p{ width: auto; text-align: center;}
+
+/* 公用tab栏 */
+.odd_nav{ background: #e6e6eb; padding: 0 60px;}
+.odd_nav ul li{ float: left; height: 40px; width: 150px; background: url(../../images/bkscore/scoreLive/slash-line.png) no-repeat right center;}
+.odd_nav.nav5 ul li{ width: 200px;}
+.odd_nav ul li.last-li{ background: none;}
+.odd_nav ul li a{ display: block; text-align: center; line-height: 40px; font-size: 18px; color: #666666;}
+.odd_nav ul li a:hover{ background: #fff; transform: skew(30deg); -webkit-transform: skew(30deg); -moz-transform: skew(30deg); -o-transform: skew(30deg);}
+.odd_nav ul li a:hover span{ display: inline-block; transform: skew(-30deg); -webkit-transform: skew(-30deg); -moz-transform: skew(-30deg); -o-transform: skew(-30deg);}
+.odd_nav ul li.on a{ background: #fff; transform: skew(30deg); -webkit-transform: skew(30deg); -moz-transform: skew(30deg); -o-transform: skew(30deg);}
+.odd_nav ul li.on a span{ display: inline-block; transform: skew(-30deg); -webkit-transform: skew(-30deg); -moz-transform: skew(-30deg); -o-transform: skew(-30deg);}
+
+
+.sign{width:52px; height:52px ;position:absolute; right: 20px; top: 20px;}
+.win{background: url(../../../images/common/icon-win.png) no-repeat center center;}
+.lose{background: url(../../../images/common/icon-lose.png) no-repeat center center;}
+.split{background: url(../../../images/common/icon-split.png) no-repeat center center;}
+
+.winhalf{background: url(../../../images/game_state/winhalf.png) no-repeat center center; }
+.losehalf{background: url(../../../images/game_state/losehalf.png) no-repeat center center; }
+.pending{background: url(../../../images/game_state/pending.png) no-repeat center center; }
+.putoff{background: url(../../../images/game_state/putoff.png) no-repeat center center; }
+.cancel{background: url(../../../images/game_state/cancel.png) no-repeat center center; }
+.interrupt{background: url(../../../images/game_state/interrupt.png) no-repeat center center; }
+.cut{background: url(../../../images/game_state/cut.png) no-repeat center center; }
+.flat{background: url(../../../images/game_state/flat.png) no-repeat center center; }
+
+/* 悬浮梯口 */
+.floatBox { width: 66px; position: fixed; top: 36.4%; left: 50%; margin-left: 633px; background: #fff; -webkit-box-shadow: 0 2px 6px 0 rgba(0,0,0,.1); box-shadow: 0 2px 6px 0 rgba(0,0,0,.1);}
+.floatBox .toolBox{ position: relative;}
+.floatBox .toolBox ul li { height: 30px; text-align: center; background: #3f697e; margin-bottom: 3px;}
+.floatBox .toolBox ul li:hover{ background: #2a627e;}
+.floatBox .toolBox ul li a { display: block; height: 30px; line-height: 30px; color: #fff; font-size: 12px;}
+.toolImg{ position: absolute; top: -36px; left: -21px; width: 108px; height: 50px; background: url(../../images/scoreLive/tool-top.png) no-repeat center center;}
+
+
+
+
+
+
+

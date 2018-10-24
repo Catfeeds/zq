@@ -1,0 +1,138 @@
+<style>
+	.table-config tr{
+		height: 35px;
+	}
+	.table-config td{
+		text-align: center;
+		padding-right: 10px;
+	}
+</style>
+<div class="pageContent">
+	<form method="post" action="__URL__/saveConfig" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$_REQUEST.gameType}" name="gameType">
+			<div class="unit">
+				<label>时间规则设置</label>
+				<table class="table-config" style="float: left;">
+					<tr>
+						<td>时间段</td>
+						<td>发布数量</td>
+					</tr>
+					<tr>
+						<td>1点</td>
+						<td><input type="text" size="5" name="config[1]" value="{$config[1]}"></td>
+					</tr>
+					<tr>
+						<td>2点</td>
+						<td><input type="text" size="5" name="config[2]" value="{$config[2]}"></td>
+					</tr>
+					<tr>
+						<td>3点</td>
+						<td><input type="text" size="5" name="config[3]" value="{$config[3]}"></td>
+					</tr>
+					<tr>
+						<td>4点</td>
+						<td><input type="text" size="5" name="config[4]" value="{$config[4]}"></td>
+					</tr>
+					<tr>
+						<td>5点</td>
+						<td><input type="text" size="5" name="config[5]" value="{$config[5]}"></td>
+					</tr>
+					<tr>
+						<td>6点</td>
+						<td><input type="text" size="5" name="config[6]" value="{$config[6]}"></td>
+					</tr>
+					<tr>
+						<td>7点</td>
+						<td><input type="text" size="5" name="config[7]" value="{$config[7]}"></td>
+					</tr>
+					<tr>
+						<td>8点</td>
+						<td><input type="text" size="5" name="config[8]" value="{$config[8]}"></td>
+					</tr>
+					<tr>
+						<td>9点</td>
+						<td><input type="text" size="5" name="config[9]" value="{$config[9]}"></td>
+					</tr>
+					<tr>
+						<td>10点</td>
+						<td><input type="text" size="5" name="config[10]" value="{$config[10]}"></td>
+					</tr>
+					<tr>
+						<td>11点</td>
+						<td><input type="text" size="5" name="config[11]" value="{$config[11]}"></td>
+					</tr>
+					<tr>
+						<td>12点</td>
+						<td><input type="text" size="5" name="config[12]" value="{$config[12]}"></td>
+					</tr>
+				</table>
+				<table class="table-config" style="float: right;margin-right: 120px;">
+					<tr>
+						<td>时间段</td>
+						<td>发布数量</td>
+					</tr>
+					<tr>
+						<td>13点</td>
+						<td><input type="text" size="5" name="config[13]" value="{$config[13]}"></td>
+					</tr>
+					<tr>
+						<td>14点</td>
+						<td><input type="text" size="5" name="config[14]" value="{$config[14]}"></td>
+					</tr>
+					<tr>
+						<td>15点</td>
+						<td><input type="text" size="5" name="config[15]" value="{$config[15]}"></td>
+					</tr>
+					<tr>
+						<td>16点</td>
+						<td><input type="text" size="5" name="config[16]" value="{$config[16]}"></td>
+					</tr>
+					<tr>
+						<td>17点</td>
+						<td><input type="text" size="5" name="config[17]" value="{$config[17]}"></td>
+					</tr>
+					<tr>
+						<td>18点</td>
+						<td><input type="text" size="5" name="config[18]" value="{$config[18]}"></td>
+					</tr>
+					<tr>
+						<td>19点</td>
+						<td><input type="text" size="5" name="config[19]" value="{$config[19]}"></td>
+					</tr>
+					<tr>
+						<td>20点</td>
+						<td><input type="text" size="5" name="config[20]" value="{$config[20]}"></td>
+					</tr>
+					<tr>
+						<td>21点</td>
+						<td><input type="text" size="5" name="config[21]" value="{$config[21]}"></td>
+					</tr>
+					<tr>
+						<td>22点</td>
+						<td><input type="text" size="5" name="config[22]" value="{$config[22]}"></td>
+					</tr>
+					<tr>
+						<td>23点</td>
+						<td><input type="text" size="5" name="config[23]" value="{$config[23]}"></td>
+					</tr>
+					<tr>
+						<td>0点</td>
+						<td><input type="text" size="5" name="config[0]" value="{$config[0]}"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+
+
+

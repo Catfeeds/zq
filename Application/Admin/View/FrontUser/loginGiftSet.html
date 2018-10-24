@@ -1,0 +1,61 @@
+<include file="Public:pagerForm" />
+<style>
+  .vali{
+    position: relative;
+  }
+  .vali .field-msg{
+    top: -0px;
+    left: 470px;
+  }
+</style>
+<form action="__URL__/loginGiftSet" method="post" class="pageForm required-validate" onsubmit="return iframeCallback(this)">
+<div style="margin:40px 0px 0px 100px;">
+            <div class="vali" style="margin-bottom:20px;">
+              <h3>注册赠送相关：</h3>
+            </div>
+            <div class="vali">
+              <label>开启状态：</label>
+              <select class="small bLeft"  name="is_on">
+                <option <eq name="config['is_on']" value="1" >selected</eq> value="1">启用</option>
+                <option <eq name="config['is_on']" value="0" >selected</eq> value="0">禁用</option>
+              </select>
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 0px;">
+              <label>开启时间：</label>
+              <input type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm:00" class="date textInput readonly valid" value="{$config['begin']|date='Y-m-d H:i:s',###}" name="begin" size="20">
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 0px;">
+              <label>结束时间：</label>
+              <input type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm:00" class="date textInput readonly valid" value="{$config['end']|date='Y-m-d H:i:s',###}" name="end" size="20">
+            </div>
+            <div class="vali">
+              <label>金币类型：</label>
+              <select class="small bLeft"  name="coinType">
+                <option <eq name="config['coinType']" value="1" >selected</eq> value="1">可提</option>
+                <option <eq name="config['coinType']" value="0" >selected</eq> value="0">不可提</option>
+              </select>
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 0px;">
+              <label>赠送金币：</label>
+              <input type="text" name="giftCoin" class="digits" value="{$config['giftCoin']}" >
+            </div>
+
+
+            <div class="vali" style="margin-top:20px;">
+              <h3>同ip同设备注册限制：</h3>
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 0px;">
+              <label>注册时间间隔：</label>
+              <input type="text" name="reg_limit_time" class="digits" value="{$config['reg_limit_time']}" > 分钟
+            </div>
+            <div class="vali" style="margin:20px 20px 20px 0px;">
+              <label>每小时次数限制：</label>
+              <input type="text" name="reg_limit_count" class="digits" value="{$config['reg_limit_count']}" >
+            </div>
+        <div class="subBar">
+            <ul>
+                <li style="margin:40px 40px 40px 60px;"><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+</form>

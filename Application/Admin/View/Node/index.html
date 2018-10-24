@@ -1,0 +1,98 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/index" method="post">
+
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>
+            	<label>所属分组：</label>
+            	<select name="group_id" class="combox" onchange="$(form).submit()">
+            		<option value="" selected>全部</option>
+            		<volist name="groupArr" id="item">
+            			<option value="{$item.id}" <eq name="item.id" value="$_REQUEST.group_id">selected</eq> >{$item.title}</option>
+            		</volist>
+            	</select>
+            </li>
+            <li>
+                <label>节点名称：</label>
+                <input type="text" name="node_name" value="{$_REQUEST.node_name}">
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a><span>分组数量：{$groupNum}</span></a></li>
+            <li><a><span>节点数量：{$nodeNum}</span></a></li>
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="10%">分组</th>
+            <th width="10%">节点名称</th>
+            <th width="10%">节点路径</th>
+            <th width="5%">排序</th>
+            <th width="15%">描述</th>
+            <th width="5%">状态</th>
+            <th width="10%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name="list">
+            <volist id="vo" name="list">
+                <tr target="sid_record" rel="{$vo['id']}" >
+                    <td style="text-align: center;">{$vo['title']}</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a style="color: blue" href="__URL__/add/group_id/{$vo['id']}" target="dialog">添加节点</a></td>
+                </tr>
+                <volist id="nn" name="vo.node">
+                    <tr>
+                        <td style="text-align: right;">|_ _ _ _ _ _ _ _ _ _ _</td>
+                        <td style="text-align: center;">{$nn['title']}</td>
+                        <td>{$nn['name']}</td>
+                        <td>{$nn['sort']}</td>
+                        <td>{$nn['remark']}</td>
+                        <td>{$nn['status']|getStatus}</td>
+                        <td>
+                        	{$nn['status']|showStatus=$nn['id'],'navTabAjaxGroupMenu',"__URL__",'__DWZ__'} | 
+                        	<a class="delete" href="__URL__/foreverdelete/id/{$nn['id']}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择用户"><span>删除</span></a> |  
+                        	<a href="__URL__/edit/id/{$nn['id']}" target="dialog">编辑</a>
+                        </td>
+                    </tr>
+                </volist>
+            </volist>
+        </notempty>
+        </tbody>
+    </table>
+</div>
+<script>
+    //隐藏和显示对应题目的选项
+    function show(id,obj){
+        var show = $(obj).attr("show");
+        if(show == 0){
+            $(".action-"+id).show();
+        }else{
+            $(".action-"+id).hide();
+        }
+        //记录是否已展开
+        var new_show = show == 0 ? 1 : 0;
+        $(obj).attr("show",new_show);
+    }
+</script>
+
+

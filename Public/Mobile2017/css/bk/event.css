@@ -1,0 +1,147 @@
+/*========================事件页面========================*/
+.table tr th,.table tr td,.tb_history tr td{padding-top: .1rem!important}
+/*小导航*/
+.odd_nav{width: 5.5rem; height: auto; margin: 0 auto;padding:.2rem .15rem;position: relative;z-index: 999}
+.odd_nav ul li{border:1px solid #01af63;float: left;width: 1.72rem;height:100%;text-align: center;border-right:0; }
+.odd_nav ul li:first-child{border-radius:.05rem 0  0 .05rem;}
+.odd_nav ul li:last-child{border-right:1px solid #01af63;border-radius:0 .05rem .05rem 0;}
+.odd_nav ul li a{color: #999999;width: 100%;display: block;height: .56rem;line-height: .6rem;}
+.odd_nav ul li.on{background: #01af63;}
+.odd_nav ul li.on a{background: #01af63;color: #fff}
+
+/*--------------------战报--------------------*/
+.live_event_news {
+	border-top: 1px solid #ddd;
+	padding:.2rem;
+    clear: both;
+    text-align: justify;
+    font-size: .34rem;
+    line-height: 180%;
+    overflow: hidden;
+}
+.live_event_news img {
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    width: 100%;
+}
+
+/*--------------------赛况--------------------*/
+.live_event_game{border-top: 1px solid #ddd}
+.game_title{height: .6rem;line-height: .65rem;padding: 0 .2rem; font-size: .28rem;background: #f1f3f4}
+.tb_scroe{width: 100%}
+.tb_scroe tr th,.tb_scroe tr td{height: .6rem}
+.tb_scroe tr th:first-child{border-right:1px solid #fff;}
+.tb_scroe tr th{background: #01af63;font-size: .28rem;font-weight: normal;color: #fff;}
+.tb_scroe tr td{text-align: center;border-right:1px solid #ddd;border-bottom:1px solid #ddd;}
+.tb_scroe tr th:last-child,.tb_scroe tr td:last-child{border-right: 0}
+
+/*文字直播*/
+.live_word tr td{padding: .15rem 0;}
+.live_word tr td:nth-child(2){text-align: left!important;}
+.live_word tr td img{height: .32rem;width: auto;}
+
+.itemImgList {
+    background: #f7f7f7;
+    border-top: 1px solid #e5e5e5;
+}
+.imgList {
+    height: .32rem;
+    line-height: .32rem;
+}
+.evenImg img, .imgList img {
+    height: .32rem;
+    width: auto;
+    margin-top: 0;
+}
+.imgList img {
+    vertical-align: middle!important;
+    margin-top: -3px;
+}
+.itemImgList table tr td {
+    padding: .2rem 0;
+}
+.itemImgList table tr td img{padding-right: .1rem}
+
+
+/*--------------------技术--------------------*/
+.tb_tec tr:nth-child(2n+1){background: #f1f3f4}
+.tb_tec{width:70%;display: inline;white-space: nowrap;overflow-x:scroll;float:left;overflow-y:hidden;float: left}
+.tb_tec tr th{display:inline-block;width:40%;padding:0 .2rem;}
+.tb_tec tr td:first-child{padding: 0 .2rem}
+.tb_tec tr th:first-child {border-right: 0;}
+/*球员*/
+.player{width: 30%;float: left;}
+.player table tr td{border-right: 1px solid #ddd!important}
+.player table tr:nth-child(2n+1){background: #f1f3f4}
+.player table tr th:first-child {border-right: 1px solid #fff;}
+/*球队统计*/
+.tb_team_count tr td{height: .6rem; border-bottom: 1px solid #ddd}
+.tb_team_count tr td:nth-child(2){background: #01af63; border-bottom: 0;color: #fff;width: 30%}
+/*--------------------阵容--------------------*/
+.compare-data{ padding: .2rem 0; font-size: .26rem;}
+.compare-data td{ padding: .1rem;border-bottom: 1px solid #ddd}
+.player_con em{ width: .6rem; line-height: .6rem; display: block; text-align: center; color: #1490d8; font-size: .24rem; background: url(../../images/live/num_black.png) no-repeat  left center; background-size: contain;}
+.player_con .name{line-height: .35rem  }
+.player_con .num_red{ background: url(../../images/live/num_red.png) no-repeat  left center; background-size: contain; color: #fff;}
+.player_con .headImg{ width: .6rem; height: .6rem; border-radius: 50%; overflow: hidden; text-align: center; background: #ffffff;}
+.player_con .headImg img{ width: 100%; border-radius: 50%;}
+.alignRight .even {
+    margin-right: .2rem;
+}
+.compare-data table tr td:nth-child(2) .player_con .name div{text-align: right;}
+
+.gt_zhenr{border-top: 1px solid #ddd;}
+
+
+/*========================数据========================*/
+/*标题*/
+.d_title{ width: 100%;height: .9rem;line-height: .9rem; background-color: #ebebec;border-top: 1px solid #dddddd;padding:0 .2rem; font-size: .3rem; position: relative; }
+.d_title span{float: left;height: .89rem; font-size: .28rem;font-weight: bold;}
+.d_title a{
+    float: right;
+    height: .89rem;
+    min-width: 3rem;
+    display: block;
+    text-align: right;
+}
+.d_title a img{width: .48rem; height: .48rem}
+/*球队logo*/
+.teamname{width: 100%; height: .7rem;line-height: .7rem;padding:0 .2rem;font-size: .24rem;float: left;font-weight: bold;}
+.teamname img{vertical-align: middle;padding-right: .13rem;width:.48rem;height:auto;margin-top: -.05rem }
+
+ /*近期交战 and 历史交战 and... */
+.tb_history{width: 100%;text-align: left; }
+.tb_history tr th{color: #cb945c;font-size: .26rem; height: .6rem;background: #ffefe0;text-align: center;}
+.tb_history tr td{height: .8rem;text-align: center;} 
+.tb_history tr td:first-child{width: 1.4rem;text-align: center;}
+.tb_history2 tr td:first-child{width: 1.7rem;}
+.tb_history tr td:first-child p{color:#666;}
+.tb_history tr:nth-child(2n+1){background-color: #f2f2f2}
+.tb_history tr td{} 
+.tb_history tr td .sc{color: #999999}
+/*.tb_history tr:last-child td{border-bottom: 0}*/
+
+.tb_history tr:last-child td{border-bottom:.1rem solid #f7f7f7 }
+.tb_history:last-child tr:last-child td{border-bottom: 0}
+.tb_history tr td span{padding-right: .1rem}
+
+.tb_yuce th{font-weight: normal;}
+.tb_yuce th a{color: #cb945c!important}
+
+.tb_tuij tr td{text-align: left!important;padding-left: .2rem}
+
+.d_title em{padding: .1rem .25rem; background: #fafafa;margin-left: .2rem;border-radius: 1rem;font-size: .24rem;-webkit-box-shadow: 2px 2px 2px #dfdfe0; }
+.d_title em.on{background: #01af63;color: #fff }
+.d_title:first-child{border-top: 0}
+
+.s_title{padding: .2rem;padding-bottom: 0; }
+.s_title h4{
+    font-size: 22px;
+    color: #000;
+    font-weight: normal;
+    border-left: 5px solid #01af63;
+    line-height: 22px;
+    padding-left: 10px;
+}
+.hot_game{min-height: 1rem;border-bottom:1px solid #ddd;}

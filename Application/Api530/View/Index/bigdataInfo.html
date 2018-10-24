@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+      <meta charset="UTF-8">
+      <title>冷热交易说明</title>
+      <!-- jquery -->
+        <script type="text/javascript" src="__PUBLIC__/Api/js/jquery-1.11.1.min.js"></script>
+
+      <!-- 引入公共样式 -->
+        <link rel="shortcut icon" href="__PUBLIC__/Api/expert/favicon.ico"/>
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/css/common/base.css">
+        <link rel="stylesheet" href="__PUBLIC__/Api/css/common/common.css">
+      <!-- 自适应 计算html font-size -->
+        <script type="text/javascript" src="__PUBLIC__/Api/js/htmlwidth.js"></script>
+        <!-- 公共js --> 
+      
+        <!-- 本页需要引用的css --> 
+        <link rel="stylesheet" href="__PUBLIC__/Api/css/pub.css">
+    </head>
+
+    <body>
+       
+        <div class="container">
+
+            <dl>
+                <dt class="fs32">{$data.name}说明</dt>
+                <volist name="data.description" id="item">
+                    <dd>{$item}</dd>
+                </volist>
+            </dl>
+
+            <dl>
+                <dt class="fs30">风险提示</dt>
+                <dd>本产品所提供的数据内容仅供浏览和参考</dd>
+            </dl>
+            <div class="figure">
+                <switch name="data.sign" >
+                    <case value="lengRe"><img src="__PUBLIC__/Api/pub/images/figure1.png" alt="冷热交易" /></case>
+                    <case value="jiXian"><img src="__PUBLIC__/Api/pub/images/figure2.png" alt="每日极限" /></case>
+                    <case value="yingPan"><img src="__PUBLIC__/Api/pub/images/figure3.png" alt="赢盘对抗" /></case>
+                    <case value="jingCai"><img src="__PUBLIC__/Api/pub/images/figure4.png" alt="欧指差异" /></case>
+                    <default />
+                </switch>
+            </div>
+        </div>
+        
+    </body>
+</html>

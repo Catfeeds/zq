@@ -1,0 +1,27 @@
+/**
+ * 模态窗口登录css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-12-1
+**/
+
+/* 模态窗口 */
+@media (min-width: 768px){
+.modal-sm { width: 362px;}
+}
+.modal { margin-left: -215px;}
+.modal-header .close{ color: #10af63; opacity: 1;}
+.modal-header .close:hover{ color: #ccc; opacity: 1;}
+.modal-header h4{ color: #10af63;}
+.modal-body{ padding: 20px 50px;}
+.modal-body .title{ height: 32px; line-height: 32px; padding-left: 40px; background: url(../../images/quiz_hall/notice-icon.png) no-repeat; font-size: 16px; color: #8a8a8a;}
+.modal-body .ob{ text-align: center; font-size: 16px; margin: 10px 0;}
+.modal-body .ob span{ margin: 0 10px;}
+.modal-body .radio-con{ text-align: center;}
+.modal-body .radio-con label{ margin: 0 auto; color: #8a8a8a;}
+.modal-body .radio-con .selet-m{ margin-left: 10px;}
+.modal-body .radio-con input{ vertical-align: -2px;}
+.modal-body .btn-con{  text-align: center; margin-top: 15px;}
+.modal-body .btn-con button{ width: 100px; border-radius: 3px;}
+.login-btn { margin-top: 10px;}
+.login-btn input[type=submit]{ width: 100%; font-size: 16px; border-radius: 3px;}

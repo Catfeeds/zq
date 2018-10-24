@@ -1,0 +1,173 @@
+<extend name="Public/Olympic/base" />
+<block name="seo">
+    <title>{$data.title}_全球体育网</title>
+</block>
+<block name="append">
+            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Mobile/css/news.css">
+</block>
+<block name="header"></block>
+     <!-- 二级头部 s -->
+         <block name="nav">
+    <header id="other_header">
+      <a href="{:U('Olympic/index')}"></a>{$data.name} 
+    </header>
+              	<style type="text/css">
+		/* 弹出层 */
+		.modal{  display: none;  position: fixed;  top: 30%;  left: 50%; width: 72%; margin-left: -36%; background-color: #fff;  z-index:1050;}
+		.modal-header{ padding: .2rem;}
+		.modal-header .modal-title{ line-height: .5rem; text-align: center; font-size: .36rem; font-weight: normal;}
+		.modal_ul{ padding: .3rem; border-bottom: 1px solid #e5e5e5; border-top: 1px solid #e5e5e5;}
+		.modal_ul li{ float: left; width: 33.3%; margin-bottom: .1rem; color: #666; font-size: .26rem;}
+		.modal-footer{ padding: .2rem;}
+		.modal-footer a{ padding: .1rem .2rem;}
+		.modal-footer a:hover{ color: #fff;}
+		.modal-footer a:nth-child(2){ margin-right: .2rem;}
+		.modal-backdrop {
+			display: none; 
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1040;
+			background-color: #000000;
+			opacity: 0.5;
+			overflow-x: hidden;
+		}
+    </style>
+         </block>
+    <!-- 二级头部 e --> 
+
+
+
+
+
+<block name="content">
+     <section class="art_main boxs">
+        <!-- 标题 start-->
+      <section class="art_title">
+      <h1>{$data.title}</h1>
+      <time datetime="{$data.add_time|date='Y-m-d',###}">{$data.add_time|date='Y/m/d H:i:s',###} {$data.source}</time>
+    </section>
+    <!-- 标题 end-->
+
+    <!-- 文章内容 start -->
+    <article class="article_main">
+           {$data.content|htmlspecialchars_decode}
+     </article>
+       <!-- 文章内容end -->
+<input type="hidden" id="publish_id" value="{$publish_id}" />
+<input type="hidden" id="user_id" value="{$user_id}" />
+       <!-- 相关 start -->
+      <section class="about_link" style="display:block">
+         <div class="about_l fl">相关:</div>
+         <div class="about_r fl">
+             <volist name="lable" id="v">
+             <a href="javascript:;">{$v}</a>
+             </volist>
+         </div>
+       </section>
+        <!-- 相关 end -->
+      </section>
+
+       <section class="art_main2">
+        <section class="art_main3">
+      <!-- 热门评论 strat -->
+      <section class="article_hotcmnt">
+        <aside class="cmmt_title">热门评论</aside>
+
+<div id="content_box">
+    <volist name="commlist" id="v">
+        <div class="comment_box clearfix" data-id="{$v.id}" >
+           <div class="head">
+            <img src="{$v.head}" alt="{$v.nick_name}">
+           </div>
+           <div class="comment_wrap">
+             <aside class="c_reply"><a href="javascript:;"><img src="__IMAGES__/Olympic/rp.png" alt="更多"></a></aside>
+             <div class="huifu"><a href="javascript:;"></a><a href="javascript:;"></a></div>
+             <p><span class='nick_name'>{$v.nick_name}</span><a class="js-like <eq name='v.is_like' value='1'>on</eq>" href="javascript:;">(<em>{$v.like_num}</em>)</a></p>
+            <time>{$v.create_time}</time>
+            <article>{$v.filter_content}</article>
+            <div class='reply_box'>
+            <volist name="v.children" id="vv" >
+                <if condition="$vv.status eq 1">
+            <article class="reply reply02" data-name="{$vv.nick_name}" data-pid="{$vv.id}">
+              <div class="huifu02"><a href="javascript:;"></a><a href="javascript:;"></a></div>
+              <em>{$vv.nick_name} 回复 {$vv.by_username}：</em>{$vv.filter_content}
+            </article>
+            <else/>
+            <article class="reply">该条评论已被管理员屏蔽</article>
+                </if>
+            </volist>
+            </div>
+           </div>
+        </div>
+    </volist>
+</div>
+
+          <div class="view_more">
+            <a id='js-loadmore' href="javascript:;">查看更多评论</a>
+            <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已经全部加载完毕</a>
+          </div>
+
+          <!-- 评论输入 -->
+          <div class="pl_main">
+             <textarea type="text" placeholder="评论资讯" id="txt_pl" data-pid="0" maxlength="255"></textarea>
+             <div class="submit"><input type="submit" value=""  style="background: none;width: .7rem;height: .7rem"></div>
+          </div>
+ 
+          <!-- 评论输入 -->
+           
+
+            <div id="app-bar" class="app-bar">
+            <div class="app-logo"><img src="__IMAGES__/app-logo.png"></div>
+            <div class="app-title">
+                <p class="p1">全球体育APP</p>
+                <p class="p2">最专业的体育宝典！</p>
+            </div>
+             <a class="app-btn" id="load_btn">立即下载</a>
+        </div>
+      </section>
+      <!-- 热门评论 end --> 
+
+</section>
+   </section>
+    <div class="bubbleTips"></div>
+        <!-- 模态窗口开始 -->
+    <div id="show" class="modal" >
+    	<div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">请选择举报的原因</h4>
+            </div>
+            <div class="modal-body">
+            	<ul class="modal_ul clearfix">
+            		<li><input name="report_content" id="content1" type="radio" value="1"><label for="content1">反动言论</label></li>
+                    <li><input name="report_content" id="content2" type="radio" value="2"><label for="content2">淫秽色情</label></li>
+                    <li><input name="report_content" id="content3" type="radio" value="3"><label for="content3">虚假中奖</label></li>
+                    <li><input name="report_content" id="content4" type="radio" value="4"><label for="content4">广告营销</label></li>
+                    <li><input name="report_content" id="content5" type="radio" value="5"><label for="content5">人身攻击</label></li>
+                    <li><input name="report_content" id="content6" type="radio" value="6"><label for="content6">其他</label></li>
+            	</ul>
+            </div>
+            <div class="modal-footer clearfix">
+                <a id="report-submit" class="btn btn-green fr report_submit" href="javascript:void(0)" >提交</a>
+                <a id="modal-close" class="btn btn-default fr" href="javascript:void(0)" >取消</a>
+            </div>
+        </div>
+    </div>     
+    <div id="bg" class="modal-backdrop" style="z-index: 1040;"></div>
+</block>
+
+
+ 
+
+    <!-- 金牌快讯 Swiper JS --> 
+    <block name="scripts">
+        <script type="text/javascript" src="__PUBLIC__/Api/Home/picDetail/js/panDuan.js"></script>
+    <script src="__JS__/Olympic/swiper_banner.js"></script>   
+    <script src="__JS__/Olympic/news_detail.js"></script>
+    <!-- 公共js -->
+    <script type="text/javascript" src="__JS__/Olympic/common.js"></script>
+    </block>

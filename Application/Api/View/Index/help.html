@@ -1,0 +1,276 @@
+<include file="header"/>
+
+<body>
+    <!-- 页面需要引进的css文件 -->
+    <link href="__PUBLIC__/Api/css/quiz_king.css?d=20180727" rel="stylesheet" type="text/css">
+    <style>
+    .li_pl{padding-left: 1.8rem;}
+    .li_pl_2{padding-left: 5.2rem;}
+    </style>
+    <div class="section-con">
+        <div class="section">
+            <div class="bg-default title">
+                <h1>推荐怎么玩?</h1>
+            </div>
+            <div class="title-con">
+                <ul>
+                    <li>1、注册成功后，即可免费参与推荐；</li>
+                    <li>2、足球亚盘：<span>周一至周五</span>每天可推荐<span>5场</span>，<span>周六至周日</span>每天可推荐<span>10场</span></li>
+                    <li>3、足球竞彩：<span>周一至周五</span>每天可推荐<span>5场</span>，<span>周六至周日</span>每天可推荐<span>10场</span></li>
+                    <li>4、篮球亚盘：<span>周一至周五</span>每天可推荐<span>5场</span>，<span>周六至周日</span>每天可推荐<span>10场</span>  </li>
+                </ul>
+            </div>
+        </div>
+        <div class="section">
+            <div class="bg-default title">
+                <h1>如何获取积分?</h1>
+            </div>
+            <div class="title-con">
+                <ul>
+                    <li>1、推荐时系统自动提供100积分进行推荐，不会扣除原账户积分</li>
+                    <li class="li_pl">足球亚盘：赢 = 推荐指数 * 投注积分；赢半 = (推荐指数*积分)/2；</li> 
+                    <li class="li_pl">足球竞彩：赢 = (推荐指数-1) * 投注积分；</li>
+                    <li class="li_pl">篮球亚盘：赢 = 推荐指数 * 投注积分；</li>
+                    <li class="li_pl">输、输半、平都不扣积分；</li>
+                    <li>2、玩推荐时填写分析、分享推荐均可获得对应积分</li>
+                    <li>3、坚持每日签到，完成宝箱任务，解锁我的成就都可获得丰富积分</li>
+                </ul>
+            </div>
+        </div>
+        <div class="section">
+            <div class="bg-default title">
+                <h1>如何获取Q币？</h1>
+            </div>
+            <div class="title-con">
+                <ul>
+                    <li>1、积分兑换Q币；</li>
+                    <li>2、推荐周榜和月榜排名前10名,奖励Q币；</li>
+                    <li>3、充值购买Q币</li>
+                </ul>
+            </div>
+        </div>
+        <div class="section">
+            <div class="bg-default title">
+                <h1>积分、Q币有什么用？</h1>
+            </div>
+            <div class="title-con">
+                <ul>
+                    <li>积分达到5000可兑换Q币(1000积分=1Q币)，Q币可购买其他会员发布的推荐内容或提现</li>
+                </ul>
+            </div>
+        </div>
+        <div class="section">
+            <div class="bg-default title">
+                <h1>如何获取销售提成?</h1>
+            </div>
+            <div class="title-con">
+                <ul>
+                    <li>发布推荐内容被其他会员购买后，可获得分成</li>
+                    <li class="text-red">严禁注册多个ID推荐，若发现作弊等情况，将取消获奖资格；本推荐最终解释权归<if condition="$pkg eq 'master'">彩票推荐大师<else />全球体育</if>所有。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="bg-default title">
+            <h1>等级划分规则和推荐定价</h1>
+        </div>
+        <div class="title-con">
+            <ul>
+                <li>1、足球亚盘胜率 = [ 赢的场次 + 赢半的场次 ] / [ 赢的场次 + 赢半的场次 + 输的场次 + 输半的场次 ] * 100%</li>
+                <li>2、竞彩胜率 = 赢 / [ 赢 + 输 ] * 100%</li> 
+                <li>3、根据玩法，等级和价格分开计算。</li>
+                <li>4、升级规律，从推荐第一场赛事算起，一周为一个周期，每达到升级条件则升级成功；</li>
+                <li>5、降级规律，维持条件则保持等级，不满足条件则降一级，一下一级胜率及场次为标准进行处理；</li>
+            </ul>
+        </div>
+        <div class="table-con rank-divide">
+            <table class="table table-bordered" width="100%">
+                <thead>
+                    <tr>
+                        <td width="15%">等级</td>
+                        <td width="15%">玩法</td>
+                        <td width="">升级条件</td>
+                        <td width="15%">定价</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="imgIcon"><img src="__PUBLIC__/Api/images/icon/ic_lv0@2x.png" alt=""></td>
+                        
+                        <td class="text-font">足球</br>篮球</td>
+                        <td class="text-two-font">新用户注册</td>
+                        <td><span>0</span><i>Q币</i></td>
+                    </tr>
+                    <tr>
+                        <td class="imgIcon"><img src="__PUBLIC__/Api/images/icon/ic_lv1@2x.png" alt=""></td>
+                        
+                        <td class="text-font">足球</br>篮球</td>
+                        <td class="text-two-font">发布<span>10场</span> 以上推荐
+                        </br>胜率 <span>50% </span>以上</td>
+                        <td><span>2</span><i>Q币</i></td>
+                    </tr>
+                    <tr>
+                        <td class="imgIcon"><img src="__PUBLIC__/Api/images/icon/ic_lv2@2x.png" alt=""></td>
+                        <td class="text-font">足球</br>篮球</td>
+                        <td class="text-two-font">发布 <span>10场</span> 以上推荐
+                        </br>胜率 <span>55% </span>以上</td>
+                        <td><span>4</span><i>Q币</i></td>
+                    </tr>
+                    <tr>
+                        <td class="imgIcon"><img src="__PUBLIC__/Api/images/icon/ic_lv3@2x.png" alt=""></td>
+                        
+                        <td class="text-font">足球</br>篮球</td>
+                        <td class="text-two-font">发布 <span>10场</span> 以上推荐
+                        </br>胜率 <span>60%</span> 以上</td>
+                        <td><span>8</span><i>Q币</i></td>
+                    </tr>
+                    <tr>
+                        <td class="imgIcon"><img src="__PUBLIC__/Api/images/icon/ic_lv4@2x.png" alt=""></td>
+                        
+                        <td class="text-font">足球</br>篮球</td>
+                        <td class="text-two-font">发布 <span>15场</span> 以上推荐
+                        </br>胜率 <span>60%</span> 以上</td>
+                        <td><span>18</span><i>Q币</i></td>
+                    </tr>
+                    <tr>
+                        <td class="imgIcon"><img src="__PUBLIC__/Api/images/icon/ic_lv5@2x.png" alt=""></td>
+                       
+                        <td class="text-font">足球</br>篮球</td>
+                        <td class="text-two-font">发布 <span>15场</span> 以上推荐
+                        </br>胜率 <span>65%</span> 以上</td>
+                        <td><span>28</span><i>Q币</i></td>
+                    </tr>
+                    <tr>
+                        <td class="imgIcon"><img src="__PUBLIC__/Api/images/icon/ic_lv6@2x.png" alt=""></td>
+                        
+                        <td class="text-font">足球</br>篮球</td>
+                        <td class="text-two-font">发布 <span>20场</span> 以上推荐
+                        </br>胜率 <span>70% </span>以上</td>
+                        <td><span>38</span><i>Q币</i></td>
+                    </tr>
+                    <tr>
+                        <td class="imgIcon"><img src="__PUBLIC__/Api/images/icon/ic_lv7@2x.png" alt=""></td>
+                       
+                        <td class="text-font">足球</br>篮球</td>
+                        <td class="text-two-font">发布 <span>20场</span> 以上推荐
+                        </br>胜率 <span>75%</span> 以上</td>
+                        <td><span>48</span><i>Q币</i></td>
+                    </tr>
+                    <tr>
+                        <td class="imgIcon"><img src="__PUBLIC__/Api/images/icon/ic_lv8@2x.png" alt=""></td>
+                        
+                        <td class="text-font">足球</br>篮球</td>
+                        <td class="text-two-font">发布<span>22场</span>  以上推荐
+                        </br>胜率 <span>75%</span> 以上</td>
+                        <td><span>58</span><i>Q币</i></td>
+                    </tr>
+                    <tr>
+                        <td class="imgIcon"><img src="__PUBLIC__/Api/images/icon/ic_lv9@2x.png" alt=""></td>
+                       
+                        <td class="text-font">足球</br>篮球</td>
+                        <td class="text-two-font">发布 <span>22场</span> 以上推荐
+                        </br>胜率 <span>80%</span> 以上</td>
+                        <td><span>68</span><i>Q币</i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="section">
+            <div class="bg-default title">
+                <h1>足球周榜 <span>（规则和奖励）</span></h1>
+            </div>
+            <div class="title-con">
+                <ul>
+                    <li>&nbsp;&nbsp;&nbsp;周榜分别统计亚盘和竞彩当天起前7日的推荐，按胜率排行，连续3天没有推荐，或参与推荐数不够15场，则会掉出排行榜，重新推荐即可恢复排行。</li>
+                </ul>
+            </div>
+        </div>
+        <div class="ic-con  table-pading">
+            <div class="table-con">
+                <table class="table table-bordered" width="100%">
+                    <tbody>
+                        <tr bgcolor="#f7f7f7">
+                            <td width="33.333%">排名</td>
+                            <td width="33.333%">亚盘奖励</td>
+                            <td width="33.333%">竞彩奖励</td>
+                        </tr>
+                        <tr bgcolor="#f7f7f7">
+                            <td width="33.333%">第1名</td>
+                            <td width="33.333%"><span class="text-red text-padding" >388</span><i>Q币</i></td>
+                            <td width="33.333%"><span class="text-red text-padding">288</span><i>Q币</i></td>
+                        </tr>
+                        <tr bgcolor="#f7f7f7">
+                            <td width="33.333%">第2名</td>
+                            <td width="33.333%"><span class="text-red text-padding">188</span><i>Q币</i></td>
+                            <td width="33.333%"><span class="text-red text-padding">168</span><i>Q币</i></td>
+                        </tr>
+                        <tr bgcolor="#f7f7f7">
+                            <td width="33.333%">第3名</td>
+                            <td width="33.333%"><span class="text-red text-padding">88</span><i>Q币</i></td>
+                            <td width="33.333%"><span class="text-red text-padding">88</span><i>Q币</i></td>
+                        </tr>
+                        <tr bgcolor="#f7f7f7">
+                            <td width="33.333%">第4名-第10名</td>
+                            <td width="33.333%"><span class="text-red text-padding">38</span><i>Q币</i></td>
+                            <td width="33.333%"><span class="text-red text-padding">38</span><i>Q币</i></td>
+                        </tr>
+                        <tr bgcolor="#ffffe2">
+                            <td colspan="3" style="text-align: left;padding:0.6rem 1rem;background: #ffffe2;">周胜率＜65%，或当周连续3天没推荐的用户取消领奖资格，每周一派发奖励</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="section">
+            <div class="bg-default title">
+                <h1>足球月榜<span>（规则和奖励）</span></h1>
+            </div>
+            <div class="title-con">
+                <ul>
+                    <li>&nbsp;&nbsp;&nbsp;月榜分别统计亚盘和竞彩当天起前30日的推荐，按胜率排行，连续5天没有推荐，或参与推荐数不够50场，则会掉出排行榜，重新推荐即可恢复排行。</li>
+                </ul>
+            </div>
+        </div>
+        <div class="ic-con  table-pading">
+            
+            <div class="table-con">
+                <table class="table table-bordered" width="100%">
+                    <tbody>
+                
+                        <tr bgcolor="#f7f7f7">
+                            <td width="33.333%">排名</td>
+                            <td width="33.333%">亚盘奖励</td>
+                            <td width="33.333%">竞彩奖励</td>
+                        </tr>
+                        <tr bgcolor="#f7f7f7">
+                            <td width="33.333%">第1名</td>
+                            <td width="33.333%"><span class="text-red">888</span>币</td>
+                            <td width="33.333%"><span class="text-red">688</span>币</td>
+                        </tr>
+                        <tr bgcolor="#f7f7f7">
+                            <td width="33.333%">第2名</td>
+                            <td width="33.333%"><span class="text-red">488</span>币</td>
+                            <td width="33.333%"><span class="text-red">288</span>币</td>
+                        </tr>
+                        <tr bgcolor="#f7f7f7">
+                            <td width="33.333%">第3名</td>
+                            <td width="33.333%"><span class="text-red">288</span>币</td>
+                            <td width="33.333%"><span class="text-red">188</span>币</td>
+                        </tr>
+                        <tr bgcolor="#f7f7f7">
+                            <td width="33.333%">第4名-第10名</td>
+                            <td width="33.333%"><span class="text-red">88</span>币</td>
+                            <td width="33.333%"><span class="text-red">68</span>币</td>
+                        </tr>
+                        <tr bgcolor="#ffffe2">
+                            <td colspan="3" style="text-align: left;padding:0.6rem 1rem;background: #ffffe2;">月胜率＜60%，或当月连续5天没推荐的用户取消领奖资格，每月1日派发奖励</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="bottom" >-  我也是有底线的  -</div>
+    </div>
+</body>
+</html>

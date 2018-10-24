@@ -1,0 +1,96 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			
+			<div class="unit">
+				<label>直播标题：</label>
+				<textarea maxlength="255" class="large bLeft" name="title" rows="3" cols="47">{$vo.title}</textarea>
+			</div>
+					
+			<div class="unit">
+				<label>直播封面图片：</label>
+				<ul class="tabImg">
+					<li>
+						<input id="viewUploadInput_20180806" name="fileInput" type="file" onChange="previewImage(20180806)" style="display:none;" />
+						<a href="javascript:void(0);">
+							 <span id="viewUploadDiv_20180806">
+								<empty name="vo.img">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_20180806"/>
+								<else/>
+									<img id="viewUploadImg_20180806" width='80' height='80' border=0 src="{$vo.img}">
+								</empty>
+							 </span>
+						</a>
+						<div id="poiter_20180806" class="poiter">
+							<empty name="vo.img">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_20180806')">添加图片</a>
+							<else/>
+								<a title="删除" onclick="delPic({$vo.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_20180806')">重传</a>
+							</empty>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="unit">
+				<label>是否显示：</label>
+				<select class="small bLeft"  name="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">是</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">否</option>
+				</select>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+	$(function(){
+		$('.tabImg li').hover(function(e) {
+			$(this).children('div').stop().animate({'top':'0'},300);
+		},function(){
+			$(this).children('div').stop().animate({'top':'80px'},300);
+		});
+	});
+
+	function delPic(id){
+		if(confirm("确认要删除吗？") == false){
+			return false;
+		}
+		//异步执行删除
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/PublishList/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                	$("#viewUploadInput_20180806").val("");
+					$("#viewUploadImg_20180806").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+					var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_20180806')\">添加图片</a>";
+					$("#poiter_20180806").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+
+</script>
+
+
+

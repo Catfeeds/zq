@@ -1,0 +1,23 @@
+/**
+ * 全彩个人中心css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-23
+**/
+
+/* 提款 */
+.drawing-list{ background: url(../../images/personal_center/drawing-bg.jpg) no-repeat right top;}
+.drawing-list form dt{ height: 34px; line-height: 34px;}
+.drawing-list form input[type=submit]{ border: 0 none; width: 167px; margin-left: 65px;}
+.drawing-list .notice{ margin-top: 40px;}
+.drawing-list .notice dd{ margin-top: 10px; font-size: 12px;}
+/* 提款记录 */
+.recharge-record-list .table .table-header th{ text-align: center; background: #dadada;}
+.recharge-record-list .table .one{ text-align: center; background: #ededed;}
+.recharge-record-list .table .two{ text-align: center; background: #f9f9f9;}
+.recharge-record-list .table .begin-time em{ margin-left: 10px;}
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td { border: 1px solid #fff; font-size: 12px;}
+
+/* 绑定银行卡 */
+.banded-list{ height: 400px; background: url(../../images/personal_center/banded-bg.jpg) no-repeat 80% 20px;}
+.banded-list .suc{ width: 158px; height: 40px; background: url(../../images/personal_center/suc.png) no-repeat center center; margin-bottom: 15px;}

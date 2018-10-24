@@ -1,0 +1,26 @@
+<div class="return-top">
+    <a href="#">
+      <span class="ft_bg"></span>
+      <span>回顶部</span>
+    </a>
+</div>
+<script type="text/javascript">
+/**
+ * @author Chensiren <793952481@qq.com>
+ * @since  2015-01-18
+*/
+$(function(){
+    //返回顶部
+    $(window).scroll(function(e) {
+        if($(window).scrollTop()>$(window).height()){
+            $('.return-top').fadeIn(300);
+        }else {
+            $('.return-top').fadeOut(300);
+        }
+    });
+    $('.return-top').click(function(e) {
+        $('body,html').animate({'scrollTop':'0'},500);
+
+    });
+});
+</script>

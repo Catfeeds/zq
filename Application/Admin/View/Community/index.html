@@ -1,0 +1,212 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>
+                <label>圈子名称：</label>
+                <input type="text" name="name" value="{$_REQUEST.name}"/>
+            </li>
+            <li>
+                <label>状态：</label>
+                <select name="status" class="combox" onchange="$(form).submit()">
+                    <option value="" selected>全部</option>
+                    <option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >可用</option>
+                    <option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >停用</option>
+                </select>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="__URL__/add" target="dialog" mask="true" height="550"><span>新增</span></a></li>
+            <li><a class="delete" href="__URL__/del/id/{sid_record}" target="ajaxTodo" title="你确定要删除吗？" warn="请选择用户"><span>删除</span></a></li>
+            <li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" warn="请选择用户" height="550"><span>编辑</span></a></li>
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="30" >ID</th>
+            <th width="60">圈子名称</th>
+            <th width="40">圈子头像</th>
+            <th width="40">背景图片</th>
+            <th width="250">圈子介绍</th>
+            <th width="40" >关注数</th>
+            <th width="40" >帖子数</th>
+            <th width="40">层级</th>
+            <th width="40">状态</th>
+            <th width="40">是否推荐</th>
+            <th width="40">排序</th>
+            <th width="40">创建时间</th>
+            <th width="40">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name="list">
+            <volist name="list" id="item">
+                <tr target="sid_record" rel="{$item.id}">
+                    <td>{$item.id}</td>
+                    <td>{$item.name}</td>
+                    <td>
+                        <empty name="item.titleimg">没有上传
+                        <else/>
+                        <if condition="pathinfo($item['titleimg'], PATHINFO_EXTENSION) eq swf">
+                            <a href="{$item.titleimg}" target="_blank" title="查看图片">
+                            <embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$item.titleimg}">
+                            </a>
+                        <else/>
+                            <a href="{$item.titleimg}" target="_blank" title="查看图片"><img src="{$item['titleimg']}" alt="图片" width="30" height="30" /></a>
+                        </if>
+                        </empty>
+                    </td>
+                    <td>
+                        <empty name="item.background">没有上传
+                        <else/>
+                        <if condition="pathinfo($item['background'], PATHINFO_EXTENSION) eq swf">
+                            <a href="{$item.background}" target="_blank" title="查看图片">
+                            <embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$item.background}">
+                            </a>
+                        <else/>
+                            <a href="{$item.background}" target="_blank" title="查看图片"><img src="{$item['background']}" alt="图片" width="30" height="30" /></a>
+                        </if>
+                        </empty>
+                    </td>
+                    <td>{$item.description|msubstr=0,45}</td>
+                    <td>{$item.follower_num}</td>
+                    <td>{$item.post_num}</td>
+                    <td>{$item.level}</td>
+                    <td>{$item['status']|getStatus}</td>
+                    <td>
+                        <switch name="item.recommend">
+                            <case value="0">否</case>
+                            <case value="1">是</case>
+                        </switch>
+                    </td>
+                    <td>{$item.sort}</td>
+                    <td>{$item.create_time|date='Y-m-d',###}</td>
+                    <td>
+                        {$item['status']|showStatus=$item['id'],'navTabAjaxDone',"__URL__",''} |
+                        <a href="{:U('__URL__/edit',['id'=>$item['id']])}" target="dialog" mask="true" title="{$item.name} 编辑" rel="editPage" height="550">编辑</a>
+                    </td>
+                </tr>
+                <notempty name="item.childs">
+                    <volist name="item.childs" id="item2">
+                        <tr target="sid_record" rel="{$item2.id}">
+                            <td>{$item2.id}</td>
+                            <td>|_{$item2.name}</td>
+                            <td>
+                                <empty name="item2.titleimg">没有上传
+                                <else/>
+                                <if condition="pathinfo($item2['titleimg'], PATHINFO_EXTENSION) eq swf">
+                                    <a href="{$item2.titleimg}" target="_blank" title="查看图片">
+                                    <embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$item2.titleimg}">
+                                    </a>
+                                <else/>
+                                    <a href="{$item2.titleimg}" target="_blank" title="查看图片"><img src="{$item2['titleimg']}" alt="图片" width="30" height="30" /></a>
+                                </if>
+                                </empty>
+                            </td>
+                            <td>
+                                <empty name="item2.background">没有上传
+                                <else/>
+                                <if condition="pathinfo($item2['background'], PATHINFO_EXTENSION) eq swf">
+                                    <a href="{$item2.background}" target="_blank" title="查看图片">
+                                    <embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$item2.background}">
+                                    </a>
+                                <else/>
+                                    <a href="{$item2.background}" target="_blank" title="查看图片"><img src="{$item2['background']}" alt="图片" width="30" height="30" /></a>
+                                </if>
+                                </empty>
+                            </td>
+                            <td>{$item2.description|msubstr=0,45}</td>
+                            <td>{$item2.follower_num}</td>
+                            <td>{$item2.post_num}</td>
+                            <td>{$item2.level}</td>
+                            <td>{$item2['status']|getStatus}</td>
+                            <td>
+                                <switch name="item2.recommend">
+                                    <case value="0">否</case>
+                                    <case value="1">是</case>
+                                </switch>
+                            </td>
+                            <td>{$item2.sort}</td>
+                            <td>{$item2.create_time|date='Y-m-d',###}</td>
+                            <td>
+                                {$item2['status']|showStatus=$item2['id'],'navTabAjaxDone',"__URL__",''} |
+                                <a href="{:U('__URL__/edit',['id'=>$item2['id']])}" target="dialog" mask="true" title="{$item2.name} 编辑" rel="editPage" height="550">编辑</a>
+                            </td>
+                        </tr>
+                        <notempty name="item2.childs">
+                            <volist name="item2.childs" id="item3">
+                                <tr target="sid_record" rel="{$item3.id}">
+                                    <td>{$item3.id}</td>
+                                    <td>|__{$item3.name}</td>
+                                    <td>
+                                        <empty name="item3.titleimg">没有上传
+                                        <else/>
+                                        <if condition="pathinfo($item3['titleimg'], PATHINFO_EXTENSION) eq swf">
+                                            <a href="{$item3.titleimg}" target="_blank" title="查看图片">
+                                            <embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$item3.titleimg}">
+                                            </a>
+                                        <else/>
+                                            <a href="{$item3.titleimg}" target="_blank" title="查看图片"><img src="{$item3['titleimg']}" alt="图片" width="30" height="30" /></a>
+                                        </if>
+                                        </empty>
+                                    </td>
+                                    <td>
+                                        <empty name="item3.background">没有上传
+                                        <else/>
+                                        <if condition="pathinfo($item3['background'], PATHINFO_EXTENSION) eq swf">
+                                            <a href="{$item3.background}" target="_blank" title="查看图片">
+                                            <embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$item3.background}">
+                                            </a>
+                                        <else/>
+                                            <a href="{$item3.background}" target="_blank" title="查看图片"><img src="{$item3['background']}" alt="图片" width="30" height="30" /></a>
+                                        </if>
+                                        </empty>
+                                    </td>
+                                    <td>{$item3.description|msubstr=0,45}</td>
+                                    <td>{$item3.follower_num}</td>
+                                    <td>{$item3.post_num}</td>
+                                    <td>{$item3.level}</td>
+                                    <td>{$item3['status']|getStatus}</td>
+                                    <td>
+                                        <switch name="item3.recommend">
+                                            <case value="0">否</case>
+                                            <case value="1">是</case>
+                                        </switch>
+                                    </td>
+                                    <td>{$item3.sort}</td>
+                                    <td>{$item3.create_time|date='Y-m-d',###}</td>
+                                    <td>
+                                        {$item3['status']|showStatus=$item3['id'],'navTabAjaxDone',"__URL__",''} |
+                                        <a href="{:U('__URL__/edit',['id'=>$item3['id']])}" target="dialog" mask="true" title="{$item3.name} 编辑" rel="editPage" height="550">编辑</a>
+                                    </td>
+                                </tr>
+                            </volist>
+                        </notempty>
+                    </volist>
+                </notempty>
+            </volist>
+        </notempty>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+
+</div>
+
+

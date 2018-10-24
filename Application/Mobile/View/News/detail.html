@@ -1,0 +1,66 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>{$data.title}_手机全球体育手机网</title>
+</block>
+<block name="append">
+            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Mobile/css/news.css?v20180607">
+            <link rel="stylesheet" type="text/css" href="__CSS__/special/news.css?v=2018060151800">
+</block>
+<!-- 二级头部 -->
+<block name="header">
+    <if condition="$_GET['header'] eq ''">
+        <header id="other_header">
+            <a href="javascript:history.go(-1)"></a>资讯
+        </header>
+    </if>
+</block>
+<block name="nav"></block>
+
+<block name="content">
+    <if condition="$_GET['header'] eq ''">
+        <div id="new-bar" class="new-bar">
+            <div class="new-logo"><img src="__IMAGES__/app-logo.png"></div>
+            <div class="new-title">
+                <p class="p1">全球体育APP</p>
+                <p class="p2">最专业的体育宝典！</p>
+            </div>
+             <a class="app-btn" id="load_btn">立即下载</a>
+        </div>
+        </if>
+
+        <section class="art_main boxs">
+
+            <!-- 标题 start-->
+            <section class="art_title">
+                <h1 id="article_title">{$data.title}</h1>
+                <time datetime="{$data.add_time|date='Y-m-d',###}">{$data.add_time|date='Y/m/d H:i:s',###} {$data.source}</time>
+            </section>
+            <!-- 标题 end-->
+
+            <!-- 文章内容 start -->
+            <article class="article_main">
+                {$data.content|htmlspecialchars_decode}
+                <p class="statement">{:C('user_statement')}</p>
+            </article>
+            <!-- 文章内容end -->
+            <img src="__IMAGES__/2.gif" width="100%">
+            <!-- 相关 start -->
+         <!--    <present name="lable">
+                <section class="about_link clearfix" style="display:block">
+                    <span class="about_l">相关:</span>
+                    <span class="about_r">
+                        <volist name='lable' id="item">
+                            <a href="javascript:;">{$item}</a>
+                        </volist>
+                    </span>
+                </section>
+            </present> -->
+            <!-- 相关 end -->
+        </section>
+                <div class="view_more">
+                    <!-- <a id="load_btn01">下载全球体育APP,查看更多评论</a> -->
+                </div>
+                <script type="text/javascript" src="__PUBLIC__/Api/Home/picDetail/js/panDuan.js"></script>
+</block>
+<block name="footer">
+</block>

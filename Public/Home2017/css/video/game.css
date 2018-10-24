@@ -1,0 +1,59 @@
+/**
+ * 资讯评论页css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-03-10
+**/
+body{ background: #f7f7f7;}
+/*导航*/
+.nav-game-bg{ width: 100%; min-width: 1000px; height: 68px; line-height: 68px; background: #171717;}
+.nav-game-con { width: 1000px; margin: 0 auto;}
+.nav-game-con ul{ margin-bottom: 0;}
+.game-logo img{padding-right: 30px; } 
+.nav-game-con .nav-game { width: auto; margin-left: 40px}
+.nav-game-con .nav-game ul li{ height: 68px; float: left; text-align: center; position: relative; background: url(../../images/game-nav-line.png) no-repeat 0 center; padding-left: 2px;}
+.nav-game-con .nav-game .on a { background: #0b0b0b; color: #10af63;}
+.nav-game-con .nav-game ul li a { position: relative; display: block; height: 68px; padding: 0 26px; color: #fff; font-size: 16px; line-height: 68px; text-decoration: none;transition: all 0.3s;}
+.nav-game-con .nav-game ul li a:hover{ background: #0b0b0b; color: #10af63;}
+.game-login ul li{ float: left; margin-right: 15px; color: #fff;}
+.game-login ul li a{ color: #fff; transition: ease 0.3s;}
+.game-login ul li a:hover{ color: #10af63;}
+
+/* 主体盒子 */
+.main{ width: 1000px; margin: 0 auto;}
+
+/* 视屏 */
+.game-video-con{ margin-top: 28px;}
+.game-info-con{ background: #0d0d0d; padding: 0 10px; padding-top: 26px;  padding-bottom: 12px;}
+.game-info-con .team{ width: 120px; text-align: center;}
+.game-info-con .team h3{ font-size: 20px; margin: 10px 0;}
+.game-info-con .team a{ color: #fff; transition: ease 0.2s;}
+.game-info-con .team a:hover{ color: #10af63;}
+.header-sup{ width: 740px;}
+.header-sup .team-score{ text-align: center; font-size: 20px; color:#999;}
+.icon_support,.support{ background: url(../../images/all.png) no-repeat 0 0;}
+.support-con .support{ width: 60px; height: 40px; position: relative;}
+.support-con .support_k{ background-position: -70px 0;}
+.support-con .icon_support{ display: block; width: 38px; height: 38px; border-radius: 50%; position: absolute; left: 1px; top: 1px; transition: ease 0.3s; -moz- transition: ease 0.3s; -webkit- transition: ease 0.3s;}
+.support-con .pull-right .icon_support{ left: 20px; top: 1px;}
+.support-con .pull-left .icon_support{border-color: #2690fe; background-position: 2px -60px; background-color: #2690fe}
+.support-con .pull-left .icon_support:hover{ border-color: #fff; background-position: 2px -112px; background-color: #fff}
+.icon_support_host { border-color: #ea4444; background-position: -50px -60px; background-color: #ea4444;}
+.icon_support_host:hover { border-color: #fff; background-position: -50px -112px; background-color: #fff;}
+.support-con p{ margin-bottom: 0;}
+.support_chart{ height: 5px; font-size: 0; line-height: 0; background: #ea4444;}
+.clearsub { overflow: hidden; zoom: 1;}
+.support_chart s { display: inline-block; box-sizing: border-box; height: 100%; width: 83%; border-right: 1px solid #0e0f19; background: #2690fe;}
+.transition { -webkit-transition: all .5s; -moz-transition: all .5s; -ms-transition: all .5s; -o-transition: all .5s; transition: all .5s;}
+.support_data{ margin-top: 10px;}
+.support_data span{ font-size: 16px; color: #999;}
+.support_data .pull-left span{ margin-left: 15px;}
+.support_data .pull-right span{ margin-right: 15px;}
+.support_live{ margin: 0 auto; text-align: center;}
+.support_live span{ background: #ea4473; color: #fff; display: inline-block; padding: 6px 12px;}
+/* 热门标签 */
+.hot_label dl{ margin-top: 20px;}
+.hot_label dl dt{ line-height: 28px;}
+.hot_label dl dd{ margin-left: 10px;}
+.hot_label dl .btn{ padding: 3px 12px;}

@@ -1,0 +1,411 @@
+
+<div class="page">
+	<div class="pageContent">
+
+	<form method="post" action="__URL__/commonConf" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>客服电话：</label>
+				<input type="text" name="service[tel]" size="15" value="{$data['service']['tel']}" />
+			</div>
+
+			<div class="unit">
+				<label>客服地址：</label>
+				<input type="text" name="service[address]" size="50" value="{$data['service']['address']}" />
+			</div>
+
+			<div class="unit">
+				<label>IOS内购外跳地址：</label>
+				<input type="text" name="iosAddress" size="50" value="{$data['iosAddress']}" />
+			</div>
+
+			<div class="unit">
+				<label>IOS内购文字描述：</label>
+				<textarea name="iosDocuments" cols="50" rows="2">{$data.iosDocuments}</textarea>
+			</div>
+
+			<div class="unit">
+				<label>IOS内购文字高亮：</label>
+				<input type="text" name="iosHighLight" size="50" value="{$data['iosHighLight']}" />
+			</div>
+
+			<div class="unit">
+				<label>推荐文字描述：</label>
+				<input type="text" name="description[one]" size="50" value="{$data['description']['one']}" />
+				<input type="text" style="margin-left: 130px;" name="description[two]" size="50" value="{$data['description']['two']}" />
+			</div>
+
+			<div class="unit">
+				<label>充值限制金额：</label>
+				<input type="text" name="rechargeLimit" size="10" value="{$data['rechargeLimit']}" />（元/天，不填则无限制）
+			</div>
+
+			<div class="unit">
+				<label>提款限制金额：</label>
+				<input type="text" name="iosExtractMoney" size="10" value="{$data['iosExtractMoney']}" />（元，不显示“提款”的入口）
+			</div>
+
+			<div class="unit">
+				<label>短信运营商：</label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="mobileSMS"  value="1" <eq name="data.mobileSMS" value="1">checked</eq> />圣亚短信 </label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="mobileSMS"  value="2" <eq name="data.mobileSMS" value="2">checked</eq> />大鱼短信 </label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="mobileSMS"  value="3" <eq name="data.mobileSMS" value="3">checked</eq> />大鱼语音 </label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="mobileSMS"  value="4" <eq name="data.mobileSMS" value="4">checked</eq> />infobip短信</label>
+			</div>
+
+			<div class="unit">
+				<label>APP 邀请好友：</label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="invite"  value="0" <eq name="data.invite" value="0">checked</eq> />关闭 </label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="invite"  value="1" <eq name="data.invite" value="1">checked</eq> />开启 </label>
+			</div>
+
+			<div class="unit">
+				<label>商城开关：</label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="shopping"  value="0" <eq name="data.shopping" value="0">checked</eq> />关闭 </label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="shopping"  value="1" <eq name="data.shopping" value="1">checked</eq> />开启 </label>
+			</div>
+
+			<div class="unit">
+				<label>聊天室功能：</label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="chatroom"  value="0" <eq name="data.chatroom" value="0">checked</eq> />关闭 </label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="chatroom"  value="1" <eq name="data.chatroom" value="1">checked</eq> />开启 </label>
+			</div>
+
+			<div class="unit">
+				<label>APP 第三方支付：</label>
+				<label style="width: 70px;padding: 0"><input type="checkbox" name="payment[ali]"  value="1" <eq name="data.payment.ali" value="1">checked</eq>/>支付宝</label>
+				<label style="width: 70px;padding: 0"><input type="checkbox" name="payment[wx]"   value="1" <eq name="data.payment.wx" value="1">checked</eq>/>微信</label>
+				<label style="width: 70px;padding: 0"><input type="checkbox" name="payment[yee]"  value="1" <eq name="data.payment.yee" value="1">checked</eq>/>易宝</label>
+				<label style="width: 70px;padding: 0"><input type="checkbox" name="payment[wabp]" value="1" <eq name="data.payment.wabp" value="1">checked</eq>/>移动</label>
+			</div>
+
+			<div class="unit">
+				<label>APP 第三方登陆：</label>
+				<label style="width: 70px;padding: 0"><input type="checkbox" name="sdklogin[weixin]" value="1" <eq name="data.sdklogin.weixin" value="1">checked</eq>/>微信</label>
+				<label style="width: 70px;padding: 0"><input type="checkbox" name="sdklogin[sina]"   value="1" <eq name="data.sdklogin.sina" value="1">checked</eq>/>新浪</label>
+				<label style="width: 70px;padding: 0"><input type="checkbox" name="sdklogin[qq]"     value="1" <eq name="data.sdklogin.qq" value="1">checked</eq>/>QQ</label>
+				<label style="width: 70px;padding: 0"><input type="checkbox" name="sdklogin[mm]"     value="1" <eq name="data.sdklogin.mm" value="1">checked</eq>/>移动</label>
+			</div>
+
+			<div class="unit">
+				<label>提款显示配置：</label>
+				<label style="width: 70px;padding: 0"><input type="checkbox" name="extract[ios]"  value="1" <eq name="data.extract.ios" value="1">checked</eq>/>苹果</label>
+				<label style="width: 70px;padding: 0"><input type="checkbox" name="extract[apk]"  value="1" <eq name="data.extract.apk" value="1">checked</eq>/>安卓</label>
+				<label style="width: 70px;padding: 0"><input type="checkbox" name="extract[web]"  value="1" <eq name="data.extract.web" value="1">checked</eq>/>网站</label>
+				<label style="width: 70px;padding: 0"><input type="checkbox" name="extract[m]"    value="1" <eq name="data.extract.m" value="1">checked</eq>/>M站</label>
+			</div>
+
+			<div class="unit">
+				<label>APP 本地缓存清理：</label>
+				<table width="400">
+					<tr>
+						<td width="40">苹果：</td>
+						<td width="120">
+							<label style="width: auto;"><input type="radio" name="app_cache[ios][clear]" value="1" <eq name="data.app_cache.ios.clear" value="1">checked</eq>/>开启</label>
+							<label style="width: auto;"><input type="radio" name="app_cache[ios][clear]" value="0" <eq name="data.app_cache.ios.clear" value="0">checked</eq>/>关闭</label>
+						</td>
+						<td width="40">版本：</td>
+						<td>
+							<input type='text' size="10" name="app_cache[ios][ver]" value="{$data.app_cache.ios.ver}" />
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td width="40">安卓：</td>
+						<td width="120">
+							<label style="width: auto;"><input type="radio" name="app_cache[apk][clear]" value="1" <eq name="data.app_cache.apk.clear" value="1">checked</eq>/>开启</label>
+							<label style="width: auto;"><input type="radio" name="app_cache[apk][clear]" value="0" <eq name="data.app_cache.apk.clear" value="0">checked</eq>/>关闭</label>
+						</td>
+						<td width="40">版本：</td>
+						<td>
+							<input type='text' size="10" name="app_cache[apk][ver]" value="{$data.app_cache.apk.ver}"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<div class="unit">
+				<label>ios屏蔽IP段：<br>(多个IP以逗号隔开)</label>
+				<table width="400">
+					<tr>
+						<td>
+							<textarea name="ios_ip_shield" cols="50" rows="2">{$data.ios_ip_shield}</textarea>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="unit">
+				<label>ios审核配置替换内容：</label>
+				<table width="400">
+					<tr>
+						<td>亚盘：</td>
+						<td>
+							<input type='text' size="6" name="ios_character[yapan]" value="{$data.ios_character.yapan}" />
+						</td>
+						<td>竞彩：</td>
+						<td>
+							<input type='text' size="6" name="ios_character[jingcai]" value="{$data.ios_character.jingcai}" />
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td>充值：</td>
+						<td>
+							<input type='text' size="6" name="ios_character[charge]" value="{$data.ios_character.charge}" />
+						</td>
+						<td>提款：</td>
+						<td>
+							<input type='text' size="6" name="ios_character[withdraw]" value="{$data.ios_character.withdraw}" />
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td>盈利：</td>
+						<td>
+							<input type='text' size="6" name="ios_character[profit]" value="{$data.ios_character.profit}" />
+						</td>
+						<td>价格：</td>
+						<td>
+							<input type='text' size="6" name="ios_character[price]" value="{$data.ios_character.price}" />
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td colspan="2">首页高命中logo：</td>
+						<td colspan="2">
+							<input type='text' size="48" name="ios_character[pic1]" value="{$data.ios_character.pic1}" />
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td colspan="2">首页连胜多logo：</td>
+						<td colspan="2">
+							<input type='text' size="48" name="ios_character[pic2]" value="{$data.ios_character.pic2}" />
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="unit">
+				<label>ios公司版更新：</label>
+				<table width="400">
+					<tr>
+						<td>现在的版本：</td>
+						<td>
+							<input type='text' size="10" name="ios_version[ver]" value="{$data.ios_version.ver}" />
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td>强制升级最低版本：</td>
+						<td>
+							<input type='text' size="10" name="ios_version[ver_limit]" value="{$data.ios_version.ver_limit}" />
+						</td>
+					</tr>
+					<tr>
+						<td>升级说明：</td>
+						<td>
+							<textarea name="ios_version[ver_desc]" cols="30" rows="2">{$data.ios_version.ver_desc}</textarea>
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td>下载链接：</td>
+						<td>
+							<input type='text' size="50" name="ios_version[url]" value="{$data.ios_version.url}" />
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="unit">
+				<label>ios个人版更新：</label>
+				<table width="400">
+					<tr>
+						<td>现在的版本：</td>
+						<td>
+							<input type='text' size="10" name="ios_version_personal[ver]" value="{$data.ios_version_personal.ver}" />
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td>强制升级最低版本：</td>
+						<td>
+							<input type='text' size="10" name="ios_version_personal[ver_limit]" value="{$data.ios_version_personal.ver_limit}" />
+						</td>
+					</tr>
+					<tr>
+						<td>升级说明：</td>
+						<td>
+							<textarea name="ios_version_personal[ver_desc]" cols="30" rows="2">{$data.ios_version_personal.ver_desc}</textarea>
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td>下载链接：</td>
+						<td>
+							<input type='text' size="50" name="ios_version_personal[url]" value="{$data.ios_version_personal.url}" />
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="unit">
+				<label>ios大师版更新：</label>
+				<table width="400">
+					<tr>
+						<td>现在的版本：</td>
+						<td>
+							<input type='text' size="10" name="ios_version_master[ver]" value="{$data.ios_version_master.ver}" />
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td>强制升级最低版本：</td>
+						<td>
+							<input type='text' size="10" name="ios_version_master[ver_limit]" value="{$data.ios_version_master.ver_limit}" />
+						</td>
+					</tr>
+					<tr>
+						<td>升级说明：</td>
+						<td>
+							<textarea name="ios_version_master[ver_desc]" cols="30" rows="2">{$data.ios_version_master.ver_desc}</textarea>
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td>下载链接：</td>
+						<td>
+							<input type='text' size="50" name="ios_version_master[url]" value="{$data.ios_version_master.url}" />
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="unit">
+				<label>ios世界杯版更新：</label>
+				<table width="400">
+					<tr>
+						<td>现在的版本：</td>
+						<td>
+							<input type='text' size="10" name="ios_version_worldCup[ver]" value="{$data.ios_version_worldCup.ver}" />
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td>强制升级最低版本：</td>
+						<td>
+							<input type='text' size="10" name="ios_version_worldCup[ver_limit]" value="{$data.ios_version_worldCup.ver_limit}" />
+						</td>
+					</tr>
+					<tr>
+						<td>升级说明：</td>
+						<td>
+							<textarea name="ios_version_worldCup[ver_desc]" cols="30" rows="2">{$data.ios_version_worldCup.ver_desc}</textarea>
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td>下载链接：</td>
+						<td>
+							<input type='text' size="50" name="ios_version_worldCup[url]" value="{$data.ios_version_worldCup.url}" />
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="unit">
+				<label>ios审核控制：</label>
+				<label style="width: 80px;padding: 0"><input type="radio" name="iosCheck"  value="0" <eq name="data.iosCheck" value="0">checked</eq> />关闭 </label>
+				<label style="width: auto;padding: 0"><input type="radio" name="iosCheck"  value="1" <eq name="data.iosCheck" value="1">checked</eq> />开启 （总开关）</label>
+			</div>
+
+			<div class="unit">
+				<label><!-- ios审核接口模块： -->&nbsp;</label>
+				<table width="400" id='table'>
+					<notempty name="data.ios_check_module">
+						<volist name="data.ios_check_module" id="item">
+							<tr class="list">
+								<td>接口版本:</td>
+								<td>
+									<input type='text' size="5" name="module[{$i}][api_name]" value="{$key}" />
+								</td>
+								<td>包版本:</td>
+								<td>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]" value="company" <if condition="in_array('company',$item)">checked</if> />公司版</label>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]" value="personal" <if condition="in_array('personal',$item)">checked</if> />个人版</label>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]" value="master" <if condition="in_array('master',$item)">checked</if> />大师版</label>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]"  value="worldCup" <if condition="in_array('worldCup',$item)">checked</if> />世界杯</label>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]"  value="scoreApp" <if condition="in_array('scoreApp',$item)">checked</if> />比分版</label>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]"  value="valuableBook" <if condition="in_array('valuableBook',$item)">checked</if> />比分宝典版</label>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]"  value="zuzu" <if condition="in_array('zuzu',$item)">checked</if> />找场版</label>
+								</td>
+								<td>
+									<a class="buttonActive" href="javascript:;" onclick="delOption(this);">
+									<span>删除</span>
+									</a>
+								</td>
+							</tr>
+						</volist>
+						<else/>
+						<for start="1" end="2">
+							<tr class="list">
+								<td>接口版本:</td>
+								<td>
+									<input type='text' size="5" name="module[{$i}][api_name]"/>
+								</td>
+								<td>包版本:</td>
+								<td>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]"  value="company"/>公司版</label>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]"  value="personal"/>个人版</label>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]"  value="master"/>大师版</label>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]"  value="worldCup"/>世界杯</label>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]"  value="scoreApp"/>比分版</label>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]"  value="valuableBook"/>比分宝典版</label>
+									<label style="width: auto;"><input type="checkbox" name="module[{$i}][api][]"  value="zuzu"/>找场版</label>
+								</td>
+								<td>
+									<a class="buttonActive" href="javascript:;" onclick="delOption(this);">
+									<span>删除</span>
+									</a>
+								</td>
+							</tr>
+						</for>
+					</notempty>
+				</table>
+			</div>
+			<div class="unit">
+				<label>&nbsp;</label>
+				<a class="buttonActive" href="javascript:addOption()"><span>点击添加一个接口版本</span></a>
+			</div>
+
+		</div>
+
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+	</div>
+</div>
+<script>
+	function addOption(){
+		var i = $('.list').length + 1;
+		var html = "<tr class=\"list\">"+
+						"<td>接口版本:</td>"+
+						"<td>"+
+							"<input type='text' size=\"5\" name=\"module["+i+"][api_name]\" style=\"border-style: solid;border-width: 1px;font-size: 12px;line-height: 15px;margin: 0;padding: 2px;\"/>"+
+						"</td>"+
+						"<td>包版本:</td>"+
+						"<td>"+
+							"<label style=\"width: auto;\"><input type=\"checkbox\" name=\"module["+i+"][api][]\"  value=\"company\"/>公司版</label>"+
+							"<label style=\"width: auto;\"><input type=\"checkbox\" name=\"module["+i+"][api][]\"  value=\"personal\"/>个人版</label>"+
+							"<label style=\"width: auto;\"><input type=\"checkbox\" name=\"module["+i+"][api][]\"  value=\"master\"/>大师版</label>"+
+							"<label style=\"width: auto;\"><input type=\"checkbox\" name=\"module["+i+"][api][]\"  value=\"worldCup\"/>世界杯</label>"+
+							"<label style=\"width: auto;\"><input type=\"checkbox\" name=\"module["+i+"][api][]\"  value=\"scoreApp\"/>比分版</label>"
+						"</td>"+
+						"<td>"+
+							"<a class=\"buttonActive\" href=\"javascript:;\" onclick=\"delOption(this);\">"+
+							"<span>删除</span>"+
+							"</a>"+
+						"</td>"+
+					"</tr>";
+		$("#table tr:last").after(html);
+	}
+	function delOption(obj){
+		$(obj).parent().parent().remove();
+	}
+</script>

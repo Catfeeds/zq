@@ -1,0 +1,90 @@
+<div class="gameHeadTop bGameHeadTop">
+    <div class="t_core b_core clearfix">
+        <div class="team_name fl">
+            <div class="clearfix">
+                <div class="homeLogo pull-left">
+                    <img src="{$gameInfo['home_img_url']}" alt="{$gameInfo['home_team_name'][0]}">
+                </div>
+                <div class="homeScore pull-left">
+                    <strong>{$gameInfo['game_info'][0]}</strong>
+                </div>
+            </div>
+            <div class="teamNameTxt">
+                <p>
+                    {$gameInfo['home_team_name'][0]}
+                </p>
+            </div>
+        </div>
+        <div class="tc_main">
+            <div class="p4" style="background-color: {$gameInfo['union_color']}">{$gameInfo['union_name'][0]}</div>
+            <p class="p2 text-fff">开赛时间：{$gameInfo['game_time']} 开赛</p>
+            <div class="scoreBox">
+                <table class="table table-bordered text-fff no-b-t no-b-b no-b-l no-b-r">
+                    <if condition="$gameInfo['union_name'][0] eq 'NCAA'">
+                        <thead>
+                        <tr>
+                            <th class="no-b-l">球队</th>
+                            <th>上半场</th>
+                            <th class="no-b-r">下半场</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="no-b-l">{$gameInfo['home_team_name'][0]}</td>
+                            <td>{$gameInfo['game_info'][2]}</td>
+                            <td class="no-b-r">{$gameInfo['game_info'][6]}</td>
+                        </tr>
+                        <tr>
+                            <td class="no-b-l no-b-b">{$gameInfo['away_team_name'][0]}</td>
+                            <td class="no-b-b">{$gameInfo['game_info'][3]}</td>
+                            <td class="no-b-b no-b-r">{$gameInfo['game_info'][7]}</td>
+                        </tr>
+                        </tbody>
+                    <else/>
+                        <thead>
+                        <tr>
+                            <th class="no-b-l">球队</th>
+                            <th>第一节</th>
+                            <th>第二节</th>
+                            <th>第三节</th>
+                            <th class="no-b-r">第四节</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="no-b-l">{$gameInfo['home_team_name'][0]}</td>
+                            <td>{$gameInfo['game_info'][2]}</td>
+                            <td>{$gameInfo['game_info'][4]}</td>
+                            <td>{$gameInfo['game_info'][6]}</td>
+                            <td class="no-b-r">{$gameInfo['game_info'][8]}</td>
+                        </tr>
+                        <tr>
+                            <td class="no-b-l no-b-b">{$gameInfo['away_team_name'][0]}</td>
+                            <td class="no-b-b">{$gameInfo['game_info'][3]}</td>
+                            <td class="no-b-b">{$gameInfo['game_info'][5]}</td>
+                            <td class="no-b-b">{$gameInfo['game_info'][7]}</td>
+                            <td class="no-b-b no-b-r">{$gameInfo['game_info'][9]}</td>
+                        </tr>
+                        </tbody>
+                    </if>
+                </table>
+            </div>
+            <a href="javascript:;" class="liveBtn"></a>
+        </div>
+        <div class="team_name fr">
+            <div class="clearfix">
+                <div class="awayLogo pull-right">
+                    <img class="pull-right" src="{$gameInfo['away_img_url']}" alt="{$gameInfo['away_team_name'][0]}">
+                </div>
+                <div class="awayScore pull-right">
+                    <strong>{$gameInfo['game_info'][1]}</strong>
+                </div>
+            </div>
+            <div class="teamNameTxt">
+                <p>
+                    {$gameInfo['away_team_name'][0]}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

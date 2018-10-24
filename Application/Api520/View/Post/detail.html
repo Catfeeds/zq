@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta charset="UTF-8">
+	<title>帖子</title>
+
+	<!-- jquery -->
+	<script type="text/javascript" src="__PUBLIC__/Mobile/js/jquery-1.11.1.min.js"></script>
+
+	<!-- jqueryMobile -->
+	<!--<link rel="stylesheet" href="__PUBLIC__/Mobile/js/jqueryMobile/jquery.mobile-1.4.5.min.css" />-->
+	<!--<script type="text/javascript" src="__PUBLIC__/Mobile/js/jqueryMobile/jquery.mobile-1.4.5.min.js"></script>-->
+
+	<!-- 引入公共样式 -->
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/Post/postDetail/css/base.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/Post/postDetail/css/common.css">
+	<!-- 自适应 计算html font-size -->
+	<script type="text/javascript" src="__PUBLIC__/Api/Post/postDetail/js/htmlwidth.js"></script>
+
+	<!-- 本页需要引用的css -->
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/Post/postDetail/css/post.css">
+
+</head>
+<body>
+
+<!-- 二级头部 s -->
+<header id="other_header">
+	<!--<a href="javascript:;"></a>-->
+	<!-- 用户信息 -->
+	<div class="user_msg" userid="{$info['user_id']}">
+		<img src="{$info['face']}" alt="Babyboy" class="user_head fl userimg">
+		<div class="user_else fl">
+			<!-- 等级说明： v1 v2 v3....-->
+			<p class="user">{$info['nick_name']}</p>
+			<p>{$info['create_time']|date='Y-m-d H:i:s',###}</p>
+		</div>
+	</div>
+</header>
+<!-- 二级头部 e -->
+
+<a href="#top_{$look_id}" class="smooth" style="display: none;">滑动</a>
+<section class="art_main boxs">
+	<!-- 标题 start-->
+	<section class="art_title">
+		<h1 id="myH">{$info['title']}</h1>
+	</section>
+	<!-- 标题 end-->
+    <style>
+      .show_all{text-align: center;}
+	</style>
+	<!-- 文章内容 start -->
+	<article class="article_main">
+		<div id="myP"><pre>{$info['content']}</pre></div>
+        <p id="sub_con"></p>
+
+		<div class="article_img">
+			<foreach name="info['img']" item="v" key="k" >
+				<img src="{$v}" alt="">
+			</foreach>
+		</div>
+	</article>
+	<!-- 文章内容end -->
+	 
+
+	<!-- 点赞 s-->
+	<section class='zan clearfix <if condition="$info['is_liked'] eq 1">on</if>' >
+		<div post_id="{$info['id']}">
+			<span>{$info['like_num']}</span>
+			<p>+1</p>
+		</div>
+	</section>
+	<!-- 点赞 end-->
+</section>
+
+<section class="art_main2">
+	<section class="art_main3">
+		<!-- 热门评论 strat -->
+		<section class="article_hotcmnt">
+			<aside class="cmmt_title">全部回帖（{$info['num']}）</aside>
+			<foreach name="commentList" item="v" key="k" >
+				<div class="list comment_box clearfix" userid="{$v['user_id']}" id="top_{$v['id']}">
+					<div class="head">
+						<img src="{$v['face']}" alt="head" class="userimg">
+					</div>
+					<div class="comment_wrap comment_wrap_{$v['id']}">
+						<p><span class="user">{$v['nick_name']} <em>{$v['floor_num']}楼</em></span><a href="javascript:void(0);" class="on like_comment_{$v['id']}" comment_id="{$v['id']}">({$v['like_num']})</a></p>
+						<time>{$v['create_time']|date='Y-m-d H:i:s',###}</time>
+						<article class="comment" comment_name="{$v['nick_name']}" comment_id="{$v['id']}" id="{$v['id']}">{$v['content']}</article>
+						<foreach name="v['subComment']" item="v1" key="k1" >
+							<article class="reply comment" comment_name="{$v1['fromUser']}" comment_id="{$v1['id']}"><em><span>{$v1['fromUser']}</span> 回复 {$v1['toUser']}：</em>{$v1['content']}</article>
+						</foreach>
+					</div>
+				</div>
+			</foreach>
+		</section>
+
+	</section>
+	<input type="hidden" id="userToken" value="{$userToken}">
+	<input type="hidden" id="post_id" value="{$post_id}">
+	<input type="hidden" id="auto_load" value="1">
+	<input type="hidden" id="floor_num" value="{$floor_num}">
+	<input type="hidden" id="isStop" value="{$isStop}">
+	<div class="paged boxs">
+		<div class="load_gif fs24 text-999">
+			<span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+			<span>正在加载更多的数据...</span>
+		</div>
+		<a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已经全部加载完毕</a>
+	</div>
+
+	<div id="alert_tip">
+		您已点过赞了
+	</div>
+	<style>
+      #alert_tip{position: fixed;top:35%;left: 50%;width:3rem;height: 1rem;margin-left: -1.5rem; text-align: center;line-height: 1rem; border-radius: .1rem;background: #000;opacity: .5;color: #fff;font-size: .38rem;display: none; }
+	</style>
+</section>
+
+
+<script>
+      window.alert = function(name){  
+             var iframe = document.createElement("IFRAME");  
+            iframe.style.display="none";  
+            iframe.setAttribute("src", 'data:text/plain');  
+            document.documentElement.appendChild(iframe);  
+            window.frames[0].window.alert(name);  
+            iframe.parentNode.removeChild(iframe);  
+       }  
+
+	//帖子点赞
+	$(".zan div").click(function(){
+		if($(this).parent(".zan").hasClass("on")){
+			//alert("已点过了亲"); 
+			$("#alert_tip").fadeIn();
+			setTimeout(function(){
+              $("#alert_tip").fadeOut();
+			},1500)
+		}else{
+			window.location.href = 'like:'+$(this).attr('post_id')+'_'+1;
+		}
+	});
+
+	//点赞成功js处理
+	function showzan(num){
+		$(".zan").addClass("on");
+		$('.zan div').find('span').text(num);
+		$(".zan div p").animate({top:'-50px',opacity:0},500).css("display","block");
+		setTimeout(function(){
+			$(".zan div p").fadeOut();
+		}, 1200)
+	};
+	//点赞 js end
+
+	 $(function(){
+		//用户昵称跳转用户主页
+		$('.user').click(function() {
+			var userid = $(this).parents('.comment_box').attr('userid');
+			if(userid == undefined){
+				var userid = $(this).parents('.user_msg').attr('userid');
+			}
+
+			window.location.href = 'user:'+userid;
+		});
+
+		 //用户头像跳转用户主页
+		 $('.userimg').click(function() {
+			 var userid = $(this).parents('.comment_box').attr('userid');
+			 if(userid == undefined){
+				 var userid = $(this).parents('.user_msg').attr('userid');
+			 }
+		
+			 window.location.href = 'user:'+userid;
+		 });
+
+		//评论点赞
+		$('.article_hotcmnt .on').click(function() {
+			window.location.href = 'like:'+$(this).attr('comment_id')+'_'+2;
+		});
+
+		//评论 touchend tap
+	    $(document).on("touchend", ".comment", function(){
+			window.location.href = 'comment:'+$(this).attr('comment_id')+'_'+$(this).attr('comment_name');
+		});
+
+		if({$look_id}){
+			$(".smooth").click();
+		}
+
+	  });
+
+	  $(".smooth").click(function(){
+		  var href = $(this).attr("href");
+		  var pos = $(href).offset().top;
+		  $("html,body").animate({scrollTop: pos}, 1000);
+		  return false;
+	  });
+
+	//加载更多方法
+	$(function () {
+		$("#auto_load").val(1);
+		var isStop = $('#isStop').val();
+		var p = 2;// 初始化页面，点击事件从第二页开始
+		var flag = false;
+
+		if ($(".list").size() <= 10 || isStop == 1)
+		{
+			$("#auto_load").val(0);
+			$(".load_gif").hide();
+			$("#showLess").show();
+		}
+
+		$(window).scroll(function () {
+			var auto_load = $("#auto_load").val();
+			if (auto_load == 0) {
+				return false;
+			}
+			//初始状态，如果没数据return ,false;否则
+			if ($(".list").size() <= 0)
+			{
+				return false;
+			} else {
+				if ($(document).height() - ($(document).scrollTop() + $(window).height()) <= 400) {
+					if (auto_load == 1) {
+						$("#auto_load").val(0);
+						send();
+					}
+				}
+			}
+		});
+
+		function send() {
+			if (flag) {
+				return false;
+			}
+			var post_id = $("#post_id").val();
+			var userToken = $("#userToken").val();
+			var floor_num = $("#floor_num").val();
+
+			$.ajax({
+				type: 'post',
+				url: "/Api500/Post/loadMore.html",
+				data: {k: p, post_id: post_id, userToken: userToken, floor_num: floor_num},
+				dataType: 'json',
+				success: function (data) {
+					if (data.status == 1) {
+						var list = data.info;
+						$(".article_hotcmnt").append(list);
+						$("#floor_num").val(data.nextNum);
+                        
+                       //回复隐藏
+					$(".comment_wrap").each(function(){
+						var rep_len=$(this).children(".reply").length;
+						if(rep_len>3){
+							$(this).children(".reply:gt(2)").hide();
+
+                            if($(this).find("div").length==0){
+                            	 var more_len=$(this).children(".reply:gt(2)").length;
+						         $(this).append("<div class='more_btn' data-id='"+ more_len +"'>更多"+ more_len +"条回复...</div>");
+
+                                 //更多回复点击
+								$(this).find(".more_btn").click(function(){
+									var rd_hide_obj = $(this).parent(".comment_wrap").children(".reply:gt(2)");
+
+											if(rd_hide_obj.hasClass("rd_hide") == 1){
+												$(this).prevAll(".rd_hide").hide();
+												rd_hide_obj.removeClass("rd_hide");
+												$(this).html("更多"+ $(this).attr("data-id") +"条回sss复 ↓");
+											}else{
+												rd_hide_obj.addClass("rd_hide");
+												$(this).prevAll(".rd_hide").show();
+												$(this).html("收起 ↑");
+											}
+								});
+                            }
+						}
+					});
+
+						if (list != null) {
+							$("#auto_load").val(1);
+							if (data.info.length < 20) {
+								$("#auto_load").val(0);
+								$(".load_gif").hide();
+								$("#showLess").show();
+								flag = true;
+							}
+						}
+					} else {
+						$("#auto_load").val(0);
+						$(".load_gif").hide();
+						$("#showLess").show();
+						flag = true;
+					}
+				}
+			});
+			p++;
+		}
+	});
+
+	//评论点赞
+	function like_comment(id, num){
+		$('.like_comment_'+id).text('('+num+')');
+	}
+
+	//评论加载
+	function load_comment(top_id, fromUser, toUser, insertId, filter_content){
+		//如果没有展开就先展开
+		var rd_hide_obj = $('.comment_wrap_'+top_id).children(".reply:gt(2)");
+		if(rd_hide_obj.hasClass("rd_hide") != 1){
+			$('.comment_wrap_'+top_id+' .more_btn').click();
+		}
+
+		var str = '<article class="reply comment" comment_name="'+fromUser+'" comment_id="'+insertId+'"><em>'+fromUser+' 回复 '+toUser+'：</em>'+filter_content+'</article>';
+		$('.comment_wrap_'+top_id+' article:last').after(str);
+	}
+
+	//回复隐藏
+	$(".comment_wrap").each(function(){
+		var rep_len=$(this).children(".reply").length;
+		if(rep_len>3){
+			$(this).children(".reply:gt(2)").hide();
+			var more_len=$(this).children(".reply:gt(2)").length;
+			$(this).append("<div class='more_btn' data-id='"+ more_len +"'>更多"+ more_len +"条回复...</div>")
+		}
+	});
+
+	//更多回复点击
+	$(".more_btn").click(function(){
+		var rd_hide_obj = $(this).parent(".comment_wrap").children(".reply:gt(2)");
+
+	    if(rd_hide_obj.hasClass("rd_hide") == 1){
+			$(this).prevAll(".rd_hide").hide();
+			rd_hide_obj.removeClass("rd_hide");
+			$(this).html("更多"+ $(this).attr("data-id") +"条回复 ↓");
+	    }else{
+			rd_hide_obj.addClass("rd_hide");
+			$(this).prevAll(".rd_hide").show();
+			$(this).html("收起 ↑");
+	    }
+	});
+
+	//文章内容超出1000隐藏
+    var con_len = $("#myP").html().length;
+ 	if(con_len>1000){
+ 		$("#sub_con").html($("#myP").html().substr(0, 1000)+"...");
+ 		$("#myP").hide();
+ 		$("#sub_con").after("<div class='show_all'>展开全文</div>");
+ 	}
+ 	$(".show_all").click(function(){
+ 		$("#sub_con").hide();
+ 		$("#myP").show();
+ 		$(".show_all").hide();
+ 	});
+
+    //android 图片序号
+ 	 $(".article_main img").each(function (e) {
+            $(this).click(function () {
+                window.location.href = 'imgid:' + e;
+            })
+        });
+</script>
+ 
+</body>
+</html>

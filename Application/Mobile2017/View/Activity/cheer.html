@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta charset="UTF-8">
+
+        <title>制定国足专属助威海报</title>
+
+        <link rel="apple-touch-icon"  href="__IMAGES__/app-logo.png" />
+        <link rel="shortcut icon" href="__PUBLIC__/Home/images/icon/16X16.ico">
+        <!-- jquery -->
+        <script type="text/javascript" src="__PUBLIC__/Mobile/js/jquery-1.11.1.min.js"></script>
+        <!-- 自适应 计算html font-size -->
+        <script type="text/javascript" src="__PUBLIC__/Mobile/js/htmlwidth.js"></script>
+        <script>
+            var _hmt = _hmt || [];
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?0452415b61a2145478f9493dac7e2a81";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+        <!-- 引入公共样式 -->
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Mobile/css/base.css">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Mobile/css/common.css">
+
+        
+    <!-- 本页需要引用的css -->
+    <style type="text/css">
+		body{ background: #fff url(__IMAGES__/activity/background.jpg) repeat-y; background-size: 100% auto;}
+		.personNum{ width: 82%; padding: .15rem 0; text-align: center; font-size: .47rem; background: url(__IMAGES__/activity/pN-bg.png); background-size: 100% 100%; border-radius: 5px; margin: 0 auto; margin-bottom: .5rem; color: #e1e1e1; text-shadow: 3px 3px 3px rgba(0,0,0,0.5);}
+		.personNum span{ color: #ac2417; padding: 0 4px; text-shadow: none;}
+		.inputWrap{ text-align: center; height: .7rem; line-height: .7rem; margin-bottom: .3rem; color: #4e2100; font-size: .34rem;}
+		.inputWrap input{ height: .7rem; width: 3.2rem; border: 0 none; outline: 0 none; overflow: hidden; resize: none; background-color: rgba(0,0,0,0.28); border-radius: 5px; padding: 0 .1rem; color: #fff; font-size: .34rem;}
+		.secletWrap label{ display: inline-block; height: .7rem; width: 3.2rem;}
+		.secletWrap select{ appearance: none;-moz-appearance:none;-webkit-appearance:none; background-color: transparent; border: 0 none; outline: 0 none; padding-right: .4rem; background: transparent url(__IMAGES__/activity/select-bg.png) no-repeat right center; background-size: .27rem auto; margin-right: .2rem; font-size: .34rem; color: #4e2100;}
+		.table tr td{ padding-bottom: .5rem;}
+		.table select{ width: 1.44rem; height: 1.2rem; text-align:center; font-weight: 700px; font-size: .8rem; padding: 0 .45rem; color: #c63333; appearance: none;-moz-appearance:none;-webkit-appearance:none; background-color: transparent; border: 0 none; outline: 0 none; background: transparent url(__IMAGES__/activity/groove.png) no-repeat; background-size: 100% 100%;}
+		.state{  font-size: .34rem; color: #4e2100;}
+		.state img{ width: 4.13rem;}
+		.makeBtn{ display: block; width: 4.12rem; height: 1.35rem; margin: 0 auto; background: url(__IMAGES__/activity/make-btn03.png) no-repeat; background-size: 100% 100%;}
+		.rule_con{ border-bottom: 1px solid rgba(255,255,255,0.2);}
+		.rule_con_in{padding: 0 .26rem; border-bottom: 1px solid rgba(0,0,0,0.4);}
+		.rule{ padding-top: .1rem;}
+		.rule dt{ display: inline-block;  height: .6rem; line-height: .6rem; font-size: .34rem; color: #4e2100; font-weight: 700;}
+		.rule dd{ color: #4e2100; line-height: 160%;}
+		.rule dd { border-color: #fff; padding: .1rem 0;}
+		.rule .last-dd{max-width:  650px; margin: 0 auto; text-align: center;}
+                 /* 弹出层 */
+            .modal{  display: none; position: fixed;  top: .3rem;  left: 50%; width: 72%; margin-left: -36%;  z-index:1050;}
+            .modal-header{ padding: .2rem;}
+            .modal-header .modal-title{ line-height: .5rem; text-align: center; font-size: .36rem; font-weight: normal;}
+            .modal-body{ max-height: 8.2rem; overflow: hidden;}
+            .close{ position: absolute; right: -10%; top: 0; width: .5rem; height: .5rem; border-radius: 50%; background: rgba(0,0,0,0.5) url(__IMAGES__/activity/icon-close.png) no-repeat center center; background-size: 100% auto;}
+            .modal-footer{ padding: .2rem;}
+            .modal-footer a{ padding: .1rem .2rem;}
+            .modal-footer a:hover{ color: #fff;}
+            .modal-footer a:nth-child(2){ margin-right: .2rem;}
+            .modal-backdrop { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; z-index: 1040; background-color: #000000; opacity: 0.5; overflow-x: hidden;}
+            /* app下载 */
+            .app-bar{ overflow: hidden; width:100%; height: 1.1rem; background: rgba(247,247,247,0.8); font-family: "Microsoft Yahei"; z-index: 1045;}
+            .app-bar-position{position: fixed; left: 0; top: 0;}
+            .app-bar .app-logo{float:left; width: .8rem; margin: .15rem 0 0 .5rem;}
+            .app-btn{ float:right; background-color: #ff7e00; border-radius: .08rem; width: 1.8rem; height: .68rem; line-height: .68rem; font-size: 0.34rem; text-align: center; margin: .21rem .2rem 0 0; color:#FFF;}
+            .app-bar .app-title{ float: left; margin-left: .42rem; padding: .15rem 0;}
+            .app-bar .app-title .p1{ font-size: .32rem;}
+            .app-bar .app-title .p2{ font-size: .24rem;}
+    </style>
+    
+	<!-- 页面需要引进的js文件 -->
+    <script type="text/javascript" src="//www.qqty.com/Public/Api/Home/picDetail/js/panDuan.js"></script>
+ 
+</head>
+<body>
+     <section>
+            <div id="app-bar" class="app-bar">
+                <div class="app-logo"><img src="//m.qqty.com//Public/Mobile/images/app-logo.png"></div>
+                <div class="app-title">
+                    <p class="p1">全球体育APP</p>
+                    <p class="p2">最专业的体育宝典！</p>
+                </div>
+                 <a class="app-btn" id="load_btn" href="//m.qqty.com/H5/appJump/sign/zwgz" >立即下载</a>
+            </div>
+        </section>
+	<section><img src="__IMAGES__/activity/s01.jpg"></section>
+    <section>
+      	<div class="personNum">我是第<span>{$num}</span>位助威者</div>
+    </section>
+    <section><img src="__IMAGES__/activity/s02.png"></section>
+    <section>
+    	<form action="">
+        	<div class="inputWrap">
+                <label >
+                    输入姓名：
+                    <input type="text" placeholder="如：许家印" id="truename">
+                </label>
+            </div>
+            <div class="inputWrap">
+                <label >
+                    出发机场：
+                    <input type="text" placeholder="如：广州" id="city">
+                </label>
+            </div>
+            <div class="inputWrap secletWrap">
+            	出发日期：
+                    <select name="month" >
+                    	<option value="10">10月</option>
+                    </select>
+                    <select name="day" id="js-day">
+                    	<option value="1">01日</option>
+                    	<option value="2">02日</option>
+                    	<option value="3" selected="selected">03日</option>
+                        <option value="4">04日</option>
+                        <option value="5">05日</option>
+                        <option value="6">06日</option>
+                    </select>
+            </div>
+            <div class="inputWrap secletWrap">
+            	出发时间：
+                    <select name="hour" id="js-hour">
+                    	<option value="1">01点</option>
+                        <option value="2">02点</option>
+                        <option value="3">03点</option>
+                        <option value="4">04点</option>
+                        <option value="5">05点</option>
+                        <option value="6">06点</option>
+                        <option value="7">07点</option>
+                    	<option value="8">08点</option>
+                        <option value="9">09点</option>
+                        <option value="10">10点</option>
+                        <option value="11">11点</option>
+                        <option value="12">12点</option>
+                        <option value="13">13点</option>
+                        <option value="14">14点</option>
+                    	<option value="15" selected="selected">15点</option>
+                        <option value="16">16点</option>
+                        <option value="17">17点</option>
+                        <option value="18">18点</option>
+                        <option value="19">19点</option>
+                        <option value="20">20点</option>
+                        <option value="21">21点</option>
+                        <option value="22">22点</option>
+                        <option value="23">23点</option>
+                        <option value="24">24点</option>
+                    </select>
+                    <select name="time" id="js-time">
+                    	<option value="0">00分</option>
+                        <option value="1">01分</option>
+                        <option value="2">02分</option>
+                        <option value="3">03分</option>
+                        <option value="4">04分</option>
+                        <option value="5">05分</option>
+                        <option value="6">06分</option>
+                        <option value="7">07分</option>
+                        <option value="8">08分</option>
+                        <option value="9">09分</option>
+                        <option value="10">10分</option>
+                        <option value="11">11分</option>
+                        <option value="12">12分</option>
+                        <option value="13">13分</option>
+                        <option value="14">14分</option>
+                        <option value="15">15分</option>
+                        <option value="16">16分</option>
+                        <option value="17">17分</option>
+                        <option value="18">18分</option>
+                        <option value="19">19分</option>
+                        <option value="20">20分</option>
+                        <option value="21">21分</option>
+                        <option value="22">22分</option>
+                        <option value="23">23分</option>
+                        <option value="24">24分</option>
+                        <option value="25">25分</option>
+                        <option value="26">26分</option>
+                        <option value="27">27分</option>
+                        <option value="28">28分</option>
+                        <option value="29">29分</option>
+                        <option value="30" selected="selected">30分</option>
+                        <option value="31">31分</option>
+                        <option value="32">32分</option>
+                        <option value="33">33分</option>
+                        <option value="34">34分</option>
+                        <option value="35">35分</option>
+                        <option value="36">36分</option>
+                        <option value="37">37分</option>
+                        <option value="38">38分</option>
+                        <option value="39">39分</option>
+                        <option value="40">40分</option>
+                        <option value="41">41分</option>
+                        <option value="42">42分</option>
+                        <option value="43">43分</option>
+                        <option value="44">44分</option>
+                        <option value="45">45分</option>
+                        <option value="46">46分</option>
+                        <option value="47">47分</option>
+                        <option value="48">48分</option>
+                        <option value="49">49分</option>
+                        <option value="50">50分</option>
+                        <option value="51">51分</option>
+                        <option value="52">52分</option>
+                        <option value="53">53分</option>
+                        <option value="54">54分</option>
+                        <option value="55">55分</option>
+                        <option value="56">56分</option>
+                        <option value="57">57分</option>
+                        <option value="58">58分</option>
+                        <option value="59">59分</option>
+                        <option value="60">60分</option>
+                    </select>
+            </div>
+        </form>
+    </section>
+    <section><img src="__IMAGES__/activity/s03.png"></section>
+    <section>
+    	<table class="table">
+    		<tr>
+    			<td>
+                	<select name="score" id="half_home">
+                    	<option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </td>
+                <td class="state"><strong>半场推荐</strong></td>
+                <td>
+                	<select name="score" id="half_away">
+                    	<option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </td>
+    		</tr>
+            <tr class="state">
+            	<td colspan="3"><img src="__IMAGES__/activity/state-img.png"></td>
+            </tr>
+            <tr>
+    			<td>
+                	<select name="score" id="home">
+                    	<option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </td>
+                <td class="state"><strong>全场推荐</strong></td>
+                <td>
+                	<select name="score" id="away">
+                    	<option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </td>
+    		</tr>
+    	</table>
+    </section>
+    <section class="mtb-10"><a href="javascript:;" class="makeBtn"></a></section>
+    <section>
+    	<div class="rule_con">
+            <div class="rule_con_in">
+                <dl class="rule">
+                    <dt>活动玩法：</dt>
+                    <dd><strong>推荐半场、全场比分，将生成的海报分享至朋友圈即可完成推荐。</strong></dd>
+                </dl>
+            </div>
+            <div class="rule_con_in">
+                <dl class="rule">
+                    <dt>活动规则：</dt>
+                    <dd>1、活动时间截止为：10月6日19:35，同时命中半场及全场比分即为中奖，领奖时若发现没有在活动期间分享海报至朋友圈，则视为推荐无效；</dd>
+                    <dd>2、每人只有一次推荐机会，多次推荐以第一次为准；</dd>
+                    <dd>3、中奖球迷按助威顺序排名，<strong>前1-3名奖励188元，4-10名奖励88元，10名之后奖励28元；</strong>注：本次活动发放的奖励统一以全球体育APP金币形式发放（1金币=1元，可提现）</dd>
+                    <dd>4、中奖名单将于10月8号在“全球体育网”微信订阅号公布敬请留意；</dd>
+                    <dd>5、本次活动最终解释权归全球体育所有<br>全球体育微信订阅号：qqtyw1 <br>全球体育微信服务号：qqtyw8 <br>客服小编微信号：qqtyw520</dd>
+                    <dd class="last-dd"><img src="//m.qqty.com//Public/Mobile/images/activity/erwei.gif" alt="二维码"></dd>
+                </dl>
+            </div>
+        </div>
+    </section>
+        <!-- 模态窗口开始 -->
+        <div id="show" class="modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                     <img id="js-img" src="__IMAGES__/activity/made.jpg" alt="海报">
+                </div>
+                <div style="color: #fff; height: .4rem;  line-height: .4rem; text-align: center; font-size: .3rem;">长按图片保存到手机↑</div>
+                <a class="close" href="javascript:void(0)" ></a>
+            </div>
+        </div>     
+        <div id="bg" class="modal-backdrop" style="z-index: 1040;"></div>
+        <script src="__PUBLIC__/Mobile/js/Olympic/swiper_banner.js"></script>   
+        <script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        var title='制定国足专属助威海报';
+        var img='//m.qqty.com/Public/Mobile/images/activity/s01.jpg';
+        var desc='我们在一起，才是中国！';
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+
+            appId: "{$appid}", // 必填，公众号的唯一标识
+
+            timestamp: {$time}, // 必填，生成签名的时间戳
+
+            nonceStr: "{$nonceStr}", // 必填，生成签名的随机串
+
+            signature: "{$signature}", // 必填，签名，见附录1
+
+            jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareQZone','onMenuShareQZone','onMenuShareWeibo'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+
+        });
+        wx.ready(function () {
+            wx.onMenuShareTimeline({
+                title: title, // 分享标题
+
+                link: "{$link}", // 分享链接
+
+                imgUrl: img, // 分享图标
+
+                success: function () {
+
+                    // 用户确认分享后执行的回调函数
+
+                },
+                cancel: function () {
+
+                    // 用户取消分享后执行的回调函数
+
+                }
+
+            });
+            wx.onMenuShareWeibo({
+                title: title, // 分享标题
+                desc: desc, // 分享描述
+                link: "{$link}", // 分享链接
+                imgUrl: img, // 分享图标
+                success: function () { 
+                   // 用户确认分享后执行的回调函数
+                },
+                cancel: function () { 
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title: title, // 分享标题
+
+                desc: desc, // 分享描述
+
+                link: "{$link}", // 分享链接
+
+                imgUrl: img, // 分享图标
+
+                type: '', // 分享类型,music、video或link，不填默认为link
+
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+
+                success: function () {
+
+                    // 用户确认分享后执行的回调函数
+
+                },
+                cancel: function () {
+
+                    // 用户取消分享后执行的回调函数
+
+                }
+            });
+            wx.onMenuShareQQ({
+                title: title, // 分享标题
+
+                desc: desc, // 分享描述
+
+                link: "{$link}", // 分享链接
+
+                imgUrl: img, // 分享图标
+
+                success: function () {
+
+                    // 用户确认分享后执行的回调函数
+
+                },
+                cancel: function () {
+
+                    // 用户取消分享后执行的回调函数
+
+                }
+
+            });
+            wx.onMenuShareQZone({
+                title: title, // 分享标题
+
+                desc: desc, // 分享描述
+
+                link: "{$link}", // 分享链接
+
+                imgUrl: img, // 分享图标
+
+                success: function () {
+
+                    // 用户确认分享后执行的回调函数
+
+                },
+                cancel: function () {
+
+                    // 用户取消分享后执行的回调函数
+
+                }
+
+            });
+        });
+
+    </script>
+        <script>
+            $(function(){
+
+            //APP位置
+            $(window).scroll(function(e) {
+                if($(window).scrollTop()>$('.app-bar').height()){
+                    $('.app-bar').addClass('app-bar-position');
+                }else {
+                    $('.app-bar').removeClass('app-bar-position');
+                }
+            });
+
+            //光标聚焦
+            $('.textarea,.inputWrap input').focus(function (e) {
+                //$('body,html').stop().animate({ scrollTop:$('body').height()}, 200);
+                $('#app-bar').css({'display':'none'});
+            });
+
+            //弹出层
+            $(document).on('click','.makeBtn',function(){
+                var truename=$("#truename").val();
+                var city=$("#city").val();
+                var day=$("#js-day").val();
+                var hour=$("#js-hour").val();
+                var time=$("#js-time").val();
+                var half_home=$("#half_home").val();
+                var half_away=$("#half_away").val();
+                var home=$("#home").val();
+                var away=$("#away").val();
+                if(truename==''){
+                    alert('请输入您的姓名！');
+                    $("#truename").focus();
+                    return false;
+                }
+                if(city==''){
+                    alert('请输入您的城市！');
+                    $("#city").focus();
+                    return false;
+                }
+                var params={
+                    truename:truename,
+                    airpore:city,
+                    day:day,
+                    hour:hour,
+                    minutes:time,
+                    half_home:half_home,
+                    half_away:half_away,
+                    home:home,
+                    away:away,
+                };
+                $.ajax({
+                    type: 'post',
+                    url: "/Activity/docheer.html",
+                    data: params,
+                    dataType: 'json',
+                    success: function (data) {
+                       if(data.status==1){
+                            //$('.modal-body').html(data.info);
+                            $('#js-img').prop('src',data.info);
+                            $('.modal-backdrop,.modal').css('display', 'block');
+                       }else{
+                           alert(data.info);
+                       }
+                    }
+                });
+            });
+//            $('.makeBtn').click(function (e) {
+//                $('.modal-backdrop,.modal').css('display', 'block');
+//            });
+            $('.close').click(function (e) {
+                $('.modal-backdrop,.modal').css('display', 'none');
+            });
+        });
+        </script>
+
+    </body>
+</html>

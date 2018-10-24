@@ -1,0 +1,156 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>{$against.home_team_name.0}vs{$against.away_team_name.0}_足球分析_足彩比分直播_足球比分_全球体育</title>
+</block>
+<block name="body">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/common.css"> 
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/team_data.css"> 
+	<!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Home/js/score/htmlwidth.js"></script>
+        <include file="Public:top_index" />
+        <include file="FbScore/against"/>
+        <include file="FbScore/subnav"/>
+	   <!-- 内容 s -->
+	   <section class="odds_con clearfix">
+       		<!-- 数据导航s -->
+	   	    <nav class="odd_nav">
+                <ul>
+                  <li class="on"><a href="{:U('detail_action/'.$_GET['scheid'].'@bf')}">赛况</a></li>
+                  <li><a href="{:U('detail_statistical/'.$_GET['scheid'].'@bf')}">技术</a></li>
+                  <li><a href="{:U('detail_team/'.$_GET['scheid'].'@bf')}">阵容</a></li>
+                </ul> 
+             </nav>
+             <!-- 数据导航e --> 
+			<!-- 球队统计s -->
+            <div class="data_title">
+            	球队赛况
+            </div>
+            <div class="compare-data">
+                <div class="item">
+                    <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <volist name='data' id='v'>
+                                <php>
+                                    if($v[2]==11){
+                                        $swop=str_replace('↓','',$v[6]);
+                                        $swop=explode('↑',$swop);
+                                    }
+                                </php>
+                            <tr>
+                                <td width="50%" class="alignRight">
+                                    <eq name='v[1]' value='1'>                           
+                                        <div class="clearfix">
+                                            <eq name='v.2' value='11'>
+                                                <div class="clearfix">
+                                                    <span class="fr even evenImg"><img src="__PUBLIC__/Mobile/images/in.png"></span>
+                                                    <span class="fr even"><em>{$swop[1]}</em></span>
+                                                </div>
+                                                <div class="clearfix">
+                                                    <span class="fr even evenImg"><img src="__PUBLIC__/Mobile/images/out.png"></span>
+                                                    <span class="fr even"><em>{$swop[0]}</em></span>
+                                                </div>
+                                            <else/>
+                                            <span class="fr even evenImg"><img 
+                                                    <switch name="v.2">
+                                                    <case value="1"><img src='__PUBLIC__/Mobile/images/jinqiu.png'></case>
+                                                    <case value="2"><img src='__PUBLIC__/Mobile/images/red-card.png'></case>
+                                                    <case value="3"><img src='__PUBLIC__/Mobile/images/yellow-card.png'></case>
+                                                    <case value="7"><img src='__PUBLIC__/Mobile/images/penalty.png'></case>
+                                                    <case value="8"><img src='__PUBLIC__/Mobile/images/oolong.png'></case>
+                                                    </switch>
+                                                    </span>
+                                            <span class="fr even name"><em>{$v.6}</em></span>
+                                            </eq>
+                                        </div>
+                                    <else/>
+                                	<div class="clearfix">
+                                    	<span class="fr even">{$v.3}'</span>
+                                    </div>
+                                    </eq>
+                                </td>
+                                <td class="centerlLine">
+                                    <div class="mid">
+                                        <div class="time"></div>
+                                    </div>
+                                </td>
+                                <td width="50%" class="alignLeft">
+                                    <eq name='v[1]' value='1'>
+                                    <div class="clearfix">
+                                    	<span class="fl even">{$v.3}'</span>
+                                    </div>
+                                    <else/>
+                                    <div class="clearfix">
+                                        <eq name='v.2' value='11'>
+                                                <div class="clearfix">
+                                                    <span class="fl even evenImg"><img src="__PUBLIC__/Mobile/images/in.png"></span>
+                                                    <span class="fl even"><em>{$swop[1]}</em></span>
+                                                </div>
+                                                <div class="clearfix">
+                                                    <span class="fl even evenImg"><img src="__PUBLIC__/Mobile/images/out.png"></span>
+                                                    <span class="fl even"><em>{$swop[0]}</em></span>
+                                                </div>
+                                            <else/>
+                                            <span class="fl even evenImg"><img 
+                                                    <switch name="v.2">
+                                                <case value="1"><img src='__PUBLIC__/Mobile/images/jinqiu.png'></case>
+                                                <case value="2"><img src='__PUBLIC__/Mobile/images/red-card.png'></case>
+                                                <case value="3"><img src='__PUBLIC__/Mobile/images/yellow-card.png'></case>
+                                                <case value="7"><img src='__PUBLIC__/Mobile/images/penalty.png'></case>
+                                                <case value="8"><img src='__PUBLIC__/Mobile/images/oolong.png'></case>
+                                                    </switch>
+                                                    </span>
+                                            <span class="fl even name"><em>{$v.6}</em></span>
+                                            </eq>
+                                        </div>
+                                    </eq>
+                                </td>
+                            </tr>
+                            </volist>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="itemImgList">
+                	<table class="table" width="100%" cellpadding="0" cellspacing="0">
+                		<tbody>
+                			<tr>
+                				<td width="18%">
+                                	<div class="imgList">
+                                    	<img src="__PUBLIC__/Mobile/images/jinqiu.png">进球
+                                    </div>
+                                </td>
+                                <td width="18%">
+                                	<div class="imgList">
+                                    	<img src="__PUBLIC__/Mobile/images/penalty.png">点球
+                                    </div>
+                                </td>
+                                <td width="19%">
+                                	<div class="imgList">
+                                    	<img src="__PUBLIC__/Mobile/images/oolong.png">乌龙球
+                                    </div>
+                                </td>
+                                <td width="23%">
+                                	<div class="imgList">
+                                    	<img src="__PUBLIC__/Mobile/images/yellow-card.png">
+                                        <img src="__PUBLIC__/Mobile/images/red-card.png">
+                                        红黄牌
+                                    </div>
+                                </td>
+                                <td width="22%">
+                                	<div class="imgList">
+                                    	<img src="__PUBLIC__/Mobile/images/in.png">
+                                        <img src="__PUBLIC__/Mobile/images/out.png">
+                                        换人
+                                    </div>
+                                </td>
+                			</tr>
+                		</tbody>
+                	</table>
+                </div>
+            </div>
+            <!-- 球队统计e -->
+         
+	   </section>
+	   <!-- 内容 e -->
+           <include file="Public:footer"/>
+<include file="Public:return_top"/>
+</block>

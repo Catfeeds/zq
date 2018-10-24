@@ -1,0 +1,31 @@
+/*球王*/
+body{background: #efeff4}
+.bk_mainb{padding: .2rem}
+.bk_con{background: #fff;padding:.2rem .2rem 0 .2rem;border:1px solid #e0e0e0;margin-top: .2rem;border-radius: .1rem}
+.bk_title{padding-bottom: .2rem}
+.bk_title img{width:.4rem; height: auto;vertical-align: text-bottom;margin-right: .1rem;}
+.bk_title span{font-size: .34rem;font-weight: bold;}
+.bk_txt{padding: .2rem 0;border-top: 1px solid #e0e0e0;line-height: 150%;}
+.bk_txt i{background: #ff8f47;width: .3rem;height: .3rem;line-height: .3rem;color: #fff;font-family: 黑体;border-radius: 50%;margin-right: .1rem;display: inline-block;margin-top: -.1rem;padding-left: .05rem;}
+.no_border{border-top: 0}
+.des_style{color: #808080;padding-bottom: .5rem}
+.bk_foot p{color: #4c4c4c;padding-top: .05rem;font-size: .30rem;}
+.copyright{color: #333333!important;padding-top: .2rem!important;font-size: .32rem!important;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

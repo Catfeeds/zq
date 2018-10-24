@@ -1,0 +1,49 @@
+<extend name="Public/base" />
+<block name="conflict">
+</block>
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/schedule_base.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/competition.css?v=2018050718">
+    <script type="text/javascript" src="__JS__/schedulelist/swiper.min.js"></script>
+    <script type="text/javascript" src="__JS__/schedulelist/zepto.min.js"></script>
+    <style>
+        #footer .version a {
+            color:#0a94e4;
+        }
+    </style>
+</block>
+
+<block name="header">
+    <!-- 头部 -->
+    <header class="top">
+        <ul class="head-top">
+            <li class="f-h">
+                <a href="{:U('/'.$name)}"><img src="__IMAGES__/schedule/back.png"></a>
+            </li>
+            <li class="l-g">
+                <span class="leaguesIcon"></span>
+                <span class="photo">{$unionName}</span>
+            </li>
+        </ul>
+    </header>
+</block>
+
+<block name="nav"></block>
+
+<block name="content">
+    <input type="hidden" name="level" value="{$level}">
+    <input type="hidden" name="name" value="{$name}">
+    <!-- 主体内容 -->
+    <section class="wrapCon">
+        <!--动态插入-->
+    </section>
+</block>
+
+<block name="footer">
+</block>
+
+<block name="scripts">
+    <script type="text/javascript" src="__JS__/schedulelist/scheduleData.js"></script>
+</block>
+

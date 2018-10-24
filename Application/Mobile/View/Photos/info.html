@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" class="next-head"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{$seo['seo_title']|default='图库详情'}</title>
+    <meta name="keywords" content="{$seo['seo_keys']|default='足球比分,国际足球新闻,国内足球,篮球新闻,综合体育,电竞,彩票资讯,足球比分直播、视频集锦,英超,西甲,德甲,意甲,欧冠杯,亚冠,世界杯直播'}">
+    <meta name="description" content="{$seo['seo_desc']|default='全球体育手机网是一家涵盖国际足球、国内足球、篮球、NBA、综合体育类的大型体育新闻网，包括电竞、彩票资讯、足球比分直播等一系列体育竞技类最新资讯，还有英雄联盟、DOTA2、绝地求生、王者荣耀的精彩手游类视频集锦。'}">
+    <link rel="dns-prefetch" href="//img1.qqty.com" />
+    <link rel="dns-prefetch" href="//static.qqty.com" />
+    <link rel="dns-prefetch" href="//hm.baidu.com" />
+    <link href="{$canonical}" rel="canonical" />
+    <link rel="apple-touch-icon"  href="__PUBLIC__/Api/images/app-logo.png" />
+    <link rel="shortcut icon" href="__PUBLIC__/Home/images/icon/16X16.ico">
+    <!-- jquery -->
+    <script type="text/javascript" src="__JS__/jquery-1.11.1.min.js"></script>
+    <!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__JS__/htmlwidth.js"></script>
+    <!-- Link Swipers CSS -->
+    <link rel="stylesheet" href="__CSS__/swiper.min.css">
+    <link rel="stylesheet" href="__CSS__/photo/info.css?v=20180508">
+</head>
+<body style="overflow: hidden;">
+
+
+<!-- Swiper -->
+<div class="swiper-container" style=" position: relative; width: 100%; height: 100%;">
+    <neq name="_GET['header']" value="no">
+    <div class="back">
+        <a><img src="__IMAGES__/photo/f-h.png"></a>
+    </div>
+    </neq>
+    <div class="swiper-wrapper banner">
+        <volist name="data" id="vo">
+            <div class="swiper-slide pho">
+                <img class="cont-img" src="{$vo['image_url']}" width="" height="" alt="{$vo['title']}">
+                <div class="words">
+                    <span>{$vo['title']}</span>
+                    <p>{$vo['intro']}</p>
+                </div>
+            </div>
+        </volist>
+
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination number"></div>
+    <eq name="_GET['header']" value="no">
+        <include file="Public:go_back_pack"/>
+    </eq>
+</div>
+<!-- Swiper JS -->
+<script src="__JS__/swipers.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'fraction',
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        preventLinksPropagation: false,
+    });
+    var showType = 0;
+    $('.cont-img').on('click', function () {
+        if (showType) {
+            $('.back').css('display', '');
+            $('.swiper-pagination').css('display', '');
+            $('.words').css('display', '');
+            showType = 0;
+        } else {
+            $('.back').css('display', 'none');
+            $('.swiper-pagination').css('display', 'none');
+            $('.words').css('display', 'none');
+            showType = 1;
+        }
+    })
+    $('.back a').on('click', function () {
+        window.history.back();
+    })
+</script>
+</body>
+</html>

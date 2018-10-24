@@ -1,0 +1,104 @@
+/* 
+* @Author: Chen Siren
+* @Date:   2018-06-13 16:33:03
+* @Last Modified by:   Marte
+* @Last Modified time: 2018-06-13 16:33:49
+*/
+/*多媒体处理直播比分不同width显示*/
+@media screen and (max-width: 600px) {
+    body{ min-width: 100%;}
+    .contentMain{ width: 100%; }
+    .main{ width: 100%;}
+    .control-2{ margin-bottom: 10px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(5){ display: none;}
+    .table>thead:first-child>tr:first-child>th:nth-child(2){ width: 40px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(6){ width: 90px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(8){ width: 90px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(9){ width: 35px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(10){ width: 35px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(10){ width: 35px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(11){ display: none;}
+    .table>thead:first-child>tr:first-child>th:nth-child(12){ display: none;}
+    .table>thead:first-child>tr:first-child>th:nth-child(13){ width: 55px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(14){ width: 30px;}
+
+    .mytable01 .table td:nth-child(5){ display: none;}
+    .mytable01 .table td:nth-child(11){ display: none;}
+    .mytable01 .table td:nth-child(12){ display: none;}
+    .mytable01 .table td:nth-child(13){ display: none;}
+    .mytable01 .table td:nth-child(14){ display: none;}
+    .mytable01 .table td:nth-child(15){ display: none;}
+    .mytable01 .table td:nth-child(16){ display: none;}
+    .dataLink{ width: 50px;}
+}
+
+@media screen and (max-width: 700px) and (min-width: 600px) {
+    body{ min-width: 100%;}
+    .contentMain{ width: 100%; }
+    .main{ width: 100%;}
+    .control-2{ margin-bottom: 10px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(5){ display: none;}
+    .table>thead:first-child>tr:first-child>th:nth-child(2){ width: 40px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(6){ width: 90px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(8){ width: 90px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(9){ width: 35px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(10){ width: 35px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(10){ width: 35px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(11){ display: none;}
+    .table>thead:first-child>tr:first-child>th:nth-child(12){ display: none;}
+    .table>thead:first-child>tr:first-child>th:nth-child(13){ width: 55px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(14){ width: 30px;}
+
+    .mytable01 .table td:nth-child(5){ display: none;}
+    .mytable01 .table td:nth-child(11){ display: none;}
+    .mytable01 .table td:nth-child(12){ display: none;}
+    .mytable01 .table td:nth-child(13){ display: none;}
+    .mytable01 .table td:nth-child(14){ display: none;}
+    .mytable01 .table td:nth-child(15){ display: none;}
+    .mytable01 .table td:nth-child(16){ display: none;}
+    .dataLink{ width: 50px;}
+}
+
+@media screen and (max-width: 900px) and (min-width: 700px) {
+    body{ min-width: 100%;}
+    .contentMain{ width: 100%;}
+    .main{ width: 100%;}
+    .table>thead:first-child>tr:first-child>th:nth-child(5){ display: none;}
+    .table>thead:first-child>tr:first-child>th:nth-child(2){ width: 40px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(6){ width: 90px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(8){ width: 90px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(9){ width: 35px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(10){ width: 35px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(10){ width: 35px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(11){ width: auto;}
+    .table>thead:first-child>tr:first-child>th:nth-child(12){ display: none;}
+    .table>thead:first-child>tr:first-child>th:nth-child(13){ width: 55px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(14){ width: 30px;}
+    
+    .mytable01 .table td:nth-child(5){ display: none;}
+    .mytable01 .table td:nth-child(12){ display: none;}
+    .mytable01 .table td:nth-child(13){ display: none;}
+    .mytable01 .table td:nth-child(14){ display: none;}
+    .dataLink{ width: 50px;}
+}
+
+@media screen and (max-width: 1080px) and (min-width: 900px) {
+    body{ min-width: 100%;}
+    .contentMain{ width: 100%;}
+    .main{ width: 100%;}
+    .table>thead:first-child>tr:first-child>th:nth-child(1){ width: 20px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(2){ width: 60px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(4){ width: 35px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(5){ width: 35px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(6){ width: 100px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(7){ width: 40px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(8){ width: 100px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(9){ width: 35px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(10){ width: 35px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(13){ width: 55px;}
+    .table>thead:first-child>tr:first-child>th:nth-child(14){ width: 30px;}
+    .dataLink{ width: 48px;}
+}
+@media screen and (min-width: 1080px) {
+    body{ min-width: 1024px;}
+}

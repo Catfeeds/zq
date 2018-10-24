@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta charset="UTF-8">
+	<title>图集详情</title>
+    <script type="text/javascript" src="__PUBLIC__/Api/Home/picDetail/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Api/Home/picDetail/js/panDuan.js"></script>
+
+
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/Home/picDetail/css/common.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/Home/picDetail/css/girl.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/Home/picDetail/css/touchTouch.css">
+
+    <!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Api/Home/picDetail/js/htmlwidth.js"></script>
+    <!-- touchTouch JS -->
+    <script src="__PUBLIC__/Api/Home/picDetail/js/touchTouch.jquery.js"></script>
+    <script>
+    $(function(){
+    //图片事件,img-gather
+    $('#thumbs a').touchTouch();
+    });
+    </script>
+
+
+
+</head>
+<body>
+
+ <!--girl-main-->
+    <div class="girl-main">
+<!--         <div id="app-bar" class="app-bar">
+        <div class="app-logo"><img src="__PUBLIC__/Api/Home/picDetail/images/app-logo.png"></div>
+        <div class="app-title">
+          <p class="p1">全球体育APP</p>
+            <p class="p2">玩体育一起来吧</p>
+        </div>
+        <a class="app-btn" id="load_btn" href="javascript:;">立即下载</a>
+      </div> -->
+        <section>
+          <h1>{$detail['title']}</h1>
+        </section>
+        <!--img-gather-->
+        <div class="clearfix img-gather" id="thumbs">
+            <volist name="detail.imgages" id="item">
+                <a href="{$item}"><img src="{$item}"></a>
+            </volist>
+        </div>
+        <!--img-gather end-->
+
+        <!-- 点赞 后 section标签添加样式 on-->
+        <section class="zan <if condition="$detail['is_liked'] == 1">on</if>" pic_id="{$detail['id']}">
+            <div>
+            <span>{$detail['like_num']}</span>
+            <p>+1</p>
+            </div>
+        </section>
+        <!-- 点赞 end-->
+    </div>
+ <!-- girl-main end-->
+
+   <!-- 点赞 js-->
+    <script>
+      $(".zan div").click(function(){
+        if($(this).parent(".zan").hasClass("on") == false)
+        {
+            window.location.href = 'like:'+$('.zan').attr('pic_id');
+        }
+      })
+
+      function addLikeNum ()
+      {
+        var likeNum = parseInt($('.zan div span').text());
+        $('.zan div span').text(likeNum+1);
+        $('.zan').addClass("on");
+        showzan();
+      }
+
+      function showzan(){
+        $(".zan div p").animate({top:'-50px',opacity:0},"slow").css("display","block");
+        setTimeout(function(){
+          $(".zan div p").fadeOut();
+        },1200)
+      }
+    </script>
+    <!-- 点赞 js end-->
+</body>
+</html>

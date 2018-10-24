@@ -1,0 +1,21 @@
+<div class="scoreNav">
+
+	<link rel="stylesheet" href="__PUBLIC__/Home/bkscore/css/scoreLive/hint.css">
+    <ul class="clearfix">
+        <if condition="$header eq ''">
+        	<li class="pull-left <eq name="actionName" value="index">on</eq>"><a href="{:U('/lanqiu@bf')}" class="navLink"><i class="liveState"></i>即时比分</a></li>
+        	<li class="pull-left <eq name="actionName" value="schedule">on</eq>"><a href="{:U('/lanqiu/schedule@bf')}" class="navLink"><i class="overState"></i>完场赛事</a></li>
+        	<li class="pull-left <eq name="actionName" value="schtoday">on</eq>"><a href="{:U('/lanqiu/schtoday@bf')}" class="navLink"><i class="willState"></i>未来赛事</a></li>
+        	<li class="pull-left <eq name="actionName" value="indices">on</eq>"><a href="{:U('/lanqiu/indices@bf')}" class="navLink"><i class="liveIndex"></i>即时指数</a></li>
+            <li class="pull-left <eq name="actionName" value="generate">on</eq>"><a href="{:U('/lanqiu/generate@bf')}" class="navLink"><i class="freeUse"></i>免费调用</a></li>
+        <else/>
+			<style>.home{width: 100%;}</style>
+        	<li class="pull-left <eq name="actionName" value="index">on</eq>"><a href="{:U('/lanqiu@bf',['header'=>'no'])}" class="navLink"><i class="liveState"></i>即时比分</a></li>
+        	<li class="pull-left <eq name="actionName" value="schedule">on</eq>"><a href="{:U('/lanqiu/schedule@bf',['header'=>'no'])}" class="navLink"><i class="overState"></i>完场赛事</a></li>
+        	<li class="pull-left <eq name="actionName" value="schtoday">on</eq>"><a href="{:U('/lanqiu/schtoday@bf',['header'=>'no'])}" class="navLink"><i class="willState"></i>未来赛事</a></li>
+        	<li class="pull-left <eq name="actionName" value="indices">on</eq>"><a href="{:U('/lanqiu/indices@bf',['header'=>'no'])}" class="navLink"><i class="liveIndex"></i>即时指数</a></li>
+            <li class="pull-left"><a target="_blank" href="{:U('/lanqiu/generate@bf')}" class="navLink"><i class="freeUse"></i>免费调用</a></li>
+        </if>
+        
+    </ul>
+</div>

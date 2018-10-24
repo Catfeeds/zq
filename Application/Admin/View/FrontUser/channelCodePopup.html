@@ -1,0 +1,43 @@
+<div class="pageContent">
+	<form method="post" action="{$_REQUEST.actionName}"class="pageForm" onsubmit="return navTabSearch(this);">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit" width="200" height="50">
+				<label>注册时间：</label>
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="10"><label style="width:10px">至</label>
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="10">
+			</div>
+			<div class="unit" width="200">
+				<label >手机号：</label>
+				<input type="text" name="username" value="{$_REQUEST.username}"/>
+			</div>
+			<div class="unit" width="200">
+				<label >昵称：</label>
+				<input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+			</div>
+			<div class="unit" width="200">
+				<label>渠道id：</label>
+                <input type="text" name="channel_code" value="{$_REQUEST.channel_code}" placeholder="渠道id">
+            </div>
+            <div class="unit" width="200">
+				 <label>渠道名：</label>
+                 <input type="text" name="channel_name" value="{$_REQUEST.channel_name}" placeholder="渠道名、平台">
+            </div>
+            <div class="unit" width="200">
+				<label>金币流动：</label>
+                    <select name="flow" class="combox" onchange="$(form).submit()">
+                        <option value="" selected>全部</option>
+                        <option value="1" <if condition="$_REQUEST.flow  eq '1'">selected</if> >充值</option>
+                        <option value="2" <if condition="$_REQUEST.flow  eq '2'">selected</if> >消费</option>
+                    </select>
+			</div>
+
+			</if>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">开始检索</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="reset">清空重输</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

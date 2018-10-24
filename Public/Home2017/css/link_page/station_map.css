@@ -1,0 +1,26 @@
+/**
+ * 全彩网站地图css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-12-31
+**/
+/* 主体内容 */
+.home{ width: 1000px; margin: 12px auto; margin-top: 12px\9; margin-bottom: 12px\9}
+.top-center .center-right{line-height: 24px;}
+.contact-list{ margin-top: 23px;}
+.contact-list li{ float: left;  height: 24px; margin-left: 15px;}
+.contact-list li a{ display: block; height: 24px;  padding-left: 34px;}
+.contact-list li.one a{background: url(../../images/link_page/icon-home.png) no-repeat 0 center;}
+.contact-list li.two a{background: url(../../images/link_page/icon-kefu.png) no-repeat 0 center;}
+.contact-list li.three a{background: url(../../images/link_page/icon-compart.png) no-repeat 0 center;}
+.navs-con .navs-con-ul{ width: 1000px; border: 1px solid #e5e5e5;}
+.navs-con .navs-list{ padding: 15px 20px; margin-bottom: 0; border-bottom: 1px solid #e5e5e5;}
+.navs-con .navs-list dl{ margin-bottom: 0px;}
+.navs-con .navs-list dt{ width: 80px; text-align: center; font: 16px "微软雅黑","黑体"; font-weight: normal; color: #336699;}
+ .navs-con .navs-list dd{ width: 868px; line-height: 24px;}
+.navs-con .navs-list dd a{ margin-left: 20px;}
+/* 底部版权信息 */
+.footer{ padding: 18px 0; border-top: 1px solid #d7d7d7; background: #fff; text-align: center; color: #555; font-size: 12px;}
+.footer .link{ margin-bottom: 10px;}
+.footer .link a{ color: #555;}
+.footer .link a:hover{ color: #ff7e00;}

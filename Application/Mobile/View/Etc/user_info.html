@@ -1,0 +1,17 @@
+
+<div class="guess_infor">
+        	<figure class="clearfix">
+                <div class="fl headImg">
+                    <img <present name="user_auth">src="{$user_auth['head_url']}" alt="{$user_auth['nick_name']}"<else/>src="__IMAGES__/user/headImg.png" alt='请登录'</present>>
+                </div>
+                <figcaption class="fl head_infor">
+                    <p class="name"><present name="user_auth">{$user_auth['nick_name']}<else/>-</present></p>
+                    <ul class="infor_ul">
+                      <li><span class="fs24">积分：</span><em id='u_integral' class="fs22"><present name="user_auth">{$user_auth['integral']}<else/>-</present></em></li>
+                      <li><span class="fs24">推荐币：</span><em id='u_coin' class="fs22"><present name="user_auth">{$user_auth['coin']}<else/>-</present></em></li>
+                      <li><span class="fs24">排名：</span><em class="fs22"><present name="user_auth"><eq name="user_auth['rank']" value="0">-<else/>{$user_auth['rank']}</eq><else/>-</present></em></li>
+                    </ul>
+                </figcaption>
+                <a href="{:U('Etc/change')}" class="etc-more"><img src="__IMAGES__/etc/etc-more.png" alt='兑换推荐币'></a>
+            </figure>
+        </div>

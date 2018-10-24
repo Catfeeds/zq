@@ -1,0 +1,57 @@
+/**
+ * 全彩个人中心css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-23
+**/
+
+/* 查看记录 */
+.select-con{ margin-bottom: 15px;}
+.select-con select{ width: 150px;}
+.account-list .table .table-header th{ text-align: center; background: #dadada;}
+.account-list .table .one{ text-align: center; background: #ededed;}
+.account-list .table .two{ text-align: center; background: #f9f9f9;}
+.account-list .table .begin-time em{ margin-left: 10px;}
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td { border: 1px solid #fff;}
+/*页码开始*/
+.page-con {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.page-con nav {
+	height: 32px;
+	line-height: 32px;
+	padding: 0 20px;
+}
+
+.page-con .pagination {
+	margin: 3px 0 0 0;
+	float: right;
+}
+
+.page-con .pagination .webpage-jump {
+	margin-left: 20px;
+}
+
+.page-con .pagination .isTxtBig {
+	margin: 0 10px;
+	width: 50px;
+	height: 25px;
+	line-height: 25px;
+	float: left;
+	outline: none;
+	border: 1px solid #ddd;
+	padding: 0 4px;
+	text-align: center;
+}
+
+.page-con nav .page-text {
+	margin-right: 15px;
+}
+
+.pagination > li > a, .pagination > li > span {
+    padding: 2px 12px;
+    color: #107ee3;
+}
+/*页码结束*/

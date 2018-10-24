@@ -1,0 +1,16 @@
+/**
+ * 全彩个人中心css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-23
+**/
+
+/* 我的关注01 */
+body{ background: #ffffff;}
+.atten-list .table .table-header th{ text-align: center; background: #f7f7f7;}
+.atten-list .table .one{ text-align: center; background: #ffffff;}
+.atten-list .table .two{ text-align: center; background: #f7f7f7;}
+.atten-list .table .green{ background: #10a225; color: #fff;}
+.atten-list .table .begin-time em{ margin-left: 10px;}
+.right-main .tab-content .detail-btn02{ width: 60px; height: 22px; border: 1px solid #ff7e00; padding: 0;background: #ff7e00; color: #fff;border-radius: 20px;font-size: 12px!important;}
+.detail-btn:hover{color: #ff7e00!important;}

@@ -1,0 +1,127 @@
+<style>
+    .searchContent label{width: auto}
+    .searchContent li{width: auto !important;margin-right: 12px;}
+</style>
+<form id="pagerForm" action="__URL__/codeLog" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+    <volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/codeLog" method="post">
+    <input type="hidden" name="partner_id" value="{$_REQUEST.partner_id}">
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>
+                <label>有效时间：</label>
+                <input type="text" readonly="true"  class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="15">至
+                <input type="text" readonly="true"  class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="15">
+            </li>
+            <li>
+                <label>兑换用户：</label>
+                <input type="text"name="nick_name" value="{$_REQUEST.nick_name}">
+            </li>
+            <li>
+                <label>兑换状态：</label>
+                <select name="is_use" onchange="$(form).submit()" class="combox">
+                    <option value="">全部</option>
+                    <option <if condition="$_REQUEST.is_use eq '1'">selected </if> value="1">是</option>
+                    <option <if condition="$_REQUEST.is_use eq '0'"> selected </if> value="0">否</option>
+                </select>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+            <a class="edit" href="__URL__/onOff/sign/close" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确定都设为禁用?">
+            <span>批量设为禁用</span></a>
+            </li>
+            <li>
+            <a class="edit" href="__URL__/onOff/sign/open" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确定都设为启用?">
+            <span>批量设为启用</span></a>
+            </li>
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="2%" style="cursor: default;">
+                <div class="gridCol" title="">
+                    <input class="checkboxCtrl" type="checkbox" group="id">
+                </div>
+            </th>
+            <th width="3%">ID</th>
+            <th width="10%">合作商名称</th>
+            <th width="10%">兑换用户</th>
+            <th width="10%">兑换码</th>
+            <th width="5%" orderField="price" <if condition="$_REQUEST._order eq 'price'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>推荐价格</th>
+            <th width="8%" orderField="" <if condition="$_REQUEST._order eq ''">class="{$_REQUEST._sort}"<else/>class="desc"</if>>生成时间</th>
+            <th width="8%" orderField="over_time" <if condition="$_REQUEST._order eq 'over_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>券有效时间</th>
+            <th width="8%" orderField="" <if condition="$_REQUEST._order eq ''">class="{$_REQUEST._sort}"<else/>class="desc"</if>>兑换时间</th>
+            <th width="5%">兑换状态</th>
+            <th width="5%">状态</th>
+            <th width="5%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name="list">
+            <volist id="vo" name="list">
+                <tr target="sid_record" rel="{$vo['id']}" >
+                    <td>
+                        <div>
+                            <input type="checkbox" value="{$vo.id}" name="id">
+                        </div>
+                    </td>
+                    <td>{$vo['id']}</td>
+                    <td>{$vo['shop_name']}</td>
+                    <td>
+                        <if condition="$vo.is_use eq 1"><a href="__ADMIN__/FrontUser/index/id/{$vo['user_id']}" target="navTab">{$vo['nick_name']}</a><else />--</if>
+                    </td>
+                    <td>{$vo['code']}</td>
+                    <td>{$vo['price']}</td>
+                    <td>{$vo['add_time']|date="Y-m-d H:i:s",###}</td>
+                    <td>{$vo['over_time']|date="Y-m-d",###}</td>
+                    <td>
+                        <switch name="vo.is_use">
+                            <case value="1">{$vo['use_time']|date="Y-m-d H:i:s",###}</case>
+                            <case value="0">--</case>
+                        </switch>
+                    </td>
+                    <td>
+                        <switch name="vo.is_use">
+                            <case value="1"><div style="color: red">是</div></case>
+                            <case value="0"><div style="color: green">否</div></case>
+                        </switch>
+                    </td>
+                    <td>{$vo.status|getStatus}</td>
+                    <td>
+                        {$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",'__DWZ__'}
+                    </td>
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+
+</div>
+
+

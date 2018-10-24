@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta charset="UTF-8">   
+        <title>世界杯预测赢大奖</title>
+        <link rel="apple-touch-icon" href="">
+        <link rel="shortcut icon" href="">
+        <!-- jquery -->
+        <script type="text/javascript" src="__PUBLIC__/Mobile/js/jquery-1.11.1.min.js"></script>
+        <!-- 自适应 计算html font-size -->
+        <script type="text/javascript" src="__PUBLIC__/Mobile/js/htmlwidth.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/Mobile/js/CupquizActivities/cup.js?v=2018062719"></script>
+        <!-- swiper of css -->
+        <!-- 引入公共样式 -->
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Mobile/css/base.css">
+        <!-- <link rel="stylesheet" type="text/css" href="css/common.css">  -->
+        <style>
+            html,body{height:100%!important;}
+            .wrapCon{min-height: 100%}
+            .popup{position: absolute;top:0;left:0;width:100%;height:100%;display: none;background:rgba(0,0,0,0.7);overflow-y: auto;}
+            .popupChild img{width:100%;height:auto;}
+            .bot{position: fixed;bottom:0;left:0;width:100%;height:1.5rem;background:#fff;z-index:20000}
+            .protect{width:100%;height:.7rem;background:#fff04e;font-size: .28rem;line-height: .7rem;text-align:center;color:#333333;font-weight: bold ;}
+            .close-btn{width:100%;height:.8rem;line-height: .8rem;font-size: .34rem;text-align: center;font-weight: 400;color:#000000}
+            .wrapCon ul li p{ border-right: 1px solid #dde2ea;}
+            .total{ border-right: 1px solid #8cb1f7 !important;}
+            .remaining{ border-right: none !important;}
+        </style>
+    </head>
+    <body>
+    <div style="display: none">
+        {:htmlspecialchars_decode($site_setting['mobileJs'])}
+    </div>
+    <!-- 页面所需css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/CupquizActivities/predict.css?v=2018062719">
+            <!-- 头部 -->
+            <header class="top">
+                    <ul class="headline">
+                        <a onclick="history.back(-1);" class="back"><img src="__IMAGES__/CupquizActivities/last.png"></a>
+                        <li class="head-portrait"><img src="{$frontFace}"></li>
+                        <li><a href="JavaScript:;"><span>{$coin}</span>Q币</a></li>
+                        <li><a href="{:U('CupquizActivities/convert')}">兑换</a></li>
+                        <li ><a href="{:U('CupquizActivities/activePage')}" class="active">今日活动</a></li>
+                        <li><a href="{:U('CupquizActivities/guessList')}">预测记录</a></li>
+                    </ul>
+            </header>
+        <!-- 主体内容 -->
+        <section class="wrapCon">
+           <p>
+               <span>{$activity.title}</span>
+               <if condition="$cupS.result eq 1">
+                  <span>你的比赛预测</span>
+               <elseif condition="$cupS.result eq -1" />
+                  <span>你的比赛预测</span>
+               <else />
+               	<span>你的比赛预测已提交</span>
+               </if>
+           </p>
+          <ul>
+              <include file="CupquizActivities/guess"/>
+              <if condition="$cupS.result eq 1">
+                   <li>
+	                    <p class="total">获得:<strong>{$cupS['qcoin']}</strong>Q币<a href="javascript:;">去兑奖</a></p>
+	                    <p class="remaining win">
+	                       
+	                    </p>
+	                </li>
+              <elseif condition="$cupS.result eq -1" />
+                  <li>
+	                    <p class="total">好友助力:<strong>{$cupS['qcoin']}</strong>Q币</p>
+	                    <p class="remaining no-win">	                       
+	                    </p>
+	                </li>
+              <else />
+	               	<li>
+	                    <p class="total">全中将获得:<strong>{$cupS['qcoin']}</strong>Q币</p>
+	                    <p class="remaining">
+	                        <span class="timer" style=" margin-left: -1rem;">此轮倒计时</span>
+	                        <span>
+                                <i id="hourO">0</i>
+                                <i id="hourT">0</i>
+                                <i>:</i>
+                                <i id="minuteO">0</i>
+                                <i id="minuteT">0</i>
+                                <i>:</i>
+                                <i id="secondO">0</i>
+                                <i id="secondT">0</i>
+	                        </span>
+	                    </p>
+	                </li>
+              </if>
+          </ul>
+           <if condition="$cupS.result eq 1">
+                <a href="javascript:;" class="invitation-button" act_id="{$activity.id}" page_type="2" sponsor_id="{$cupS['id']}">炫耀一下</a>
+         		<a href="{:U('CupquizActivities/activePage')}" class="encourage-button">继续预测</a>
+           <elseif condition="$cupS.result eq -1" />
+                <a href="javascript:;" class="invitation-button" act_id="{$activity.id}" page_type="3" sponsor_id="{$cupS['id']}">分享一下</a>
+         		<a href="{:U('CupquizActivities/activePage')}" class="encourage-button">越战越勇，继续预测</a>
+           <else />
+           		<a href="javascript:;" class="invitation-button" act_id="{$activity.id}" page_type="1" sponsor_id="{$cupS['id']}">邀请好友助力，奖金马上升</a>
+         		<p class="remind">上轮活动最高获奖者得{$top}Q币</p>
+           </if>
+           
+           <input type="text" style="display:none;" class="activity_end_time" value="{$activity.end_time|date='Y/m/d H:i',###}"/>
+        
+         <div class="power-list">
+            <include file="CupquizActivities/helpList"/>
+         </div>
+         <div class="popup" id="popup"><div class="popupChild" style="width:75%;height:100%;position: relative;padding-top: 10px;margin:0 auto"></div></div>
+        </section>
+        <script>
+            var starttime = new Date($('.activity_end_time').val());
+            
+            function tozero() {
+                var nowtime = new Date();
+                var time = starttime - nowtime;
+                if(time > 0){
+                    var day = parseInt(time / 1000 / 60 / 60 / 24);
+                    var hour = parseInt(time / 1000 / 60 / 60 % 24) + day * 24;
+                    var minute = parseInt(time / 1000 / 60 % 60);
+                    var seconds = parseInt(time / 1000 % 60);
+                    //console.log(hour + "小时" + minute + "分钟" + seconds + "秒");
+                    if(hour >= 10){
+                        $('#hourO').html(hour.toString()[0]);
+                        $('#hourT').html(hour.toString()[1]);
+                    }else {
+                        $('#hourO').html(0);
+                        $('#hourT').html(hour);
+                    }
+                    if(minute >= 10){
+                        $('#minuteO').html(minute.toString()[0]);
+                        $('#minuteT').html(minute.toString()[1]);
+                    }else {
+                        $('#minuteO').html(0);
+                        $('#minuteT').html(minute);
+                    }
+                    if(seconds >= 10){
+                        $('#secondO').html(seconds.toString()[0]);
+                        $('#secondT').html(seconds.toString()[1]);
+                    }else {
+                        $('#secondO').html(0);
+                        $('#secondT').html(seconds);
+                    }
+                }else{
+
+                }
+            }
+            setInterval(function () {
+                tozero();
+            }, 1000);
+
+            // $('.close-btn').click(function(){
+            //     $('.popup').css('display','none');
+            // });
+          
+  
+        </script>
+    </body>
+
+</html>

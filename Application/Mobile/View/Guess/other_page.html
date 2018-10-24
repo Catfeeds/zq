@@ -1,0 +1,435 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/user/percircle.css">
+    <link rel="stylesheet" href="__CSS__/swiper.css">
+    <link rel="stylesheet" href="__CSS__/user/user.css">
+    <link rel="stylesheet" href="__CSS__/user/user_index.css">
+    <link rel="stylesheet" href="__CSS__/guess.css?v=201806061835">
+    <!--   <link rel="stylesheet" href="/min/?f=__CSS__/user/user.css,__CSS__/user/percircle.css,__CSS__/swiper.css,__CSS__/user/user_index.css,__CSS__/guess.css"> -->
+
+    <style type="text/css">
+        .user_infor figure div{ overflow: hidden;}
+        .user_infor img{ border-radius: 0;}
+        #other_header,.user_infor{
+            background: -webkit-linear-gradient(90deg, #08a76d, #169980, #08a76d); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(90deg, #08a76d, #169980, #08a76d); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(90deg, #08a76d, #169980, #08a76d); /* Firefox 3.6 - 15 */
+            background: linear-gradient(90deg, #08a76d, #169980, #08a76d); /* 标准的语法（必须放在最后） */
+        }
+        #other_header a{background:url(__PUBLIC__/Mobile/images/back.png) no-repeat center center;background-size: .22rem .4rem}
+        /*.rank_nav ul li {width:25%}*/
+        .rank_nav ul li {width:25%}
+        .color_fen,.color_fen p{color: #fd6d99!important}
+        .color_orange,.color_orange p{color: #ff7e00!important}
+        .color_red,.color_red p{color: #eb0000!important}
+        .color_blue,.color_blue p{color: #0085eb!important}
+        .color_green,.color_green p{color: #01af63!important} 
+    </style>
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <header id="other_header">
+        <a href="<present name='Think.cookie.pageUrl'>{$Think.cookie.pageUrl}<else/>/Guess/new_put.html</present>" class="back_link"></a><if condition="$_REQUEST.user_id neq is_login()">Ta<else/>我</if>的主页
+        <!--        <a href="javascript:;" class="share"><img src="__IMAGES__/icon/icon-shares.png"></a>-->
+        <if condition="$_REQUEST.user_id neq is_login()">
+            <a href="javascript:;" onclick="doFollow(this, {$userInfo['id']})" class="<if condition="$isFollow neq ''">atten<else/>atten2</if>"></a>
+        </if>
+    </header>
+</block>
+<!-- 二级头部 e -->
+
+<!-- 用户头像信息 s -->
+<block name="nav">
+</block>
+<block name="content">
+    <div class="user_infor">
+        <figure>
+            <div>
+                <img src="{$userInfo.head}">
+            </div>
+            <figcaption class="head_infor">
+                <p class="fs32 clearfix">
+                    <span class="fl">{$userInfo.nick_name}</span>
+                    <!-- <em class="lv lv{$userInfo.lv}"></em> -->
+                <!--     <gt name="userInfo.WinNum.win" value="5"><em class="mingz">近{$userInfo.WinNum.num}中{$userInfo.WinNum.win}</em></gt>
+                    <gt name="winnig.curr_victs" value="1"><em class="lians">{$winnig.curr_victs}连胜</em></gt> -->
+                </p>
+                <p>粉丝: {$userInfo.follow}</p>
+                <p class="fs24">简介： {$userInfo.descript}</p>
+            </figcaption>
+        </figure>
+    </div>
+    <!-- 用户头像信息 e -->
+
+
+
+    <section class="main">
+
+        <!-- 切换 s-->
+        <section class="user_rate">
+            <!-- Swiper -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+
+                        <div class="sw_top clearfix"><span class="fl">亚盘等级</span><em class="lv lv{$userInfo['lv']}"></em></div>
+                        <div class="sw_con sw_con01">
+                            <ul class="clearfix">
+                                <li <egt name='win.week' value='50'>class="color_fen"</egt>>
+                                    <p><span>{$win.week|default='0'}%</span></p>
+                                    <p>周胜率</p>
+                                </li>
+                                <li <egt name='win.month' value='50'>class="color_fen"</egt>>
+                                    <p><span>{$win.month|default='0'}%</span></p>
+                                    <p>月胜率</p>
+                                </li>
+                                <li <egt name='win.season' value='50'>class="color_fen"</egt>>
+                                    <p><span>{$win.season|default='0'}%</span></p>
+                                    <p>季胜率</p>
+                                </li>
+                                <li class="color_orange">
+                                    <p><span>{$winnig.curr_victs|default='0'}</span></p>
+                                    <p>当前连胜</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="sw_con sw_con02">
+                            <ul class="clearfix">
+                                <li class="color_red">
+                                    <p><span>{$winnig.win|default='0'}</span></p>
+                                    <p>胜场</p>
+                                </li>
+                                <li class="color_blue">
+                                    <p><span>{$winnig.level|default='0'}</span></p>
+                                    <p>平场</p>
+                                </li>
+                                <li class="color_green">
+                                    <p><span>{$winnig.transport|default='0'}</span></p>
+                                    <p>负场</p>
+                                </li>
+                                <li class="color_orange">
+                                    <p><span>{$winnig.max_victs|default='0'}</span></p>
+                                    <p>最大连胜</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="sw_top clearfix"><span class="fl">竞彩等级</span><em class="lv jc_lv{$userInfo['lv_bet']}"></em></div>
+                        <div class="sw_con sw_con01">
+                            <ul class="clearfix">
+                                <li <egt name='win.weekRace' value='50'>class="color_fen"</egt>>
+                                    <p><span>{$win.weekRace|default='0'}%</span></p>
+                                    <p>周胜率</p>
+                                </li>
+                                <li <egt name='win.monthRace' value='50'>class="color_fen"</egt>>
+                                    <p><span>{$win.monthRace|default='0'}%</span></p>
+                                    <p>月胜率</p>
+                                </li>
+                                <li <egt name='win.seasonRace' value='50'>class="color_fen"</egt>>
+                                    <p><span>{$win.seasonRace|default='0'}%</span></p>
+                                    <p>季胜率</p>
+                                </li>
+                                <li class="color_orange">
+                                    <p><span>{$winnigRace.curr_victs|default='0'}</span></p>
+                                    <p>当前连胜</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="sw_con sw_con02">
+                            <ul class="clearfix">
+                                <li class="color_red">
+                                    <p><span>{$winnigRace.win|default='0'}</span></p>
+                                    <p>胜场</p>
+                                </li>
+                                <!--<li class="color_blue">-->
+                                    <!--<p><span>{$winnigRace.level|default='0'}</span></p>-->
+                                    <!--<p>平场</p>-->
+                                <!--</li>-->
+                                <li class="color_green">
+                                    <p><span>{$winnigRace.transport|default='0'}</span></p>
+                                    <p>负场</p>
+                                </li>
+                                <li class="color_orange">
+                                    <p><span>{$winnigRace.max_victs|default='0'}</span></p>
+                                    <p>最大连胜</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Pagination -->
+                 <div class="swiper-pagination"></div>
+            </div>
+        </section>
+        <!-- 切换 e-->
+        <section class="her_tj clearfix">
+            <div class="ht_left fl"><if condition="$_REQUEST.user_id neq is_login()">Ta<else/>我</if>的推荐<span>(共{$winnig.total_times}场)</span></div>
+        </section>
+        <div class="rank_nav">
+            <ul class="clearfix">
+                <li class="fl <eq name='type' value=''>on</eq>"><a href="{:U('',['user_id'=>$user_id])}">全部</a></li>
+                <li class="fl <eq name='type' value='1'>on</eq>"><a href="{:U('',['user_id'=>$user_id,'type'=>'1'])}">让球</a></li>
+                <li class="fl <eq name='type' value='-1'>on</eq>"><a href="{:U('',['user_id'=>$user_id,'type'=>'-1'])}">大小</a></li>
+                <if condition="$type eq '2' OR $type eq '-2' ">
+                    <li class="fl on"><a href="{:U('',['user_id'=>$user_id,'type'=>'2'])}">竞彩</a></li>
+                <else/>
+                    <li class="fl"><a href="{:U('',['user_id'=>$user_id,'type'=>'2'])}">竞彩</a></li>
+                </if>
+            </ul>
+        </div>
+        <!-- </a> -->
+        <!-- 内容 s -->
+        <div class="new_tj com_dt clearfix">
+            <ul class="posts">
+                <volist name="gamble" id="item">
+                    <li class="list">
+                        <div class="p_1">
+                            <div class="t_vs"><if condition="$item.play_type eq '-2' OR $item.play_type eq '2'"><em>{$item['bet_code']} </em></if><em style="color: {$item.union_color}">{$item.union_name}</em> {$item.home_team_name} <if condition="$item.result eq 0">VS<else/><strong style="color: red">{$item.score|str_replace='-','：',###}</strong></if> {$item.away_team_name}</div>
+                            <div class="etip">
+                                <if condition="$item['desc'] neq ''">
+                                    <span><img src="__IMAGES__/guess/fenxi.png" alt="分析"></span>
+                                </if>
+                                <if condition="($item['is_trade'] eq 1 and $item['tradeCoin'] gt 0) or ($item['result'] neq 0 and $item['tradeCoin'] gt 0)">
+                                    <span class="coins">{$item['tradeCoin']}</span>
+                                </if>
+                                <if condition="($item['is_trade'] eq 1 and $item['tradeCoin'] eq 0) or ($item['result'] neq 0 and $item['tradeCoin'] eq 0)">
+                                    <span><img src="__IMAGES__/guess/free.png" alt="免费"></span>
+                                </if>
+                            </div>
+                        </div>
+                        <p class="p_2">{$item.game_date|strtotime|date="m/d",###}  {$item.game_time}</p>
+                        <p class="p_3">玩法：<span>
+                            <if condition="$item.play_type eq '1'">让球</if>
+                            <if condition="$item.play_type eq '-1'">大小球</if>
+                            <if condition="$item.play_type eq '2'">竞彩</if>
+                            <if condition="$item.play_type eq '-2'">竞彩</if>
+
+                        </span>
+                        </p>
+                    <if condition="$item['is_trade'] eq 1 or $item['user_id'] eq is_login() or $item['result'] neq 0">
+                        <!--各种样式: 赢:win 赢半:win_half 输:lose 输半:lose_half 平:ping -->
+                        <if condition="$item['result'] eq '1' OR $item['result'] eq '0.5'"><div class="win"></div></if>
+                        <if condition="$item['result'] eq '-1' OR $item['result'] eq '-0.5'"><div class="lose"></div></if>
+                        <if condition="$item['result'] eq '2' "><div class="ping"></div></if>
+                        <if condition="$item['result'] eq '-10' "><div class="cancel"></div></if>
+                        <if condition="$item['result'] eq '-11' "><div class="pending"></div></if>
+                        <if condition="$item['result'] eq '-12' "><div class="cut"></div></if>
+                        <if condition="$item['result'] eq '-13' "><div class="interrupt"></div></if>
+                        <if condition="$item['result'] eq '-14' "><div class="putoff"></div></if>
+
+                        <if condition="$item.play_type eq '1' OR $item.play_type eq '-1' ">
+                            <p class="p_4">推荐：<span>{$item.Answer} {$item.handcp} </span><em>（{$item.odds}）</em></p>
+                        </if>
+                        <if condition="$item.play_type eq '2' OR $item.play_type eq '-2' ">
+                            <p class="p_4">推荐：<span>{$item.home_team_name} ({$item.handcp}) {$item.Answer} </span><em>（{$item.odds}）</em></p>
+                        </if>
+                        <p class="p_5 q-two">分析：<span>{$item.desc|default='暂无分析'}</span></p>
+                        <else/>
+                        <a href="javascript:;" onclick="payment(this, {$item.id}, {$item.tradeCoin},4444)">
+                            <if condition="$item.tradeCoin eq 0">
+                                <div class="gold2 bg_green">免费</div>
+                                <else/>
+                                <div class="gold2">{$item.tradeCoin}金币</div>
+                            </if>
+                        </a>
+                    </if>
+                    </li>
+                </volist>
+            </ul>
+            <input type="hidden" id="auto_load" value="1">
+            <notempty name="gamble">
+                <div class="paged boxs">
+                    <div class="load_gif fs24 text-999">
+                        <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                        <span>正在加载更多的数据...</span>
+                    </div>
+                    <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已经全部加载完毕</a>
+                </div>
+            <else/>
+                <div class="paged boxs">
+                    <span style="color:#8a8a8a;">即将发布</span>
+                </div>
+                <div class="paged boxs"> </div>
+            </notempty>
+        </div>
+        <div id='tips_bg'></div>
+        <input type="hidden" value="{$user_auth.id}" name="user_auth" />
+        <input type="hidden" value="{$Think.get.user_id}" name="user_id" />
+        <input id="play_type" type="hidden" value="{$Think.get.type}" name="play_type" />
+        <input id="gambleType" type="hidden" value="{$gambleType}" name="gambleType" />
+        <!-- 内容 e -->
+        <div class="bubbleTips"></div>
+        <!-- 模态窗口开始 -->
+        <div id="dailogFixBox" class="fixBox" style="display: none">
+            <div class="fixBoxIn clearfix">
+                <div class="tip" style="line-height: 0.8rem; "><span id="dailogContent" ></span></div>
+                <a id="yesDailog" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+            </div>
+        </div>
+    </section>
+</block>
+<block name='scripts'>
+<script type="text/javascript" src="__JS__/progress/percircle.js"></script>
+ <!-- Swiper JS -->
+  <script src="__JS__/swiper.js"></script>
+  <script>
+
+      var DOMAIN = "m."+"__DOMAIN__";
+      var IMAGES = "__IMAGES__";
+
+      //信息提示弹框点击隐藏
+      $('#dailogFixBox').on('click',function () {
+          $(this).css('display','none');
+      });
+
+
+    $('.guess_sele').on('change',function(){
+      var sort = $(this).val();
+      var user_id = $("input[name='user_id']").val();
+      switch(sort){
+        case  '-1': window.location.href='/Guess/other_page/user_id/'+user_id+'/type/-1.html'; break;
+        case   '1': window.location.href='/Guess/other_page/user_id/'+user_id+'/type/1.html';  break;
+        default   : window.location.href='/Guess/other_page/user_id/'+user_id+'.html';  break;
+      }
+    })
+    $(document).on('click','#js-modal-close',function(){
+        $('.modal,#bg').css('display','none');
+    });
+    //banner 切换
+
+    var initialSlide = $('#play_type').val() == '2'
+                    || $('#play_type').val() == '-2'
+                    || $('#gambleType').val() == '2'
+                    ? 1 : 0;
+
+    var swiper = new Swiper('.swiper-container', {
+          initialSlide: initialSlide,
+          pagination: '.swiper-pagination',
+          paginationClickable: true,
+          spaceBetween: 30,
+          centeredSlides: true,
+          autoplay: false,
+          autoplayDisableOnInteraction: false
+      });
+    $(document).on('click','#js-modal-close',function(){
+        $('.modal,#bg').css('display','none');
+    });
+
+    $(function () {
+        $("#auto_load").val(1);
+        var p = 2;// 初始化页面，点击事件从第二页开始
+        var flag = false;
+        if ($(".list").size() <= 0)
+        {
+            $("#auto_load").val(0);
+            $(".load_gif").hide();
+            $("#showLess").show();
+        }
+        $(window).scroll(function () {
+            var auto_load = $("#auto_load").val();
+            if (auto_load == 0) {
+                return false;
+            }
+            //初始状态，如果没数据return ,false;否则
+            if ($(".list").size() <= 0)
+            {
+                return false;
+            } else {
+                if ($(document).height() - ($(document).scrollTop() + $(window).height()) <= 100) {
+                    if (auto_load == 1) {
+                        $("#auto_load").val(0);
+                        send();
+                    }
+                }
+            }
+        });
+        function send() {
+            if (flag) {
+                return false;
+            }
+            var user_id   = $("input[name='user_id']").val();
+            var play_type = $("input[name='play_type']").val();
+            $.ajax({
+                type: 'post',
+                url: "/Guess/other_page.html",
+                data: {k: p,user_id:user_id,type:play_type},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status == 1) {
+                        var list = data.info;
+                        $(".posts li:last").after(list);
+                        if (list != null) {
+                            $("#auto_load").val(1);
+                            if (data.info.length < 10) {
+                                $("#auto_load").val(0);
+                                $(".load_gif").hide();
+                                $("#showLess").show();
+                                flag = true;
+                            }
+                        }
+                    } else {
+                        $("#auto_load").val(0);
+                        $(".load_gif").hide();
+                        $("#showLess").show();
+                        flag = true;
+                    }
+
+                }
+            });
+            p++;
+        }
+    });
+    //关注
+    function doFollow(obj,id){
+        //判断是否在登录的状态--同步请求
+        var isLogin = false;
+        $.ajax({
+            type: 'post',
+            async : false,
+            url: "/Guess/show_guess.html",
+            dataType: 'json',
+            success: function (data) {
+                if(data.status==1)
+                {
+                    isLogin = true;
+                }
+                else
+                {
+                    isLogin = false;
+                    window.location.href = '/User/login.html';
+                }
+            }
+        });
+        if (! isLogin)
+            return false;
+      var type = $(obj).hasClass('atten2') ? '1' : '2';
+      $.ajax({
+          type:'post',
+          url:"/Guess/focus.html",
+          data:{id:id,type:type},
+          dataType:'json',
+          success:function(data){
+              if(data.status==-1){
+                  location.href=data.url;
+                  return false;
+              }
+              if(data.status==1){
+                  if (type==1) {
+                      $(obj).removeClass('atten2').addClass('atten');
+                  } else {
+                      $(obj).removeClass('atten').addClass('atten2');
+                  }
+              }else{
+//                  $('#tips_bg').html(data.info).stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                  $('#dailogContent').html(data.info);
+                  $('#dailogFixBox').css({'display':'block'});
+              }
+          }
+      });
+    }
+  </script>
+    <script src="__JS__/common/trade.js"></script>
+</block>

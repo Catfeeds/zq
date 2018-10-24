@@ -1,0 +1,92 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>活动标题：</label>
+				<input type="text" name="title" value="{$_REQUEST.title}"/>
+			</li>
+			<li>
+				<label>主播昵称：</label>
+				<input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+			</li>
+			<li>
+				<label>状态：</label>
+				<select name="status_select" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.status_select eq '1'">selected</if> >启用</option>
+					<option value="0" <if condition="$_REQUEST.status_select eq '0'">selected</if> >禁用</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true" rel="addLiveUser" height="350"><span>新增活动</span></a></li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" height="350" warn="请选择记录"><span>编辑</span></a></li>
+			<span style="float: right; font-weight:600;color:red;display: block; overflow: hidden; height: 23px; line-height: 23px;">总额：{$total_value}， 领取金额：{$total_get_value} &nbsp;|&nbsp; 总红包数：{$total_count}， 领取红包：{$total_get_count} </span>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="2%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th width="10%">活动标题</th>
+			<th width="8%">主播</th>
+			<th width="5%">单次金额/已领</th>
+			<th width="5%">单次红包个数/已领</th>
+			<th width="5%">发放开始时间</th>
+			<th width="5%">活动添加时间</th>
+			<!--<th width="5%">状态</th>-->
+			<th width="4%" orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>启用状态</th>
+			<th width="2%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['title']}</td>
+					<td>{$vo['nick_name']}（{$vo['user_id']}）</td>
+					<td><strong>{$vo['value']}</strong>（<span style="color: blue">{$vo['get_coin']}</span>）</td>
+					<td>
+						<a rel="RedpkgLog_{$vo['id']}" target="navTab" href="{:U('__ADMIN__/RedpkgLog/index',['pid'=>$vo['id']])}"><strong>{$vo['count']}</strong>（<span style="color: blue">{$vo['get_num']}</span>）</a></td>
+					<td>{$vo['start_time']|date="Y-m-d H:i",###}</td>
+					<td>{$vo['add_time']|date="Y-m-d H:i:s",###}</td>
+					<!--<td>-->
+						<!--<eq name="vo.send_status" value='1'>已开始<else/><span style="color: blue;">未开始</span></eq>-->
+					<!--</td>-->
+					<td>
+						<eq name="vo.status" value='0'>
+							<a title="确定启用吗？" href="__URL__/resume/id/{$vo.id}/status/1" target="ajaxTodo"><div style="color:red;">否</div></a>
+						<else/>
+							<a title="确定禁用吗？" href="__URL__/forbid/id/{$vo.id}/status/0" target="ajaxTodo"><div style="color:blue">是</div></a>
+						</eq>
+					</td>
+					<td>
+						<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" title="编辑" rel="editPage" height="350">编辑</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

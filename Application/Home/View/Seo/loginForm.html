@@ -1,0 +1,53 @@
+<div class="modal fade myLogin" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm m_login">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">用户登录</h4>
+            </div>
+            <div class="modal-body modal-body-jc">
+                <form id="ajaxLogin">
+                    <div class="item item-fore1">
+                        <label for="loginname" class="login-label name-label"></label>
+                        <input type="password" class="hidden"/>
+                        <input id="loginname" type="text" class="itxt" name="username" tabindex="1" autocomplete="off"
+                               placeholder="输入手机号">
+                        <span class="clear-btn"></span>
+                    </div>
+                    <div class="item item-fore1 item-fore2">
+                        <label class="login-label pwd-label" for="nloginpwd"></label>
+                        <input type="password" class="hidden"/>
+                        <input type="password" id="nloginpwd" name="password" class="itxt itxt-error" tabindex="2"
+                               autocomplete="off" placeholder="登录密码">
+                        <span class="clear-btn"></span>
+                    </div>
+                    <div class="clearfix remeber">
+                        <div class="pull-left">
+                            <label for="checkbox"><input id="checkbox" type="checkbox" name="remember"> 保持登录</label>
+                        </div>
+                        <div class="pull-right">
+                            <a href="javascript:;"  id="ml_reg" data-toggle="modal"
+                               data-target=".bs-example-modal-sm" data-dismiss="modal" aria-label="Close">免费注册</a>
+                            &nbsp;|&nbsp;
+                            <a href="{:U('User/re_phone')}" >忘记密码？</a>
+                        </div>
+                    </div>
+                    <div class="login-btn">
+                        <!-- <input class="btn btn-orange" type="button" onclick="submitReister(this)"  value="登录"> -->
+                        <input class="btn btn-orange" type="button" onclick="submitLogin()"  value="登录" id="login_btn">
+                    </div>
+
+                    <div class="else_login"><a href="{:U('User/sdk_login',['type'=>qq])}"  target="_blank;"><img
+                            src="__PUBLIC__/Home/images/login/qq.png">QQ登录</a><a
+                            href="{:U('User/sdk_login',['type'=>sina])}"  target="_blank;"><img
+                            src="__PUBLIC__/Home/images/login/sina.png">微博登录</a><a
+                            href="{:U('User/sdk_login',['type'=>weixin])}"  target="_blank;"><img
+                            src="__PUBLIC__/Home/images/login/wx.png">微信登录</a></div>
+
+                </form>
+                <input type="hidden" name="userId" value="{$userId}">
+            </div>
+        </div>
+    </div>
+</div>

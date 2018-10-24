@@ -1,0 +1,32 @@
+/**
+ * 英超css样式文件
+ * 
+ * @author pengjian <710348662@qq.com>
+ *
+ * @since  2016-04-15
+**/
+
+ 
+ /*英超 -  大小*/
+.en_bigs{width: 100%;text-align: left; }
+.en_bigs tr th{color: #cb945c;font-size: .26rem; height: .6rem;background: #ffefe0;text-align: center;}
+.en_bigs tr td{height: .8rem;text-align: center;} 
+.en_bigs tr td:first-child{width: 1.8rem;text-align: center;}
+.en_bigs tr:nth-child(2n+3){background-color: #f2f2f2}
+.en_bigs tr td span{ float: left;padding-right: .05rem } 
+
+#other_header aside{float: right;width: 3.2rem;}
+#other_header aside a{float: left;color: #fff;font-size: .3rem}
+
+
+
+
+
+
+
+
+
+
+
+
+

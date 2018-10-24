@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>资讯-详情页</title>
+    <!-- jquery -->
+    <script type="text/javascript" src="__PUBLIC__/Plugs/jquery-1.11.1.min.js"></script>
+    <!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Api/Home/articleDetail/js/htmlwidth.js"></script>
+    <!-- 引入公共样式 -->
+    <link rel="stylesheet" href="__PUBLIC__/Api/Home/articleDetail/css/base.css">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__PUBLIC__/Api/Home/articleDetail/css/news_detailV510.css?v=5.1">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Mobile/css/special/news.css?v=2018060151800">
+    <style type="text/css">
+      * {
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+    </style>
+</head>
+<body>
+
+<style>
+    .tj_user{background: #f7f7f7;padding: .2rem 0;text-align: center;color: #666;}
+    .tj_user span{color: #16a116;}
+    .tj_user a{color: #666;display: block;}
+    .authorNotes{padding:10px 0 20px 0;color:#999;border-bottom:1px solid #e5e5e5;font-size:16px;}
+</style>
+
+<section class="art_main boxs">
+
+    <!-- 标题 start-->
+    <section class="art_title">
+        <h1>{$detail['title']}</h1>
+        <if condition="empty($detail['user_id'])">
+            <time class="param_user" user_id="{$user_id}">{$detail['add_time']|date='Y-m-d H:i:s',###} {$detail['source']}</time>
+        </if>
+    </section>
+    <!-- 标题 end-->
+
+    <if condition="!empty($detail['user_id'])">
+        <div class="n_top clearfix">
+            <div class="n_top_left clearfix" userid="{$detail['user_id']}" is_expert = "{$is_expert}">
+                <a href="javascript:;" class="mainUser"><img class="lazy" data-original="https://img1.qqty.com/Uploads/user/7160/face/200.jpg?1407" src="{$detail['face']}" alt="{$detail['nick_name'] }" style="display: block;"></a>
+                <div class="ntl_main fl">
+                    <div class="ntl_name mainUser">{$detail['nick_name']}</div>
+                    <div class="ntl_per clearfix">
+                        <em>特邀专家</em>
+                        <if condition="$detail.tenGambleRate gt 5 && $is_vip neq 1">
+                            <em>近10中{$detail['tenGambleRate']}</em>
+                        </if>
+                    </div>
+                </div>
+            </div>
+            <div class="fr mlc_time">
+                <span>{$detail['click_number']}</span>
+                <p><time class="param_user">{$detail['add_time']|date='Y-m-d',###}</time></p>
+            </div>
+        </div>
+    </if>
+
+    <if condition="$gameInfo neq '' and $is_show eq 1">
+        <div class="guess_list">
+            <div class='g_state <switch name="gameInfo.result">
+                    <case value="1">win</case>
+                    <case value="0.5">win_half</case>
+                    <case value="2">ping</case>
+                    <case value="-0.5">lose_half</case>
+                    <case value="-1">lose</case>
+                    <case value="0.5">win_half</case>
+                    <case value="-11">daiding</case>
+                    <case value="-12">yaozhan</case>
+                    <case value="-13">zhongduan</case>
+                    <case value="-14">tuichi</case>
+                    <case value="-10">quxiao</case>
+                </switch>'>
+            </div>
+            <table class="table tb_guess_con"  width="100%" align="center" cellspacing="0" border="0" cellpadding="0">
+                <tbody>
+                    <tr class="matchName">
+                        <td colspan="3" style="text-align: left;"><span style="color: #0066FF">{$gameInfo['union_name']}</span>
+                        <if condition="$gameInfo['play_type'] eq 2 || $gameInfo['play_type'] eq -2">
+                            <span>{$gameInfo['bet_code']}</span>
+                        </if>
+                        </td>
+                    </tr>
+                    <tr class="tr_vs">
+                        <td width="35%"><img src="{$gameInfo['home_img']}" alt="{$gameInfo['home_team_name']}" title="{$gameInfo['home_team_name']}"><p>{$gameInfo['home_team_name']}</p></td>
+                        <td width="35%">
+                            <p class="timeP">{$gameInfo['game_date']}  {$gameInfo['game_time']}</p>
+                            <if condition="$gameInfo['result'] neq 0">
+                                <p class="scoreP">{$gameInfo['score']}</p>
+                                <p class="stautP">完场</p>
+                                <else />
+                                <p class="scoreP">VS</p>
+                            </if>
+                        </td>
+                        <td width="35%"><img src="{$gameInfo['away_img']}" alt="{$gameInfo['away_team_name']}" title="{$gameInfo['away_team_name']}" > <p>{$gameInfo['away_team_name']}</p></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <neq  name="detail['odds_other']" value="">
+            <table class="table tb_guess_con table-border"  width="100%" align="center" cellspacing="0" border="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <switch name="gameInfo['play_type']">
+                            <case value="1">
+                                <td width="25%">让球</td>
+                                <td width="25%" <if condition="$gameInfo['chose_side'] eq 1">class="on"</if>>{$gameInfo['odds']}<i></i></td>
+                                <td width="25%">{$gameInfo['handcp']}</td>
+                                <td width="25%" <if condition="$gameInfo['chose_side'] eq -1">class="on"</if>>{$gameInfo['odds_other']} <i></i></td>
+                            </case>
+                            <case value="-1">
+                                <td width="25%">大小</td>
+                                <td width="25%" <if condition="$gameInfo['chose_side'] eq 1">class="on"</if>>{$gameInfo['odds']} <i></i></td>
+                                <td width="25%">{$gameInfo['handcp']}</td>
+                                <td width="25%" <if condition="$gameInfo['chose_side'] eq -1">class="on"</if>>{$gameInfo['odds_other']} <i></i></td>
+                            </case>
+                            <case value="-2">
+                                <td width="25%">让球({$gameInfo['handcp']})</td>
+                                <td width="25%" <if condition="$gameInfo['chose_side'] eq 1">class="on"</if>>胜 <if condition="$gameInfo['chose_side'] eq 1">{$gameInfo['odds']} <i></i><else />{$gameInfo['odds_other']['home_letodds']}</if></td>
+                                <td width="25%" <if condition="$gameInfo['chose_side'] eq 0">class="on"</if>>平 <if condition="$gameInfo['chose_side'] eq 0">{$gameInfo['odds']} <i></i><else />{$gameInfo['odds_other']['draw_letodds']}</if></td>
+                                <td width="25%" <if condition="$gameInfo['chose_side'] eq -1">class="on"</if>>负 <if condition="$gameInfo['chose_side'] eq -1">{$gameInfo['odds']} <i></i><else />{$gameInfo['odds_other']['away_letodds']}</if></td>
+                            </case>
+                            <case value="2">
+                                <td width="25%">不让球</td>
+                                <td width="25%" <if condition="$gameInfo['chose_side'] eq 1">class="on"</if>>胜 <if condition="$gameInfo['chose_side'] eq 1">{$gameInfo['odds']} <i></i><else />{$gameInfo['odds_other']['home_odds']}</if></td>
+                                <td width="25%" <if condition="$gameInfo['chose_side'] eq 0">class="on"</if>>平 <if condition="$gameInfo['chose_side'] eq 0">{$gameInfo['odds']} <i></i><else />{$gameInfo['odds_other']['draw_odds']}</if></td>
+                                <td width="25%" <if condition="$gameInfo['chose_side'] eq -1">class="on"</if>>负 <if condition="$gameInfo['chose_side'] eq -1">{$gameInfo['odds']} <i></i><else />{$gameInfo['odds_other']['away_odds']}</if></td>
+                            </case>
+                        </switch>
+                    </tr>
+                </tbody>
+            </table>
+            </neq >
+        </div>
+    </if>
+    <!-- 文章内容 start -->
+    <article class="article_main">
+        {$detail['content']|htmlspecialchars_decode}
+    </article>
+    <if condition="$hide_content eq 1">
+        <div class="hit"><span>会员专享情报，开通会员阅读余下内容</span><a href="javascript:;">立即开通 V I P</a></div>
+    </if>
+    <!-- 文章内容end -->
+    <p class="statement">{:C('user_statement')}</p>
+</section>
+<notempty name="is_show">
+<section class="art_main2">
+    <if condition="count($list) gt 0">
+    <section class="her_tj clearfix">
+        <a href="javascript:void(0);">
+            <div class="ht_left fl"><if condition="$user_id eq 0">高手推荐<else />TA的推荐</if></div>
+            <div class="ht_right fr" user_id="{$user_id}">更多></div>
+        </a>
+    </section>
+    <!-- 他的推荐 内容 s -->
+    <div class="new_tj com_dt clearfix">
+        <ul class="posts">
+            <foreach name="list" item="v" key="k" >
+            <li class="list gamble_div_{$v['gamble_id']}">
+                <div class="n_top clearfix">
+                    <div class="n_top_left">
+                        <img user_id="{$v['user_id']}" class="lazy gambleUser" data-original="{$v['face']}" src="{$v['face']}" alt="{$v['nick_name']}" style="display: block;">
+                        <div class="ntl_main fl">
+                            <div class="ntl_name gambleUser" user_id="{$v['user_id']}">{$v['nick_name']}
+                                <em class="ya_text">
+                                    <if condition="($v['play_type'] eq -2) OR ($v['play_type'] eq 2)">
+                                        竞: <i>LV{$v['lv_bet']}</i>
+                                    <else />
+                                        亚: <i>LV{$v['lv']}</i>
+                                    </if>
+                                </em>
+                            </div>
+                            <div class="ntl_per">
+                                <em>周胜: {$v['weekPercnet']}%</em>
+                                <gt name="v['currentWin']" value="2">
+                                    <em>{$v['currentWin']}连胜</em>
+                                </gt>
+                            </div>
+                        </div>
+                    </div>
+                    <gt name="v['winNum']" value="5">
+                        <div class="n_top_right">
+                            <img src="/Public/Mobile/images/index/ic_{$v['winNum']}.png" alt="">
+                        </div>
+                    </gt>
+                </div>
+                <div class="p_1">
+                    <div class="t_vs">
+                        <if condition="($v['play_type'] eq -2) OR ($v['play_type'] eq 2)">
+                            <em>{$v['bet_code']}</em>
+                        </if>
+                        <em style="color: #008888">{$v['union_name'][0]}</em>
+                        <em>{$v['game_date']|strtotime|date='m/d',###}  {$v['game_time']}</em>
+                        <if condition="$v['is_trade'] eq 1 && $v['tradeCoin'] eq 0">
+                        <em class="mian"><img src="__PUBLIC__/Api/Home/articleDetail/images/mian.png" alt="免费"></em>
+                        </if>
+                    </div>
+                    <div class="etip"></div>
+                </div>
+                <div class="p_2 clearfix ">
+                    <span class="fl fs30 q-toe">{$v['home_team_name'][0]} VS {$v['away_team_name'][0]}</span>
+                    <if condition="$v['is_trade'] eq 0">
+                        <if condition="$v['tradeCoin'] eq 0">
+                            <a href="javascript:;" class="gold clickGamble fr free" gamble_id="{$v['gamble_id']}" gamble_coin="{$v['tradeCoin']}">免费</a>
+                       <else />
+                            <a href="javascript:;" class="gold clickGamble fr gold" gamble_id="{$v['gamble_id']}" gamble_coin="{$v['tradeCoin']}">{$v['tradeCoin']}Q币</a>
+                        </if>
+                    </if>
+                </div>
+                <p class="p_3 clearfix"><em class="fl">玩法：</em>
+                    <span class="fl">
+                    <if condition="$v['play_type'] eq 1">让分<elseif condition="$v['play_type'] eq -1"/><if condition="$game_type eq 1">大小<else />总分</if><else />竞彩</if>
+                    </span>
+                    <if condition="$v['user_id'] neq $my_id">
+                        <if condition="$v['is_trade'] eq 0">
+                            <span class="fr quiz_number">{$v['quiz_number']}</span>
+                        </if>
+                    </if>
+                </p>
+                <switch name="v['play_type']" >
+                    <case value="1"><p class="p_4" <if condition="$v['is_trade'] eq 0">style="display: none;"</if>>推荐：<span><switch name="v['chose_side']" > <case value="1">{$v['home_team_name'][0]}</case><case value="-1">{$v['away_team_name'][0]}</case></switch> ({$v['handcp']}) </span><em>({$v['odds']})</em></p></case>
+                    <case value="-1"><p class="p_4" <if condition="$v['is_trade'] eq 0">style="display: none;"</if>>推荐：<span><switch name="v['chose_side']" > <case value="1">大</case><case value="-1">小</case></switch> ({$v['handcp']}) </span><em>({$v['odds']})</em></p></case>
+                    <case value="2"><p class="p_4" <if condition="$v['is_trade'] eq 0">style="display: none;"</if>>推荐：<span><switch name="v['chose_side']" > <case value="1">{$v['home_team_name'][0]} 胜</case><case value="0">平</case><case value="-1">{$v['away_team_name'][0]} 负</case></switch> ({$v['handcp']}) </span><em>({$v['odds']})</em></p></case>
+                    <case value="-2"><p class="p_4" <if condition="$v['is_trade'] eq 0">style="display: none;"</if>>推荐：<span><switch name="v['chose_side']" > <case value="1">{$v['home_team_name'][0]} 胜</case><case value="0">平</case><case value="-1">{$v['away_team_name'][0]} 负</case></switch> ({$v['handcp']}) </span><em>({$v['odds']})</em></p></case>
+                </switch>
+                <p class="p_5 q-two gamble_trade2" <if condition="$v['is_trade'] eq 0">style="display: none;"</if>>分析：<span><if condition="$v['desc'] eq ''">暂无分析 <else />{$v['desc']}</if></span></p>
+            </li>
+            </foreach>
+        </ul>
+    </div>
+    <!-- 他的推荐 内容 e -->
+    </if>
+    <section class="art_main3">
+        <!-- 热门评论 strat -->
+        <section class="article_hotcmnt">
+            <aside class="cmmt_title">热门评论（{$number}）</aside>
+
+            <if condition="!empty($comment)">
+            <volist name="comment" id="item">
+                <div class="comment_box clearfix list" userid="{$item['user_id']}">
+                    <div class="head">
+                        <img src="{$item['face']}" alt="head" class="user">
+                    </div>
+                    <div class="comment_wrap comment_wrap_{$item['id']}">
+                        <p><span class="user">{$item['nick_name']}</span><a href="javascript:void(0);" class="on" comment_id="{$item['id']}">({$item['like_num']})</a>
+                        </p>
+                        <time>{$item['create_time']|date='Y-m-d H:i',###}</time>
+                        <article class="comment" comment_id="{$item['id']}" comment_name="{$item['nick_name']}" id="{$item['id']}">
+                            <if condition="$item['status'] eq 1">
+                                {$item['content']}
+                                <else/>
+                                <span style="color: #999">该条评论已被管理员屏蔽</span>
+                            </if>
+                        </article>
+                        <!--二级评论-->
+                        <volist name="item['subComment']" id="subItem">
+                            <article class="reply comment" comment_id="{$subItem['id']}" comment_name="{$subItem['fromUser']}" id="{$subItem['id']}">
+                                <em><span>{$subItem['fromUser']}</span> 回复 {$subItem['toUser']}</em>
+                                <if condition="$item['status'] eq 1">
+                                    {$subItem['content']}
+                                    <else/>
+                                    <span style="color: #999">该条回复已被管理员屏蔽</span>
+                                </if>
+
+                            </article>
+                        </volist>
+                        <!--二级评论end-->
+                    </div>
+                </div>
+            </volist>
+            <else />
+                <div class="view_more" article_id="{$detail['id']}">
+                <a>暂无评论数据</a>
+                </div>
+            </if>
+        </section>
+        <!-- 热门评论 end -->
+    </section>
+    <div class="paged boxs">
+        <div class="load_gif fs24 text-999">
+            <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+            <span>正在加载更多的数据...</span>
+        </div>
+        <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已显示全部评论</a>
+    </div>
+    <input type="hidden" id="userToken" value="{$userToken}">
+    <input type="hidden" id="article_id" value="{$detail['id']}">
+    <input type="hidden" id="auto_load" value="1">
+</section>
+</notempty>
+
+<script>
+    $(function () {
+        //跳转开通会员
+        $(document).on('click', '.hit a', function(e) {
+            window.location.href = 'vip:do';
+        });
+
+        $(document).on("click", ".mainUser", function(){
+            window.location.href = 'user:' + $(this).parents('.n_top_left').attr('userid') + ':'+ $(this).parents('.n_top_left').attr('is_expert');
+        });
+
+        $(document).on("click", ".user", function(){
+            window.location.href = 'user:' + $(this).parents('.comment_box').attr('userid');
+        });
+
+        $(document).on("click", ".comment_box .on", function(){
+            window.location.href = 'like:' + $(this).attr('comment_id');
+        });
+
+        $(document).on("touchend", ".comment", function(){
+            window.location.href = 'comment:'+$(this).attr('comment_id')+'_'+$(this).attr('comment_name');
+        });
+
+        $(".article_main img").each(function (e) {
+            $(this).click(function () {
+                window.location.href = 'imgid:' + e;
+            })
+        });
+
+        //更多推荐
+        $('.ht_right').click(function () {
+            window.location.href = 'moregamble:' + $(this).attr('user_id');
+        });
+
+        //推荐
+        $('.clickGamble').click(function () {
+            window.location.href = 'gamble:' + $(this).attr('gamble_id')+'_'+$(this).attr('gamble_coin');
+        });
+
+        //推荐用户
+        $('.gambleUser').click(function () {
+            window.location.href = 'user:' + $(this).attr('user_id');
+        });
+
+        //名师
+        $('.param_user').click(function () {
+            var user_id = $(this).attr('user_id');
+            if(user_id > 0){
+                window.location.href = 'user:' + user_id;
+            }
+        });
+
+    });
+
+    //购买推荐(兼容ios)
+    function byGamble(gamble_id){
+        buyGamble(gamble_id);
+    }
+
+    //购买推荐
+    function buyGamble(gamble_id){
+        $('.gamble_div_'+gamble_id+' .gold').hide();
+        $('.gamble_div_'+gamble_id+' .quiz_number').hide();
+        $('.gamble_div_'+gamble_id+' .p_4').css('display', 'block');
+        $('.gamble_div_'+gamble_id+' .gamble_trade2').css('display', 'block');
+
+        var coin = $('.gamble_div_'+gamble_id+' .clickGamble').attr('gamble_coin');
+        if(coin == 0){
+            $('.gamble_div_'+gamble_id+' .t_vs').append('<em class="mian"><img src="__PUBLIC__/Api/Home/articleDetail/images/mian.png" alt="免费"></em>');
+        }
+    }
+
+    //评论点赞成功回调
+    function upCommentNum(comment_id){
+        var commentObj = $('.comment_wrap a[comment_id='+comment_id+']');
+        var numStr = commentObj.text();
+        var num = numStr.replace(/\(|\)/g,'');
+        var newNum = Number(num) + 1;
+        commentObj.text('('+newNum+')');
+    }
+
+    //评论加载
+    function load_comment(top_id, fromUser, toUser, insertId, filter_content){
+        //如果没有展开就先展开
+        var rd_hide_obj = $('.comment_wrap_'+top_id).children(".reply:gt(2)");
+        if(rd_hide_obj.hasClass("rd_hide") != 1){
+            $('.comment_wrap_'+top_id+' .more_btn').click();
+        }
+
+        var str = '<article class="reply comment" comment_name="'+fromUser+'" comment_id="'+insertId+'"><em>'+fromUser+' 回复 '+toUser+'：</em>'+filter_content+'</article>';
+        $('.comment_wrap_'+top_id+' article:last').after(str);
+    }
+
+    //回复隐藏  
+    $(".comment_wrap").each(function(){ 
+        var rep_len=$(this).children(".reply").length;
+        if(rep_len>3){
+            $(this).children(".reply:gt(2)").hide();
+            var more_len=$(this).children(".reply:gt(2)").length;
+            $(this).append("<div class='more_btn' data-id='"+ more_len +"'>更多"+ more_len +"条回复...</div>")
+        }
+    });
+    //更多回复点击
+    $(".more_btn").click(function(){ 
+       var rd_hide_obj = $(this).parent(".comment_wrap").children(".reply:gt(2)");
+       if(rd_hide_obj.hasClass("rd_hide") == 1){ 
+        $(this).prevAll(".rd_hide").hide();
+        rd_hide_obj.removeClass("rd_hide");
+        $(this).html("更多"+ $(this).attr("data-id") +"条回复 ↓");
+       }else{
+        rd_hide_obj.addClass("rd_hide");
+        $(this).prevAll(".rd_hide").show();
+        $(this).html("收起 ↑");
+       } 
+    });
+
+    //加载更多方法
+    $(function () {
+        $("#auto_load").val(1);
+        var p = 2;// 初始化页面，点击事件从第二页开始
+        var flag = false;
+
+        if ($(".list").size() <= 10)
+        {
+            $("#auto_load").val(0);
+            $(".load_gif").hide();
+            if(p > 2){
+                $("#showLess").show();
+            }
+        }
+
+        $(window).scroll(function () {
+            var auto_load = $("#auto_load").val();
+            if (auto_load == 0) {
+                return false;
+            }
+            //初始状态，如果没数据return ,false;否则
+            if ($(".list").size() <= 0) {
+                return false;
+            } else {
+                if ($(document).height() - ($(document).scrollTop() + $(window).height()) <= 400) {
+                    if (auto_load == 1) {
+                        $("#auto_load").val(0);
+                        send();
+                    }
+                }
+            }
+        });
+
+        function send() {
+            if (flag){
+                return false;
+            }
+            var article_id = $("#article_id").val();
+            var userToken = $("#userToken").val();
+
+            $.ajax({
+                type: 'post',
+                url: "/Api500/Home/loadMoreComment.html",
+                data: {p: p, article_id: article_id, userToken: userToken},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status == 1) {
+                        var list = data.info;
+                        $(".article_hotcmnt").append(list);
+
+                        //回复隐藏
+                        $(".comment_wrap").each(function(){
+                            var rep_len=$(this).children(".reply").length;
+                            if(rep_len>3){
+                                $(this).children(".reply:gt(2)").hide();
+
+                                if($(this).find("div").length==0){
+                                    var more_len=$(this).children(".reply:gt(2)").length;
+                                    $(this).append("<div class='more_btn' data-id='"+ more_len +"'>更多"+ more_len +"条回复...</div>");
+
+
+                                    //更多回复点击
+                                    $(this).find(".more_btn").click(function(){
+                                        var rd_hide_obj = $(this).parent(".comment_wrap").children(".reply:gt(2)");
+
+                                        if(rd_hide_obj.hasClass("rd_hide") == 1){
+                                            $(this).prevAll(".rd_hide").hide();
+                                            rd_hide_obj.removeClass("rd_hide");
+                                            $(this).html("更多"+ $(this).attr("data-id") +"条回sss复 ↓");
+                                        }else{
+                                            rd_hide_obj.addClass("rd_hide");
+                                            $(this).prevAll(".rd_hide").show();
+                                            $(this).html("收起 ↑");
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                        if (list != null) {
+                            $("#auto_load").val(1);
+                            if (data.info.length < 20) {
+                                $("#auto_load").val(0);
+                                $(".load_gif").hide();
+                                $("#showLess").show();
+                                flag = true;
+                            }
+                        }
+                    } else {
+                        $("#auto_load").val(0);
+                        $(".load_gif").hide();
+                        $("#showLess").show();
+                        flag = true;
+                    }
+                }
+            });
+            p++;
+        }
+    });
+</script>
+</body>
+</html>

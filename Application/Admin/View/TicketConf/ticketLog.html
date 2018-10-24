@@ -1,0 +1,168 @@
+<style>
+    .searchContent label{width: auto}
+    .searchContent li{width: auto !important;margin-right: 12px;}
+</style>
+<form id="pagerForm" action="__URL__/ticketLog" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+    <volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/ticketLog" method="post">
+    <input type="hidden" value="{$_REQUEST.class_id}" name="class_id">
+    <input type="hidden" value="{$_REQUEST.gift_id}" name="gift_id">
+    <input type="hidden" value="{$_REQUEST.partner_id}" name="partner_id">
+    <input type="hidden" value="{$_REQUEST.user_id}" name="user_id">
+    <input type="hidden" value="{$_REQUEST.is_use}" name="is_use">
+    <input type="hidden" value="{$_REQUEST.type}" name="type">
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>
+                <label>购买人名称：</label>
+                <input type="text"name="nick_name" value="{$_REQUEST.nick_name}">
+            </li>
+            <li>
+                <label>兑换码：</label>
+                <input type="text"name="code" value="{$_REQUEST.code}">
+            </li>
+            <li>
+                <label>获取时间：</label>
+                <input type="text" readonly="true"  class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="15">至
+                <input type="text" readonly="true"  class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="15">
+            </li>
+            <li>
+                <label>获取方式：</label>
+                <select name="get_type" onchange="$(form).submit()" class="combox">
+                    <option value="">全部</option>
+                    <option <if condition="$_REQUEST.get_type eq '1'">selected </if> value="1">购买</option>
+                    <option <if condition="$_REQUEST.get_type eq '2'"> selected </if> value="2">兑换</option>
+                    <option <if condition="$_REQUEST.get_type eq '3'"> selected </if> value="3">注册赠送</option>
+                    <option <if condition="$_REQUEST.get_type eq '4'"> selected </if> value="4">活动赠送</option>
+                    <option <if condition="$_REQUEST.get_type eq '5'"> selected </if> value="5">系统赠送</option>
+                    <option <if condition="$_REQUEST.get_type eq '6'"> selected </if> value="6">摇一摇赠送</option>
+                </select>
+            </li>
+           <li>
+                <label>渠道查询：</label>
+                <select name="plat_form" onchange="$(form).submit()" class="combox">
+                    <option value="">全部</option>
+                    <option <if condition="$_REQUEST.plat_form eq '1'">selected </if> value="1">web</option>
+                    <option <if condition="$_REQUEST.plat_form eq '2'"> selected </if> value="2">IOS</option>
+                    <option <if condition="$_REQUEST.plat_form eq '3'"> selected </if> value="3">ANDRIOD</option>
+                </select>
+            </li>
+            <li>
+                <label>使用状态：</label>
+                <select name="is_use" onchange="$(form).submit()" class="combox">
+                    <option value="">全部</option>
+                    <option <if condition="$_REQUEST.is_use eq '1'">selected </if> value="1">是</option>
+                    <option <if condition="$_REQUEST.is_use eq '0'"> selected </if> value="0">否</option>
+                </select>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="3%">ID</th>
+            <th width="10%">用户名称</th>
+            <th width="6%">劵类型</th>
+            <th width="6%" orderField="price" <if condition="$_REQUEST._order eq 'price'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>价格/限额</th>
+            <th width="6%" orderField="give_coin" <if condition="$_REQUEST._order eq 'give_coin'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>销售/赠送金额</th>
+            <th width="8%" orderField="get_time" <if condition="$_REQUEST._order eq 'get_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>获取时间</th>
+            <th width="8%" orderField="over_time" <if condition="$_REQUEST._order eq 'over_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>有效时间</th>
+            <th width="6%">获取渠道</th>
+            <th width="6%">获取方式</th>
+            <th width="8%">兑换码</th>
+            <th width="8%" orderField="use_time" <if condition="$_REQUEST._order eq 'use_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>使用时间</th>
+            <th width="6%" orderField="is_use" <if condition="$_REQUEST._order eq 'is_use'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>是否使用</th>
+            <th width="6%">状态</th>
+            <th width="5%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name="list">
+            <volist id="vo" name="list">
+                <tr target="sid_record" rel="{$vo['id']}" >
+                    <td>{$vo['id']}</td>
+                    <td>
+                        <a href="__ADMIN__/FrontUser/index/id/{$vo['user_id']}" target="navTab">
+                        {$vo['nick_name']}
+                        </a>
+                    </td>
+                    <td>
+                        <switch name="vo.type">
+                            <case value="1">体验劵</case>
+                            <case value="2">优惠券</case>
+                        </switch>
+                    </td>
+                    <td>{$vo['price']}</td>
+                    <td>{$vo['give_coin']}</td>
+                    <td>{$vo['get_time']|date="Y-m-d H:i:s",###}</td>
+                    <td>{$vo['over_time']|date="Y-m-d",###}</td>
+                    <td>
+                        <switch name="vo.plat_form">
+                            <case value="1">WEB</case>
+                            <case value="2">IOS</case>
+                            <case value="3">ANDRIOD</case>
+                        </switch>
+                    </td>
+                    <td>
+                        <switch name="vo.get_type">
+                            <case value="1">购买</case>
+                            <case value="2">兑换</case>
+                            <case value="3">注册赠送</case>
+                            <case value="4">活动赠送</case>
+                            <case value="5">系统赠送</case>
+                            <case value="6">摇一摇赠送</case>
+                        </switch>
+                    </td>
+                    <td>{$vo['code']}</td>
+                    <td><if condition="$vo['use_time'] neq 0">{$vo['use_time']|date="Y-m-d H:i:s",###}<else/>--</if></td>
+                    <td>
+                        <switch name="vo.is_use">
+                            <case value="1"><div style="color: red">是</div></case>
+                            <case value="0"><div style="color: green">否</div></case>
+                        </switch>
+                    </td>
+                    <td>
+                        <switch name="vo.status">
+                            <case value="1"><a title="你确定要设为禁用吗？" href="__URL__/saveStatus/id/{$vo.id}/status/0" target="ajaxTodo"><div style="color:red;"><div style="color: green">正常</div></a></case>
+                            <case value="0"><a title="你确定要设为正常吗？" href="__URL__/saveStatus/id/{$vo.id}/status/1" target="ajaxTodo"><div style="color:blue"><div style="color: red">禁用</div></a></case>
+                        </switch>
+                    </td>
+                    <td>
+                    <if condition="$vo.is_use eq 1">
+                        <a href="__ADMIN__/GambleList/buyDetails/user_id/{$vo['user_id']}/gamble_id/{$vo['gamble_id']}" title="查看推荐记录" rel="checkGamble" target="navTab">查看推荐</a>
+                    </if>
+                    </td>
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

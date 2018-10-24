@@ -1,0 +1,193 @@
+<extend name="Public/base" />
+<block name="append">
+	 <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/user/user.css">
+
+    <!-- 本页需要引用的js -->
+	<script type="text/javascript">
+    	$(function(){
+            //切换选中
+            $('.price_ul li .odd').click(function(e) {
+                    $(this).parents('li').siblings().find('.odd').removeClass('on');  //移除本行其他单元格的on
+                    //$(this).parents('tr').siblings('tr').find('.odd').removeClass('on');  //移除另行所有单元格的on
+                    //$(this).hasClass("on") ? $(this).removeClass("on") : $(this).addClass("on"); //条件成立执行这个语句1 ： 否则执行这个语句2
+                    $(this).toggleClass('on'); //切换类
+            });
+	});
+    </script>
+</block>
+
+
+<block name="header">
+
+    <style type="text/css">
+        #other_header,.head_user{
+        background: -webkit-linear-gradient(90deg, #08a76d, #169980, #08a76d); /* Safari 5.1 - 6.0 */
+        background: -o-linear-gradient(90deg, #08a76d, #169980, #08a76d); /* Opera 11.1 - 12.0 */
+        background: -moz-linear-gradient(90deg, #08a76d, #169980, #08a76d); /* Firefox 3.6 - 15 */
+        background: linear-gradient(90deg, #08a76d, #169980, #08a76d); /* 标准的语法（必须放在最后） */
+        }
+        #other_header .back_link{background:url(/Public/Mobile/images/back.png) no-repeat .2rem center;background-size: .22rem .4rem}
+    </style>
+	<!-- 二级头部 s -->
+    <header id="other_header">
+    	<!--<a href="{$userUrl}" class="back_link"></a>-->
+        <a href="{:U('User/user_inform')}" class="share"><img src="__IMAGES__/icon/icon-noice.png">
+            <if condition="isset($new_message) and ($new_message neq 0)"><i></i></if>
+        </a>
+    </header>
+    <!-- 二级头部 e -->
+</block>
+<block name="nav">
+</block>
+<block name="content">
+	<section class="main">
+    	<!-- 用户头部 -->
+        <div class="head_user">
+            <a <present name='user_auth'>href="{:U('Guess/other_page',['user_id'=>$user_auth['id']])}"<else/>href="{:U('User/login')}"</present>>
+            <figure>
+                    <div class="fs32">
+                        <present name='user_auth'>
+                        <img src="{$user_auth.head}" />
+                        <else/> <img src="__IMAGES__/user/headImg.png" /></present>
+                    </div>
+                    <figcaption class="fs32">
+                        <present name='user_auth'>{$user_auth.nick_name}<else/>登录/注册</present>
+              </figcaption>
+                </figure>
+            </a>
+        </div>
+        <!-- 用户头部 -->
+        <!-- 用户导航 -->
+        <div class="user_nav">
+        	<div class="user_nav_con">
+            	<ul class="clearfix">
+            		<li>
+                            <a href="{:U('User/gold_deta')}">
+                    	<p>{$info.count_coin|default='-'}</p>
+                        <p>金币</p></a>
+                    </li>
+                    <li>
+                        <a href="{:U('User/integral_deta')}">
+                    	<p>{$info.point|default='-'}</p>
+                        <p>总积分</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:U('User/myFans')}">
+                    	<p>{$info.follow|default='-'}</p>
+                        <p>粉丝</p>
+                        </a>
+                    </li>
+            	</ul>
+            </div>
+        </div>
+        <!-- 用户导航 -->
+        <!-- 用户条例 -->
+        <div class="user_list">
+        	<ul class="clearfix">
+        		<li>
+                	<a href="{:U('Pay/index')}">
+                        <span class="fl iconImg"><img src="__IMAGES__/icon/icon-charge.png" ></span>
+                        <span class="fl fs30">充值</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                    </a>
+                </li>
+                <li>
+                	<a href="{:U('User/drawal_extract')}">
+                        <span class="fl iconImg"><img src="__IMAGES__/icon/icon-draw.png" ></span>
+                        <span class="fl fs30">提款</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                    </a>
+                </li>
+        	</ul>
+   		</div>
+        <div class="user_list">
+        	<ul class="clearfix">
+        		<li>
+                	<a href="{:U('User/basic')}">
+                        <span class="fl iconImg"><img src="__IMAGES__/icon/icon-personal.png" ></span>
+                        <span class="fl fs30">基本资料</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                    </a>
+                </li>
+        	<ul class="clearfix">
+        		<li>
+                	<a href="{:U('User/myquiz')}">
+                        <span class="fl iconImg"><img src="__IMAGES__/icon/icon-guess.png" ></span>
+                        <span class="fl fs30">我的推荐</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                    </a>
+                </li>
+                <li>
+                	<a href="{:U('User/mybuy')}">
+                        <span class="fl iconImg"><img src="__IMAGES__/icon/icon-car.png" ></span>
+                        <span class="fl fs30">我的购买</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Intro/order')}">
+                        <span class="fl iconImg"><img src="__IMAGES__/icon/icon-intro.png" ></span>
+                        <span class="fl fs30">球王订购</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Ticket/myTicket')}">
+                        <span class="fl iconImg"><img src="__IMAGES__/icon/icon-free.png" ></span>
+                        <span class="fl fs30">我的优惠券</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                        <span class="fr fs30"><if condition="$user_auth neq ''" >{$available_num}张可用</if></span>
+                    </a>
+                </li>
+
+                <li>
+                	<a href="{:U('User/fcous_dt')}">
+                        <span class="fl iconImg"><img src="__IMAGES__/icon/icon-save.png" ></span>
+                        <span class="fl fs30">我关注的</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('Activity/gamble')}">
+                        <span class="fl iconImg"><img src="__IMAGES__/icon/icon-active.png" ></span>
+                        <span class="fl fs30">推荐活动</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('User/set')}">
+                        <span class="fl iconImg"><img src="__IMAGES__/icon/icon-setting.png" ></span>
+                        <span class="fl fs30">功能设置</span>
+                        <i class="fr"><img src="__IMAGES__/user/np_more.png"></i>
+                    </a>
+                </li>
+        	</ul>
+    	</div>
+        <present name="user_auth">
+        <div class="user_list">
+        	<ul class="clearfix">
+        		<li>
+                	<a href="{:U('User/logout')}" style="text-align: center;">
+                        <span class="fs30 red">退出登录</span>
+                    </a>
+                </li>
+        	</ul>
+    	</div>
+        </present>
+        <div class="bubbleTips"></div>
+        <!-- 用户条例 -->
+        <!-- 底部导航 -->
+<!--        <nav class="foter_nav">
+        	<ul class="clearfix">
+        		<li class="fs30"><a href="javascript:;"><img src="__IMAGES__/icon/icon-feedback.png">反馈</a></li>
+                <li class="fs30"><a href="{:U('User')}"><img src="__IMAGES__/icon/icon-set.png">设置</a></li>
+        	</ul>
+        </nav>-->
+        <!-- 底部导航 -->
+	</section>
+</block>
+<block name="footer">
+    <include file="Public/footer_new"/>
+</block>

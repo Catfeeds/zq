@@ -1,0 +1,122 @@
+<extend name="Public/Olympic/base" />
+<block name="seo">
+    <title>2016里约奥运会奖牌榜_中国奖牌榜_全球体育手机网</title>
+</block>
+<block name="append">
+    <style type="text/css">
+        #other_header span{ padding: .1rem .2rem;  position: relative; background: #fff; cursor: pointer; font-size: .26rem;}
+        #other_header span:nth-child(2){ margin-left: -1px;}
+        #other_header span.on{ background: #00d0b0; color: #fff;}
+    </style>
+
+    <!-- 本页需要引用的js -->
+    <script type="text/javascript">
+        $(function () {
+            var id="{$id}";
+            $(".nav_medal a").eq(id-1).addClass('on');
+            $(".matchCon").eq(id-1).css('display','');
+            $(document).on('click', '#js-all', function () {
+                location.href = '/Olympic/medal';
+            });
+            $('.nav_medal a').click(function (e) {
+                $(this).addClass('on').siblings().removeClass('on');
+                var medType = $(this).index();
+                $('.section .tableCon').eq(medType).show().siblings().hide();
+            });
+        })
+    </script>  
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <header id="other_header">
+        <a href="{:U('Olympic/index')}"></a><span id='js-all'>奖牌榜</span><span class="on">中国奖牌榜</span> 
+    </header>
+</block>
+<!-- 二级头部 e --> 
+<block name="nav">
+    <div class="nav_medal">
+        <a href="javascript:;">金牌</a>
+        <a href="javascript:;">银牌</a>
+        <a href="javascript:;">铜牌</a>
+    </div>
+</block>
+<!-- 是否只显示中国对球赛 -->
+<block name="content">
+    <section class="section">
+        <div class="matchCon tableCon list1" style="display:none">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td width="16%"></td>
+                        <td width="18%">运动员</td>
+                        <td width="38%">项目</td>
+                        <td width="15%">日期</td>
+                        <td width="12%">详情</td>
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name='list.1' id='v'>
+                    <tr>
+                        <td class="fs26 text-666">{$v.name}</td>
+                        <td class="fs30">{$v.player_name}</td>
+                        <td class="fs26 text-young">{$v.sport_name}</td>
+                        <td class="fs26 text-666">{$v.get_time|date='m-d',###}</td>
+                        <td class="fs26 text-666"><a href="{:U('Olympic/news_detail',['id'=>$v['url']])}">查看</a></td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+        <div class="matchCon tableCon  list2" style="display:none">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td width="16%"></td>
+                        <td width="18%">运动员</td>
+                        <td width="38%">项目</td>
+                        <td width="15%">日期</td>
+                        <td width="12%">详情</td>
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name='list.2' id='v'>
+                    <tr>
+                        <td class="fs26 text-666">{$v.name}</td>
+                        <td class="fs30">{$v.player_name}</td>
+                        <td class="fs26 text-young">{$v.sport_name}</td>
+                        <td class="fs26 text-666">{$v.get_time|date='m-d',###}</td>
+                        <td class="fs26 text-666"><a href="{:U('Olympic/news_detail',['id'=>$v['url']])}">查看</a></td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+        <div class="matchCon tableCon  list3" style="display:none">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td width="16%"></td>
+                        <td width="18%">运动员</td>
+                        <td width="38%">项目</td>
+                        <td width="15%">日期</td>
+                        <td width="12%">详情</td>
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name='list.3' id='v'>
+                    <tr>
+                        <td class="fs26 text-666">{$v.name}</td>
+                        <td class="fs30">{$v.player_name}</td>
+                        <td class="fs26 text-young">{$v.sport_name}</td>
+                        <td class="fs26 text-666">{$v.get_time|date='m-d',###}</td>
+                        <td class="fs26 text-666"><a href="{:U('Olympic/news_detail',['id'=>$v['url']])}">查看</a></td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!-- 公共js -->
+    <script type="text/javascript" src="__JS__/Olympic/common.js"></script>
+</block>

@@ -1,0 +1,51 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>{$against.home_team_name.0}vs{$against.away_team_name.0}_足球分析_足彩比分直播_足球比分_全球体育</title>
+</block>
+<block name="body">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/common.css"> 
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/team_data.css"> 
+	<!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Home/js/score/htmlwidth.js"></script>
+        <include file="Public:top_index" />
+        <include file="FbScore/against"/>
+            <include file="FbScore/subnav"/>
+	   <!-- 内容 s -->
+	   <section class="odds_con clearfix">
+       		<!-- 数据导航s -->
+	   	    <nav class="odd_nav">
+                <ul>
+                  <li><a href="{:U('detail_action/'.$_GET['scheid'].'@bf')}">赛况</a></li>
+                  <li class="on"><a href="{:U('detail_statistical/'.$_GET['scheid'].'@bf')}">技术</a></li>
+                  <li><a href="{:U('detail_team/'.$_GET['scheid'].'@bf')}">阵容</a></li>
+                </ul> 
+             </nav>
+             <!-- 数据导航e --> 
+			<!-- 球队统计s -->
+            <div class="data_title">
+            	球队统计
+            </div>
+            <div class="compare-data">
+            	<table class="table" width="100%" cellpadding="0" cellspacing="0">
+                    <volist name="data" id="v">
+                	<tr>
+                    	<td width="8%">{$v.1}</td>
+                        <td width="35%">
+                        	<div class="expand-percent alignRight"><span class="expand" style="width: {$v.homerate}%"></span></div>
+                        </td>
+                        <td width="14%">{$v.title}</td>
+                        <td width="35%">
+                        	<div class="expand-percent alignLeft"><span class="expand" style="width: {$v.awayrate}%"></span></div>
+                        </td>
+                        <td width="8%">{$v.2}</td>
+                    </tr>
+                    </volist>
+                </table>
+            </div>
+            <!-- 球队统计e -->
+         
+	   </section>
+	   <!-- 内容 e -->
+       <include file="Public:footer"/>
+<include file="Public:return_top"/>
+</block>

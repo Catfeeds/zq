@@ -1,0 +1,92 @@
+
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+
+        <div class="searchBar">
+            <ul class="searchContent">
+                 <li>
+                    <label>idfa：</label>
+                    <input type="text" name="idfa" value="{$where.idfa}">
+                </li>
+                <li>
+                    <label>ip：</label>
+                    <input type="text" name="ip" value="{$where.ip}">
+                </li>
+                 <li>
+                    <label>appid：</label>
+                    <input type="text" name="appid" value="{$where.appid}">
+                </li>
+                <li>
+                    <label>激活时间：</label>
+                                                开始:<input type="text" name="activation_date_start" value="{$where.activation_date_start}">-
+                                                截止:<input type="text" name="activation_date_end" value="{$where.activation_date_end}">
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+  <!--  <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="__URL__/save" target="dialog" mask="true"><span>新增</span></a></li>
+				<li>
+					<li>
+						<a class="delete" href="__URL__/foreverdelete/id/{sid_record}/navTabId/__MODULE__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择角色">
+							<span>删除</span>
+						</a>
+					</li>
+				</li>
+				<li>
+					<a class="edit" href="__URL__/save/id/{sid_record}" target="dialog" mask="true" warn="请选择对象">
+						<span>编辑</span>
+					</a>
+				</li>
+        </ul>
+    </div> -->
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="5%">编号</th>
+			<th width="10%">mac</th>
+			<th width="20%">idfa</th>
+			<th width="10%">ip</th>
+			<th width="5%">version</th>
+			<th width="5%">appid</th>
+			<th width="5%">source</th>
+			<th width="5%">添加时间</th>
+			<th width="1%">是否激活</th>
+			<th width="5%">激活时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name='list'>
+            <volist name='list' id='vo'>
+                <tr rel="{$vo['id']}">
+                    <td>{$vo['id']}</td>
+					<td>{$vo['mac']}</td>
+					<td>{$vo['idfa']}</td>
+					<td>{$vo['ip']}</td>
+					<td>{$vo['version']}</td>
+					<td>{$vo['appid']}</td>
+					<td>{$vo['source']}</td>
+					<td>{$vo['add_date']}</td>
+					<td><if condition="!empty($vo['activation_id'])">是<else/>否</if></td>
+					<td>{$vo['activation_date']}</td>
+					<!-- <td>{$vo['activation_date']|date="Y-m-d H:i:s",###}</td> -->
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+</table>
+
+<include file="Public:pagerNum" />
+</div>

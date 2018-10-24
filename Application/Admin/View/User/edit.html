@@ -1,0 +1,70 @@
+
+<div class="pageContent">
+
+
+	<form method="post" action="__URL__/update/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>"/>
+		<input type="hidden" name="id" value="{$vo.id}" />
+		<div class="pageFormContent" layoutH="58">
+					
+			<!-- 
+			<div class="unit">
+				<label>重置密码：</label>
+				<input type="text" name="resetPwd" > <INPUT type="button" value="重置密码" onclick="resetPwd()" class="submit" style="height:25px">
+			</div>
+			-->
+			
+			<div class="unit">
+				<label>用户名：</label>
+				<input type="text" class="required"   name="account" value="{$vo.account}">
+			</div>
+			
+			<div class="unit">
+				<label>昵 称：</label>
+				<input type="text" class="required" name="nickname" value="{$vo.nickname}">
+			</div>
+			<div class="unit">
+				<label>邮 箱：</label>
+				<input type="text" name="email" size="30" maxlength="100" class="email" value="{$vo.email}"/>
+			</div>
+			<div class="unit">
+				<label>销售渠道号：</label>
+				<input type="text" name="channel_code" size="30" class="channel_code" value="{$vo.channel_code}"/>
+				<span class="inputInfo">(销售权限使用，多个使用 , 隔开)</span>
+			</div>
+			<div class="unit">
+				<label>状 态：</label>
+				<select class="small bLeft"  name="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+				</select>
+			</div>
+			
+			<div class="unit">
+				<label>备 注：</label>
+				<textarea class="large bLeft"  name="remark" rows="2" cols="57">{$vo.remark}</textarea>
+			</div>
+			<div class="unit">
+				<label>特殊权限选择：</label>
+			</div>
+			<div class="unit">
+				<input type="checkbox" value="1" <eq name="vo.is_search_user" value="1" >checked</eq> name="is_search_user">1、搜索包含字母用户的权限<br/>
+				<input type="checkbox" value="1" <eq name="vo.is_show_user" value="1" >checked</eq> name="is_show_user">2、显示账号重要信息（上次登录、登录IP、登录版本、登录次数、金币）的权限；<br/>
+				<input type="checkbox" value="1" <eq name="vo.is_save_user" value="1" >checked</eq> name="is_save_user">3、操作编辑用户所有信息的权限<br/>
+				<input type="checkbox" value="1" <eq name="vo.is_show_pay" value="1" >checked</eq> name="is_show_pay">4、查看财务信息（支付宝、银行卡、身份证、总金币）权限<br/>
+				<input type="checkbox" value="1" <eq name="vo.is_show_mobile" value="1" >checked</eq> name="is_show_mobile">5、查看手机号码权限<br/>
+				<input type="checkbox" value="1" <eq name="vo.is_show_answer" value="1" >checked</eq> name="is_show_answer">6、查看竞猜选择权限<br/>
+				<input type="checkbox" value="1" <eq name="vo.is_show_index" value="1" >checked</eq> name="is_show_index">7、后台首页统计数据显示权限<br/>
+				<input type="checkbox" value="1" <eq name="vo.is_show_count" value="1" >checked</eq> name="is_show_count">8、各销售统计数据（充值金额、销售金额、消费金额、剩余金额、推介价格）权限<br/>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

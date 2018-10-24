@@ -1,0 +1,18 @@
+.qw_content{ width: 1000px;}
+.right_main .one,.right_main .two,.right_main .three{ width: 210px; height: 44px; border-radius: 10px; border: 1px solid #e4e4e4; color: #999999; font-size: 14px; margin:0 36px 0 10px;}
+.right_main form{ width: 1024px;}
+.right_main table td{ margin: 0 10px 0 10px;}
+.right_main table{ text-align: center; margin-top: 30px;}
+.right_main table td{ border: 1px solid #fff !important; height: 80px; font-size: 16px !important; color:#999 !important;}
+.right_main td .three{ width: 200px !important; border: 1px solid #f00;}
+h1{ font-size: 16px; line-height: 50px; max-width: 360px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #333;}
+h2{ font-size: 16px; width: 300px; text-align: center; color: #333;}
+h3{ font-size: 16px; width: 220px; text-align: center; color: #333;}
+.right_main .user{ width: 420px;}
+.right_main .user img{ width: 50px; height: 50px; margin-right: 10px;}
+.four button{ width: 92px; height: 32px; border-radius: 10px; background-color: #fff; border: 1px solid #4bbaff; color: #4bbaff;}
+.on button{ width: 92px; height: 32px; border-radius: 10px; background-color: #4bbaff; border: 1px solid #4bbaff; color: #fff;}
+.one{ max-width: 400px;}
+.user{ max-width: 300px;}
+.user a{ float: left; max-width: 120px;}
+.user h1{ min-width: 100px; max-width: 200px; display: inline-block; text-align: left;}

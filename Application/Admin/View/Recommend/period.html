@@ -1,0 +1,25 @@
+<include file="Public:pagerForm" />
+<style>
+    .vali{
+        position: relative;
+    }
+    .vali .field-msg{
+        top: -0px;
+        left: 470px;
+    }
+</style>
+<form action="__URL__/urlSave" method="post"  onsubmit="return iframeCallback(this)">
+    <div style="margin:40px 0px 0px 100px;">
+
+
+        <div class="vali" style="margin:20px 20px 20px 0px;">
+            <label>链接：</label>
+            <input type="text" name="msite" class="required url"  value="{$msite}" >
+        </div>
+        <div class="subBar">
+            <ul>
+                <li style="margin:40px 40px 40px 60px;"><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,116 @@
+/*新年球星拜年*/
+html,body{  height:100%;}
+.star_header{background: url(../../../images/activity/newYear/top_bg.jpg) no-repeat left top; width: 100%;height: 9.41rem;background-size: 100% 9.41rem;position: relative;}
+.head_body{width: 6.25rem;height: 10.4rem;position:absolute;left: 50%;top:.6rem;margin-left: -3.125rem;background: url(../../../images/activity/newYear/body/cluo.png) no-repeat left top;background-size: 6.25rem 10.4rem}
+
+.body_cluo{background: url(../../../images/activity/newYear/body/cluo.png) no-repeat left top;background-size: 6.25rem 10.4rem }
+.body_mx{background: url(../../../images/activity/newYear/body/mx.png) no-repeat left top;background-size: 6.25rem 10.4rem}
+.body_yb{background: url(../../../images/activity/newYear/body/yb.png) no-repeat left top; background-size: 6.25rem 10.4rem}
+.body_cjk{background: url(../../../images/activity/newYear/body/cjk.png) no-repeat left top; top:.3rem; background-size: 6.25rem 8.5rem}
+
+.body_nme{background: url(../../../images/activity/newYear/body/nme.png) no-repeat left top;background-size: 6.25rem 10.4rem }
+.body_ml{background: url(../../../images/activity/newYear/body/ml.png) no-repeat left top; background-size: 6.25rem 10.4rem}
+.body_jl{background: url(../../../images/activity/newYear/body/jl.png) no-repeat left top; background-size: 6.25rem 10.4rem}
+.body_lzll{background: url(../../../images/activity/newYear/body/lzll.png) no-repeat left top;height: 8.5rem; top:.2rem;background-size: 6.25rem 8.5rem}
+
+.body_kst{background: url(../../../images/activity/newYear/body/kst.png) no-repeat left top; background-size: 6.25rem 10.4rem}
+.body_kdna{background: url(../../../images/activity/newYear/body/kdna.png) no-repeat left top; background-size:6.25rem 10.4rem}
+.body_lms{background: url(../../../images/activity/newYear/body/lms.png) no-repeat left top; background-size: 6.25rem 10.4rem}
+.body_bdyjy{background: url(../../../images/activity/newYear/body/bdyjy.png) no-repeat left top;height: 8.5rem; top:.3rem;background-size:6.25rem 8.5rem}
+
+
+.s_head{width: .96rem;height: 1.65rem;left: 50%;position: relative;margin-left: -.5rem;}
+.s_head img{width: .96rem;height: 1.65rem}
+.s_body{position: relative;margin-top: -.4rem;background: url(../../../images/activity/newYear/body_bg.png) no-repeat left top;width: 3.76rem;height: 3.42rem;background-size: 3.76rem 3.42rem;}
+.s_word{width: 5rem;height: auto;margin:4.2rem 0 0 .62rem;}
+.s_word p span{font-size: .38rem;padding-left: .2rem;}
+.s_word p em{font-size: .54rem}
+.s_word p:last-child{text-align: center;padding-top: .1rem}
+
+.star_bg{background: url(../../../images/activity/newYear/star_bg.png) no-repeat left top; width: 100%;height:1.98rem;background-size: 100% 1.98rem;padding:.2rem .15rem 0 .15rem;position: relative;}
+
+.star_head ul li{float:left;padding: 0 .25rem}
+.star_head ul li img{width: 1.28rem;height: 1.28rem;}
+/*.star_head ul li img.on{border:3px solid #e11900;border-radius: 50%}*/
+.star_head ul li figcaption{text-align: center;color: #ce1700;font-size: .24rem}
+
+.swiper-container{height: 1.98rem;}
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{bottom: .2rem!important}
+
+.swiper-pagination-bullet-active{background: #e01900!important}
+
+/*content*/
+.s_content{height: 7rem; position: relative;margin-top: -2.78rem}
+.top_bt_bg{background: url(../../../images/activity/newYear/top_bt_bg.png) no-repeat left bottom; width: 100%;height:1.81rem;background-size: 100% 1.81rem;border: none;}
+.s_footer{background: url(../../../images/activity/newYear/bottom_bg.png) repeat; width: 100%;min-height:6rem;padding: .7rem .5rem 0 .5rem;margin-top: -.006rem;}
+.s_footer .y_com span{color: #ffe9a8;font-size: .34rem;font-weight: bold;}
+.s_footer .y_com input{width: 2.65rem;height: .7rem;background: #ffefd3;border-radius: .1rem;line-height: .7rem;padding-left: .2rem;box-shadow:.05rem .05rem .05rem #c5a58f inset;}
+.s_footer .yzhufu{margin-top: .5rem;padding-left: .34rem}
+.s_footer .yzhufu input{width: 4.6rem}
+
+.sub_btn{width: 100%;height: 1.67rem;margin-top: .7rem;text-align: center;}
+.sub_btn img{width: 4.52rem;height: 1.67rem;}
+
+/*newyear*/
+.newyear{margin-top: -1.5rem}
+.ewm{margin-top: -.3rem;background: url(../../../images/activity/newYear/ewm_bg.png) no-repeat center top; width:2.5rem;height:2.33rem;background-size: 2.5rem 2.33rem;margin:0 auto;padding: .36rem 0 0 .43rem}
+.ewm img{width: 1.64rem;height: 1.6rem}
+
+#share_tip{position: fixed;top: 0;right: 0;z-index: 999;display: none;}
+
+
+@font-face
+    {
+    font-family: Fzzdxfw;
+    src: url('../../../font/activity/stxingka.ttf');
+	 font-weight: normal;
+	 font-style: normal;
+    }
+.font_qqty{
+        font-family: Fzzdxfw;
+		text-align: center;
+    }
+
+.logo{position: fixed;top: 0;left: 0;z-index: 9999;width:1.83rem;height: .72rem }    
+.saoma{text-align: center;}
+.saoma img{width: 1.47rem;height: .34rem;}
+
+.modal{top: 1%;width: 80%;
+    margin-left: -40%;z-index:9;}
+.close{position: absolute;
+    right: -10%;
+    top: 0;
+    width: .5rem;
+    height: .5rem;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.5) url(../../../images/activity/newYear/icon-close.png) no-repeat center center;
+    background-size: 100% auto;
+    }
+
+/*.modal-body img{margin-bottom: 1rem;}*/
+.app-bar{background: url(../../../images/activity/newYear/ads/ads.jpg) no-repeat center center;background-size: 100% 1.1rem}
+.btn_down{width: 1.24rem;height: .56rem;background: url(../../../images/activity/newYear/ads/get.png) no-repeat center center;background-size: 1.24rem .56rem;position: absolute;top: 30%;right: 3%}
+.btn_down:active{background: url(../../../images/activity/newYear/ads/get_on.png) no-repeat center center;background-size: 1.24rem .56rem;}
+.btn_down.on{background: url(../../../images/activity/newYear/ads/get_on.png) no-repeat center center;background-size: 1.24rem .56rem;}
+
+.star_loading{background: url(../../../images/load.gif) no-repeat center center;background-size: .8rem .8rem;position: fixed;top:5%;
+    left:50%;
+    width:.8rem;
+    height:.8rem;
+    z-index:999;
+    margin-left:-.4rem;
+    display: none;
+}
+.shengc_tip{text-align: center;position: fixed;
+	top:12%;
+    width:100%;
+    height:.2rem;
+    z-index:999;
+    display: none;
+    }
+.down_year{
+    width:100%;
+    height:100%;
+    display: block;}
+.logo_link{width: 2.1rem;height: 1rem; position: fixed;top: 0;left: 0;z-index: 9999}
+.logo_link a{display: block;width: 100%;height: 100%}

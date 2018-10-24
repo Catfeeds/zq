@@ -1,0 +1,49 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>{$seo_title}资讯_手机全球体育网</title>
+</block>
+<block name="append">
+<include file="Public/append-widget"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/news.css">
+    <script type="text/javascript">var DOMAIN = "{:C('MAIN')}";</script>
+</block>
+<block name="header">
+    <header id="other_header" class="headFixed">
+        <a href="{:U('/')}"></a>
+        <span>新闻资讯</span>
+    </header>
+</block>
+<!-- 导航-->
+<block name="nav">
+    <include file="News/nav"/>
+</block>
+<!-- 内容 -->
+<block name="content">
+
+    <section class="news_con clearfix" style='padding-top: 1.7rem;'>
+        <ul class='posts'>
+            <volist name='list' id='v'>
+                <li class="list clearfix">
+                    <a href="<if condition="$v['is_original'] eq 0">{:U('/info_n/'.$v['id'])}<else/>{:U('/news/'.$v['id'])}</if>">
+                        <div class="n_img"><img <notempty name='v.img'>src="{$v.img}"<else/>src="__IMAGES__/default.jpg"</notempty> alt="{$v.title}"></div>
+                    <div class="n_des">
+                        <h3 class='overflow'>{$v.title|msubstr=###,0,26}</h3>
+                        <p class="q-two">{$v.source}</p>
+                    </div>
+                    </a>
+                </li>
+            </volist>
+        </ul>
+        <input type="hidden" id="class_id" value="{$class_id}">
+        <div class="paged boxs">
+             <a href="javascript:;" class="btn btn-green boxs" id="loadMore">加载更多</a>
+            <div class="load_gif fs24 text-999" style='display: none;'>
+                <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>数据加载中，请稍候......</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">没有更多了</a>
+        </div>
+    </section>
+    <!-- 内容 e -->
+    <script type="text/javascript" src="__PUBLIC__/Mobile/js/news_class.js"></script>
+</block>

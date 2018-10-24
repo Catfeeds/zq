@@ -1,0 +1,45 @@
+<include file="Public:pagerForm" />
+<style>
+  .vali{
+    position: relative;
+  }
+  .vali .field-msg{
+    top: -0px;
+    left: 470px;
+  }
+</style>
+<form action="__URL__/config" method="post" class="pageForm required-validate" onsubmit="return iframeCallback(this)">
+    <h1>大数据配置</h1>
+    <div style="margin:40px 0px 0px 100px;">
+
+        <div class="vali" style="margin-bottom:20px;">
+            <label>是否需要登录：</label>
+            <label style="width: 90px;padding: 0"><input type="radio" name="isLogin"  value="0" <eq name="data.isLogin" value="0">checked</eq> />否</label>
+            <label style="width: 90px;padding: 0"><input type="radio" name="isLogin"  value="1" <eq name="data.isLogin" value="1">checked</eq> />是</label>
+        </div>
+
+        <div class="vali" style="margin-bottom:20px;">
+          <h3>标题：</h3>
+        </div>
+
+        <div class="vali" style="margin:20px 20px 20px 0px;">
+             <input name="title" value="{$data['title']}" size="30">
+        </div>
+
+        <div class="vali" style="margin-bottom:20px;">
+            <h3>内容：</h3>
+        </div>
+
+        <div class="vali" style="margin:20px 20px 20px 0px;">
+                     <textarea name="content" cols="80" rows="10">
+                        {$data['content']}
+                     </textarea>
+        </div>
+
+        <div class="subBar">
+            <ul>
+                <li style="margin:40px 40px 40px 60px;"><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+</form>

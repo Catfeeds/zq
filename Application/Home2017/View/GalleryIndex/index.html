@@ -1,0 +1,59 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>全球体育高清图集_全球体育网qqty.com</title>
+</block>
+<block name="body">
+<body>
+<!-- 页面所需css -->
+<link rel="stylesheet" href="__PUBLIC__/Home/css/gallery_index/girlList.css">
+<include file="Public:top_index" />
+    <div class="container">
+        <ul class="row">
+            <volist name="allGallery" id="item" >
+        	<li class="col-xs-3">
+                <div class="desc_img">
+                    <a target="_blank" href="{:U('/info_p/'.$item['id'].'')}">
+                        <div class="imgBox"><img class="lazy" src="{$item.images}" width="235" height="auto" alt="{$item.short_title}"></div>
+                        <div class="imgText">{$item.short_title}</div>
+                    </a>
+                </div>
+            </li>
+            </volist>
+        </ul>
+        <!--页码开始-->
+        <div class="page-con">
+            <nav>
+                <ul class="pagination pull-right">
+                    {$show}
+                    <li>
+                        <input class="isTxtBig" type="text" value="{$_REQUEST.p|default=1}" name="p">
+                    </li>
+                    <li id="GO"><a href="javascript:void(0)">GO</a></li>
+                </ul>
+            </nav>
+            <div class="pull-right" style="margin-top: 5px;">
+                共有{$totalCount}条，每页显示：{$numPerPage}条
+            </div>
+        </div>
+        <!--页码结束-->
+    </div>
+    <input type="hidden" id="class_id" name="class_id" value="{$Think.get.class_id}">
+    <include file="Public:return_top"/>
+    <include file="Public:footer" />
+</body>
+    <script>
+        $(function(){
+            $("#GO").find("a").bind("click", function(){
+                var p = $("input[name='p']").val();
+                if (isNaN(p)) {
+                    return;
+                } else if (p>0){
+                    var class_id = $("input[name='class_id']").val();
+                    window.location.href = "/list_p/"+class_id+'/'+p+'.html';
+                }
+            });
+        });
+    </script>
+</block>
+
+

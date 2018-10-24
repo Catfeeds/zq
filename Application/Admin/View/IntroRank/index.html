@@ -1,0 +1,98 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li style="width: 200px">
+				<label>榜单类型：</label>
+				<select name="time_type" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.time_type eq '1'">selected</if> >周榜</option>
+					<option value="2" <if condition="$_REQUEST.time_type eq '2'">selected</if> >月榜</option>
+				</select>
+			</li>
+			<li style="width: 200px;">
+				<label>时间类型：</label>
+				<select name="type" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.type eq '1'">selected</if> >回报率</option>
+					<option value="2" <if condition="$_REQUEST.type eq '2'">selected</if> >命中率</option>
+				</select>
+			</li>
+			<li>
+				<label>日期：</label>
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid"
+					   value="{$_REQUEST.create_time}" name="create_time" size="16">
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="icon" href="__URL__/index/update/1" target="navTab" ><span>更新当天榜单</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th style="width: 10px; cursor: default;">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th>图片</th>
+			<th>产品名</th>
+			<th>榜单类型</th>
+			<th>时间类型</th>
+			<th <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'total_num')"> class="desc"</if> orderField="total_num" <if condition="$_REQUEST._order eq 'total_num'">class="{$_REQUEST._sort}"</if>>百分比</th>
+			<th <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'create_time')"> class="desc"</if> orderField="create_time" <if condition="$_REQUEST._order eq 'create_time'">class="{$_REQUEST._sort}"</if>>榜单日期</th>
+			<th>操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td style="width: 10px;">
+						<div>
+							<input type="checkbox" value="{$vo.id}" name="id">
+						</div>
+					</td>
+					<td>{$vo['id']}</td>
+					<td>
+					<empty name="vo.logo">没有上传
+					<else/>
+					    <img src="{$vo['logo']}" alt="产品图片" width="30" height="30" />
+					</if>
+					</empty>
+					</td>
+					<td>{$vo['name']}</td>
+					<td><if condition="$vo['type'] eq '1'">回报率<elseif condition="$vo['type'] eq '2'"/>命中率</if></td>
+					<td><if condition="$vo['time_type'] eq '1'">周榜<elseif condition="$vo['time_type'] eq '2'"/>月榜</if></td>
+					<td>{$vo.total_num}%</td>
+					<td>{$vo['create_time']|date="Y-m-d",###}</td>
+					<td>
+						<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" height="400" title="{$vo.name}编辑" rel="editPage">编辑</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

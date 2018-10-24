@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta charset="UTF-8">
+	<title>全球体育网</title>
+	  <!-- jquery -->
+    <script type="text/javascript" src="__PUBLIC__/Api/Invitation/js/jquery-1.8.0.min.js"></script>
+
+	  <!-- 引入公共样式 --> 
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/Invitation/css/base.css">
+	  <!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Api/Invitation/js/htmlwidth.js"></script>
+    
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__PUBLIC__/Api/Invitation/css/index.css">
+</head>
+<body>
+
+   
+   
+    <!-- top  s-->
+    <section class="banner">
+      <!-- 二级头部 s -->
+      <!--<header id="other_header">-->
+        <!--<a href="javascript:;"></a>邀请好友  立刻赚钱 -->
+      <!--</header>-->
+      <!-- 二级头部 e --> 
+      <a href="javascript:;" id="rules"></a>
+    </section>
+    <!-- top  e-->
+
+    <!-- 邀请码 s -->
+     <section class="yaoqing">
+       <figure>
+         <img src="__PUBLIC__/Api/Invitation/images/ewm.png" alt="二维码">
+         <figcaption>我的邀请码：<span class="codeSpan">{$code}</span></figcaption>
+         <a href="javascript:;" class="shareClick">点击邀请好友赚金币</a>
+       </figure>
+     </section>
+    <!-- 邀请码 e -->
+
+    <!-- 我邀请的人 and 我获的金币 s -->
+    <section class="yq_count">
+      <div class="man"><em>{$info['total_num']}</em><em>{$info['total_coin']}</em></div>
+      <div class="man_lv">
+        <p><em><img src="__PUBLIC__/Api/Invitation/images/lv_1.png" alt="一级">级下属邀请：<span>{$info['first_num']}</span>人</em><em>您获得：<span>{$info['first_coin']}</span>金币</em></p>
+        <p><em><img src="__PUBLIC__/Api/Invitation/images/lv_2.png" alt="一级">级下属邀请：<span>{$info['second_num']}</span>人</em><em>您获得：<span>{$info['second_coin']}</span>金币</em></p>
+        <p><em><img src="__PUBLIC__/Api/Invitation/images/lv_3.png" alt="一级">级下属邀请：<span>{$info['third_num']}</span>人</em><em>您获得：<span>{$info['third_coin']}</span>金币</em></p>
+         
+      </div>
+    </section>
+    <!-- 邀请的人 and 我获的金币 e -->
+    
+    <!-- 邀请达人榜 s -->
+    <section class="yq_daren">
+      <div class="dr_title clearfix">
+        <span><img src="__PUBLIC__/Api/Invitation/images/yq_title.png" alt="邀请达人榜">邀请达人榜</span>
+        <em><a href="javascript:;" class="shareClick">争上达人榜<img src="__PUBLIC__/Api/Invitation/images/yq_bang.png" alt="邀请达人榜"></a></em>
+      </div>
+      <!-- 排名 -->
+      <div class="dr_rank">
+         <div class="dr_con">
+            <figure>
+              <img src="{$list[1]['face']}" class="head user" alt="{$list[1]['nick_name']}" user_id="{$list[1]['user_id']}">
+              <figcaption>
+                <p><span>160</span>金币</p>
+                <p class="user" user_id="{$list[1]['user_id']}"><img src="__PUBLIC__/Api/Invitation/images/NO2.png" alt="第二名">{$list[1]['nick_name']}</p>
+              </figcaption>
+            </figure>
+         </div>
+         <div class="dr_con dr_con_gold">
+           <figure>
+              <img src="{$list[0]['face']}" class="head user" alt="{$list[0]['nick_name']}"  user_id="{$list[0]['user_id']}">
+              <figcaption>
+                <p><span>160</span>金币</p>
+                <p class="user" user_id="{$list[0]['user_id']}"><img src="__PUBLIC__/Api/Invitation/images/NO1.png" alt="第一名">{$list[0]['nick_name']}</p>
+              </figcaption>
+            </figure>
+         </div>
+         <div class="dr_con">
+           <figure>
+              <img src="{$list[2]['face']}" class="head user" alt="{$list[2]['nick_name']}" class="user" user_id="{$list[2]['user_id']}">
+              <figcaption>
+                <p><span>160</span>金币</p>
+                <p class="user" user_id="{$list[2]['user_id']}"><img src="__PUBLIC__/Api/Invitation/images/NO3.png" alt="第三名">{$list[2]['nick_name']}</p>
+              </figcaption>
+            </figure>
+         </div>
+      </div>
+    </section>
+    <!-- 邀请达人榜 e -->
+
+    <!-- 邀请达人列表 s-->
+   <section class="dr_list">
+     <ul>
+         <foreach name="list" item="v" key="k">
+             <if condition="$k gt 2">
+             <li>
+                 <em class="user" user_id="{$v['user_id']}"><img src="{$v['face']}" alt="{$v['nick_name']}" >{$v['nick_name']}</em>
+                 <span><i>{$v['total_coin']}</i> 金币</span>
+             </li>
+             </if>
+         </foreach>
+     </ul>
+   </section>
+    <!-- 邀请达人列表 e-->
+
+
+  <div id="maskLayer"></div>
+  <div class="rules_con">
+    <div id="close"></div>
+    <h2>活动规则</h2>
+    <p>1.邀请好友下载全球体育APP，提交注册时输入邀请码，您和您的好友均可获得金币。</p>
+    <p>2.一级邀请每邀请1人成功注册，您和好友均可获得5金币；通过好友成功邀请注册的二级邀请及三级邀请，您可获得1金币。</p>
+    <p>3.如发现使用不正当手段获取奖励，全球体育有权在事先不通知的情况下取消对其的奖励。</p>
+    <p>4.最终解释权归全球体育所有。</p>
+  </div>
+
+
+<script>
+  $("#rules").click(function(){
+     $("#maskLayer").show();
+     $(".rules_con").show();
+  });
+  $("#maskLayer,#close").click(function(){
+        $("#maskLayer").hide();
+        $(".rules_con").hide();
+  });
+
+    $(function(){
+        //分享
+        $('.shareClick').click(function() {
+            window.location.href = 'share:'+$('.codeSpan').text();
+        });
+
+        //用户昵称、用户头像跳转用户主页
+        $('.user').click(function() {
+            var userid = $(this).attr('user_id');
+            window.location.href = 'user:'+userid;
+        });
+
+    })
+</script>
+
+
+</body>
+</html>

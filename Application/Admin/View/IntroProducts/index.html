@@ -1,0 +1,153 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>产品名称：</label>
+				<input type="text" name="name" value="{$_REQUEST.name}"/>
+			</li>
+			<li>
+				<label>所属分类：</label>
+				<input type="text" name="class_name" value="{$_REQUEST.class_name}"/>
+			</li>
+            <li>
+                <label>发布者：</label>
+                <input type="text" name="nickname" value="{$_REQUEST.nickname}"/>
+            </li>
+			<li>
+				<label>状态：</label>
+				<select name="status" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >启用</option>
+					<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >禁用</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		<if condition="in_array($_SESSION['authId'], C('RBAC_LOGIN_USER'))">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true" height="600"><span>新增</span></a></li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" height="600" warn="请选择产品"><span>编辑</span></a></li>
+			<li>
+			<a class="edit" href="__URL__/onOff/sign/close" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确定都设为禁用?">
+			<span>批量设为禁用</span></a></li>
+			<li>
+			<a class="edit" href="__URL__/onOff/sign/open" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确定都设为启用?">
+			<span>批量设为启用</span></a></li>
+		</if>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="2%" style="cursor: default;">
+			    <div class="gridCol" title="">
+			        <input class="checkboxCtrl" type="checkbox" group="id">
+			    </div>
+			</th>
+			<th width="3%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th width="5%">产品名称</th>
+			<th width="4%">发布者</th>
+			<th width="4%">所属分类</th>
+			<th width="4%">产品logo</th>
+			<th width="4%" orderField="sale" <if condition="$_REQUEST._order eq 'sale'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>销售价格</th>
+			<th width="4%" orderField="total_num" <if condition="$_REQUEST._order eq 'total_num'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>限购数量</th>
+			<if condition="in_array($_SESSION['authId'], C('RBAC_LOGIN_USER'))">
+				<th width="6%" orderField="pay_num" <if condition="$_REQUEST._order eq 'pay_num'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>设置已预购数量</th>
+			</if>
+			<th width="4%">预购数量</th>
+			<th width="5%">推介比赛数量</th>
+			<th width="5%" orderField="total_rate" <if condition="$_REQUEST._order eq 'total_rate'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>累计回报率</th>
+			<th width="4%">近十中几</th>
+			<th width="4%">近{:C('introRateNum')}中几</th>
+			<th width="4%" orderField="total_pay" <if condition="$_REQUEST._order eq 'total_pay'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>总销量</th>
+			<th width="7%" orderField="create_time" <if condition="$_REQUEST._order eq 'create_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>创建时间</th>
+			<th width="3%" orderField="sort" <if condition="$_REQUEST._order eq 'sort'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>排序</th>
+			<th width="3%" orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>状态</th>
+			<th width="4%">路径标识</th>
+			<th width="8%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>
+					    <div>
+					        <input type="checkbox" value="{$vo.id}" name="id">
+					    </div>
+					</td>
+					<td>{$vo['id']}</td>
+					<td>{$vo['name']}</td>
+					<td>{$vo['nickname']}</td>
+					<td>{$vo['class_name']}</td>
+					<td>
+					<empty name="vo.logo">没有上传
+					<else/>
+					<if condition="pathinfo($vo['logo'], PATHINFO_EXTENSION) eq swf">
+						<a href="{$vo.logo}" target="_blank" title="查看产品logo">
+						<embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$vo.logo}">
+						</a>
+					<else/>
+					    <a href="{$vo.logo}" target="_blank" title="查看产品logo"><img src="{$vo['logo']}" alt="产品logo" width="30" height="30" /></a>
+					</if>
+					</empty>
+					</td>
+					<td>{$vo['sale']}</td>
+					<td>{$vo['total_num']}</td>
+					<if condition="in_array($_SESSION['authId'], C('RBAC_LOGIN_USER'))">
+						<td><eq name="vo['is_auto_pay']" value="1">是<else/>否</eq>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{$vo['pay_num']}</td>
+					</if>
+					<td style="font-weight: bold">
+						<a href="__ADMIN__/IntroBuy/index/product_id/{$vo.id}/list_id/0" target="navTab" mask="true" title="预购用户">
+							{$vo['buy_num']|default=0}
+						</a>
+					</td>
+					<td>{$vo['game_num']}</td>
+					<td>{$vo['total_rate']}%</td>
+					<td>{$vo['ten_num']}</td>
+					<td>{$vo['rate_num']}</td>
+					<td style="font-weight: bold">
+						<a href="__ADMIN__/IntroBuy/index/product_id/{$vo.id}" target="navTab" mask="true" title="总销量">
+							{$vo['total_pay']|default=0}
+						</a>
+					</td>
+					<td>{$vo['create_time']|date="Y-m-d H:i:s",###}</td>
+					<td>{$vo['sort']}</td>
+					<td>{$vo['status']|getStatus}</td>
+					<td>{$vo.path}</td>
+					<td>
+					<if condition="$vo.is_push neq 1">
+					<a href="__URL__/addList/product_id/{$vo.id}" target="navTab" mask="true" rel="addList">发布</a> |
+					</if>
+					<if condition="in_array($_SESSION['authId'], C('RBAC_LOGIN_USER'))">
+						<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" height="600" title="{$vo.name}编辑" rel="editPage">编辑</a> |
+						{$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",'__DWZ__'}
+						<else/>
+						<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" title="{$vo.name}编辑" rel="editPage">编辑</a>
+					</if>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

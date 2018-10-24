@@ -1,0 +1,256 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userInfo/recharge.css?v=20180510">
+</block>
+<block name="content">
+    <include file="Public:top_user"/>
+
+    <div class="body">
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <script>
+                                $(function(){
+                                //验证登录
+                                $('.checkLogin').click(function(e) {
+                                    //判断登录
+                                    var is_login = $("input[name='userId']").val();
+                                    if (is_login == '')
+                                    {
+                                        modalLogin();
+                                    }
+                                    else
+                                    {
+                                        window.location.href="/myGamble/1.html"
+                                    }
+                                });
+                                });
+                            </script>
+                            <div class="pay_con">
+                                <form method="post" action="{:U('Pay/getPayUrl')}" target="_blank" id="topay">
+                                    <div class="pb_40 have_gold"><i>当前余额：</i><span class="chenge-size">{$coin|default=0}</span> 金币</div>
+                                    <div class="pb_40 free_pay">马上充值：
+                                        <input type="text" id="txt_pay" name="old_ordtotal_fee" value="{:sprintf('%d', ($rechargeBind + $rechargeNum))}" onafterpaste="this.value=this.value.replace(/\D/g,'')" onkeyup="change_class()"> 金币
+                                        <input type="hidden" name="ordtotal_fee" id="new_txt_pay" value="{$rechargeBind}">
+                                        &nbsp;( 至少充值10个金币,充值的金币仅限于本网站项目消费，不可提现 )
+                                    </div>
+                                    <div class="pb_40 pay_money  clearfix">
+                                        <ul>
+                                            <volist name="recharge" id="v">
+                                                <li>
+                                                    <a href="javascript:;" rel="{:sprintf('%d', ($v['account'] + $v['number']))}" rell="{$v.number}">
+                                                        <if condition="($v.number eq '0') or ($v.number eq '') ">
+                                                            <else />
+                                                            <p class="send"><span>送</span>{$v.number}</p>
+                                                        </if>
+                                                        <p class="recharge">充￥<i>{$v.account}</i></p>
+                                                    </a>
+                                                </li>
+                                            </volist>
+                                        </ul>
+                                    </div>                
+                                    <p class="pay_money_box"><span>支付金额：</span><span  class="pay-money-all" id="txt_pay_1">{$rechargeBind}</span><i class="unit">元</i>
+                                            <b>（赠送{$rechargeNum}金币）</b>
+                                    </p>
+                                    <div class="pay_type clearfix">
+                                        <ul>
+                                            <span class="type">支付方式：</span>
+                                            <li paytype='2'><a href="javascript:;"></a><img src="__IMAGES__/quiz_hall/wx_pay.png" alt="微信">&nbsp;&nbsp;微信支付<span class="hot-icon"></span></li>
+                                            <li paytype='1'><a href="javascript:;"></a><img src="__IMAGES__/quiz_hall/alipay.png" alt="支付宝">&nbsp;&nbsp;支付宝支付</li>
+                                        </ul>
+                                    </div>
+                                    <p class="accept">进行支付表示您已阅读并接受<a href="//m.qqty.com/User/agreement.html" class="text-green" target="_blank">《全球体育服务协议》</a></p>
+                                  
+                                    <div class="pb_40 pay_btn">
+                                        <input name="payType" type="hidden" value="1"  id="paytype">
+                                        <input type="hidden" name="agree"  value="on">
+                                        <input name="ordshow_url" type="hidden" value="{:U('/UserInfo/charge')}" >
+                                        <input type="button" class="submit" data-toggle="modal" id="submitpay" value="确认提交">
+                                    </div>
+                                    <!-- 微信支付页面 -->
+                                    <div class="wx_pay_method">
+                                        <div  class="wx_pay_method_left">
+                                            <span class="wx_pay_method_top">亿万级用户选择，更快更便捷</span>
+                                            <span class="wx_code"></span>
+                                            <p class="wx_code_small">
+                                                <span>请使用微信扫一扫</span>
+                                                <span>扫描二维码直接支付</span>
+                                            </p>
+                                         </div>
+                                    </div>
+                                    
+                                </form>
+
+                                <div class="guize">
+                                    <p class="guize-font-size">注意事项：</p>
+                                    <p>1.充值的金额不能提现。销售收入金币，积分兑换的金币和本站奖励的金币能进行提现。</p>
+                                    <p>2.每次充值至少10个金币，1金币=1元</p>
+                                    <p>3.同一个账号，每日充值金额不得超过3000元。</p>
+                                    <p>4.为了您的资金安全，请尽量不要在网吧等公共场合充值。</p> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+</block>
+
+<block name="js">
+    <script>
+        var ajax_domain = "{:U('/')}";
+        var id = "{$userId}";
+        $(function(){
+            var initnum = $('.pay_money ul li').children('a').attr('rell');
+            if (initnum === '' || initnum === '0') {
+                $('.pay_money_box').children('b').html('');
+            }
+            $('.pay_money ul li').on('click',function(){
+                $('#txt_pay').val($(this).children('a').attr('rel'));
+                var true_fee = $(this).children('a').attr('rel')-$(this).children('a').attr('rell');
+                $('#txt_pay_1').html(true_fee);
+                $('#new_txt_pay').val(true_fee);
+                var ss = '';
+                var num = $(this).children('a').attr('rell');
+                if (!(num === '' || num === '0')) {
+                    ss="（赠送"+$(this).children('a').attr('rell')+"金币)";
+                }
+                $('.pay_money_box').children('b').html(ss);
+                $(this).addClass('on').siblings().removeClass('on');
+                var number = parseInt($("input#new_txt_pay").val());
+                checkNum(number);
+                getQrCodeRequest();
+            });
+            $('.pay_type ul li').on('click',function(){
+                var paytype = $(this).attr('paytype');
+                $('#paytype').val(paytype);
+                //如果点击微信支付
+                if($('#paytype').val(paytype)[0].value==2){
+                    $('#submitpay').addClass('btn_none');
+                    $(".pay_btn").addClass("btn_none");
+                    $(this).addClass('on').siblings().removeClass('on');
+                    var userId = $("input[name='userId']").val();
+                    if (userId == '')
+                    {
+                        modalLogin();
+                        return;
+                    }
+                    $('.wx_pay_method').addClass('wx_block');
+                    getQrCodeRequest();
+                }else if($('#paytype').val(paytype)[0].value==1){
+                    $('.wx_pay_method').removeClass('wx_block');
+                    $('#submitpay').removeClass('btn_none');
+                    $(".pay_btn").removeClass("btn_none");
+                    $(this).addClass('on').siblings().removeClass('on');
+                }
+            });
+
+            $("input[name='old_ordtotal_fee']").bind("input propertychange", function(event) {
+                var num = parseInt($("input[name=old_ordtotal_fee]").val());
+                checkNum(num);
+                $("input[name=ordtotal_fee]").val(num);
+                var ordtotal_fee = parseInt(num);
+                var ordshow_url = $("input[name=ordshow_url]").val();
+                getWxPayQrCode(ordtotal_fee, ordshow_url);
+            });
+
+        });
+        function change_class(){
+            var tid = document.getElementById('txt_pay');
+            tid.value=tid.value.replace(/\D/g,'');
+            var tids=document.getElementById('txt_pay_1');
+            tids.innerHTML=tid.value;
+            var newFee = document.getElementById("new_txt_pay");
+            newFee.innerHTML = newFee.value;
+            $('.pay_money_box').children('b').css("display","none");
+            $('.pay_money ul li').removeClass('on');
+        }
+        $(".submit").click(function () {
+            var userId = $("input[name='userId']").val();
+            if (userId == '')
+            {
+                modalLogin();
+                return;
+            }
+            var number = $('#txt_pay').val();
+            checkNum(number);
+
+            if($("#paytype").val()==2){
+                $("#submitpay").attr('data-target','');
+            }
+            $("#topay").submit();
+            $('.bs-example-modal-sm').modal("show");
+        });
+
+        function checkNum(number) {
+            if(isNaN(number)){
+                showMsg("金额格式错误！",0,'error');
+                return;
+            }
+            if(!(/^(\+|-)?\d+$/.test( number )) || number < 0){
+                showMsg("充值金额必须是整数！",0,'error');
+                return;
+            }
+            if(number < 10){
+                showMsg("充值金额最少10元！",0,'error');
+                return;
+            }
+            if(number > 3000){
+                showMsg("充值金额最多3000元！",0,'error');
+                return;
+            }
+        }
+
+        function getQrCodeRequest() {
+            var ordtotal_fee = parseInt($("input[name=ordtotal_fee]").val());
+            var ordshow_url = $("input[name=ordshow_url]").val();
+            getWxPayQrCode(ordtotal_fee, ordshow_url);
+        }
+
+        function getWxPayQrCode(ordtotal_fee, ordshow_url) {
+            $.ajax({
+                url:ajax_domain+'Pay/getWxPayQrCode',
+                type:'POST',
+                async:true,
+                data:{
+                    "ordtotal_fee": ordtotal_fee,
+                    "agree": "on",
+                    "payType": 2,
+                    "user_id" : id,
+                    "ordshow_url": ordshow_url
+                },
+                timeout:5000,
+                dataType:'json',
+                beforeSend:function(xhr){
+                },
+                success:function(data,textStatus,jqXHR){
+                    if (data.url != null ){
+                        $("span.wx_code").html('<img src="http://paysdk.weixin.qq.com/example/qrcode.php?data='+data.url+'" width="230" height="230">')
+                    } else {
+                        showMsg("请勿频繁操作！",0,'error');
+                        $("span.wx_code").html('<img src="http://paysdk.weixin.qq.com/example/qrcode.php?data='+data.url+'" width="230" height="230">')
+                    }
+                },
+                error:function(xhr,textStatus){
+                    console.log('错误');
+                    console.log(xhr);
+                    console.log(textStatus);
+                },
+                complete:function(){
+                }
+            });
+        }
+    </script>
+</block>

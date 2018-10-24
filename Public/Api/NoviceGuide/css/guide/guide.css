@@ -1,0 +1,202 @@
+/**
+ * 支付css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-11-25
+ *
+**/
+
+/* 新手指引 */
+html{height: 100%;}
+body{ height: 100%; background: url(../../images/app-guide/guide-body.jpg) no-repeat 0 0; background-size: 100% 100%;}
+
+#other_header{ position: absolute; left: 0; top: 0; background: transparent; font-size: .42rem; color: #06bdc1; height: .9rem; line-height: .9rem; text-indent: 0;}
+#other_header a{ position: absolute; top: .1rem; left: .5rem; width: .7rem; height: .7rem; background: url(../../images/app-guide/return-top-btn.png) no-repeat; background-size: 100% 100%;}
+.title_notice{ width: 70%; position: absolute; left: 15%; top: 1.2rem; color: #fff; font-size: .32rem; font-weight: normal; word-break: break-all;}
+.scollCon{ width: 76%; position: absolute; left: 12%; top: 3rem; height: 8.4rem; overflow-y: scroll; padding: 0 3%;}
+.scollCon::-webkit-scrollbar-thumb{border-radius:10px;background:#06bdc1;-moz-box-shadow:inset 0 0 6px rgba(0,0,0,0.5);-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.5)}
+.scollCon::-webkit-scrollbar-track{-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);border-radius:2px;-moz-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);border-radius:2px}
+.scollCon::-webkit-scrollbar-thumb:window-inactive{background:rgba(6,189,193,0.4)}
+.scollCon::-webkit-scrollbar{width:4px}
+.scollCon ul li{ margin-bottom: 10px;}
+
+.nav-con{ position: fixed; width: 100%; max-width: 1080px; left: 50%; bottom: .2rem; margin-left: -50%;}
+.nav-con .nav-item{ float: left; width: 33.333%; text-align: center; padding: .2rem 0; position: relative;}
+.nav-con .nav-item a{ display: block; width: 1.72rem; height: 1.72rem; line-height: 1.72rem;  border-radius: 50%; color: #fff; font-size: .3rem; margin: 0 auto; text-align: center; position: relative; z-index: 1;}
+.nav-con .nav-item a:after {
+	pointer-events: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	content: '';
+	-webkit-box-sizing: content-box; 
+	-moz-box-sizing: content-box; 
+	box-sizing: content-box;
+}
+
+.nav-con .nav-item a:before {
+	font-family: 'ecoicon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	display: block;
+	-webkit-font-smoothing: antialiased;
+}
+/* hover */
+.nav-con .nav-item a{
+	/* background: rgba(255,255,255,0.1); */
+	-webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
+	-moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
+	transition: transform ease-out 0.1s, background 0.2s;
+}
+
+.nav-con .nav-item a:after {
+	top: 0;
+	left: 0;
+	padding: 0;
+	z-index: -1;
+	box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
+	opacity: 0;
+	-webkit-transform: scale(0.9);
+	-moz-transform: scale(0.9);
+	-ms-transform: scale(0.9);
+	transform: scale(0.9);
+}
+
+.nav-con .nav-item a:hover {
+	background: rgba(255,255,255,0.05);
+	-webkit-transform: scale(0.93);
+	-moz-transform: scale(0.93);
+	-ms-transform: scale(0.93);
+	transform: scale(0.93);
+	color: #fff;
+}
+
+.nav-con .nav-item a:hover:after {
+	-webkit-animation: sonarEffect 1s ease-out 65ms;
+	-moz-animation: sonarEffect 1s ease-out 765ms;
+	animation: sonarEffect 1s ease-out 65ms;
+}
+@-webkit-keyframes sonarEffect {
+	0% {
+		opacity: 0.3;
+	}
+	40% {
+		opacity: 0.5;
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 5px 5px #17a6a4, 0 0 0 5px rgba(255,255,255,0.5);
+	}
+	100% {
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 5px 5px #17a6a4, 0 0 0 5px rgba(255,255,255,0.5);
+		-webkit-transform: scale(1.5);
+		opacity: 0;
+	}
+}
+@-moz-keyframes sonarEffect {
+	0% {
+		opacity: 0.3;
+	}
+	40% {
+		opacity: 0.5;
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 5px 5px #17a6a4, 0 0 0 5px rgba(255,255,255,0.5);
+	}
+	100% {
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 5px 5px #17a6a4, 0 0 0 5px rgba(255,255,255,0.5);
+		-moz-transform: scale(1.5);
+		opacity: 0;
+	}
+}
+@keyframes sonarEffect {
+	0% {
+		opacity: 0.3;
+	}
+	40% {
+		opacity: 0.5;
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 5px 5px #17a6a4, 0 0 0 5px rgba(255,255,255,0.5);
+	}
+	100% {
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 5px 5px #17a6a4, 0 0 0 5px rgba(255,255,255,0.5);
+		transform: scale(1.5);
+		opacity: 0;
+	}
+}
+.nav-con .nav-item.on a{background: #19a9a8;}
+.nav-con .nav-item-p2 a{ line-height: .45rem; padding: .35rem 0;}
+.nav-con .nav-item-top-left:after{ content:""; width: 100%; height: 2px; background: linear-gradient(to left, rgba(255,255,255,0.5),transparent); position: absolute; left: 0; bottom: 0;}
+.nav-con .nav-item-top-left:before{ content:"";  width: 2px; height: 2.12rem; position: absolute; right: 0;  bottom: 0; background: linear-gradient(to top, rgba(255,255,255,0.5),transparent);}
+.nav-con .nav-item-top-right:after{ content:""; width: 100%; height: 2px; background: linear-gradient(to right, rgba(255,255,255,0.5),transparent); position: absolute; left: 0; bottom: 0;}
+.nav-con .nav-item-top-right:before{ content:"";  width: 2px; height: 2.12rem; position: absolute; left: 0; background: linear-gradient(to top, rgba(255,255,255,0.5),transparent);}
+
+.nav-item-top-center:after{content:"";  width: 100%; height: 2px; position: absolute; left: 0; bottom: 0; background: linear-gradient(to top, rgba(255,255,255,0.5),rgba(255,255,255,0.5));}
+.nav-item-center:after{content:"";  width: 100%; height: 2px; position: absolute; left: 0; bottom: 0; background: linear-gradient(to top, rgba(255,255,255,0.5),rgba(255,255,255,0.5));}
+.nav-item-center-right:after{ content:""; width: 100%; height: 2px; background: linear-gradient(to right, rgba(255,255,255,0.5),transparent); position: absolute; left: 0; bottom: 0;}
+.nav-item-center-right:before{ content:""; width: 2px; height: 2.12rem; background: linear-gradient(to right, rgba(255,255,255,0.5),rgba(255,255,255,0.5)); position: absolute; left: 0;}
+.nav-item-center-left:after{ content:""; width: 100%; height: 2px; background: linear-gradient(to left, rgba(255,255,255,0.5),transparent); position: absolute; left: 0; bottom: 0;}
+.nav-item-center-left:before{ content:""; width: 2px; height: 2.12rem; background: linear-gradient(to right, rgba(255,255,255,0.5),rgba(255,255,255,0.5)); position: absolute; right: 0; bottom: 0;}
+.nav-item-bottom-left:before{content:"";  width: 2px; height: 2.12rem; position: absolute; right: 0; top: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.5),transparent);}
+.nav-item-bottom-right:before{ content:"";  width: 2px; height: 2.12rem; position: absolute; left: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.5),transparent);}
+
+/* banner */
+.swiper-con{ width: 100%; height: 100%; overflow: hidden; background: rgba(0,0,0,0.5) url(../../images/app-guide/swiper-con-bg.jpg) repeat-x 0 0; background-size: auto 100%;}
+
+/* 重置swipe样式 */
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{ text-align: center; width: 100%; right: inherit; bottom: 15%; margin-right: 0;}
+@media screen and (min-width:410px) and (max-width:1920px) {
+    .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
+        bottom: 20%;
+    }
+}
+.swiper-pagination-bullet {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  border-radius: 100%;
+  background: transparent;
+  border: 1px solid rgba(6,189,193,1);
+}
+button.swiper-pagination-bullet {
+  border: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.swiper-pagination-clickable .swiper-pagination-bullet {
+  cursor: pointer;
+}
+.swiper-pagination-white .swiper-pagination-bullet {
+  background: #fff;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #06bdc1;
+}
+.swiper-pagination-white .swiper-pagination-bullet-active {
+  background: #fff;
+}
+.swiper-pagination-black .swiper-pagination-bullet-active {
+  background: #000;
+}
+.swiper-container-vertical > .swiper-pagination-bullets {
+  right: 10px;
+  top: 50%;
+  -webkit-transform: translate3d(0px, -50%, 0);
+  -moz-transform: translate3d(0px, -50%, 0);
+  -o-transform: translate(0px, -50%);
+  -ms-transform: translate3d(0px, -50%, 0);
+  transform: translate3d(0px, -50%, 0);
+}
+.swiper-container-vertical > .swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 5px 0;
+  display: block;
+}
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 0 5px;
+}
+

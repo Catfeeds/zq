@@ -1,0 +1,87 @@
+<style>
+    .searchContent label{width: auto}
+    .searchContent li{width: auto !important;margin-right: 12px;}
+</style>
+<form id="pagerForm" action="__URL__/statistics" method="post">
+	<input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+	<input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+	<input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+	<input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+	<input type="hidden" name="startTime" value="{$_REQUEST.startTime}"/>
+	<input type="hidden" name="endTime" value="{$_REQUEST.endTime}"/>
+	<volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/statistics" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+                <label>购买时间：</label>
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="16">至
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="16">
+            </li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><span style="color: red">销售总收入：{$IntroBuyCount[0]['IntroBuyCount']+$IntroBuyCount[1]['IntroBuyCount']}</span></li>
+			<li><span style="color: red">收入金额：{$IntroBuyCount[0]['IntroBuyCount']}</span></li>
+			<li><span style="color: red">退回金额：{$IntroBuyCount[1]['IntroBuyCount']}</span></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="3%">序号</th>
+			<th width="12%" orderField="create_time" <if condition="$_REQUEST._order eq 'create_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>日期</th>
+			<th width="10%" orderField="gameNumSum" <if condition="$_REQUEST._order eq 'gameNumSum'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>被购买推荐的数量</th>
+			<th width="10%" orderField="totleNum" <if condition="$_REQUEST._order eq 'totleNum'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>购买产品数量</th>
+			<th width="10%">消费总金额</th>
+			<th width="10%">收入金额</th>
+			<th width="10%">退回金额</th>
+			<th width="10%">赢</th>
+			<th width="10%">平</th>
+			<th width="10%">输</th>
+			<th width="10%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$key+1}</td>
+					<td>{$vo['create_time']|date="Y-m-d",###}</td>
+					<td>{$vo['gameNumSum']}</td>
+					<td>{$vo['totleNum']}</td>
+					<td>{$vo['priceSum']}</td>
+					<td>{$vo['win_coin']}</td>
+					<td>{$vo['return_coin']}</td>
+					<td>{$vo['win']}</td>
+					<td>{$vo['draw']}</td>
+					<td>{$vo['trans']}</td>
+					<td><a href="__URL__/index/create_time/{$vo.day_time}" target="navTab">查看</a></td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

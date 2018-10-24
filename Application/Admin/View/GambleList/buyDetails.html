@@ -1,0 +1,182 @@
+<style>
+    .searchContent label{width: auto}
+    .searchContent li{width: auto !important;margin-right: 12px;}
+</style>
+<form id="pagerForm" action="__URL__/buyDetails" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+    <volist name="map" id="m">
+        <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/buyDetails" method="post">
+        <input type="hidden" name="gameType" value="{$_REQUEST.gameType}"/>
+        <input type="hidden" name="gamble_id" value="{$_REQUEST.gamble_id}"/>
+        <input type="hidden" name="user_id" value="{$_REQUEST.user_id}"/>
+        <input type="hidden" name="cover_id" value="{$_REQUEST.cover_id}"/>
+        <input type="hidden" name="accountSign" value="{$_REQUEST.accountSign}"/>
+        <input type="hidden" name="play_type" value="{$_REQUEST.play_type}"/>
+        <input type="hidden" name="coin" value="{$_REQUEST.coin}"/>
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label>查看时间：</label>
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="15">至
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="15">
+                </li>
+                <li>
+                    <label >购买人名称：</label>
+                    <input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+                </li>
+                <li>
+                    <label >被购买人名称：</label>
+                    <input type="text" name="nick_name_by" value="{$_REQUEST.nick_name_by}"/>
+                </li>
+                <li>
+                    <label>是否使用体验券：</label>
+                    <select name="is_ticket" onchange="$(form).submit()" class="combox">
+                        <option value="">全部</option>
+                        <option <if condition="$_REQUEST.is_ticket eq '1'">selected </if> value="1">是</option>
+                        <option <if condition="$_REQUEST.is_ticket eq '0'"> selected </if> value="0">否</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><span style="color: red">赢：   {$win}</span></li>
+            <li><span style="color: red">赢半： {$half}</span></li>
+            <li><span style="color: green">平：   {$level}</span></li>
+            <li><span style="color: blue">输：   {$lose}</span></li>
+            <li><span style="color: blue">输半： {$lhalf}</span></li>
+            <li style="margin-left: 10px">
+                <a class="icon" href="__URL__/buyDetails.html?Export=1&{:http_build_query($_REQUEST)}"  warn="导出"><span>导出</span></a>
+            </li>
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="3%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+            <th width="5%">购买人名称</th>
+            <th width="5%">购买人ip</th>
+            <th width="5%">购买人设备</th>
+            <th width="7%">购买日期</th>
+            <th width="4%">购买渠道</th>
+            <th width="5%">被购买人名称</th>
+            <th width="5%">被购买人ip</th>
+            <th width="5%">被购买人设备</th>
+            <th width="6%">比赛时间</th>
+            <th width="4%">竞猜玩法</th>
+            <th width="5%">主队</th>
+            <th width="3%">比分</th>
+            <th width="5%">客队</th>
+            <th width="5%">竞猜球队</th>
+            <th width="3%">盘口</th>
+            <if condition="getUserPower()['is_show_count'] eq 1">
+                <th width="3%">金币</th>
+            </if>
+            <th width="3%">结果</th>
+            <th width="4%">使用体验券</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name='list'>
+            <volist name='list' id='vo'>
+                <tr target="sid_user" rel="{$vo['id']}" <if condition="$vo['yichang'] eq 1">style="background: yellow"</if>>
+                    <td>{$vo.id}</td>
+                    <td><a href="__ADMIN__/FrontUser/index/id/{$vo['user_id']}" target="navTab">{$vo['nick_name']|default='-'}</a></td>
+                    <td>{$vo.last_ip}</td>
+                    <td><a href="javascript:;" title="{$vo.device_token}">{$vo.device_token|msubstr=0,10}</a></td>
+                    <td>{$vo['log_time']|date="Y/m/d H:i:s",###}</td>
+                    <td>
+                        <if condition="$vo.platform eq '1'">Web</if>
+                        <if condition="$vo.platform eq '2'">IOS</if>
+                        <if condition="$vo.platform eq '3'">Andriod</if>
+                        <if condition="$vo.platform eq '4'">M站</if>
+                    </td>
+                    <td><a href="__ADMIN__/FrontUser/index/id/{$vo['cover_id']}" target="navTab">{$vo['nick_name_by']|default='-'}</a></td>
+                    <td>{$vo.last_ip_by}</td>
+                    <td><a href="javascript:;" title="{$vo.device_token_by}">{$vo.device_token_by|msubstr=0,10}</a></td>
+                    <td>{$vo['game_date']} {$vo['game_time']}</td>
+
+                    <td>
+                        <if condition="$_REQUEST['gameType'] eq 1 or $_REQUEST['gameType'] eq ''">
+                            <switch name="vo.play_type">
+                                <case value="1">让球</case>
+                                <case value="-1">大小</case>
+                                <case value="2">不让球胜平负</case>
+                                <case value="-2">让球胜平负</case>
+                            </switch>
+                        </if>
+                        <if condition="$_REQUEST.gameType eq 2">
+                            <switch name="vo.play_type">
+                                <case value="1">全场让分</case>
+                                <case value="-1">全场大小</case>
+                                <case value="2">半场让分</case>
+                                <case value="-2">半场大小</case>
+                            </switch>
+                        </if>
+                    </td>
+                    <td>{$vo['home_team_name']}</td>
+                    <td>{$vo['score']}</td>
+                    <td>{$vo['away_team_name']}</td>
+                    <td>
+                        <if condition="getUserPower()['is_show_answer'] eq 1 or $vo['result'] neq '0'">
+                        {$vo['Answer']|msubstr=###,0,5}
+                        <else/>
+                        --
+                        </if>
+                    </td>
+                    <td>{$vo['handcp']}</td>
+                    <if condition="getUserPower()['is_show_count'] eq 1">
+                        <td>{$vo['tradeCoin']}</td>
+                    </if>
+                    <td>
+                        <switch name="vo.result">
+                            <case value="1"><div style="color:red;">赢</div></case>
+                            <case value="0.5"><div style="color:red;">赢半</div></case>
+                            <case value="2"><div style="color:green;">平</div></case>
+                            <case value="-1"><div style="color:blue;">输</div></case>
+                            <case value="-0.5"><div style="color:blue;">输半</div></case>
+                            <case value="-10"><div style="color:black;">取消</div></case>
+                            <case value="-11"><div style="color:black;">待定</div></case>
+                            <case value="-12"><div style="color:black;">腰斩</div></case>
+                            <case value="-13"><div style="color:black;">中断</div></case>
+                            <case value="-14"><div style="color:black;">推迟</div></case>
+                            <case value="0"><div style="color:black;">--</div></case>
+                        </switch>
+                    </td>
+                    <td>
+                        <if condition="$vo.ticket_id gt '0'">
+                            <div style="color:red;">是</div>
+                        <else/>
+                            <div style="color:green;">否</div>
+                        </if>
+                    </td>
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+</table>
+
+<include file="Public:pagerNum" />
+
+
+</div>
+
+

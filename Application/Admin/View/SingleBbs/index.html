@@ -1,0 +1,92 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input type="hidden" name="class_id" value="{$_REQUEST.class_id}">
+	<input type="hidden" name="game_id" value="{$_REQUEST.game_id}">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>文章关联ID：</label>
+				<input type="text" name="id" value="{$_REQUEST.id}" size="10" />
+			</li>
+			<li>
+				<label>资讯标题：</label>
+				<input type="text" name="title" value="{$_REQUEST.title}"/>
+			</li>
+
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li>
+                    <div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
+                </li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<if condition="$_REQUEST.class_id neq '10'">
+			<li><a class="add" href="__URL__/edit" target="dialog" mask="true"><span>新增</span></a></li>
+			</if>
+			<!--<li><a class="delete" href="__URL__/delete/id/{sid_record}" target="ajaxTodo" title="你确定要删除吗？" warn="请选择文章"><span>删除</span></a></li>-->
+			<li>
+			<a class="delete" href="__URL__/delAll" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要删除这些记录吗?">
+			<span>批量删除</span>
+			</a>
+			</li>
+
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="1%" style="cursor: default;">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th width="3%"  orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else /> class="desc"</if>>关联文章ID</th>
+			<th width="20%">文章标题</th>
+			<th width="3%" orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}" <else /> class="desc"</if>>状态</th>
+			<th width="5%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td style="width: 10px;">
+						<div>
+							<input type="checkbox" value="{$vo.id}" name="id">
+						</div>
+					</td>
+					<td>{$vo['id']}</td>
+					<td title="{$vo['title']}">
+						<a target="_blank" href="{:U('/info_n/'.$vo['id'].'/1')}">{$vo['title']}</a>
+					</td>
+					<td>{$vo['status']|getStatus}</td>
+					<td>
+						<a class="delete" href="__URL__/remove/id/{$vo.id}" target="ajaxTodo" title="你确定要删除吗？">
+							<span>删除</span>
+						</a>
+					</td>
+				</tr>
+
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+
+</div>
+
+
+

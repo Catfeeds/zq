@@ -1,0 +1,140 @@
+<extend name="Public:layout"/>
+<block name='seo'>
+    <title>冷热交易_全球体育网</title>
+    <meta name="keywords" content="必发指数,必发交易量,成交趋势变化">
+    <meta name="description" content="全球体育必发交易频道根据必发交易所的动态交易量来统计出主流菠菜公司的成交量、成交价以及成交趋势变化，从而判断出该场比赛的真实走势和倾向，对用户有具体一定的指示性。">
+</block>
+<block name='css'>
+    <!-- 页面所需css -->
+    <link rel="stylesheet" href="__CSS__/ypRadar/radarData.css">
+</block>
+<block name="content">
+    <!-- theme -->
+    <div class="themeBox rdBody">
+        <div class="themeBanner"><div class="themeBanTet">全球体育大数据全年已经覆盖450余个各级别足球赛事，近60000场比赛，每日处理赛前数据2000万条,利用独创的大数据AI人工智能算法结合比赛基本面、球队技战术数据、赔率必发等进行分析计算给出独有的分析数据，大大提高你的胜率。</div></div>
+        <include file="YpRadar:topLink" />
+
+        <!-- main -->
+        <div class="main">
+            <div class="explain">
+                <p><span class="text-red">必发交易：</span>根据必发交易所的动态交易量来统计出主流博彩公司的成交量、成交价以及成交趋势变化，从而判断出该场比赛的真实走势和倾向，对用户有具体一定的指示性。</p>
+                <p><span class="text-red">盈利和亏损：</span>通过模拟主流博彩公司对球队的盈亏数据统计，判断欧亚市场主力资金对比赛可能性发生的结果和倾向性做成预测</p>
+                <p><span class="text-red">风险提示：</span>本产品所提供的数据内容仅供浏览和参考之用</p>
+            </div>
+            <!-- 当前位置 -->
+            <div class="position">
+                当前位置：<span class="now"><a href="https://www.qqty.com/" title="全球体育">全球体育首页</a></span> &gt; <span class="now"><a href="{:U('@sporttery')}" title="专家说彩">专家说彩</a></span> &gt;<span class="text-blue">盈盘雷达</span></div>
+            <!-- 当前位置 -->
+            <div class="subNav jySubNav clearfix">
+                <div class="subNavL pull-left">
+                    <ul class="clearfi">
+                        <li class="pull-left <eq name="param['type']" value="1">on</eq>"><a href="javascript:void(0);" data-type="1" title="必发交易"><span>必发交易</span> </a></li>
+                        <li class="pull-left <eq name="param['type']" value="2">on</eq>"><a href="javascript:void(0);" data-type="2" title="庄家盈利"><span>庄家盈利</span></a></li>
+                        <li class="pull-left <eq name="param['type']" value="3">on</eq>"><a href="javascript:void(0);" data-type="3" title="庄家亏损"><span>庄家亏损</span></a></li>
+                    </ul>
+                </div>
+                <div class="subNavR pull-right">
+                    <div class="dropdown">
+                        <a id="dLabel" title="时间筛选" class="ddTime" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            时间筛选
+                            <span class="glyphicon glyphicon-menu-down"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                            <foreach name="week" item="v" key="k">
+                                <li <eq name="param['date']" value="$v">class="on"</eq>><a href="#" data-date="{$v}" title="{$k}">{$k}</a></li>
+                            </foreach>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="dtTypeCon">
+
+                <empty name="data">
+                    <div class="dtBox dtNoneBox clearfix">
+                        <div><img src="__IMAGES__/ypRadar/none-data-bg.jpg" width="520" height="234" alt="回査数据"></div>
+                        <p><a href="javascript:void(0);" class="text-666" title="回査数据">回査数据 >></a></p>
+                    </div>
+                    <else />
+
+                    <!-- lrjyBox -->
+                    <div class="dtBox lrjyBox lrjySub clearfix">
+                        <div class="pull-left dtBoxIn">
+                            <ul>
+                                <foreach name="data" key="k" item="v">
+                                    <li class="clearfix list <if condition='$k%4 eq 2'>graListL<elseif condition='$k%4 eq 3'/>graListR</if>">
+                                        <div class="pull-left dLeft">
+                                            <p class="text-999 mb30">{$v['betCode']}  {$v['unionName']|switchName=0,###}  {$v['gtime']}</p>
+                                            <p class="text-666 f16 mb10 clearfix"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,0}</span></empty><span class="pull-left awayTeam text-hidden" title="{$v['homeTeamName']|switchName=0,###}">{$v['homeTeamName']|switchName=0,###}</span></p>
+                                            <p class="mb10 text-blue <notempty name="v['score']">pl15</notempty>">平局</p>
+                                            <p class="text-666 f16 clearfix"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,1}</span></empty><span class="pull-left awayTeam text-hidden" title="{$v['awayTeamName']|switchName=0,###}">{$v['awayTeamName']|switchName=0,###}</span></p>
+                                        </div>
+
+                                        <div class="pull-left">
+                                            <p class="text-right text-red f16 pr30 mb10">总交易量：{$v['allDealNum']}</p>
+                                            <div class="clearfix">
+                                                <div class="pull-left cjj">
+                                                    <p class="f16 text-center mb15 text-999">成交价</p>
+                                                    <p class="rowNum text-center f12 text-666 mb10">{$v['homeDealPrice']}</p>
+                                                    <p class="rowNum text-center f12 text-666 mb10">{$v['drawDealPrice']}</p>
+                                                    <p class="rowNum text-center f12 text-666 mb10">{$v['awayDealPrice']}</p>
+                                                </div>
+                                                <div class="pull-left cjl">
+                                                    <p class="f16 text-center mb15 text-999">成交量</p>
+                                                    <p class="rowNum text-center f12 text-666 mb10">{$v['homeDealNum']}</p>
+                                                    <p class="rowNum text-center f12 text-666 mb10">{$v['drawDealNum']}</p>
+                                                    <p class="rowNum text-center f12 text-666 mb10">{$v['awayDealNum']}</p>
+                                                </div>
+                                                <div class="pull-left cjbl">
+                                                    <p class="f16 text-center mb15 text-999"><if condition="$param['type'] eq 2">盈利<elseif condition="$param['type'] eq 3" />亏损<else />成交比例</if></p></p>
+                                                    <p class="rowNum text-center f12 mb10 <if condition="($v['maxSign'] eq 1 and $param['type'] eq 1) or ($v['maxSign'] eq 1 and $param['type'] eq 2)">text-red<elseif condition="$v['maxSign'] eq 1 and $param['type'] eq 3" /> text-green <else /> text-666 </if>">{$v['homeDealRatio']}</p>
+                                                    <p class="rowNum text-center f12 mb10 <if condition="($v['maxSign'] eq 2 and $param['type'] eq 1) or ($v['maxSign'] eq 2 and $param['type'] eq 2)">text-red<elseif condition="$v['maxSign'] eq 2 and $param['type'] eq 3" /> text-green <else /> text-666 </if>">{$v['drawDealRatio']}</p>
+                                                    <p class="rowNum text-center f12 mb10 <if condition="($v['maxSign'] eq 3 and $param['type'] eq 1) or ($v['maxSign'] eq 3 and $param['type'] eq 2)">text-red<elseif condition="$v['maxSign'] eq 3 and $param['type'] eq 3" /> text-green <else /> text-666</if>">{$v['awayDealRatio']}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- lrjyBox -->
+                </empty>
+            </div>
+        </div>
+        <!-- main -->
+
+    </div>
+    <!-- theme -->
+</block>
+
+
+<block name="js">
+    <!-- 页面所需的js -->
+    <script type="text/javascript" src="__JS__/ypRadar/radarData.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('.subNavL ul li a').click(function(){
+                var type = $(this).data('type');
+                var date = $('.dropdown-menu li.on a').data('date');
+                loadData(type, date);
+            });
+
+            $('.secSubNav a').click(function(){
+                var type = $('.subNavL ul li.on a').data('type');
+                var date = $('.dropdown-menu li.on a').data('date');
+                loadData(type, date);
+            });
+
+            $('.dropdown-menu li a').click(function(){
+                var type = $('.subNavL ul li.on a').data('type');
+                var date = $(this).data('date');
+                loadData(type, date);
+            });
+
+            function loadData(type, date){
+                window.location.href = '?type='+type+'&date='+date;
+            }
+        })
+    </script>
+</block>

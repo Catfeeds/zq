@@ -1,0 +1,92 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>{$data.title}_手机全球体育手机网</title>
+</block>
+<block name="append">
+    <style>
+        #gallerySlider .placeholder img{width:auto!important}
+    </style>
+            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Mobile/css/news.css?v=20180607">
+            <link rel="stylesheet" type="text/css" href="__CSS__/girl.css">
+            <link rel="stylesheet" type="text/css" href="__CSS__/touchTouch.css">
+            <script src="__JS__/touchTouch.jquery.js"></script>
+                <script>
+    $(function(){
+    //图片事件,img-gather
+    $('#thumbs a').touchTouch();
+    });
+    </script>
+</block>
+<!-- 二级头部 -->
+<block name="header">
+    <if condition="$_GET['header'] eq ''">
+<header id="other_header">
+            <a href="javascript:history.go(-1)"></a>资讯
+        </header>
+        </if>
+</block>
+<block name="nav"></block>
+
+<block name="content">
+    <if condition="$_GET['header'] eq ''">
+        <div id="new-bar" class="new-bar">
+            <div class="new-logo"><img src="__IMAGES__/app-logo.png"></div>
+            <div class="new-title">
+                <p class="p1">全球体育APP</p>
+                <p class="p2">最专业的体育宝典！</p>
+            </div>
+             <a class="app-btn" id="load_btn">立即下载</a>
+        </div>
+    </if>
+
+        <section class="art_main boxs">
+    <div class="girl-main">
+        <section>
+          <h1>{$data.title}</h1>
+        </section>
+        <!--img-gather-->
+        <div class="clearfix img-gather" id="thumbs">
+           <volist name="data.imgages" id="v">
+            <a href="{$v}"><img src="{$v}"></a>
+           </volist>
+        </div>
+        <!--img-gather end-->
+
+        <!-- 点赞 后 section标签添加样式 on-->
+<!--        <section class="zan">
+            <div>
+            <span>2134</span>
+            <p>+1</p>
+            </div>
+        </section>-->
+        <!-- 点赞 end-->
+    </div>
+        </section>
+                <div class="view_more">
+                    <!-- <a id="load_btn01">下载全球体育APP,查看更多评论</a> -->
+                </div>
+                <script type="text/javascript" src="__PUBLIC__/Api/Home/picDetail/js/panDuan.js"></script>
+</block>
+<block name="footer">
+</block>
+<block name="scripts">
+       <!-- 点赞 js-->
+    <script>
+      $(".zan div").click(function(){
+        if($(this).parent(".zan").hasClass("on")){
+         // alert("已点过了亲")
+        }else{
+           $(this).parent(".zan").addClass("on");
+           showzan();
+        }
+      })
+
+      function showzan(){
+         $(".zan div p").animate({top:'-50px',opacity:0},"slow").css("display","block");
+        setTimeout(function(){
+          $(".zan div p").fadeOut();
+        },1200)
+      }
+    </script>
+    <!-- 点赞 js end-->
+</block>

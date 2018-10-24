@@ -1,0 +1,105 @@
+<include file="Public:pagerForm" />
+<div class="pageContent">
+
+	<form action="__URL__/saveHomeNews" method="post" class="pageForm required-validate" onsubmit="return iframeCallback(this)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+			  	<textarea style="width:70%;height:690px;" name="content">
+			  		{$HomeNews}
+			  	</textarea>
+			</div>
+			<div class="focus-con clearfix">
+				<!-- 新闻模版预览 -->
+				{$HomeNews|htmlspecialchars_decode}
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<if condition="$isedit neq 1">
+					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+					<li><div class="button"><div class="buttonContent"><button type="reset">重置</button></div></div></li>
+					<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+				<else/>
+					<li>{$msg}</li>
+				</if>
+			</ul>
+		</div>
+	</form>
+	<div class="edit" status="{$isedit}" hidden have="1"></div>
+	
+</div>
+<script>
+	$("textarea[name='content']").bind('input propertychange',function(){
+		var html = $("textarea[name='content']").val();
+		$(".focus-con").html(html);
+		$(".new-con h3 a,.new-list ul li a").css("padding-right","6px");
+		$(".new-con h3 a:last-child,.new-list ul li a:last-child").css("padding-right","0"); 
+	})
+	$(".new-con h3 a,.new-list ul li a").css("padding-right","6px");
+	$(".new-con h3 a:last-child,.new-list ul li a:last-child").css("padding-right","0");
+	//监控刷新与关闭
+	window.onbeforeunload=onclose;
+	function onclose()
+	{
+		$.ajax({
+			url: "__URL__/editstatus",
+			type: "GET",
+			success: function (courseDT4) {
+			}
+		});
+		return true;
+	}
+	$(document).ready(function(){
+		console.log($(".edit").attr('status'));
+		if($(".edit").attr('status') != 1)
+		{
+			var setTime = setInterval(function () {
+				if($(".edit").attr('have') === undefined)
+				{
+					onclose();
+					clearInterval(setTime);
+				}
+			}, 5000);
+		}
+	});
+
+</script>
+<style>
+	.focus-con .focus-new{ float: right; margin:0px 50px 0 0; border: 1px dashed;width: 370px; }
+	.focus-con .new-con{padding-bottom: 12px;}
+	.focus-con .new-con h3{ margin-bottom:10px; margin-top:0px;}
+	.focus-con .new-con h3 a{ color: #2a6cb8;}
+	.focus-con .new-con h3 strong{ font-size: 18px;}
+	.focus-con .new-con h3 a.live{ background: url(__PUBLIC__/Home/images/index/live-icon.png) no-repeat 0 center; padding-left: 30px;}
+	.focus-con .new-con .new-list ul{margin-bottom: 0;}
+	.focus-con .new-con .new-list ul li a{float: left;}
+	.focus-con .new-con .new-list ul li{ float: left; margin: 0 0 10px 0px; width: 100%; overflow: hidden;}
+
+	.new-con h3 a{
+	    font-size: 18px;
+	}
+	.text-red {
+	    color: #eb0000;
+	}
+	.new-list ul li a {
+	    color: #333;
+	    font: 14px/1.25 "Microsoft YaHei","Helvetica Neue",Helvetica,Arial !important;
+	}
+	h3, h4, h5, h6 {
+	    color: inherit;
+	    font-family: inherit;
+	    font-weight: 500;
+	    line-height: 1.1;
+	}
+	.focus-con a:active, .focus-con a:hover {
+	    color: #ff7e00 !important;;
+	    outline: 0 none !important;;
+	}
+</style>
+
+
+
+
+
+
+

@@ -1,0 +1,188 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>显示内容：</label>
+				<input type="text" name="title" value="{$_REQUEST.title}"/>
+			</li>
+			<li>
+				<label>广告平台：</label>
+				<select name="platform" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.platform eq '1'">selected</if> >web</option>
+					<option value="2" <if condition="$_REQUEST.platform eq '2'">selected</if> >ios</option>
+					<option value="3" <if condition="$_REQUEST.platform eq '3'">selected</if> >安卓</option>
+					<option value="4" <if condition="$_REQUEST.platform eq '4'">selected</if> >m站</option>
+					<option value="5" <if condition="$_REQUEST.platform eq '5'">selected</if> >手机平台</option>
+					<option value="6" <if condition="$_REQUEST.platform eq '6'">selected</if> >全平台</option>
+				</select>
+			</li>
+			<li>
+				<label>状态：</label>
+				<select name="status" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >启用</option>
+					<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >禁用</option>
+				</select>
+			</li>
+			<li>
+				<label>类型：</label>
+				<select name="module" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.module eq '1'">selected</if> >资讯</option>
+					<option value="2" <if condition="$_REQUEST.module eq '2'">selected</if> >图集</option>
+					<option value="3" <if condition="$_REQUEST.module eq '3'">selected</if> >视频</option>
+					<option value="9" <if condition="$_REQUEST.module eq '9'">selected</if> >外链</option>
+					<option value="10" <if condition="$_REQUEST.module eq '10'">selected</if> >个人主页</option>
+					<option value="11" <if condition="$_REQUEST.module eq '11'">selected</if> >足球推荐页面</option>
+					<option value="12" <if condition="$_REQUEST.module eq '12'">selected</if> >蓝球推荐页面</option>
+					<option value="13" <if condition="$_REQUEST.module eq '13'">selected</if> >帖子</option>
+					<option value="15" <if condition="$_REQUEST.module eq '15'">selected</if> >体验券</option>
+					<option value="16" <if condition="$_REQUEST.module eq '16'">selected</if> >球王</option>
+					<option value="17" <if condition="$_REQUEST.module eq '17'">selected</if> >无跳转</option>
+					<option value="18" <if condition="$_REQUEST.module eq '18'">selected</if> >商城</option>
+				</select>
+			</li>
+			<li>
+				<label>显示位置：</label>
+				<select name="class_id" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<volist name="AdverClass" id="item">
+						<option value="{$item.id}" <eq name="item.id" value="$_REQUEST.class_id">selected</eq> >{$item.name}</option>
+					</volist>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true" height="700", width="680"><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/delete/id/{sid_record}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择广告"><span>删除</span></a></li>
+			<li>
+			<a class="delete" href="__URL__/delAll" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要删除这些记录吗?">
+			<span>批量删除</span>
+			</a>
+			</li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" height="600" warn="请选择用户"><span>编辑</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="2%">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th width="2%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th width="3%">图片</th>
+			<th width="7%">显示内容</th>
+			<th width="7%">显示位置</th>
+			<th width="3%">广告平台</th>
+			<th width="3%">销售价格</th>
+			<th width="3%">销售人</th>
+			<th width="6%" orderField="add_time" <if condition="$_REQUEST._order eq 'add_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>添加时间</th>
+			<th width="6%" orderField="online_time" <if condition="$_REQUEST._order eq 'online_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>设定上架时间</th>
+			<th width="6%" orderField="end_time" <if condition="$_REQUEST._order eq 'end_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>结束时间</th>
+			<th width="3%" orderField="click" <if condition="$_REQUEST._order eq 'click'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>点击量</th>
+			<th width="3%">上架状态</th>
+			<th width="3%">所属模块</th>
+			<th width="12%">模块id / 外链地址</th>
+			<th width="3%" orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>状态</th>
+			<th width="3%" orderField="sort" <if condition="$_REQUEST._order eq 'sort'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>排序</th>
+			<th width="4%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>
+						<div>
+							<input type="checkbox" value="{$vo.id}" name="id">
+						</div>
+					</td>
+					<td>{$vo['id']}</td>
+					<td>
+					<empty name="vo.titleimg">没有上传
+					<else/>
+					<if condition="pathinfo($vo['titleimg'], PATHINFO_EXTENSION) eq swf">
+						<a href="{$vo.titleimg}" target="_blank" title="查看广告图片">
+						<embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$vo.titleimg}">
+						</a>
+					<else/>
+					    <a href="{$vo.titleimg}" target="_blank" title="查看广告图片"><img src="{$vo['titleimg']}" alt="广告图片" width="30" height="30" /></a>
+					</if>
+					</empty>
+					</td>
+					<td>{$vo['title']}</td>
+					<td>{$vo['name']}</td>
+					<td>
+						<switch name="vo.platform">
+							<case value="1">web</case>
+							<case value="2">ios</case>
+							<case value="3">安卓</case>
+							<case value="4">m站</case>
+							<case value="5">手机平台</case>
+							<case value="6">全平台</case>
+						</switch>
+					</td>
+					<td>￥{$vo['price']}</td>
+					<td>{$vo['sales_people']}</td>
+					<td>{$vo['add_time']|date="Y-m-d H:i",###}</td>
+					<td>{$vo['online_time']|date="Y-m-d H:i",###}</td>
+					<td>{$vo['end_time']|date="Y-m-d H:i",###}</td>
+					<td>{$vo['click']}</td>
+					<td>
+						<if condition="$vo.online_time gt time()"><div style="color: blue">未开始</div>
+						<elseif condition="$vo.end_time lt time()" /><div style="color: red">已结束</div>
+						<else /><div style="color: green">进行中</div>
+						</if>
+					</td>
+					<td>
+						<switch name="vo.module">
+							<case value="1">资讯</case>
+							<case value="2">图集</case>
+							<!-- <case value="3">视频</case> -->
+							<case value="9">外链</case>
+							<case value="10">个人主页</case>
+							<case value="11">足球推荐页面</case>
+							<case value="12">篮球推荐页面</case>
+							<case value="13">贴子</case>
+							<case value="15">体验券</case>
+							<case value="16">球王</case>
+							<case value="17">无跳转</case>
+							<case value="18">商城</case>
+						</switch>
+					</td>
+					<td><a target="_blank" href="{$vo['url']}">{$vo['url']|msubstr=0,30}</a></td>
+					<td>{$vo['status']|getStatus}</td>
+					<td>{$vo['sort']}</td>
+					<td>
+						<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" height="600" width="650" title="{$vo.name}编辑" rel="editPage">编辑</a> |
+						{$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",'__DWZ__'}
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

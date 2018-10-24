@@ -1,0 +1,191 @@
+<if condition="$_REQUEST.SignPublishListIndex eq '1'">
+	<div class="pageContent">
+		<form method="post" action="{$_REQUEST.actionName}"class="pageForm" onsubmit="return navTabSearch(this);">
+		<input type="hidden" name="class_id" value="{$_REQUEST.class_id}">
+		<input type="hidden" name="game_id" value="{$_REQUEST.game_id}">
+			<div class="pageFormContent" layoutH="58">
+				<div class="unit" width="200" height="50">
+					<label>ID：</label>
+					<input type="text" name="id" value="{$_REQUEST.id}" size="10" />
+				</div>
+				<div class="unit" width="200">
+					<label>资讯标题：</label>
+					<input type="text" name="title" value="{$inputQuest.title}"/>
+				</div>
+				<if condition="$_REQUEST.class_id neq '10'">
+				<div class="unit" width="200">
+					<label>所属分类：</label>
+					<select name="class_id" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<volist name="PublishClass" id="item">
+							<option value="{$item.id}" <eq name="item.id" value="$_REQUEST.class_id">selected</eq> >{$item.name}</option>
+							<notempty name="item.childs">
+								<volist name="item.childs" id="item2">
+									<option value="{$item2.id}" <eq name="item2.id" value="$_REQUEST.class_id">selected</eq> >|_{$item2.name}</option>
+									<notempty name="item2.childs">
+										<volist name="item2.childs" id="item3">
+											<option value="{$item3.id}" <eq name="item3.id" value="$_REQUEST.class_id">selected</eq> >|__{$item3.name}</option>
+										</volist>
+									</notempty>
+								</volist>
+							</notempty>
+						</volist>
+					</select>
+	            </div>
+	            </if>
+				<div class="unit" width="200">
+					<label>编辑：</label>
+					<select name="editor" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<volist name="editor" id="item">
+							<option value="{$item.id}" <eq name="item.id" value="$_REQUEST.editor">selected</eq> >{$item.nickname}</option>
+						</volist>
+					</select>
+				</div>
+
+				<if condition="$_REQUEST.class_id eq '10'">
+	                <div class="unit" width="200">
+	                    <label >手机号：</label>
+	                    <input type="text" name="username" value="{$_REQUEST.username}"/>
+	                </div>
+	                <div class="unit" width="200">
+	                    <label >昵称：</label>
+	                    <input type="text" name="nick_name" value="{$inputQuest.nick_name}"/>
+	                </div>
+            	</if>
+	            <div class="unit" width="200">
+					<label>状态：</label>
+					<select name="status" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >可用</option>
+						<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >停用</option>
+					</select>
+				</div>
+				<div class="unit" width="200">
+					<label>首页推荐：</label>
+					<select name="is_recommend" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<option value="0" <if condition="$_REQUEST.is_recommend eq '0'">selected</if> >否</option>
+						<option value="1" <if condition="$_REQUEST.is_recommend eq '1'">selected</if> >推荐</option>
+						<option value="2" <if condition="$_REQUEST.is_recommend eq '2'">selected</if> >重点推荐</option>
+					</select>
+				</div>
+				<div class="unit" width="200">
+					<label>栏目推荐：</label>
+					<select name="is_channel_push" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<option value="0" <if condition="$_REQUEST.is_channel_push eq '0'">selected</if> >否</option>
+						<option value="1" <if condition="$_REQUEST.is_channel_push eq '1'">selected</if> >是</option>
+					</select>
+				</div>
+				<div class="unit" width="200">
+					<label>日期：</label>
+					<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="10"><label style="width:10px">至</label>
+					<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="10">
+				</div>
+			</div>
+			<if condition="$_REQUEST.SignPublishListIndex eq '1'">
+			<div class="formBar">
+				<ul>
+					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">开始检索</button></div></div></li>
+					<!-- <li><div class="button"><div class="buttonContent"><button type="reset">清空重输</button></div></div></li> -->
+				</ul>
+			</div>
+			</if>
+		</form>
+	</div>
+</if>
+<if condition="($_REQUEST.SignPublishListIndex eq '1') and ($_REQUEST.class_id eq '10')">
+	<div class="pageContent">
+		<form method="post" action="{$_REQUEST.actionName}"class="pageForm" onsubmit="return navTabSearch(this);">
+		<input type="hidden" name="class_id" value="{$_REQUEST.class_id}">
+		<input type="hidden" name="game_id" value="{$_REQUEST.game_id}">
+			<div class="pageFormContent" layoutH="58">
+				<div class="unit" width="200" height="50">
+					<label>ID：</label>
+					<input type="text" name="id" value="{$_REQUEST.id}" size="10" />
+				</div>
+				<div class="unit" width="200">
+					<label>资讯标题：</label>
+					<input type="text" name="title" value="{$inputQuest.title}"/>
+				</div>
+				<if condition="$_REQUEST.class_id neq '10'">
+				<div class="unit" width="200">
+					<label>所属分类：</label>
+					<select name="class_id" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<volist name="PublishClass" id="item">
+							<option value="{$item.id}" <eq name="item.id" value="$_REQUEST.class_id">selected</eq> >{$item.name}</option>
+							<notempty name="item.childs">
+								<volist name="item.childs" id="item2">
+									<option value="{$item2.id}" <eq name="item2.id" value="$_REQUEST.class_id">selected</eq> >|_{$item2.name}</option>
+									<notempty name="item2.childs">
+										<volist name="item2.childs" id="item3">
+											<option value="{$item3.id}" <eq name="item3.id" value="$_REQUEST.class_id">selected</eq> >|__{$item3.name}</option>
+										</volist>
+									</notempty>
+								</volist>
+							</notempty>
+						</volist>
+					</select>
+	            </div>
+				<div class="unit" width="200">
+					<label>编辑：</label>
+					<select name="editor" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<volist name="editor" id="item">
+							<option value="{$item.id}" <eq name="item.id" value="$_REQUEST.editor">selected</eq> >{$item.nickname}</option>
+						</volist>
+					</select>
+				</div>
+	            </if>
+                <div class="unit" width="200">
+                    <label >手机号：</label>
+                    <input type="text" name="username" value="{$_REQUEST.username}"/>
+                </div>
+                <div class="unit" width="200">
+                    <label >昵称：</label>
+                    <input type="text" name="nick_name" value="{$inputQuest.nick_name}"/>
+                </div>
+	            <div class="unit" width="200">
+					<label>状态：</label>
+					<select name="status" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >可用</option>
+						<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >停用</option>
+					</select>
+				</div>
+				<div class="unit" width="200">
+					<label>首页推荐：</label>
+					<select name="is_recommend" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<option value="0" <if condition="$_REQUEST.is_recommend eq '0'">selected</if> >否</option>
+						<option value="1" <if condition="$_REQUEST.is_recommend eq '1'">selected</if> >推荐</option>
+						<option value="2" <if condition="$_REQUEST.is_recommend eq '2'">selected</if> >重点推荐</option>
+					</select>
+				</div>
+				<div class="unit" width="200">
+					<label>栏目推荐：</label>
+					<select name="is_channel_push" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<option value="0" <if condition="$_REQUEST.is_channel_push eq '0'">selected</if> >否</option>
+						<option value="1" <if condition="$_REQUEST.is_channel_push eq '1'">selected</if> >是</option>
+					</select>
+				</div>
+				<div class="unit" width="200">
+					<label>日期：</label>
+					<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="10"><label style="width:10px">至</label>
+					<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="10">
+				</div>
+			</div>
+			<if condition="($_REQUEST.SignPublishListIndex eq '1') and ($_REQUEST.class_id eq '10')">
+			<div class="formBar">
+				<ul>
+					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">开始检索</button></div></div></li>
+					<!-- <li><div class="button"><div class="buttonContent"><button type="reset">清空重输</button></div></div></li> -->
+				</ul>
+			</div>
+			</if>
+		</form>
+	</div>
+</if>

@@ -1,0 +1,46 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" value="{$vo.id}" name="id" />
+		<div class="pageFormContent" layoutH="58">
+			
+			<div class="unit">
+				<label>国家名称：</label>
+				<input type="text" class="required"  name="country" value="{$vo.country}" size="40"/>
+			</div>
+
+			<div class="unit">
+				<label>国家图片地址：</label>
+				<input type="text" class="required" name="img" value="{$vo.img}" size="60"/>
+			</div>
+
+			<div class="unit">
+				<label>排名：</label>
+				<input type="text" class="digits" name="ranking" value="{$vo.ranking}" size="40" />
+			</div>
+					
+			<div class="unit">
+				<label>金牌数：</label>
+				<input type="text" class="digits" name="gold" value="{$vo.gold}" size="40" />
+			</div>
+
+			<div class="unit">
+				<label>银牌数：</label>
+				<input type="text" class="digits" name="silver" value="{$vo.silver}" size="40" />
+			</div>
+
+			<div class="unit">
+				<label>铜牌数：</label>
+				<input type="text" class="digits" name="copper" value="{$vo.copper}" size="40" />
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+

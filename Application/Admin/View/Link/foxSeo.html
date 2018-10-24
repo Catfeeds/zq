@@ -1,0 +1,70 @@
+<include file="Public:pagerForm" />
+<div class="pageContent">
+
+    <form action="__URL__/saveFoxSeo" method="post" class="pageForm required-validate" onsubmit="return iframeCallback(this)">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <textarea style="width:70%;height:690px;" name="content">{$foxSeo}</textarea>
+            </div>
+            <div class="focus-con clearfix">
+                <!-- 新闻模版预览 -->
+                {$foxSeo|htmlspecialchars_decode}
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="reset">重置</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+<script>
+    $("textarea[name='content']").bind('input propertychange',function(){
+        var html = $("textarea[name='content']").val();
+        $(".focus-con").html(html);
+        $(".new-con h3 a,.new-list ul li a").css("padding-right","6px");
+        $(".new-con h3 a:last-child,.new-list ul li a:last-child").css("padding-right","0");
+    })
+    $(".new-con h3 a,.new-list ul li a").css("padding-right","6px");
+    $(".new-con h3 a:last-child,.new-list ul li a:last-child").css("padding-right","0");
+</script>
+<style>
+    .focus-con .focus-new{ float: right; margin:20px 50px 0 0; border: 1px dashed; }
+    .focus-con .focus-new{ width: 380px;}
+    .focus-con .new-con{padding-top: 10px}
+    .focus-con .new-con h3{  font-size: 18px; margin-bottom:10px; margin-top:0px}
+    .focus-con .new-con .new-list ul{margin-bottom: 0}
+    .focus-con .new-con .new-list ul li a{float: left;}
+    .focus-con .new-con .new-list ul li{ float: left; margin: 0 0 13px 0px; width: 100%; overflow: hidden;}
+    .focus-con .new-con .new-list ul li .video{background: url("__PUBLIC__/Home/images/index/video.png") no-repeat left center;padding-left: 20px}
+    .new-con h3 a{
+        font-size: 18px;
+    }
+    .text-red {
+        color: #eb0000;
+    }
+    .new-list ul li a {
+        color: #333;
+        font: 14px/1.25 "Microsoft YaHei","Helvetica Neue",Helvetica,Arial !important;
+    }
+    h3, h4, h5, h6 {
+        color: inherit;
+        font-family: inherit;
+        font-weight: 500;
+        line-height: 1.1;
+    }
+    .focus-con a:active, .focus-con a:hover {
+        color: #ff7e00 !important;;
+        outline: 0 none !important;;
+    }
+</style>
+
+
+
+
+
+
+

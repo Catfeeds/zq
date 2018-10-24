@@ -1,0 +1,77 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/pay/pay.css">
+    <style type="text/css">
+    	.pay_infor{ padding: .5rem .2rem .3rem .2rem;}
+		.pay_infor dt,.pay_infor dd{ margin-bottom: .25rem;}
+    </style>
+</block>
+<!-- 顶部结束 -->
+<block name="header">
+    <header id="other_header">
+    	<a href="{:U('Pay/index')}"></a>确定支付
+    </header>
+</block>
+<block name="nav"></block>
+<block name="content">
+    <section class="main">
+            <dl class="pay_infor">
+                <dt class="fs30">应付金额：<em class="text-orange">￥{$da.total_fee}</em></dt>
+                <dd class="clearfix">
+                	<span class="fs26 text-999">订单号：</span>
+                    <em class="fs26">{$da.no}</em>
+                </dd>
+                <dd class="clearfix">
+                	<span class="fs26 text-999">订单状态：</span>
+                    <em class="fs26">未支付</em>
+                </dd>
+                <dd class="clearfix">
+                	<span class="fs26 text-999">创建日期：</span>
+                    <em class="fs26">{$da.tm}</em>
+                </dd>
+            </dl>
+            <div class="next_con">
+                <input type="button" id='dopay' class="submit fs30 text-fff bg-orange" onclick="callpay()" value="立即支付" />
+            </div>
+	</section>
+    <!-- 主体内容开始 -->
+<script type="text/javascript">
+	//调用微信JS api 支付
+	function jsApiCall()
+	{
+		WeixinJSBridge.invoke(
+			'getBrandWCPayRequest',
+                        {$jsApiParameters},
+			function(res){
+				WeixinJSBridge.log(res.err_msg);
+                                if(res.err_msg=='get_brand_wcpay_request:ok'){
+                                    alert('支付成功!');
+                                    location.href="//m.qqty.com/User/index.html";
+                                }else if(res.err_msg=='get_brand_wcpay_request:cancel'){
+                                    alert('您取消了支付!');
+                                }else if(res.err_msg=='get_brand_wcpay_request:fail'){
+                                    alert('支付失败!');
+                                    location.href="//m.qqty.com/Pay/index.html";
+                                }
+			}
+		);
+	}
+	function callpay()
+	{
+		if (typeof WeixinJSBridge == "undefined"){
+		    if( document.addEventListener ){
+		        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+		    }else if (document.attachEvent){
+		        document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+		        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+		    }
+		}else{
+		    jsApiCall();
+		}
+	}
+</script>
+</block>
+<block name="footer">
+    <include file="Public/footer_phone" />
+</block>

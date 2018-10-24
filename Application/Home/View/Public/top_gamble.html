@@ -1,0 +1,30 @@
+<div class="logo"><img src="__IMAGES__/quiz_hall/logo.png"></div>
+<div id="nav">
+    <ul>
+        <li <in name="info" value="football,betting">class="on"</in>><a href="{:U('@jc')}">足球推荐</a></li>
+        <li <eq name="info" value="basketball">class="on"</eq>><a href="{:U('/basketball@jc')}">篮球推荐</a></li>
+        <li <in name="Think.ACTION_NAME" value="rank,rank_bet,profit,profit_bet">class="on"</in>><a href="{:U('/rank@jc')}">高手排行</a></li>
+        <li <eq name="Think.ACTION_NAME" value="exchange">class="on"</eq>><a href="{:U('/exchange@jc')}">兑换中心</a></li>
+        <li <eq name="Think.ACTION_NAME" value="recharge">class="on"</eq>><a href="{:U('/recharge@jc')}">充值中心</a></li>
+        <li <eq name="Think.ACTION_NAME" value="rule">class="on"</eq>><a href="{:U('/rule@jc')}">推荐规则</a></li>
+        <li <eq name="Think.ACTION_NAME" value="myGamble">class="on"</eq>><a class="checkLogin" href="javascript:;">我的推荐</a></li>
+    </ul>
+</div>
+<script>
+$(function(){
+    //验证登录
+    $('.checkLogin').click(function(e) {
+        //判断登录
+        var is_login = $("input[name='userId']").val();
+        if (is_login == '')
+        {
+            modalLogin();
+        }
+        else
+        {
+            window.location.href="/myGamble/1.html"
+        }
+
+    });
+});
+</script>

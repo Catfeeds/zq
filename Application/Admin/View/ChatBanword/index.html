@@ -1,0 +1,87 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+		<div class="searchBar">
+			<ul class="searchContent">
+				<li>
+					<label>内容：</label>
+					<input type="text" name="scontent" value="{$_REQUEST.scontent}"/>
+				</li>
+				<li>
+					<label>昵称：</label>
+					<input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+				</li>
+			</ul>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true" height="480", width="680"><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/delete/id/{sid_record}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择广告"><span>删除</span></a></li>
+			<li>
+				<a class="delete" href="__URL__/delAll" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要删除这些记录吗?">
+					<span>批量删除</span>
+				</a>
+			</li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" height="600" warn="请选择用户"><span>编辑</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="2%">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th width="2%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th width="7%">用户</th>
+			<th width="7%">房间类型</th>
+			<th width="7%">房间号</th>
+			<th width="7%">内容</th>
+			<th width="7%">添加时间</th>
+			<th width="4%">状态</th>
+			<th width="4%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>
+						<div>
+							<input type="checkbox" value="{$vo.id}" name="id">
+						</div>
+					</td>
+					<td>{$vo['id']}</td>
+					<td>{$vo['nick_name']}</td>
+					<td>{$vo['room_type']}</td>
+					<td>{$vo['room_id']}</td>
+					<td>{$vo['content']}</td>
+					<td>{$vo['add_time']|date="Y-m-d H:i",###}</td>
+					<td>{$vo['status']|getStatus}</td>
+					<td>
+						<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" height="600" width="650" title="{$vo.name}编辑" rel="editPage">编辑</a> |
+						{$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",'__DWZ__'}
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+</div>
+
+

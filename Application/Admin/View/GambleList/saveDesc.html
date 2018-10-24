@@ -1,0 +1,39 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/saveDesc/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="{$_REQUEST.id}" />
+		<input type="hidden" name="gameType" value="{$_REQUEST.gameType}" />
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>推荐赛事：</label>
+				<label style="width: auto;">{$vo.home_team_name|switchName=0,###} VS {$vo.away_team_name|switchName=0,###}</label>
+			</div>
+			
+			<div class="unit">
+				<label>分析内容：</label>
+				<textarea maxlength="255" name="desc" rows="6" cols="57">{$vo.desc}</textarea>
+			</div>
+
+			<div class="unit">
+				<label>分析内容审核：</label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="desc_check"  value="1" <eq name="vo.desc_check" value="1">checked</eq> />正常 </label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="desc_check"  value="0" <eq name="vo.desc_check" value="0">checked</eq> />屏蔽 </label>
+			</div>
+
+			<div class="unit">
+				<label>音频状态：</label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="is_voice"  value="1" <eq name="vo.is_voice" value="1">checked</eq> />正常 </label>
+				<label style="width: 90px;padding: 0"><input type="radio" name="is_voice"  value="0" <eq name="vo.is_voice" value="0">checked</eq> />屏蔽 </label>
+			</div>
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

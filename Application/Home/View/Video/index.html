@@ -1,0 +1,247 @@
+<extend name="Public:layout"/>
+<block name='seo'>
+    <title>视频专区|英超直播|西甲直播|世界杯直播|赛事直播_体育赛事直播专题频道_全球体育网</title>
+    <meta name="keywords" content="英超直播,西甲直播,世界杯直播,赛事直播,中超直播,法甲直播,JRS直播,直播吧,意甲直播,德甲直播,亚冠直播,欧冠直播,足球直播,NBA直播,CBA直播">
+    <meta name="description" content="全球体育赛事直播专题频道，为您提供英超直播、西甲直播、2018世界杯直播、中超直播、篮球直播等赛事直播内容，欢迎关注！">
+</block>
+
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/highlights/videoList.css">
+    <link rel="stylesheet" href="__CSS__/video/live.css">
+</block>
+<block name="content">
+  <!-- 主体内容开始 -->
+  <div class="themeBox video-main">
+    <div class="themeNavCon">
+        <div class="themeNavBox">
+            <div class="clearfix themeNavIn">
+                <div class="pull-left themeLogo"><a href="{:U('/')}"><img src="__IMAGES__/special/theme-logo.png" width="142" height="35"></a></div>
+                <div class="pull-left themeNav">
+                    <ul class="clearfix">
+                        <li class="pull-left on">
+                            <a href="{:U('/@video')}"><span>直播</span></a>
+                        </li>
+                        <volist name="navArr" id="vo">
+                            <li class="pull-left">
+                                <a href="{$vo.href}"><span>{$vo.name}</span></a>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main clearfix">
+        <!-- 当前位置标题 -->
+        <div class="position">
+            <span class="now">当前位置：</span> <span class="now"><a href="{:U('/')}">  首页></a></span> <span class="now"><a href="{:U('/@video')}">视频专区  ></a></span><span class="position_tip">{$className}</span>
+        </div>
+          <!-- 赛事导航 -->
+         <div class="live-tree">
+            <ul>
+              <li <if condition="$_GET['type'] eq '' ">class="on"</if> ><a href="{:U('@video')}">全部</a></li>
+              <li <if condition="$_GET['type'] eq '1' ">class="on"</if> ><a href="{:U('@video')}?type=1">足球</a></li>
+              <li <if condition="$_GET['type'] eq '2' ">class="on"</if> ><a href="{:U('@video')}?type=2">篮球</a></li>
+            </ul>
+         </div>
+         <script type="text/javascript">
+           $(".live-tree ul li:last").css("border-bottom","1px solid #e5e5e5")
+         </script>
+         <!-- 赛事内容 start-->
+         <div class="live-main"> 
+            <!-- 赛事时间选择 start-->
+                <div class="live-time">
+                   <div class="ladyScroll">
+                  <a class="prev" href="javascript:void(0)"></a>
+                  <div class="scrollWrap">
+                      <div class="dlList">  
+                           <ul>
+                           <volist name="week" id="its">
+                             <li  <if condition="$its.is_on eq 1">class="on" </if> ><a href="javascript:;"><p>{$its.week}</p><p class="day" time="{$its.time}">{$its.day}</p></a></li>
+                           </volist>
+                           </ul>  
+                      </div>
+                  </div>
+                  <a class="next" href="javascript:void(0)"></a>
+                </div>
+            </div>
+                <!-- 赛事列表 start -->
+                  <div class="live-list">
+                    <div class="clearfix">
+                      <div class="showtime pull-left"> 
+                        <img src="__IMAGES__/video/title.png" height="14" />
+                        <span id="stime">{$today.day}（ {$today.week} ）</span>
+                      </div>
+                      <div class="pull-right lange">
+                          <ul class="clearfix">
+                              <li class="pull-left"><a href="javascript:;" <eq name="lang" value="0">class="current"</eq> lang="0">简体</a></li>
+                              <li class="pull-left"><a href="javascript:;" <eq name="lang" value="1">class="current"</eq> lang="1">繁体</a></li>
+                          </ul>
+                      </div>
+                    </div>
+                    <div class="live-list-con">
+                      <ul id="lis">
+                      <volist name="play" id="it">
+                         <li id="{$it.id}">
+                           <div class="live-con clearfix">
+                              <div class="lc-left">
+                                 <span class="s1">{$it[game_time]}</span>
+                                 <span class="s2"><a href="#"><img src="{$it.team_logo}" /></a></span>
+                                 <span class="s3">
+                                    <span <if condition="I('cookie.lang') == 1"> class="hidden" </if>>{$it.union_name|switchName=0,###}</span>
+                                    <span <if condition="I('cookie.lang') == 0"> class="hidden" </if>>{$it.union_name|switchName=1,###}</span>
+                                 </span>
+                              </div>
+                               <div class="lc-center">
+                                 <span class="s2">
+                                   <span <if condition="I('cookie.lang') == 1"> class="hidden" </if>><a href="#">{$it.home_team_name|switchName=0,###}</a></span>
+                                   <span <if condition="I('cookie.lang') == 0"> class="hidden" </if>><a href="#">{$it.home_team_name|switchName=1,###}</a></span>
+                                 </span>
+                                 <span class="s1"><a href="#"><img src="{$it.home_logo}"  /></a></span>
+                                 <span class="s3 <if condition="$it.play_state eq '1'">over<elseif condition="$it.play_state eq '3' " />ing</if>">{$it.score}</span>
+                                 <span class="s5"><a href="#"><img src="{$it.away_logo}" /></a></span>
+                                 <span class="s4">
+                                   <span <if condition="I('cookie.lang') == 1"> class="hidden" </if>><a href="#">{$it.away_team_name|switchName=0,###}</a></span>
+                                   <span <if condition="I('cookie.lang') == 0"> class="hidden" </if>><a href="#">{$it.away_team_name|switchName=1,###}</a></span>
+                                 </span>
+                              </div>
+                              <div class="lc-right" data-id="{$it.id}">
+                                  <if condition="($it.is_live eq 1 )||($it.is_live eq 3)">
+                                      <if condition="$it.is_live eq '3'">
+                                        <a href="javascript:;" class="zb-common cdefault" >播放源<span></span></a>
+                                      <else />
+                                        <if condition="$it.web_video_num gt '0'">
+                                            <a href="javascript:;" class="zb-common zbz">比赛中<span></span></a>
+                                            <else />
+                                            <a href="javascript:;" class="zb-common cdefault">进行中<span></span></a>
+                                        </if>
+                                      </if>
+                                      <div class="zb-list clearfix">
+                                        <ul>
+                                          <volist name="it.web_video" id="video">
+                                              <if condition="$video['weburl'] neq '' and $it['type'] eq 1">
+                                                <li><a href="{:U('/live/'.$it['game_id'].'@bf')}" target="_blank" >{$video.webname}</a></li>
+                                              </if>
+                                          </volist>
+                                        </ul>
+                                      </div>
+                                    <else />
+                                      <if condition="$it.game_state eq '0' ">
+                                          <if condition="$it.prospect_url neq ''">
+                                            <a href="{$it.prospect_url}" class="zb-common play" target="_blank" >前瞻</a>
+                                          <else />
+                                            <a href="javascript:;" class="zb-common" style="color:#999999;cursor:default;" >未开赛</a>
+                                          </if>
+                                      <elseif condition="$it.game_state eq '-1'" />
+                                          <if condition="$it.jijin_url neq ''">
+                                            <a href="{$it.jijin_url}" class="zb-common play" target="_blank" >集锦</a>
+                                          <else />
+                                            <a href="javascript:;" class="zb-common gameover cdefault">已完场</a>
+                                          </if>
+                                      <else/>
+                                          <a href="javascript:;" class="zb-common gameover cdefault">
+                                            <switch name="it.game_state">
+                                              <case value='-11|-2'>待定</case>
+                                              <case value='-10'>取消</case>
+                                              <case value='-12'>腰斩</case>
+                                              <case value='-13'>中断</case>
+                                              <case value='-14'>推迟</case>
+                                            </switch>
+                                          </a>
+                                      </if>
+                                  </if>
+                              </div>
+                           </div>
+                         </li>
+                      </volist>
+                      </ul>
+                    </div>
+                  </div>
+             <!-- 赛事列表 end -->
+         </div>
+         <!-- 赛事内容 end-->
+    </div>
+  </div>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/video/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="__JS__/common/cookie.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //返回顶部
+            $(window).scroll(function(e) {
+                if($(window).scrollTop()>$(window).height()){
+                    $('.return-top').fadeIn(300);
+                }else {
+                    $('.return-top').fadeOut(300);
+                }
+            });
+            $('.return-top').click(function(e) {
+                $('body,html').animate({'scrollTop':'0'},500);
+            });
+            //直播列表显示js
+            $('#lis').delegate(".lc-right", "mouseover mouseout", function(e) {
+                if (e.type == 'mouseover')
+                {
+                    $(this).children("div").show()
+                }
+                else if (e.type == 'mouseout')
+                {
+                    $(this).children("div").hide();
+                }
+            });
+            //简繁体切换
+            $('.lange a').click(function() {
+                $('.lange a').removeClass('current');
+                $(this).addClass('current');
+
+                var newLang = $(this).attr('lang');
+                var oldLang = Cookie.getCookie('lang');
+
+                if (newLang != oldLang)
+                {
+                    $('.live-list-con .hidden').removeClass('hidden').siblings('span').addClass('hidden');
+                    Cookie.setCookie('lang',$(this).attr('lang'),30);
+                }
+            });
+        });
+        jQuery(".ladyScroll").slide({ mainCell:".dlList ul", effect:"leftLoop",vis:7, autoPlay:false,scroll:3,pnLoop:false});
+        $(".dlList ul li").click(function(){
+            $(".dlList ul li").removeClass("on");
+            $(this).addClass("on");
+            //ajax
+            var day =  $(this).find('.day').attr('time');
+            var type = "{$_GET[type]}";
+            var typeStr = type ? '&type='+type : '';
+            $.ajax({
+                type:'get',
+                url:"/?game_date="+day+typeStr+".html",
+                dataType:'json',
+                beforeSend:function(){
+                    var load = "<li style='text-align: center; padding-top: 20px;'><div class=\"text-999 loadp\">"+
+                        "<span><img src=\"__PUBLIC__/Mobile/images/load.gif\"></span>"+
+                        "<span style='margin-left: 5px;'>数据加载中，请稍候......</span>"+
+                        "</div></li>";
+                    $("#lis").html(load);
+                },
+                success:function(lis){
+                    if(lis != ''){
+                        $("#lis").html(lis);
+                    }else{
+                        $("#lis").html("<li style='text-align: center; padding-top: 25px;'><div class='text-999'>暂时没有数据噢！</div></li>");
+                    }
+                },
+                complete:function(){
+                    $(document).scrollTop(1);
+                    $(document).scrollTop(0);
+                    $(".loadp").remove();
+                },
+            });
+        });
+        $(".dlList ul li a").click(function(){
+            var gweek = $(this).children("p:first-child").html();
+            var gdate = $(this).children("p").eq(1).html();
+            $("#stime").html(gdate + "（" + gweek +"）");
+        })
+    </script>
+</block>

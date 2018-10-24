@@ -1,0 +1,66 @@
+<div class="pageContent">
+<style>
+    .pageFormContent span{line-height: 21px;}
+</style>
+    <form method="post" action="__URL__/ToExamine" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="{$list.id}"/>
+        <input type="hidden" name="log_status" value="{$list.log_status}"/>
+        <input type="hidden" name="user_id" value="{$list.user_id}"/>
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>真实姓名：</label>
+                <span>{$list.true_name|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>会员昵称：</label>
+                <span>{$list.nick_name|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>用户名：</label>
+                <span>{$list.username|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>银行名称：</label>
+                <span>{$list.bank_name|default ='--'}</span>
+            </div>
+
+            <div class="unit">
+                <label>开户银行名称：</label>
+                <span>{$list.bank_full_name|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>开户省份、市：</label>
+                <span>{$list.bank_region|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>银行卡号：</label>
+                <span>{$list.bank_card_id|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>支付宝账号：</label>
+                <span>{$list.alipay_id|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>提款金额：</label>
+                <span>{$list.change_num|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>审核操作 ：</label>
+                <input type="radio" name="log_status" value="3" checked>通过&nbsp;&nbsp;
+                <input type="radio" name="log_status" value="2">不通过&nbsp;&nbsp;
+                <input type="radio" name="log_status" value="5">冻结
+            </div>
+            <div class="unit">
+                <label>审核说明：</label>
+                <textarea  name="desc" rows="4" cols="57" maxlength="255" class="required"></textarea>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>

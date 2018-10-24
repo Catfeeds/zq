@@ -1,0 +1,81 @@
+<extend name="Public/base" />
+<block name="conflict">
+</block>
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/competition.css?v=2018050718">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/index.css?v=2018050719">
+    <script type="text/javascript" src="__JS__/schedulelist/swiper.min.js"></script>
+    <script type="text/javascript" src="__JS__/schedulelist/zepto.min.js"></script>
+    <style>
+        #footer .version a {
+            color:#0a94e4;
+        }
+    </style>
+</block>
+
+<block name="header">
+    <!-- 头部 -->
+    <neq name="_GET['header']" value="no">
+    <header class="top">
+        <ul class="head-top">
+            <li class="f-h">
+                <a href="{:U('/'.$name)}<eq name="_GET['header']" value="no">?header=no</eq>"><img src="__IMAGES__/schedule/back.png"></a>
+            </li>
+            <li class="l-g">
+                <span class="leaguesIcon"></span>
+                <span class="photo">{$unionName}</span>
+            </li>
+        </ul>
+    </header>
+    </neq>
+</block>
+
+<block name="nav"></block>
+
+<block name="content">
+    <input type="hidden" name="level" value="{$level}">
+    <input type="hidden" name="name" value="{$name}">
+
+    <!-- 主体内容 -->
+    <section class="wrapCon">
+        <section class="n_module">
+            <ul class="nav_list nav_list03 clearfix l">
+                <li><a href="{:U($name.'/info/')}<eq name="_GET['header']" value="no">?header=no</eq>" class="on"><span>资讯</span></a></li>
+                <li><a href="{:U($name.'/schedule/')}<eq name="_GET['header']" value="no">?header=no</eq>"><span>赛程</span></a></li>
+                <li><a href="{:U($name.'/rank/')}<eq name="_GET['header']" value="no">?header=no</eq>"><span>排行</span></a></li>
+            </ul>
+        </section>
+        <!-- 主体内容 -->
+        <section class="container clearfix">
+            <!-- 英超 -->
+             <!--jsd est ata-->
+        </section>
+        <button class="more"><span>点击查看更多<img src="__IMAGES__/index/more.png"></span></button>
+        <button class="over hide_swiper"><span>没有更多数据了</span></button>
+        <eq name="_GET['header']" value="no">
+            <include file="Public:go_back_pack"/>
+        </eq>
+    </section>
+</block>
+
+<block name="footer">
+</block>
+
+<block name="scripts">
+    <script>
+        var time_stamp = {:time()};
+        var htmlData = "";
+        var is_load = 1;
+        <eq name="_GET['header']" value="no">
+        htmlData = '?header=no';
+        is_load = 0;
+        </eq>
+    </script>
+    <script type="text/javascript" src="__JS__/schedulelist/infoData.js?20180614"></script>
+</block>
+
+
+
+
+

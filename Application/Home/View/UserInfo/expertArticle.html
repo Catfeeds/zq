@@ -1,0 +1,267 @@
+<!-- Nav tabs -->
+<style>
+    .nav-on a{
+        margin-right: 2px;
+        line-height: 1.42857143;
+        border: 1px solid transparent;
+        border-radius: 4px 4px 0 0;
+        background: #3f446f;
+        color:#FFF;
+    }
+    #weburl_label {
+        width:101px;
+    }
+    .nav-on a:hover{color:#D82222;}
+</style>
+<ul class="top-nav nav nav-tabs">
+    <li role="presentation"  <if condition="$_GET['type'] eq 1 or $_GET['type'] eq ''">class="nav-on"</if>><a href="{:U('UserInfo/publish',['type'=>1])}">资讯文章</a></li>
+    <li role="presentation"  <if condition="$_GET['type'] eq 2">class="nav-on"</if>><a href="{:U('UserInfo/publish',['type'=>2])}">推荐文章</a></li>
+</ul>
+<!-- Nav tabs -->
+<div class="applyInfor reset-con applyArticle">
+    <div class="form reset-list">
+        <form method="post" action="__URL__/save" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return form_submit()">
+            <div class="form-in clearfix">
+                <div class="pull-left input-name">文章标题：</div>
+                <div class="pull-left input-con input-position-relative">
+                    <input id="title" class="form-control" name="title" type="text" placeholder="" maxlength="48">
+                    <p class="notesP" style="color:red;">注：请勿填写违反国家法律，设计色情、政治、造谣、敏感等内容，标题字数限制48个字</p>
+                </div>
+            </div>
+            <div class="form-in clearfix">
+                <div class="pull-left input-name">封面图片：</div>
+                <ul class="tabImg">
+                    <li>
+                        <input id="viewUploadInput_77" name="fileInput" type="file" onChange="previewImage(77)" style="display:none;" />
+                        <a href="javascript:void(0);">
+							 <span id="viewUploadDiv_77">
+									<img src="__IMAGES__/common/add_gray.png" width="80" height="80" id="viewUploadImg_77"/>
+							 </span>
+                        </a>
+                        <div id="poiter_77" class="poiter">
+                                <a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_77')">添加图片</a>
+                        </div>
+                    </li>
+                </ul><br><br>
+                <p class="notesP"  style="color:red;">注：上传图片大小建议为600X400</p>
+            </div>
+            <style type="text/css">
+                .tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+                .poiter a:hover{color:red;}
+                .tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+                .tabImg li div a{ line-height: 80px;}
+                .form-control {display: inline-block;}
+            </style>
+            <!--引入本页js-->
+            <script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+            <script>
+                $(function(){
+                    $('.tabImg li').hover(function(e) {
+                        $(this).children('div').stop().animate({'top':'0'},300);
+                    },function(){
+                        $(this).children('div').stop().animate({'top':'80px'},300);
+                    });
+                });
+            </script>
+            <if condition="$_GET['type'] eq 2">
+                <div class="form-in clearfix">
+                    <div class="pull-left input-name">选择比赛：</div>
+                    <div class="pull-left input-con">
+                        <div class="pull-left form-control game_input"></div>
+                        <!-- <input id="title" class="form-control" name="title" type="text" placeholder=""> -->
+                        <div class="pull-right reanks-con">
+                            <a href="javascript:;" type="button" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-orange">选择比赛</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-in clearfix game_ya" style="display: none;">
+                    <div class="pull-left input-name">亚盘玩法：</div>
+                    <div class="pull-left input-con">
+                        <table class="table table-bordered"  width="100%" align="center" cellspacing="0" border="0" cellpadding="0">
+                            <thead>
+                            <tr>
+                                <th width="130"><strong>玩法</strong></th>
+                                <th width="130"><strong>赔率</strong></th>
+                                <th width="130"><strong>盘口</strong></th>
+                                <th width="130"><strong>赔率</strong></th>
+                            </tr>
+                            </thead>
+                            <tbody id="game_ya">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-in clearfix game_ji" style="display: none;">
+                    <div class="pull-left input-name">竞彩玩法：</div>
+                    <div class="pull-left input-con">
+                        <table class="table table-bordered"  width="100%" align="center" cellspacing="0" border="0" cellpadding="0">
+                            <thead>
+                            <tr>
+                                <th width="130"><strong>玩法</strong></th>
+                                <th width="130"><strong>胜</strong></th>
+                                <th width="130"><strong>平</strong></th>
+                                <th width="130"><strong>负</strong></th>
+                            </tr>
+                            </thead>
+                            <tbody id="game_ji">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            <else/>
+                <div class="form-in clearfix">
+                    <div class="input-name pull-left">文章分类：</div>
+                    <div class="select-con">
+                        <select class="form-control class_st" style="width: 150px;" name="class_st">
+                            <option value="news">资讯</option>
+                            <option value="video">视频</option>
+                        </select>
+                        <select class="form-control class_nd" style="width: 150px;" name="class_nd">
+                            <volist name="class_p" id="item">
+                                <option value="{$item.id}" type="{$item.type}" <if condition="$item['type'] eq 2">style="display:none;"</if>>{$item.name}</option>
+                            </volist>
+                        </select>
+                        <select class="form-control class_rd hidden" style="width: 150px;" name="class_rd">
+                            <volist name="class_s" id="item">
+                                <option value="{$item.id}" pid="{$item.pid}" type="{$item.type}">{$item.name}</option>
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-in clearfix weburl" style="display: none;">
+                    <div class="pull-left input-name">视频播放地址：</div>
+                    <div class="pull-left input-con input-position-relative">
+                        <input id="weburl" class="form-control" name="weburl" type="text" placeholder="">
+                        <p class="notesP" style="color:red;">注：请勿填写违反国家法律，设计色情、政治、造谣、敏感等内容</p>
+                    </div>
+                </div>
+                <div class="form-in clearfix weburl" style="display: none;">
+                    <div class="pull-left input-name">视频简介：</div>
+                    <div class="pull-left input-con input-position-relative">
+
+                        <textarea style="height: 200px;"  class="form-control txtUserName required remark" placeholder="请填写视频简介" name="remark"></textarea>
+                    </div>
+                </div>
+            </if>
+            <div class="form-in clearfix news_content">
+                <div class="input-name">分析内容：</div>
+                <p class="notesP" style="color:red;">注：文章字数不少于500字!</p>
+                <textarea id="myeditor" style="width:100%;height:600px;" name="content"></textarea>
+            </div>
+            <div id="game_type"></div>
+            <div class="reg-btn">
+                <input type="submit" class="btn btn-blue" value="发布">
+                <input type="button" class="btn preview" value="预览">
+            </div>
+        </form>
+    </div>
+</div>
+<!--引入百度编辑器-->
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js?v20180605"></script>
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.min.js"> </script>
+
+<!-- 模态窗口开始 -->
+<div class="modal ditai01 fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="width: 786px;left: 50%; margin-left: -393px;margin-top: 5%">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">
+                <a href="javascript:;" class="cur">足球</a>
+                <a href="javascript:;">篮球</a>
+            </h4>
+        </div>
+        <div class="modalTab">
+            <div class="modal-body">
+                <div class="menu_list">
+                    <ul class="clearfix" id="union">
+                        <li class="on"><a href="javascript:;" union_id="all">全部</a></li>
+                        <volist name="game.union" id="item">
+                            <li><a href="javascript:;" union_id="{$item.union_id}">{$item.union_name|switchName=0,###}({$item.union_num})</a></li>
+                        </volist>
+                    </ul>
+                </div>
+                <div class="menu_select">
+                    <ul id="game_list">
+                        <volist name="game.game" id="item">
+                            <li union_id="{$item.union_id}"><label class="inline"><input name="game_radio" type="radio" value="{$item.game_id}" home_logo="{$item.homeTeamLogo}" away_logo="{$item.awayTeamLogo}" home_name="{$item.home_team_name|switchName=0,###}" away_name="{$item.away_team_name|switchName=0,###}" union_name="{$item.union_name|switchName=0,###}" gtime="{$item.gtime|date="Y-m-d H:i",###}"><span class="bg-ac language simplified ">{$item.home_team_name|switchName=0,###} VS {$item.away_team_name|switchName=0,###} {$item.gtime|date="Y-m-d H:i",###}</span><if condition="$item['home_odds'] neq
+     '' or $item['draw_letodds'] neq ''"><em>竞彩</em></if></label></li>
+                            <div class="game_{$item.game_id}" value="{$item.home_odds}_{$item.draw_odds}_{$item.away_odds}_{$item.home_letodds}_{$item.draw_letodds}_{$item.away_letodds}_{$item.fsw_exp_home}_{$item.fsw_exp}_{$item.fsw_exp_away}_{$item.fsw_ball_home}_{$item.fsw_ball}_{$item.fsw_ball_away}_{$item.let_exp}"></div>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-body" style="display: none;">
+                <div class="menu_list">
+                    <ul class="clearfix" id="union">
+                        <li class="on"><a href="javascript:;" union_id="all">全部</a></li>
+                        <volist name="bk.union" id="item">
+                            <li><a href="javascript:;" union_id="{$item.union_id}">{$item.union_name|switchName=0,###}({$item.union_num})</a></li>
+                        </volist>
+                    </ul>
+                </div>
+                <div class="menu_select">
+                    <ul id="game_list">
+                        <volist name="bk.game" id="item">
+                            <li union_id="{$item.union_id}"><label class="inline"><input name="game_radio" type="radio" value="{$item.game_id}" home_logo="{$item.homeTeamLogo}" away_logo="{$item.awayTeamLogo}" home_name="{$item.home_team_name|switchName=0,###}" away_name="{$item.away_team_name|switchName=0,###}" union_name="{$item.union_name|switchName=0,###}" gtime="{$item.gtime|date='Y-m-d H:i',###}" gtype="bk"><span class="bg-ac language simplified ">{$item.home_team_name|switchName=0,###} VS {$item.away_team_name|switchName=0,###} {$item.gtime|date="Y-m-d H:i",###}</span><if condition="$item['home_odds'] neq
+     ''"><em>竞彩</em></if></label></li>
+                            <div class="game_{$item.game_id}" gtype="bk" value="{$item.home_odds}_{$item.draw_odds}_{$item.away_odds}_{$item.home_letodds}_{$item.draw_letodds}_{$item.away_letodds}_{$item.fsw_exp_home}_{$item.fsw_exp}_{$item.fsw_exp_away}_{$item.fsw_ball_home}_{$item.fsw_ball}_{$item.fsw_ball_away}_{$item.let_exp}"></div>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="btn-con clearfix">
+            <input type="button" id="removeAll" class="btn btn-default pull-right" data-dismiss="modal" style="margin-left: 12px;" value="关闭">
+            <input type="button" id="ensure" class="btn btn-blue pull-right" data-dismiss="modal" value="确定">
+        </div>
+    </div>
+</div>
+<!-- 模态窗口结束 -->
+
+</block>
+<block name='js'>
+    <script>
+        //
+        //实例化编辑器
+        var editor = new UE.ui.Editor();
+
+        editor.render("myeditor");
+        var toolbars = [
+		'undo', //撤销
+		'redo', //重做
+		'bold', //加粗
+		'formatmatch', //格式刷
+		'blockquote', //引用
+		'autotypeset', //自动排版
+		'insertorderedlist', //有序列表
+		'insertunorderedlist', //无序列表
+		'music', //音乐
+		'simpleupload', //单图上传
+		'insertimage', //多图上传
+		'insertvideo', //视频
+		'horizontal', //分隔线
+		'fontsize', //字号
+		'fullscreen'//全屏
+        ];
+        
+        editor.options.toolbars = [toolbars]; 
+      
+        var ue2 = UE.getEditor('myeditor');
+        ue2.addListener('afterinserthtml', function (html) {
+        	 var doc = this.document;
+        	
+             if (doc.getElementById('baidu_pastebin')) {
+                 return;
+             }
+
+			$(doc).find('a').each(function(){
+				this.removeAttribute('href');
+				this.removeAttribute('_href');
+			})
+        });
+        
+        var sprScore = {:json_encode(C('score'),JSON_UNESCAPED_UNICODE)};
+        var DOMAIN = "__DOMAIN__";
+    </script>
+    <script type="text/javascript" src="__JS__/userInfo/expertArticle.js?20180816"></script>
+</block>

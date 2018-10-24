@@ -1,0 +1,49 @@
+/**
+ * 竞猜统计css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-04-26
+ *
+**/
+
+.rank_nav{ background: #f7f7f7; padding: .1rem .2rem;}
+.rank_nav ul{ padding-left: 2px;}
+.rank_nav ul li{ width: 25%; position: relative; margin-left: -1px;}
+.rank_nav ul li.on a{ background: #0a94e4; color: #fff;}
+.rank_nav ul li a{ display: block; height: 0.6rem; line-height: 0.58rem; text-align: center; color: #999; border: 1px solid #0a94e4; background: #fff;}
+
+.rank_item .table tr td{ padding: .2rem 0;}
+.rank_item .table tr .f-td{ padding: .2rem;}
+.rank_item .table .rankImg img{ width: .25rem;}
+.rank_item .table .headImg img{ width: .7rem; height:.7rem; border-radius: 50%;}
+.rank_item .table .flogImg span{ display: inline-block; margin-left: .1rem; width: .16rem; height: .16rem; border-radius: 50%; background: #eb0000;}
+.star_img{ background: url(../images/on-star.png) no-repeat center center; background-size: .32rem auto; cursor: pointer;}
+.star_img_on{ background: url(../images/det-star.png) no-repeat center center; background-size: .32rem auto; cursor: pointer;}
+
+#rank_tr td:first-child{text-align: left;padding-left: .2rem;font-size: .26rem}
+#rank_tr td:first-child span{color: #c91b0f}
+
+/*2016年11月15日 11:30:52;*/
+.jc_type{width: 90%;height: .7rem;border:1px solid #0a94e4;margin:0 auto;border-radius: 2px;margin-top: .2rem;line-height: .68rem}
+.jc_type a{width: 50%;height: 100%;display: block;text-align: center;display: inline-block;float: left;}
+.jc_type a.on{background: #0a94e4;color: #fff}
+.jc_type a i{background:url(../images/guess/yp.png) no-repeat left top;background-size: .26rem .26rem;width:.26rem;height: .26rem;display:inline-block;margin-right: .1rem }
+.jc_type a.on i{background:url(../images/guess/yp_on.png) no-repeat left top;background-size: .26rem .26rem;}
+.jc_type .jc i{background:url(../images/guess/jc.png) no-repeat left top;background-size: .26rem .26rem;}
+.jc_type .jc.on i{background:url(../images/guess/jc_on.png) no-repeat left top;background-size: .26rem .26rem;}
+
+
+.win_rank_sele{padding-right: .2rem;margin-left: .05rem}
+.win_rank_sele select{height: .4rem;width: 1.4rem;line-height: .4rem}
+.update_time{margin-top: .05rem}
+.show_user{margin-right: .1rem}
+.show_user span{margin-top: .05rem;float: left;padding-right: .1rem}
+.show_user input{margin-top: .1rem;}
+
+
+.flogImg p{padding-left: .2rem}
+.headImg img{margin-left: .1rem}
+.tr_rtitle td{color: #666}
+
+

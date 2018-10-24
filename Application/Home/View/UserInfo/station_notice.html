@@ -1,0 +1,88 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userInfo/station_notice.css">
+</block>
+<block name="content">
+    <include file="Public:top_user"/>
+    <div class="body">
+
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <div class="data-graph notice-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="javascript:void(0);" class="current">站内通知</a></li>
+                                </ul>
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <notempty name="list">
+                                        <div id="notice" class="line-graph clearfix">
+                                            <div class="notice-list">
+                                                <ul>
+                                                    <volist name="list" id="vo">
+                                                        <li class="clearfix">
+                                                            <div class="pull-left left"><img src="__PUBLIC__/Home/images/personal_center/station01.jpg" width="41" height="41"></div>
+                                                            <div class="pull-left ml right">
+                                                                <div class="clearfix">
+                                                                    <div class="title pull-left"><strong>{$vo.title}</strong><span class="yd" style="color:red;"><if condition="$vo.is_read eq 0">（未读消息）</if></span></div>
+                                                                    <div class="pull-right">{$vo.send_time|date="Y-m-d H:i",###}</div>
+                                                                </div>
+                                                                <p>{$vo.content}</p>
+                                                            </div>
+                                                        </li>
+                                                    </volist>
+                                                </ul>
+                                            </div>
+                                            <!--页码开始-->
+                                            <div class="pageNum">
+                                                <nav aria-label="...">
+                                                    <ul class="pagination clearfix">
+                                                        {$show}
+                                                        <li>
+                                                            <input class="form-control isTxt" type="text" value="{$_REQUEST.p|default=1}" name="p">
+                                                        </li>
+                                                        <li id="GO"><a href="javascript:void(0)">GO</a></li>
+                                                    </ul>
+                                                    <div class="">共有{$totalCount}条，每页显示：{$numPerPage}条</div>
+                                                </nav>
+                                            </div>
+                                            <!--页码结束-->
+                                        </div>
+                                        <else/>
+                                        <p>没有消息哦</p>
+                                    </notempty>
+                                    <!-- Tab panes -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+
+    </div>
+</block>
+<block name='js'>
+    <script>
+    //绑定a标签
+    $("#GO").find("a").bind("click", function(){
+        var p = $("input[name='p']").val();
+        if (isNaN(p)) {
+            return;
+        } else if (p>0){
+            window.location.href="/UserInfo/station_notice/p/"+p+".html";
+        }
+    });
+</script>
+</block>

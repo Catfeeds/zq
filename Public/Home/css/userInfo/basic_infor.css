@@ -1,0 +1,19 @@
+/**
+ * 全彩个人中心css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-23
+**/
+/* 基本信息 */
+.tab-content{ font-size: 12px;}
+.form-inline .form-control{ font-size: 12px;}
+.basic-list ul li{ height: 34px; line-height: 34px;}
+.basic-list ul li .time-m{ margin-left: 15px;}
+.basic-list ul li strong{ margin-right: 5px;}
+.face-img{ margin-right: 80px;}
+.face{padding: 5px; border: 1px solid #e5e5e5;}
+.basic-infor .upload-con { text-align: center; margin-top: 5px;}
+.basic-infor .upload-con input[type=file] { margin: 0 auto; position:absolute; right:50%; margin-right:-30x; top:0; right/*\**/:0px\9; margin-right/*\**/:0px\9; width/*\**/:10px\9;opacity:0; filter:alpha(opacity=0); z-index:2; cursor:pointer;}
+.basic-infor .profile { margin-top: 15px;}
+.basic-infor .profile .grtextarea { width: 95%; height: 140px; overflow: hidden; border: 1px solid #e5e5e5; line-height: 20px; font-size: 12px; resize: none; outline: none;}
+.basic-infor .preser{ width: 150px; margin-top: 10px;}

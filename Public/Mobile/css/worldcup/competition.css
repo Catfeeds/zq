@@ -1,0 +1,150 @@
+/*头部*/
+/* .top{ padding-top: 0rem; width: 100%; float:left;  background-color: #f9f9fa;} */
+html,body{min-height:100%;background:url('../../images/worldcup/common/combg.png') no-repeat;background-size: 100%;}
+a:hover{color: #999999;}
+.top{background-color: #f9f9fa;position:absolute;top: 0;left: 0;width: 100%;}
+.head-top{ width: 100%;  padding: .3rem; border-top: 1px solid #eee; border-bottom: 1px solid #eee; float: left; }
+.head-top li{ float: left; list-style-type: none;}
+.head-top .l-g{ margin-left: 2.6rem;}
+.head-top .f-h img{ width: .2rem; }
+.head-top .l-g img{ width: .5rem; margin-right: .2rem;}
+.head-top .nba img{ width: .3rem;}
+.head-top .l-g .photo{ font-size:.32rem; line-height: .4rem; height: .4rem;}
+.head-top .calendar{ margin:  0 0.1rem 0 2.1rem;}
+.head-top .calendar img{ width: .4rem;}
+
+/* 主体内容 */
+.wrapCon{width:100%;background:url('../../images/worldcup/common/combg.png') repeat;background-size: 100%;padding-top: 1.2rem;height: 100%;}
+/* .wrapCon-top{padding-top: 2.5rem} */
+.title{width: 100%;height: 3rem;background: url(../../images/worldcup/common/bgone.png) no-repeat center;background-size: 100% 100%;}
+.headline{width:100%;height:1.6rem;background:url('../../images/worldcup/common/tablebgo.png') no-repeat;background-size: 100%;padding: .1rem .4rem;display:flex;flex-direction:row;}
+.headline a { width: 25%;display: flex;justify-content: center;margin-left: 7%;}
+.headline a:first-child{margin-left:0}
+.headline a img {display:block;width:50%;}
+.headline-selected{background:#fff04e;}
+.headline a{width:20%;display:block;height:100%; background-size: 400%;}
+.schedule{background:url('../../images/worldcup/common/tabworko.png')no-repeat .45rem;}
+.Analysis{background:url('../../images/worldcup/common/tabworko.png')no-repeat -1.2rem;}
+.predict{background:url('../../images/worldcup/common/tabworko.png')no-repeat -2.8rem;}
+.Crunchies{background:url('../../images/worldcup/common/tabworko.png')no-repeat -4.4rem;}
+.schedule-selected{background:url('../../images/worldcup/common/tabselect.png') #fff04e no-repeat .35rem;}
+.Analysis-selected{background:url('../../images/worldcup/common/tabselect.png')#fff04e no-repeat -1.2rem;}
+.predict-selected{background:url('../../images/worldcup/common/tabselect.png')#fff04e no-repeat -2.8rem;}
+.Crunchies-selected{background:url('../../images/worldcup/common/tabselect.png')#fff04e no-repeat -4.3rem;}
+.table{width:100%;height:1.0rem; padding: .4rem .4rem 0 .4rem;}
+.table p{background:#1861a6;display: block;width:100%;height:100%;margin:0 auto;border-radius: 1%}
+.table p span{width: 60%;display: flex;margin: 0 auto;height: 100%;line-height:.6rem;}
+.table p span a{font-size: 14px;width: 33.3%;display: block;text-align: center;color:#ffffff}
+.finals{display:block;width:100%;padding: 0 .4rem 3rem .4rem;}
+.eight-finals{background:#f6f6f6;width:100%;margin-top:.2rem}
+.caption{font-size: .35rem;color: #ffffff;line-height: .55rem;width: 100%;height: .7rem;background:url('../../images/worldcup/common/chunk.png') no-repeat;background-size: 100% 95%;text-align: center}
+.caption-content{  width: 100%;background: #ffffff;margin-top: .1rem;}
+.caption-title{line-height:.5rem;height:.5rem;border-bottom:1px solid #f5f5f5;margin:0 .4rem;text-align:center;position: relative;font-size: .26rem}
+.title-time{font-size: .3rem;color:#999999}
+.status{display: block;position: absolute;top:0;right:0;color:#6f8b9c}
+.team{text-align: center;height:1.0rem;margin:0 0.4rem}
+.team-left{width: 40%; float: left;text-align: left;display: flex;white-space: nowrap;line-height: 1.0rem;justify-content: flex-end;}
+.team-left i{display: block;width:70%;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;color:#4c4c4c;text-align: right}
+
+.team-right{width: 40%; float: right;text-align: left;display: flex;white-space: nowrap;line-height: 1.0rem;}
+.team-right i{display: block;width: 70%;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;color:#4c4c4c}
+.team-left img{width: .8rem;height: .5rem; margin-top: 0.25rem;margin-left: .1rem;}
+.team-right img{width: .8rem;height: .5rem; margin-top: 0.25rem;margin-right: .1rem}
+.time{line-height: 1.0rem}
+.finals-box{display: none}
+/* 榜单  */
+.choiced{width:50%!important}
+.caption-organize{width:100%;padding:0 .1rem .3rem .3rem;text-align: center}
+.organize-headline{font-size: .3rem;color:#333333;margin-top:.3rem}
+.box{display:flex;width:100%; outline:none;}
+.ranking span{flex: 2;display: flex;align-items: center;justify-content:center;color: #999999;}
+.first span i{display: block;width:.3rem;height:.3rem;background:#ec2626;color:#ffffff;line-height:.3rem;text-align:center;border-radius: .05rem;}
+.second span i{display: block;width:.3rem;height:.3rem;background:#edb711;color:#ffffff;line-height:.3rem;text-align:center;border-radius: .05rem;}
+.Third span i{display: block;width:.3rem;height:.3rem;background:#c0c0c0;color:#ffffff;line-height:.3rem;text-align:center;border-radius: .05rem;}
+.box span {color:#333333;font-size:.28rem;line-height: .5rem }
+.caption-organize .organize-headline{display:flex}
+.caption-organize .organize-headline span:nth-child(1){flex:2;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;justify-content: center;align-items: center;display: flex;}
+.caption-organize .organize-headline span:nth-child(2){flex:6;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.caption-organize .organize-headline span:nth-child(3){flex:1;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.caption-organize .organize-headline span:nth-child(4){flex:3;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.caption-organize .organize-headline span:nth-child(5){flex:2;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+/* 分析球队 */
+.analyse-box{width:100%;display:flex;flex-direction: row;margin-top:.4rem;flex-wrap:wrap;justify-content:space-between}
+.analyse-box li{width:48%;background: #ffffff;margin-bottom: .2rem}
+.troops{width: 100%;height: .5rem;background: url(../../images/worldcup/common/chunk.png) no-repeat;background-size: 100% 100%;text-align: center;line-height: .5rem;font-size: .3rem;color: #ffffff;}
+.analyse-box a{width:100%;height:.9rem;padding: 0 .1rem;display: flex;flex-direction: row ;border-bottom:1px solid #eeeeee}
+/* .first-troops a{display: flex;width:100%;flex-direction: row ;border-bottom:1px solid #eeeeee} */
+.analyse-box a img {width:.9rem;margin-top:.2rem;margin-right: .1rem;height:.5rem}
+.contry{flex:5.5;line-height: .9rem;color:#000000;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.entry{margin-top: .25rem;display:block;width:.4rem;height:.6rem;background: url('../../images/worldcup/common/sysbg.png') no-repeat;background-size:50%;}
+/* 预测宝典 */
+.forecast-box{padding: .4rem .1rem;}
+.forecast-box  li{width:100%;height:2.0rem;display: block;overflow: hidden;margin-top: .3rem;}
+.forecast-box  li a{width:100%;display:flex;height:100%;flex-direction:row;}
+.order{width: 10%;display: flex;flex-direction: column;color:#ffffff;justify-content: center;align-items: center;}
+.order h2{font-size: .5rem;white-space: nowrap;}
+/* .forecast-center{display: flex;flex-direction:row;background: #ffffff;margin-left: .5rem;width: 90%;} */
+.forecast-center {display: flex;flex-direction: row;background: #ffffff;margin-left: .25rem;width: 97%;}
+/* .forecast-center img{margin-left: -.4rem;    width: 40%; height: 75%;margin-top: .15rem;} */
+.forecast-center img {margin-left: -.25rem;width: 25%;height: 70%;margin-top: .2rem;}
+/* .forecast-center  span{padding: .3rem .1rem;    width: 60%;} */
+.forecast-center span {padding: .3rem .1rem;width: 69%;}
+/* .forecast-center  span h2{font-size: .35rem;line-height: .6rem;text-overflow: ellipsis;overflow: hidden;white-space: nowrap} */
+.forecast-center span h2 {font-size: .35rem;line-height: .6rem;overflow: hidden;white-space: nowrap;width: 98%;}
+.forecast-center  span i{line-height: .6rem;display: block;font-size: .25rem}
+.Ana{display: block}
+.forecast-center span span{text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;padding-top: .07rem;height: .8rem;width: 100%;overflow: hidden;}
+@media screen and (min-width:320px) and (max-width:960px){ .forecast-center span {padding: .3rem .1rem;width: 80%;} 
+.forecast-center span h2 {font-size: .35rem;line-height: .6rem;overflow: hidden; white-space: nowrap;width: 100%;}
+.forecast-center span span{text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;padding-top: .07rem;height: .8rem;width: 100%;overflow: hidden;}} 
+@media screen and (max-width:320px){  .forecast-center span h2 {font-size: .35rem;line-height: .6rem;overflow: hidden;white-space: nowrap;width: 94%;text-overflow: ellipsis;}.forecast-center span {padding: .3rem .1rem;width: 77.3%;}.forecast-center span span{text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;padding-top: .07rem;height: .8rem;width: 100%;overflow: hidden;}}  
+/* 滚动事件
+.title-scroll{z-index:10000;position: fixed;top:.85rem;}
+.title-scroll p span{width:100%;}
+.title-scroll p{background: #1d2b3d}
+.table-scroll{z-index:10000;position: fixed;top:1.4rem;} */
+.caption-organize .organize-headline span:nth-child(5) {
+    flex: 2;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+}
+.forecast-center {
+    display: flex;
+    flex-direction: row;
+    background: ragb(0,0,0,0.6);
+    margin-left: .25rem;
+    width: 97%;
+    background: rgba(0,0,0,0.6);
+    color: #ffffff;
+    border-radius: .08rem;
+}
+.forecast-center img {
+    margin-left: -.25rem;
+    width: 25%;
+    height: 70%;
+    margin-top: .2rem;
+    border: 1px solid #666666;
+    border-radius: 0.04rem;
+}
+
+.forecast-center span span{
+    color: #dddddd;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    padding-top: .07rem;
+    height: .8rem;
+    width: 100%;
+    overflow: hidden;
+}
+.wrapCon{
+    width:100%;
+    background:url('../../images/worldcup/common/combg.png') repeat;
+    background-size: 100%;
+    padding-top: 1.2rem;
+    height: 100%;
+}

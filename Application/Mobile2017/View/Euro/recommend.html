@@ -1,0 +1,60 @@
+<extend name="Public/euro/base" />
+<block name="seo">
+    <title>2016欧洲杯竞彩推荐_全球体育欧洲杯专题</title>
+</block>
+<block name="append">
+    <script type="text/javascript" src="__JS__/euro/Recommended.js"></script> 
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/euro/hot.css"> 
+    <script>
+        var DOMAIN="__DOMAIN__";
+    </script>
+</block>
+<block name="content">
+    <!-- 推荐 s-->
+    <section class="tj_top">
+        <ul>
+            <volist name='expert' id='v'>
+                <li <eq name="v['id']" value="$_GET['expert']">class='on'</eq>
+                <if condition="($_GET['expert'] eq null) && ($i eq 1)">class='on'</if>
+                    >
+                    <a href="{:U('recommend@m',[expert=>$v['id']])}"><figure><img src="{$v.head|frontUserFace=###}" alt="{$v.nick_name}"></figure>
+                <figcaption>{$v.nick_name}</figcaption></a>
+            </li>
+            </volist>
+        </ul>
+    </section>
+    <!-- 推荐 e -->
+  <!-- 列表 s -->
+    <section class="news_con clearfix">
+        <ul id='news_list'>
+            <volist name='list' id='v'>
+                <li class="list js-list clearfix">
+                    <a href="{:U('recommend_detail@m',array('id'=>$v['id']))}">
+                        <div class="n_img"><img <notempty name='v.img'>src="{$v.img}"<else/>src="__IMAGES__/default.jpg"</notempty> alt="{$v.short_title}"></div>
+                        <div class="n_des">
+                            <h3 class="q-one">{$v.short_title}</h3>
+                            <p class="q-two">{$v.remark}</p>
+                        </div> 
+                    </a>
+                </li>
+            </volist>
+        </ul>
+        <input type="hidden" id="auto_load" value="1">
+        <input type="hidden" id="user_id" value="{$user_id}">
+          <div class="paged boxs">
+            <div class="load_gif fs24 text-999">
+                <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>数据加载中，请稍候......</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">没有更多了</a>
+          </div>
+    </section>
+    <!-- 列表 e -->
+
+ 
+
+       <include file="Public/app-bar"/>
+       <!-- 内容 e -->
+</block>
+ 

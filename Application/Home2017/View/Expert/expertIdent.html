@@ -1,0 +1,217 @@
+<!-- 右边的主体内容 -->
+
+<div class="applyTitle">申请专家</div>
+<div class="applyInfor reset-con">
+    <div class="form reset-list">
+        <form method="post" action="__URL__/saveIdent" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return form_submit()">
+            <div class="form-in clearfix">
+                <div class="pull-left input-name">专家名称：</div>
+                <div class="pull-left applyName">
+                    {$info['name']}
+                </div>
+            </div>
+            <div class="form-in clearfix">
+                <div class="pull-left input-name">专家简介：</div>
+                <div class="pull-left input-con input-position-relative">
+                    <textarea class="form-control grtextarea" maxlength="200" name="descript"
+                              placeholder="10-200字，简述内容价值" id="descript"></textarea>
+                    <p class="notesP">注：请勿填写违反国家法律，设计色情、政治、造谣、敏感等内容，或含有联系方式和外链</p>
+                </div>
+            </div>
+            <div class="form-in clearfix">
+                <div class="pull-left input-name">专家头像：</div>
+                <div class="pull-left input-con">
+                    <div class="face">
+                        <img src="{$info.head}" width="130" height="130">
+                        <!--<a href="javascript:;" class="upload-img"><label for="upload-file">重新上传</label></a>-->
+                        <!--<input type="file" class="" name="upload-file" id="upload-file">-->
+                    </div>
+                    <!--<p class="notesP">要求清晰、健康、代表形象的正方形图片。请勿使用二维码，最大2M</p>-->
+                </div>
+            </div>
+            <div class="form-in clearfix">
+                <div class="pull-left input-name">真实姓名：</div>
+                <div class="pull-left input-con input-position-relative">
+                    <input id="name" class="form-control" name="name" type="text" value="{$info['true_name']}"  readonly="readonly">
+                </div>
+            </div>
+            <div class="form-in clearfix">
+                <div class="pull-left input-name">身份证号：</div>
+                <div class="pull-left input-con input-position-relative">
+                    <input id="card" class="form-control" name="card" type="text" value="{$info['identfy']}"  readonly="readonly">
+                </div>
+            </div>
+            <div class="form-in clearfix">
+                <div class="pull-left input-name">证件照：</div>
+                <ul class="tabImg">
+                    <li>
+                        <input id="viewUploadInput_77" name="fileInput" type="file" onChange="previewImage(77)" style="display:none;" />
+                        <a href="javascript:void(0);">
+							 <span id="viewUploadDiv_77">
+									<img src="__PUBLIC__/Home/images/common/idcard.png" width="227" height="130" id="viewUploadImg_77"/>
+							 </span>
+                        </a>
+                        <div id="poiter_77" class="poiter">
+                            <a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_77')">添加图片</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <style type="text/css">
+                .tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:227px;height: 130px;overflow: hidden;cursor: pointer;}
+                .poiter a:hover{color:red;}
+                .tabImg li div{ position: absolute; left: 0; top:130px; width: 227px;  height: 130px; line-height: 130px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+                .tabImg li div a{ line-height: 130px;}
+                .tabImg img{ width: 100%; height: 100%;}
+            </style>
+            <!--引入本页js-->
+            <script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+            <script>
+                $(function(){
+                    $('.tabImg li').hover(function(e) {
+                        $(this).children('div').stop().animate({'top':'0'},300);
+                    },function(){
+                        $(this).children('div').stop().animate({'top':'130px'},300);
+                    });
+                });
+            </script>
+            <div class="form-in clearfix">
+                <div class="pull-left input-name">手机号码：</div>
+                <div class="pull-left input-con input-position-relative">
+                    <input token="{$token}" id="phone" class="form-control" name="phone" type="text" value="{$info['phone']}"  readonly="readonly">
+                </div>
+            </div>
+            <div class="form-in clearfix">
+                <div class="pull-left input-name">验证码：</div>
+                <div class="pull-left input-con input-position-relative captcha">
+                    <input id="ranks" class="form-control required" name="captcha" type="text" placeholder="验证码"
+                           data-msg-required="请输入验证码">
+                    <div class="pull-right reanks-con">
+                        <a href="javascript:;" onclick="sendMobileMsg();" class="btn btn-orange"><span id="sendMobileBtn"></span>获取验证码</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox" style="margin-left: 100px;">
+                    <label>
+                        <input type="checkbox" checked="" id="agree">我已阅读并接受<a target="_blank"
+                                                                               href="https://www.qqty.com/Copyright/service.html"
+                                                                               class="text-blue">《“全球体育”的专家号自媒体平台用户协议》</a>
+                    </label>
+                </div>
+            </div>
+            <div class="reg-btn">
+                <input type="submit" class="btn btn-orange" id="tijiao" value="提交">
+                <a href="javascript:;" class="btn btn-default">取消</a>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+
+    function form_submit()
+    {
+        var img = $("#viewUploadInput_77").val();
+        if(img == '')
+        {
+            _alert('温馨提示',"请上传证件照");
+
+            return false;
+        }
+        var descript = $("#descript").val();
+        if(descript == '')
+        {
+            _alert('温馨提示','请填写专家简介');
+            return false;
+        }else{
+            if(descript.length < 10)
+            {
+                _alert('温馨提示','专家简介不小于10个字数');
+                return false;
+            }
+            if(descript.length > 200)
+            {
+                _alert('温馨提示','专家简介不大于200个字数');
+                return false;
+            }
+        }
+
+        var rank = $('#ranks').val();
+        var mobile = $('#phone').val();
+
+        var status = 1;
+        $.ajax({
+            url: "/Expert/checkVerify.html",
+            type:'post',
+            data:{'mobile':mobile,'captcha':rank},
+            async : false,
+            dataType: "json",
+            success: function(data){
+                if(!data.status){
+                    _alert('温馨提示',data.info);
+                    status = 2;
+                }
+            }
+        });
+        if(status == 1)
+        {
+            _alert('温馨提示','申请提交成功');
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+    /**
+     * 发送手机验证码
+     *
+     */
+    function sendMobileMsg(){
+        var mobile = $('#phone').val();
+        //验证手机
+        if(mobile == ""){
+            _alert('温馨提示',"请输入手机号码！");
+            return false;
+        }
+        if (!/^1[3456789]{1}\d{9}$/.test(mobile)){
+            _alert('温馨提示',"手机号码格式不正确，请重新输入！");
+            return false;
+        }
+        var token = $('#phone').attr('token');
+        $.ajax({
+            url: "/User/sendMobileMsg.html",
+            type:'post',
+            data:{token:token,'mobile':mobile,'msgType':'verifyPhone'},
+            dataType: "json",
+            beforeSend:function(XMLHttpRequest)
+            {
+                $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>正在发送…").removeAttr("onclick").attr("disabled","disabled");
+            },
+            success: function(data){
+                if(data.status){
+                    daojishi(60);
+                    _alert('温馨提示',data.info);
+                    return;
+                }else{
+                    $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>获取验证码").attr("onclick",'sendMobileMsg()').removeAttr("disabled");
+                    _alert('温馨提示',data.info);
+                }
+            }
+        });
+    }
+    /**
+     * 倒计时
+     *
+     */
+    function daojishi(S){
+        if (S>0){
+            var S = S-1;
+            $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>秒后重发").removeAttr("onclick").attr("disabled","disabled");
+            $("#sendMobileBtn").html(S);
+            setTimeout("daojishi("+S+")",1000);
+            return;
+        } else {
+            $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>获取验证码").attr("onclick",'sendMobileMsg()').removeAttr("disabled");
+        }
+    }
+</script>

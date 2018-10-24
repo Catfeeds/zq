@@ -1,0 +1,332 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+    <input type="hidden" name="logType" value="{$_REQUEST.logType}"/>
+    <input type="hidden" name="amount" value="{$_REQUEST.amount}"/>
+    <input type="hidden" name="drawing" value="{$_REQUEST.drawing}"/>
+    <input type="hidden" name="user_id" value="{$_REQUEST.user_id}"/>
+    <input type="hidden" name="checkOpenVip" value="{$_REQUEST.checkOpenVip}"/>
+    <div class="searchBar">
+
+        <ul class="searchContent">
+            <li>
+                <label>创建时间：</label>
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="16">至
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="16">
+            </li>
+            <li>
+                <label>处理时间：</label>
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm" class="date textInput readonly valid" value="{$_REQUEST.start_time}" name="start_time" size="16">至
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm" class="date textInput readonly valid" value="{$_REQUEST.end_time}" name="end_time" size="16">
+            </li>
+            <if condition="$_REQUEST.user_id eq '' ">
+                <li >
+                    <label>手机号：</label>
+                    <input name="username" value="{$_REQUEST.username}" type="text" placeholder="手机号" size="11"/>
+                </li>
+                <li >
+                    <label>昵称：</label>
+                    <input name="nick_name" value="{$_REQUEST.nick_name}" type="text" placeholder="昵称"  size="11"/>
+                </li>
+            </if>
+
+            <li>
+                <label>渠道：</label>
+                <select name="platform" class="combox" onchange="$(form).submit()">
+                    <option value="">全部</option>
+                    <option value="1" <if condition="$_REQUEST.platform eq 1">selected</if>>web</option>
+                    <option value="2" <if condition="$_REQUEST.platform eq 2">selected</if>>IOS</option>
+                    <option value="3" <if condition="$_REQUEST.platform eq 3">selected</if>>ANDRIOD</option>
+                    <option value="4" <if condition="$_REQUEST.platform eq 4">selected</if>>m站</option>
+                </select>
+            </li>
+
+            <if condition="($_REQUEST.logType eq '' or $_REQUEST.logType eq '2') and $_REQUEST.drawing eq ''">
+                <li>
+                    <label>状态：</label>
+                    <select name="log_status" class="combox" onchange="$(form).submit()">
+                        <option value=""  >全部</option>
+                        <volist name=":C('accountStatus')" id="item" offset="1" length='10'>
+                            <option value="{$key}" <if condition="$_REQUEST.log_status eq $key">selected</if>>{$item}</option>
+                        </volist>
+                    </select>
+                </li>
+            </if>
+
+            <if condition="$_REQUEST.drawing eq ''">
+                <li>
+                    <label>类型：</label>
+                    <select name="log_type" class="combox" onchange="$(form).submit()">
+                        <option value="">全部</option>
+                        <volist name=":C('accountType')" id="item">
+                            <option value="{$key}" <if condition="$_REQUEST.log_type eq $key">selected</if>>{$item}</option>
+                        </volist>
+                    </select>
+                </li>
+            </if>
+            <if condition="$_REQUEST.logType eq 1">
+                <li>
+                    <label>支付方式：</label>
+                    <select name="pay_way" class="combox" onchange="$(form).submit()">
+                        <option value="">全部</option>
+                        <option value="1" <if condition="$_REQUEST.pay_way eq 1">selected</if>>支付宝</option>
+                        <option value="2" <if condition="$_REQUEST.pay_way eq 2">selected</if>>微信</option>
+                        <option value="3" <if condition="$_REQUEST.pay_way eq 3">selected</if>>网银</option>
+                        <option value="4" <if condition="$_REQUEST.pay_way eq 4">selected</if>>移动支付</option>
+                        <option value="5" <if condition="$_REQUEST.pay_way eq 5">selected</if>>苹果支付</option>
+                        <option value="6" <if condition="$_REQUEST.pay_way eq 6">selected</if>>苹果沙盒</option>
+                    </select>
+                </li>
+            </if>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                <if condition="$_REQUEST.checkOpenVip eq ''">
+                    <li>
+                        <a class="button" title="查询框" mask="true" target="dialog" href="__URL__/pageSearch.html?SignaccountLogIndex=1&actionName=__ACTION__&{:http_build_query($_REQUEST)}" height="350"><span>高级检索</span></a>
+                    </li>
+                </if>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+
+        <ul class="toolBar">
+            <if condition="$_REQUEST.logType eq '1'">
+                <li><a class="add" href="__URL__/recharge" target="dialog" mask="true" rel="docoin" height="350"><span>手动充值</span></a></li>
+            </if>
+
+        <if condition="$_REQUEST.user_id eq '' ">
+            <if condition="$_REQUEST.logType eq '' and $_REQUEST.drawing eq ''">
+                <li><a class="edit" href="__URL__/deduct" target="dialog" mask="true" rel="docoin" height="350"><span>手动扣除</span></a></li>
+            </if>
+        </if>
+        <if condition="$_REQUEST.user_id eq '' ">
+            <li>
+                <span style='color:red;padding-left:0px;'>
+                    涉及总金额：{$totalAmount|default=0}
+                </span>
+                <span style='color:red;'>
+                    涉及人数：{$totalUser|default=0}
+                </span>
+             </li>
+        </if>
+        <if condition="$_REQUEST.user_id neq '' ">
+            <li >
+                <span style='color:red;padding-right: 0px;padding-left: 0px'>
+                    余额：{$balance|default=0}
+                </span>
+            </li>
+            <li><span style="padding-right: 0px;padding-left: 0px">&nbsp;|&nbsp;</span></li>
+            <li >
+                <span style='color:red;padding-right: 0px;padding-left: 0px'>
+                    收入金币：{$incomeCoin|default=0}
+                </span>
+            </li>
+            <li style=""><span style="padding-right: 0px;padding-left: 0px">&nbsp;|&nbsp;</span></li>
+            <li>
+                <span style='color:red;padding-right: 0px;padding-left: 0px'>
+                    支出金币：{$expendCoin|default=0}
+                </span>
+            </li>
+            <li><span style="padding-right: 0px;padding-left: 0px">&nbsp;|&nbsp;</span></li>
+            <li>
+                <span style='color:red;padding-right: 0px;padding-left: 0px'>
+                    冻结金币：{$frozenCoin|default=0}
+                </span>
+
+            </li>
+        </if>
+        <li style="margin-left:20px;">
+            <a class="icon" href="__URL__/index.html?Export=1&totalCount={$totalCount}&{:http_build_query($_REQUEST)}"  warn="导出">
+                <span>导出</span>
+            </a>
+        </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="2%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+            <th width="2%">用户ID</th>
+            <th width="3%">昵称/手机号</th>
+            <th width="3%">注册时间</th>
+            <if condition="getUserPower()['is_show_pay'] eq 1">
+                <th width="3%">真实姓名</th>
+                <th width="3%">银行名称</th>
+                <th width="3%">银行卡号</th>
+                <th width="3%">支付宝账号</th>
+            </if>
+            <th width="5%" orderField="log_time" <if condition="$_REQUEST._order eq 'log_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>创建时间</th>
+            <if condition="$_REQUEST.checkOpenVip eq 1">
+            <th width="5%">到期时间</th>
+            </if>
+            <th width="4%">记录类型</th>
+            <th width="3%" orderField="change_num+0" <if condition="$_REQUEST._order eq 'change_num+0'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>涉及金额</th>
+            <if condition='$_REQUEST.logType eq "2"'>
+                <th width="4%" orderField="poundage+0" <if condition="$_REQUEST._order eq 'poundage+0'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>转账手续费</th>
+            </if>
+            <th width="3%" orderField="total_coin" <if condition="$_REQUEST._order eq 'total_coin'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>余额</th>
+            <if condition='$_REQUEST.logType eq "2"'>
+                <th width="4%">转账方式</th>
+                <th width="4%">转账流水号</th>
+            </if>
+            <th width="3%">平台</th>
+            <th width="3%">状态</th>
+            <if condition="$_REQUEST.drawing neq '1'">
+                <th width="3%">处理人</th>
+                <th width="4%" orderField="operation_time" <if condition="$_REQUEST._order eq 'operation_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>处理时间</th>
+                <th width="6%">说明</th>
+                <if condition='$_REQUEST.logType eq "2"'>
+                    <th width="3%">操作</th>
+                </if>
+            </if>
+            <if condition="$_REQUEST.drawing eq '1'">
+                <th width="3%">设备号异常</th>
+                <th width="3%">登录ip异常</th>
+                <th width="2%">操作</th>
+            </if>
+        </tr>
+        </thead>
+        <tbody>
+        <volist id="vo" name="list">
+            <tr target="sid_user" rel="{$vo['id']}" <if condition="$vo['yichang'] eq 1">style="background: yellow"</if>>
+                <td>{$vo['id']}</td>
+                <td>{$vo['user_id']}</td>
+                <td>
+                    <a href="{:U('__ADMIN__/FrontUser/index',['id'=>$vo['user_id']])}" target="navTab" rel="1{:time()}{$vo['id']}" title="{$vo['nick_name']}-交易明细">{$vo['nick_name']}（{$vo['username']|is_show_mobile}）</a>
+                </td>
+                <td>{$vo.reg_time|date="Y-m-d",###}</td>
+                <if condition="getUserPower()['is_show_pay'] eq 1">
+                    <td>{$vo['true_name']|default ='--'}</td>
+                    <td><a href="javascript:;" title="{$vo['bank_name']|default ='--'}">{$vo['bank_name']|default ='--'}</a></td>
+                    <td><div style="text-overflow: ellipsis;cursor: pointer;" title="{$vo['bank_card_id']}">{$vo['bank_card_id']|default ='--'}</div></td>
+                    <td><div style="text-overflow: ellipsis;cursor: pointer;" title="{$vo['alipay_id']}">{$vo['alipay_id']|default='--'}</div></td>
+                </if>
+                <td>{$vo['log_time']|date="Y-m-d H:i:s",###}</td>
+                <if condition="$_REQUEST.checkOpenVip eq 1">
+                    <td>{$vo['model_overtime']|date="Y-m-d",###}</td>
+                </if>
+                <td>
+                    {:C('accountType')[$vo['log_type']]}
+                    <eq name="vo.log_type" value="8">
+                       （<switch name="vo.pay_way">
+                            <case value="1">支付宝：{$vo.alipay_trade_no}</case>
+                            <case value="2">微信：{$vo.alipay_trade_no}</case>
+                            <case value="3">网银</case>
+                            <case value="4">移动支付</case>
+                            <case value="5">苹果支付</case>
+                            <case value="6">苹果沙盒</case>
+                        </switch>）
+                    </eq>
+                </td>
+                <td>
+                    <if condition="$vo.log_type eq 3">
+                        <a rel="GambleList" href="__ADMIN__/GambleList/buyDetails/user_id/{$vo['user_id']}/gamble_id/{$vo.gamble_id}/game_type/{$vo.game_type}" target="navTab">{$vo['change_num']}</a>
+                    <elseif condition="$vo.log_type eq 4"/>
+                        <a rel="GambleList" href="__ADMIN__/GambleList/buyDetails/cover_id/{$vo['user_id']}/gamble_id/{$vo.gamble_id}/gameType/{$vo.game_type}" target="navTab" title="{$vo['descc']}">{$vo['change_num']}</a>
+                    <else/>
+                        <a href="__URL__/index/user_id/{$vo.user_id}" target="navTab" rel="2{:time()}{$vo['id']}" title="{$vo['nick_name']}-涉及金币">{$vo['change_num']}</a>
+                    </if>
+                </td>
+                <if condition='$_REQUEST.logType eq "2"'>
+                    <td>{$vo['poundage']|default ='--'}</td>
+                </if>
+                <td>{$vo['total_coin']}</td>
+                <if condition='$_REQUEST.logType eq "2"'>
+                    <td><div style="text-overflow: ellipsis;cursor: pointer;" title="{$vo['transfer_way']}">{$vo['transfer_way']|default ='--'}</div></td>
+                    <td><div style="text-overflow: ellipsis;cursor: pointer;" title="{$vo['pay_no']}">{$vo['pay_no']|default ='--'}</div></td>
+                </if>
+                <td>
+                    <switch name="vo.platform">
+                        <case value="1">Web</case>
+                        <case value="2">IOS
+                            <switch name="vo.pkg">
+                                <case value="company">(绿色公司版)</case>
+                                <case value="personal">(蓝色个人版)</case>
+                                <case value="master">(红色版)</case>
+                            </switch>
+                        </case>
+                        <case value="3">ANDRIOD</case>
+                        <case value="4">M站</case>
+                    </switch>
+                </td>
+                <td>
+                    <div <switch name="vo.log_status">
+                        <case value="0">style="color:red"</case>
+                        <case value="1">style="color:green"</case>
+                        <case value="2">style="color:blue"</case>
+                        <case value="3">style="color:orange"</case>
+                        <case value="4">style="color: red;"</case>
+                        <case value="5">style="color: gray;"</case>
+                    </switch> >{:C('accountStatus')[$vo['log_status']]}</div>
+                </td>
+                <if condition="$_REQUEST.drawing neq '1'">
+                    <td><notempty name="vo.admin_id">{$vo['nickname']}<else/>系统处理</notempty></td>
+                    <td>
+                        <switch name="vo.log_type">
+                            <case value="1|2">{$vo['operation_time']|date="Y-m-d H:i",###}</case>
+                            <default/>--
+                        </switch>
+                    </td>
+                    <td>
+                    <div style="text-overflow: ellipsis;cursor: pointer;" title="{$vo['descc']}">
+                        <if condition="$vo.log_type eq 3">
+                            <a rel="GambleList" href="__ADMIN__/GambleList/buyDetails/user_id/{$vo['user_id']}/gamble_id/{$vo.gamble_id}/game_type/{$vo.game_type}" target="navTab">{$vo['descc']}</a>
+                        <elseif condition="$vo.log_type eq 4"/>
+                            <a rel="GambleList1" href="__ADMIN__/GambleList/buyDetails/cover_id/{$vo['user_id']}/gamble_id/{$vo.gamble_id}/gameType/{$vo.game_type}" target="navTab">{$vo['descc']}</a>
+                        <else/>
+                            {$vo['descc']}
+                        </if>
+                    </div>
+                    </td>
+                    <if condition="$_REQUEST.logType eq '2' ">
+                        <if condition="$vo.log_status eq '3' ">
+                            <td>
+                                <a href="__URL__/check/id/{$vo['id']}/pass/1" target="dialog" title="审核" height="600">
+                                    <div style="color: red;">审核</div>
+                                </a>
+                            </td>
+                         <else/>
+                            <td >
+                                <a href="__URL__/check/id/{$vo['id']}/edit/1" target="dialog" height="600" title="编辑">编辑</a>
+                            </td>
+                        </if>
+                    </if>
+                </if>
+                <if condition="$_REQUEST.drawing eq '1'">
+                    <td>
+                        <if condition="$vo.device neq ''">
+                            <a style="color: red" href="__ADMIN__/FrontUser/abnormal/device_token/{$vo.device}" target="navTab" title="查看相同设备号">异常</a>
+                        </if>
+                    </td>
+                    <td>
+                        <if condition="$vo.last neq ''">
+                            <a style="color: red" href="__ADMIN__/FrontUser/abnormal/abnormal/2/last_ip/{$vo.last}" target="navTab" title="查看相同登录ip">异常</a>
+                        </if>
+                    </td>
+                    <td>
+                        <!--&lt;!&ndash; <a href="__URL__/ToExamine/id/{$vo.id}/log_status/1/user_id/{$vo['user_id']}/change_num/{$vo['change_num']}" target="ajaxTodo" title="确定审核通过吗？" warn="参数错误">通过</a> | &ndash;&gt;-->
+                        <!--<a href="__URL__/pass/id/{$vo.id}/log_status/1/user_id/{$vo['user_id']}/change_num/{$vo['change_num']}" target="dialog">通过</a> |-->
+                        <!--<a href="__URL__/reason/id/{$vo.id}/log_status/2/user_id/{$vo['user_id']}/change_num/{$vo['change_num']}/total_coin/{$vo['total_coin']}" target="dialog" title="拒绝审核！" warn="参数错误">不通过</a>-->
+                        <a href="__URL__/check/id/{$vo.id}" target="dialog" title="审核！" height="500"> 审核</a>
+
+                    </td>
+                </if>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+
+

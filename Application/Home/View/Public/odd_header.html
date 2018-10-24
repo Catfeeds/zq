@@ -1,0 +1,44 @@
+<div class="tongji" style="border-bottom: none;">
+    <!-- 头部比分s -->
+    <div class="gameHeadTop">
+        <div class="t_core clearfix">
+            <div class="team_name fl">
+                <div class="pull-right"><img src="{$gameInfo['homeTeamLogo']}" alt="{$gameInfo['home_team_name']}" onerror='this.src="__PUBLIC__/Home/images/common/home_def.png"'></div>
+                <div class="pull-right teamNameTxt"><a target="_blank" title="{$gameInfo['home_team_name']}" href="{:U('/team/' . $gameInfo['home_team_id'] . '@data', '', 'html')}"><p>{$gameInfo['home_team_name']}</p></a><span class="text-fff">联赛排名：{$gameInfo.home_team_rank}</span></div>
+            </div>
+            <div class="tc_main">
+                <div class="p4" style="background-color: {$gameInfo['union_color']}"><a style="color:#fff;" href="<if condition="$gameInfo['is_league'] eq 1">{:U('/league/'.$gameInfo['union_id'].'@data')}<else/>{:U('/cupMatch/'.$gameInfo['union_id'].'@data')}</if>" target="_blank">{$gameInfo['union_name']}</a></div>
+                <p class="p2 text-fff">开赛时间：{$gameInfo['gtime']} 开赛</p>
+                
+                <if condition="$gameInfo['game_state'] eq '0'">
+                    <div class="p1" style="margin-left: 123px;">
+                        <span class="text-red pull-left">未开始</span> 
+                    </div>
+                <else/>
+                    <if condition="in_array($gameInfo['game_state'],[-1,1,2,3,4])"> 
+                        <div class="p1 clearfix">
+                            <div class="pull-left text-right"><strong>{:explode('-',$gameInfo['score'])[0]}</strong></div>
+                            <span class="text-red pull-left">{$gameInfo['game_state_zn']}</span> 
+                            <div class="pull-left text-left"><strong>{:explode('-',$gameInfo['score'])[1]}</strong></div>
+                        </div> 
+                    <else/>
+                        <div class="p1" style="margin-left: 123px;">
+                            <span class="text-red pull-left">{$gameInfo['game_state_zn']}</span>
+                        </div>
+                    </if>
+                    <if condition="in_array($gameInfo['game_state'],[-1,2,3,4])">               
+                        <p class="p5">{$gameInfo['half_score']|default='--'}</p>
+                    </if>
+                    <if condition="$gameInfo['is_flash'] eq 1 or $gameInfo['is_video'] eq 1">
+                        <a target="_blank" href="{:U('/live/'.$_GET['game_id'].'@bf')}" class="liveBtn"></a>
+                    </if>
+                </if>  
+            </div>
+            <div class="team_name fr">
+                <div class="pull-left"><img src="{$gameInfo['awayTeamLogo']}" alt="{$gameInfo['away_team_name']}"  onerror='this.src="__PUBLIC__/Home/images/common/away_def.png"'></div>
+                <div class="pull-left teamNameTxt"><a target="_blank" title="{$gameInfo['away_team_name']}" href="{:U('/team/' . $gameInfo['away_team_id'] . '@data', '', 'html')}"><p>{$gameInfo['away_team_name']}</p></a><span class="text-fff">联赛排名：{$gameInfo.away_team_rank}</span></div>
+            </div>
+        </div>
+    </div>
+    <!-- 头部比分额e -->
+</div>

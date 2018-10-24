@@ -1,0 +1,75 @@
+/**
+ * wap即时比分css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since   2016-04-13
+**/
+
+/*tips 比分或者红黄牌提示 start*/
+#tips_box{ position: fixed;bottom:10%; left: 50%; margin-left:-3rem;}
+#tips_box>div{ margin-top: 5%;}
+.tips{width: 6rem; height: .9rem;  border:1px solid #ff7e00; background: #fff;border-radius: 5px;display: none;font-size: .24rem; }
+.score_tips{top: 60%; border:1px solid #01af63;}
+.show{display: block;}
+.tips .t_left{width: 1.7rem; height: 100%; line-height: .9rem; float: left; background: #ff7e00;color: #fff;text-align: center;}
+.tips .t_right{width:4.25rem;float:left;padding:.13rem .15rem;  }
+.tips .t_right p{height: .32rem; line-height: .35rem}
+.tips .t_right em{float: right; width: .2rem; height: .24rem; display: block; border-radius: 2px;margin-top: .04rem}
+.tips .t_right .red{ background: #f64b16}
+.tips .t_right .yellow{ background: #f9e615}
+/*.tips .t_right p:last-child{padding-top: .05rem}*/
+.score_tips .t_left{background: #01af63}
+.score_tips .t_right em{background: url(../images/tips_ball.png) no-repeat center center; background-size: .2rem auto;}
+/*tips 比分或者红黄牌提示 end*/
+
+
+.content{ position: relative;}
+.liveList .match{ padding: .1rem .2rem; border-bottom: 1px solid #e5e5e5; position: relative;}
+.js-detail .top table tr td:first-child{text-align: right!important;}
+.live_now .top table tr td:nth-child(2){text-align: right!important;}
+.rangq{color: #cf956e;font-size: .22rem}
+.match_name{ font-size: .26rem;}
+.mach_begin{ color: #1490d8;}
+.mach_half{ color: #999999; font-size: .18rem;}
+.mach_over{ color: #eb0000;}
+.mach_will{ color: #999999;}
+.mach_begin_time{ color: #eb0000; font-size: .2rem;}
+.mach_will_time{ color: #999999; font-size: .2rem;}
+.mach_over_time{ color: #eb0000; font-size: .2rem;}
+.jq{ font-size: .22rem;}
+.star_img{ background: url(../images/det-star-icon.png) no-repeat left center; background-size: .36rem auto; cursor: pointer;}
+.star_img_on{ background: url(../images/on-star-icon.png) no-repeat left center; background-size: .36rem auto; cursor: pointer;}
+
+.yel_card,.red_card{ vertical-align:middle; padding: 0.01rem 0.04rem; font-size: .18rem; text-align: center; border-radius: 0.03rem;}
+.yel_card{ background: #f9e615; color: #bd6211;}
+.red_card{ background: #f64b16; color: #ffffff;}
+.teamRank{ font-size: .18rem; color: #999;}
+.odds{ margin-bottom: .05rem;}
+.odds span{ font-size: .2rem; padding: 0.02rem 0.05rem; border-radius: 2px;}
+.odds .oddsType{ width: 15%; color: #999;}
+.odds .addsNub{ width: 22.5%;}
+.odds .addsPankou{ width: 40%;}
+.rf .addsPankou{ color: #b86126;}
+.dx .addsPankou{ color: #009152;}
+
+/* 篮球节点比分 */
+.f-td{ padding: .2rem; background: #fff; border-bottom: 1px solid #e5e5e5;}
+.f-td input,input[type="checkbox"], input[type="radio"]{ border: 1px solid #999999; vertical-align: middle; margin-top: -2px; line-height: normal; color: inherit;}
+.sec_score ul li{ float: left; min-width: .26rem; margin-right: .15rem; font-size: .24rem; color: #666;}
+.sec_score ul li.mach_begin{margin-right: .4rem; color: #1490d8}
+.odds .addsPankou{ width: auto;}/* 重置之前的盘口宽度 */
+
+/* 广告 */
+.liveList .ad { padding: 0; border: 0 none;}
+.ad img{ width: 100%;}
+
+/*日期选择*/
+.day{ border-bottom: 1px solid #e5e5e5;}
+
+
+/*.nav_time{width: 1760px; transition-property: -webkit-transform; transform-origin: 0px 0px 0px; transform: translate(0px, 0px) scale(1) translateZ(0px);}*/
+.swiper-container {
+        width: 100%;
+        height: 100%;
+    }

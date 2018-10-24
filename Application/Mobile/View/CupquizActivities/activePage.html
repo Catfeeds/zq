@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta charset="UTF-8">   
+        <title>竞猜</title>
+        <link rel="apple-touch-icon" href="">
+        <link rel="shortcut icon" href="">
+        <!-- jquery -->
+        <script type="text/javascript" src="__PUBLIC__/Mobile/js/jquery-1.11.1.min.js"></script>
+        <!-- 自适应 计算html font-size -->
+        <script type="text/javascript" src="__PUBLIC__/Mobile/js/htmlwidth.js"></script>
+        <!-- layer -->
+        <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/layer/theme/default/layer.css">
+        <!-- 引入公共样式 -->
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Mobile/css/base.css">
+        <!-- <link rel="stylesheet" type="text/css" href="css/common.css">  -->
+        <style>
+            .wrapCon{min-height: 100%}
+        </style>
+
+
+    </head>
+    
+    <body>
+	<div style="display: none">
+        {:htmlspecialchars_decode($site_setting['mobileJs'])}
+    </div>
+    <!-- 页面所需css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/CupquizActivities/guessing.css?v=2018062718">
+   
+        <section class="wrapCon">
+             <!-- 头部 -->
+            <header class="top">
+                    <ul class="headline">
+                        <a onclick="history.back(-1);" class="back"><img src="__IMAGES__/CupquizActivities/last.png"></a>
+                        <li class="head-portrait"><img src="{$frontFace}"></li>
+                        <li><a href="JavaScript:;"><em>{$coin}</em>Q币</a></li>
+                        <li><a href="{:U('CupquizActivities/convert')}">兑换</a></li>
+                        <li ><a href="{:U('CupquizActivities/activePage')}" class="active">今日活动</a></li>
+                        <li><a href="{:U('CupquizActivities/guessList')}">预测记录</a></li>
+                    </ul>
+            </header>
+            <div class="content">
+                <div class="main">
+                    <if condition="$activity">
+                        <div class="title">
+                            <span><img src="__IMAGES__/CupquizActivities/rxing.png" alt=""></span>
+                            <span class="words">{$activity.title}</span>
+                            <span><img src="__IMAGES__/CupquizActivities/rxing.png" alt=""></span>
+                        </div>
+                        <h2 class=""> 本轮共猜{$num}场，截止时间{$activity.end_time|date='Y-m-d H:i:s',###}</h2>
+                        <div class="con-main">
+                            <span class="congratu">恭喜</span>
+                            <span class="active">上轮活动最高获奖者得{$top}Q币</span>
+                            <ul class="list">
+                                <volist name="game_type" id="item">
+                                <li class="question" data-gameId="{$item.game.game_id}">
+                                    <div class="list-top">
+                                        <span class="name-left">{$item.game.home_team_name}</span>
+                                        <span class="photo-left"><img src="{$item.game.home_team_logo}" alt=""></span>
+                                        <span class="photo-middle"><img src="__IMAGES__/CupquizActivities/vs.png" alt=""></span>
+                                        <span class="photo-right"><img src="{$item.game.away_team_logo}" alt=""></span>
+                                        <span class="name-right">{$item.game.away_team_name}</span>
+                                    </div>
+                                    <div class="list-middle">{$item.play.name}</div>
+                                    <div class="list-bottom clearfix">
+                                        <volist name="item.play.options" id="itemo">
+                                        <span class="one"><a data-answer="{$item.game.game_id},{$item.play.id},{$itemo.0}" title="{$itemo.1}">{$itemo.1}</a><p>{$itemo.per}%人支持</p></span>
+                                        </volist>
+                                    </div>
+                                </li>
+                                </volist>
+                            </ul>
+                            <div class="button">
+                                <a class="push">提交答案</a>
+                            </div>
+                        </div>
+                    <else />
+                        <div style="height: 200px;line-height: 150px;text-align: center;">
+                            活动正在紧张筹备中，敬请期待！
+                        </div>
+                    </if>
+                </div>
+                <dl class="note">
+                    <dt>奖励明细</dt>
+                    <dd>1.提交完答案后，可邀请好友助力，好友本轮助力的Q币即为本轮全中后所得奖金。</dd>
+                    <dd>2.每次助力，个人活动奖金随机叠加 1-10 Q币，参与好友越多奖金越多，当天赛事全中的情况下奖金将在1-2个工作日通过全球体育APP金币形式发放至中奖用户的全球体育账户（1Q币=1元）。</dd>
+                    <dd>3.活动奖金可在APP中提现，也可以用于购买全球体育站内专家推荐。</dd>
+                </dl>
+                <dl class="note">
+                    <dt>活动规则</dt>
+                    <dd>1.本场竞猜完全免费，不涉及任何支付行为。</dd>
+                    <dd>2.同一个账户每天最多能帮5个好友助攻，对于同一个好友每天只能助攻一次。</dd>
+                    <dd>3.用户可以登录全球体育APP查看并领取奖金。</dd>
+                    <dd>4.所有赛事结果都以世界杯官方数据为准。</dd>
+                </dl>
+                <dl class="note">
+                    <dt>免责声明</dt>
+                    <dd>1.严厉禁止和打击恶意刷参与活动的行为，对于恶意刷Q币者，全球体育有权对违规者活动金币进行清币处罚，并保留追究其法律责任的权利。</dd>
+                    <dd>2.如遇不可抗因素，或者活动和国家法律法规冲突的，一切以法律为准。如果导致本次活动因故无法进行时，全球体育在法律允许的范围内有权决定取消，终止，修改或暂停本活动。</dd>
+                    <dd>3.任何参与本活动的用户，都应仔细阅读完声明，一旦参加活动，即视为对本声明全部内容的认可和接受。</dd>
+                    <dd>4.本次活动的最终解释权归全球体育所有。</dd>
+                </dl>
+            </div>
+        </section>
+        <script src="__JS__/CupquizActivities/predict.js" type="text/javascript"></script>
+        <script>
+            var _tk = '{$_Tk}';
+            $(document).ready(function(){
+                $("span.one").click(function(){
+                    $(this).siblings('span').removeClass('selected');
+                    $(this).siblings('span').find('a').removeClass('on');
+                    $(this).addClass('selected');
+                    $(this).find('a').addClass('on');
+                });
+                $('a.push').click(function () {
+                    var liq = $('li.question').length;
+                    var sp = $('span.selected');
+                    var spa = sp.length;
+                    if(liq == spa){
+                        var answer = [];
+                        sp.each(function () {
+                            answer.push($(this).find('a').attr('data-answer'));
+                        });
+                        var act_id = "{$activity.id}";
+                        var push_data = {
+                            'act_id': act_id,
+                            'options': answer.join(';'),
+                            '_tk': _tk,
+                        };
+
+                        $.post('/CupquizActivities/guessing',push_data,function (data,status) {
+                            if(data.err == -1){
+                                layer.open({
+                                    content: data.msg
+                                    ,btn: '确定'
+                                });
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 2000);
+                                return false;
+                            }
+                            if(data.err == 1000){
+                                layer.open({
+                                    content: data.msg
+                                    ,btn: '确定'
+                                });
+                                setTimeout(function () {
+                                    window.location.href = '/user/login.html';
+                                    return false;
+                                }, 2000);
+                                return false;
+                            }
+
+                            if(data.err == 0 || data.err == 1003){
+                                layer.open({
+                                    content: data.msg
+                                    ,btn: '确定'
+                                });
+                                setTimeout(function () {
+                                    window.location.href = '/CupquizActivities/guessResult/id/'+data.sid+'.html';return false;
+                                }, 2000);
+                            }else {
+                                layer.open({
+                                    content: data.msg
+                                    ,btn: '确定'
+                                });
+                                return false;
+                            }
+                        }).error(function(){
+                            layer.open({
+                                content: '请求异常'
+                                ,btn: '确定'
+                            });
+                        });
+                    }else{
+                        layer.open({
+                            content: '请提交所有选项'
+                            ,btn: '确定'
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+
+</html>

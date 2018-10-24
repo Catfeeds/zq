@@ -1,0 +1,107 @@
+<extend name="Public:layout"/>
+<block name='seo'>
+    <title>全球体育号</title>
+    <meta name="keywords" content="体育号,全球体育号">
+    <meta name="description" content="一呼百应，吹响体育号！">
+</block>
+
+<block name="css">
+    <link rel="stylesheet" href="__CSS__/sportuser/media-login.css">
+    <link rel="stylesheet" href="__CSS__/sportuser/reset-boot.css">
+</block>
+
+<block name="content">
+    <!-- main -->
+    <div class="main">
+        <div class="formMain">
+            <!-- formStep -->
+            <div class="formStep">
+                <ul class="clearfix">
+                    <li class="on">
+                        <div class="clearfix">
+                            <span class="pull-left step"><strong>1</strong></span>
+                            <span class="pull-left dotLine">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </span>
+                        </div>
+                        <p class="text-999">登陆注册  </p>
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <span class="pull-left step"><strong>2</strong></span>
+                            <span class="pull-left dotLine">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </span>
+                        </div>
+                        <p class="text-999">填写资料  </p>
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <span class="pull-left step"><strong>3</strong></span>
+                        </div>
+                        <p class="text-999">完成 </p>
+                    </li>
+                </ul>
+            </div>
+            <!-- formStep -->
+            <div class="loTitle"><span>您已登陆全球体育账号</span></div>
+            <div class="userBox">
+                <div class="inforFace">
+                    <div class="faceImg"><img class="img-circle" src="{$user['face']}" width="70" height="70" alt="131313" title="" style=""></div>
+                    <p class="faceName"><strong>{$user['nick_name']}</strong></p>
+                    <if condition="($user['is_expert'] eq 0) and ($user['expert_status'] eq 0)">
+                        <p>请继续完善您的资料，成为体育号作者</p>
+                        <a href="{:U('SportUser/sportExpertInfo')}?{:rand(0,9999)}" class="btn btn-green" title="下一步">下一步</a>
+                    <elseif  condition="($user['is_expert'] eq 0) and ($user['expert_status'] eq 2)" />
+                        <p>你的资料在审核中，请留意个人中心消息通知 </p>
+                        <a href="{:U('UserInfo/ident')}" class="btn btn-green" title="去个人中心">去个人中心</a>
+                    <elseif  condition="($user['is_expert'] eq 0) and ($user['expert_status'] eq 3)" />
+                        <p>您的申请未通过, <a href="{$user['url']}">请联系客服修改资料</a></p>
+                        <a href="{:U('SportUser/sportExpertInfo')}" class="btn btn-green" title="重新申请">重新申请</a>
+                    <elseif condition="($user['is_expert'] eq 1) and ($user['expert_status'] eq 1)" />
+                        <p>您已经是体育号作者，无需再申请</p>
+                        <a href="{:U('UserInfo/list_e')}" class="btn btn-green" title="去个人中心">去个人中心</a>
+                    <elseif condition="($user['is_expert'] eq 1) and ($user['expert_status'] eq 0)" />
+                        <p>您已经是体育号作者，无需再申请</p>
+                        <a href="{:U('UserInfo/list_e')}" class="btn btn-green" title="去个人中心">去个人中心</a>
+                    </if>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main -->
+</block>

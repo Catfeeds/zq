@@ -1,0 +1,25 @@
+/**
+ * 全彩登陆css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-17
+**/
+
+.home{ width: 1000px; margin:0 auto;}
+.form-main{ background: #fff;margin-top: 20px;}
+.form-nav ul li{ float: left; height: 48px; line-height: 48px; text-align: center; font-size: 16px; color: #f2f2f2; position: relative;}
+.form-nav .li1{ background: url(../../images/login/nav-li01-off.png) no-repeat center center; width: 362px;}
+.form-main .form-nav .cur1{  background: url(../../images/login/nav-li01-on.png) no-repeat center center;}
+.form-nav .li2{ background: url(../../images/login/nav-li02-off.png) no-repeat center center; width: 344px;}
+.form-main .form-nav .cur2{  background: url(../../images/login/nav-li02-on.png) no-repeat center center;}
+.form-nav .li3{ background: url(../../images/login/nav-li03-off.png) no-repeat center center; width: 334px;}
+.form-main .form-nav .cur3{  background: url(../../images/login/nav-li03-on.png) no-repeat center center;}
+.form-nav .ml{ margin-left: -20px;}
+.form-con{ padding: 66px 60px 100px 60px;}
+.form .form-in{ margin-bottom: 15px;}
+.form .input-con{ position: relative;}
+.form .reg-btn .btn{ width:  220px; border-radius: 3px;}
+.form .input-name{ width:100px; text-align: right; height: 34px; line-height: 34px; font-size: 14px;}
+.form #txtUserName,.form #txtPassword,.form #pwdOk{ width: 220px;}
+.ew-nioce{ margin-top: 16px; padding-left: 30px; background: url(../../images/login/nioce-icon.png) no-repeat left center;}
+.ew-nioce p{ line-height: 22px; padding: 0 15px;}

@@ -1,0 +1,74 @@
+<include file="Public:pagerForm" />
+<div class="page">
+    <div class="pageHeader">
+        <form onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+            <div class="searchBar">
+                <ul class="searchContent">
+                    <li>
+                        <label>状态：</label>
+                        <select name="status" class="combox" onchange="$(form).submit()">
+                            <option value="" selected>全部</option>
+                            <option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >可用</option>
+                            <option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >停用</option>
+                        </select>
+                    </li>
+                </ul>
+                <div class="subBar">
+                    <ul>
+                        <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="pageContent">
+        <div class="panelBar">
+            <ul class="toolBar">
+                <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="700" height="470"><span>新增</span></a></li>
+                <li><a class="delete" href="__URL__/foreverdelete/id/{sid_node}/navTabId/__DWZ__" target="ajaxTodo"  title="你确定要删除吗？" warn="请选择节点"><span>删除</span></a></li>
+                <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点" width="700" height="460"><span>修改</span></a></li>
+            </ul>
+        </div>
+        <table class="list" width="100%" layoutH="116">
+            <thead>
+            <tr>
+                <th width="60"><input type="checkbox" group="id[]" class="checkboxCtrl">id</th>
+                <th width="50">平台</th>
+                <th width="50">渠道</th>
+                <th width="50">名称</th>
+                <th width="30">包名</th>
+                <th width="50">版本号</th>
+                <th width="50">升级地址</th>
+                <th width="50">强制升级</th>
+                <th width="50">更新时间</th>
+                <th width="50">状态</th>
+                <th width="50">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+                <volist id="vo" name="list">
+                    <tr target="sid_node" rel="{$vo['id']}">
+                        <td><input name="id[]" value="{$vo['id']}" type="checkbox">{$vo['id']}</td>
+                        <td><if condition="$vo['app_type'] eq 2">ios<else />安卓</if></td>
+                        <td><if condition="$vo['app_channel'] eq 'official'">官网<else />移动市场</if></td>
+                        <td>{$vo['app_name']}</td>
+                        <td>{$vo['app_pkg_name']}</td>
+                        <td>{$vo['app_version']}</td>
+                        <td>{$vo['app_url']}</td>
+                        <td><if condition="$vo['is_upgrade'] eq 1">是<else />否</if></td>
+                        <td>{$vo['update_time']|date="Y-m-d H:i:s",###}</td>
+                        <td>{$vo['status']|getStatus}</td>
+                        <td>
+                            {$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",'__DWZ__'}
+                            <a href="__URL__/edit/id/{$vo['id']}" target="dialog" width="700" height="470">编辑</a>
+                            <a href="__URL__/foreverdelete/id/{$vo.id}/navTabId/__DWZ__" target="navTabTodo" title="你确定要删除吗？">删除</a>
+                        </td>
+                    </tr>
+                </volist>
+            </tbody>
+        </table>
+        <include file="Public:pagerNum" />
+
+    </div>
+</div>

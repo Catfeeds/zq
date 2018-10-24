@@ -1,0 +1,35 @@
+/**
+ * media number css
+ *
+ * @author Chensiren <245017279@qq.com>
+ * 
+ * @since  2018-02-01
+ *
+**/
+
+.manual{position:relative; margin:0 auto}
+.manual p{margin:0}
+.manual .manLeft{ width: 216px; padding-top: 10px; position: fixed; left: 50%; display: inline-block; margin-left: -512px; padding-top: 20px; height: 50%; background-color: #fff;}
+.manual .manLeft ul.nav>li>a{ display:block; margin-left: 20px; padding-left: 20px; background:url(../../images/sportuser/li-default.png) no-repeat left center; text-decoration:none}
+.manual .manLeft ul.nav>li.active>a{ background-image: url(../../images/sportuser/li-active.png); text-decoration: none}
+.manual .manLeft ul.nav>li>ul a{display: inline-block; overflow: hidden; width: 100%; color:#666666; text-overflow: ellipsis; white-space: nowrap}
+.manual .manLeft ul.nav>li>ul li{padding: 10px 10px 10px 40px; background-color: #f3fefb}
+.manual .manLeft ul.nav>li>ul li.active{ background-color: #01af63}
+.manual .manLeft ul.nav>li>ul li.active a{color:#fff}
+
+.manual .manRight{ width: 780px; display: inline-block; padding:10px; background-color:#fff;}
+.manual .manRight p{ line-height: 24px; color: #666;}
+.manual .manRight img{ margin: 20px 0; width:80%; height:auto}
+.manual .manRight h2{ font-size: 20px;}
+.manual .manRight h3,.manual .manRight h4{ font-size: 16px}
+.manual .manRight h2{margin:0; margin-top:70px; margin-bottom:20px; padding:15px 0 15px 20px; position: relative;}
+.manual .manRight h2:before{ content:""; width: 6px; height: 18px; background: #333333; position: absolute; left: 0; top: 18px;}
+.manual .manRight h4{ margin: 30px 0 10px;}
+.manual .manRight h3{ margin-top: 50px; margin-bottom: 20px}
+.manual .manRight h3 h4:first-child{ margin-top: 10px}
+.manual .manRight ul.flow{ padding:10px 0 10px 15px; margin-bottom: 30px;}
+.manual .manRight ul.flow li{position: relative; display: inline-block; width: 75px; height: 75px; border-radius: 75pt; background-color: #01af63; color: #fff;text-align: center;}
+.manual .manRight ul.flow li>span{position:absolute;top:50%;right:0;left:0;margin:0 auto;width:28px;-webkit-transform:translateY(-50%);transform:translateY(-50%); margin-top: -20px\9;}
+.manual .manRight ul.flow li:not(:first-child){margin-left:75px;}
+.manual .manRight ul.flow li:not(:first-child):before{position: absolute; top: 0; left: -78px; display: inline-block; width: 75px; height: 75px; background-image:url(../../images/sportuser/manual-arrow.png);background-position:center center;background-repeat:no-repeat;content:""}
+.manual .manRight ul.flow-plus li:not(:first-child):before{background-image:url(../../images/sportuser/manual-add.png)}

@@ -1,0 +1,63 @@
+<div class="icon" style="width: 10%; margin-left: -.1rem;<if condition="$list['result'] eq 0">display:none;</if>>;"><img style="width: .6rem;" src="<if condition="$list['result'] eq 1 or $list['result'] eq 0.5">__IMAGES__/ic_dyseal_win.png<elseif condition="$list['result'] eq 2" />__IMAGES__/ic_dyseal_split.png<elseif condition="$list['result'] eq -1 or $list['result'] eq -0.5" />__IMAGES__/ic_dyseal_lose.png<elseif condition="$list['result'] eq -10"/>__IMAGES__/ic_dyseal_cancel.png<elseif condition="$list['result'] eq -11"/>__IMAGES__/ic_dyseal_pending.png<elseif condition="$list['result'] eq -12"/>__IMAGES__/ic_dyseal_cut.png<elseif condition="$list['result'] eq -13"/>__IMAGES__/ic_dyseal_interrupt.png<elseif condition="$list['result'] eq -14"/>__IMAGES__/ic_dyseal_putoff.png</if>" alt="全球体育手机网"></div>
+<div class="frame">
+    <table class="gameInfo"  border="1" cellspacing="0";>
+        <switch name="list.play_type">
+            <case value="1">
+                <tr class="f">
+                    <td class="move">玩法</td>
+                    <td class="move">主队</td>
+                    <td class="move">盘口</td>
+                    <td>客队</td>
+                </tr>
+                <tr>
+                    <td class="move">让分</td>
+                    <td class="selectOdd move <eq name="list.chose_side" value="1">on</eq>">{$game.home_team_name|switchName=0,###}({$game.fsw_exp_home})</td>
+                    <td class="selectOdd move"><if name="vo.fsw_exp" condition="$game['gtype'] eq 1 and strpos($game['fsw_exp'],'-') !== false">受</if><if condition="$game['gtype'] eq 1">{$game.fsw_exp|abs|handCpSpread}<else/>{$game.fsw_exp}</if></td>
+                    <td class="selectOdd <eq name="list.chose_side" value="-1">on</eq>">{$game.away_team_name|switchName=0,###}({$game.fsw_exp_away})</td>
+                </tr>
+            </case>
+            <case value="2">
+                <tr class="f">
+                    <td class="move">玩法</td>
+                    <td class="move">胜</td>
+                    <td class="move">平</td>
+                    <td>负</td>
+                </tr>
+                <tr>
+                    <td class="move">胜平负</td>
+                    <td class="selectOdd move <eq name="list.chose_side" value="1">on</eq>">胜({$game.home_odds})</td>
+                    <td class="selectOdd move <eq name="list.chose_side" value="0">on</eq>">平({$game.draw_odds})</td>
+                    <td class="selectOdd <eq name="list.chose_side" value="-1">on</eq>">负({$game.away_odds})</td>
+                </tr>
+            </case>
+            <case value="-1">
+                <tr class="f">
+                    <td class="move">玩法</td>
+                    <td class="move">大球</td>
+                    <td class="move">盘口</td>
+                    <td>小球</td>
+                </tr>
+                <tr>
+                    <td class="move">大小</td>
+                    <td class="selectOdd move <eq name="list['chose_side']" value="1">on</eq>">大球({$game.fsw_exp_home})</td>
+                    <td class="move">{$game.fsw_exp|handCpTotal}</td>
+                    <td class="selectOdd <eq name="list['chose_side']" value="-1">on</eq>">小球({$game.fsw_exp_away})</td>
+                </tr>
+            </case>
+            <case value="-2">
+                <tr class="f">
+                    <td class="move">玩法</td>
+                    <td class="move">胜</td>
+                    <td class="move">平</td>
+                    <td>负</td>
+                </tr>
+                <tr>
+                    <td class="move">让球({$game.handcp})</td>
+                    <td class="selectOdd move <eq name="list.chose_side" value="1">on</eq>">胜({$game.home_letodds})</td>
+                    <td class="selectOdd move <eq name="list.chose_side" value="">on</eq>">平({$game.draw_letodds})</td>
+                    <td class="selectOdd <eq name="list.chose_side" value="-1">on</eq>">负({$game.away_letodds})</td>
+                </tr>
+            </case>
+        </switch>
+    </table>
+</div>

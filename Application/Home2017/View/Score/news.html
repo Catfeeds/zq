@@ -1,0 +1,109 @@
+<extend name="Public:header" />
+<block name="seo">
+    <if condition="$sign eq '1'">
+        <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}_竞彩赔率_亚盘赔率_全球体育</title>
+        <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、赛前分析、足球推荐、足球分析、竞彩推荐、竞彩分析、篮球分析、篮球推荐"/>
+        <meta name="description" content="全球体育提供百家足球即时赔率、亚盘对比、即时盘口、百家欧赔比较、赔率变化比较、赔率分析、历史相同赔率查询、盘路走势分析"/>
+    <else />
+        <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、大小赔率、大小球赔率、全球体育</title>
+        <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}、大小球指数、大小球赔率、大小球变化、大小球比较、大小球分析、赔率分析"/>
+        <meta name="description" content="全球体育提供百家足球即时赔率、亚盘对比、即时盘口、百家欧赔比较、赔率变化比较、赔率分析、历史相同赔率查询、盘路走势分析"/>
+    </if>
+</block>
+<block name="body">
+<body>
+<!--引入本页所需css-->
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreLive/scoreLive.css?20171106">
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreData/data-common.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreData/data-swot.css">
+<div class="body">
+    <!-- top nav -->
+    <include file="Public:top_score"/>
+    <!-- 主体内容开始 -->
+    <div class="home clearfix">
+        <!-- 头部比分s -->
+        <include file="Public:odd_header"/>
+        <include file="Public:odd_nav"/>
+        <!-- 头部比分额e -->
+        <!-- 数据导航s -->
+        <section class="main blWith">
+            <div class="swotCon">
+                <div class="t_show swoTitle"> 赛前情报</div>
+                <if condition="$list neq ''">
+                    <div class="swotListCon">
+                        <ul class="posts">
+                            <volist name="list" id="item">
+                                <li class="ds-list clearfix">
+                                    <div class="pull-left swotLeft">
+                                        <div class="clearfix">
+                                            <div class="rec_img">
+                                                <a target="_blank" href="<if condition="$item['type'] eq 1">{:U('/news/'.$item['id'].'')}<else/>{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}</if>"><img class="lazy" src="{$item.img.0}" alt="" original="{$item.img.0}"></a>
+                                            </div>
+                                            <div class="rec_right">
+                                                <p class="mlc_title"><a target="_blank" href="<if condition="$item['type'] eq 1">{:U('/news/'.$item['id'].'')}<else/>{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}</if>"><strong>{$item.title}</strong></a></p>
+                                                <eq name="item['type']" value="1"><div class="mlc_match"><span>{$item.union_name|switchName=0,###} </span>{$item.home|switchName=0,###}  VS  {$item.away|switchName=0,###}</div></eq>
+                                                <div class="mlc_time clearfix">
+                                                    <span class="pull-left">{$item.time|date="Y-m-d",###}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <a href="<if condition="$item['type'] eq 1">{:U('/news/'.$item['id'].'')}<else/>{:U('Video/lives',['type'=>$item['game_type'],'game_id'=>$item['game_id'],'jj_id'=>$item['id']])}</if>" target="_blank" class="pull-right swotLook">查看</a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </if>
+                <if condition="$matchinfo">
+                <div class="swotConWrap">
+                    <!-- <div class="title-wrap">
+                        <div class="title-l"><p>梅斯</p></div>
+                        <div class="title-normal"></div>
+                        <div class="title-r"> <p>摩纳哥</p></div>
+                    </div> -->
+                    <div class="colWrap clearfix">
+                        <div class="columns homeCol pull-left">
+                            <div class="colTitle clearfix">
+                                <div class="teamFace pull-left">
+                                    <img class="lazy" data-original="{$gameInfo['homeTeamLogo']}" src="{$gameInfo['homeTeamLogo']}" alt="{$gameInfo['home_team_name']}" style="display: block;">
+                                </div>
+                                <div class="teamName  pull-left">{$gameInfo['home_team_name']}</div>
+                            </div>
+                            <div class="info-good">
+                                <ul>
+                                    <volist name="matchinfo['HpmInfo']" id="item">
+                                        <li><i></i>{$item}</li>
+                                    </volist>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="columns awayCol pull-right">
+                            <div class="colTitle clearfix">
+                                <div class="teamFace pull-left">
+                                    <img class="lazy" data-original="{$gameInfo['awayTeamLogo']}" src="{$gameInfo['awayTeamLogo']}" alt="{$gameInfo['away_team_name']}" style="display: block;">
+                                </div>
+                                <div class="teamName  pull-left">{$gameInfo['away_team_name']}</div>
+                            </div>
+                            <div class="info-good">
+                                <ul>
+                                    <volist name="matchinfo['ApmInfo']" id="item">
+                                        <li><i></i>{$item}</li>
+                                    </volist>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                </if>
+            </div>
+        </section>
+    </div>
+    <!-- 主体内容开始 -->
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+</div>
+</body>
+</block>

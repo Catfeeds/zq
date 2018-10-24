@@ -1,0 +1,17 @@
+<div class="scoreNav">
+    <ul class="clearfix">
+    	<if condition="$_GET['header'] neq no">
+			<li class="pull-left <eq name="ACTION_NAME" value="index">on</eq>"><a href="{:U('@bf')}" class="navLink"><i class="liveState"></i>即时比分</a></li>
+			<li class="pull-left <eq name="ACTION_NAME" value="schedule">on</eq>"><a href="{:U('/schedule@bf')}" class="navLink"><i class="overState"></i>完场赛事</a></li>
+			<li class="pull-left <eq name="ACTION_NAME" value="schtoday">on</eq>"><a href="{:U('/schtoday@bf')}" class="navLink"><i class="willState"></i>未来赛事</a></li>
+			<li class="pull-left <eq name="ACTION_NAME" value="indices">on</eq>"><a href="{:U('/indices@bf')}" class="navLink"><i class="liveIndex"></i>即时指数</a></li>
+			<li class="pull-left <eq name="ACTION_NAME" value="generate">on</eq>"><a href="{:U('/generate@bf')}" class="navLink"><i class="freeUse"></i>免费调用</a></li>
+		<else/>
+			<li class="pull-left <eq name="ACTION_NAME" value="index">on</eq>"><a href="{:U('@bf')}?header=no" class="navLink"><i class="liveState"></i>即时比分</a></li>
+			<li class="pull-left <eq name="ACTION_NAME" value="schedule">on</eq>"><a href="{:U('/schedule@bf')}?header=no" class="navLink"><i class="overState"></i>完场赛事</a></li>
+			<li class="pull-left <eq name="ACTION_NAME" value="schtoday">on</eq>"><a href="{:U('/schtoday@bf')}?header=no" class="navLink"><i class="willState"></i>未来赛事</a></li>
+			<li class="pull-left <eq name="ACTION_NAME" value="indices">on</eq>"><a href="{:U('/indices@bf')}?header=no" class="navLink"><i class="liveIndex"></i>即时指数</a></li>
+			<li class="pull-left <eq name="ACTION_NAME" value="generate">on</eq>"><a href="{:U('/generate@bf')}?header=no" class="navLink"><i class="freeUse"></i>免费调用</a></li>
+		</if>
+    </ul>
+</div>

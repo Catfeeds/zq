@@ -1,0 +1,242 @@
+<include file="Public:header" />
+<body>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/video/infor_common.css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/video/game.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/swf/common.css"/>
+    
+    <!-- 导航开始 -->
+    <include file="Public:top_index" />
+    <!-- 导航结束 -->
+
+    <!-- 主体内容开始 -->
+    <div class="main">
+    	<!-- 球队对战信息 -->
+    	<div class="game-video-con">
+        	<div class="game-info-con clearfix">
+            	<div class="pull-left team">
+                	<a href="javascript:;">
+                   		<img src="{$info.home_logo}" width="54" height="54">
+                        <h3>{$info.home_team_name}</h3>
+                    </a>
+                </div>
+           	  	<div class="header-sup pull-left">
+                	<p class="team-score">{$info.union_name}</p>
+                    <div class="support-con clearfix">
+                        <div class="support_data clearsub">
+                          <div class="pull-left">
+                            </div>
+                            <div class="pull-right">
+                            </div>
+                        </div>
+                        <div class="support_live clearsub">
+                            <if condition='$info.is_live eq 1'><span>直播中</span></if>
+                        </div>
+               	  </div>
+                </div>
+
+            	<div class="pull-right team">
+                	<a href="javascript:;">
+                   		<img src="{$info.away_logo}" width="54" height="54">
+                        <h3>{$info.away_team_name}</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="flash-video" id="HLSPlayer"></div>
+        </div>
+        <SCRIPT LANGUAGE=JavaScript>
+            //<!--
+            var vID        = "HLSPlayer";
+            var vWidth     = 1000;
+            var vHeight    = 700;
+            var vPlayer    = "__PUBLIC__/Home/swf/HLSplayer.swf?v=1.5";
+            var vHLSset    = "__PUBLIC__/Home/swf/HLS.swf";
+            var vPic        = "__PUBLIC__/Home/images/background_1.jpg";
+            var vCssurl    = "__PUBLIC__/Home/swf/mini.css";
+            var vHLSurl    = "{$info.video}";
+            //-->
+        </SCRIPT>
+        <script type="text/javascript" src="__PUBLIC__/Home/swf/hls.min.js?rand=20161217"></script>
+
+        <!-- 球队对战信息 -->
+        <!-- 数据切换栏 -->
+
+        <div class="tab-box">
+            <div class="tab-li-con">
+                <ul class="clearfix gamedata">
+                    <li class="tab current game" ><a href="javascript:;">赛事数据</a></li>
+                    <!--<li class="tab battle"><a href="javascript:;">出场阵容</a></li>-->
+                    <li class="tab news"><a href="javascript:;">相关新闻</a></li>
+                </ul>
+            </div>
+            <div class="stats-con stats-container">
+                <div class="stats-list">
+                    <div class="football-data showed" role="stats">
+                        <div class="data-title">比赛事件</div>
+                        <div class="football-content">
+                            <table width="100%" class="table">
+                                <thead>
+                                <tr>
+                                    <th width="42%" class="alignRight"><img src="{$info.home_logo}"> </th>
+                                    <th width="16%">实时赛况</th>
+                                    <th width="42%" class="alignLeft"><img src="{$info.away_logo}"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="nioce">
+                                    <td class="alignRight">
+                                        <em class="goal"></em>
+                                        <span>进球</span>
+                                        <span class="footbNum"></span>
+                                        <em class="penalty"></em>
+                                        <span>点球</span>
+                                    </td>
+                                    <td>
+                                        <em class="oolong"></em>
+                                        <span>乌龙球</span>
+                                    </td>
+                                    <td class="alignLeft">
+                                        <em class="yellow-card"></em>
+                                        <em class="red-card"></em>
+                                        <span>黄红牌</span>
+                                        <span class="footbNum"></span>
+                                        <em class="up"></em>
+                                        <em class="down"></em>
+                                        <span>换人</span>
+                                    </td>
+                                </tr>
+                                <volist name="info.game_list" id="v">
+                                <if condition='$v.1 eq 1'>
+                                    <tr>
+                                        <td class="alignRight">
+                                            <span class="footbScare">
+                                                <!--1-0-->
+                                            </span>
+                                            <p>
+                                                <span class="footbNum"></span>
+                                                <span>{$v.6}</span>
+                                                <span class="hearImg"><img src="__PUBLIC__/Home/images/common/face.png" width="30" height="30"></span>
+                                                <em class="{$v.2}"></em>
+                                            </p>
+                                        </td>
+                                        <td>{$v.3}’</td>
+                                        <td class="alignLeft"></td>
+                                    </tr>
+                                </else>
+                                    <tr>
+                                        <td class="alignRight"></td>
+                                        <td>{$v.3}’</td>
+                                        <td class="alignLeft">
+                                            <p><em class="{$v.2}"></em>
+                                                <span class="hearImg"><img src="__PUBLIC__/Home/images/common/face.png" width="30" height="30"></span>
+                                                <span>{$v.6}</span>
+                                                <span class="footbNum"></span>
+                                            </p>
+                                            <span class="footbScare">
+                                                <!--1-0-->
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </if>
+                                </volist>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="data-title">技术统计</div>
+                    <div class="compare-data showed" role="stats" style="display: block;">
+                        <table width="100%" class="table">
+                            <thead>
+                            <tr>
+                                <th width="42%" class="alignRight">
+                                    <img src="{$info.home_logo}">
+                                </th>
+                                <th width="16%">对比数据</th>
+                                <th width="42%" class="alignLeft">
+                                    <img src="{$info.away_logo}">
+                                </th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <volist name="info.skill_list" id="vo">
+                            <tr>
+                                <td class="alignRight"><span>{$vo.1}</span><em class="green" style="width:{$vo.3}%"></em></td>
+                                <td>{$vo.0}</td>
+                                <td class="alignLeft"><em class="gray" style="width:{$vo.4}%"></em><span>{$vo.2}</span></td>
+                            </tr>
+                          </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="stats-list" style="display:none;">
+                    <div class="clearfix list-con">
+                        <div class="pull-left list-left </if>">
+                            <ul>
+                                <volist id="vo" name="info.news_list">
+                                    <if condition="$i lt 5">
+                                        <li class="clearfix"><a href="#" title="{$vo.title}" class="pull-left">{$vo.title}</a><span class="pull-right">{$vo.day}<em>{$vo.hour}</em></span></li>
+                                    </if>
+                                </volist>
+                            </ul>
+                        </div>
+                        <div class="pull-left list-right </if>">
+                            <ul>
+                                <volist id="vo" name="info.news_list">
+                                     <if condition="$i gt 5">
+                                         <li class="clearfix"><a href="#" title="{$vo.title}" class="pull-left">{$vo.title}</a><span class="pull-right">{$vo.day}<em>{$vo.hour}</em></span></li>
+                                     </if>
+                                </volist>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 数据切换栏 -->
+    </div>
+    <!-- 主体内容结束 -->
+    <include file="Public:footer" />
+    <!--引入本页所需js-->
+    <script type="text/javascript">
+        var game_id="{$info.game_id}";
+        $(function(){
+            $('.icon_support_visit').click(function(e) {
+                $(this).animate({'background-position-x':'2px','background-position-y':'-164px'},300);
+                var url = '/index.php?m=home&c=video&a=ajax_up&type={$_GET[type]}&id={$_GET[id]}&host=1';
+                     $.get(url,function(res){
+                         $("#home_up").html(res.home_up);
+                         $("#away_up").html(res.away_up);
+                         $("#away_score").html(res.away_score+'%');
+                         $("#home_score").html(res.home_score+'%');
+
+                     });
+            });
+            $('.icon_support_host').click(function(e) {
+                $(this).animate({'background-position-x':'-50px','background-position-y':'-164px'},300);
+                var url = '/index.php?m=home&c=video&a=ajax_up&type={$_GET[type]}&id={$_GET[id]}&host=0';
+                    $.get(url,function(res){
+                        $("#home_up").html(res.home_up);
+                        $("#away_up").html(res.away_up);
+                        $("#away_score").html(res.away_score+'%');
+                        $("#home_score").html(res.home_score+'%');
+                    });
+            });
+
+            $('.icon_support_visit').click(function(e) {
+                $(this).animate({'background-position-x':'2px','background-position-y':'-164px'},300);
+            });
+
+            $('.icon_support_host').click(function(e) {
+                $(this).animate({'background-position-x':'-50px','background-position-y':'-164px'},300);
+            });
+
+            $('.tab-li-con ul li').click(function(e) {
+                $(this).addClass('current').siblings().removeClass('current');
+                var num = $(this).index();
+                $('.stats-container .stats-list').eq(num).show().siblings().hide();
+            });
+
+         });
+    </script>

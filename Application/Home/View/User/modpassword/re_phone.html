@@ -1,0 +1,197 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/login/register.css">
+</block>
+<block name="content">
+    <include file="Public:top_user"/>
+    <div class="home">
+        <!-- 注册表单内容开始 -->
+        <div class="form-main">
+            <div class="form-nav">
+                <ul class="clearfix">
+                    <li class="li1 cur1">输入手机号</li>
+                    <li class="ml li2">输入新密码</li>
+                    <li class="ml li3">成功找回密码</li>
+                </ul>
+            </div>
+            <div class="form-con">
+              <div class="con clearfix">
+                    <div class="pull-left form">
+                       <form  action="#" method="post">
+                            {:get_form_token()}
+                            <if condition="$_REQUEST.operation eq 'backDrawPass' or $operation eq  'backDrawPass' ">
+                                <div class="form-in clearfix">
+                                    <div class="pull-left input-name">真实姓名：</div>
+                                    <div class="pull-left input-con input-position-relative">
+                                        <input id="txt" style="width: 220px;" class="form-control required" name="true_name" type="text" placeholder="真实姓名" data-msg-required="真实姓名"/>
+                                    </div>
+                                </div>
+                                <div class="form-in clearfix">
+                                    <div class="pull-left input-name">身份证号码：</div>
+                                    <div class="pull-left input-con input-position-relative">
+                                        <input id="card" style="width: 220px;" class="form-control required" name="identfy" type="text"  placeholder="身份证号码" data-msg-required="身份证号码"/>
+                                    </div>
+                                </div>
+                            </if>
+                            <div class="form-in clearfix">
+                                <div class="pull-left input-name">输入手机号：</div>
+                                <div class="pull-left input-con input-position-relative">
+                                    <input id="phone" class="form-control required mobile" name="mobile" type="text" placeholder="手机号" data-msg-required="请输入手机号"/>
+                                </div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="form-in clearfix pull-left"> 
+                                    <div class="pull-left input-name">验证码：</div>
+                                    <div class="pull-left input-con input-position-relative captcha">
+                                        <input id="ranks" class="form-control required" name="captcha" type="text" placeholder="验证码" data-msg-required="请输入验证码"/> 
+                                    </div>
+                                </div>
+                                <div class="pull-right reanks-con">
+                                    <a href="javascript:;" onclick="sendMobileMsg();" class="btn btn-orange"><span id="sendMobileBtn"></span>发送验证码</a>
+                                 </div>
+                            </div>
+                            <if condition="$_REQUEST.operation eq 'backDrawPass'">
+                               <input type="hidden" name="operation" value="{$_REQUEST.operation}" >
+                               <else/>
+                               <if condition="$operation eq  'backDrawPass'">
+                                   <input type="hidden" name="operation" value="{$operation}" >
+                               </if>
+                            </if>
+                            <div class="reg-btn clearfix form-in"> 
+                                <input type="submit" class="btn btn-orange pull-right" value="下一步" />
+                            </div>
+                            <div class="haven pull-right">
+                                <if condition="$_REQUEST.operation eq 'backDrawPass' or $operation eq  'backDrawPass' ">
+                                    <p><a href="{:U('UserInfo/extract')}" class="text-orange">返回提款</a></p>
+                                <else/>
+                                    <p><a href="{:U('User/login')}" class="text-orange">返回登录</a></p>
+                                </if>
+
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="pull-right clearfix">
+                      <div class="ew-ma"><img src="__IMAGES__/login/ew-ma.jpg" width="264" height="264"></div>
+                        <div class="ew-nioce">
+                          <p>扫二维码，下载全彩球讯app<br/>随时获取最新信息！</p>
+                        </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- 注册表单内容结束 -->
+    </div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+      $(function(){
+        $("form").validate({
+          onkeyup : false,
+          rules: {
+            mobile : {
+              remote: {
+                url: "/User/checkMobileThere.html",
+                type: "post",
+                data: {
+                  fieldValue: function() {
+                  return $( "#phone" ).val();
+                  },
+                }
+              }
+            },
+          },
+          messages : {
+            mobile : {
+              remote : '该手机号码未注册！',
+            },
+          },
+          submitHandler:function(form){
+                var form = $(form);
+                var data = form.serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "/User/re_phone.html",
+                    data: data,
+                    success: function(data){
+                      if(data.status){
+                        window.location.href="/User/new_password.html";
+                      }else{
+                        _alert('温馨提示',data.info);
+                      }
+                    }
+                });
+            }
+        });
+      })
+      /**
+     * 发送手机验证码
+     *
+    */
+    function sendMobileMsg(){
+      var mobile = $('#phone').val();
+
+      //判断是找回登录密码操作还是找回提款密码操作
+      var operation = "{$Think.get.operation}";
+      var ass_operation = '{$operation}';
+      if (operation == '' || operation == null) {
+          if (ass_operation == '' || ass_operation == null) {
+              var msgType = 'editPwd';
+          }
+          else {
+              var msgType = 'backDrawPass';
+          }
+      }else {
+          var msgType = 'backDrawPass';
+      }
+
+
+      //验证手机
+      if(mobile == ""){
+        _alert('温馨提示',"请输入手机号码！");
+        return false;
+      }
+      if (!/^1[3456789]{1}\d{9}$/.test(mobile)){
+        _alert('温馨提示',"手机号码格式不正确，请重新输入！");
+        return false;
+      }
+      var token = $("input[name='token']").val();
+      $.ajax({
+        url: "/User/sendMobileMsg.html",
+        type:'post',
+        data:{token:token,'mobile':mobile,'msgType':msgType},
+        dataType: "json",
+        beforeSend:function(XMLHttpRequest)
+          {
+            $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>正在发送…").removeAttr("onclick").attr("disabled","disabled");
+          },
+        success: function(data){
+          if(data.status){
+            _alert('温馨提示',data.info);
+            daojishi(60);
+            return;
+          }else{
+            $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>获取验证码").attr("onclick",'sendMobileMsg()').removeAttr("disabled");
+            _alert('温馨提示',data.info);
+          }
+        }
+      });
+    }
+    /**
+     * 倒计时
+     *
+    */
+    function daojishi(S){
+      if (S>0){
+        var S = S-1;
+        $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>秒后重发").removeAttr("onclick").attr("disabled","disabled");
+        $("#sendMobileBtn").html(S);
+        setTimeout("daojishi("+S+")",1000);
+        return;
+      } else {
+        $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>获取验证码").attr("onclick",'sendMobileMsg()').removeAttr("disabled");
+      }
+    }
+    </script>
+</block>

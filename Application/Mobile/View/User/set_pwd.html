@@ -1,0 +1,50 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/login/login.css">
+    <script type="text/javascript" src="__JS__/user/register.js"></script>
+    <style>
+    </style>
+</block>
+<block name="header">
+    <!-- 二级头部 s -->
+    <header id="other_header">
+        <a href="javascript:history.go(-1);"></a>修改密码
+        <a href="javascript:;" id='dosave' class="share" style="font-size:.3rem;">保存</a>
+    </header>
+    <!-- 二级头部 e -->
+</block>
+<block name="nav"></block>
+<block name="content">
+    <div class="login_panel">
+        <form id="login-form" action="" method="post">
+            <div class="login-container">
+                <div class="inputbox inputUser" id="account-box">
+                    <div class="u-input">
+                        <label class="u-label ne_name">新密码</label>
+                        <input style="padding-left:1.5rem;width:80%" name="password" class="ycpwd" type="password" maxlength="15" id="password" placeholder="请输入6-15位数字或者字母">
+                        <input style="padding-left:1.5rem;width:80%" name="password" class="xspwd" type="text" maxlength="15" id="text" placeholder="请输入6-15位数字或者字母">
+                        <a href="javascript:;" class="ne_btn no-pw"></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</block>
+<block name='scripts'>
+    <script>
+        $(document).on('click', "#dosave", function () {
+            var pwd = $("#password").val();
+            if (!isPwd(pwd)) {
+                alert('密码为6-15位数字或者字母!');
+                return false;
+            }
+            $.post('', {pwd:pwd}, function (data) {
+                alert(data.info);
+                if(data.status==1){
+                    window.location.href = data.url;
+                }
+            }, 'json');
+        });
+    </script>
+</block>

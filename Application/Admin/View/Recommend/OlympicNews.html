@@ -1,0 +1,57 @@
+<include file="Public:pagerForm" />
+<div class="pageContent">
+
+	<form action="__URL__/OlympicNews" method="post" class="pageForm required-validate" onsubmit="return iframeCallback(this)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+			  	<textarea style="width:70%;height:690px;" name="content3">
+			  		{$OlympicNews}
+			  	</textarea>
+			</div>
+			<div class="imgs_list">
+			    <ul>
+			        <!-- 新闻模版预览 -->
+			        {$OlympicNews|htmlspecialchars_decode}
+			    </ul>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="reset">重置</button></div></div></li>
+				<li><div class="button yulan"><div class="buttonContent"><button type="button">预览</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script>
+	$("textarea[name='content3']").bind('input propertychange',function(){
+		var html = $("textarea[name='content3']").val();
+		$(".imgs_list ul").html(html);
+	})
+</script>
+<style>
+	/*今日头条*/
+	.imgs_list {float: right; margin:20px 50px 0 0; border: 1px dashed;width: 355px;height: auto;}
+	.imgs_list ul li {line-height: 29px;}
+	.imgs_list ul li a:hover{color: #f77722}
+	.imgs_list ul li a {
+		margin-left: 8px;
+	    color: #333;
+	    font: 14px/1.25 "Microsoft YaHei","Helvetica Neue",Helvetica,Arial !important;
+	}
+	h3, h4, h5, h6 {
+	    color: inherit;
+	    font-family: inherit;
+	    font-weight: 500;
+	    line-height: 1.1;
+	}
+</style>
+
+
+
+
+
+

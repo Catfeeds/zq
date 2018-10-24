@@ -1,0 +1,78 @@
+<extend name="Public/base" />
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/user/FocusSuccess.css?v=201806191604">
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <neq name="is_me" value="1">
+    <include file="Public:titleHead"/>
+    </neq>
+</block>
+<!-- 二级头部 e -->
+<block name="nav"></block>
+<!-- 用户所有明细 -->
+<block name="content">
+    <div class="user-profile">
+        <div class="top">
+            <a class="back" href="javascript:void(0)"><img src="__IMAGES__/user/back.png"></a>
+            <eq name="is_me" value="1"><span>我的主页</span></eq>
+        </div>
+        <div class="top-main clearfix">
+            <li class="left">
+                <img src="{$user['head']}">
+            </li>
+            <li class="middle">
+                <div class="observer">
+                    <span>{$user['name']}</span>
+                    <eq name="user['is_expert']" value="1"><span><img src="__IMAGES__/user/specialist.png"></span></eq>
+                </div>
+                <div class="essay">
+                    <span class="article">粉丝数<em>{$user['number']}</em></span>
+                    <eq name="user['is_expert']" value="1"><span class="read">文章数<em>{$user['total']}</em></span></eq>
+                </div>
+                <div class="abstract">
+                    <span><if condition="$user['descript'] neq ''">简介：{$user['descript']}</if></span>
+                </div>
+            </li>
+            <neq name="is_me" value="1">
+                <li class="right">
+                    <a href="javascript:;" onclick="doFollow(this, {$user['id']})"><if condition="$isFollow neq ''">已关注<else/>+关注</if></a>
+                </li>
+            </neq>
+        </div>
+    </div>
+    <!-- 主体内容 -->
+    <section class="wrapCon">
+        <if condition="count($navData) gt 1">
+            <div class="<if condition="count($navData) eq 3">nav<else/>nav-change</if> clearfix">
+                <if condition="$navData['gamble'] eq 1"><a class="<eq name="listType" value="0">on</eq>" title="推荐" href="{:U('/expUser/'.$user['id'].'@m')}">推荐</a></if>
+                <if condition="$navData['new'] eq 3"><a class="<eq name="listType" value="1">on</eq>" tilte="资讯" href="{:U('/expUser/'.$user['id'].'/3@m')}">资讯</a></if>
+                <if condition="$navData['video'] eq 4"><a class="<eq name="listType" value="2">on</eq>" tilte="视频" href="{:U('/expUser/'.$user['id'].'/4@m')}">视频</a></if>
+            </div>
+        </if>
+        <if condition='$listType eq null'>
+            <include file="User:guess"/>
+        <else/>
+            <include file="User:userNewList"/>
+        </if>
+        <div class="paged boxs">
+            <div class="load_gif fs24 text-999">
+                <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>正在加载更多的数据...</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已经全部加载完毕</a>
+        </div>
+    </section>
+</block>
+<block name='scripts'>
+    <script>
+        var expId = "{$user['id']}";
+        var listtime = "{:time()}";
+        var IMAGES = "__IMAGES__";
+        var page = 1;
+        var DOMAIN = "m."+"__DOMAIN__";
+    </script>
+    <script src="__JS__/Olympic/swiper_banner.js"></script>
+    <script type="text/javascript" src="__JS__/user/expUser.js?20180612"></script>
+</block>

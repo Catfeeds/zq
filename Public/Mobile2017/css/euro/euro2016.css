@@ -1,0 +1,108 @@
+/**
+ * css样式文件
+ * 
+ * @author Chensiren <710348662@qq.com>
+ *
+ * @since  2016-04-27
+ *
+**/
+
+html,body{ width: 100%; height: 100%;}
+.content{ position: relative;}
+
+/* 比分 */
+.liveList .match{ padding: .1rem .2rem; border-bottom: 1px solid #e5e5e5; position: relative;}
+.match_name{ font-size: .26rem;}
+.mach_begin{ color: #1490d8; font-size: .28rem;}
+.mach_half{ color: #999999; font-size: .18rem;}
+.mach_over{ color: #eb0000;}
+.mach_will{ color: #999999;}
+.mach_begin_time{ color: #eb0000; font-size: .2rem;}
+.mach_will_time{ color: #999999; font-size: .2rem;}
+.mach_over_time{ color: #eb0000; font-size: .2rem;}
+.yel_card,.red_card{ display: inline-block; height: .24rem; line-height: .24rem; width: .2rem; font-size: .18rem; text-align: center; border-radius: .02rem;}
+.yel_card{ background: #f9e615; color: #bd6211;}
+.red_card{ background: #f64b16; color: #ffffff;}
+.teamRank{ font-size: .18rem; color: #999;}
+.homeTeamName,.guestTeamName{ font-size: .26rem;}
+
+/* 广告 */
+.liveList .ad { padding: 0; border: 0 none;}
+.ad img{ width: 100%;}
+
+/*日期选择*/
+.day{ border-bottom: 1px solid #e5e5e5;}
+
+
+/* 对阵图 */
+.plan_main{ width: 100%;/*  height: 100%; */ height: 9.34rem; background: url(../../images/euro/plan-bg.jpg) no-repeat center top; background-size: cover; padding-top: .5rem;}
+.planNav{ width: 6.6rem; height: .7rem; margin: 0 auto; background: url(../../images/euro/planNav.png) no-repeat center center; background-size: 100% 100%; box-shadow: 0 2px 0.2rem rgba(0,0,0,0.7); border-radius: .35rem; margin-bottom: .5rem;}
+.planNav li{ float: left; width: 1.6rem; height: .7rem; position: relative; margin-left: -.28rem;}
+.planNav li a{ display: block; height: .7rem; line-height: .7rem; text-align: center; color: #fff; text-shadow: -1px 1px 2px rgba(0,0,0,7);}
+.planNav li.on a{ color: #333; text-shadow: 0 1px 1px #fff;}
+.planNav li.on{ background: url(../../images/euro/qu2.png) no-repeat right 0; background-size: 100% 100%;}
+.planNav .startLi.on{ background: url(../../images/euro/lg.png) no-repeat right 0; background-size: 100% 100%;}
+.planNav .endLi.on{ background: url(../../images/euro/rg.png) no-repeat right 0; background-size: 100% 100%;}
+.planNav .startLi{ width: 1.48rem; margin-left: 0;}
+.planNav .endLi{ width: 1.42rem;}
+
+.plan_con .plan{ width: 50%; margin-bottom: .5rem;}
+.plan_con_8 .plan{ width: 50%; margin-bottom: .3rem;}
+.plan_con .plan .plan_list{ display: block; width: 2.83rem; height: 2.09rem; margin: 0 auto;}
+.plan_con_8 .plan .plan_list,.plan_con_4 .plan .plan_list{ height: 1.62rem;}
+.plan_con_2{ position: relative;  width: 4.43rem; margin: 0 auto;}
+.boy{ position: absolute; right: -1.22rem; top: .1rem; width: 2.44rem; height: 4.09rem; background: url(../../images/euro/boy.png) no-repeat center center; background-size: cover;}
+.plan_con_2 .plan{ width: 4.43rem; margin: 0 auto; margin-bottom: .3rem;}
+.plan_con_2 .plan .plan_list{ display: block; width: 4.43rem; height: 1.82rem;}
+.plan_con_1 { width: 4.28rem; height: 4.27rem; margin: 0 auto;}
+.plan_con_1 .plan .plan_list{ display: block; width: 4.28rem; height: 4.27rem;}
+
+.plan_con .plan .plan_list.A{ background: url(../../images/euro/A.png) no-repeat center center; background-size: cover;}
+.plan_con .plan .plan_list.B{ background: url(../../images/euro/B.png) no-repeat center center; background-size: cover;}
+.plan_con .plan .plan_list.C{ background: url(../../images/euro/C.png) no-repeat center center; background-size: cover;}
+.plan_con .plan .plan_list.D{ background: url(../../images/euro/D.png) no-repeat center center; background-size: cover;}
+.plan_con .plan .plan_list.E{ background: url(../../images/euro/E.png) no-repeat center center; background-size: cover;}
+.plan_con .plan .plan_list.F{ background: url(../../images/euro/F.png) no-repeat center center; background-size: cover;}
+
+.plan_con_8 .plan .plan_list.A{ background: url(../../images/euro/8-A.png) no-repeat center center; background-size: cover;}
+.plan_con_8 .plan .plan_list.B{ background: url(../../images/euro/8-B.png) no-repeat center center; background-size: cover;}
+.plan_con_8 .plan .plan_list.C{ background: url(../../images/euro/8-C.png) no-repeat center center; background-size: cover;}
+.plan_con_8 .plan .plan_list.D{ background: url(../../images/euro/8-D.png) no-repeat center center; background-size: cover;}
+.plan_con_8 .plan .plan_list.E{ background: url(../../images/euro/8-E.png) no-repeat center center; background-size: cover;}
+.plan_con_8 .plan .plan_list.F{ background: url(../../images/euro/8-F.png) no-repeat center center; background-size: cover;}
+.plan_con_8 .plan .plan_list.G{ background: url(../../images/euro/8-G.png) no-repeat center center; background-size: cover;}
+.plan_con_8 .plan .plan_list.H{ background: url(../../images/euro/8-H.png) no-repeat center center; background-size: cover;}
+
+.plan_con_4 .plan .plan_list.A{ background: url(../../images/euro/4-A.png) no-repeat center center; background-size: cover;}
+.plan_con_4 .plan .plan_list.B{ background: url(../../images/euro/4-B.png) no-repeat center center; background-size: cover;}
+.plan_con_4 .plan .plan_list.C{ background: url(../../images/euro/4-C.png) no-repeat center center; background-size: cover;}
+.plan_con_4 .plan .plan_list.D{ background: url(../../images/euro/4-D.png) no-repeat center center; background-size: cover;}
+
+.plan_con_2 .plan .plan_list.A{ background: url(../../images/euro/2-A.png) no-repeat center center; background-size: cover;}
+.plan_con_2 .plan .plan_list.B{ background: url(../../images/euro/2-B.png) no-repeat center center; background-size: cover;}
+
+.plan_con_1 .plan .plan_list.A{ background: url(../../images/euro/1-A.png) no-repeat center center; background-size: cover;}
+
+/* 对阵图列表页 */
+.planTitle{ padding: .2rem; border-bottom: 1px solid #e5e5e5;}
+.planTitle span{ display: block; width: 1.1rem; height: .56rem; line-height: .54rem; text-align: center; color: #0165b8; border: 1px solid #e5e5e5; border-radius: .56rem;}
+.planTime span{ color: #0165b8;}
+.homeTeamName img{ width: .3rem; margin-left: .1rem;}
+.guestTeamName img{ width: .3rem; margin-right: .1rem;}
+.line-bg{ background: url(../../images/euro/line-bg.jpg) repeat-y center center;}
+.empty td{ height: .2rem;}
+.planItem{ padding-top: .08rem; background: #e5e5e5; border-bottom: 1px solid #e5e5e5;}
+.planItem .itemTitle{ background: #fff; height: .9rem; line-height: .9rem; padding: 0 .75rem;}
+.planItem .item01{ background: #fff url(../../images/euro/groom-icon.png) no-repeat .2rem center; background-size: .5rem auto;}
+.planItem .item02{ background: #fff url(../../images/euro/news-icon.png) no-repeat .2rem center; background-size: .5rem auto;}
+.itemUl li{ padding: 0 .2rem;}
+.itemUl li a{ display: block; height: .8rem; line-height: .8rem; border-bottom: 1px solid #e5e5e5; padding-right: .4rem; background: url(../../images/euro/s_list.png) no-repeat right center; background-size: .14rem auto; white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow: hidden; }
+.itemUl li a:hover,.more a:hover{ color: #ff7e00; transition: all ease-out 0.1s;}
+.more{ height: .9rem; line-height: .9rem;}
+.more a{ padding-right: .42rem; background: url(../../images/euro/more-r.png) no-repeat right center; background-size: .3rem auto; color: #eb0000;}
+
+
+/*1/8决赛新增*/
+.planNav{margin-bottom: .3rem}
+.fenqu{margin-bottom: .1rem}
+.fenqu span{display: block;float:left;width: 50%;text-align: center;color: #fff600;font-weight: bold;}

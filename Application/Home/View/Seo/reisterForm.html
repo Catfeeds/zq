@@ -1,0 +1,98 @@
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" style="width: 600px"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm m_reg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">用户注册</h4>
+            </div>
+            <div class="modal-body">
+<style>
+    .tip_show{display: block!important;}
+    .tip_hide{display: none!important;}
+</style>
+                    <!-- 注册 s -->
+                    <div class="show_register">
+                        <div class="form-con">
+                            <div class="con clearfix">
+                                <div class="pull-left form" style="width: 324px">
+                                    <form id="ajaxRegister">
+                                        <div class="form-in clearfix">
+                                            <div class="pull-left input-name">输入手机号：</div>
+                                            <div class="pull-left input-con input-position-relative">
+                                                <input id="phone" class="form-control required mobile" name="mobile"
+                                                       type="text" placeholder="手机号" data-msg-required="请输入手机号">
+                                                       <label class="field-msg field-error tip_hide" id="phone_tip">请输入手机号码</label>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">
+                                            <div class="form-in clearfix pull-left">
+                                                <div class="pull-left input-name">验证码：</div>
+                                                <div class="pull-left input-con input-position-relative captcha">
+                                                    <input id="ranks" style="width: 122px" class="form-control required" name="captcha"
+                                                           type="text" placeholder="验证码" data-msg-required="请输入验证码"><label class="field-msg field-error tip_hide" id="ranks_tip">请输入验证码</label>
+                                                </div>
+                                            </div>
+                                            <div class="pull-left reanks-con">
+                                                <a href="javascript:;"  onclick="sendMobileMsg();"
+                                                   class="btn btn-orange"><span id="sendMobileBtn"></span>发送验证码</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-in clearfix">
+                                            <div class="pull-left input-name">用户昵称：</div>
+                                            <div class="pull-left input-con input-position-relative">
+                                                <input id="nick_name" class="form-control required" name="nick_name"
+                                                       type="text" placeholder="用户昵称" data-msg-required="请输用户昵称"><label class="field-msg field-error tip_hide" id="nick_name_tip">请输入用户昵称</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-in clearfix">
+                                            <div class="pull-left input-name">密码：</div>
+                                            <div class="pull-left input-con input-position-relative">
+                                                <input type="password" class="hidden"/>
+                                                <input id="passd" class="form-control required checkpass" name="passd"
+                                                       type="password" placeholder="密码" data-msg-required="请输密码"><label class="field-msg field-error tip_hide" id="passd_tip">请输入密码</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-in clearfix">
+                                            <div class="pull-left input-name">确认密码：</div>
+                                            <div class="pull-left input-con input-position-relative">
+                                                <input type="password" class="hidden"/>
+                                                <input id="com_passd" class="form-control required" name="com_passd"
+                                                       type="password" placeholder="确认密码" data-msg-required="确认密码"><label class="field-msg field-error tip_hide" id="com_passd_tip">请输入确认密码</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="checkbox" style="margin-left: 100px;">
+                                                <label>
+                                                    <input type="checkbox" checked="" id="agree">我已阅读并接受<a target="_blank" href="{:U('Copyright/service')}" class="text-green">《全球体育服务协议》</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="reg-btn clearfix form-in">
+                                            <input style="width:220px"  type="button" onclick="submitRegiter()" class="btn btn-orange pull-right" value="注册">
+                                        </div>
+
+                                        <p class="login_tip" style="padding-top: 10px">您也可以使用以下账号登录</p>
+                                        <div class="else_login" style="padding-top: 10px">
+                                            <a href="{:U('User/sdk_login',['type'=>qq])}"  target="_blank;"><img
+                                                    src="__PUBLIC__/Home/images/login/qq.png">QQ登录</a>
+                                            <a href="{:U('User/sdk_login',['type'=>sina])}"  target="_blank;"><img
+                                                    src="__PUBLIC__/Home/images/login/sina.png">微博登录</a>
+                                            <a href="{:U('User/sdk_login',['type'=>weixin])}"  target="_blank;"><img
+                                                    src="__PUBLIC__/Home/images/login/wx.png">微信登录</a>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 注册 e -->
+            </div>
+        </div>
+    </div>
+</div>

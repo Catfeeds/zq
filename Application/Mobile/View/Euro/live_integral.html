@@ -1,0 +1,60 @@
+<extend name="Public/euro/base" />
+<block name="seo">
+    <title>2016欧洲杯赛程_全球体育欧洲杯专题</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/euro/hot.css"> 
+</block>
+<!-- 二级导航 s-->
+<block name="sub_nav">
+    <include file="Euro/live_nav"/>
+</block>
+<!-- 二级导航 e-->
+
+<!-- 积分榜 s-->
+<block name="content">
+    <section>
+
+
+
+
+        <volist name='list' id='v'>
+            <aside class="teamname boxs">
+                {$key}组
+            </aside>
+            <table class="tb_rank" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <th>排名</th>
+                        <th>国家</th>
+                        <th>轮次</th>
+                        <th>胜</th>
+                        <th>平</th>
+
+                        <th>负</th>
+                        <th>进球</th>
+                        <th>失球</th>
+                        <th>净胜</th>
+                        <th>积分</th>
+                    </tr>
+                <volist name='v' id='vv' key='k'>
+                    <tr>
+                        <td><elt name="k" value="3"><span>{$k}</span><else/>{$k}</elt></td>
+                        <td>{$vv.country_name}</td>
+                        <td>{$vv.round}</td>
+                        <td>{$vv.win}</td>
+                        <td>{$vv.draw}</td>
+                        <td>{$vv.lose}</td>
+                        <td>{$vv.score}</td>
+                        <td>{$vv.lose_ball}</td>
+                        <td>{$vv['score']-$vv['lose_ball']}</td>
+                        <td>{$vv.integral}</td> 
+                    </tr>
+                </volist>
+                </tbody>
+            </table> 
+        </volist>
+    </section>
+    <!-- 积分榜 e-->
+</block>

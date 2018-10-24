@@ -1,0 +1,36 @@
+/*统计*/
+.con-list .list-li .game-result{ position: absolute; right: 8%; top:15% ;}
+.tj_tuij{width: 94%;margin:0 auto;height: 40px;border:1px solid #10af63;text-align: center;font-size: 18px;line-height: 40px}
+.tj_tuij a{color: #10af63;}
+
+.play_type{margin:0 auto;text-align: center; background: #fff; padding: 10px 0;}
+.play_type ul li{ display: inline-block; margin: 0 5px}
+.play_type ul li a{ display: block; color: #c0c0c0; padding-bottom: 5px; border-bottom: 2px solid transparent; font-size: 18px;}
+.play_type a.on{color: #4d7082; border-color: #4d7082;}
+.play_type a:hover{color: #4d7082; border-color: #4d7082;}
+
+.t_content{ background: #fff;}
+.con-list { background: #fff; padding: 15px 20px;}
+.con-list .list-li { float: left; padding: 10px 15px; margin: 5px; width: 570px; position: relative; background-color: #f2f2f7;  border: 1px solid #ddd;}
+
+.usrTop{ margin-bottom: 20px;}
+.faceImg{width: 47px; height: 47px; border-radius: 50%;  border: 1px solid #ffaf05; overflow: hidden; margin-right: 10px;}
+.nTop img{width: 46px; height: 46px; border-radius: 50%; vertical-align: middle;}
+.ntInfor .ntName{ margin-bottom: 5px; padding-top: 5px;}
+.ntInfor .ntName span{ color: #1e88d2;}
+.ntInfor .ntName i{ padding: 0 3px; margin: 0 8px; color: #fff; font-size: 12px; border-radius: 2px;}
+.ntInfor .ntName em{ font-size: 12px;}
+.ntInfor .ntPer a,.ntInfor .ntPer span{ display: inline-block; padding: 2px 10px; font-size: 12px; color: #fff; border-radius: 10px; margin-right: 10px;}
+.ntInfor .ntPer a{ background: #ff8a4f;}
+.ntInfor .ntPer span{ background: #ff4f51;}
+.ntInfor .ntPer font{ color: #ff4f51;}
+
+.usrBotttom{ background: #fff; padding: 10px 20px; position: relative;}
+.timeVision span,.timeVision em{ color: #a8a8a8; font-size: 12px;}
+.timeVision em{ background: url(../../images/publish_index/icon-vision.png) no-repeat left center; padding-left: 22px; margin-left: 10px;}
+.tjList span{ font-size: 16px; color: #666666;}
+.tjList em{ margin-right: 10px; font-size: 12px;}
+.tjList em font,.tjList .name{ color: #ff8a4f;}
+.audioFx span{ line-height: 24px;}
+.audioFx a{ width: 90px; height: 24px; line-height: 22px; text-align: right; padding-right: 10px; color: #00c674; border: 1px solid #00c674; border-radius: 12px; background: url(../../images/scoreLive/audio-wifi.png) no-repeat 10px center;}
+

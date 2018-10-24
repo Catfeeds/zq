@@ -1,0 +1,86 @@
+<extend name="Public/base" />
+<block name="conflict">
+</block>
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/schedule_base.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/Rankinglist.css?v=20180507">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/bkcompetition.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/competition.css?v=2018050718">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/calendar.min.css">
+    <script type="text/javascript" src="__JS__/schedulelist/calendar.min.js"></script>
+    <script type="text/javascript" src="__JS__/schedulelist/dateformat.js"></script>
+    <script type="text/javascript" src="__JS__/schedulelist/swiper.min.js"></script>
+    <script type="text/javascript" src="__JS__/schedulelist/zepto.min.js"></script>
+    <style>
+        #footer .version a { color:#0a94e4;}
+        #calendar_input { width: .44rem; height: .44rem; position:relative;left: 2rem; background: url("__IMAGES__/schedule/btn_top_date.png")  no-repeat 100%  100% ; color:transparent; background-size: 100% 100%;}
+        div.no-data { position : absolute; top: 300px;}
+        div.no-data img{ position : relative;max-width: 50%;max-height: 50%;left: 57%;}
+        p.no-data-p { color:#888888;white-space: nowrap;position: absolute;left: 65%;top:103%;}
+    </style>
+</block>
+
+<block name="header">
+    <!-- 头部 -->
+    <header class="top">
+        <ul class="head-top">
+            <li class="f-h">
+                <a href="{:U('/'.$name)}"><img src="__IMAGES__/schedule/back.png"></a>
+            </li>
+            <li class="l-g">
+                <span class="leaguesIcon"></span>
+
+                <span class="photo">{$unionName}</span>
+                <input id="calendar_input" type="input" format="yyyy-MM-dd" class="calendars" min-date="{:date('Y-m-d',strtotime('-6 month'))}" max-date="{:date('Y-m-d',strtotime('+6 month'))}"  src="__IMAGES__/schedule/btn_top_date.png">
+                <input type="hidden" id="calendar_value_temp">
+            </li>
+        </ul>
+    </header>
+</block>
+
+<block name="nav"></block>
+
+<block name="content">
+    <input type="hidden" name="level" value="{$level}">
+    <input type="hidden" name="name" value="{$name}">
+    <!-- 主体内容 -->
+    <section class="wrapCon">
+        <section class="n_module">
+            <ul class="nav_list nav_list03 clearfix">
+                <li><a href="{:U($name.'/info/')}" >
+                    <span>资讯</span>
+                </a></li>
+                <li><a href="{:U($name.'/schedule/')}" class="on">
+                    <span>赛程</span>
+                </a></li>
+                <li><a href="{:U($name.'/rank/')}">
+                    <span>排行</span>
+                </a></li>
+            </ul>
+        </section>
+        <!-- 列表 -->
+        <div class="main" id="bkschedule">
+            <ul>
+            </ul>
+        </div>
+        <div class="no-data ">
+            <img src="__IMAGES__/schedule/ic_normal_style_data.png" alt="">
+            <p class="no-data-p">暂时没有数据</p>
+        </div>
+    </section>
+
+</block>
+
+<block name="footer">
+</block>
+
+<block name="scripts">
+    <script type="text/javascript" src="__JS__/schedulelist/scheduleData.js"></script>
+</block>
+
+
+
+
+
+

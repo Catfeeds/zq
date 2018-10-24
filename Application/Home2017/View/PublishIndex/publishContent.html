@@ -1,0 +1,156 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>{$list.title}_全球体育资讯情报qqty.com</title>
+    <meta name="keywords" content="{$list.seo_keys},赛前分析、足球推荐、足球分析、竞彩推荐、竞彩分析、篮球分析、篮球推荐"/>
+    <meta name="description" content="{$list.title},全球体育为广大彩民提供最新的足球推荐、竞彩分析、篮球预测、英超、意甲、西甲、德甲、欧冠等新闻资讯、赛事实况和比赛数据"/>
+</block>
+<block name="css"><link rel="stylesheet" href="/min/?b=Public/Home/css/publish_index&f=infor_common.css,comment.css"><script type="text/javascript">if(navigator.userAgent.toLowerCase().indexOf("android")!= -1 || navigator.userAgent.toLowerCase().indexOf("iphone")!= -1 || navigator.userAgent.toLowerCase().indexOf("mobile")!= -1){if((navigator.userAgent.indexOf("Gecko")!= -1 || navigator.userAgent.indexOf("MQQBrowser")!= -1) && navigator.userAgent.toLowerCase().indexOf("pad") == -1){if(document.URL.toLowerCase().indexOf("from=m")!=-1){document.cookie = "from=m"}var strCook = document.cookie;if(strCook.indexOf("from=m") == -1){window.location.href = '//m.__DOMAIN__/info_n/<php>echo I('id');</php>.html'}}}</script></block>
+<block name="body">
+<body>
+    <include file="Public:top_index" />
+    <!-- 主体内容开始 -->
+    <div class="main">
+    	<div class="com-con clearfix">
+        	<div class="pull-left left-con">
+                <div class="position">
+                    当前位置：<span class="now"><a href="{:U('/')}">首页</a></span> > <span class="now"><a href="{:U('/analysts')}">资讯情报</a></span> > <span class="now"><a href="{:U('/list_n/'.$list['class_id'].'')}">{$list.name}</a></span> > {$list.title}
+                </div>
+                <div class="title">
+                	<h1 class="text-center text-blue">{$list.title}</h1>
+
+                <if condition="$list.class_id eq 10">
+            </div>
+                    <div class="inforBox clearfix">
+                        <div class="pull-left rec_face">
+                            <a target="_blank" href="{:U('/userIndex/'.$list['user_id'].'/3')}"><img class="lazy" src="{$list['head']}" style="display: inline;" original="{$list['head']}" title=""></a>
+                        </div>
+                        <div class="pull-left rec_infor">
+                            <p class="faceName"><a target="_blank" href="{:U('/userIndex/'.$list['user_id'].'/3')}">{$list.nick_name}&nbsp;</a></p>
+                            <div class="clearfix">
+                                <if condition="$is_follow neq ''">
+                                    <a href="javascript:;" onclick="cancelFollow({$list.user_id},'rank',this);" class="fan-ate btn-default" title="取消关注">已关注</a>
+                                    <else/>
+                                    <a href="javascript:;" onclick="addFollow({$list.user_id},'rank',this);" class="fan-ate btn-orange" title="+关注">+关注</a></if>
+                                <div class="pull-right timeVision">
+                                    <span><if condition="$list.add_time neq ''">{$list.add_time|date="Y-m-d",###}<else/>{$list.update_time|date="Y-m-d",###}</if></span>
+                                    <em>{$list.click_number}</em>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <else/>
+                <p class="text-center">
+                    {$list.add_time|date='Y-m-d H:i:s',###}
+                    <span>来源：{$list.source|default='全球体育'}</span>
+                    <span>已浏览：{$list.click_number} 次</span>
+                </p>
+            </div>
+                    <notempty name="list.remark">
+                        <div class="sum">
+                            <p><span class="text-orange">文章摘要：</span>{$list.remark}</p>
+                        </div>
+                    </notempty>
+                </if>
+                <if condition="$game['game_id'] neq '' or $game['gamebk_id'] neq ''">
+                    <div class="matchBox clearfix">
+                        <div class="pull-left matchLogo matchLogoL"><img src="{$game.homeTeamLogo}" alt="{$game.home_team_name|switchName=0,###}"></div>
+                        <div class="pull-left matchIn">
+                            <div class="matchTitle clearfix">
+                                <div class="pull-left matchName" style=" background: #6ba7c6;">{$game.union_name|switchName=0,###}<span class="triangleTopleft" style="border-top: 28px solid #6ba7c6;"></span></div>
+                                <div class="pull-right matchTime">{$game.bet_code}  {$game.gtime|date="Y-m-d H:i",###}</div>
+                            </div>
+                            <div class="matchScore clearfix">
+                                <div class="pull-left teamName text-r" title="{$game.home_team_name|switchName=0,###}"><strong>{$game.home_team_name|switchName=0,###}</strong></div>
+                                <div class="pull-left teamTime"><strong>
+									<span class="text-red">
+                                    <if condition="$game['game_state'] neq '-1'">
+                                        VS
+                                        <else/>
+                                        {$game.score}
+                                    </if>
+                                    </span>
+                                </strong></div>
+                                <div class="pull-left teamName text-l" title="{$game.away_team_name|switchName=0,###}"><strong>{$game.away_team_name|switchName=0,###}</strong></div>
+                            </div>
+                            <div class="matchLink">
+                                <a href="<if condition="$game['gtype'] eq 1">{:U('/ypOdds@bf',['game_id'=>$list['game_id'],'sign'=>1])}" target="_blank<else/>#</if>">亚赔</a>
+                                <a href="<if condition="$game['gtype'] eq 1">{:U('/eur_index@bf','game_id='.$list['game_id'])}" target="_blank<else/>#</if>">欧赔</a>
+                                <a href="<if condition="$game['gtype'] eq 1">{:U('/dataFenxi@bf','game_id='.$list['game_id'])}" target="_blank<else/>#</if>">分析</a>
+                                <a href="<if condition="$game['gtype'] eq 1">{:U('/gambleDetails@bf','game_id='.$list['game_id'])}" target="_blank<else/>#</if>">高手推荐</a>
+                            </div>
+                        </div>
+                        <div class="pull-left matchLogo matchLogoR"><img src="{$game.awayTeamLogo}" alt="{$game.away_team_name|switchName=0,###}"></div>
+                    </div>
+                </if>
+                <div class="p-con content-list">
+                   {$list.content|htmlspecialchars_decode}
+                </div>
+                <if condition="$game['game_id'] neq '' or $game['gamebk_id'] neq ''">
+                    <include file="content_game"/>
+                </if>
+                <if condition="$list['class_id'] eq 10">
+                    <p class="statement">{:C('user_statement')}</p>
+                </if>
+				<div class="npArticle clearfix">
+                	<if condition="$rLeftArr['posts'] neq ''">
+                        <div class="pull-left"><span>上一篇</span><a href="{:getNewsUrl($rLeftArr['posts']['id'],$rLeftArr['posts']['is_original'])}">{$rLeftArr['posts']['title']|mb_substr=###,0,18,'utf-8'}...</a></div>
+                    </if>
+                    <if condition="$rLeftArr['next'] neq ''">
+                        <div class="pull-right"><span>下一篇</span><a href="{:getNewsUrl($rLeftArr['posts']['id'],$rLeftArr['next']['is_original'])}">{$rLeftArr['next']['title']|mb_substr=###,0,18,'utf-8'}...</a></div>
+                    </if>
+                </div>
+                <div class="lab-con">
+                   <!--  <div class="lab-title clearfix">
+                        <div class="pull-right">
+                            <span>分享到：</span>
+                            <a class="jiathis_button_weixin" href="javascript:;">
+                                <img src="__PUBLIC__/Home/images/login/wx.png" width="22" height="22">
+                            </a>
+                            <a class="jiathis_button_tsina" href="javascript:;">
+                                <img src="__PUBLIC__/Home/images/login/sina.png" width="22" height="22">
+                            </a>
+                            <a class="jiathis_button_qzone" href="javascript:;">
+                                <img src="__PUBLIC__/Home/images/login/kojian.png" width="22" height="22">
+                            </a>
+                            <a class="jiathis_button_cqq" href="javascript:;">
+                                <img src="__PUBLIC__/Home/images/login/qq.png" width="22" height="22">
+                            </a>
+                        </div>
+                    </div> -->
+                    <div class="linLoad clearfix">
+                    	<a href="javascript:;" class="pull-left"><img class="lazy" src="__PUBLIC__/Home/images/art-logo.png" width="273" height="80"></a>
+                        <a href="javascript:;" class="pull-right"><img class="lazy" src="__PUBLIC__/Home/images/gzh-ew.png?20171121" width="100" height="100"><br>微信公众号</a>
+                        <a href="javascript:;" class="pull-right" style="margin-right: 100px;"><img class="lazy" src="__PUBLIC__/Home/images/app-ew.png?20171122" width="100" height="100"><br>全球体育APP</a>	
+                    </div>
+                    <div class="clearfix newTile">
+                    	<div class="pull-left newTileDiv">相关新闻</div>
+                        <notempty name="list.label">
+                            <div class="pull-right newTileDiv">更多关于
+                                <volist name="list.label" id="item">
+                                    <a class="lab-name" target="_blank" title="{$item}" href="{:U('/list_n/'.$item)}"><span class="text-orange">{$item} </span></a>
+                                </volist>
+                                的文章</div>
+                        </notempty>
+                    </div>
+                    <ul class="lab-list">
+                    <volist name="beSimilar" id="item">
+                        <li class="clearfix">
+                            <a target="_blank" href="{:getNewsUrl($item['id'],$item['is_original'])}" class="pull-left infor"><span>[{$item.name}] </span>{$item.title}</a>
+                            <span class="pull-right time">{$item.add_time|date='Y-m-d H:i:s',###}<em></em></span>
+                        </li>
+                    </volist>
+                    </ul>
+                </div>
+                <!-- 相关新闻列表 -->
+            </div>
+            <!-- 右边主体内容 -->
+            <include file="content_right"/>
+        </div>
+    </div>
+    <!-- 主体内容结束 -->
+    <include file="Public:return_top"/>
+    <include file="Public:footer" />
+    <script type="text/javascript" src="/min/?b=Public/Home/js&f=publish_index/publish_class.js,index/jquery.inview.min.js,common/trade.js,common/follow.js"></script>
+</body>
+</html>
+</block>

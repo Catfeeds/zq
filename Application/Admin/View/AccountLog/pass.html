@@ -1,0 +1,102 @@
+<div class="pageContent">
+<style>
+    .pageFormContent span{line-height: 21px;}
+</style>
+    <form method="post" action="__URL__/ToExamine" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="{$list.id}"/>
+        <input type="hidden" name="user_id" value="{$list.user_id}"/>
+        <div class="pageFormContent" layoutH="58">
+
+            <div class="unit">
+                <label>真实姓名：</label>
+                <span>{$list.true_name|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>会员昵称：</label>
+                <span>{$list.nick_name|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>用户名：</label>
+                <span>{$list.username|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>银行名称：</label>
+                <span>{$list.bank_name|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>开户银行名称：</label>
+                <span>{$list.bank_full_name|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>开户省份、市：</label>
+                <span>{$list.bank_region|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>银行卡号：</label>
+                <span>{$list.bank_card_id|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>支付宝账号：</label>
+                <span>{$list.alipay_id|default ='--'}</span>
+            </div>
+            <div class="unit">
+                <label>提款金额：</label>
+                <span>{$list.change_num}</span>
+            </div>
+            <div class="unit">
+                <label>审核操作 ：</label>
+                <input type="radio" name="log_status" value="1" checked>汇款&nbsp;&nbsp;
+                <input type="radio" name="log_status" value="4">驳回
+            </div>
+            <div  class="unit" id="tran_rmb">
+
+                <div  class="unit">
+                    <label>转账方式：</label>
+                    <input type="text" name="transfer_way" value="" class="required ">
+                </div>
+                <div  class="unit">
+                    <label>转账流水单号：</label>
+                    <input type="text" name="pay_no" value="" class="required ">
+                </div>
+                <div  class="unit">
+                    <label>转账手续费：</label>
+                    <input type="text" name="poundage" value="0" class="required number">
+                </div>
+            </div>
+
+            <div class="unit">
+                <div class="unit">
+                    <label>审核说明：</label>
+                    <textarea  name="desc"  rows="5" cols="57" maxlength="255" class="required" >{$list.desc}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+<script>
+    $(document).ready(function() {
+        $("input[name='log_status']").change(
+                function()
+                {
+                    if($("input[name='log_status']:checked").val()==1)
+                    {
+                        $('#tran_rmb').html
+                                        ("<div  class='unit'> <label>转账方式：</label> <input type='text' name='transfer_way' value='' class='required'> </div>" +
+                                         "<div  class='unit'> <label>转账流水单号：</label> <input type='text' name='pay_no' value='' class='required'> </div>" +
+                                         "<div class='unit'><label>转账手续费：</label> <input type='text' name='poundage' value='0' class='required'></div>");
+                    }
+                    else
+                    {
+                        $('#tran_rmb').html('');
+                    }
+                });
+    });
+
+</script>

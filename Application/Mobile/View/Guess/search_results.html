@@ -1,0 +1,218 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" href="__CSS__/guess_search.css?v=20180619">
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file="Public/header_rules"/>
+</block>
+<!-- 二级头部 e --> 
+
+<block name="nav">
+    <include file="Guess/nav"/>
+</block>
+<!-- 内容 s -->
+<block name="content">
+    
+    <div class="contentPt">
+    <div id="search_header" >
+        <form id="fmsearch" action="{:U('Guess/search_results')}" method="get" onsubmit="return checkForm();">
+            <div class="sc_text">
+<!--                <a href="{:U('Guess/rank')}" class="his_back"></a>-->
+                <div>
+                    <input id='search_txt' type="text" name='keyword' placeholder="搜索推荐高手" value='{$keyword}' maxlength="10">
+                    <a href="javascript:;" class="ne_close"></a>
+                </div>
+            </div>
+            <div class="sc_btn">
+                <a id='js-confirm' href="javascript:;">确定</a>
+            </div> 
+        </form>
+    </div>
+    </div>
+    <section class="recom_hot clearfix">
+        <div id="maskLayer"></div>
+        <notempty name="list">
+            <ul class="n_top posts">
+                <volist name='list' id='v'>
+                    <li class='list'>
+                        <a href="{:U('/expUser/'.$v['id'].'/1')}">
+                            <div class="rg_top">
+                                <div class="rgt_left"><img src="{$v.head}"></div>
+                                <div class="rgt_right">
+                                    <p><span>{$v.nick_name}</span><em class="lv lv{$v.lv}"></em><em class="lv jc_lv{$v.lv_bet}"></em></p>
+                                    <p class="fs26"><span class="text-666">最新推荐：</span>
+                                        <if condition="$v['home_team_name'] neq '' AND $v['away_team_name'] neq '' ">
+                                            {$v['home_team_name']} VS {$v['away_team_name']}
+                                            <else/>
+                                            即将发布
+                                        </if>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </volist>
+            </ul>
+        <else/>
+            <div class="paged boxs" style="margin-top: 1rem;">
+                <div class="load_gif fs24 text-999">
+                    <span>没有相关用户</span>
+                </div>
+            </div>
+        </notempty>
+
+        <input type='hidden' id='keyword' value='{$keyword}'>
+        <div id="searchListMore" class="paged boxs" style="display:none;">
+            <div class="load_gif fs24 text-999">
+                <span><img src="__IMAGES__/load.gif"></span>
+                <span>正在加载更多的数据...</span>
+            </div>
+        </div>
+        <div id="showLess" class="paged boxs" style="display:none;">
+            <div class="load_gif fs24 text-999">
+                <span>已经全部加载完毕</span>
+            </div>
+        </div>
+        <div id="dailogFixBox" class="fixBox" style="display: none;">
+            <div class="fixBoxIn clearfix">
+                <div class="tip" style="line-height: 0.8rem; "><span id="dailogContent" ></span></div>
+                <a id="yesDailog" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+            </div>
+        </div>
+    </section>
+    <!-- 内容 e -->
+</block>
+
+<block name="scripts">
+    <script>
+        $(function () {
+
+
+            //获取点头像跳转前的滚动位置,并滚动到此
+            var searchResultScrollTop = Cookie.getCookie('searchResultScrollTop');
+            // 头像跳转前的滚动位置
+            $(document).on('click','.list a',function () {
+                var topHeight = $(document).scrollTop();
+                Cookie.setCookie('searchResultScrollTop', topHeight, 60000);//点击位置
+            });
+            //滚动
+            if (searchResultScrollTop) {
+                $("html, body").animate({scrollTop: searchResultScrollTop}, 1000);
+                Cookie.delCookie('searchResultScrollTop');
+
+            }
+            //关闭弹框
+            $('#yesDailog').on('click',function () {
+                $('#dailogFixBox').css('display','none');
+            });
+            //搜索提交
+            $('#js-confirm').on('click',function () {
+                $('#fmsearch').submit();
+            });
+
+            var DOMAIN = "{:C('MAIN')}";
+
+            var p = 2;// 初始化页面，点击事件从第二页开始
+
+            //滚动加载滚动---亚盘、竞彩
+            $(window).scroll(function () {
+                //$(window).scrollTop()这个方法是当前滚动条滚动的距离
+                //$(window).height()获取当前窗体的高度
+                //$(document).height()获取当前文档的高度
+                // var bot = 50; //bot是底部距离的高度
+                //当底部基本距离+滚动的高度〉=文档的高度-窗体的高度时；
+                if (($(window).scrollTop()) >= ($(document).height() - $(window).height()))
+                {
+                    if ($(".list").size() < 20)
+                    {
+                        $('#showLess').css('display','block');
+                    }
+                    else
+                    {
+                        send();
+                    }
+
+                }
+            });
+
+            function send() {
+
+                $('#showLess').css('display','none');
+                $('#searchListMore').css('display','block');
+                $.ajax({
+                    type: 'post',
+                    url: "/Guess/search_results.html",
+                    data: {page: p, keyword: $('#keyword').val()},
+                    dataType: 'json',
+                    success: function (data)
+                    {
+
+                        if (data.status == 1)
+                        {
+                            var list = data.list;
+                            if (list != null)
+                            {
+
+                                $.each(list, function (k,v) {
+
+                                    var teamNameHtml = v['home_team_name'] != null && v['away_team_name'] != null ? v['home_team_name']+' VS '+v['away_team_name'] : '即将发布';
+
+                                    html = '<li class="list">' +
+                                                ' <a href="//' + DOMAIN + '/expUser/' + v['id'] + '/1.html">' +
+                                                    ' <div class="rg_top">' +
+                                                        ' <div class="rgt_left"><img src="'+v['head']+'"></div> '+
+                                                        ' <div class="rgt_right">'+
+                                                            '<p>' +
+                                                                '<span>'+v['nick_name']+'</span>' +
+                                                                '<em class="lv lv'+v['lv']+'"></em>' +
+                                                                '<em class="lv jc_lv'+v['lv_bet']+'"></em>' +
+                                                            '</p>'+
+                                                            '<p class="fs26"><span class="text-666">最新推荐：</span>'+teamNameHtml+ ' </p> ' +
+                                                        '</div> ' +
+                                                    '</div> ' +
+                                                '</a> ' +
+                                            '</li>';
+                                    $(".posts").append(html);
+                                });
+
+
+                                p++;
+                            }
+                            else
+                            {
+
+                                $('#searchListMore').css('display','none');
+                                $('#showLess').css('display','block');
+                            }
+                        }
+                        else
+                        {
+                            $('#searchListMore').css('display','none');
+                        }
+
+                    },
+                    complete:function () {
+                        $('#searchListMore').css('display','none');
+                    }
+                });
+
+            }
+        });
+        function checkForm() {
+            var search_txt = $('#search_txt').val();
+            if (search_txt == '') {
+                window.location.href = '/Guess/search.html';
+                return false;
+            }
+            if (search_txt.length > 10) {
+                $('#dailogFixBox').css('display','block');
+                $('#dailogContent').html('关键字不能超过10个字符！');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</block>

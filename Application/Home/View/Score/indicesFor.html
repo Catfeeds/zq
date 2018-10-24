@@ -1,0 +1,135 @@
+<extend name="Public:layout"/>
+<block name="seo">
+    <title>足球赛事亚盘、欧盘即时指数_全球体育网</title>
+    <meta name="keywords" content="滚球,滚球指数,亚盘,亚盘分析法,欧赔,亚洲指数,欧洲指数,必发指数,凯利指数,"/>
+    <meta name="description" content="全球体育网提供每天快速、精准、齐全的亚盘、欧赔指数供每一位足球赛事爱好者分析研究使用。"/>
+</block>
+<block name="css">
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__STATIC__/score/css/scoreLive/scoreLive.css?20171226">
+    <link rel="stylesheet" href="__STATIC__/score/css/scoreData/now_index.css">
+    <style>
+        body{ background-image:url('');}
+        .home{width: 1000px !important;}
+    </style>
+</block>
+<block name="header"></block>
+<block name="footer"></block>
+<block name="elevator"></block>
+<block name="content">
+<div class="body">
+    <!-- 主体内容开始 -->
+    <div class="home clearfix">
+        <!-- 导航开始 -->
+        <div class="scoreNav">
+            <ul class="clearfix">
+                <li class="pull-left <eq name="ACTION_NAME" value="index">on</eq>"><a href="{:U('/@bf')}?f=no" class="navLink"><i class="liveState"></i>即时比分</a></li>
+                <li class="pull-left <eq name="ACTION_NAME" value="schedule">on</eq>"><a href="{:U('/schedule@bf')}?f=no" class="navLink"><i class="overState"></i>完场赛事</a></li>
+                <li class="pull-left <eq name="ACTION_NAME" value="schtoday">on</eq>"><a href="{:U('/schtoday@bf')}?f=no" class="navLink"><i class="willState"></i>未来赛事</a></li>
+                <li class="pull-left <eq name="ACTION_NAME" value="indices">on</eq>"><a href="{:U('/indices@bf')}?f=no" class="navLink"><i class="liveIndex"></i>即时指数</a></li>
+            </ul>
+        </div>
+        <section class="main">
+            <div class="control-con">
+                <!-- 筛选导航 -->
+                <div class="control-box clearfix">
+                    <div class="pull-left control-l">
+                        <ul class="control-ul clearfix">
+                            <li class="control-li control-li03" style="margin-left: 0;">
+                                <a href="javascript:;" class="mya dropdown event">
+                                    赛事选择<span class="caret"></span>
+                                </a>
+                                <div class="box-list dropdown-menu">
+                                    <div class="clearfix">
+                                        <div class="pull-left box-title">赛事选择</div>
+                                        <div class="pull-right box-title"><span>隐藏 <em class="text-red" id="hideCount">0</em> 场</span></div>
+                                    </div>
+                                    <div class="box-team" id="unionCheck">
+                                        <div class="box-rank clearfix">
+                                            <ul class="rank-ul clearfix" id="unionSelect">
+                                                <li class="rank-ul-li01 unionLevel on"><a data-unionLevel="0" level="" href="javascript:;"><i class="iconType"></i><p>一级赛事</p></a></li>
+                                                <li class="rank-ul-li02 unionLevel on"><a data-unionLevel="1" href="javascript:;"><i class="iconType"></i><p>二级赛事</p></a></li>
+                                                <li class="rank-ul-li03 unionLevel on"><a data-unionLevel="2" href="javascript:;"><i class="iconType"></i><p>三级赛事</p></a></li>
+                                            </ul>
+                                        </div>
+                                        <ul class="clearfix match-team navUnionList" id="unionLevel">
+                                        </ul>
+                                    </div>
+                                    <div class="btn-con clearfix">
+                                        <input type="button" id="checkAll1" class="btn btn-blue pull-left" value="全选">
+                                        <input type="button" id="reverse1" class="btn btn-red pull-left" value="反选" style="margin-left: 12px;">
+                                        <input type="button" id="ensure" class="btn btn-blue pull-right" style="margin-left: 12px;" value="确定">
+                                        <input type="button" id="removeAll" class="btn btn-default pull-right" value="关闭">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="control-li control-li04">
+                                <a href="javascript:;" class="mya dropdown gongSi">
+                                    公司选择<span class="caretCon"><span class="caret"></span></span>
+                                </a>
+                                <div class="gs-list dropdown-menu">
+                                    <div class="box-title">
+                                        公司选择
+                                    </div>
+                                    <div class="box-team" id="companySelect">
+                                        <ul class="clearfix match-team companyList">
+                                        </ul>
+                                    </div>
+                                    <div class="btn-con clearfix" style="padding: 0 10px 10px 10px; background: #f7f7f7;">
+                                        <span><em class="text-red pull-left">*</em>请同时选择三家公司</span>
+                                        <input  type="button" id="companySure" class="btn btn-blue pull-right" style="margin-left: 12px;" value="确定">
+                                        <input type="button" id="closeAll" class="btn btn-default pull-right" value="关闭">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pull-left input-append">
+                        <input id="search_text" class="Colltext pull-left" type="text" placeholder="输入球队名/赛事名">
+                        <a class="Colladd pull-left btn-orange" href="javascript:;" id="check">查看</a>
+                        <div id="auto_div" class="Collname">
+                        </div>
+                    </div>
+                    <div class="pull-right control-r clearfix">
+
+                        <div class="pull-left pankou">
+                            <ul>
+                                <li><em></em><span>初盘</span></li>
+                                <li><em class="up"></em><span>升盘</span></li>
+                                <li><em class="none"></em><span>未变盘</span></li>
+                                <li><em class="down"></em><span>降盘</span></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown pull-left odds-language">
+                            <button type="button" class="btn dropdown-toggle" id="" data-toggle="dropdown">
+                                <span id="languageContent">
+                                    {:langSwitch('简体','繁体','EN')}
+                                </span>
+                                <i class="caret"></i>
+                            </button>
+                            <ul id="languageSle" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation"><a role="menuitem" data-language="0" tabindex="-1" href="javascript:;">简体</a></li>
+                                <li role="presentation"><a role="menuitem" data-language="1" tabindex="-1" href="javascript:;">繁体</a></li>
+                                <li role="presentation"><a role="menuitem" data-language="2" tabindex="-1" href="javascript:;">EN</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="loading_gif" style="text-align: center;">
+                    <img src="__STATIC__/score/images/loading.gif" width="180">
+                </div>
+            </div>
+            <!-- 筛选功能选择结束 -->
+
+        </section>
+    </div>
+    <input id="minTime" type="hidden" value="{$minTime}">
+    <input id="maxTime" type="hidden" value="{$maxTime}">
+</div>
+</block>
+<block name="js">
+    <!--引入本页所需js-->
+    <script type="text/javascript" src="__PUBLIC__/Plugs/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="__JS__/common/cookie.js"></script>
+    <script type="text/javascript" src="__STATIC__/score/js/indicesFor.js?v=20180712"></script>
+</block>

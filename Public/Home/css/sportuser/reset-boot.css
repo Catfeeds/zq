@@ -1,0 +1,119 @@
+
+/**
+ * reset bootcss css
+ *
+ * @author Chensiren <245017279@qq.com>
+ * 
+ * @since  2018-02-01
+ *
+**/
+.btn{
+	border-radius: 0;
+}
+
+/* btn-green */
+.btn-green {
+  color: #fff;
+  background-color: #01af63;
+  border-color: #01af63;
+}
+.btn-green:focus,
+.btn-green.focus {
+  color: #fff;
+  background-color: #0cc776;
+  border-color: #0cc776;
+}
+.btn-green:hover {
+  color: #fff;
+  background-color: #0cc776;
+  border-color: #0cc776;
+}
+.btn-green:active,
+.btn-green.active,
+.open > .dropdown-toggle.btn-green {
+  color: #fff;
+  background-color: #0cc776;
+  border-color: #0cc776;
+}
+.btn-green:active:hover,
+.btn-green.active:hover,
+.open > .dropdown-toggle.btn-green:hover,
+.btn-green:active:focus,
+.btn-green.active:focus,
+.open > .dropdown-toggle.btn-green:focus,
+.btn-green:active.focus,
+.btn-green.active.focus,
+.open > .dropdown-toggle.btn-green.focus {
+  color: #fff;
+  background-color: #0cc776;
+  border-color: #0cc776;
+}
+.btn-green:active,
+.btn-green.active,
+.open > .dropdown-toggle.btn-green {
+  background-image: none;
+}
+
+/* btn-default */
+.btn-default {
+  color: #333;
+  background-color: #e0e0e0;
+  border-color: #e0e0e0;
+}
+.btn-default:focus,
+.btn-default.focus {
+  color: #fff;
+  background-color: #ccc;
+  border-color: #ccc;
+}
+.btn-default:hover {
+  color: #fff;
+  background-color: #ccc;
+  border-color: #ccc;
+}
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-green {
+  color: #666;
+  background-color: #ccc;
+  border-color: #ccc;
+}
+.btn-default:active:hover,
+.btn-default.active:hover,
+.open > .dropdown-toggle.btn-default:hover,
+.btn-default:active:focus,
+.btn-default.active:focus,
+.open > .dropdown-toggle.btn-default:focus,
+.btn-default:active.focus,
+.btn-default.active.focus,
+.open > .dropdown-toggle.btn-default.focus {
+  color: #666;
+  background-color: #ccc;
+  border-color: #ccc;
+}
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+  background-image: none;
+}
+
+.form-control {
+  box-shadow: none;
+  border-radius: 0;
+}
+.form-control:focus {
+  border-color: #0cc776;
+  outline: 0;
+  box-shadow: none;
+}
+
+
+
+/**
+  身份证上传专有样式
+ */
+.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:227px;height: 130px;overflow: hidden;cursor: pointer;}
+.poiter a:hover{color:red;}
+.tabImg li div{ position: absolute; left: 0; top:130px; width: 227px;  height: 130px; line-height: 130px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+.tabImg li div a{ line-height: 130px;}
+.tabImg img{ width: 100%; height: 100%;}

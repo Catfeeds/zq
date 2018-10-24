@@ -1,0 +1,233 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>足球比分_足球比分直播_足球即时比分_即时比分|全球体育</title>
+    <meta name="keywords" content="足球比分,篮球比分,足球推荐,赛事直播,比分直播,竞彩足球"/>
+    <meta name="description" content="即时比分,赛事直播,最及时的足球比分都能在全球体育网上获取.专业足球分析师为用户提供的足彩推荐都是独家猛料,为彩民畅赢五大联赛."/>
+</block>
+<block name="body">
+<body>
+    <!-- 引入公共样式 -->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/base.css"> 
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/common.css">
+    <style type="text/css">
+        .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{  font: 0.28rem 'STHeiti','Microsoft YaHei',Helvetica,Arial,sans-serif; border-top: none 0; padding:0;
+        }
+        .pull-left{ float: left;}
+        .pull-right{ float: right;}
+        img{ width: auto;}
+        .footer{ margin-top: 10px;}
+        body{ max-width: 1920px; min-width: 1000px;}
+        .content{max-width:1080px; display: block; margin: 0 auto;}
+        .table{margin-bottom: 0!important;}
+        .js_mach_time{font-size: 16px!important;}
+        .js-score{font-size: 0.32rem!important;}
+        .top{background: none;}
+        .mach_begin_time{font-size: 0.24rem!important}
+        .liveList{padding-left: 50px;}
+        .fs-link ul li {
+            float: left;
+            margin-bottom: 12px;
+            margin-right: 27px;
+        }
+        .fs-link ul {
+            padding-top: 18px;
+        }
+        .friend-con .stat-title {
+            background: rgba(0, 0, 0, 0) url("Public/Home/images/index/b-line.png") repeat-x scroll left center;
+        }
+        .friend-con .stat-title h4 {
+            color: #333;
+            text-align: center;
+        }
+        .stat-title h4 {
+            color: #fff;
+            font-size: 22px;
+            height: 40px;
+            line-height: 40px;
+            margin: 0;
+        }
+        .friend-con .stat-title h4 span {
+            background: #fff none repeat scroll 0 0;
+            padding: 0 10px;
+        }
+    </style> 
+    <!-- 公共js -->
+    <!--    <script type="text/javascript" src="__PUBLIC__/Mobile/js/common.js"></script>-->
+    <!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Home/js/score/htmlwidth.js"></script>
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/live_score.css">
+    <script>
+        var DOMAIN = "__DOMAIN__";
+    </script>
+    <!-- 顶部开始 -->
+<include file="Public:top_index" />
+<!-- 顶部结束 -->
+<!-- 内容 s -->
+<section class="content">
+    <div class="liveList">
+        <volist name="list" id="v" key='k'>
+            <div id="scheid{$v.0}" class="match js-data" data-key="{$k}" data-id="{$v[0]}" data-time="{$v[6]} {$v[7]}" data-status="{$v[5]}">
+                <div class="top">
+                    <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="8%" onclick="zhiDing({$v.0}, this)" class='star_img'></td>
+                            <td width="37%" class="q-tl">
+                                <span class="match_name" style="color:{$v.3}">{$v[2][0]}</span> 
+                                <em class="mach_will_time">{$v[7]}</em>
+                            </td>
+                        <switch name="v[5]">
+                        <case value="0|-10|-11|-12|-13|-14">
+                            <td width="10%" class="js_mach_time mach_will_time">{:C('game_state')[$v[5]]}</td>
+                        </case>
+                        <case value="1|3|4">
+                            <td width="10%" class="js_mach_time mach_begin_time"><time>{:MshowGameTime($v[8],$v[5])}</time>'</td>
+                        </case>
+                        <case value="-1|2">
+                            <td width="10%" class="js_mach_time mach_begin_time">{:C('game_state')[$v[5]]}</td>
+                        </case>
+                        </switch>
+                        <td width="45%" class="q-tl jq corner_box">
+                            <in name='v[5]' value='-1,1,2,3,4'>全角[<span class='home_corner'>{$v[27]}</span>-<span class='away_corner'>{$v[28]}</span>]</in>
+                            <!-- <em class="mach_will_time" style="float: right;margin-right: 0.8rem">
+                                <a target="_blank" href="//dh.qqty.com/animate/animate.html?game_id={$v.0}">动画直播</a>
+                            </em> -->
+                        </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="bottom" >
+                    <in name="v[5]" value="-1,1,2,3,4">
+                    <a href="{:U('detail_action/'.$v[0].'@bf')}" target="_blank">
+                        <else/>
+                        <a href="{:U('analysis/'.$v[0].'@bf')}" target="_blank">
+                            </in>
+                            <table class="table" width="100%" cellpadding="0" cellspacing="0">
+
+                                <tr>
+                                    <td width="45%" class="q-tr">
+                                        <span id="js-home-ycard" class="yel_card" <eq name='v.25' value='0'>style="display:none"</eq>>{$v[25]}</span>
+                                        <span id="js-home-rcard" class="red_card" <eq name='v.23' value='0'>style="display:none"</eq>>{$v[23]}</span>
+                                <notempty name="v.11"><span class="teamRank">[{$v[11]}]</span></notempty>
+                                <span class="homeTeamName">{$v[9][0]}</span>
+                                </td>
+                                <td width="10%">
+                                    <switch name="v[5]">
+                                <case value="0|-10|-11|-12|-13|-14"><span class='js-score'>VS</span></case>
+                                <case value="1|2|3|4"><span class="mach_begin js-score">{$v[13]}-{$v[14]}</span></case>
+                                <case value="-1"><span class="mach_over">{$v[13]}-{$v[14]}</span></case>
+                                <default /><span class='js-score'>VS</span>
+                                </switch>
+                                </td>
+                                <td width="45%" class="q-tl">
+                                    <span class="guestTeamName">{$v[10][0]}</span>
+                                <notempty name="v.12"><span class="teamRank">[{$v[12]}]</span></notempty>
+                                <span id="js-guest-ycard" class="yel_card"  <eq name='v.26' value='0'>style="display:none"</eq>>{$v[26]}</span>
+                                <span id="js-guest-rcard" class="red_card"  <eq name='v.24' value='0'>style="display:none"</eq>>{$v[24]}</span>
+                                </td>
+                                </tr>
+
+                                <tr>
+                                    <td width="45%" class="q-tr" >
+                                        <div class="odds rf" <empty name='v[17]'>style="display:none;"</empty>>
+                                            <span class="oddsType">让</span>
+                                            <span   class="addsNub js-home-asian">{$v[17]}</span>
+                                            <span  class="addsPankou js-all-asian">{$v[18]}</span>
+                                            <span class="addsNub js-away-asian">{$v[19]}</span>
+                                        </div>
+                                    </td>
+                                <neq name='v[15]' value=""><td width="10%" class="mach_half">({$v[15]}:{$v[16]})</td></neq>
+                                <eq name='v[15]' value=""><td width="10%" class="mach_half"></td></eq>
+                                <td width="45%" class="q-tl">
+                                    <div class="odds dx"  <empty name='v[20]'>style="display:none;"</empty>>
+                                        <span class="oddsType">大</span>
+                                        <span  class="addsNub js-home-ball">{$v[20]}</span>
+                                        <span  class="addsPankou js-all-ball">{$v[21]}</span>
+                                        <span  class="addsNub js-away-ball">{$v[22]}</span>
+                                    </div>
+                                </td>
+                                </tr>
+                            </table>
+                            </div>
+                        </a>
+                </div>
+                <!--                <if condition="($k-3)%5 eq 0">
+                                    <present name="adver_list">
+                                        <volist name='adver_list' id='v'  offset="($k-3)/5" length='1'>
+                                            <div class="match ad">
+                                                <a href="{$v['url']}" target='_blank'><img src="{$v.img}"></a>
+                                            </div>
+                                        </volist>
+                                    </present>
+                                </if>-->
+        </volist>
+    </div>
+    <present name='Link'>
+        <div class="synthetic clearfix">
+            <!-- 友情链接开始 -->
+            <div class="friend-con">
+                <div class="clearfix stat-title">
+                    <div>
+                        <h4><span>友情链接</span></h4>
+                    </div>
+                </div>
+                <div class="fs-link">
+                    <ul class="clearfix">
+                        <volist name="Link" id="item">
+                            <li><a href="{$item.url}" target="_blank">{$item.name}</a></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+            <!-- 友情链接结束 -->
+        </div>
+    </present>
+    <!-- 红牌黄牌弹窗提示 -->
+    <div id='tips_box'>
+
+    </div>
+    <!-- 红牌黄牌声音提示 -->
+    <audio id="sound_card" preload="auto">
+        <source src="__PUBLIC__/Mobile/video/hy.wav" />
+        <source src="__PUBLIC__/Mobile/video/hy.mp3" />
+        <source src="__PUBLIC__/Mobile/video/hy.ogg" />
+    </audio>
+
+    <audio id="sound_score" preload="auto">
+        <source src="__PUBLIC__/Mobile/video/jq.wav" />
+        <source src="__PUBLIC__/Mobile/video/jq.mp3" />
+        <source src="__PUBLIC__/Mobile/video/jq.ogg" />
+    </audio>
+</section>
+<!-- 内容 e -->
+
+
+<!-- 底部 s -->
+<!-- 底部版权信息开始 -->
+<include file="Public:footer"/>
+<!-- 底部版权信息结束 -->
+<include file="Public:return_top"/>
+<!-- 底部 e -->
+<style>
+    .return-top{left:52%!important;}
+</style>
+<script type="text/javascript" src="__PUBLIC__/Home/backend_js/common/cookie.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/score/score.js"></script>
+<script>
+                                $(function () {
+                                    var scrollTop = Cookie.getCookie('scrollTop');
+                                    if (scrollTop) {
+                                        $("html, body").animate({scrollTop: scrollTop}, 500);
+                                        Cookie.delCookie('scrollTop');
+                                    }
+                                    var color = $(".color_tips");
+                                    var score = $(".score_tips");
+                                    //如果上面【红牌黄牌提示】显示并且下面【进球提示】不显示：位置下移
+                                    if (!color.is(":hidden") && score.is(":hidden")) {
+                                        color.css("top", "-.28rem");
+                                    }
+                                });
+</script>
+</body>
+</html>
+</block>

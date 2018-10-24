@@ -1,0 +1,120 @@
+<extend name="Public/base" />
+<block name="conflict">
+</block>
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/schedule_base.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/AsianFootball.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/competition.css?v=2018050718">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/Rankinglist.css?v=20180507">
+    <script type="text/javascript" src="__JS__/schedulelist/swiper.min.js"></script>
+    <script type="text/javascript" src="__JS__/schedulelist/zepto.min.js"></script>
+    <style>
+        #footer .version a {
+            color:#0a94e4;
+        }
+    </style>
+</block>
+
+<block name="header">
+    <!-- 头部 -->
+    <neq name="_GET['header']" value="no">
+    <header class="top">
+        <ul class="head-top">
+            <li class="f-h">
+                <a href="{:U('/'.$name)}"><img src="__IMAGES__/schedule/back.png"></a>
+            </li>
+            <li class="l-g">
+                <span class="leaguesIcon"></span>
+                <span class="photo">{$unionName}</span>
+            </li>
+        </ul>
+    </header>
+    </neq>
+</block>
+
+<block name="nav"></block>
+
+
+<block name="content">
+    <input type="hidden" name="level" value="{$level}">
+    <input type="hidden" name="name" value="{$name}">
+
+    <!-- 主体内容 -->
+    <section class="wrapCon">
+        <section class="n_module">
+            <ul class="nav_list nav_list03 clearfix">
+                <li><a href="{:U($name.'/info/')}<eq name="_GET['header']" value="no">?header=no</eq>">
+                    <span>资讯</span>
+                </a></li>
+                <li><a href="{:U($name.'/schedule/')}<eq name="_GET['header']" value="no">?header=no</eq>" class="on">
+                    <span>赛程</span>
+                </a></li>
+                <li><a href="{:U($name.'/rank/')}<eq name="_GET['header']" value="no">?header=no</eq>">
+                    <span>排行</span>
+                </a></li>
+            </ul>
+            <!-- 二级导航 -->
+            <div class="second-list">
+                <ul>
+                    <li class="on">
+                        <a>日程赛</a>
+                    </li>
+                    <li class="name">
+                        <a>小组赛</a>
+                    </li>
+                    <li class="name">
+                        <a>淘汰赛</a>
+                    </li>
+                    <li class="name">
+                        <a>豪门赛</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--日程赛-->
+            <div class="main schedule list_game">
+                <ul>
+                    <!--Js内容-->
+                </ul>
+            </div>
+
+
+            <!--小组赛-->
+            <div class="group_schedule group list_game hide_swiper">
+                <!--Js内容-->
+                <!-- A组 -->
+                <!-- list -->
+            </div>
+
+            <!--淘汰赛-->
+            <div class="group_schedule eliminate list_game hide_swiper">
+                <!--Js内容-->
+                <!-- A组 -->
+                <!-- list -->
+            </div>
+
+            <!--豪门赛-->
+            <div class="group_schedule powerful list_game hide_swiper">
+                <!--Js内容-->
+                <!-- A组 -->
+                <!-- list -->
+            </div>
+            <eq name="_GET['header']" value="no">
+                <include file="Public:go_back_pack"/>
+            </eq>
+        </section>
+    </section>
+</block>
+<block name="footer">
+</block>
+
+<block name="scripts">
+    <script>
+        var htmlData = 1;
+        <eq name="_GET['header']" value="no">htmlData = 0;</eq>
+    </script>
+    <script type="text/javascript" src="__JS__/schedulelist/scheduleData.js?20180614"></script>
+</block>
+
+

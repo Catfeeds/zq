@@ -1,0 +1,95 @@
+/*头部*/
+/* .top{ padding-top: 0rem; width: 100%; float:left;  background-color: #f9f9fa;} */
+html,body{min-height:100%;}
+a:hover{color: #999999;}
+.top{position: fixed;top: 0;left: 0;width: 100%;}
+.head-top{ width: 100%;  padding: .3rem; border-top: 1px solid #eee; border-bottom: 1px solid #eee; float: left; }
+.head-top li{ float: left; list-style-type: none;}
+.head-top .l-g{ margin-left: 2.6rem;}
+.head-top .f-h img{ width: .2rem; }
+.head-top .l-g img{ width: .5rem; margin-right: .2rem;}
+.head-top .nba img{ width: .3rem;}
+.head-top .l-g .photo{ font-size:.32rem; line-height: .4rem; height: .4rem;}
+.head-top .calendar{ margin:  0 0.1rem 0 2.1rem;}
+.head-top .calendar img{ width: .4rem;}
+.headline{width:100%;height:1.0rem;background:rgba(0,0,0,0.5);display: flex;flex-direction: row;padding: 0 .2rem}
+.headline li{margin: 0 .18rem;color:#ffffff;font-size: .30rem;display: flex;justify-content: center;align-items: center;white-space: nowrap}
+.headline  a{display: inline-block;width:.50rem;height:100%;}
+.headline li a{display: inline-block;width:100%;height:100%;line-height: 1.0rem;color:#ffffff}
+.headline  a img{display: inline-block;width:.30rem;height:50%;margin:60% 0 0 30%}
+.headline  .active{color:#ffc832}
+.head-portrait {width:1.0rem;height:100%;display: block}
+.head-portrait img{width:100%;height:80%;display: inline-block}
+/* 主体内容 */
+.wrapCon{width:100%;background:url('../../images/CupquizActivities/bg_com.png'); background-size:100%;height: 100%;overflow-y: auto}
+.wrapCon-content{padding:0!important;width:100%;background:url('../../images/CupquizActivities/bg_com.png'); background-size:100%;height: 100%;overflow-y: auto}
+.wrapCon p{display: flex;flex-direction: column;justify-content: center;align-items: center}
+.wrapCon p span{display: block;color:#ffffff;}
+.wrapCon p span:nth-child(1){font-size: .4rem;line-height: .6rem}
+.wrapCon p span:nth-child(2){font-size: .35rem;}
+.wrapCon ul {margin-top:.2rem;background:#3b77e9;border-radius: .1rem;}
+
+.wrapCon ul li div{display: flex;flex-direction: row;height:.8rem;color:#ffffff;padding: 0 .08rem;background: #2a6eef}
+.wrapCon ul li h3{display: flex;justify-content: center;align-items: center;font-size: .3rem;font-weight: normal;color:#0d41a4}
+.wrapCon ul li p{display: block;flex:2;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;text-align: center;line-height: .8rem;}
+.wrapCon ul li p:nth-child(1){border-left: none;}
+
+.selected{background:url('../../images/CupquizActivities/select.png') no-repeat right top;background-size:27%}
+.same{background:url('../../images/CupquizActivities/same.png') no-repeat right top;background-size:27%}
+.win{background:url('../../images/CupquizActivities/win.png') no-repeat right top;background-size:27%}
+.wrapCon ul li:last-child{height:1.6rem;background: #0d41a4;margin:0 .03rem .03rem .03rem;border-radius: 0 0 .1rem .1rem;display: flex;flex-direction: row}
+.wrapCon ul li:last-child .total{font-size: .35rem;color:#fff21d;line-height: 1.6rem;text-align: left;flex:7;padding-left: .2rem}
+.wrapCon ul li:last-child .total strong{font-size: .4rem;margin:0 .15rem}
+.wrapCon ul li:last-child .total a{font-size: .35rem;margin:0 .15rem;color:#fff21d;}
+.wrapCon ul li:last-child .remaining{display: flex;flex-direction: column;align-items: flex-end;border-left: none;flex:4;padding-right: .2rem}
+.wrapCon ul li:last-child .remaining span:first-child{font-size: .35rem;}
+.wrapCon ul li:last-child .remaining span:nth-child(2){display: flex;flex-direction: row}
+.wrapCon ul li:last-child .remaining span:nth-child(2) i{display: block;width:.25rem;background: #000000;color:#ffffff;margin-right: .02rem;height:.5rem;line-height: .5rem}
+.wrapCon ul li:last-child .remaining span:nth-child(2) i:nth-child(3){background: none}
+.wrapCon ul li:last-child .remaining span:nth-child(2) i:nth-child(6){background: none}
+.wrapCon ul li:last-child .no-win{background: url(../../images/CupquizActivities/4_03.png) no-repeat .4rem -0.2rem;background-size: 100%;}
+.wrapCon ul li:last-child .win{background: url(../../images/CupquizActivities/5_03.png) no-repeat .4rem -0.2rem;background-size: 100%;}
+.invitation-button{display: flex;width:90%;margin:.6rem auto;justify-content: center;align-items: center;background:#ffc832;height:1.2rem;color:#1051cd;border-radius:.1rem;font-size: .4rem;font-weight: bolder}
+.encourage-button{display: flex;width:90%;margin:.6rem auto;margin-top:-.5rem;justify-content: center;align-items: center;border:1px solid #ffc832;height:1.2rem;color:#ffc832;border-radius:.1rem;font-size: .4rem}
+.remind{color:#a6b6e7;font-size: .3rem;margin-top: -.4rem}
+.power-list{width:80%;height:auto;margin:.6rem  auto;background: #0d41a4;padding: .3rem .4rem;}
+.power-list h2{font-size: .35rem;color:#b9c2dd;text-align: center;font-weight: normal}
+.power-list p{color:#ffffff;display: flex;flex-direction: row; justify-content: space-between;height:1.0rem}
+.power-list p img{display: inline-block;width:.5rem;}
+.power-list p span{font-size: .3rem!important;display: flex !important; align-items: center}
+.power-list p span:nth-child(1){flex:8;}
+.power-list p span:nth-child(2){flex:1.5;}
+.power-list p span .brother{    display: block;border: 1px solid #b5b955;color: #b5b955;margin-left: .1rem;border-radius: .05rem;height: .40rem;font-size: .14rem;line-height: .35rem;}
+.power-list p span  .number{color:#b5b955;font-weight: bold}
+.power-list p span .name{width:30%;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;display: inline-block;margin-left: .15rem}
+.four{width:.5rem;display: inline-block;text-align: center}
+/* 遮罩层 */
+.wrapCon .cover{position: absolute;top:-.2rem;left: 0;width:100%;height:1000px;z-index: 1000;background: rgba(0, 0, 0, .7); }
+.wrapCon .cover .cover-bg{width:70%;height:3.6rem;background:url('../../images/CupquizActivities/coverbg_03.png') no-repeat center center;background-size: 100%;margin:2rem auto;padding-top:.15rem;margin-bottom:0}
+.wrapCon .cover .cover-bg p{width:2.0rem;height:2.0rem;margin:.8rem auto;margin-bottom:0;background: rgba(255, 255, 255, .4);border-radius: .1rem}
+.wrapCon .cover .cover-bg p span{width:1.6rem;height:1.6rem;display:inline-block;background: rgba(255, 255, 255, .7);border-radius: .1rem;color:#ffbb00;font-size: .6rem;text-align: center;line-height:.8rem}
+.wrapCon .cover .cover-bg-2{width:70%;height:3.0rem;background: #ffffff;margin: 0 auto;}
+.cover-bg-2 p{display: flex;flex-direction: column;justify-content: center;align-items: center;padding:.2rem 0}
+.cover-bg-2 p span{color:#ffce6b;line-height: .7rem;font-size: .4rem;font-weight: bold }
+.share{display: inline-block;width:60%;height:.8rem;color:#ffffff;background:#ffce6b;text-align: center;line-height: .8rem;border-radius: .1rem;margin-left: 20%;font-size: .35rem;font-weight: bold}
+/* 倒计时页面 */
+.wrapCon .down-time {background:#3b77e9;border-radius: .1rem;padding:.3rem .6rem;margin:-.2rem .4rem 0 .3rem}
+.down-time h6{font-size:.35rem;color:#ffffff;text-align: center;}
+.down-time .time{display: flex;flex-direction: row;}
+.wrapCon .down-time .time span{    display: inline-block;
+    width: .45rem;
+    background: #1a3363;
+    font-size: .5rem!important;
+    line-height: .7rem!important;
+    border-radius: .01rem;
+    text-align: center;
+    margin: .35rem .02rem;
+    border-radius: .04rem;}
+.wrapCon .down-time .time span:nth-child(3){background: none;}
+.wrapCon .down-time .time span:nth-child(6){background: none;}
+.testimonials{font-size: .30rem;color:#ffffff;font-weight: bold;line-height:.9rem}
+.accumulated{font-size: .30rem;color:#fffc22;line-height:.3rem;font-weight: bold;margin-bottom:.25rem}
+.banner{width: 100%;height: 3.8rem;background: url('../../images/CupquizActivities/banner.png') no-repeat;background-size: 100% 100%;}
+.close{display:block;position: absolute;top: 1.8rem;right: 12.5%;width:.7rem;height:.7rem;background: #ffffff;border-radius: 50%;font-size: .7rem;text-align:center;line-height: .5rem;color:#f8b031}
+.power-list p span .number{font-size: .34rem;}
+.change{width:.25rem!important;}

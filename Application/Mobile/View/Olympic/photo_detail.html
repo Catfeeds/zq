@@ -1,0 +1,69 @@
+<extend name="Public/Olympic/base" />
+<block name="seo">
+    <title>2016里约奥运会图片_全球体育手机网</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/Olympic/photo_detail.css">   
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="__CSS__/Olympic/swiper_photo.css">
+</block>
+<block name="header">
+</block>
+<block name="nav">
+</block>
+<block name="content">
+   <section id="pt_title">
+        <!-- 二级头部 s -->
+      <header id="vd_header">
+          <a href="javascript:history.go(-1)"></a>
+      </header>
+      <!-- 二级头部 e -->
+      <section class="vd_title">
+          
+      </section>
+   </section>
+
+   <!-- Swiper -->
+   <section id="photo_detail">
+      <div class="swiper-container">
+          <div class="swiper-wrapper"> 
+            <volist name="data.img_array" id="v">
+              <div class="swiper-slide"><img src="{$v}" alt="{$data['describe'][$i]}"></div>
+            </volist>
+          </div> 
+         
+      </div>
+  </section>
+    
+
+    <div id="p_title_con">
+    {$data.title}
+        <volist name="data.img_array" id="v">
+     <p class="p_title"><em></em>{$data['describe'][$i]}</p>
+        </volist>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination" style="height: 1px;overflow: hidden;"></div>
+</block>
+
+
+<block name='scripts'>
+    <!-- Swiper JS -->
+    <script src="__JS__/Olympic/swiper_photo.js"></script> 
+    <!-- Initialize Swiper -->
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationType: 'fraction',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        autoHeight: true
+    });
+    $(".swiper-slide").click(function(){
+       $("#pt_title").slideToggle();
+       $("#p_title_con").slideToggle();
+    })
+    </script>
+</block>

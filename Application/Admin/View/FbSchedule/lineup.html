@@ -1,0 +1,211 @@
+<style>
+	.table_video td{
+		text-align: center;
+		padding: 5px;
+	}
+</style>
+<div class="pageContent">
+
+	<form method="post" action="__URL__/saveLineup" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="game_id" value="{$_REQUEST.game_id}" id="game_id">
+			<input type="hidden" name="type" value="{$_REQUEST.type}">
+			<input type="hidden" name="home_team_id" value="{$Fbinfo.home_team_id}">
+			<input type="hidden" name="away_team_id" value="{$Fbinfo.away_team_id}">
+			<div style="float: left; margin-left: 80px;">
+				<table class="table_video">
+					<tr style="background: yellow;">
+						<td colspan="5">
+							<strong>
+								<if condition="$_REQUEST.type eq 'home'">
+									主队（{$Fbinfo.home_team_name|switchName=0,###}）
+								<else/>
+									客队（{$Fbinfo.away_team_name|switchName=0,###}）
+								</if>
+							</strong>
+						</td>
+					</tr>
+					<tr>
+						<td width="50">球衣号</td>
+						<td width="110">球员</td>
+						<td width="50">位置</td>
+						<td width="50">是否首发</td>
+						<td width="50">操作</td>
+					</tr>
+					<volist name="Lineup" id='item'>
+						<tr style="background: #f2f2f2;">
+							<td>{$item.player_number}<input type="hidden" value="{$item.player_id}" /></td>
+							<td>{$item.player_name|switchName=0,###}</td>
+							<td>
+								<select>
+									<option value="2" <eq name="item.player_type" value="2">selected</eq>>守门员</option>
+									<option value="3" <eq name="item.player_type" value="3">selected</eq>>后卫</option>
+									<option value="4" <eq name="item.player_type" value="4">selected</eq>>中场</option>
+									<option value="5" <eq name="item.player_type" value="5">selected</eq>>前锋</option>
+									<option value="1" <eq name="item.player_type" value="1">selected</eq>>教练</option>
+								</select>
+							</td>
+							<td>
+								<select>
+									<option value="1">首发</option>
+									<option value="0">替补</option>
+								</select>
+							</td>
+							<td><a class="buttonActive addPlayer" href="javascript:;"><span>添加</span></a></td>
+						</tr>
+					</volist>
+				</table>
+			</div>
+
+			<div style="float: right;margin-right: 80px;">
+				<table class="table_video">
+					<tr style="background: yellow;">
+						<td colspan="5"><strong>已添加队员（灰色为从数据库添加）</strong></td>
+					</tr>
+					<tr>
+						<td width="50">球衣号</td>
+						<td width="110">球员</td>
+						<td width="50">位置</td>
+						<td width="50">是否首发</td>
+						<td width="50">操作</td>
+					</tr>
+					<volist name="hasLineup" id='item'>
+						<tr class="is_sys-{$item.is_sys}" <if condition="$item.is_sys eq 1">style="background: #f2f2f2;"</if>>
+							<td>{$item.player_number}<input type="hidden" value="{$item.player_id}" class="player_id"></td>
+							<td>
+								{$item.player_name|switchName=0,###}
+							</td>
+							<td>
+								<switch name="item.player_type">
+								    <case value="1">教练</case>
+								    <case value="2">守门员</case>
+								    <case value="3">后卫</case>
+								    <case value="4">中场</case>
+								    <case value="5">前锋</case>
+								</switch>
+							</td>
+							<td>
+								<switch name="item.is_first">
+								    <case value="1">首发</case>
+								    <case value="0">替补</case>
+								</switch>
+							</td>
+							<td><a class="buttonActive" href="javascript:;" onclick="delTr({$item.id}, this);"><span>删除</span></a></td>
+						</tr>
+					</volist>
+						<tr style="text-align: center;">
+							<td colspan="5"><a class="buttonActive addNewPlayer" href="javascript:;" style="margin-left: 140px;"><span>添加一名球员</span></a></td>
+						</tr>
+				</table>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<script>
+	$(".addPlayer").click(function(){
+		var player_id  = $(this).parent().siblings().eq(0).find("input").val();
+		var is_be=true;
+		//判断是否重复选择
+		$(".player_id").each(function(index, element) {
+        	var value = element.value;
+			if(value==player_id){
+				is_be=false;
+				return;	
+			}
+        });
+        if(is_be){
+        	var player_number = $(this).parent().siblings().eq(0).text();
+        	var player_name = $(this).parent().siblings().eq(1).text();
+        	var player_type = $(this).parent().siblings().eq(2).find("select").val();
+        	switch(player_type)
+        	{
+        	    case '1': name = '教练';   break;
+        	    case '2': name = '守门员'; break;
+        	    case '3': name = '后卫'; break;
+        	    case '4': name = '中场'; break;
+        	    case '5': name = '前锋'; break;
+        	}
+        	var is_first = $(this).parent().siblings().eq(3).find("select").val();
+        	switch(is_first)
+        	{
+        	    case '1': first = '首发'; break;
+        	    case '0': first = '替补'; break;
+        	}
+        	var html = "<tr class=\"is_sys-1\" style=\"background: #f2f2f2;\">"+
+        					"<td>"+player_number+"<input type=\"hidden\" name=\"player_id[]\" value='"+player_id+"' class=\"player_id\"/><input type=\"hidden\" name=\"player_number[]\" value='"+player_number+"'/></td>"+
+        					"<td>"+player_name+"<input type=\"hidden\" name=\"player_name[]\" value='"+player_name+"' /></td>"+
+        					"<td>"+name+"<input type=\"hidden\" name=\"player_type[]\" value='"+player_type+"' /></td>"+
+        					"<td>"+first+"<input type=\"hidden\" name=\"is_first[]\" value='"+is_first+"' /></td>"+
+        					"<td><a class=\"buttonActive\" href=\"javascript:;\" onclick=\"delTr(0, this);\"><span>删除</span></a></td>"+
+        					"<input type=\"hidden\" name=\"is_sys[]\" value='1'/>"+
+        				"</tr>";
+        	if($(".is_sys-1").length > 0){
+        		$(".is_sys-1").last().after(html);
+        	}else{
+        		$(".addNewPlayer").parents("tr").before(html);
+        	}
+        	
+        }else{
+        	alert("该球员已添加！");
+        }
+	})
+	//删除球员
+	function delTr(id,obj){
+		if (confirm('确定删除该球员吗？')==false){
+			return;
+		}
+		if(id == '0'){
+			$(obj).parent().parent().remove();
+			return;
+		}
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/Against/delLineup.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status == 1){
+                	$(obj).parent().parent().remove();
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+	$(".addNewPlayer").click(function(){
+		var html = "<tr>"+
+						"<td><input type=\"hidden\" name=\"player_id[]\" value=''/><input type=\"text\" name=\"player_number[]\" size=\"1\" /></td>"+
+						"<td><input type=\"text\" name=\"player_name[]\" size=\"13\" /></td>"+
+						"<td>"+
+							"<select name=\"player_type[]\">"+
+								"<option value=\"2\">守门员</option>"+
+								"<option value=\"3\">后卫</option>"+
+								"<option value=\"4\">中场</option>"+
+								"<option value=\"5\">前锋</option>"+
+								"<option value=\"1\">教练</option>"+
+							"</select>"+
+						"</td>"+
+						"<td>"+
+							"<select name=\"is_first[]\">"+
+								"<option value=\"1\">首发</option>"+
+								"<option value=\"0\">替补</option>"+
+							"</select>"+
+						"</td>"+
+						"<td><a class=\"buttonActive\" href=\"javascript:;\" onclick=\"delTr(0, this);\"><span>删除</span></a></td>"+
+						"<input type=\"hidden\" name=\"is_sys[]\" value='0'/>"+
+					"</tr>";
+		$(".addNewPlayer").parents("tr").before(html);
+	})
+</script>
+
+
+

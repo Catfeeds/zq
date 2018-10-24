@@ -1,0 +1,207 @@
+<include file="Public:header"/>
+
+<!--引入本页所需css-->
+<link rel="stylesheet" href="__PUBLIC__/Home/css/personal_index/personal_index.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/personal_center/my_attention.css">
+
+
+<body>
+    <!-- 顶部开始 -->
+    <include file="Public:top"/>
+    <!-- 顶部结束 -->
+
+    <div class="body">
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <div class="data-graph atten-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="javascript:void(0);" class="current">关注的比赛</a></li>
+                                    <li role="presentation"><a href="{:U('UserGamble/followUser')}">我的关注</a></li>
+                                </ul>
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <notempty name="gamble">
+                                <div class="tab-content">
+                                    <div id="atten" class="line-graph clearfix">
+                                        <div class="atten-list">
+                                             <table class="table table-bordered" width="100%" cellpadding="0" cellspacing="0">
+                                                <tbody>
+                                                    <tr class="table-header">
+                                                        <th>赛事</th>
+                                                        <th>比赛时间</th>
+                                                        <th>主队</th>
+                                                        <th>比分/半场 </th>
+                                                        <th>客队</th>
+                                                        <th>玩法</th>
+                                                        <th>盘口</th>
+                                                        <th>推荐人</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                    <volist name="gamble" id="item">
+                                                        <tr <if condition="$key % 2 eq 0">class="one"<else/>class="two"</if>>
+                                                            <td style="background: {$item.union_color};color: #fff;">
+                                                                <span title="{$item.union_name}">{$item.union_name}</span>
+                                                            </td>
+                                                            <td class="begin-time"><span title="{$item.game_date|strtotime|date='m-d',###} {$item.game_time}">{$item.gtime|date="m-d H:i",###}</span></td>
+                                                            <td ><a title="{$item.home_team_name}" href="javascript:;">{$item.home_team_name}</a></td>
+                                                            <td>
+                                                                <span  class="text-danger">{$item.score|default="--"}</span>({$item.half_score|default="--"})
+                                                            </td>
+                                                            <td><a title="{$item.away_team_name}" href="javascript:;">{$item.away_team_name}</a></td>
+                                                            <td class="text-orange">
+                                                                <switch name="item.play_type">
+                                                                    <case value="1" ><span title="全场让球">全场让球</span></case>
+                                                                    <case value="-1"><span title="推荐大小">推荐大小</span></case>
+                                                                </switch>
+                                                            </td>
+                                                            <td>
+                                                                {$item.handcp|default="--"}
+                                                            </td>
+                                                            <td><a target="_blank" href="{:U('/userindex/'.$item['user_id'].'')}" >{$item.nick_name}</a></td>
+                                                            <td>
+                                                            <if condition="$item['is_check'] neq '' or $item['result'] neq 0">
+                                                                    <button type="button" class="btn detail-btn <if condition='$item.tradeCoin gt 0'>jb_icon</if>" onclick="showDetail(this)" gamble_id='{$item.id}'>详情</button>
+                                                                <elseif condition="$item.tradeCoin eq 0" />
+                                                                    <button type="button" class="btn detail-btn02" onclick="showDetail(this)" free='1' gamble_id='{$item.id}'>免费</button>
+                                                                <else/>
+                                                                    <button type="button" class="btn detail-btn02" onclick="doAnswer(this)" gamble_id='{$item.id}'>{$item.tradeCoin}金币</button>
+                                                            </if>
+                                                            </td>
+                                                        </tr>
+                                                    </volist>
+                                                </tbody>
+                                            </table>
+                                            <!--页码开始-->
+                                            <div class="page-con">
+                                                <nav>
+                                                    <ul class="pagination pull-right">
+                                                        {$show}
+                                                        <li><input class="isTxtBig" type="text" value="{$_REQUEST.p|default=1}" name="p"></li>
+                                                        <li id="GO"><a href="javascript:void(0)">GO</a></li>
+                                                    </ul>
+                                                    <div class="pull-right">共有{$totalCount}条，每页显示：{$numPerPage}条</div>
+                                                </nav>
+                                            </div>
+                                            <!--页码结束-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <else/>
+                                    <br/>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;没有关注的比赛哦！ <a href="{:U('GambleHall/index')}" target="_blank"><i class="icon-arrow-right text-tie"> 去推荐大厅</i></a></p>
+                                </notempty>
+                                <!-- Tab panes -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+    <!-- 模态窗口开始01 -->
+    <div class="modal ditai01 fade doAnswer bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">竟猜详情</h4>
+            </div>
+            <div class="modal-body">
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">对阵队伍：</dt>
+                    <dd class="pull-left"><span class="mach_name" style="color:#5b8ae9;"></span><em class="game_team"></em></dd>
+                </dl>
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">比赛时间：</dt>
+                    <dd class="pull-left game_date"></dd>
+                </dl>
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">推荐玩法：</dt>
+                    <dd class="pull-left play_type"></dd>
+                </dl>
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">推荐情况：</dt>
+                    <dd class="pull-left text-red">
+                        <span class="answer"></span>&nbsp;
+                        <span class="odds"></span>
+                    </dd>
+                </dl>
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">独家分析：</dt>
+                    <dd class="pull-left text-orange desc"></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <!-- 模态窗口结束01 -->
+    <!-- 模态窗口开始02 -->
+    <div class="modal ditai01 fade checkGame bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">竟猜详情</h4>
+            </div>
+            <div class="modal-body">
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">对阵队伍：</dt>
+                    <dd class="pull-left"><span class="mach_name union_name" style="color:#5b8ae9;"></span><em class="game_team"></em></dd>
+                </dl>
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">比赛时间：</dt>
+                    <dd class="pull-left game_date"></dd>
+                </dl>
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">推荐玩法：</dt>
+                    <dd class="pull-left play_type"></dd>
+                </dl>
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">推荐情况：</dt>
+                    <dd class="pull-left text-red">
+                        <span class="answer"></span>&nbsp;
+                        <span class="odds"></span>
+                    </dd>
+                </dl>
+                <dl class="clearfix dl_list">
+                    <dt class="pull-left">独家分析：</dt>
+                    <dd class="pull-left text-red desc"></dd>
+                </dl>
+                <div class="btn-con">
+                    <input type="hidden" class="gamble_id" value="">
+                    <button type="button" class="btn btn-orange tradeCoin"></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态窗口结束02 -->
+    <input type="hidden" name="game_type" value="1">
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+</body>
+</html>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/user_gamble/follow_game.js"></script>
+<script>
+//绑定a标签
+$("#GO").find("a").bind("click", function(){
+    var p = $("input[name='p']").val();
+    if (isNaN(p)) {
+        return;
+    } else if (p>0){
+        window.location.href="/UserGamble/followGame/p/"+p+".html";
+    }
+});
+</script>

@@ -1,0 +1,134 @@
+<extend name="Public/base" />
+<!-- 本页需要引用的css -->
+<block name='append'>
+    <!-- 本页需要引用的css --> 
+    <style type="text/css">
+        html,body{ background: #f7f7f7;}
+        .infom_list{ background: #fff;}
+        .infom_list ul li{ padding: .2rem .2rem .2rem 1rem; border-bottom: 1px solid #e5e5e5; background: url(__IMAGES__/icon/icon-det-inform.png) no-repeat .2rem center !important; background-size: .68rem auto !important;}
+        .infom_list ul li.on{ background: url(__IMAGES__/icon/icon-on-inform.png) no-repeat .2rem center !important; background-size: .68rem auto !important;}
+        .infom_list ul li figure{ margin-bottom: .1rem;}
+    </style>
+</block>
+<!-- 二级头部 s -->
+<block name='header'>
+    <header id="other_header">
+    <a href="{:U('User/index')}"></a>
+    {$title}
+</header>
+</block>
+<!-- 二级头部 e -->
+<block name='nav'></block>
+<block name='content'>
+    <section class="main">
+        <!-- 用户条例 -->
+        <div class="infom_list">
+            <ul class='posts'>
+                <volist name="list" id="v">
+                    <li class='list <eq name='v.is_read' value='0'>on</eq>'>
+                        <figure class="clearfix">
+                            <span class="fl fs30">{$v.title}</span>
+                            <em class="fr fs22 text-999">{$v.times}</em>
+                        </figure>
+                        <p class="fs26 <eq name='v.is_read' value='1'>text-999</eq>">{$v.content}</p>
+                    </li>
+                </volist>
+            </ul>
+        </div>        
+        <input type="hidden" id="auto_load" value="1">
+        <div class="paged boxs">
+            <div class="load_gif fs24 text-999">
+                <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>正在加载更多的数据...</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已经全部加载完毕</a>
+        </div>
+    </section>
+</block>
+<block name='scripts'>
+    <script>
+        $(function () {
+            $("#auto_load").val(1);
+            var p = 2;// 初始化页面，点击事件从第二页开始
+            var flag = false;
+            if ($(".list").size() < 20)
+            {
+                $("#auto_load").val(0);
+                $(".load_gif").hide();
+                $("#showLess").show();
+            }
+            $(window).scroll(function () {
+                var auto_load = $("#auto_load").val();
+                if (auto_load == 0) {
+                    return false;
+                }
+                //初始状态，如果没数据return ,false;否则
+                if ($(".list").size() <= 0)
+                {
+                    return false;
+                } else {
+                    if ($(document).height() - ($(document).scrollTop() + $(window).height()) <= 400) {
+                        if (auto_load == 1) {
+                            $("#auto_load").val(0);
+                            send();
+                        }
+                    }
+                }
+            });
+            function send() {
+                if (flag) {
+                    return false;
+                }
+                $.ajax({
+                    type: 'post',
+                    url: "",
+                    data: {page: p},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 1) {
+                            var list = data.info;
+                            if (list != null) {
+                                $.each(list, function (k, v) {
+                                    var read='';
+                                    var color='';
+                                    if(v.is_read=='0'){
+                                        read='on';
+                                    }else{
+                                        color='text-999';
+                                    }
+                                    var html ='<li class="list '+read+'">'+
+                                                '<figure class="clearfix">'+
+                                                '<span class="fl fs30">'+v.title+'</span>'+
+                                                '<em class="fr fs22 text-999">'+v.times+'</em>'+
+                                                '</figure>'+
+                                                '<p class="fs26 '+color+'">'+v.content+'</p></li>';
+                                    $(".posts .list:last").after(html);
+                                });
+
+                                $("#auto_load").val(1);
+                                if (data.info.length < 20) {
+                                    $("#auto_load").val(0);
+                                    $(".load_gif").hide();
+                                    $("#showLess").show();
+                                    flag = true;
+                                }
+                            } else {
+                                $("#auto_load").val(0);
+                                $(".load_gif").hide();
+                                $("#showLess").show();
+                                flag = true;
+                            }
+                        } else {
+                            $("#auto_load").val(0);
+                            $(".load_gif").hide();
+                            $("#showLess").show();
+                            flag = true;
+                        }
+
+                    }
+                });
+                p++;
+            }
+        });
+    </script>
+</block>

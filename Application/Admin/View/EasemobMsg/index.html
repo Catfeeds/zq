@@ -1,0 +1,102 @@
+<form id="pagerForm" action="__URL__" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="_order" value="{$_REQUEST['_order']}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST['_sort']|default='1'}"/>
+    <input type="hidden" name="listRows" value="{$_REQUEST['listRows']}"/>
+    <volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+
+<div class="page">
+    <div class="pageHeader">
+        <form onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label>平台：</label>
+                    <select class="combox" name="platform" onchange="$(form).submit()">
+                        <option value="">请选择</option>
+                        <option value="2" <eq name="_REQUEST.platform" value="2">selected=selected</eq>>ios</option>
+                        <option value="3" <eq name="_REQUEST.platform" value="3">selected=selected</eq>>android</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                    <!-- <li><a class="button" href="__URL__/search" target="dialog" mask="true" title="高级检索"><span>高级检索</span></a></li> -->
+                </ul>
+            </div>
+        </div>
+        </form>
+    </div>
+
+    <div class="pageContent">
+        <div class="panelBar">
+            <ul class="toolBar">
+                <li><a class="add" href="{:U('qqty_admin/EasemobUser/push')}" target="dialog" mask="true" rel="pull" width="850" height="550"><span>新建推送</span></a></li>
+            </ul>
+        </div>
+        <table class="list" width="100%" layoutH="116">
+            <thead>
+            <tr>
+                <th width="60"><input type="checkbox" group="ids[]" class="checkboxCtrl">id</th>
+                <th width="50" >平台</th>
+                <th width="50" >指定用户</th>
+                <!--<th width="90" >IOS 发送数 / 成功数</th>-->
+                <!--<th width="90" >Android 发送数 / 成功数</th>-->
+                <th width="50" >打开消息行为</th>
+                <th width="40" >行为参数值</th>
+                <th width="50" >显示内容</th>
+                <th width="80" >定时发送时间</th>
+                <th width="50" >创建时间</th>
+            </tr>
+            </thead>
+            <tbody>
+                <volist id="vo" name="list">
+                    <tr target="sid_node" rel="{$vo['id']}">
+                        <td><input name="ids[]" value="{$vo['id']}" type="checkbox">{$vo['id']}</td>
+                        <td>
+                            <switch name="vo['platform']">
+                                <case value="2">ios</case>
+                                <case value="3">android</case>
+                                <default />所有
+                            </switch>
+                        </td>
+                        <td>{$vo['custom_type']}</td>
+
+                        <!--<if condition="$vo['users_num'] != ''">-->
+                            <!--<td>{$vo['em_nums']} / {$vo['em_succ_times']}</td>-->
+                            <!--<else />-->
+                            <!--<td> </td>-->
+                        <!--</if>-->
+
+                        <!--<td>{$vo['um_nums']} / {$vo['um_succ_times']} </td>-->
+
+                        <td>
+                            <switch name="vo['module']">
+                                <case value="0">进入App</case>
+                                <case value="1">资讯</case>
+                                <case value="2">图集</case>
+                                <case value="9">外链</case>
+                                <case value="14">进入系统通知</case>
+                                <default />其他
+                            </switch>
+                        </td>
+
+                        <td>{$vo['url']}</td>
+
+                        <td title="{$vo['content']}">{$vo['content']|mb_substr=###,0,40}</td>
+
+                        <td><if condition="$vo['task_time'] neq 0">{$vo['task_time']|date="Y-m-d H:i:s",###}<else/>即时发送</if></td>
+                        <td>{$vo['create_time']|date="Y-m-d H:i:s",###}</td>
+                    </tr>
+                </volist>
+            </tbody>
+        </table>
+        <include file="Public:pagerNum" />
+    </div>
+</div>

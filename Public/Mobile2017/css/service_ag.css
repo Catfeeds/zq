@@ -1,0 +1,10 @@
+/*
+ * 服务协议手机页面
+ * @author Chensiren <245017279@qq.com>
+ * @since  2016-02-04
+*/
+.main{ padding: 10px;}
+.h1{ font-size: 2.4rem; text-align: center; height: 6rem; line-height: 6rem; margin-bottom: 1rem; font-weight: 700;}
+.section-con dl{ margin-bottom: 1.5rem;}
+.section-con dt{ font-size: 2rem; margin-bottom: 1rem; font-weight: 700;}
+.section-con dd{ font-size: 1.4rem; line-height: 2.4rem; text-indent: 2.8rem;}

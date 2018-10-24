@@ -1,0 +1,111 @@
+<style>
+    .searchContent label{width: auto}
+    .searchContent li{width: auto !important;margin-right: 12px;}
+</style>
+<form id="pagerForm" action="__URL__/BettingLv" method="post">
+	<input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+	<input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+	<input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+	<input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+	<volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/BettingLv" method="post">
+	<input type="hidden" name="gameType" value="{$_REQUEST.gameType}"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li >
+				<label>手机号：</label>
+				<input name="username" value="{$_REQUEST.username}" type="text" placeholder="用户名"/>
+			</li>
+			<li >
+				<label>昵称：</label>
+				<input name="nick_name" value="{$_REQUEST.nick_name}" type="text" placeholder="昵称"/>
+			</li>
+			<li>
+				<label>用户类型：</label>
+				<select name="is_robot" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="0" <if condition="$_REQUEST.is_robot eq '0'">selected</if> >正常用户</option>
+					<option value="1" <if condition="$_REQUEST.is_robot eq '1'">selected</if> >机器人用户</option>
+				</select>
+			</li>
+
+			<li>
+				<label>用户等级：</label>
+				<select name="userLv" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="0" <if condition="$_REQUEST.userLv eq '0'">selected</if> >Lv0</option>
+					<option value="1" <if condition="$_REQUEST.userLv eq '1'">selected</if> >Lv1</option>
+					<option value="2" <if condition="$_REQUEST.userLv eq '2'">selected</if> >Lv2</option>
+					<option value="3" <if condition="$_REQUEST.userLv eq '3'">selected</if> >Lv3</option>
+					<option value="4" <if condition="$_REQUEST.userLv eq '4'">selected</if> >Lv4</option>
+					<option value="5" <if condition="$_REQUEST.userLv eq '5'">selected</if> >Lv5</option>
+					<option value="6" <if condition="$_REQUEST.userLv eq '6'">selected</if> >Lv6</option>
+					<option value="7" <if condition="$_REQUEST.userLv eq '7'">selected</if> >Lv7</option>
+					<option value="8" <if condition="$_REQUEST.userLv eq '8'">selected</if> >Lv8</option>
+					<option value="9" <if condition="$_REQUEST.userLv eq '9'">selected</if> >Lv9</option>
+				</select>
+			</li>
+
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="icon" href="__URL__/breakUserLv/gameType/1/betting/1" target="ajaxTodo" title="你确定要刷新用户等级吗？"><span>刷新用户等级</span></a></li>
+			<li><span style="color: blue">当前结算周期：<if condition="$userLvDays eq 1">周<else/>月</if></span></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="5%">ID</th>
+			<th width="10%">用户名</th>
+			<th width="10%">昵称</th>
+			<th width="8%" >等级</th>
+			<th width="8%">胜率</th>
+			<th width="8%">竞猜场数</th>
+			<th width="8%">赢</th>
+			<th width="8%">输</th>
+			<th width="8%">总积分</th>
+			<th width="5%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo.username|is_show_mobile}</td>
+					<td><a href="__ADMIN__/FrontUser/index/id/{$vo['id']}" target="navTab">{$vo.nick_name}</a></td>
+					<td>Lv {$vo['lv_bet']}</td>
+					<td>{$vo['winrate']}%</td>
+					<td>{$vo['count']}</td>
+					<td>{$vo['win']}</td>
+					<td>{$vo['transport']}</td>
+					<td>{$vo['pointCount']}</td>
+					<td><a href="__URL__/resetGambleData/user_id/{$vo.id}/gambleType/2" target="ajaxTodo" title="你确定要重置竞彩记录吗？">重置</a></td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+</div>
+
+

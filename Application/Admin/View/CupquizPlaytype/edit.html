@@ -1,0 +1,66 @@
+<div class="page">
+	<div class="pageContent">
+
+		<form method="post" action="__URL__/update" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+			<input type="hidden" name="id" value="{$_REQUEST.id}">
+			<div class="pageFormContent" layoutH="58">
+				<div class="unit">
+					<label>状态：</label>
+					<select class="small bLeft"  name="status" >
+						<option <eq name="vo['status']" value="1" >selected</eq> value="1">启用</option>
+						<option <eq name="vo['status']" value="0" >selected</eq> value="0">禁用</option>
+					</select>
+				</div>
+
+				<div class="unit">
+					<label>玩法标题：</label>
+					<textarea name="name" class="required" rows="4" cols="60">{$vo.name}</textarea>
+				</div>
+
+				<div class="unit options">
+					<volist name="vo.options" id="options">
+						<ul>
+
+							<li style="float:left;">
+								<input type="hidden"  name="options[]" value="{$options[0]}" size="20">
+								<label>玩法选项值设置：</label><input style="border:none" type="text"  disabled="disabled" value="{$options[0]}" size="20">
+								<label>玩法选项描述：</label><input type="text"  name="options2[]" value="{$options[1]}" size="20">
+							</li>
+
+						</ul>
+					</volist>
+
+				</div>
+				<!--<div class="unit">-->
+					<!--<label>新增玩法：</label>-->
+					<!--<div class="button" id="addPlay"><span>增加</span></div>-->
+					<!--<div style="height: 25px;line-height: 24px;color:red"> *玩法值最好统一为字母、大小写、正整数；要删除选项，则设置选项和值空值即可*</div>-->
+				<!--</div>-->
+			</div>
+
+			<div class="formBar">
+				<ul>
+					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+					<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+				</ul>
+			</div>
+		</form>
+
+	</div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //添加玩法
+		$('#addPlay').click(function () {
+            var html = '<ul> ' +
+                '<li style="float:left;"> ' +
+                '<label>玩法选项值设置：</label><input type="text" name="options[]" value="" namesize="20" class="textInput"> ' +
+                '<label>玩法选项描述：</label><input type="text" name="options2[]" value="" size="20" class="textInput"> ' +
+                '</li> ' +
+                '</ul>';
+            $('.options').append(html);
+        })
+
+    });
+</script>

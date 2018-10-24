@@ -1,0 +1,83 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>用户名：</label>
+				<input type="text" name="account" value=""/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" width="650" height="350" href="__URL__/add" target="dialog" mask="true" height='350'><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/foreverdelete/id/{sid_user}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择用户"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_user}" height='500' target="dialog" mask="true" warn="请选择用户"><span>编辑</span></a></li>
+			<li class="line">line</li>
+			<li><a class="icon" width="650" height="350" href="__URL__/password/id/{sid_user}" target="dialog" mask="true" warn="请选择用户"><span>修改密码</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="3%">编号</th>
+			<th width="8%">用户名</th>
+			<th width="8%">昵称</th>
+			<th width="15%">备注</th>
+			<th width="8%">Email</th>
+			<th width="8%" orderField="create_time" <if condition="$_REQUEST._order eq 'create_time'">class="{$_REQUEST._sort}"</if>是>添加时间</th>
+			<th width="8%" orderField="last_login_time" <if condition="$_REQUEST._order eq 'last_login_time'">class="{$_REQUEST._sort}"</if>>上次登录</th>
+			<th width="5%" orderField="login_count" <if condition="$_REQUEST._order eq 'login_count'">class="{$_REQUEST._sort}"</if>>登录次数</th>
+			<th width="6%">手机查看权限</th>
+			<th width="6%">竞猜查看权限</th>
+			<th width="5%">销售渠道号</th>
+			<th width="4%" orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}"</if>>状态</th>
+			<th width="5%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<volist id="vo" name="list">
+			<tr target="sid_user" rel="{$vo['id']}">
+				<td>{$vo['id']}</td>
+				<td>{$vo['account']}</td>
+				<td>{$vo['nickname']}</td>
+				<td>{$vo['remark']}</td>
+				<td>{$vo['email']}</td>
+				<td>{$vo['create_time']|date="Y-m-d H:i:s",###}</td>
+				<td>{$vo['last_login_time']|date="Y-m-d H:i:s",###}</td>
+				<td>{$vo['login_count']}</td>
+				<td>
+					<eq name="vo.is_show_mobile" value="0"><div style="color: gray">关闭</div><else/><div style="color: green">显示</div></eq>
+				</td>
+				<td>
+					<eq name="vo.is_show_answer" value="0"><div style="color: gray">关闭</div><else/><div style="color: green">显示</div></eq>
+				</td>
+				<td>{$vo['channel_code']}</td>
+				<td>{$vo['status']|getStatus}</td>
+				<td>
+					{$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",'__DWZ__'} | 
+					<a href="__URL__/edit/id/{$vo.id}" height='500' target="dialog" mask="true" warn="请选择用户">编辑</a>
+				</td>
+			</tr>
+		</volist>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

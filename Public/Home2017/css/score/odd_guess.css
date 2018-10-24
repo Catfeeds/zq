@@ -1,0 +1,124 @@
+/**
+ * 竞猜css样式文件
+ * 
+ * @author pengjian <710348662@qq.com>
+ *
+ * @since  2016-04-26
+**/
+.guess_title{ height: .78rem; line-height: .78rem; border-top: 1px solid #ddd;border-bottom: 1px solid #ddd;margin-top: .1rem;padding: 0 .2rem; background: url(../images/s_list.png) no-repeat 98% center; background-size: .22rem .4rem;  }
+.guess_title img{ width: .36rem; height: .3rem; vertical-align: middle;margin-top: -.12rem;padding-right: .1rem }
+
+.guess_con{padding: .2rem;}
+.guess_sele_con{padding: .1rem;padding-top: 0}
+
+ /*内容*/
+.tb_guess{width: 100%;text-align: left; }
+.tb_guess tr th{color: #666666;height: .5rem; font-weight: normal; }
+.tb_guess tr td{border:1px solid #dddddd; text-align: center; height: .5rem;line-height: .5rem;border-bottom: 0;border-right: 0}
+.tb_guess tr td:last-child {border-right:1px solid #dddddd;}
+.tb_guess tr:last-child td{border-bottom:1px solid #dddddd; }
+.tb_guess tr td:first-child{background: #999999; color: #fff}
+
+
+.tb_guess_sele{width: 100%;text-align: left; }
+.tb_guess_sele tr th{color: #666666;height: .5rem; font-weight: normal; }
+.tb_guess_sele tr td{ text-align: center}
+.tb_guess_sele tr td a{ display: block ;border:1px solid #dddddd; text-align: center;height: .9rem; line-height: .9rem; color: #999999;cursor: pointer;}
+.tb_guess_sele tr td:last-child,.tb_guess_sele tr td:nth-child(2){width: 2.65rem;}
+.tb_guess_sele tr td:first-child{background: #01af63;color: #fff;border:1px solid #01af63;}
+.tb_guess_sele tr td a.on{border:1px solid #00af62;color: #333333;background: url(../images/g_sele.png) no-repeat right bottom;}
+.tb_guess_sele tr td a.no_sele{background: #dddddd}
+.tb_guess_sele tr td a.on_sub{border:1px solid #eb0000;color: #333333;background: url(../images/g_sele_on.png) no-repeat right bottom;}
+
+.tb_guess_form{width: 100%;text-align: left; }
+.tb_guess_form tr th{color: #666666;height: .5rem; font-weight: normal; } 
+
+.form_main{height:.8rem; background-color: #f7f7f7;border-radius: .5rem;position: relative; }
+.form_main:before{
+	content:'普通竞猜'; 
+	width: 50%; 
+	line-height: .8rem;
+	text-align: center;
+	display: block; 
+	color: #999999;
+	float: left
+}
+.form_main:after{
+	content:'重点竞猜'; 
+	width: 50%; 
+	line-height: .8rem;
+	text-align: center;
+	display: block; 
+	color: #999999;
+	float: left;
+
+	background-color: #fe7000; 
+	color: #fff;
+	border-radius: .5rem;
+
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	transition: all .5s ease;
+}
+ 
+.form_main:after:hover{position: absolute;left: 0;top: 0}
+
+#checkboxThreeInput{display: none;}
+.checkboxThree{height:.8rem; background-color: #f7f7f7;border-radius: .5rem;position: relative;}
+.checkboxThree:before {
+	content:'普通竞猜'; 
+	line-height: .8rem;
+    text-align: center;
+    display: block;
+    color: #999999;
+    float: left;
+    z-index: 11;
+    position: absolute;
+    left: 20%;
+}
+.checkboxThree:after {
+	content:'重点竞猜'; 
+	line-height: .8rem;
+    text-align: center;
+    display: block;
+    color: #999999;
+    float: left;
+    z-index: 11;
+    position: absolute;
+    right: 20%;
+    color: #fff;
+}
+.checkboxThree label {
+	display: block;
+	width: 50%; 
+	height: .8rem;
+	line-height: .8rem;
+    background-color: #fe7000; 
+	color: #fff;
+	border-radius: .5rem; 
+
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	transition: all .5s ease;
+	cursor: pointer;
+	color: #fff;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.checkboxThree input[type=checkbox]:checked + label {
+	left: 0;  
+}
+
+.type_sle{height:.8rem; background-color: #f7f7f7;border-radius: .4rem;position: relative;}
+.type_sle ul li{ width: 50%; position: relative; z-index: 1;}
+.type_sle ul li a{ display: block; height: .8rem; line-height: .8rem; text-align: center; color: #999;}
+.type_sle ul li.on a{ color: #fff; transition: all ease-out 0.5s;}
+.cur{ position: absolute; left: 0; top: 0; height: .8rem; width: 50%; border-radius: .4rem; background: #ff7e00;}
+
+.sub_btn{ width: 100%; height: .9rem;margin-top: .5rem;background: #fe7000;border-radius:5px  }
+.sub_btn a{ text-align: center; color: #fff; line-height: .9rem;display: block;}

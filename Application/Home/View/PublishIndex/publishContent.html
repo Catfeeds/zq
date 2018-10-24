@@ -1,0 +1,197 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" type="text/css" href="__CSS__/listInfo/listInfo.css?201806261805">
+</block>
+<block name="content">
+  <include file="Public:top_user"/>
+  <!-- 主体内容开始 -->
+  <div class="main">
+     <div class="position text-666">
+            当前位置：<span class="now"><a href="{:U('/')}" title="首页">首页</a></span> <notempty name="list.parentName">&gt; <span class="now"><a href="{$list.parentHref}" title="{$list.parentName}">{$list.parentName}</a></span></notempty> &gt; <span class="now"><a href="{$list.classHref}" title="{$list.className}">{$list.className}资讯</a></span> &gt; <span>正文</span>
+     </div>
+     <div class="content-m clearfix">
+        <!-- 左边内容开始 -->
+        <div class="pull-left left">
+            <div class="long testCss">
+                <h1 class="title">{$list['title']}</h1>
+                <p><span class="f12 text-80 mr5">{$list['add_time']|date='Y-m-d H:i:s',###}</span>
+                <notempty name="list.nick_name">
+                    <span class="f12 text-80 mr5">|</span>
+                    <span class="f12 text-80">作者: {$list['nick_name']} </span>
+                </notempty>
+                <notempty name="list.remark">
+                    <p class="abstract">摘要：{$list.remark}</p>
+                </notempty>
+            </div>
+          <div class="cont">
+              <div class="cont-ban">
+                <div class="ban">
+                    <if condition="$game['game_id'] neq '' or $game['gamebk_id'] neq ''">
+                    <!-- 赔率 -->
+                    <div class="matchBox clearfix">
+                      <div class="pull-left matchLogo matchLogoL"><img src="{$game.homeTeamLogo}" alt="{$game.home_team_name|switchName=0,###}"></div>
+                      <div class="pull-left matchIn">
+                          <div class="matchTitle clearfix">
+                              <div class="pull-left matchName" style=" background: #6ba7c6;">{$game.union_name|switchName=0,###}<span class="triangleTopleft" style="border-top: 28px solid #6ba7c6;"></span></div>
+                              <div class="pull-right matchTime">{$game.bet_code}  {$game.gtime|date="Y-m-d H:i",###}</div>
+                          </div>
+                          <div class="matchScore clearfix">
+                              <div class="pull-left teamName text-r" title="{$game.home_team_name|switchName=0,###}"><strong>{$game.home_team_name|switchName=0,###}</strong>
+                              </div>
+                              <div class="pull-left teamTime">
+                                  <strong>
+                                    <span class="text-red">
+                                    <if condition="$game['game_state'] neq '-1'">
+                                      VS
+                                      <else/>
+                                      {$game.score}
+                                    </if>
+                                    </span>
+                                  </strong>
+                              </div>
+                              <div class="pull-left teamName text-l" title="{$game.away_team_name|switchName=0,###}"><strong>{$game.away_team_name|switchName=0,###}</strong>
+                              </div>
+                          </div>
+                          <div class="matchLink">
+                              <a title="亚赔" href="<if condition="$game['gtype'] eq 1">{:U('/ypOdds@bf',['game_id'=>$list['game_id'],'sign'=>1])}" target="_blank<else/>#</if>">亚赔</a>
+                              <a title="欧赔" href="<if condition="$game['gtype'] eq 1">{:U('/eur_index@bf','game_id='.$list['game_id'])}" target="_blank<else/>#</if>">欧赔</a>
+                              <a title="分析" href="<if condition="$game['gtype'] eq 1">{:U('/dataFenxi@bf','game_id='.$list['game_id'])}" target="_blank<else/>#</if>">分析</a>
+                              <a title="高手推荐" href="<if condition="$game['gtype'] eq 1">{:U('/gambleDetails@bf','game_id='.$list['game_id'])}" target="_blank<else/>#</if>">高手推荐</a>
+                          </div>
+                      </div>
+                      <div class="pull-left matchLogo matchLogoR"><img src="{$game.awayTeamLogo}" alt="{$game.away_team_name|switchName=0,###}"></div>
+                    </div>
+                    </if>
+                </div>
+                <div class="ban-w">
+                    {$list['content']}
+                </div>
+               <if condition="$game['game_id'] neq '' or $game['gamebk_id'] neq ''">
+                   <include file="PublishIndex:content_game"/>
+               </if>
+               <p class="statement">{:C('user_statement')}</p>
+                <div class="ban-b">
+                <if condition="$list['label'] neq ''">
+                  <span class="b-q">标签</span>
+                    <volist name="list['label']" id="v">
+                        <span class="label-s"> <a href="{$v['url']}" target="_blank">{$v['name']}</a></span>
+                    </volist>
+                </if>
+                </div>
+                <div class="ban-c">
+                  <span>分享到</span>
+                  <include file="Public:baiduShare"/>
+                </div>
+                 <div class="line-ban"></div>
+              </div>
+              <div class="lab-con">
+                  <div class="clearfix newTile">
+                      <h2 class="pull-left title">相关新闻</h2>
+                  </div>
+                  <ul class="lab-list">
+                      <volist name="beSimilar" id="item">
+                      <li class="liInfor clearfix">
+                          <a href="{$item.href}" target="_blank" title="{$item.title}" class="pull-left inforImg"><img src="{$item.img}" width="180" height="124" alt="{$item.title}"></a>
+                          <div class="pull-left inforArt">
+                              <h3 class="text-hidden"><a href="{$item.href}" target="_blank" title="{$item.title}">{$item.title}</a></h3>
+                              <p class="text-999 inforArtP">{$item.remark}</p>
+                              <div class="clearfix author">
+                                  <span class="pull-left text-999 leftUser">{$item.add_time|date='Y-m-d H:i:s',###}</span>
+                                  <span class="pull-right text-999 rightEye">{$item.click_number}</span>
+                              </div>
+                          </div>
+                      </li>
+                      </volist>
+                  </ul>
+              </div>
+            </div>
+        </div>
+        <!-- 右边内容开始  -->
+        <div class="pull-right right">
+            <div class="uInfor">
+              <a href="{:U('/expuser/'.$list['user_id'])}" target="_blank" class="clearfix mb15 faceInfor" title="{$list['nick_name']}">
+                <div class="pull-left uFace"><img class="img-circle" src="{$list['face']}" width="auto" height="auto" alt="{$list['nick_name']}"></div>
+                <div class="pull-left pl15">
+                    <div class="uName clearfix mb10">
+                      <p class="text-hidden nameText">{$list['nick_name']}</p>
+                      <p><span class="absType">特约专家</span></p>
+                    </div>
+                </div>
+              </a>
+              <div class="text-999 uIntro">{$list['descript']}</div>
+              <!-- 文章数 -->
+              <div class="classBox">
+                  <ul class="clearfix classUl">
+                    <li class="pull-left artiNum">
+                      <p><strong>{$list['articleNum']}</strong></p>
+                      <p class="text-999">文章数</p>
+                    </li>
+                    <li class="pull-left fansNum">
+                      <p><strong>{$list['fansNum']}</strong></p>
+                      <p class="text-999">粉丝</p>
+                    </li>
+                  </ul>
+              </div>
+            </div>
+            <div class="artLiBox">
+                <h2>专家文章</h2>
+                <div class="artlist">
+                    <ul>
+                      <volist name="expertList" id="item">
+                          <li class="li-small clearfix">
+                                <a target="_blank" title="{$item.title}" href="{$item['href']}" class="pull-left liImg">
+                                  <img src="{$item.img}">
+                                </a>
+                                <div class="liTxt pull-left">
+                                   <h3 class="name-l"><a target="_blank" title="{$item.title}" href="{$item['href']}">{$item.title}</a></h3>
+                                   <p class="time-l">{$item.add_time|date='Y-m-d H:i:s',###}</p>
+                                </div>
+                            </a>
+                          </li>
+                      </volist>
+                    </ul>
+                </div>
+                <h2>24小时热文</h2>
+                <div class="artlist">
+                    <ul>
+                      <volist name="hostNews24" id="item">
+                          <li class="li-small clearfix">
+                              <a class="pull-left liImg" target="_blank" title="{$item.title}" href="{$item['href']}">
+                                <img src="{$item.img}">
+                              </a>
+                              <div class="liTxt pull-left">
+                                 <h3 class="name-l"><a class="li-small clearfix" target="_blank" title="{$item.title}" href="{$item['href']}">{$item.title}</a></h3>
+                                 <p class="time-l">{$item.add_time|date='Y-m-d H:i:s',###}</p>
+                              </div>
+                          </li>
+                      </volist>
+                    </ul>
+                </div>
+                <!-- 赛事直播 -->
+                <h2>相关推荐 <a target="_blank" href="javascript:void(0);" class="text-666 pull-right moreTit renew"><img src="__IMAGES__/publish_index/loading.png">换一换</a></h2>
+                <!-- 赛事锦集 start-->
+                <div class="listBox04">
+                    <ul>
+                    </ul>
+                </div>
+                <div class="">
+                    <ul class="left-tab clearfix left-photo">
+                    </ul>
+                </div>
+                <!-- 赛事锦集 start-->
+            </div>
+        </div>
+      </div>
+  </div>
+  <!-- 主体内容结束 -->
+</block>
+<block name="js">
+    <script>
+        var user_id = '{$user_id|default=0}';
+        var is_hyh = 0;
+    </script>
+    <script type="text/javascript" src="__JS__/publish/index.js"></script>
+
+    <script type="text/javascript" src="__JS__/publish_index/index.js?v=20180627"></script>
+</block>
+

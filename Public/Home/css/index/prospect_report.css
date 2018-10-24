@@ -1,0 +1,6 @@
+.message{ margin-top: 30px; margin-bottom: 30px;}
+.message h2{ font-size: 20px; border-left: 4px solid #bf000c; padding-left: 10px; height: 20px; line-height: 20px; margin: 10px 0 20px 0;}
+.message h2 a{  font-size: 14px; margin-left: 150px; cursor: pointer;}
+.explain,.pron{ border-top: 1px solid #e0e0e0; margin-top: 15px; padding-top: 15px;}
+.explain li,.pron li{ font-size: 14px; margin-bottom: 10px; height: 20px; overflow: hidden;}
+.explain .report,.pron .report{ background-color: #eca908; padding: 0 5px 0 5px; color: #fff; margin-right: 10px; }

@@ -1,0 +1,35 @@
+/**
+ * 竞猜王css样式文件
+ * 
+ * @author pengjian <710348662@qq.com>
+ *
+ * @since  2016-06-13
+ *
+**/
+/*推荐title*/
+.her_tj{border-top: .15rem solid #f7f7f7;border-bottom: 1px solid #ddd;padding: .2rem; line-height: .45rem;padding-top: .15rem}
+.her_tj .ht_left{ height: .4rem; border-left:.06rem solid #0a94e4;padding-left: .2rem;margin-top: .1rem}
+.her_tj .ht_left span{color: #666666}
+.her_tj .ht_right img{width: .22rem; height: auto;margin-top: .05rem}
+
+
+
+.n_top{padding-bottom: .15rem}
+.n_top .n_top_left{float: left;font-size: .3rem;line-height: .57rem}
+.n_top_right{float: right;line-height: .57rem;font-size: .24rem; color: #999999}
+.n_top .n_top_left span{float: left;}
+.n_top .n_top_left img{float:left;width: .57rem; height: .57rem; border-radius: 50%;vertical-align: middle;margin-right: .2rem}
+.n_top .n_top_left em{margin-top: .15rem;}
+
+.sw_con p {text-align: center;}
+
+.fs32 em{padding: 0 .15rem; display: block;float: left;height: .28rem;color: #fff;line-height:.28rem;margin-left: .1rem;font-size: .20rem;margin-top: .11rem;}
+.fs32 .mingz{background: #f86054;border-radius: .2rem;margin-top: .09rem;}
+.fs32 .lians{background: url(../../images/guess/ic_streak.png) no-repeat left top; width: 1.11rem;height: .32rem;background-size: 1.11rem .32rem;padding: 0;padding-left: .35rem;line-height: .32rem;margin-top: .07rem;text-align: center; }
+
+.guess_sele{margin-top: .2rem;border:none;font-size: .26rem}
+
+
+
+
+

@@ -1,0 +1,76 @@
+<div class="pageContent">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>手机号：</label>
+				<input type="text" class="digits" name="username" value="{$vo.username}" disabled="disabled">
+			</div>
+			<div class="unit">
+				<label>头像：</label>
+				<img src="{$vo['face']}" width="100" height="100"></div>
+			<div class="unit">
+				<label>昵称：</label>
+				<input type="text" class="digits" name="nick_name" value="{$vo.nick_name}" disabled="disabled">
+			</div>
+			<div class="unit">
+				<label>真实姓名：</label>
+				<input type="text" class="digits" name="true_name" value="{$vo.true_name}" disabled="disabled">
+			</div>
+			<div class="unit">
+				<label>专家擅长：</label>
+				<input type="text" class="digits" name="true_name" value="{$vo.be_good_at}" disabled="disabled">
+			</div>
+			<div class="unit" style="padding-top:10px;">
+				<label>个人简介：</label>
+				<textarea cols="50" rows="8" disabled="disabled">{$vo['descript']}</textarea>
+			</div>
+			<div class="unit">
+				<label>身份证：</label>
+				<input type="text" class="digits" name="identfy" value="{$vo.identfy}" disabled="disabled">
+			</div>
+			<div class="unit">
+				<label>证件照：</label>
+				<img src="{$vo['identfy_pic']}" width="300" height="200">
+			</div>
+			<div class="unit">
+				<label>拒绝原因：</label>
+				<textarea cols="50" rows="6" id="reason">{$vo['reason']}</textarea>
+			</div>
+		</div>
+</div>
+<form id="form1" method="post" action="__URL__/expertInfo" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone);" target="callbackframe">
+	<input type="hidden" name="id" value="{$vo.id}" />
+	<input type="hidden" name="expert_status" id="expert_status" value="" />
+	<input type="hidden" name="reason" id="inputReason" value="{$vo.reason}" />
+	<div class="formBar">
+		<ul>
+			<if condition="$vo.expert_status neq 1">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" class="classBtn" status="1">通过</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" class="classBtn" status="3">拒绝</button></div></div></li>
+			</if>
+			<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+		</ul>
+	</div>
+</form>
+
+</div>
+<!--引入本页js-->
+<script>
+	$(".classBtn").on('click',function(){
+		var status = $(this).attr('status');
+		$('#expert_status').val(status);
+
+		if(status == 3){
+			var reason = $('#reason').val();
+			if(reason == '' || reason == undefined){
+				alert('请先填写拒绝原因！');
+				return false;
+			}
+
+			$('#inputReason').val(reason);
+		}
+
+		$('#form1').submit();
+	})
+</script>
+
+

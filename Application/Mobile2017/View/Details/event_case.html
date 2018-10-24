@@ -1,0 +1,94 @@
+<extend name="Public/tpl-detail" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/team_data.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/scrollCss3/animateTeam.css">
+    <style type="text/css">
+        .evenImg img, .imgList img{ margin-top: 0;}
+    </style>
+
+    <!-- 本页需要引用的js -->
+    <script type="text/javascript" src="__JS__/scrollCss3/collapsingToolbarLayout.js"></script>   
+    
+</block>
+<block name="content">
+	   <!-- 内容 s -->
+	   <section class="data_con odds_con clearfix">
+            <div class="iframe">
+       		<!-- 数据导航s -->
+	   	    <nav class="odd_nav">
+                <ul>
+                  <li class="on"><a href="{:U('Details/event_case',array('scheid'=>$_GET['scheid']))}">赛况</a></li>
+                  <li><a href="{:U('Details/event_technology',array('scheid'=>$_GET['scheid']))}">技术</a></li>
+                  <li><a href="{:U('Details/event_squad',array('scheid'=>$_GET['scheid']))}">阵容</a></li>
+                </ul> 
+             </nav>
+             <!-- 数据导航e --> 
+			<!-- 球队统计s -->
+            <div class="data_title">
+            	文字直播
+            </div>
+            <div class="compare-data" style="padding:0">
+                <div class="item">
+                    <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <volist name='data' id='v' mod="2">
+                                <tr <eq name='mod' value='1'>bgcolor="#f2f2f2"</eq>>
+                                <td width="8%" class="evenImg">
+                                    <switch name='v.type'>
+                                        <case value='1'><img src="__IMAGES__/jinqiu.png"></case>
+                                        <case value='2'><img src="__IMAGES__/corner-foot.png"></case>
+                                        <case value='3'><img src="__IMAGES__/yellow-card.png"></case>
+                                        <default/><img src="__IMAGES__/scores-nromal.png">
+                                    </switch>
+                                </td>
+                                <td width="84%" class="alignLeft">{$v.time} {$v.data}</td>
+                                <td width="8%" class="evenImg"><eq name='v.position' value='1'><img src="{$against.home_logo}"  alt="{$against.home_team_name.0}"></eq><eq name='v.position' value='2'><img src="{$against.away_logo}" alt="{$against.away_team_name.0}"></eq></td>
+                            </tr>
+                            </volist>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="itemImgList">
+                	<table class="table" width="100%" cellpadding="0" cellspacing="0">
+                		<tbody>
+                			<tr>
+                				<td width="18%">
+                                	<div class="imgList">
+                                    	<img src="__IMAGES__/jinqiu.png">进球
+                                    </div>
+                                </td>
+                                <td width="18%">
+                                	<div class="imgList">
+                                    	<img src="__IMAGES__/penalty.png">点球
+                                    </div>
+                                </td>
+                                <td width="19%">
+                                	<div class="imgList">
+                                    	<img src="__IMAGES__/oolong.png">乌龙球
+                                    </div>
+                                </td>
+                                <td width="23%">
+                                	<div class="imgList">
+                                    	<img src="__IMAGES__/yellow-card.png">
+                                        <img src="__IMAGES__/red-card.png">
+                                        红黄牌
+                                    </div>
+                                </td>
+                                <td width="22%">
+                                	<div class="imgList">
+                                    	<img src="__IMAGES__/in.png">
+                                        <img src="__IMAGES__/out.png">
+                                        换人
+                                    </div>
+                                </td>
+                			</tr>
+                		</tbody>
+                	</table>
+                </div>
+            </div>
+            <!-- 球队统计e -->
+            </div>
+	   </section>
+	   <!-- 内容 e -->
+</block>

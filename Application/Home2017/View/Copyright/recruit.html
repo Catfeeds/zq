@@ -1,0 +1,70 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>高薪聘请_全球体育_即时比分,足球比分,赛事直播,足彩推荐|全球体育网qqty.com</title>
+    <meta name="keywords" content="英超直播、NBA直播、直播吧、A8直播、足球直播、极速直播、jrs直播、中超直播、比分直播、赛事直播、体育直播网、CBA直播"/>
+    <meta name="description" content="全球体育是最好的体育视频直播网站、主要提供英超直播、NBA直播、直播吧、A8直播、足球直播、极速直播、jrs直播、中超直播、比分直播、赛事直播等、力争做用户体验最好的体育直播网"/>
+</block>
+<block name="body">
+<body>
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/link_page/recruit.css">
+    <div class="body">
+        <!-- 顶部开始 -->
+        <include file="Public:top_about"/>
+
+        <!-- 主体内容开始 -->
+        <div class="home clearfix">
+            <section class="main clearfix">
+                <h2><img src="__PUBLIC__/Home/images/link_page/title03.png"></h2>
+                <div class="rec-banner">
+                    <div class="rec-info">
+                        <ul>
+                            <li>公司将为每位员工提供同行业具有吸引力的薪资，完善的福利保障，舒适的办公环境，良好的合作氛围等最具竞争力的条件。</li>
+                            <li>应聘简历请发送至Email：<span>hr@gdquancai.com</span>，请务必以“姓名＋应聘职位全称”为邮件标题，并在邮件中注明“期望薪资范围”</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rec-type">
+                    <h3 class="text-orange">选择招聘分类</h3>
+                    <ul class="clearfix recruitClass">
+                            <li style="margin-left: 0;"><a href="{:U('Copyright/recruit')}" <if condition="$Think.get.class_id eq ''">class="btn-orange"</if> >全部</a></li>
+                            <volist name="recruitClass" id="item">
+                                <li style=" margin-left: 0;"><a href="{:U('Copyright/recruit',['class_id'=>$item['id']])}" <if condition="$Think.get.class_id eq $item['id']">class="btn-orange"</if> >{$item.name}</a></li>
+                            </volist>
+                    </ul>
+                    <h3 class="text-orange">
+                        <volist name="recruitClass" id="item">
+                            <if condition="$Think.get.class_id eq $item['id']">{$item.name}</if>
+                        </volist>
+                    </h3>
+                    <div class="tab">
+                        <!-- Nav tabs -->
+                        <ul class="clearfix tab-nav">
+                            <volist name="recruitList" id="item">
+                                <li style=" margin-left: 0;"><a href="javascript:;" <if condition="$key eq 0">class="btn-orange"</if> >{$item.title}</a></li>
+                            </volist>
+                        </ul>
+                        <!-- Nav tabs -->
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <volist name="recruitList" id="item">
+                                <div class="type-list" <if condition="$key neq 0">style="display:none;"</if>>
+                                    <h4 class="text-555">{$item.title}</h4>
+                                    <div class="job_intro_wrap">
+                                        <div class="job_intro_info">
+                                            {$item.content|htmlspecialchars_decode}
+                                        </div>
+                                    </div>
+                                </div>
+                            </volist>
+                        </div>
+                        <!-- Tab panes -->
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- 主体内容开始 -->
+        <include file="Public:footer_about"/>
+    </div>
+</body>
+</html>
+</block>

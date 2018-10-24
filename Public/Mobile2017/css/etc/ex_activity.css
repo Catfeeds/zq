@@ -1,0 +1,136 @@
+/**
+ * 欧洲杯竞猜css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-06-04
+ *
+**/
+/* 竞猜内容 */
+.bd_lucky{height:auto; background: url(../../images/etc/etc-bg.jpg) center top repeat-y; background-size: 100% auto;}
+.bd-lucky .Imgpng{ position:relative;}
+.bd-lucky .bg{ width: 100%;}
+.record{ width:90%; margin:0 5%; height: .6rem; background: #03286a; overflow:hidden;}
+.record ul li{ height: .6rem; line-height:.6rem; text-align: center; overflow:hidden; color:#fff;}
+.record-list{ /*height:26rem;*/  overflow:hidden;}
+
+/* 抽奖区 */
+.cj-box { width: 80%; margin:0 auto; position: relative;}
+.cj { position: absolute; top: 6.4%; top: 0; left: 0; width: 100%; height: 100%; padding: .26rem;}
+.cj li { position: absolute; float: left; width: 28%; height: 28%;} 
+/* 设8个奖项的样式 */
+ .eight-item li:nth-of-type(1){
+    left:6%;top:6%;
+}
+
+.eight-item li:nth-of-type(2){
+    left:36%;top:6%;
+}
+.eight-item li:nth-of-type(3){
+    left:66%;top:6%;
+}
+.eight-item li:nth-of-type(4){
+    left:66%;top:36%;
+}
+
+.eight-item li:nth-of-type(5){
+	left:66%;top:66%;
+    /* left:36%;top:36%; */
+}
+.eight-item li:nth-of-type(6){
+	left:36%;top:66%;
+    /* left:6%;top:36%; */
+}
+
+.eight-item li:nth-of-type(7){
+    left:6%;top:66%;
+}
+.eight-item li:nth-of-type(8){
+	left:6%;top:36%; 
+    /* left:36%;top:66%; */
+}
+.eight-item li:nth-of-type(9){
+    left:66%;top:66%;
+}
+
+.eight-item li:nth-of-type(10){
+    left:-0.1%;top:32.8%;
+}
+
+.cj li > div {
+    width: 100%;
+    height: 100%;
+    background: url(../../images/etc/cj-det.png) no-repeat center center;
+	background-size: 100% auto;
+    text-align: center;
+	padding: 5% 0;
+}
+.cj li > div img {
+    width: auto;
+	max-width: 96%;
+    height: .75rem;
+}
+.cj li > div p:nth-child(2){ font-size: .2rem; color: #eb4f38;}
+.cj li > div p:nth-child(3){ font-size: .18rem;}
+
+.cj-info,.cj-cs{color:#fff;}
+.cj-cs>p,.cj-cs>p:first-child{
+    text-align:center;
+	position: relative;
+	margin-bottom: .36rem;
+}
+.cj-cs>p:first-child{ margin-top: -.1rem;}
+.cj-cs .only{ display: block; width: 50%; margin: 0 auto; height: .5rem; line-height: .5rem; border-radius: .25rem; background: #d4100d;}
+.cj-cs .only em{ color: #ffe795;}
+.cj-info a{    
+    color:#fff;
+    text-decoration:underline;
+}
+.cj-cs a{    
+    color:#83ddff;
+    text-decoration:underline;
+} 
+
+.cj li.adcls>div{background: url(../../images/etc/cj-on.png) no-repeat center center; background-size: 100% auto;}
+.bt{position:absolute;left:36%;top:36%; width: 28%; height: 28%;;margin:0 auto 0;background: url(../../images/etc/cj-btn.png) no-repeat center center;
+	background-size: 100% auto;text-align:center;color:#fff;cursor:pointer;}
+#cj-a{margin:0 auto ;}
+.dialog
+{
+    display:none;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    padding:0 10%;
+    background:rgba(0,0,0,.6);
+	z-index: 1000;
+}
+.text{position:fixed;top:20%; left: 10%; width:80%; height: 47.8%; padding: .2rem 0;background: url(../../images/etc/msg-bg.png) no-repeat center 0; padding-top: 20%; background-size: 100% 100%; text-align:center; z-index: 1001;}
+.text p:nth-child(1){ font-size: .32rem; color: #991803;}
+.text p:nth-child(2) img{ width: auto; max-width: 96%; height: .76rem;}
+.text p:nth-child(3){ font-size: .24rem;}
+.text p:nth-child(3) span{ color: #d83313;}
+.text p:nth-child(4) a{ display: inline-block; width: 3.82rem; height: .93rem; line-height: .8rem; color: #ffefd9; font-size: .36rem; background: url(../../images/etc/lq-btn.png) no-repeat center center; background-size: 100% 100%;}
+.text p{ margin-bottom: .15rem;}
+.text.t0{ font-size: .32rem; }
+.text.t1{top:10%;}
+.text.t2{top:20%;}
+.text .close_btn{ width: .56rem; height: .56rem; position: absolute; right: 14%; top: .08rem; background: url(../../images/etc/close.png) no-repeat center 0; background-size: 100% 100%;}
+
+
+/* 竞猜内容 */
+.cai_con{ padding: 0 .26rem; padding-bottom: .1rem;}
+.cai_con .title{ height: .52rem; width: 100%; margin-top: .3rem; margin-bottom: .12rem; background: url(../../images/etc/title.png) no-repeat center center; background-size: 100% auto;}
+.cai_list_con .prize_list{ margin-top: .3rem; padding: .3rem; background: #1948b4; border: 1px solid #0d448b; box-shadow: 0 0 .1rem #0b2c6b; margin-bottom: .2rem; border-radius: .1rem;}
+.cai_list_con .prize_list a{ display: block; width: 2.2rem; margin:0 auto; margin-top: .3rem; height: .56rem; line-height: .56rem; background: url(../../images/etc/prize-on-btn.png) no-repeat 0 0; background-size: 100% 100%; text-align: center; color: #fff; text-shadow: 1px 1px 1px #000;}
+.cai_list_con .prize_list a.dis{background: url(../../images/etc/prize-dis-btn.png) no-repeat 0 0; background-size: 100% 100%; cursor: not-allowed; pointer-events: none;  -webkit-box-shadow: none; box-shadow: none;}
+.cai_list_con .prize_list .title_p{ height: .46rem; line-height: .46rem; text-align: center; border-radius: .2rem; background: #fcff00; position: relative; margin-top: -.53rem; margin-bottom: .3rem;}
+.cai_list_con .prize_list figure img{ width: 2.4rem;}
+
+/*弹出框个人信息填写*/
+.form_div{ margin-bottom: .08rem;}
+.input-name{ width: 30%; height: .4rem; line-height: .4rem; text-align: right;}
+.input-con{ width: 70%; height: .4rem;}
+.input-con input{ width: 80%; height: .4rem; border: 1px solid #f1d7aa; background: #fffdf2; padding: 0 1%;}

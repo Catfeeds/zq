@@ -1,0 +1,174 @@
+<include file="Public:header"/>
+
+<!--引入本页所需css-->
+<link rel="stylesheet" href="__PUBLIC__/Home/css/personal_center/draw_money.css">
+<style>
+    .input-con {position: relative;}
+</style>
+
+<body>
+    <!-- 顶部开始 -->
+    <include file="Public:top"/>
+    <!-- 顶部结束 -->
+
+    <div class="body">
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <div class="data-graph draw-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="{:U('UserAccount/extract')}" >提款</a></li>
+                                    <li role="presentation"><a href="{:U('UserAccount/bindBankCard')}">绑定银行卡</a></li>
+                                    <li role="presentation"><a href="javascript:void(0);" class="current">绑定支付宝</a></li>
+                                </ul>
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <!-- 绑定银行卡开始 -->
+                                    <div id="bind" class="line-graph clearfix">
+                                        <div class="bind-list">
+                                            <!--用户银行信息开始-->
+                                            <if condition ="$bank_card_id neq ''">
+                                                <span class="text-red" style="margin-left:10px;">您已经绑定银行卡</span>
+                                            <else />
+                                                <div class="pull-left form">
+                                                 <form  id="jsForm" action="" method="post">
+                                                    <div class="form-in clearfix">
+                                                        <div class="pull-left input-name">支付宝账号：</div>
+                                                        <div class="pull-left input-con">
+                                                            <input style="width: 260px" class="form-control" name="alipay_id" type="text" placeholder=""/>
+                                                            <span class="hint">填写支付宝账号</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-in clearfix">
+                                                        <div class="pull-left input-name">真实姓名：</div>
+                                                        <div class="pull-left input-con">
+                                                            <input type="password" class="hidden" />
+                                                            <input style="width: 260px" class="form-control required" name="true_name" type="text" placeholder=""/>
+                                                            <span class="hint">必须与身份证真实姓名一致</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-in clearfix">
+                                                        <div class="pull-left input-name">提款密码：</div>
+                                                        <div class="pull-left input-con">
+                                                            <input type="password" class="hidden" />
+                                                            <input id="paw" class="form-control required" name="bank_extract_pwd" type="password" placeholder=""/>
+                                                            <span class="hint">提款时需要输入的密码</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-in clearfix">
+                                                        <div class="pull-left input-name">重复提款密码：</div>
+                                                        <div class="pull-left input-con">
+                                                            <input id="pawOk" class="form-control" name="re_bank_extract_pwd" type="password" placeholder=""/>
+                                                            <span class="hint">由6位数字组成的密码</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="reg-btn clearfix form-in">
+                                                        <input type="submit" class="btn btn-green pull-right" value="确认提交" />
+                                                    </div>
+                                                    <span class="text-red no-change">*支付宝绑定后不可修改</span>
+                                                    </form>
+                                                </div>
+                                            </if>
+                                            <!--用户银行信息结束-->
+                                        </div>
+                                    </div>
+                                    <!-- 绑定银行卡结束 -->
+                                </div>
+                                <!-- Tab panes -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+</body>
+</html>
+<script type="text/javascript">
+    $(function(){
+        $("form").validate({
+            onkeyup:false,
+            rules: {
+                alipay_id: {required: true},
+                true_name : {
+                    remote: {
+                        url: "{:U('UserAccount/verifyTrueName')}",
+                        type: "post",
+                        data: {'true_name':function(){return $("input[name='true_name']").val();}}
+                    }
+                },
+                bank_extract_pwd: {
+                    required: true,
+                    digits:true,
+                    rangelength:[6,6],
+                },
+                re_bank_extract_pwd: {
+                    required: true,
+                    equalTo: "#paw"
+                }
+            },
+
+            messages : {
+                alipay_id :{
+                    required:"请输入支付宝账号"
+                },
+                true_name : {
+                    required: "请输入真实姓名",
+                    remote : '真实姓名不一致',
+                },
+                bank_extract_pwd: {
+                    required: "请输入提款密码",
+                    digits: "提款密码由6位数字组成",
+                    rangelength: "密码长度6个字符"
+                },
+                re_bank_extract_pwd: {
+                    required: "请确认提款密码",
+                    equalTo: "两次密码输入不一致"
+                }
+            },
+            submitHandler:function(form){
+                var form = $(form);
+                var data = form.serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "{:U('UserAccount/bindAlipay')}",
+                    data: data,
+                    success: function(data){
+                      if(data.status){
+                        // document.getElementById("jsForm").reset();
+                        _alert("提示",data.info,"window.location.href='{:U('UserAccount/bindAlipay')}'");
+                      }else{
+                        showMsg(data.info,'','error');
+                      }
+                    }
+                });
+            }
+        })
+        //聚焦input出现提示
+        $('.input-con input').focus(function(e) {
+            $(this).siblings('span.hint').show();
+            //$(this).siblings('span.hint').stop().fadeIn(500);
+        });
+        $('.input-con input').blur(function(){
+            $(this).siblings('span.hint').hide();
+            //$(this).siblings('span.hint').stop().fadeOut(500);
+        });
+    })
+</script>

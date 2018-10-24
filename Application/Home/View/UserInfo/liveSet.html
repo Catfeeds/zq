@@ -1,0 +1,234 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userInfo/qw_order.css?v=20180828">
+    <link rel="stylesheet" href="__CSS__/userInfo/liveSet.css?v=201808311849">
+    <script type="text/javascript" src="__JS__/common/laydate/laydate.js"></script>
+    <script type="text/javascript" src="__JS__/common/jquery-1.11.1.min.js"></script>
+       <!--引入本屏所需css-->
+       <link rel="stylesheet" href="__PUBLIC__/Plugs/cropbox/upface.css">
+</block>
+<block name="content">
+    <div class="body">
+        <!-- 头部开始 -->
+        <include file="Public:top_user"/>
+        <!-- 头部结束 -->
+
+        <!-- 主体内容开始 -->
+        <div class="qw_content clearfix">
+            <!-- 左边的主体内容 -->
+            <include file="Public:leftMenu"/>
+            <!-- left-main e -->
+
+            <!-- right_main s -->
+            <div class="right_main fr" style="min-height: 842px; padding-left: 30px;position:relative">
+              <div> 
+                    <p>模板图示例：</p>
+                    <div class="pictrue">
+                        <a>
+                            <img src="/Public/Home/images/pic_sl.png" class="pic">
+                            <img src="__IMAGES__/pic5.png" class="pic_i">
+                        </a>
+                        <a>
+                             <img src="/Public/Home/images/pic_sl.png" class="pic">
+                            <img src="__IMAGES__/pic6.png" class="pic_i">
+                        </a>
+                        <a>
+                             <img src="/Public/Home/images/pic_sl.png" class="pic">
+                            <img src="__IMAGES__/pic7.png" class="pic_i">
+                        </a>
+                        <a>
+                             <img src="/Public/Home/images/pic_sl.png" class="pic"><img src="__IMAGES__/pic8.png" class="pic_i">
+                        </a>
+                        <a>
+                             <img src="/Public/Home/images/pic_sl.png" class="pic">
+                            <img src="__IMAGES__/pic9.png" class="pic_i">
+                        </a>
+                    </div>
+                    
+                    <div class="add">
+                        <div class="liveImage">
+                            <input id="viewUploadInput_77" name="fileInput" type="file" onChange="previewImage(77)" style="display:none;" />
+                            <a href="javascript:void(0);">
+                             <span id="viewUploadDiv_77">
+                                    <img src="<if condition="$liveLogo neq ''">{$liveLogo}<else/>__IMAGES__/add.png</if>" width="120" height="120" id="viewUploadImg_77"/>
+                             </span>
+                            </a>
+                            <div id="poiter_77" class="poiter">
+                                <a  class="openpops"  title="修改封面" >修改封面</a>
+                                <!-- <a title="修改封面" onclick="selectViewUploadImg('#viewUploadInput_77')">修改封面</a> -->
+                            </div>
+                        </div>
+                        <!--<a><img src="__IMAGES__/add.png"></a>-->
+                        <h1><span class="need">*必填</span>直播封面图</h1>
+                        <h2>支持JPG、PNG、图片大小不能超过2M</h2>
+                    </div>
+                    <!-- 裁剪封面图弹窗开始 -->
+                    <div class="pops">
+                    <link rel="stylesheet" href="__PUBLIC__/Plugs/cropbox/upface.css">
+                    <!--引入本屏js-->
+                    <script src="__PUBLIC__/Plugs/cropbox/cropbox.js"></script>
+                    <script src="__PUBLIC__/Plugs/cropbox/upsurface.js"></script>
+                    <input name="imgData" id="imgData" type="hidden" value="" />
+                    <input id="myFaceUrl" value="{$UserData.UserFace}" type="hidden"/>
+                   <div class="container">
+                        <div class="action">
+                            <div class="tips" style="color: #eb0000;">温馨提示：预览框内支持鼠标滑轮缩放，点击保存即可。</div>
+                        </div>
+                     <div class="imageBox" style=" width:250px;height:250px;left: 100px;margin-top: -30px;">
+                            <div class="thumbBox"></div>
+                            <div class="spinner" style="display: none">Loading...</div>
+                        </div>
+                        <p class="hint-image" >请上传(200x200)px大小的图片</p>
+                        <!-- <div class="cropped" style="right:-415px;"></div> -->
+                    </div>
+        
+                    <hr/>
+                    <div class="new-contentarea tc" style="margin-left: 20px">
+                            <a href="javascript:void(0)" class="upload-img">
+                                <label for="upload-file">点击上传封面图</label>
+                            </a>
+                            <input type="file" class="" name="upload-file" id="upload-file" />
+                        </div>
+                        <input type="button" id="btnCrops"  class="Btnsty_peyton  btn-close"  value="取消" />
+                        <input type="button" id="btnCrop"  class="Btnsty_peyton btn-peytons" value="保存" />
+                        <input type="button" id="btnZoomIn" class="Btnsty_peyton btn-peyton" value="+"  >
+                        <input type="button" id="btnZoomOut" class="Btnsty_peyton btn-peyton" value="-"/>
+                    <!-- <input type="button" value="保存" class="btn btn-blue" style="margin-left:1em;padding:6px 12px;width:150px;" onclick="checkUpFace(this);" /> -->
+                </div>
+                  <!-- 裁剪封面图弹窗结束 -->
+                <!-- <div class="link"><span>当前直播链接:</span><span class="long"><a>{$liveInfo['replay_url']}</a></span><span><button class="copyButton" data-clipboard-text="{$liveInfo['replay_url']}" type="text" value="but">复制链接</button></span><span>当前房间ID:</span><span class="roomId">{$liveInfo['room_id']}</span></div> -->
+                    <div class="titleDiv">
+                        <h2><span class="need">*必填</span>直播标题</h2>
+                        <input type="text" class="titleInput" placeholder="请输入直播标题" value="{$liveInfo['title']}" maxlength="20"><span class="before-wore">{:strlen($liveInfo['title'])}</span>/20
+                        <!-- <button type="text" class="saveTitle" value="but" <if condition="$liveInfo eq ''">style="display:none;"</if>>保存标题</button> -->
+                    </div>
+                    <div class="top">
+                        <span class="topleft">相关赛事 : 非必填，可选可不选</span>
+                        <span class="topmiddle">已选中的赛事：</span>
+                        <span class="topright">{$liveInfo['game']}</span>
+                        <button type="text" value="but" class="gameListButton">赛事筛选<img src="__IMAGES__/dbx.png"></button>
+                    </div>
+                    <!--赛事选择-->
+                    <div class="control-box">
+                        <div id="unionLevel" class="box-list dropdown-menu">
+                            <div class="clearfix uniontitle">
+                                <div class="pull-left box-title">赛事选择</div>
+                                <div class="pull-right box-title">隐藏<i>0</i>场</div>
+                            </div>
+                            <div class="box-team">
+                                <div id="menu_list">
+                                    <ul class="clearfix match-team">
+                                        <volist name="game['union']" id="vo">
+                                            <li><label class="inline" style="border-left: 5px solid {$vo.union_color};">
+                                                <input type="checkbox" class="userid" checked="checked" value="{$vo.union_id}">
+                                                <span>{$vo.union_name}</span>
+                                                <em>[{$vo.num}]</em>
+                                            </label>
+                                            </li>
+                                        </volist>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="btn-con clearfix">
+                                <input type="button" id="checkAll" class="btn btn-blue pull-left" value="全选">
+                                <input type="button" id="reverse" class="btn btn-red pull-left" value="反选" style="margin-left: 12px;">
+                                <input type="button" id="removeAll" class="btn btn-default pull-right" style="margin-left: 12px;" value="关闭">
+                                <input type="button" id="ensure" class="btn btn-blue pull-right" value="确定">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="next-top">
+                        <span class="one f16">联赛名称</span>
+                        <span class="two f16">比赛时间</span>
+                        <span class="three f16">状态</span>
+                        <span class="four f16">主队</span>
+                        <span class="five f16">客队</span>
+                        <span class="six f16">已经专家直播</span>
+                        <span class="seven f16">勾选直播</span>
+                    </div>
+                    <div id="mainBox">
+                        <div id="content">
+                            <table class="gameList">
+                                <volist name="game['game']" id="vo">
+                                    <tr game_id="{$vo['game_id']}" union_id="{$vo['union_id']}">
+                                        <td class="one">{$vo['union_name']}</td>
+                                        <td class="two">{$vo['game_start_timestamp']|date='Y/m/d H:i',###}</td>
+                                        <td class="three">{:C('game_state')[$vo['game_state']]}</td>
+                                        <td class="four">{$vo['home_team_name']}</td>
+                                        <td class="five">{$vo['away_team_name']}</td>
+                                        <td class="six">{$nowLive[$vo['game_id']]|default="0"}</td>
+                                        <td class="seven checkLive"><a class="<if condition="$liveInfo['game_id'] eq $vo['game_id']">ischeck<else/>nocheck</if>"></a></td>
+                                    </tr>
+                                </volist>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="click">
+                        <if condition="$liveInfo eq ''">
+                            <button type="text" value="but">我要开播</button>
+                            <else/>
+                            <button type="text" value="but" class="right">直播结束</button>
+                        </if>
+                        <if condition="$liveInfo['live_status'] eq 1">
+                            <a class="startStop isstart" <if condition="$liveInfo eq ''">style='display:none;'</if>><img src="__IMAGES__/click.png"></a>
+                            <else/>
+                            <a class="startStop isstop" <if condition="$liveInfo eq ''">style='display:none;'</if>><img src="__IMAGES__/start.png"></a>
+                        </if>
+                    </div>
+                    <div class="liveRadio" <if condition="$liveInfo eq ''">style='display:none;'</if>>
+                        <div class="link"><span class="link-one">当前直播链接 :</span><span class="long" style="margin-left: 17px;"><a>{$liveInfo['replay_url']}</a></span><span class="link-three"><button class="copyButton" data-clipboard-text="{$liveInfo['replay_url']}" type="text" value="but">复制链接</button></span>
+                            <span class="link-two link-speat">（粘贴至“OBS-控件/文件-设置-流-Url"位置，点击确定即可开播）</span>
+                            <span class="link-two" style="left: 0px;">当前房间ID :</span><span class="roomId roomId-speat">{$liveInfo['room_id']}</span>
+                        </div>
+
+                    <h5>文字广播<span class="small-wore" >(内容以走马灯的形式在播放端呈现给用户,您可以再次发送或输入新的内容)</span></h5>
+                    <!-- <div class="request">
+                        <volist name="liveInfo['notice']" id="vo">
+                            <div adId="{$key}">
+                                <span class="worlds"><p>{$vo}</p></span>
+                                <span class="button reSend">重发</span>
+                                <span class="delMsg"><img src="__IMAGES__/delect.png"></span>
+                            </div>
+                        </volist>
+
+                    </div> -->
+                    <div class="request">
+                        <volist name="liveInfo['notice']" id="vo">
+                            <div class="request-box" adId="{$key}">
+                                <span class="worlds"><p>{$vo}</p></span>
+                                <span class="button reSend">再次发送</span>
+                                <span class=" delMsg">删除记录</span>
+                            </div>
+                        </volist>
+                            
+           
+
+                    </div>
+                    <textarea placeholder="请输入直播标题" class="liveAd" maxlength="100" style="margin-top: -12px;"></textarea>
+                    <div class="impose"><span class="left"> 1</span><span class="right"> /100</span></div>
+                    <div class="sub">
+                        <button class="toAnew" type="text" value="but">重发</button>
+                        <button class="toSend" type="text" value="but">发送</button>
+                    </div>
+                </div>
+            </div>
+            <!--页码结束<-->
+        </div>
+        <!-- right_main s -->
+
+    </div>
+    <!-- 主体内容结束 -->
+    </div>
+
+</block>
+<block name='js'>
+    <script>
+        var RoomImg = "{$liveLogo}";
+    </script>
+    <script type="text/javascript" src="__PUBLIC__/Plugs/clipboard.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+    <!--引入本页js-->
+    <script type="text/javascript" src="__JS__/userInfo/liveSet.js?v=201808311215"></script>
+</block>
+

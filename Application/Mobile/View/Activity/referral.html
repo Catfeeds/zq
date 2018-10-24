@@ -1,0 +1,74 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>精准推介，免费体验 - 全球体育手机网</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/activity/master_sele.css?v=20180827">
+</block>
+<block name="header"></block>
+<block name="body"></block>
+<block name="nav"></block>
+<!-- 内容 s -->
+<block name="content">
+    <section class="ms_bg">
+        <div class="logo"></div>
+        <div class="logo_right"><a href="{:U('/')}"></a></div>
+        <a href="{:U('/')}"><div class="top_back"></div></a>
+        <section class="ms_tip">
+            <p>五大赛事激战连连，全球体育专家团推介全面飘红</p>
+            <p>周胜率达90% 现在推出新用户免费产品体验</p>
+            <p>让您体验高胜率推介</p>
+            <p>全球体育球王产品精选的信心稳场推介，</p>
+            <p>价值<span>388</span>元推介<span>免费送！</span></p>
+            <p>免费获取精准推介助您场场红单</p>
+        </section>
+        <!-- 挑选高手推介 s-->
+        <section class="master_list clearfix">
+            <div class="master_title"><img src="__IMAGES__/activity/masterSele/master_title.png?v=1" alt="挑选产品推介"></div>
+            <div class="ms_list_con">
+                <ul>
+                    <volist name="list" id="vo">
+                        <li data-id="{$vo['id']}">
+                            <div class="head"><img src="{$vo['head']}" alt="头像"></div>
+                            <div class="head_top"></div>
+                            <p><span>{$vo['master_name']}</span><em>回报率: {$vo['winrate']}%</em></p>
+                            <p>{$vo['descript']}</p>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+        </section>
+        <!-- 挑选高手推介 e-->
+    </section>
+    <section class="tel_con">
+        <section class="get_msg">
+            <div class="get_type"><img src="__IMAGES__/activity/masterSele/get.png?v=1" alt="获取方式"></div>
+            <div class="get_word">添加微信号"qqtyvip"，可获得球王<span>免费推介</span></div>
+            <div class="get_ewm"><img src="__IMAGES__/activity/masterSele/ewm.jpg?v=1" alt="二维码"></div>
+        </section>
+    </section>
+    <section class="footer">
+        <div><span> 注意：</span></div>
+        <p>1、认准全球体育官方客服微信id：qqtyvip，活动不限量，欢迎添加客服小姐姐微信号体验球王推荐，详情请咨询客服小姐姐。</p>
+        <p>2、赠送球王产品精准推荐将视当天赛事情况而定，当日未获得赠送的用户将在次日赠送，请留意您的微信信息。</p>
+    </section>
+    <div id="app-bar" class="app-bar ios_touch" style="">
+        <a class="app-close ios_touch" id="cone" href="javascript:;">&nbsp;</a>
+    </div>
+</block>
+{//底部}
+<block name="footer"></block>
+<block name="scripts">
+    <script>
+        $(function(){
+            //关闭app下载提示
+            $(document).on('click','#cone',function(){
+                $('#app-bar').hide();
+                return false;
+            });
+        });
+    </script>
+</block>
+
+

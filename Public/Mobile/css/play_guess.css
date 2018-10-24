@@ -1,0 +1,18 @@
+/**
+ * 竞猜统计css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-04-26
+ *
+**/
+
+.guess_item{ background: #fff;}
+.guess_item .item_list{ padding: 0 .18rem;}
+.item_list .mTiti,.item_list .vTeam{ width: 100%;}
+.mTiti .mTitle,.mTiti .mTime{ width: 50%; padding-top: .12rem;}
+.mTiti .mTitle{ text-align: right; padding-right: .16rem;}
+.mTiti .mTime{ text-align: left; padding-left: .16rem; color: #ff7e00;}
+.vTeam .vZhu,.vTeam .vKe{ width: 45%;}
+.vTeam .vWill{ width: 10%; text-align: center; font-size: .22rem;}
+.vTeam .vZhu img{ width: .7rem;}

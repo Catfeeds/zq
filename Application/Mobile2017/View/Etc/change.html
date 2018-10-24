@@ -1,0 +1,108 @@
+<include file="Etc/head"/>
+<link rel="stylesheet" href="__CSS__/etc/ex_change.css">
+<body>
+    <!-- 导航 s-->
+    <!-- 二级头部 s -->
+    <header id="other_header">
+        <a href="{:U('Etc/index')}"></a>兑换推荐币
+    </header>
+    <!-- 二级头部 e -->
+
+    <!-- banner 切换 s-->
+    <section class="main_banner">
+        <figure class="baner">
+            <a href="#"><img src="__IMAGES__/etc/exchange-banner.jpg" alt=""></a>
+        </figure>
+    </section>
+    <!-- banner 切换 e-->
+
+    <section class="main">
+        <div class="guess_infor">
+            <figure class="clearfix">
+                <div class="fl headImg">
+                    <img <present name="user_auth">src="{$user_auth['head_url']}"<else/>src="__IMAGES__/user/headImg.png"</present>>
+                </div>
+                <figcaption class="fl head_infor">
+                    <p class="name"><present name="user_auth">{$user_auth['nick_name']}<else/>-</present></p>
+                    <ul class="infor_ul">
+                      <li><span class="fs24">积分：</span><em id='u_integral' class="fs22"><present name="user_auth">{$user_auth['integral']}<else/>-</present></em></li>
+                      <li><span class="fs24">推荐币：</span><em id='u_coin' class="fs22"><present name="user_auth">{$user_auth['coin']}<else/>-</present></em></li>
+                      <li><span class="fs24">排名：</span><em class="fs22"><present name="user_auth"><eq name="user_auth['rank']" value="0">-<else/>{$user_auth['rank']}</eq><else/>-</present></em></li>
+                    </ul>
+                </figcaption>
+                <a href="{:U('Etc/change_log')}" class="etc-more" style="width:1.34rem;"><img style="width:1.34rem;" src="__IMAGES__/etc/rank-link.png"></a>
+            </figure>
+        </div>
+        <div class="cai_con">
+            <div class="cai_title">
+                <div id="marquee">
+                    <ul>
+                        <li><a>兑换推荐币</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="cai_list_con">
+                <ul class="clearfix">
+                    <li class="fl change_list">
+                        <span class="fl">100推荐币</span>
+                        <a href="javascript:;" data-type='1' class="fr <lt name="user_auth.integral" value='100'>dis</lt> js-change">兑换</a>
+                    </li>
+                    <li class="fr change_list">
+                        <span class="fl">300推荐币</span>
+                        <a href="javascript:;" data-type='2' class="fr <lt name="user_auth.integral" value='300'>dis</lt> js-change">兑换</a>
+                    </li>
+                    <li class="fl change_list">
+                        <span class="fl">500推荐币</span>
+                        <a href="javascript:;" data-type='3' class="fr <lt name="user_auth.integral" value='500'>dis</lt> js-change">兑换</a>
+                    </li>
+                    <li class="fr change_list">
+                        <span class="fl">1000推荐币</span>
+                        <a href="javascript:;" data-type='4' class="fr <lt name="user_auth.integral" value='1000'>dis</lt> js-change">兑换</a>
+                    </li>
+                    <li class="fl change_list">
+                        <span class="fl">2000推荐币</span>
+                        <a href="javascript:;" data-type='5' class="fr <lt name="user_auth.integral" value='2000'>dis</lt> js-change">兑换</a>
+                    </li>
+                    <!--<li class="fr change_list">
+                        <span class="fl">3000推荐币</span>
+                        <a href="javascript:;" data-type='6' class="fr <lt name="user_auth.integral" value='3000'>dis</lt> js-change">兑换</a>
+                    </li>-->
+                </ul>
+            </div>
+            <a href="http://act.etcchebao.com/points/03/index.html" class="do_task"><img src="__IMAGES__/etc/do-task.png"></a>
+        </div>
+    </section>
+    <!-- 推荐成功 -->
+    <div class="bubbleTips"></div>
+    <!-- 推荐成功 -->
+    <!-- 推荐失败 -->
+    <div class="failTips"></div>
+    <!-- 推荐失败 -->
+</body>
+
+<script type="text/javascript">
+$('.js-change').click(function(e) {
+                    var type=$(this).data('type');
+                    if(Number(type)<1 || Number(type)>5){
+                        $('.failTips').html('输入100的倍数且不大于1000!').stop().fadeIn(300).animate({'top':'40%'},1500).hide(0).animate({'top':'50%'});
+                        return false;
+                    }
+                  $.ajax({
+                    type:"post",
+                    url : "/Etc/dochange.html",
+                    data:{type:type},
+                    dataType:'json',
+                    success: function(data){
+                        if(data.status==1){
+                            $('#u_integral').html(data.info.integral);
+                            $('#u_coin').html(data.info.coin);
+                            $('.bubbleTips').html(data.info.msg).stop().fadeIn(300).animate({'top':'40%'},1500).hide(0).animate({'top':'50%'});
+                        }else{
+                            $('.failTips').html(data.info).stop().fadeIn(300).animate({'top':'40%'},1500).hide(0).animate({'top':'50%'});
+                        }
+                          
+                    }
+                });
+                });
+</script>
+</html>

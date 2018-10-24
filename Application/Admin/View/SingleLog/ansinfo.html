@@ -1,0 +1,58 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input type="hidden" name="gameType" value="{$_REQUEST.gameType}"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+
+	<table class="list" width="100%" layoutH="117">
+		<thead>
+		<tr>
+			<th width="2%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="13%">竞猜标题</th>
+			<th width="5%">赛事ID</th>
+			<th width="8%">用户昵称</th>
+            <th width="8%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'add_time')"> class="desc"</if> orderField="add_time" <if condition="$_REQUEST._order eq 'add_time'">class="{$_REQUEST._sort}"</if>>竞猜时间</th>
+			<th width="10%">选项</th>
+			<th width="10%">竞猜内容</th>
+			<th width="10%">目前结果</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+				    <td>{$vo['single_title']}</td>
+                    <td>{$vo['game_id']}</td>
+                    <td>{$vo['user_name']}</td>
+                    <td>{$vo['add_time']|date="Y-m-d H:i",###}</td>
+					<td>{$vo['option']}</td>
+					<td>{$vo['ans']}</td>
+					<td>{$vo['conclusion']}</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

@@ -1,0 +1,22 @@
+<if condition="$_GET['header'] neq no">
+    <!--无意义,用于获取距离顶部距离-->
+    <link rel="stylesheet" type="text/css" href="__CSS__/index/navCss.css?v=20180504">
+    <div class="disTop"></div>
+
+    <div class="top-nav">
+        <div class="scroller">
+            <div class="scrol-in" >
+                <ul></ul>
+
+            </div>
+            <a class="expand-btn  " aria-label="点击跳转" role="button" href="{:U('/editNav')}" ><i></i></a>
+        </div>
+    </div>
+
+    <!--引入store插件-->
+    <script type="text/javascript" src="__PUBLIC__/Plugs/store/store.js"></script>
+    <script>
+        var navId = "{$thisNav}";
+    </script>
+    <script type="text/javascript" src="__JS__/editNav/navHead.js"></script>
+</if>

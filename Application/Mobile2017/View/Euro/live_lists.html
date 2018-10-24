@@ -1,0 +1,102 @@
+<extend name="Public/euro/base" />
+<block name="seo">
+    <title>2016欧洲杯赛程_全球体育欧洲杯专题</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/euro/euro2016.css">
+
+</block>
+
+<!-- 二级导航 s-->
+<block name="sub_nav">
+    <include file="Euro/live_nav"/>
+</block>
+<!-- 二级导航 e-->
+
+<!-- 内容 s -->
+<block name="content">
+    <section class="content">
+        <div class="planShedu">
+            <div class="planTitle">
+                <present name="group">
+                    <span class="fs30">{$group}组</span>
+                    <else/>
+                    <span class="fs30">{$group_list.0.run_name.0}</span>
+                </present>
+            </div>
+            <div class="planCon">
+                <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr class="empty">
+                            <td width="30%"></td>
+                            <td width="3%" class="line-bg"></td>
+                            <td width="27%"></td>
+                            <td width="13%"></td>
+                            <td width="27%"></td>
+                        </tr>
+                    <volist name='group_list' id='v'>
+                        <tr>
+                            <td width="30%" class="planTime">
+                                <span class="fs24">{$v.gtime|date='m月d日',###}</span>
+                                <em class="fs22 text-999">{$v.gtime|date='H:i',###}</em>
+                            </td>
+                            <td width="3%" class="line-bg"><img src="__IMAGES__/euro/circle.png"></td>
+                            <td width="27%" class="homeTeamName q-tr">
+                                {$v.home_team_name.0}<img src="{$v.home_logo}">
+                            </td>
+                        <switch name='v.game_state'>
+                        <case value="0|-10|-11|-12|-13|-14"><td width="13%" class="mach_begin">VS</td></case>
+                        <case value="-1|1|2|3|4"><td width="13%" class="mach_over">{$v.score}</td></case>
+                            </switch>
+                            <td width="27%" class="guestTeamName q-tl">
+                                <img src="{$v.away_logo}">{$v.away_team_name.0}
+                            </td>
+                        </tr>
+                        <tr class="empty">
+                            <td width="30%"></td>
+                            <td width="3%" class="line-bg"></td>
+                            <td width="27%"></td>
+                            <td width="13%"></td>
+                            <td width="27%"></td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <notempty name='recom_list'>
+        <div class="item">
+            <div class="planItem">
+                <div class="itemTitle item01">推荐推荐</div>
+            </div>
+            <ul class="itemUl fs26">
+                <volist name='recom_list' id='v'>
+                    <li><a href="{:U('recommend_detail@m',array('id'=>$v['id']))}">{$v.title}</a></li>
+                </volist>
+            </ul>
+            <div class="more q-tc"><a href="{:U('recommend@m')}">更多推荐内容</a></div>
+        </div>
+        </notempty>
+        <notempty name='news_list'>
+        <div class="item">
+            <div class="planItem">
+                <div class="itemTitle item02">相关新闻</div>
+            </div>
+            <ul class="itemUl fs26">
+                <volist name='news_list' id='v'>
+                    <li><a href="{:U('hot_detail@m',array('id'=>$v['id']))}">{$v.title}</a></li>
+                </volist>
+            </ul>
+            <div class="more q-tc">
+                <present name="group">
+                    <a href="{:U('Euro/index@m',array('type'=>1,'group'=>$group))}">更多新闻内容</a>
+                <else/>
+                <a href="{:U('Euro/index@m',array('type'=>$group_list[0]['type'],'event'=>$_GET['id']))}">更多新闻内容</a>
+                </present>
+            </div>
+        </div>	
+        </notempty>
+    </section>
+</block>
+<!-- 内容 e -->

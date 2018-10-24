@@ -1,0 +1,96 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>手机全球体育网_即时足球比分,比分直播,足球直播,比分预测,赔率分析</title>
+</block>
+
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/intro/order.css">
+</block>
+<block name="header">
+</block>
+<block name="nav">
+</block>
+
+<!-- 内容 s -->
+<block name="content">
+    <!-- content main -->
+    <section>
+        <header id="other_header">
+            <a href="{:U('User/index')}"></a>
+            <span>球王订购</span>
+        </header>
+        <section class="order_nav">
+            <ul>
+                <li><a href="{:U('Intro/order')}" class="on">我的订购</a></li>
+                <li><a href="{:U('Intro/putout')}">最新发布</a></li>
+            </ul>
+        </section>
+        <if condition="$list eq ''">
+            <section class="no_order_main">
+                <a href="{:U('Intro/index')}"><div class="no_order"></div></a>
+            </section>
+            <else/>
+            <section class="order_main">
+             
+            <volist name="list" id="item">
+                <a href="{:U('Intro/intro_info',['id'=>$item['product_id']])}">
+                <div class="order_list">
+                    <div class="ol_top">
+                        <div class="olt_head"><img src="{$item.logo}" alt=""></div>
+                        <div class="olt_r">
+                            <div class="u_name"><em>{$item.name}</em><span>{$item.total_rate}<i>%</i></span></div>
+                            <div class="near_state"><em>近10中{$item.ten_num}</em><span>累计回报率</span></div>
+                            <div class="put_time"><if condition="$item['published'] eq 0"><em class="no_put">未发布</em><else/><em>发布于：{$item.pub_time|date="Y-m-d H:i",###}</em></if><span>{$item.sale} <i>金币</i></span></div>
+                        </div>
+                    </div>
+                    <div class="game_list">
+                        <table class="table tb_glist" cellspacing="0" >
+                            <tbody>
+                            <if condition="$item['published'] eq 0">
+                                <tr>
+                                    <td class="qw_clock">
+                                        <img src="__IMAGES__/qw/ic_qw_clock.png" alt="">敬请期待
+                                        <p>请耐心等待，推介赛事正在准备中...</p>
+                                    </td>
+                                </tr>
+                            <else/>
+                                <volist name="item['gamble']" id="val">
+                                <tr>
+                                    <td class="td_gtype">
+                                        <p style="color: {$val.union_color}">{$val.union_name.0}</p><p>{$val.gtime|date="m/d",###}</p><p>{$val.gtime|date="H:i",###}</p>
+                                    </td>
+                                    <td class="td_gvs">
+                                        <p>{$val.home_team_name.0} <span>{$val.score|default='VS'} </span>{$val.away_team_name.0}</p>
+                                        <p><span>推介：</span>
+                                            <if condition="$val['play_type'] eq 1">
+                                                <if condition="$val['chose_side'] eq 1">
+                                                    {$val.home_team_name.0}
+                                                    <else/>
+                                                    {$val.away_team_name.0}
+                                                </if>
+                                                <else/>
+                                                <if condition="$val['chose_side'] eq 1">
+                                                    大球
+                                                    <else/>
+                                                    小球
+                                                </if>
+                                            </if>
+                                            {$val.handcp} <em>({$val.odds})</em></p>
+                                    </td>
+                                    <td class="td_gres"><if condition="$val['photo'] neq ''"><img src="__IMAGES__/qw/{$val.photo}.png" alt=""></if></td>
+                                </tr>
+                                </volist>
+                            </if>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                    </a>
+            </volist>
+
+        </section>
+        </if>
+    </section>
+    <!-- content main -->
+</block>

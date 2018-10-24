@@ -1,0 +1,39 @@
+/**
+ * 参与竞猜css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-06-15
+ *
+**/
+
+.guess_infor{padding: .31rem .5rem; height: 1.82rem; background: url(../../images/etc/etc-infor02-bg.png) no-repeat center 0; background-size: 100% 100%;}
+.guess_infor figure .headImg {
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    border: 0.04rem solid #fff;
+    overflow: hidden;
+    background: #fff;
+    margin-bottom: .05rem;
+}
+.head_infor .name{ color: #0165b8; font-weight: 700; font-size: .32rem;}
+figcaption.head_infor p{ color: #936634; font-size: .26rem;}
+figcaption.head_infor p span{ color: #d03e3e;}
+
+/* 兑奖机会 */
+.change_con{ padding: .26rem;}
+.change_con p{ margin-bottom: .4rem;}
+.change_con .p02 span,.change_con .p02 a{ display: inline-block; height: .5rem;}
+.change_con .p02 span:nth-child(1){ padding: .05rem 0;}
+.change_con .p02 input[type="text"]{ width: 1.78rem; height: .5rem; background: #fff; padding: 0 .1rem; border-radius: 5px; vertical-align:middle;}
+.change_con .p02 a{ padding: .05rem .1rem; color: #fff; background: #ff7e00; border-radius: 5px;}
+.change_con .p05{ width: 52%; margin:0 auto;}
+
+/* 图片展示 */
+.guide_con{ padding-bottom: .2rem;}
+.guide_con .img_list{ padding: 0 .2rem;}
+.guide_con .img_list dt{ color: #fff; margin: .2rem 0;}
+.guide_con .img_list dd{ padding: 0 .32rem;}
+

@@ -1,0 +1,106 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" href="__CSS__/guess.css">
+    <link rel="stylesheet" href="__CSS__/login/login.css">
+    <link rel="stylesheet" href="__CSS__/play_rank.css">
+    <!-- 本页需要引用的js --> 
+
+    <style>
+        .hidden{display: none;}
+    </style>
+</block>
+<block name="header">
+    <include file="Public/header_rules"/>
+</block>
+
+<!-- 导航 s-->
+<block name="nav">
+    <include file="Guess/nav"/>
+</block>
+<block name="content">
+    <section class="main contentPt">
+        <nav id="navTab" class="jc_type clearfix">
+          <a id="yp" data-gambletype="1" href="javascript:;" <if condition='($_GET.gambleType eq 1) OR ($_GET.gambleType eq null)'>class="on"<else/>class="jc"</if>><i></i>亚盘</a>
+          <a id="jc" data-gambletype="2" href="javascript:;" <if condition='($_GET.gambleType eq 2) '>class="on"<else/>class="jc"</if>><i></i>竞彩</a>
+        </nav>
+        <div id='ypContent' style="display: block;">
+            <div id="ypRankNav" class="rank_nav">
+                <ul class="clearfix">
+                    <li  class="fl <if condition='($_GET.dateType eq 4) OR ($_GET.dateType eq null)'>on</if>">
+                        <a href="javascript:;" data-ranktype="4">日榜</a>
+                    </li>
+                    <li  class="fl <if condition='$_GET.dateType eq 1'>on</if>">
+                        <a href="javascript:;" data-ranktype="1">周榜</a>
+                    </li>
+                    <li  class="fl <if condition='$_GET.dateType eq 2'>on</if>">
+                        <a href="javascript:;" data-ranktype="2">月榜</a>
+                    </li>
+                    <li  class="fl <if condition='$_GET.dateType eq 3'>on</if>">
+                        <a href="javascript:;" data-ranktype="3">季榜</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="ypTable" class="rank_item" >
+
+                <table class="table" width="100%" cellpadding="0" cellspacing="0"></table>
+            </div>
+            <div id="rankListMore" class="paged boxs" style="display:none;">
+                <div class="load_gif fs24 text-999">
+                    <span><img src="__IMAGES__/load.gif"></span>
+                    <span>正在加载更多的数据...</span>
+                </div>
+            </div>
+            <div id="showLess" class="paged boxs" style="display:none;">
+                <div class="load_gif fs24 text-999">
+                    <span>已经全部加载完毕</span>
+                </div>
+            </div>
+        </div>
+        <div id='jcContent' style="display: none;">
+            <div id="jcRankNav" class="rank_nav">
+                <ul class="clearfix">
+                    <li  class="fl <if condition='($_GET.dateType eq 4) OR ($_GET.dateType eq null)'>on</if>">
+                        <a href="javascript:;" data-ranktype="4">日榜</a>
+                    </li>
+                    <li  class="fl <if condition='$_GET.dateType eq 1'>on</if>">
+                        <a href="javascript:;" data-ranktype="1">周榜</a>
+                    </li>
+                    <li  class="fl <if condition='$_GET.dateType eq 2'>on</if>">
+                        <a href="javascript:;" data-ranktype="2">月榜</a>
+                    </li>
+                    <li  class="fl <if condition='$_GET.dateType eq 3'>on</if>">
+                        <a href="javascript:;" data-ranktype="3">季榜</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="jcTable" class="rank_item" >
+                <table class="table" width="100%" cellpadding="0" cellspacing="0"></table>
+            </div>
+            <div id="jcRankListMore" class="paged boxs" style="display:none;">
+                <div class="load_gif fs24 text-999">
+                    <span><img src="__IMAGES__/load.gif"></span>
+                    <span>正在加载更多的数据...</span>
+                </div>
+            </div>
+            <div id="jcShowLess" class="paged boxs" style="display:none;">
+                <div class="load_gif fs24 text-999">
+                    <span>已经全部加载完毕</span>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+</block>
+<block name="scripts">
+    <script>
+        var DOMAIN = "m."+"__DOMAIN__";
+        var IMAGES = "__IMAGES__";
+    </script>
+    <script src="__JS__/guess.js"></script>
+
+</block>
+<block name="footer">
+    <include file="Public/footer_new"/>
+</block>

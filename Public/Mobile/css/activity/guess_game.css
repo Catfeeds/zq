@@ -1,0 +1,91 @@
+/*竞猜游戏*/
+.txt_al{text-align: left!important;}
+.txt_ar{text-align: right!important;}
+
+.head_con{    padding: .1rem .2rem;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    background: #fff;
+    width: 100%;
+    background: #01af63
+}
+.head_con a{color:#fff}
+.header_fixed{position:fixed!important;top:0;left: 0;}
+.mt_fixed{margin-top: .89rem}
+.head{color: #01af63;font-size: .32rem;}
+.head img{width: .9rem;height: .9rem; border-radius: 50%;margin-right: .2rem}
+.rules{color: #666;line-height: .9rem}
+
+.tb_guess_con tr td{padding: .2rem 0}
+.tb_guess_con tr:first-child td{padding-bottom: 0;}
+.tb_guess_con .game_vs td{font-size: .32rem}
+.tb_guess_con .game_vs td img{width: .5rem;height: .5rem;border-radius: 50%}
+.tb_guess_con .game_vs td:first-child img{margin-left: .1rem}
+.tb_guess_con .game_vs td:last-child img{margin-right: .1rem}
+.game_type span{color: #1490d8}
+.game_type{color: #999999}
+.tool_list a{width: .8rem; height: .8rem;display: inline-block;border:1px solid #ddd;border-radius: 50%;line-height: .8rem;margin-right: .2rem}
+.win_sele{padding-bottom: 0!important}
+.win_sele a{width: auto;padding: 0 .2rem;height: .7rem;display: inline-block;border-radius: .5rem;line-height: .7rem;margin-right: .2rem;border:1px solid #ddd;margin-bottom: .3rem}
+.win_sele a.on{background: #00af62;color: #fff}
+.win_sele a.on_red{background: #e13f3f;color: #fff}
+/*提交 and 分享*/
+.sub_btn{text-align: center;margin: .5rem 0}
+.sub_btn a{width: 40%;height:.8rem;display: inline-block;background: #00af62;margin-right: 5%;line-height: .84rem;color: #fff; }
+.sub_btn a:last-child{background: #ff7e00;margin-right: 0}
+.sub_btn a.on{background: #ccc}
+/*问题*/
+.tr_qs{}
+.tr_qs td{padding:.2rem!important;padding-bottom:.0rem!important;text-align: left!important;position: relative;}
+.tr_qs img{width: .4rem;height: .4rem;margin-right: .2rem;float: left;}
+.tr_qs span{float: left;display: inline-block;width: 91%}
+.g_state{top: 0}
+
+/*------------------竞猜记录------------------*/
+.guess_history ul li{padding: .2rem 0; border-bottom: 1px solid #ddd;float: left;}
+.gh_title{padding: .2rem;padding-top: 0;line-height: .5rem}
+.ght_head img{width: .5rem;height: .5rem;border-radius: 50%;margin-right: .2rem;margin-top: -.05rem}
+.ght_time{font-size: .2rem;color: #666666}
+/*记录内容*/
+.gh_con{padding:0 .2rem;color: #666666;line-height: 150%}
+.gh_link{width:100%;color: #ff7e00;padding-right: .2rem;text-align: right;margin-top: .1rem}
+/*------------------guess_gonggao竞猜公告------------------*/
+.guess_gonggao ul li{border-bottom: 1px solid #ddd;float: left;padding: .4rem 0;width:100%}
+.gg_title{color: #999999;margin: 0 auto;margin:.4rem 0; text-align: center;margin-bottom: .2rem}
+.gg_title span{display: inline-block;color: #999999;width:1rem;border-top: 1px solid #ddd;height: .1rem;}
+.gg_title em{margin:0 .1rem;display: inline-block;}
+.gg_con{display: flex;padding: 0 .2rem}
+.ggc_img{width: 1.8rem;float: left;margin-right:3%; }
+.ggc_img img{width: 1.8rem;height: 1.45rem}
+.ggc_con{width: 70%;float: left;}
+.ggc_con p{width: 100%}
+.ggc_con p:first-child{font-size: .32rem;color: #303030;font-weight: bold;margin-bottom: .1rem}
+.ggc_con p:last-child{color: #666666;line-height: 150%}
+
+/*------------------活动规则------------------*/
+.guess_rules{padding: .2rem;font-size: .30rem;line-height: 150%}
+
+/*------------------分享common------------------*/
+.share{width: 80%;position: fixed;top: 30%;margin-left: 10%;z-index: 99}
+.share_con{width: 100%;background: #fff;height: 5.6rem;border-radius: .2rem;padding: 0 .4rem}
+.sc_title{text-align: center;height: 1.1rem;line-height: 1.1rem;border-bottom: 1px solid #bbbbbb;font-size: .32rem}
+.sc_list{margin-top: .2rem}
+.sc_list ul li{width: 1.2rem;margin:.2rem .25rem;display: inline-block;text-align: center;}
+.sc_list ul li:nth-child(3n){margin-right: 0}
+.sc_list ul li:nth-child(4){margin-left: 1.1rem}
+.sc_list ul li img{width: 1.2rem;height: 1.2rem;}
+.sc_list ul li p{margin-top: .1rem}
+
+#s_close{width: .6rem;height: .6rem;position: absolute;top: -.8rem;right: 0}
+
+.option td{border-bottom: 1px solid #f0eded}
+
+.active_tip{margin-top: .2rem;color: #999;padding:0 .2rem}
+.active_tip p{padding-bottom: .2rem}
+.active_tip em{font-weight: bold;color:red;font-size: .30rem}
+.active_tip span{color: red}
+
+/*截止时间*/
+.stop_time{text-align: center;margin-top:.2rem}

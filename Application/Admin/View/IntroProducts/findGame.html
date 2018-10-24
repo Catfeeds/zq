@@ -1,0 +1,82 @@
+<style>
+	.union {
+		border-bottom: 1px solid;
+	    display: inline-block;
+	}
+	.union li {
+	    border: 1px solid gray;
+	    float: left;
+	    height: 25px;
+	    line-height: 25px;
+	    margin-bottom: 13px;
+	    margin-right: 12px;
+	    overflow: hidden;
+	    text-align: center;
+	    width: 92px;
+	}
+	.game li {
+		float: left;
+		width: 465px;
+		height: 32px;
+		margin-right: 12px;
+		line-height: 32px;
+		font-size: 13px;
+	}
+</style>
+<div class="pageContent">
+
+		<div class="pageFormContent" layoutH="58">
+
+			<ul class="union">
+				<a href="#">
+					<li style="background: green">
+						全部({:count($game)})
+					</li>
+				</a>
+				<volist name="union" id="item">
+					<a href="#" union_id="{$item.union_id}">
+						<li>
+							{$item.union_name|switchName=0,###} ({$item.union_num})
+						</li>
+					</a>
+				</volist>
+			</ul>
+			
+			<ul class="game">
+				<volist name="game" id="item">
+					<li union_id="{$item.union_id}">
+						<input type="radio" name="gamble" value="{ game_id:'{$item.game_id}',union_id:'{$item.union_id}', game:'{$item.gtime|date="Y-m-d H:i",###} {$item.union_name|switchName=0,###}【{$item.home_team_name|switchName=0,###} VS {$item.away_team_name|switchName=0,###}】', fsw_exp_home:'{$item.fsw_exp_home}', fsw_exp:'{$item.fsw_exp}', fsw_exp_away:'{$item.fsw_exp_away}', fsw_ball_home:'{$item.fsw_ball_home}', fsw_ball:'{$item.fsw_ball}', fsw_ball_away:'{$item.fsw_ball_away}',union_name:'{$item.union_name}',gtime:'{$item.gtime}',home_team_name:'{$item.home_team_name}',away_team_name:'{$item.away_team_name}' }"><a href="#">{$item.gtime|date="m-d H:i",###} {$item.home_team_name|switchName=0,###} VS {$item.away_team_name|switchName=0,###}</a>
+					</li>
+				</volist>
+			</ul>
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="button"><div class="buttonContent"><button type="button" multlookup="gamble" warn="请选择赛事">确定</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+</div>
+<script>
+	$(".game li a").click(function(){
+		$(this).siblings().attr('checked',true);
+	})
+	$(".union a").on('click',function(){
+		$(this).find('li').css('background','green');
+		$(this).siblings().find('li').css('background','');
+		$('.game li').css('display','block');
+		var union_id = $(this).attr('union_id');
+		if(union_id == undefined){
+			return;
+		}
+		$('.game li').each(function(k,v){
+			if($(this).attr('union_id') != union_id){
+				$(this).css('display','none');
+			}
+		})
+	})
+</script>
+
+
+

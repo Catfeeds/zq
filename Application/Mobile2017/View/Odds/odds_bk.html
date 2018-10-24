@@ -1,0 +1,134 @@
+<extend name="Public/base" />
+<!-- 本页需要引用的css -->
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/bk/zhishu.css">
+</block>
+<block name="header">
+    <include file="Public/header_score"/>
+</block>
+<!-- 导航 s-->
+<block name="nav">
+    <include file="Public/nav_bk"/>
+</block>
+<!-- 导航 e-->
+<!-- 内容 s -->
+<block name="content">
+    <section class="odds_con contentPt clearfix">
+<!--        <nav class="subnav">
+            <a href="{:U('Odds/bkcompany')}">公司</a>
+            <a href="{:U('Odds/bkevent')}">赛事</a>
+        </nav>-->
+        <volist name="list" id="v">
+        <table class="zhishu" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+            <div class="zhishu_title js-detail">
+                <a href="{:U('DetailsBk/odds_asia',['scheid'=>$v[0]])}"><p><em style="background: {$v[3]}"></em><span style="color:{$v[3]}">{$v[2][0]}<span>  <span>{$v[5]|substr=4,2}-{$v[5]|substr=6,2} {$v[6]}</span></p><p><eq name='language' value='0'>{$v[7][0]}<else/>{$v[7][1]}</eq><span>VS</span><eq name='language' value='0'>{$v[8][0]}<else/>{$v[8][1]}</eq></p></a>
+            </div>
+            <tr>
+                <th>赔率</th>
+                <th>初/即</th>
+                <th>主队</th>
+                <th>盘口</th>
+                <th>客队</th>
+            </tr>
+            <tr>
+                <td><span>让分</span></td>
+                <td>
+                    <div class="bottom_line">初盘</div><div>即盘</div></td>
+                <td>
+                    <div class="bottom_line" id="letHome{$v[0]}">{:number_format($v[9], 2)}</div>
+                    <div id="instantHome{$v[0]}" <if condition="$v[15] GT $v[9]"> class="red"</if> <if condition="$v[15] LT $v[9]"> class="green"</if>>{:number_format($v[15], 2)}</div>
+                </td>
+                <td>
+                    <div class="bottom_line" id="letHands{$v[0]}">{$v[10]}</div>
+                    <div id="instantHands{$v[0]}"  <if condition="$v[16] GT $v[10]"> class="red"</if> <if condition="$v[16] LT $v[10]"> class="green"</if>>{$v[16]|default='-'}</div>
+                </td>
+                <td>
+                    <div class="bottom_line" id="letAway{$v[0]}" >{:number_format($v[11], 2)}</div>
+                    <div id="instantAway{$v[0]}" <if condition="$v[17] GT $v[11]"> class="red"</if> <if condition="$v[17] LT $v[11]"> class="green"</if>>{:number_format($v[17], 2)}</div>
+                </td>
+            </tr>
+            <tr>
+                <td><span>总分</span></td>
+                <td>
+                    <div class="bottom_line">初盘</div><div>即盘</div></td>
+                <td>
+                    <div class="bottom_line"  id="totalHome{$v[0]}" >{:number_format($v[12], 2)}</div>
+                    <div id="instantTotalHome{$v[0]}" <if condition="$v[18] GT $v[12]"> class="red"</if> <if condition="$v[18] LT $v[12]">class="green"</if>>{:number_format($v[18], 2)}</div>
+                </td>
+                <td>
+                    <div class="bottom_line" id="totalHands{$v[0]}">{$v[13]}</div>
+                    <div id="instantTotalHands{$v[0]}"  <if condition="$v[19] GT $v[13]"> class="red"</if><if condition="$v[19] LT $v[13]">class="green"</if>>{$v[19]|default='-'}</div>
+                </td>
+                <td>
+                    <div class="bottom_line" id="totalAway{$v[0]}">{:number_format($v[14], 2)}</div>
+                    <div id="instantTotalAway{$v[0]}"  <if condition="$v[20] GT $v[14]"> class="red"</if> <if condition="$v[20] LT $v[14]"> class="green"</if>>{:number_format($v[20], 2)}</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </volist>
+<!--        <table class="zhishu" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+            <div class="zhishu_title">
+                <a href="#"><p><em></em>俄甲  <span>11-25  21:00</span></p><p>西伯尔<span>VS</span>SKA恩纳吉亚</p></a>
+            </div>
+            <tr>
+                <th>公司</th>
+                <th>初/即</th>
+                <th>上盘</th>
+                <th>盘口</th>
+                <th>下盘</th>
+            </tr>
+            <tr>
+                <td><span>BET365</span></td>
+                <td><div class="bottom_line">初盘</div><div class="red">即盘</div></td>
+                <td><div class="bottom_line">17.50</div><div class="red">4.88↑</div></td>
+                <td><div class="bottom_line">12.50</div><div class="red">4.88↑</div></td>
+                <td><div class="bottom_line">1.03</div><div class="green">2.00↓</div></td>
+            </tr>
+            <tr>
+                <td><span>SB</span></td>
+                <td><div class="bottom_line">初盘</div><div class="red">即盘</div></td>
+                <td><div class="bottom_line">17.50</div><div class="red">4.88↑</div></td>
+                <td><div class="bottom_line">12.50</div><div class="red">4.88↑</div></td>
+                <td><div class="bottom_line">1.03</div><div class="green">2.00↓</div></td>
+            </tr>
+            <tr>
+                <td><span>立博</span></td>
+                <td><div class="bottom_line">初盘</div><div class="red">即盘</div></td>
+                <td><div class="bottom_line">17.50</div><div class="red">4.88↑</div></td>
+                <td><div class="bottom_line">12.50</div><div class="red">4.88↑</div></td>
+                <td><div class="bottom_line">1.03</div><div class="green">2.00↓</div></td>
+            </tr>
+            </tbody>
+        </table> -->
+    </section>
+</block>
+<block name='filtrate'>
+    <include file="Public/bk_filtrate"/>
+</block>
+<block name="scripts">
+    <script>
+        $(function () {
+            //确定
+            $("#sele_confirm").click(function () {
+                var chioce = '';
+                if ($(".subnav_list a.on").length < 1) {
+                    alert('至少选择一项!');
+                    return false;
+                }
+                $(".subnav_list a").each(function () {
+                    $this = $(this);
+                    if ($this.hasClass('on')) {
+                        chioce += $this.data('key') + ',';
+                    }
+                });
+                chioce = chioce.substring(0, chioce.length - 1);
+                Cookie.setCookie('BkEvent', chioce);
+                window.location.reload();
+            });
+        });
+    </script>
+    <script type="text/javascript" src="__JS__/bk/bk_zhishu.js"></script>
+</block>

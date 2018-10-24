@@ -1,0 +1,39 @@
+<!-- right content-->
+<div class="pull-right main-right">
+    <notempty name="Adver">
+        <div style="line-height: 0;"><a target="_blank" href="{$Adver.0.url}"><img src="{$Adver.0.img}" width="302" height="221" style="display: inline;"></a></div>
+    </notempty>
+    <!-- 推荐推荐 -->
+    <div class="jingcai">
+        <!-- 标题 -->
+        <div class="clearfix stat-title">
+            <div class="pull-left">
+                <h4>独家解盘</h4>
+            </div>
+            <div class="pull-right more-icon title-nav">
+            	<a target="_blank" class="pull-left" href="{:U('/list_n/10@news')}">更多</a>
+                <i class="pull-left myIcon"></i>
+            </div>
+        </div>
+        <!-- 标题 -->
+        <div class="jingcai-list">
+            <ul>
+              <volist name="quiz" id="item">
+                  <li><a target="_blank" href="{:getNewsUrl($item['id'],$item['is_original'])}">{$item.title}</a></li>
+              </volist>
+            </ul>
+        </div>
+    </div>
+    <!-- 推荐推荐 -->
+    <notempty name="yunLabelArr">
+        <div class="labBox">
+            <div class="labTitle"><div class="newTileDiv">标签云</div></div>
+            <div class="labList">
+                <volist name="yunLabelArr" id="v">
+                    <a href="{:U('/list_n/'.$v)}" title="{$v}">{$v}</a>
+                </volist>
+            </div>
+        </div>
+    </notempty>
+</div>
+<!-- 右边内容  end-->

@@ -1,0 +1,194 @@
+<extend name="Public:layout" />
+<block name="seo">
+    <title>{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}_亚盘推荐_竞彩推荐_亚盘分析_竞彩分析_全球体育</title>
+    <meta name="keywords" content="{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}亚盘推荐、{$gameInfo['home_team_name']}VS{$gameInfo['away_team_name']}竞彩推荐"/>
+    <meta name="description" content="全球体育推荐王擂台是专业提供足球预测推荐分析和免费参与足球篮球推荐的体育彩票网站、特别邀请足球、分析名家每日原创足彩预测、亚盘推荐和竞彩分析、是广大球迷和彩民必选的足彩推荐网站"/>
+</block>
+<block name='css'>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__STATIC__/score/css/scoreLive/scoreLive.css?20171024">
+    <link rel="stylesheet" href="__STATIC__/score/css/scoreData/data-common.css">
+    <link rel="stylesheet" href="__STATIC__/score/css/scoreData/data-index.css">
+    <link rel="stylesheet" href="__STATIC__/score/css/scoreData/data-state.css">
+</block>
+<block name="content">
+<!-- top nav -->
+<include file="Public:top_score"/>
+<!-- 统计 s -->
+<div class="home">
+    <div class="tongji" style="border-bottom: none;">
+        <include file="Public:odd_header"/>
+        <include file="Public:odd_nav"/>
+        <div class="play_type clearfix">
+            <ul>
+                <li>
+                    <a href="{:U('/gambleDetails@bf',['game_id'=>$gameId,'play_type'=>1])}" <if condition="$_REQUEST['play_type'] eq 1 || $_REQUEST['play_type'] eq ''"> class="on" </if>>
+                    亚盘
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('/gambleDetails@bf',['game_id'=>$gameId,'play_type'=>2])}" <if condition="$_REQUEST['play_type'] eq 2"> class="on" </if>>
+                    竞彩
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="t_content">
+            <notempty name="QuizUser">
+                <ul class="con-list clearfix">
+                <volist name="QuizUser" id="item">
+                    <li class="list-li">
+                        <div class="infor-con">
+                            <div class="usrTop">
+                                <div class="nTop clearfix">
+                                    <div class="faceImg pull-left">
+                                        <img class="lazy" data-original="{$item.head|frontUserFace}" alt="{$item.nick_name}" style="display: block;">
+                                    </div>
+                                    <div class="ntInfor pull-left">
+                                        <div class="ntName"><span>{$item.nick_name}</span> <i style="background: #ff7e00;">LV{$item.lv}</i> <em>粉丝：<span class="FollowNumber">{$item.FollowNumber|default=0}</span></em></div>
+                                        <div class="ntPer"><if condition="$userId neq $item['user_id']">
+                                            <if condition="in_array($item['user_id'],$followIds)">
+                                                <a href="javascript:;" class="fan-ate btn-default" onclick="cancelFollow({$item.user_id},'gambleDetails',this);" title="已关注">已关注</a>
+                                                <else/>
+                                                <a href="javascript:;" class="fan-ate btn-orange" onclick="addFollow({$item.user_id},'gambleDetails',this);" title="+关注">+关注</a>
+                                            </if>
+                                        </if><span>近10中{$item.ten_rate}</span><em>周胜: <font>{$item.weekWin}%</font></em></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="usrBotttom clearfix">
+                                <p class="timeVision">
+                                        <span>发布时间：{$item.create_time|date="Y/m/d H:i",###}</span>
+                                        <em>{$item.quiz_number}</em>
+                                </p>
+                                <p class="timeVision">
+                                        <span>玩法：
+                                            <switch name="item.play_type">
+                                                <case value="1">让球</case>
+                                                <case value="-1">大小球</case>
+                                                <case value="-2">让球胜平负</case>
+                                                <case value="2">胜平负</case>
+                                            </switch>
+                                        </span>
+                                </p>
+                                <if condition="$item.result neq 0 or $item.user_id eq is_login() or $item.is_check neq NULL">
+                                    <p class="tjList">
+                                        <span>推荐情况：</span>
+                                        <em class="name">{$item.Answer}</em>
+                                        <em>盘口：<font>{$item.handcp}</font></em>
+                                        <em>赔率：<font>{$item.odds}</font></em>
+                                    </p>
+                                    <p class="text-8a fenxi q-two">独家分析：
+                                        <notempty name="item.desc">
+                                            <span>{$item.desc|msubstr=###, 0 ,85}</span>
+                                        <else/>
+                                            <span style="color: #8a8a8a">暂无分析</span>
+                                        </notempty>
+                                    </p>
+                                    <div class="audioFx clearfix">
+                                        <span class="text-8a pull-left">语音分析：&nbsp;</span>
+                                        <if condition="$item.voice neq ''">
+                                            <a href="javascript:;" class="pull-left music musicOff">{$item.voice_time}</a>
+                                           <!--  <audio>
+                                              <source src="images/audio/0818.ogg" type="audio/ogg">
+                                              <source src="images/audio/0818.mp3" type="audio/mpeg">。
+                                            </audio> -->
+                                            <audio class="voice_play">
+                                                <!--<source src="__STATIC__/score/images/audio/0818.ogg" type="audio/ogg">-->
+                                                <source src="{$item.voice}" type="audio/mpeg">。
+                                            </audio>
+                                        <else/>
+                                            <span style="color: #8a8a8a">暂无分析</span>
+                                        </if>
+                                    </div>
+                                    <i class="sign <if condition="$item['result'] eq 1 or $item['result'] eq 0.5">win</if><if condition="$item['result'] eq -1 or $item['result'] eq -0.5">lose</if><eq name="item.result" value="2">split</eq><eq name="item.result" value="-10">cancel</eq><eq name="item.result" value="-11">pending</eq><eq name="item.result" value="-12">cut</eq><eq name="item.result" value="-13">interrupt</eq><eq name="item.result" value="-14">putoff</eq>"></i>
+                                <else/>
+                                    <div class="st_count">
+                                        <p class="tjList">
+                                            <span>推荐情况：购买后显示</span>
+                                        </p>
+                                        <p class="text-8a fenxi q-two">独家分析：购买后显示</p>
+                                        <div class="audioFx clearfix">
+                                            <span class="text-8a pull-left">语音分析：购买后显示</span>
+                                        </div>
+                                        <a href="javascript:;" page_type="statistics" onclick="payment(this,{$item.id},{$item.tradeCoin})" class="btn-orange look">
+                                            <if condition="$item.tradeCoin eq 0">
+                                                免费
+                                                <else/>
+                                                {$item.tradeCoin}金币
+                                            </if>
+                                        </a>
+                                    </div>
+                                </if>
+                            </div>
+                        </div>
+                    </li>
+                </volist>
+                </ul>
+                <else/>
+                <div style="height: 150px;text-align: center;">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <p>没有用户参与推荐哦！<a href="{:U('/football@jc')}"><i class="icon-arrow-right text-tie"> 去推荐大厅</i></a></p>
+                </div>
+            </notempty>
+        </div>
+        <!--页码开始-->
+        <div class="page-con">
+            <nav style="display: inline-block;">
+                <ul class="pagination clearfix">
+                    <if condition="$newCount gt $limit">{$show}</if>
+                </ul>
+            </nav>
+        </div>
+        <!--页码结束-->
+    </div>
+    <input type="hidden" name="userId" value="{$userId}">
+    <input type="hidden" name="balance" value="{$balance}">
+</div>
+<!-- 统计 e -->
+</block>
+<block name="js">
+    <script>
+        $('.con-list:nth-child(2n)').css('float','right')
+        //audio
+        $('.list-li .music').click(function(e) {
+            $(".list-li .music").each(function(){
+                $(this).siblings('audio').get(0).currentTime = 0
+            });
+            if($(this).hasClass('musicOff')){
+                $(this).removeClass('musicOff');
+                $(this).siblings('audio').get(0).play();
+            }else{
+                $(this).addClass('musicOff');
+                $(this).siblings('audio').get(0).pause();
+            }
+
+        });
+        //展开和隐藏
+        $('.guess_view').click(function(){
+            var g_val;
+            var g_html = $(this).html();
+            console.log(g_html);
+            if(g_html=='展开详情'){
+                $(this).parents('p').siblings('.stc_left').children('.fenxi').css('display','block');
+                $(this).parents('p').siblings('.stc_left').children('.fenxi_short').hide();
+                $(this).parents('.list-li').addClass('h_auto');
+            }else{
+                //$(this).parents('p').siblings('.stc_left').children('.fenxi').css('display','-webkit-box');
+                $(this).parents('p').siblings('.stc_left').children('.fenxi').hide();
+                $(this).parents('p').siblings('.stc_left').children('.fenxi_short').show();
+                $(this).parents('.list-li').removeClass('h_auto');
+                $(this).parents('.list-li').addClass('g_auto');
+            }
+            g_html=='展开详情'?$(this).html('收起'):$(this).html('展开详情');
+        });
+
+    </script>
+    <script type="text/javascript" src="__JS__/common/follow.js"></script>
+    <script type="text/javascript" src="__JS__/common/trade.js"></script>
+    <script type="text/javascript" src="__JS__/common/scroll_min.js"></script>
+    <script type="text/javascript" src="__JS__/common/jquery.inview.min.js"></script>
+    <script type="text/javascript" src="__JS__/common/index.js"></script>
+</block>

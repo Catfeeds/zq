@@ -1,0 +1,36 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/saveteamM" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			<div class="unit">
+				<label>球队名称(捷报)：</label>
+				<input type="text" class="required" name="jb_team_name" value="{$vo.jb_team_name}" size="50"/>
+			</div>
+			<div class="unit">
+				<label>球队id(捷报)：</label>
+				<input type="text" class="required" name="jb_team_id" value="{$vo.jb_team_id}" size="50"/>
+			</div>
+			<div class="unit">
+				<label>球队名称(365)：</label>
+				<input type="text" class="required" name="bet_team_name" value="{$vo.bet_team_name}" size="50"/>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+
+
+
+

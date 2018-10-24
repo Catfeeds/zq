@@ -1,0 +1,70 @@
+<div class="page">
+    <div class="pageContent">
+
+    <form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+        <input type="hidden" name="id" value="{$vo.id}" >
+        <div class="pageFormContent" layoutH="58">
+           <div class="unit">
+                <label>平台：</label>
+                <select name="app_type" class="required">
+                    <option value="3">安卓</option>
+                </select>
+            </div>
+            <div class="unit">
+                 <label>渠道：</label>
+                 <select name="app_channel" class="required">
+                    <option value="official" <eq name="vo.app_channel" value="official">selected=selected</eq>>官网</option>
+                    <option value="f30" <eq name="vo.app_channel" value="f30">selected=selected</eq>>移动市场</option>
+                 </select>
+             </div>
+            <div class="unit">
+                <label>名称：</label>
+                <input type="text" class="required"  name="app_name" value="{$vo.app_name}">
+            </div>
+            <div class="unit">
+                <label>包名：</label>
+                <input type="text" class="required"  name="app_pkg_name" value="{$vo.app_pkg_name}">
+            </div>
+            <div class="unit">
+                <label>版本号：</label>
+                <input type="text" class="required"  name="app_version" value="{$vo.app_version}">
+            </div>
+            <div class="unit">
+                <label>apk地址：</label>
+                <input type="text" class="required"  name="app_url" value="{$vo.app_url}" size="70">
+            </div>
+            <div class="unit">
+                <label>强制升级：</label>
+                <select name="is_upgrade" class="required">
+                    <option value="0" <eq name="vo.is_upgrade" value="0">selected=selected</eq>>否</option>
+                    <option value="1" <eq name="vo.is_upgrade" value="1">selected=selected</eq>>是</option>
+                </select>
+            </div>
+            <div class="unit">
+                <label>状态：</label>
+                <select name="status" class="required">
+                    <option value="0" <eq name="vo.status" value="0">selected=selected</eq>>不发布</option>
+                    <option value="1" <eq name="vo.status" value="1">selected=selected</eq>>发布</option>
+                </select>
+            </div>
+<!--             <div class="unit">
+                <label>上传apk：</label>
+                <input type="file"  name="app_url" value="{$vo.app_url}"> 不修改不用传
+                <p>请把以qqty.apk或qqty_mm.apk命名的包上传到服务器项目Uploads/App/目录下</p>
+            </div> -->
+          <div class="unit">
+            <label>升级内容：</label>
+            <textarea name="descript" class="required" editor="{:uniqid()}" cols="70" rows="8">{$vo.descript}</textarea>
+          </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+    </div>
+</div>
+

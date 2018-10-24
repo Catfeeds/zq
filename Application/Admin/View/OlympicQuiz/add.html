@@ -1,0 +1,185 @@
+<style>
+	#table tr{
+		height: 35px;
+	}
+	#table tr td{
+		width: 80px;
+	}
+	.answer{
+		text-align: center;
+	}
+</style>
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" value="{$vo.id}" name="id" />
+		<div class="pageFormContent" layoutH="58">
+			
+			<div class="unit">
+				<label>赛事名称：</label>
+				<input type="text" class="required"  name="union_name" value="{$vo.union_name}" size="45"/>
+			</div>
+
+			<div class="unit">
+				<label>竞猜内容：</label>
+				<input type="text" class="required" name="title" value="{$vo.title}" size="45" />
+			</div>
+
+			<div class="unit">
+				<label>赛事时间：</label>
+				<input class="date textInput readonly valid" type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm" name="game_time" value="<notempty name="vo.game_time">{$vo.game_time|date='Y-m-d H:i',###}</notempty>">
+				<a class="inputDateButton" href="javascript:;">选择</a>
+			</div>
+
+			<div class="unit">
+				<label>竞猜积分：</label>
+				<input type="text" class="digits" name="point" value="{$vo.point}" />
+			</div>
+
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft"  name="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+				</select>
+			</div>
+
+			<div class="unit">
+				<label>排序：</label>
+				<input type="text" class="digits" name="sort" value="{$vo.sort}" />
+			</div>
+
+			<div class="unit">
+				<label>竞猜选项：</label>				
+				<table width="400" id='table'>
+					<tr>
+						<td>选项</td>
+						<td>赔率</td>
+						<td style="text-align: center;">正确答案</td>
+						<td>操作</td>
+					</tr>
+					<notempty name="question">
+						<volist name="question" id="item">
+							<tr>
+								<td>
+									<input type="hidden" value="{$item.id}" name="ids[]"/>
+									<input type='text' size="10" name="content[]" class="required" value="{$item.title}" />
+								</td>	
+								<td><input type='text' size="10" name="odds[]" class="required" value="{$item.odds}" /></td>							
+								<td class="answer"><input type='radio' name='answer' value="{$key}" <if condition="$vo['answer'] eq $item['id']">checked</if>></td>
+								<td>
+									<a class="buttonActive" href="javascript:;" onclick="delOption({$item.id}, this, {$item.pid});">
+									<span>删除</span>
+									</a>
+								</td>
+							</tr>
+						</volist>
+						<else/>
+							<tr>
+								<td>
+									<input type="hidden" value="" name="ids[]"/>
+									<input type='text' size="10" name="content[]" class="required" value="" />
+								</td>
+								<td><input type='text' size="10" name="odds[]" class="required" value="" /></td>
+								<td class="answer"><input type='radio' name='answer' value="0"></td>
+								<td>
+									<a class="buttonActive" href="javascript:;" onclick="delOption(0, this);">
+									<span>删除</span>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="hidden" value="" name="ids[]"/>
+									<input type='text' size="10" name="content[]" class="required" value="" />
+								</td>
+								<td><input type='text' size="10" name="odds[]" class="required" value="" /></td>
+								<td class="answer"><input type='radio' name='answer' value="1"></td>
+								<td>
+									<a class="buttonActive" href="javascript:;" onclick="delOption(0, this);">
+									<span>删除</span>
+									</a>
+								</td>
+							</tr>
+					</notempty>
+				</table>				
+			</div>
+			<div class="unit">
+				<label>&nbsp;</label>
+				<a class="buttonActive" href="javascript:addOption()"><span>点击添加一条选项</span></a>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<script>
+//遍历input对象
+function eachTr(){
+	$(".answer input").each(function(index){
+		$(this).val(index);
+	});
+}
+//添加一行选项
+function addOption(){
+	if($("#table tr").length > 20){
+		alert('最多20个选项哦!');
+		return;
+	}
+	//添加一个题目选项
+	var str="<tr>"+
+				"<td>"+
+					"<input type=\"hidden\" value='' name=\"ids[]\"/>"+
+					"<input type='text' size=\"10\" name=\"content[]\" class=\"required\" value='' />"+
+				"</td>"+
+				"<td><input type='text' size=\"10\" name=\"odds[]\" class=\"required\" value='' /></td>"+
+				"<td class=\"answer\"><input type='radio' name='answer' value=''></td>"+
+				"<td>"+
+					"<a class=\"buttonActive\" href=\"javascript:;\" onclick=\"delOption(0, this);\">"+
+					"<span>删除</span>"+
+					"</a>"+
+				"</td>"+
+			"</tr>";
+	$("#table tr:last").after(str);
+	eachTr();
+}
+//删除当前一行选项
+function delOption(id, obj ,pid){
+	if (confirm('确定删除该选项吗？')==false){
+		return;
+	}
+	if($("#table tr").length < 4){
+		alert('至少要两个选项!');
+		return;
+	}
+	if (id=='0'){
+		$(obj).parent().parent().remove();
+		eachTr();
+		return;
+	}
+	$.ajax({
+		type:'post',
+		url:'__ADMIN__/OlympicQuiz/delOption.html',
+		data:{id:id,pid:pid},
+		dataType:'json',
+		success:function(msg){
+			msg = parseInt(msg);
+			if (msg==1){
+				$(obj).parent().parent().remove();
+				eachTr();
+			} else {
+				alert('删除失败！');
+			}
+		}
+	});	
+	eachTr();
+}
+</script>
+
+
+
+

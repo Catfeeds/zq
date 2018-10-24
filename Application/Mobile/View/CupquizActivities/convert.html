@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta charset="UTF-8">   
+        <title>助力提现</title>
+        <link rel="apple-touch-icon" href="">
+        <link rel="shortcut icon" href="">
+        <!-- jquery -->
+        <script type="text/javascript" src="__PUBLIC__/Mobile/js/jquery-1.11.1.min.js"></script>
+        <!-- 自适应 计算html font-size -->
+        <script type="text/javascript" src="__PUBLIC__/Mobile/js/htmlwidth.js"></script>
+        <!-- 引入公共样式 -->
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Mobile/css/base.css">
+        <!-- <link rel="stylesheet" type="text/css" href="css/common.css">  -->
+        <style>
+           .wrapCon{min-height: 100%}
+        </style>
+    </head>
+    
+    <body class="convert">
+    <div style="display: none">
+        {:htmlspecialchars_decode($site_setting['mobileJs'])}
+    </div>
+    <!-- 页面所需css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/CupquizActivities/convert.css?v=20180627">
+    <link rel="stylesheet" type="text/css" href="__CSS__/CupquizActivities/head.css?v=20180627">
+        <!-- 头部 -->
+        <header class="top">
+            <ul class="headline">
+                <a onclick="history.back(-1);" class="back" ><img src="__IMAGES__/CupquizActivities/last.png"></a>
+                <li class="head-portrait"><img src="{$frontFace}"></li>
+                <li><a href="JavaScript:;">{$coin}Q币</a></li>
+                <li><a href="{:U('CupquizActivities/convert')}"  class="active">兑换</a></li>
+                <li ><a href="{:U('CupquizActivities/activePage')}">今日活动</a></li>
+                <li><a href="{:U('CupquizActivities/guessList')}">预测记录</a></li>
+            </ul>
+        </header>
+    <!-- 主体内容 -->
+        <section class="wrapCon" style="padding-top: 1.5rem">
+            <div class="point"><img src="__IMAGES__/CupquizActivities/point.png" width="auto" height="auto" alt="" /></div>
+            <a class="load-btn">没有APP？去下载</a>
+            <a href="/CupquizActivities/activePage.html" class="forecast-btn">去预测</a>
+        </section>
+    </body>
+    <script>
+        $(document).ready(function () {
+            $('.load-btn').click(function () {
+                setTimeout(function(){
+                    window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.qqw.app";
+                }, 1000);
+            })
+        })
+    </script>
+</html>

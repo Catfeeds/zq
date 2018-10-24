@@ -1,0 +1,14 @@
+
+/*---------------------------------  图片 ---------------------------------*/
+
+html,body{background: #f2f2f2}
+.v_title{ text-align: center;padding-bottom: .2rem; }
+.v_title img{ width:7.1rem; height:auto; }
+.photo_con{padding-left: .2rem}
+.photo_con ul li{width: 3.45rem; height: 2.9rem;margin-top: .2rem; float: left;margin-right: .2rem; position: relative; background: #fff}
+.photo_con ul li img{width: 3.45rem; height: 2rem; border-radius: .05rem .05rem 0 0;}
+.photo_con ul li:nth-child(2n){margin-right: 0}
+.photo_con ul li em{display: block;background: url(../../images/euro/play.png) no-repeat left center; background-size:.54rem .54rem;width: .54rem; height: .54rem;position: absolute;left: 1.725rem; top: 1rem;margin:-.27rem 0 0 -.27rem;}
+
+ .photo_con ul li figcaption{padding: 0 .15rem; }
+ 

@@ -1,0 +1,162 @@
+<if condition="$user['type'] neq 'index'">
+<style>
+    /* 体育号主页 */
+    .expertBox{ background: #fbfbfb; border: 1px solid #e5e5e5; margin: 20px 0;}
+    .expertBox .expertInt{padding: 10px 20px; color: #666666; line-height: 24px; border: 1px solid #0f0;}
+    .expertInforBox{ border-bottom: 1px dashed #e5e5e5; padding: 10px 20px;}
+    .expertInforBox .fans{ padding-top: 8px;}
+    .expertInforBox .fans span{ margin-right: 15px;}
+    .expertInforBox .fans em{ color: #999999;}
+
+    .expertBox .expertInt ul{ float: left;}
+    .expertBox .expertInt li{ width: 200px; border: 1px solid #0f0; height: 100px;}
+    .listTitle{ border-bottom: 3px solid #c0c0c0; padding: 0 20px;}
+    .listTitle h4{font-size: 20px; margin: 0; padding: 10px 0; position: relative;}
+    .listTitle h4 span{ color: #999999;}
+    .listTitle h4:after{ width: 100%; height: 3px; background: #2e76c7; position: absolute; bottom: -3px; left: 0; z-index: 1; pointer-events: none; position: absolute; content: ''; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box;}
+    .seletBox{ padding-top: 6px;}
+    .seletArticle .btn{ background: #ffffff; color: #333; border: 1px solid #e5e5e5;}
+    .seletArticle .btn1{ background: #ffffff;}
+    .seletArticle .dropdown-menu{ min-width: 100%;}
+    .seletArticle .dropdown-menu li{ text-align: center;}
+    .seletArticle .dropdown-menu > li > a{ padding: 4px 5px;}
+    .seletArticle .dropdown-menu > li > a:hover{ background: #7ebafe; color: #ffffff;}
+
+    .main-left-con{ padding: 0 20px; border: 1px solid #0f0;}
+    .main-left-con ul li{width:100%; padding: 20px 0; border-bottom: 1px solid #e5e5e5;}
+    .main-left-con .mlc_title a{font-size: 18px; color: #2a6cb8; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;display:block;height:78px;}
+    .main-left-con .mlc_des a{color: #666666; line-height: 150%;}
+    .main-left-con  .mlc_match span{ color: #2e76c7; margin-right: 15px;}
+    .mlc_time em{ background: url(__IMAGES__/UserIndex/publish_index/icon-vision.png) no-repeat left center; padding-left: 22px; margin-left: 10px;}
+    .mlc_time{ padding-top: 10px;  color: #999999; font-size: 12px;}
+    .mlc_time span{ margin-right: 15px;}
+    .rec_img{ width: 162px; height: 114px; float: left;}
+    .rec_img img{ width: 162px; height: 114px;  }
+    .rec_right{ width: 746px; float: left; padding-left: 12px; }
+    .posts{position: relative;}
+
+    .pagination > .active > a{ background: #369; border-color: #369;}
+    .page-con{ margin-top: 20px; padding:  20px;}
+    
+    .expertBox{ border: 1px solid #0f0;}
+    .expertBox ul{ border: 1px solid #f0f0; float: left;}
+
+    .pull-left .rec_face{ border: 1px solid #0f0; margin-left: 200px;}
+</style>
+    </if>
+    <input type="hidden" value="{$game_type}" name="game_type" />
+    <input type="hidden" value="{$game_type}" name="game_type" />
+    <input type="hidden" value="{$_REQUEST.gamble_type}" name="gamble_type" />
+    <input type="hidden" name="user_id" id="user_id" value="{$Think.get.user_id}">
+<div class="expertBox">
+    <eq name="user.type" value="index">
+      <div class="expertInforBox clearfix">
+        <div class="pull-left rec_face" style=" width: 230px; height: 80px; text-align: center; padding-top: 20px; border-right: 1px solid #e0e0e0;">
+            <span style=" font-size: 18px; color: orange;">{$user.new_num}</span>
+            <p>文章数</p>
+        </div>
+        <div class="pull-left rec_infor" style=" width:230px; height: 80px; margin-left: 30px; text-align: center; padding-top: 20px;  border-right: 1px solid #e0e0e0;">
+            <span style=" font-size: 18px;">{$user.followNum}</span>
+            <p>粉丝数</p>
+        </div>
+        <a href="javascript:;">
+            <div class="pull-right check-publish" data-type="0" style=" height: 80px; width: 250px; text-align: center; padding-top: 20px;">
+                <span class="glyphicon glyphicon-check" aria-hidden="true" style=" font-size: 22px; color: #0182de;"></span>
+                <p style="color: #0182de;">发布文章</p>
+            </div>
+        </a>
+      </div>
+    </eq>
+</div>
+    <style>
+        .newstitle h4:after{background: #c0c0c0;}
+        .pull-left h4{width: 60px;text-align: center;}
+        .rec_right{height: 115px;}
+        .mlc_title{ width: 540px; float: left; padding: 0px; height: 30px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;}
+        .mlc_title a{ width: 540px; text-overflow: ellipsis; }
+        .works {font-size: 10px; margin-top: 10px; padding-left: 10px; width: 580px; height: 40px; word-wrap:break-word;}
+        .audit{ margin-left: 20px; font-size: 16px;}
+        .post{ margin-top: 20px;}
+        .glyphicon-eye-open{ color: #b3b3b3; padding-top: -50px; margin-left: 550px; margin-top: -20px; float: left;}
+        .numb{  margin-left: 580px; float: left; margin-top: -23px; color: #b3b3b3;}
+        .mlc_time{ padding-left: 10px;  }
+    </style>
+<div class="listNews">
+    <div class="listTitle clearfix">
+        <a href="{:U('UserInfo/list_e',['listType'=>1])}">
+            <div class="pull-left <if condition="$_GET['listType'] neq 1 and $_GET['listType'] neq ''"> newstitle</if>">
+                <h4>
+                    资讯
+                </h4>
+            </div>
+        </a>
+        <a href="{:U('UserInfo/list_e',['listType'=>2])}">
+            <div class="pull-left <if condition="$_GET['listType'] neq 2"> newstitle</if>">
+                <h4>
+                    推荐
+                </h4>
+            </div>
+        </a>
+        <a href="{:U('UserInfo/list_e',['listType'=>3])}">
+            <div class="pull-left <if condition="$_GET['listType'] neq 3"> newstitle</if>">
+                <h4>
+                    视频
+                </h4>
+            </div>
+        </a>
+    </div>
+    <div class="main-left-con clearfix">
+        <ul class="posts">
+            <volist name="list" id="item">
+                <li class="ds-list">
+                    <div class="clearfix">
+                        <div class="rec_img">
+                            <a target="_blank" href="{$item.href}"><img class="lazy" data-original="{$item.img}" alt="" original="{$item.img}"></a>
+                        </div>
+                        <div class="rec_right">
+                            
+                            <p class="mlc_title">
+                                <a target="_blank" href="{$item.href}">
+                                    <strong>
+                                        {$item.title}
+                                    </strong>
+                                  </a>  
+                                <!-- <a class="works"></a> -->
+                            </p>
+                           <!--   -->
+                            <switch name="item.status">
+                                <case value="1"><span class="audit text-green">已通过</span></case>
+                                <case value="2"><span class="audit text-red">审核中</span></case>
+                                <case value="0"><span class="audit text-999">未通过</span></case>
+                            </switch>
+                            <div class="works" >
+                                {$item.remark}</div>
+                            <div class="mlc_time clearfix">
+                                <span class="post pull-left">{$item.add_time}</span><span class="post pull-left">发表</span>
+                                
+                                <if condition="$user['type'] neq 'index'"><em class="pull-right">{$item.click_number}</em></if>
+
+                            </div>
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                <span class="numb">{$item.click_number}</span>
+                        </div>
+                    </div>
+                </li>
+            </volist>
+        </ul>
+    </div>
+    <!--页码开始-->
+    <div class="pageNum">
+        <nav aria-label="...">
+            <ul class="pagination clearfix">
+                {$show}
+                <li>
+                    <input class="form-control isTxt" type="text" value="{$_REQUEST.p|default=1}" name="p">
+                </li>
+                <li id="GO"><a href="javascript:void(0)">GO</a></li>
+            </ul>
+            <div class="">共有{$totalCount}条，每页显示：{$numPerPage}条</div>
+        </nav>
+    </div>
+    <!--页码结束-->
+</div>

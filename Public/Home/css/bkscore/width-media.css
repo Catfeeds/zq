@@ -1,0 +1,54 @@
+/* 
+* @Author: Chen Siren
+* @Date:   2018-06-13 16:30:11
+* @Last Modified by:   Marte
+* @Last Modified time: 2018-06-13 16:31:56
+*/
+/*多媒体处理直播比分不同width显示*/
+@media screen and (max-width: 700px) and (min-width: 600px) {
+    body{ width: 100%; min-width: 100%;}
+    .contentMain{ width: 100%;}
+    .home,.main{ width: 100%;}
+    .control-l{ margin-bottom: 10px;}
+    .mytable01 .table>thead:first-child>tr:first-child>th:nth-child(5){ display: none;}
+    .mytable01 .table>thead:first-child>tr:first-child>th:nth-child(12){ display: none;}
+    .mytable01 .table>thead:first-child>tr:first-child>th:nth-child(13){ display: none;}
+    .mytable01 .table>thead:first-child>tr:first-child>th:nth-child(14){ display: none;}
+    .mytable01 .table>thead:first-child>tr:first-child>td:nth-child(15){ display: none;}
+    .mytable01 .table>tbody tr:first-child>td:nth-child(5){ display: none;}
+    .mytable01 .table>tbody tr:first-child>td:nth-child(12){ display: none;}
+    .mytable01 .table>tbody tr:first-child>td:nth-child(13){ display: none;}
+    .mytable01 .table>tbody tr:first-child>td:nth-child(14){ display: none;}
+    .mytable01 .table>tbody tr:first-child>td:nth-child(15){ display: none;}
+    .mytable01 .table>tbody tr:nth-child(2)>td:nth-child(7){ display: none;}
+    .mytable01 .table>tbody tr:nth-child(2)>td:nth-child(8){ display: none;}
+    .mytable01 .table>tbody tr:nth-child(2)>td:nth-child(9){ display: none;}
+    .mytable01 .table>tbody tr:nth-child(2)>td:nth-child(10){ display: none;}
+    .dataLink{ width: 50px;}
+}
+
+@media screen and (max-width: 900px) and (min-width: 700px) {
+    body{ width: 100%; min-width: 100%;}
+    .contentMain{ width: 100%;}
+    .home,.main{ width: 100%;}
+    .control-l{ margin-bottom: 10px;}
+    .dataLink{ width: 50px;}
+    .mytable01 .table>thead:first-child>tr:first-child>th:nth-child(5){ display: none;}
+    .mytable01 .table>thead:first-child>tr:first-child>td:nth-child(15){ display: none;}
+    .mytable01 .table>tbody tr:first-child>td:nth-child(5){ display: none;}
+    .mytable01 .table>tbody tr:first-child>td:nth-child(15){ display: none;}
+    .mytable01 .table>tbody tr:nth-child(2)>td:nth-child(10){ display: none;}
+
+}
+
+@media screen and (max-width: 1080px) and (min-width: 900px) {
+    body{ width: 100%; min-width: 100%;}
+    .contentMain{ width: 100%;}
+    .home,.main{ width: 100%;}
+    .control-l{ margin-bottom: 10px;}
+    .dataLink{ width: 50px;}
+}
+
+@media screen and (min-width: 1080px) {
+    body{ min-width: 1024px;}
+}

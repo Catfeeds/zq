@@ -1,0 +1,169 @@
+.wrap{
+    overflow-x: hidden;
+}
+.wrap-header{
+    width:100%;
+    height:15rem;
+    background:url('../../images/LiveRoom/unline-bg.png') no-repeat center center;
+    position: relative;
+}
+.back-shade{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+}
+
+.back{
+    display: flex;
+    width:100%;
+    height:30px;
+    margin-left: .6rem;
+    margin-top:3px;
+}
+.back-btn{
+    display: inline-block;
+    width:30px;
+    height:30px;
+    border:1px solid #4d4d53;
+    border-radius: 50%;
+    background:#040106;
+    line-height: 26px;
+    text-align: center;
+  
+}
+.back-btn img{
+    width: 10px;
+    height: 20px;
+}
+.host-name{
+    position: absolute;
+    left: 50px;
+    top: .4rem;
+    z-index: 9999;
+    background: #1d1d1d;
+    height: 30px;
+    border-radius: 15px;
+    line-height: 30px;
+    color:#fff;
+    display: flex;
+    border:1px solid #4d4d53;
+}
+.host-name i{color:#fff;padding-left: 2px;height:30px;line-height: 30px;display: inline-block;padding: 0 10px;font-style: normal}
+.host-name img{
+    height:30px;
+}
+.header-content{
+    width:100%;
+    height:7rem;
+    background: url('../../images/LiveRoom/soccor.png') no-repeat center bottom;
+    background-size: 50%;
+
+}
+.wore{
+    margin-top:.5rem;
+    color:#fff;
+    text-align: center;
+    font-size: 1rem;
+    
+}
+/* 内容 */
+.content{
+    margin:0 .6rem;
+}
+.content .module{
+    width:100%;
+    height:auto;
+    background: #fff;
+}
+.content .module  .top{
+    width:100%;
+    height:3rem;
+    font-size: 1rem;
+    line-height: 3rem;
+    border-bottom:1px solid #e8e8e8;
+    
+}
+.content .module  .top span{
+    border-left: 5px solid #fd6398;
+    padding-left:1rem; 
+    font-weight: bold;
+}
+.module-content ul{
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    justify-content:space-between;
+    flex-wrap: wrap;
+}
+.module-content ul li{
+     display: block;
+     width:48.5%;
+     height:10.7rem;
+     position: relative;
+     margin-top:1rem;
+    
+     
+
+}
+.module-content ul li img{
+    display: block;
+    width:100%;
+    height:100%;
+    
+}
+.module-content ul li .info{
+    position: absolute;
+ width:100%;
+ height:100%;
+ top:0;
+ left:0;
+ z-index:100;
+}
+.info .live-icon{
+    width:40%;
+    height:12.5%;
+    color:#638dd3;
+    background: rgba(0,0,0,0.5);
+    padding-left:.3rem;
+    line-height: 12.5%;
+    display: flex;
+    align-items: center;
+    border-radius: 4px 0 0 0;
+
+}
+.info .live-icon img{
+    display: inline-block;
+    width:1.0rem;
+    height:50%;
+    margin-left: .3rem;
+   
+}
+.info .live-info{
+    position: absolute;
+    width:100%;
+    height:25%;
+    bottom:0;
+    left:0;
+    padding:0 .3rem;
+    
+}
+.info .live-info span{
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  height:50%;
+
+}
+.info .live-info span:nth-child(1){
+    color:#fff;
+    font-weight: bold;
+}
+.info .live-info span:nth-child(2){
+    color:#e3e3e3;
+}
+.lx{color:#b9bebf;font-style: normal}
+.hf{color:#ffe185;font-style: normal}

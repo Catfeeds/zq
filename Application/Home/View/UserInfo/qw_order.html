@@ -1,0 +1,171 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userInfo/qw_order.css">
+    <script type="text/javascript" src="__JS__/common/laydate/laydate.js"></script>
+</block>
+<block name="content">
+    <div class="body">
+        <!-- 头部开始 -->
+        <include file="Public:top_user"/>
+        <!-- 头部结束 -->
+
+
+        <!-- 主体内容开始 -->
+        <div class="qw_content clearfix">
+            <!-- 左边的主体内容 -->
+            <include file="Public:leftMenu"/>
+            <!-- left-main e -->
+
+            <!-- right_main s -->
+            <div class="right_main fr" style="min-height: 842px;">
+                <div class="morder_title"><h5>我的订购({$count|default=0})</h5></div>
+                <div class="morder_time">
+                    时间：<input id="startTime" value='<if condition="$_REQUEST['startTime'] neq ''">{:date('Y-m-d',$_REQUEST['startTime'])}</if>' class="laydate-icon time_txt" onclick="laydate(laydate({elem: '#startTime', istime: true, format: 'YYYY-MM-DD'}))">&nbsp; — &nbsp;
+                    <input id="endTime"  value='<if condition="$_REQUEST['endTime'] neq ''">{:date('Y-m-d',$_REQUEST['endTime'])}</if>' class="laydate-icon time_txt" onclick="laydate({elem: '#endTime', istime: true, format: 'YYYY-MM-DD'})">
+                    <input id="sub" type="button" value="查 询" class="time_btn">
+                </div>
+
+                <notempty name="myBuyList">
+                    <volist name="myBuyList" id="vo">
+                        <div class="order_list">
+                            <div class="bdl_con">
+                                <a href="{$vo.href}" target="_blank">
+                                    <div class="bdlc_top clearfix">
+                                        <div class="bdlct_left fl">
+                                            <img src="{$vo['logo']}" alt="">
+                                            <div class="near_get">
+                                                <div class="ng_zhong"><span>{$vo['name']}</span><em>近10中{$vo['ten_num']}</em></div>
+                                                <div class="ng_price"><span>价格：{$vo['sale']|default=0}</span>金币/{$vo['game_num']|default=0}场</div>
+                                            </div>
+                                        </div>
+                                        <div class="bdlct_right fr">
+                                            <p class="dr_percent"><span>{$vo['total_rate']|default=0}</span>%</p>
+                                            <p>累计回报率</p>
+                                            <p class="put_time">购买于：{:date('Y-m-d H:i',$vo['create_time'])}</p>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <div class="put_game">
+                                    <table class="table tb_put_game">
+                                        <tbody>
+                                        <tr class="tr_border">
+                                            <th>开赛时间</th>
+                                            <th>赛事</th>
+                                            <th>对阵比赛</th>
+                                            <th>玩法</th>
+                                            <th>盘口/赔率</th>
+                                            <th>推介</th>
+                                        </tr>
+                                        <notempty name="vo['introGamble']">
+                                            <volist name="vo['introGamble']" id="item">
+                                                <tr>
+                                                    <td>{:date('m/d H:i',$item['gtime'])}</td>
+                                                    <td>{$item['union_name']}</td>
+                                                    <td class="game_vs">{$item['home_team_name']}<span> {$item['score']|default='VS'} </span>{$item['away_team_name']}</td>
+                                                    <td>
+                                                        <if condition="$item['play_type'] eq '1'">让球</if>
+                                                        <if condition="$item['play_type'] eq '-1'">大小</if>
+                                                    </td>
+                                                    <td>{$item['handcp']}(<font>{$item['odds']}</font>)</td>
+                                                    <td class="g_result">{$item['Answer']}({$item['odds']})
+                                                        <if condition="$item['result'] eq '1' OR $item['result'] eq '0.5' "><img src="__PUBLIC__/Home/images/qw/win.png" alt=""></if>
+                                                        <if condition="$item['result'] eq '-1' OR $item['result'] eq '-0.5' "><img src="__PUBLIC__/Home/images/qw/lose.png" alt=""></if>
+                                                        <in name="item['result']" value="2"><img src="__PUBLIC__/Home/images/qw/zou.png" alt=""></in>
+                                                        <if condition="$item['result'] eq '-10'"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_cancel.png" alt=""></if>
+                                                        <if condition="$item['result'] eq '-11'"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_pending.png" alt=""></if>
+                                                        <if condition="$item['result'] eq '-12'"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_cut.png" alt=""></if>
+                                                        <if condition="$item['result'] eq '-13'"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_interrupt.png" alt=""></if>
+                                                        <if condition="$item['result'] eq '-14'"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_putoff.png" alt=""></if>
+                                                    </td>
+                                                </tr>
+                                            </volist>
+                                            <else/>
+                                            <tr>
+                                                <td colspan="6" class="wait"><img src="__PUBLIC__/Home/images/qw/wait.png" alt="">敬请期待
+                                                </td>
+                                            </tr>
+                                        </notempty>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </volist>
+                    <else/>
+                    <div  style="padding-top: 200px; text-align: center;">
+                        <div class="uImg text-center"><img src="__PUBLIC__/Home/images/index/pImg.png" alt=""></div>
+                        <p class="text-999 text-center">暂无订购记录</p>
+                        <a href="{:U('/qiuwang@sporttery')}" target="_blank" class="btn btn-blue">去订购>></a>
+                    </div>
+                </notempty>
+
+                <!--页码开始-->
+                <div class="page-con" style="text-align: center;">
+                    <nav>
+                        <ul class="pagination" style="float: none;">
+                            <if condition="$pageCount gt 1">{$show}</if>
+                        </ul>
+                    </nav>
+                </div>
+                <!--页码结束-->
+            </div>
+            <!-- right_main s -->
+
+        </div>
+        <!-- 主体内容结束 -->
+    </div>
+
+</block>
+<block name='js'>
+    <script type="text/javascript">
+        $(function () {
+            $('#sub').on('click',function () {
+                var startTimeVal = $('#startTime').val();
+                var endTimeVal = $('#endTime').val();
+                if (!startTimeVal && !endTimeVal)
+                {
+                    return;
+                }
+                //开始时间
+                var startTime = '';
+                var startTimeHtml = '';
+                var endTimeHtml = '';
+
+                if (startTimeVal)
+                {
+                    startTime = Date.parse(new Date(startTimeVal));
+                    startTime = startTime / 1000;
+                    startTimeHtml = '/startTime/'+startTime;
+                }
+                //结束时间
+                var endTime = '';
+                if (endTimeVal)
+                {
+                    endTime = Date.parse(new Date(endTimeVal));
+                    endTime = endTime / 1000;
+                    endTimeHtml = '/endTime/'+endTime;
+                }
+                var p = "{$_REQUEST.p}";
+
+
+
+                if (p)
+                {
+
+                    window.location.href = DOMAIN_URL+'/UserInfo/qw_order/p/'+p+startTimeHtml+endTimeHtml+'.html';
+                }
+                else
+                {
+                    window.location.href = DOMAIN_URL+'/UserInfo/qw_order'+startTimeHtml+endTimeHtml+'.html';
+                }
+
+            });
+        });
+
+
+    </script>
+</block>
+

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>资讯-详情页</title>
+    <!-- jquery -->
+    <script type="text/javascript" src="__PUBLIC__/Plugs/jquery-1.11.1.min.js"></script>
+    <!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Api/Home/articleDetail/js/htmlwidth.js"></script>
+    <!-- 引入公共样式 -->
+    <link rel="stylesheet" href="__PUBLIC__/Api/Home/articleDetail/css/base.css">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__PUBLIC__/Api/Home/articleDetail/css/news_detail.css">
+</head>
+<body>
+
+<style>
+    .tj_user{background: #f7f7f7;padding: .2rem 0;text-align: center;color: #666;}
+    .tj_user span{color: #16a116;}
+    .tj_user a{color: #666;display: block;}
+</style>
+
+<section class="art_main boxs">
+
+    <!-- 标题 start-->
+    <section class="art_title">
+        <h1>{$detail['title']}</h1>
+        <time class="param_user" user_id="{$user_id}">{$detail['add_time']|date='Y-m-d H:i:s',###} <if condition="$user_id eq 0">{$detail['source']}<else />{$nick_name}</if></time>
+    </section>
+    <!-- 标题 end-->
+
+    <!-- 文章内容 start -->
+    <article class="article_main">
+        {$detail['content']|htmlspecialchars_decode}
+
+        <if condition="$user_id neq 0">
+        <div class="tj_user famous" user_id="{$user_id}">
+            <a href="javascript:void(0);"><span>{$nick_name}</span>推荐战绩统计
+            </a>
+        </div>
+        </if>
+    </article>
+    <!-- 文章内容end -->
+    <if condition="!empty($detail['user_id'])">
+        <p class="statement">{:C('user_statement')}</p>
+    </if>
+</section>
+
+
+
+
+<section class="art_main2">
+
+    <if condition="count($list) gt 0">
+    <section class="her_tj clearfix">
+        <a href="javascript:void(0);">
+            <div class="ht_left fl"><if condition="$user_id eq 0">高手推荐<else />TA的推荐</if></div>
+            <div class="ht_right fr" user_id="{$user_id}">更多></div>
+        </a>
+    </section>
+
+    <!-- 他的推荐 内容 s -->
+    <div class="new_tj com_dt clearfix">
+            <ul>
+                <foreach name="list" item="v" key="k" >
+
+                    <li class="gamble_div_{$v['gamble_id']}">
+
+                        <if condition="$user_id eq 0">
+                            <div class="n_top clearfix">
+                                <div class="n_top_left" user_id="{$v['user_id']}"><a href="javascript:void(0);" class="gambleUser"><img src="{$v['face']}" alt="{$v['nick_name']}" ><span>{$v['nick_name']}</span><em class="lv lv{{$v['lv']}}"></em></a></div>
+                                <time>半小时前</time>
+                            </div>
+                        </if>
+                        <p class="p_1"><em style="color: #a868c1"><if condition="($v['play_type'] eq -2) OR ($v['play_type'] eq 2)"> {$v['bet_code']} &nbsp;</if>{$v['union_name'][0]}</em>  {$v['home_team_name'][0]} VS {$v['away_team_name'][0]}
+                            <if condition="($v['tradeCoin'] eq 0) AND ($v['is_trade'] eq 1)">
+                                <em class="mian"><img src="__PUBLIC__/Api/Home/articleDetail/images/mian.png" alt="免费"></em>
+                            </if>
+                        </p>
+                        <div class="p_2 clearfix">
+                            <span class="fl">{$v['game_date']|strtotime|date='m/d',###}  {$v['game_time']}</span>
+
+                            <!-- 自己发的不显示金币 -->
+                            <if condition="$v['user_id'] neq $my_id">
+                                <if condition="$v['is_trade'] eq 0">
+                                    <if condition="$v['tradeCoin'] eq 0">
+                                        <div class="fr gold bg_green"><a href="javascript:;" class="clickGamble" gamble_id="{$v['gamble_id']}" gamble_coin="{$v['tradeCoin']}">免费</a></div>
+                                        <else />
+                                        <div class="gold fr"><a href="javascript:;" class="clickGamble" gamble_id="{$v['gamble_id']}" gamble_coin="{$v['tradeCoin']}">{$v['tradeCoin']}金币</a></div>
+                                    </if>
+                                </if>
+                            </if>
+                        </div>
+                        <p class="p_3 clearfix"><em class="fl">玩法：</em><span class="fl"><if condition="$v['play_type'] eq 1">让分<elseif condition="$v['play_type'] eq -1"/><if condition="$game_type eq 1">大小<else />总分</if><else />竞彩</if></span>
+                            <if condition="$v['user_id'] neq $my_id">
+                                <if condition="$v['is_trade'] eq 0">
+                                    <span class="fr quiz_number">{$v['quiz_number']}</span>
+                                </if>
+                            </if>
+                        </p>
+
+                        <p class="p_4 gamble_trade2" <if condition="$v['is_trade'] eq 0">style="display: none;"</if>>推荐：
+                        <span>
+                            <if condition="in_array($v['play_type'], [1, -1])">
+                                <if condition="$v['play_type'] eq 1">
+                                    <if condition="$v['chose_side'] eq 1">
+                                        {$v['home_team_name'][0]}
+                                        <?php echo $v['handcp'] < 0 ? '+'.abs($v['handcp']) : '-'.$v['handcp']; ?>
+                                        <else />
+                                        {$v['away_team_name'][0]}
+                                        <?php echo $v['handcp'] < 0 ? $v['handcp'] : '+'.$v['handcp']; ?>
+                                    </if>
+                                    （{$v['odds']}）
+                                    <else />
+                                    <if condition="$v['chose_side'] eq 1">大 <else />小</if>{$v['handcp']}（{$v['odds']}）
+                                </if>
+                                <else />
+                                <if condition="$v['chose_side'] eq -1">{$v['home_team_name'][0]}负<elseif condition="$v['chose_side'] eq 0"/>平 <else />{$v['home_team_name'][0]}胜</if>
+                                {$v['handcp']}（{$v['odds']}）
+                            </if>
+                        </span>
+                        </p>
+                        <p class="p_5 q-two gamble_trade2" <if condition="$v['is_trade'] eq 0">style="display: none;"</if>>分析：<span><if condition="$v['desc'] eq ''">暂无分析 <else />{$v['desc']}</if></span></p>
+                    </li>
+
+                </foreach>
+            </ul>
+        </div>
+    <!-- 他的推荐 内容 e -->
+    </if>
+
+    <section class="art_main3">
+        <!-- 热门评论 strat -->
+        <section class="article_hotcmnt">
+            <aside class="cmmt_title">热门评论</aside>
+
+            <volist name="comment" id="item">
+
+                <div class="comment_box clearfix" userid="{$item['user_id']}">
+                    <div class="head">
+                        <img src="{$item['face']}" alt="head" class="user">
+                    </div>
+                    <div class="comment_wrap comment_wrap_{$item['id']}">
+                        <p><span class="user">{$item['nick_name']}</span><a href="javascript:void(0);" class="on" comment_id="{$item['id']}">({$item['like_num']})</a>
+                        </p>
+                        <time>{$item['create_time']|date='Y-m-d H:i',###}</time>
+                        <article class="comment" comment_id="{$item['id']}" comment_name="{$item['nick_name']}" id="{$item['id']}">
+                            <if condition="$item['status'] eq 1">
+                                {$item['content']}
+                                <else/>
+                                <span style="color: #999">该条评论已被管理员屏蔽</span>
+                            </if>
+                        </article>
+                        <!--二级评论-->
+                        <volist name="item['subComment']" id="subItem">
+                            <article class="reply comment" comment_id="{$subItem['id']}" comment_name="{$subItem['fromUser']}" id="{$subItem['id']}">
+                                <em><span>{$subItem['fromUser']}</span> 回复 {$subItem['toUser']}</em>
+                                <if condition="$item['status'] eq 1">
+                                    {$subItem['content']}
+                                    <else/>
+                                    <span style="color: #999">该条回复已被管理员屏蔽</span>
+                                </if>
+
+                            </article>
+                        </volist>
+                        <!--二级评论end-->
+                    </div>
+                </div>
+            </volist>
+
+
+            <div class="view_more" article_id="{$detail['id']}">
+                <if condition="$number eq 0">
+                    <a>暂无评论数据</a>
+                    <elseif condition="$number gt 5"/>
+                    <a href="javascript:void(0);">查看更多评论</a>
+                </if>
+            </div>
+
+
+        </section>
+        <!-- 热门评论 end -->
+
+    </section>
+</section>
+
+
+<script>
+    $(function () {
+        $('.user').click(function () {
+            window.location.href = 'user:' + $(this).parents('.comment_box').attr('userid');
+        });
+
+        $('.on').click(function () {
+            window.location.href = 'like:' + $(this).attr('comment_id');
+        });
+
+        $(document).on("touchend", ".comment", function(){
+            window.location.href = 'comment:'+$(this).attr('comment_id')+'_'+$(this).attr('comment_name');
+        });
+
+        $('.view_more').click(function () {
+            window.location.href = 'morecomment:' + $(this).attr('article_id');
+        });
+
+        $(".article_main img").each(function (e) {
+            $(this).click(function () {
+                window.location.href = 'imgid:' + e;
+            })
+        });
+
+        //更多推荐
+        $('.ht_right').click(function () {
+            window.location.href = 'moregamble:' + $(this).attr('user_id');
+        });
+
+        //推荐
+        $('.clickGamble').click(function () {
+            window.location.href = 'gamble:' + $(this).attr('gamble_id')+'_'+$(this).attr('gamble_coin');
+        });
+
+        //推荐用户
+        $('.n_top_left .gambleUser').click(function () {
+            window.location.href = 'user:' + $(this).parent().attr('user_id');
+        });
+
+        //名师
+        $('.param_user').click(function () {
+            var user_id = $(this).attr('user_id');
+            if(user_id > 0){
+                window.location.href = 'user:' + user_id;
+            }
+        });
+
+        //战绩推荐统计
+        $('.famous').click(function () {
+            var user_id = $(this).attr('user_id');
+            if(user_id > 0){
+                window.location.href = 'famous:' + user_id;
+            }
+        });
+    });
+
+    //购买推荐
+    function buyGamble(gamble_id){
+        $('.gamble_div_'+gamble_id+' .gold').hide();
+        $('.gamble_div_'+gamble_id+' .gamble_trade2').css('display', 'block');
+
+        var coin = $('.gamble_div_'+gamble_id+' .clickGamble').attr('gamble_coin');
+        if(coin == 0){
+            $('.gamble_div_'+gamble_id+' .p_1').append('<em class="mian"><img src="__PUBLIC__/Api/Home/articleDetail/images/mian.png" alt="免费"></em>');
+
+        }
+    }
+
+    //评论加载
+    function load_comment(top_id, fromUser, toUser, insertId, filter_content){
+        //如果没有展开就先展开
+        var rd_hide_obj = $('.comment_wrap_'+top_id).children(".reply:gt(2)");
+        if(rd_hide_obj.hasClass("rd_hide") != 1){
+            $('.comment_wrap_'+top_id+' .more_btn').click();
+        }
+
+        var str = '<article class="reply comment" comment_name="'+fromUser+'" comment_id="'+insertId+'"><em>'+fromUser+' 回复 '+toUser+'：</em>'+filter_content+'</article>';
+        $('.comment_wrap_'+top_id+' article:last').after(str);
+    }
+
+    //回复隐藏  
+    $(".comment_wrap").each(function(){ 
+        var rep_len=$(this).children(".reply").length;
+        if(rep_len>3){
+            $(this).children(".reply:gt(2)").hide();
+            var more_len=$(this).children(".reply:gt(2)").length;
+            $(this).append("<div class='more_btn' data-id='"+ more_len +"'>更多"+ more_len +"条回复...</div>")
+        }
+    });
+    //更多回复点击
+    $(".more_btn").click(function(){ 
+       var rd_hide_obj = $(this).parent(".comment_wrap").children(".reply:gt(2)");
+       if(rd_hide_obj.hasClass("rd_hide") == 1){ 
+        $(this).prevAll(".rd_hide").hide();
+        rd_hide_obj.removeClass("rd_hide");
+        $(this).html("更多"+ $(this).attr("data-id") +"条回复 ↓");
+       }else{
+        rd_hide_obj.addClass("rd_hide");
+        $(this).prevAll(".rd_hide").show();
+        $(this).html("收起 ↑");
+       } 
+    });
+
+
+</script>
+</body>
+</html>

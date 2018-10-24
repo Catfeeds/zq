@@ -1,0 +1,134 @@
+<include file="Public:pagerForm"/>
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/index" method="post">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label>体验卷礼包名称：</label>
+                    <input type="text" name="name" value="{$_REQUEST.name}">
+                </li>
+                <li>
+                    <label>礼包类型：</label>
+                    <select name="type" class="combox" onchange="$(form).submit()">
+                        <option value="" selected>全部</option>
+                        <option value="1"
+                        <if condition="$_REQUEST.type eq '1'">selected</if>
+                        >注册赠送</option>
+                        <option value="2"
+                        <if condition="$_REQUEST.type eq '2'">selected</if>
+                        >系统赠送</option>
+                        <option value="3"
+                        <if condition="$_REQUEST.type eq '3'">selected</if>
+                        >活动赠送</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">查询</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="__URL__/edit" target="dialog" mask="true" rel="add" height="620" width="1000"><span>新增</span></a></li>
+            <li>
+            <li><a class="delete" href="__URL__/delAll" posttype="string" rel="id" target="selectedTodo"
+                   warn="请选择记录" title="你确定要删除吗？"
+                   warn="请选项"><span>删除</span></a></li>
+            <!--<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" warn="请选项" height="350"><span>编辑</span></a>-->
+            <!--</li>-->
+            <li>
+                <a class="edit" href="__URL__/saveAll/status/0" posttype="string" rel="id" target="selectedTodo"
+                   warn="请选择记录" title="确定都设为禁用?">
+                    <span>批量设为禁用</span></a></li>
+            <li>
+                <a class="edit" href="__URL__/saveAll/status/1" posttype="string" rel="id" target="selectedTodo"
+                   warn="请选择记录" title="确定都设为启用?">
+                    <span>批量设为启用</span></a></li>
+            <li><a class="add" href="__URL__/edit?type=system" target="dialog" mask="true" rel="add" height="620" width="1000"><span>系统赠送</span></a></li>
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="2%" style="cursor: default;">
+                <div class="gridCol" title="">
+                    <input class="checkboxCtrl" type="checkbox" group="id">
+                </div>
+            </th>
+            <th width="3%">ID</th>
+            <th width="8%">礼包名称</th>
+            <th width="8%">领取前图片</th>
+            <th width="8%">领取后图片</th>
+            <th width="15%">发行时间</th>
+            <th width="6%">发行状态</th>
+            <th width="8%" orderField="over_time" <if condition="$_REQUEST._order eq 'over_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>卷有效期（以前）</th>
+            <th width="8%" orderField="over_day" <if condition="$_REQUEST._order eq 'over_day'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>卷有效期（天数）</th>
+            <th width="6%">礼包类型</th>
+            <th width="6%">领取数量</th>
+            <th width="6%">状态</th>
+            <th width="6%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name="list">
+            <volist id="vo" name="list">
+                <tr target="sid_record" rel="{$vo['id']}">
+                    <td>
+                        <div>
+                            <input type="checkbox" value="{$vo.id}" name="id">
+                        </div>
+                    </td>
+                    <td>{$vo['id']}</td>
+                    <td>{$vo['name']}</td>
+                    <td><if condition="$vo.before_img neq ''"><a target="_blank" href="{$vo.before_img}"><img width="30" height="30" src="{$vo.before_img}"></a><else />没有上传</if></td>
+                    <td><if condition="$vo.after_img neq ''"><a target="_blank" href="{$vo.after_img}"><img width="30" height="30" src="{$vo.after_img}"></a><else />没有上传</if></td>
+                    <td><if condition="$vo['start_time'] neq 0">{$vo['start_time']|date="Y-m-d H:i",###} 至 {$vo['end_time']|date="Y-m-d H:i",###}<else/>--</if></td>
+                    <td>
+                        <if condition="$vo.start_time gt time()"><div style="color: blue">未开始</div>
+                        <elseif condition="$vo.end_time lt time()" /><div style="color: red">已结束</div>
+                        <else /><div style="color: green">进行中</div>
+                        </if>
+                    </td>
+                    <td>{$vo['over_time']|date="Y-m-d",###}</td>
+                    <td>{$vo['over_day']}</td>
+                    <td>
+                        <eq name="vo['type']" value="1">注册赠送</eq>
+                        <eq name="vo['type']" value="2">系统赠送</eq>
+                        <eq name="vo['type']" value="3">活动赠送</eq>
+                    </td>
+                    <td><a href="{:U('__ADMIN__/TicketConf/ticketLog',['gift_id'=>$vo['id']])}" target="navTab" mask="true"
+                           title="领取人数" rel="editPage">{$vo['gifCount']}</a></td>
+                    <td>{$vo.status|getStatus}</td>
+                    <td>
+ 
+                        <a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true"
+                           height="620" width="1000" title="{$vo.name}编辑" rel="editPage">编辑</a> |
+   
+                        {$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",'__DWZ__'}
+                    </td>
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum"/>
+
+
+</div>
+
+

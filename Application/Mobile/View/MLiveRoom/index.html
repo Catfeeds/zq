@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>全球体育直播聊天室</title>
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="white" name="apple-mobile-web-app-status-bar-style">
+    <link rel="stylesheet" href="__CSS__/LiveRoom/index.min.css">
+    <link rel="stylesheet" href="__CSS__/LiveRoom/index.css?v=201808301121">
+    <link rel="stylesheet" href="__CSS__/LiveRoom/reset.css">
+    <script type="text/javascript" src="__JS__/jquery-1.11.1.min.js"></script>
+    <!-- 自适应 计算html font-size -->
+    <!-- <script type="text/javascript" src="js/htmlwidth.js"></script> -->
+    <script src="__JS__/LiveRoom/jquery.nicescroll.min.js"></script>
+    <script src="__JS__/LiveRoom/flv.min.js"></script>
+    <script src="__JS__/LiveRoom/hls.min.js"></script>
+    <script src="__JS__/LiveRoom/dash.all.min.js"></script>
+    <script src="__JS__/LiveRoom/webtorrent.min.js"></script>
+    <script src="__PUBLIC__/Plugs/livePlayer/ckplayer.js"></script>
+    <style type="text/css" media="screen">
+        #flashContent { display: block; text-align: left; }
+    </style>
+</head>
+<body>
+<live-room-m >
+
+    <article>
+        <section id="#head_1">
+            <section class="video-container">
+                <div id="logo"> <a href="javascript:history.back();"><img src="__IMAGES__/LiveRoom/back.png" alt="" height="40px"> </a></div>
+                <div class="host-name"><img src="{$roomInfo.head}"><span>{$roomInfo.nick_name}</span> </div>
+                <!-- 视频 -->
+                <div id="mvMask"></div>
+
+                <div class="video-box">
+                    <div  class="tab">
+                        <span class="back"></span>
+                    </div>
+                    <!-- 视频播放 -->
+                    <div id="dplayer" style="width:100%; height:100%;<eq name="roomInfo['live_status']" value="2">display: none;</eq>" ></div>
+                    <!-- 默认图片 -->
+                    <img src="__IMAGES__/LiveRoom/default.png"  class="default;" style="display: none">
+                    <!-- 主播暂停 -->
+                    <div id="pause-two" style="<neq name="roomInfo['live_status']" value="2">display: none;</neq>">
+                        <img src="__IMAGES__/LiveRoom/unline-bg.png" style="width: 100%;height:100%">
+                        <div class="shade">
+                            <div class="header-content"></div>
+                            <p class="wore">主播暂时离开一会</p>
+                            <p class="wore">稍等片刻，马上回来~</p>
+                            <p class="refresh" onclick="location.reload();">召唤主播回来</p>
+                        </div>
+                    </div>
+                    <!-- 网络不好 -->
+                    <div id="pause-three" style="display: none">
+                        <img src="__IMAGES__/LiveRoom/unline-bg.png" >
+                        <div class="shade">
+                            <div class="header-icon-content"></div>
+                            <p class="wore">老铁你的网络睡着了~</p>
+                            <p class="wore">请检查您的网络设置,再刷新试试吧!</p>
+                            <p class="refresh">刷刷刷~</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="remind">欢迎来到{$roomInfo.nick_name}的直播间，喜欢就点关注吧，全球体育提倡的直播环境，只直播内容24小时巡查，任何违法、违规、低俗等不良信息将被封号。</div>
+        </section>
+        <div  class="chat-box">
+            <section class="tab-content">
+                <!-- 聊天区域 -->
+            <div id="publicChat" class="publicChat"></div>
+        </section>
+            <!--<section class="tab-zhezhao"></section>-->
+        </div>
+    </article>
+    <div id="footer" style="display: block;">
+        <!-- <div class="more-function" id="moreFunction"><img src="__IMAGES__/LiveRoom/back.jpg"></div> -->
+
+        <div id="editor">
+            <a href="{:U('/App/download@www')}" title="APP下载"><div class="messageEditor" id="messageEditor">打开全球体育APP，更多精彩互动~</div></a>
+        </div>
+
+    </div>
+    <!-- 引导去下载app -->
+    <div  class="mask">
+        <div class="go-download">
+            <span class="close-btn">x</span>
+            <p class="title">下载APP，可以看精彩直播视频噢~</p>
+            <p class="load-btn">马上下载直播走起!</p>
+        </div>
+    </div>
+    <!-- 主播切换场地 -->
+    <div  class="change" style="display: none">
+        <div class="go-change">
+        <div class="tally">
+                <p class="title-icon"></p>
+                <p class="tally-title"><i></i><span>正在直播</span></p>
+                <p class="troops"></p>
+                <a href="{:U('/App/download@www')}"><p class="tally-load-btn">去App看直播<i>GO~</i></p></a>
+            </div>
+            <p class="close-btn">
+                <span class="line"></span>
+                <a href="{:U('/Sporttery@m')}"><span class="close-icon"><img src="__IMAGES__/LiveRoom/ic_zbhcd_gb.png"></span></a>
+            </p>
+
+        </div>
+    </div>
+
+</live-room-m>
+
+<script>
+    var topic = ["{$roomInfo.mqtt_room_topic}"];
+    var mqHost = window.location.protocol == 'https:'? 'wss://'+'{$mqttOpt.ssl_host}'+':8084':'ws://'+'{$mqttOpt.host}'+':8083';
+    var mqUser = JSON.parse('{$mqttUser|json_encode}');
+    var liveStart = "{$roomInfo['live_status']}";
+    var liveUrl = "{$roomInfo['live_url']}";
+    var liveImg = "{$roomInfo['img']}";
+</script>
+<script type="text/javascript" src="__JS__/common/mqtt.min.js"></script>
+<script type="text/javascript" src="__JS__/common/mqttConnect.js"></script>
+<script src="__JS__/LiveRoom/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+/*竞猜王 - 搜索*/
+#search_header{width: 100%; height: .9rem;font-size: .24rem;background:#ddd; padding: .12rem 4%; position: relative; }
+.sc_text{width: 80%; height: auto;float: left;} 
+.sc_text div{width: 100%; height: .66rem; border-radius: .1rem; background:#fff url(../images/header_search.png) no-repeat .1rem center;background-size: .4rem .4rem; position: relative; padding-left: .65rem;} 
+.sc_text div input{width: 100%; height: .66rem; border-radius: .1rem; outline: none; background: #fff; } 
+.ne_close {
+    display: block;
+    width: .38rem;
+    height: .38rem;
+    position: absolute;
+    right: .12rem;
+    top: .15rem; 
+    background: url(../images/login/ne_close.png) no-repeat 0 0;
+    background-size: 100% auto;
+}
+
+.sc_btn{width: 20%; text-align: center; float: right; padding-left: 2%;} 
+.sc_btn a{color: #fff; font-size: .3rem; display: block; line-height: .66rem;} 
+
+.gs_title{width: 100%;height: .7rem;line-height: .7rem;padding:0 .2rem;}
+.gs_title h4{float: left;}
+.gs_title a{float: right; color: #666666;font-size: .24rem}
+
+/*热门推荐*/
+.hot_tj{border-top:1px solid #ddd;border-bottom:1px solid #ddd;padding-top: .3rem;}
+.hot_tj ul li{    width: 1.5rem; float: left; text-align: center; margin: 0 .16rem; margin-bottom: .3rem; position: relative; overflow: hidden; height: 2.3rem;}
+.hot_tj ul li figure img{width: .95rem; height: .95rem;border-radius: 50%}
+.hot_tj ul li figcaption{font-size: .3rem;width: 100%;height: .4rem; overflow: hidden;margin-top: .1rem}
+.record{background: #f86054;color:#fff;font-size: .24rem;height: .35rem;line-height: .38rem; width: 100%; border-radius: .2rem;padding:0 .1rem;}
+.hot_tj ul li em{position: absolute;right: 0;top:0;width: .18rem;height: .18rem; background: red;display: block;border-radius: 50%}
+/*搜索历史*/
+.search_history{border-top: 1px solid #ddd;}
+.search_history a{padding: .2rem .4rem;display: inline-block; background: #e6e6e6;float: left;border-radius: .1rem;margin: .2rem 0 0 .2rem;    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 2.5rem;
+    overflow: hidden;}
+
+.hot_tj_type{  color: #999;font-size: .24rem;padding-bottom: .05rem}
+
+/*热门推荐*/
+.recom_hot{position: relative; }
+.recom_hot ul li{ width: 100%; height:auto; border-top:1px solid #dddddd;padding:.1rem;position: relative; }
+.recom_hot .rg_top{height: 1rem;}
+.recom_hot .rg_top .rgt_left{float: left;}
+.recom_hot .rg_top .rgt_right{float: left;padding-left: .2rem; width: 6rem}
+.recom_hot .rg_top .rgt_left img{width: 1rem; height: 1rem; border-radius: 50%}
+.recom_hot .rg_top .rgt_right p{padding-top:.1rem;font-size: .26rem;width: 100%;float: left;line-height: 150%}
+.recom_hot .rg_top .rgt_right p:first-child span{font-size: .32rem;float: left;}
+.recom_hot .rg_top .rgt_right p:first-child span i{color: red;font-style: normal;}
+.recom_hot .rg_top .rgt_right p:last-child{color: #666666;}
+.recom_hot .rg_top .rgt_right p:last-child span{padding-left: .1rem}
+
+.n_top .n_top_right{float: left;}
+
+.win_count{position: absolute;right: .15rem;top:.2rem;font-size: .24rem;color: #666}
+
+.his_back{position: absolute;left: 0;top: 0;display: block;width: .6rem;height: .89rem}
+
+/*样式更改*/
+.nav_list a.on{color: #0a94e4;border-bottom: .1rem solid #0a94e4;}
+#header{ background-color: #0a94e4 !important ;}
+
+
+
+
+

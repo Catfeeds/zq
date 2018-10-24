@@ -1,0 +1,7 @@
+<header id="header" class="headFixed">
+    <div class="logo"><a href="{:U('/')}"><img src="__IMAGES__/index/logo.png" alt="logo"></a></div>
+    <span style="line-height: .60rem;margin-left: 65px;color: #fff;font-size: .34rem;">首页</span>
+    <div class="posnal_list">
+      <a href="<if condition="$is_log == 1">{:U('User/index')}<else/>{:U('User/login')}</if>" class="myHead"><img src="{$user_auth['head']|default='__IMAGES__/index/headImg.png'}" alt="头像"></a>
+    </div>
+</header>

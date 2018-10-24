@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta charset="UTF-8">
+	<title>全球体育网</title>
+	  <!-- jquery -->
+    <script type="text/javascript" src="__PUBLIC__/Api/Invitation/js/jquery-1.8.0.min.js"></script>
+
+	  <!-- 引入公共样式 --> 
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/Invitation/css/base.css">
+	  <!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Api/Invitation/js/htmlwidth.js"></script>
+    
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__PUBLIC__/Api/Invitation/css/index.css">
+</head>
+<body>
+
+   
+   
+    <!-- top  s-->
+    <section class="banner">
+      <div class="top_cloud"></div>
+      <!-- 二级头部 s -->
+      <!--<header id="other_header">-->
+        <!--<a href="javascript:;"></a>邀请好友  立刻赚钱 -->
+      <!--</header>-->
+      <!-- 二级头部 e --> 
+      <a href="javascript:;" id="rules"></a>
+    </section>
+    <!-- top  e-->
+
+    <!-- 邀请码 s -->
+     <section class="yaoqing">
+       <figure>
+           <if condition="!empty($code)">
+               <img src="__MODULE__/Index/getEWM?code={$code}" alt="二维码">
+               <else />
+               <img src="__PUBLIC__/Api/Invitation/images/ewm.png" alt="二维码">
+           </if>
+
+         <figcaption>我的邀请码：<span class="codeSpan">{$code}</span></figcaption><span id="copySpan" style="display: block;padding: .1rem .2rem;background: #e65b55;width: 2rem;margin:0 auto;margin-top: .2rem;color: #fff;border-radius: .2rem">复制</span>
+         <a href="javascript:;" class="shareClick">点击邀请好友赚Q币</a>
+       </figure>
+     </section>
+    <!-- 邀请码 e -->
+
+
+<section class="my_msg">
+  <div class="my_msg_bg"></div>
+  <div class="my_msg_con">
+    <div class="mmc_main">
+       <div class="ding"></div>
+       <div class="ding" style="left:auto;right: .1rem"></div>
+       <div class="my_msg_title">我的信息</div>
+       <p class="line"></p>
+       <table class="table tb_my_msg">
+         <tbody>
+           <tr>
+             <td><img src="__PUBLIC__/Api/Invitation/images/get_man.png" alt="邀请总人数">邀请总人数: <em>{$info['total_num']}</em>人</td>
+             <td><img src="__PUBLIC__/Api/Invitation/images/icore.png" alt="失效Q币">失效Q币: <em>{$info['invalid_coin']}</em>个</td>
+           </tr>
+           <tr>
+             <td><img src="__PUBLIC__/Api/Invitation/images/ti.png" alt="可提Q币">可提Q币: <em>{$info['valid_coin']}</em>个</td>
+             <td><img src="__PUBLIC__/Api/Invitation/images/no_ti.png" alt="不可提Q币">不可提Q币: <em>{$info['await_coin']}</em>个</td>
+           </tr>
+           <tr>
+             <td colspan="2" style="text-align: center!important;"><img src="__PUBLIC__/Api/Invitation/images/get_icore.png" alt="获得总Q币">获得总Q币: <em>{$info['total_coin']}</em>个</td>
+           </tr>
+         </tbody>
+       </table>
+    </div>
+    <div class="mmc_main" style="margin-top: .2rem;padding-bottom: 1rem">
+       <div class="my_msg_title my_yaoq">我的邀请</div>
+       <p class="line line2"></p>
+       <table class="table tb_yaoq">
+         <tbody>
+           <tr>
+             <td><img src="__PUBLIC__/Api/Invitation/images/level_1.png" alt="一级下属邀请"></td>
+             <td>一级下属邀请: <em>{$info['first_num']}</em>人</td>
+             <td><a href="javascript:void(0);" title="详细" class="jumpDetail" level="1">&nbsp;</a></td>
+           </tr>
+           <tr>
+             <td><img src="__PUBLIC__/Api/Invitation/images/level_2.png" alt="二级下属邀请"></td>
+             <td>二级下属邀请: <em>{$info['second_num']}</em>人</td>
+             <td><a href="javascript:void(0);" title="详细" class="jumpDetail" level="2">&nbsp;</a></td>
+           </tr>
+           <tr>
+             <td><img src="__PUBLIC__/Api/Invitation/images/level_3.png" alt="三级下属邀请"></td>
+             <td>三级下属邀请: <em>{$info['third_num']}</em>人</td>
+             <td><a href="javascript:void(0);" title="详细" class="jumpDetail" level="3">&nbsp;</a></td>
+           </tr>
+         </tbody>
+       </table>
+    </div>
+  </div>
+</section>
+
+<!-- 邀请达人榜 s-->
+<section class="rank_lay">
+<div class="my_msg_bg rank_bg"></div>
+<div class="rank_con clearfix">
+  
+     <!-- 邀请达人榜 s -->
+    <section class="yq_daren">
+      <div class="dr_title clearfix">
+        <span><img src="__PUBLIC__/Api/Invitation/images/yq_title.png" alt="邀请达人榜">邀请达人榜</span>
+        <em><a href="javascript:;" class="shareClick">争上达人榜<img src="__PUBLIC__/Api/Invitation/images/yq_bang.png" alt="邀请达人榜"></a></em>
+      </div>
+      <!-- 排名 -->
+      <div class="dr_rank">
+         <div class="dr_con">
+            <figure>
+              <img src="{$list[1]['face']}" class="head user" alt="{$list[1]['nick_name']}" user_id="{$list[1]['user_id']}">
+              <figcaption>
+                <p><span>{$list[1]['total_coin']}</span>Q币</p>
+                <p class="user" user_id="{$list[1]['user_id']}"><img src="__PUBLIC__/Api/Invitation/images/NO2.png" alt="第二名">{$list[1]['nick_name']}</p>
+              </figcaption>
+            </figure>
+         </div>
+         <div class="dr_con dr_con_gold">
+           <figure>
+              <img src="{$list[0]['face']}" class="head user" alt="{$list[0]['nick_name']}"  user_id="{$list[0]['user_id']}">
+              <figcaption>
+                <p><span>{$list[0]['total_coin']}</span>Q币</p>
+                <p class="user" user_id="{$list[0]['user_id']}"><img src="__PUBLIC__/Api/Invitation/images/NO1.png" alt="第一名">{$list[0]['nick_name']}</p>
+              </figcaption>
+            </figure>
+         </div>
+         <div class="dr_con">
+           <figure>
+              <img src="{$list[2]['face']}" class="head user" alt="{$list[2]['nick_name']}" class="user" user_id="{$list[2]['user_id']}">
+              <figcaption>
+                <p><span>{$list[2]['total_coin']}</span>Q币</p>
+                <p class="user" user_id="{$list[2]['user_id']}"><img src="__PUBLIC__/Api/Invitation/images/NO3.png" alt="第三名">{$list[2]['nick_name']}</p>
+              </figcaption>
+            </figure>
+         </div>
+      </div>
+    </section>
+    <!-- 邀请达人榜 e -->
+  <div class="rank_list">
+     <div class="rank_list_con">
+        <!-- 邀请达人列表 s-->
+   <section class="dr_list clearfix">
+     <ul>
+         <foreach name="list" item="v" key="k">
+             <if condition="$k gt 2">
+             <li>
+                 <em class="user" user_id="{$v['user_id']}"><img src="{$v['face']}" alt="{$v['nick_name']}" >{$v['nick_name']}</em>
+                 <span><i>{$v['total_coin']}</i> Q币</span>
+             </li>
+             </if>
+         </foreach>
+     </ul>
+   </section>
+    <!-- 邀请达人列表 e-->
+    </div>
+  </div>
+
+</div>
+</section>
+<!-- 邀请达人榜 e-->
+<input type="hidden" id="userToken" value="{$userToken}">
+<input type="hidden" value="{$detailUrl}" id="detailUrl">
+
+<div id="maskLayer"></div>
+<div class="rules_con">
+  <div id="close"></div>
+  <h2>活动规则</h2>
+  <p>1.邀请好友下载全球体育APP，用户注册后并在个人中心“输入邀请码”里输入好友邀请码时，您和您的好友均可获得Q币。</p>
+  <p>2.一级邀请每邀请1人成功注册，您和好友均可获得{$inviteConf[0]}Q币；通过好友成功邀请注册的二级邀请及三级邀请，您可获得{$inviteConf[2]['top']}Q币。</p>
+  <p>3.受邀用户填写邀请码那日起30天考核期内，达到一定的活跃次数时，邀请方获得的Q币才可以提现和使用；受邀方获得的Q币只要达到一定的活跃次数就可以提现和使用（不受时间约束）。</p>
+  <p>4.Q币说明：总Q币=可提Q币+不可提Q币+失效Q币；可提Q币=考核期通过的Q币；不可提Q币=考核阶段内的Q币（不可以提现和使用）；失效Q币=考核期不通过的Q币。</p>
+  <p>5.如发现使用不正当手段获取奖励，全球体育有权在事先不通知的情况下取消对其的奖励。</p>
+  <p>6.最终解释权归全球体育所有。</p>
+</div>
+
+<script>
+  $("#rules").click(function(){
+     $("#maskLayer").show();
+     $(".rules_con").show();
+  });
+  $("#maskLayer,#close").click(function(){
+        $("#maskLayer").hide();
+        $(".rules_con").hide();
+  });
+
+    $(function(){
+        //分享
+        $('.shareClick').click(function() {
+            window.location.href = 'share:'+ $('.codeSpan').text();
+        });
+
+        //用户昵称、用户头像跳转用户主页
+        $('.user').click(function() {
+            var userid = $(this).attr('user_id');
+            window.location.href = 'user:'+ userid;
+        });
+
+        //复制功能
+        $('#copySpan').click(function() {
+            window.location.href = 'copy:'+ $('.codeSpan').text();
+        });
+
+        //跳转详细页面
+        $('.jumpDetail').click(function() {
+            var level = $(this).attr('level');
+            var url = $("#detailUrl").val();
+            window.location.href = url+"&level="+level;
+        });
+    })
+</script>
+
+
+</body>
+</html>

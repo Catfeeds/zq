@@ -1,0 +1,126 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>帮助中心_全球体育_即时比分,足球比分,赛事直播,足彩推荐|全球体育网qqty.com</title>
+    <meta name="keywords" content="英超直播、NBA直播、直播吧、A8直播、足球直播、极速直播、jrs直播、中超直播、比分直播、赛事直播、体育直播网、CBA直播"/>
+    <meta name="description" content="全球体育是最好的体育视频直播网站、主要提供英超直播、NBA直播、直播吧、A8直播、足球直播、极速直播、jrs直播、中超直播、比分直播、赛事直播等、力争做用户体验最好的体育直播网"/>
+</block>
+<block name="body">
+<body>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/help_center/hc_common.css">
+    
+	<div class="body">
+    	<!-- 顶部开始 -->
+        <include file="Public:top"/>
+        <!-- 顶部结束 -->
+        <!-- banner搜索开始 -->
+        <include file="search"/>
+        <!-- banner搜索结束 -->
+        <!-- 主体内容开始 -->
+        <div class="main">
+        	<div class="section-title"><h4>问题分类</h4></div>
+            <div class="q-type clearfix">
+            	<!-- 左边导航开始 -->
+            	<include file="navigate"/>
+                <!-- 左边导航结束 -->
+                <!-- 右边列表开始 -->
+                <div class="pull-right right">
+                	<div class="data-graph">
+                        <!-- Nav tabs -->
+                        <ul class="serch-title">
+                            <li>搜索结果：<em>{$keyword}</em></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                        	<ul>
+                            <notempty name="list">
+                            <volist name="list" id="item">
+                                <li>
+                                    <div>
+                                        <a href="javascript:void(0);">
+                                        <?php
+                                        echo str_ireplace($keyword,"<span class=\"text-red\">".$keyword."</span>",htmlspecialchars_decode($item['title']));
+                                        ?>
+                                        </a>
+                                    </div>
+                                    <p>{$item.content|htmlspecialchars_decode}</p>
+                                </li>
+                            </volist>
+                            <else/>
+                            <p class="text-red">&nbsp;&nbsp;没有您要搜索的内容哦，试试其他关键字吧！</p>
+                            </notempty>
+	                        </ul>
+                        </div>
+                    </div>
+                    <!--页码开始-->
+                    <notempty name="list">
+                    <div class="page-con">
+                        <nav>
+                            <ul class="pagination pull-right">
+                                {$show}
+                                <li><input class="isTxtBig" type="text" value="{$_REQUEST.p|default=1}" name="p"></li>
+                                <li id="GO"><a href="javascript:void(0)">GO</a></li>
+                            </ul>
+                            <div class="pull-right">共有{$totalCount}条，每页显示：{$numPerPage}条</div>
+                        </nav>
+                    </div>
+                    </notempty>
+                    <!--页码结束-->
+          		</div>
+            </div>
+            <!-- 右边列表结束 -->
+      	</div>
+        <!-- 主体内容开始 -->
+        <!-- 返回顶部开始 -->
+        <div class="return-top">
+            <a href="#"></a>
+        </div>
+        <!-- 返回顶部结束 -->
+        <!-- 底部版权信息开始 -->
+        <include file="Public:footer"/>
+        <!-- 底部版权信息结束 -->
+    </div>
+</body> 
+</html>
+<!--引入本页js-->
+<script type="text/javascript">
+    /**
+     * 服务中心js文件
+     * 
+     * @author Chensiren <793952481@qq.com>
+     * @since  2015-01-18
+    */
+    $(function(){
+        //返回顶部
+        $(window).scroll(function(e) {
+            if($(window).scrollTop()>$(window).height()){
+                $('.return-top').fadeIn(300);
+            }else {
+                $('.return-top').fadeOut(300);
+            }
+        });
+        $('.return-top').click(function(e) {
+            $('body,html').animate({'scrollTop':'0'},500);
+
+        });
+        //左边导航
+        $(".q-slideBtn").click(function(){
+            $(this).parent('li').toggleClass("active");
+            //$(this).parent("li").siblings('li').children('a').find("i").removeClass('active');
+            $(this).parent('li').siblings().removeClass('active');
+            $(this).parent().find(".q-slideNav").stop().slideToggle();
+            $(this).parent("li").siblings('li').find("div.q-slideNav").stop().slideUp();
+        });
+    });
+    //绑定a标签
+    $("#GO").find("a").bind("click", function(){
+        var p = $("input[name='p']").val();
+        if (isNaN(p)) {
+            return;
+        } else if (p>0){
+            var keyword = "{$Think.get.keyword}";
+            window.location.href="/help_search/"+keyword+"/"+p+".html";
+        }
+    });
+</script>
+</block>

@@ -1,0 +1,69 @@
+
+<if condition="$_REQUEST.CommentIndex eq '1'">
+	<div class="pageContent">
+		<form method="post" action="{$_REQUEST.actionName}"class="pageForm" onsubmit="return navTabSearch(this);">
+			<div class="pageFormContent" layoutH="58">
+				<div class="unit" width="200" height="50">
+					<label>评论时间：</label>
+					<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="10"><label style="width:10px">至</label>
+					<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="10">
+				</div>
+				<div class="unit" width="200">
+					<label>资讯标题：</label>
+					<input type="text" name="title" value="{$inputQuest.title}"/>
+				</div>
+				<div class="unit" width="200">
+					<label>用户昵称：</label>
+					<input type="text" name="nick_name" value="{$inputQuest.nick_name}"/>
+				</div>
+				<div class="unit" width="200">
+					<label>IP：</label>
+					<input type="text" name="reg_ip" value="{$inputQuest.reg_ip}"/>
+				</div>
+				<div class="unit" width="200">
+					<label>评论状态：</label>
+					<select name="status" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >显示</option>
+						<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >屏蔽</option>
+					</select>
+				</div>
+				<div class="unit" width="200">
+					<label>举报：</label>
+					<select name="is_report" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<option value="1" <if condition="$_REQUEST.is_report eq '1'">selected</if> >是</option>
+						<option value="2" <if condition="$_REQUEST.is_report eq '2'">selected</if> >否</option>
+					</select>
+				</div>
+				<div class="unit" width="200">
+					<label>渠道：</label>
+				<select name="platform" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.platform eq '1'">selected</if> >web</option>
+					<option value="2" <if condition="$_REQUEST.platform eq '2'">selected</if> >ios</option>
+					<option value="3" <if condition="$_REQUEST.platform eq '3'">selected</if> >ANDRIOD</option>
+				</select>
+				</div>
+				<div class="unit" width="200">
+					<label>用户类型：</label>
+					<select name="usertype" onchange="$(form).submit()" class="combox">
+						<option value="">全部</option>
+						<option <if condition="$_REQUEST.usertype eq '1'">selected </if> value="1">正常用户</option>
+						<option <if condition="$_REQUEST.usertype eq '2'"> selected </if> value="2">专家用户</option>
+						<option <if condition="$_REQUEST.usertype eq '3'"> selected </if> value="3">机器人用户</option>
+					</select>
+				</div>
+
+			</div>
+			<if condition="$_REQUEST.CommentIndex eq '1' ">
+			<div class="formBar">
+				<ul>
+					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">开始检索</button></div></div></li>
+					<!-- <li><div class="button"><div class="buttonContent"><button type="reset">清空重输</button></div></div></li> -->
+				</ul>
+			</div>
+		</if>
+		</form>
+	</div>
+</if>

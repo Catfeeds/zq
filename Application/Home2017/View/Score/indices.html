@@ -1,0 +1,199 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>全球体育_即时指数_足球比分_篮球比分_比分直播_完场比分_未来赛程_竞彩比分</title>
+    <meta name="keywords" content="竞彩比分、足球比分、篮球比分、即时比分、完场比分、nba比分、zuqiubifen、bifenzhibo、2018世界杯"/>
+    <meta name="description" content="全球体育网是2018足球世界杯比分、竞彩比分、足球比分、篮球比分、即时比分、完场比分、nba比分、zuqiubifen、bifenzhibo的大数据比分平台"/>
+</block>
+
+<block name="body">
+<body <if condition="$header neq ''">style="background: #ffffff;"</if>>
+<!--引入本页所需css-->
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreLive/scoreLive.css?20171226">
+<link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreData/now_index.css">
+
+<div class="body">
+    <if condition="$header eq ''">
+        <include file="Public:top_score"/>
+    </if>
+    <!-- 主体内容开始 -->
+    <div class="home clearfix">
+        <!-- 导航开始 -->
+        <include file="Public:score_nav"/>
+        <section class="main">
+            <div class="control-con">
+                <!-- 筛选导航 -->
+                <div class="control-box clearfix">
+                    <div class="pull-left control-l">
+                        <ul class="control-ul clearfix">
+                            <li class="control-li control-li03" style="margin-left: 0;">
+                                <a href="javascript:;" class="mya dropdown event">
+                                    赛事选择<span class="caret"></span>
+                                </a>
+                                <div class="box-list dropdown-menu">
+                                	<div class="clearfix">
+                                        <div class="pull-left box-title">赛事选择</div>
+                                        <div class="pull-right box-title"><span>隐藏 <em class="text-red" id="hideCount">0</em> 场</span></div>
+                                    </div>
+                                    <div class="box-team" id="unionCheck">
+                                        <div class="box-rank clearfix">
+                                            <ul class="rank-ul clearfix" id="unionSelect">
+                                                <li class="rank-ul-li01 unionLevel on"><a data-unionLevel="1" level="" href="javascript:;"><i class="iconType"></i><p>一级赛事</p></a></li>
+                                                <li class="rank-ul-li02 unionLevel on"><a data-unionLevel="2" href="javascript:;"><i class="iconType"></i><p>二级赛事</p></a></li>
+                                                <li class="rank-ul-li03 unionLevel on"><a data-unionLevel="3" href="javascript:;"><i class="iconType"></i><p>三级赛事</p></a></li>
+                                            </ul>
+                                        </div>
+                                        <ul class="clearfix match-team" id="unionLevel">
+                                            <volist name="unionLevelOne" id="item">
+                                                <li style="border-color: {$item[4]};" data-level="1"><label class="inline"><input checked="" type="checkbox" class="userid" name="unionId[{$item[0]}]" value="{$item[0]}"><span class="bg-ac language simplified <if condition="$indicesLanguageSle neq 1 And $indicesLanguageSle neq ''"> hidden </if> ">{$item[1]}</span><span class="bg-ac language traditional <if condition="$indicesLanguageSle neq 2 OR $indicesLanguageSle eq ''"> hidden </if> ">{$item[2]}</span><span class="bg-ac language english <if condition="$indicesLanguageSle neq 3 OR $indicesLanguageSle eq ''"> hidden </if>">{$item[3]}</span><em class="gameCount">[{$item['gameCount']}]</em></label></li>
+                                            </volist>
+                                            <volist name="unionLevelTwo" id="item">
+                                                <li style="border-color: {$item[4]};" data-level="2"><label class="inline"><input checked="" type="checkbox" class="userid" name="unionId[{$item[0]}]" value="{$item[0]}"><span class="bg-ac language simplified <if condition="$indicesLanguageSle neq 1 And $indicesLanguageSle neq ''"> hidden </if> ">{$item[1]}</span><span class="bg-ac language traditional <if condition="$indicesLanguageSle neq 2 OR $indicesLanguageSle eq ''"> hidden </if>">{$item[2]}</span><span class="bg-ac language english <if condition="$indicesLanguageSle neq 3 OR $indicesLanguageSle eq ''"> hidden </if>">{$item[3]}</span><em class="gameCount">[{$item['gameCount']}]</em></label></li>
+                                            </volist>
+                                            <volist name="unionLevelThree" id="item">
+                                                <li style="border-color: {$item[4]};" data-level="3"><label class="inline"><input checked="" type="checkbox" class="userid" name="unionId[{$item[0]}]" value="{$item[0]}"><span class="bg-ac language simplified <if condition="$indicesLanguageSle neq 1 And $indicesLanguageSle neq ''"> hidden </if>">{$item[1]}</span><span class="bg-ac language traditional <if condition="$indicesLanguageSle neq 2 OR $indicesLanguageSle eq ''"> hidden </if>">{$item[2]}</span><span class="bg-ac language english <if condition="$indicesLanguageSle neq 3 OR $indicesLanguageSle eq ''"> hidden </if>">{$item[3]}</span><em class="gameCount">[{$item['gameCount']}]</em></label></li>
+                                            </volist>
+                                        </ul>
+                                    </div>
+                                    <div class="btn-con clearfix">
+                                        <input type="button" id="checkAll1" class="btn btn-blue pull-left" value="全选">
+                                        <input type="button" id="reverse1" class="btn btn-red pull-left" value="反选" style="margin-left: 12px;">
+                                        <input type="button" id="ensure" class="btn btn-blue pull-right" style="margin-left: 12px;" value="确定">
+                                        <input type="button" id="removeAll" class="btn btn-default pull-right" value="关闭">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="control-li control-li04">
+                                <a href="javascript:;" class="mya dropdown gongSi">
+                                    公司选择<span class="caretCon"><span class="caret"></span></span>
+                                </a>
+                                <div class="gs-list dropdown-menu">
+                                    <div class="box-title">
+                                        公司选择
+                                    </div>
+                                    <div class="box-team" id="companySelect">
+                                        <ul class="clearfix match-team">
+                                            <volist name="company" id="item">
+                                                <li>
+                                                    <label class="inline">
+                                                        <input <if condition="in_array($key,$companyId)"> checked </if> type="checkbox" class="userid" name="company[{$key}]"  value="{$key}"><span class="bg-ac">{$item}</span>
+                                                    </label>
+                                                </li>
+                                            </volist>
+                                        </ul>
+                                    </div>
+                                    <div class="btn-con clearfix" style="padding: 0 10px 10px 10px; background: #f7f7f7;">
+                                        <span><em class="text-red pull-left">*</em>请同时选择三家公司</span>
+                                        <input  type="button" id="companySure" class="btn btn-blue pull-right" style="margin-left: 12px;" value="确定">
+                                        <input type="button" id="closeAll" class="btn btn-default pull-right" value="关闭">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pull-left input-append">
+                        <input id="search_text" class="Colltext pull-left" type="text" placeholder="输入球队名/赛事名">
+                        <a class="Colladd pull-left btn-orange" href="javascript:;" id="check">查看</a>
+                        <div id="auto_div" class="Collname">
+                        </div>
+                    </div>
+                    <div class="pull-right control-r clearfix">
+
+                        <div class="pull-left pankou">
+                            <ul>
+                                <li><em></em><span>初盘</span></li>
+                                <li><em class="up"></em><span>升盘</span></li>
+                                <li><em class="none"></em><span>未变盘</span></li>
+                                <li><em class="down"></em><span>降盘</span></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown pull-left odds-language">
+                            <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+                                <span id="languageContent" language="<if condition="$indicesLanguageSle eq 1 OR  $indicesLanguageSle eq ''">1<else/>{$indicesLanguageSle}</if>" >
+                                <if condition="$indicesLanguageSle eq 1 OR  $indicesLanguageSle eq ''"> 简体 </if>
+                                <if condition="$indicesLanguageSle eq 2"> 繁体 </if>
+                                <if condition="$indicesLanguageSle eq 3"> EN </if>
+                                </span>
+                                <i class="caret"></i>
+                            </button>
+                            <ul id="languageSle" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation">
+                                    <a role="menuitem" data-language="1" tabindex="-1" href="javascript:void();">简体</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" data-language="2" tabindex="-1" href="javascript:void();">繁体</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" data-language="3" tabindex="-1" href="javascript:void();">EN</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 筛选功能选择结束 -->
+            <volist name="unionInfo" id="vo">
+                <table <if condition="$vo['is_display'] eq '0'">style="display: none"</if>  data-unionId="{$vo[1]}" data-gameId="{$vo[0]}" class="table table-bordered tb_nindex unionList">
+                    <tbody>
+                    <tr>
+                        <th width="240" class="th_first" rowspan="2">
+                            <div class="th_left cb">
+                                <label style="color: {$vo[5]};" class="inline myLabel01 language simplified unionLanguage <if condition=" $indicesLanguageSle neq 1 And $indicesLanguageSle neq '' "> hidden </if>" for="check">{$vo[2]}</label>
+                                <label style="color: {$vo[5]};" class="inline myLabel01 language traditional unionLanguage <if condition=" $indicesLanguageSle neq 2 OR $indicesLanguageSle eq '' "> hidden </if>" for="check">{$vo[3]}</label>
+                                <label style="color: {$vo[5]};" class="inline myLabel01 language english unionLanguage <if condition=" $indicesLanguageSle neq 3 OR $indicesLanguageSle eq '' "> hidden </if>" for="check">{$vo[4]}</label>
+                            </div>
+                            <div class="th_right">
+                                <p>{$vo[8]} {$vo[9]}</p>
+                            </div>
+                        </th>
+                        <th width="60" class="th_second" rowspan="2">公司</th>
+                        <th width="300" class="pType" colspan="6">亚盘</th>
+                        <th width="300" class="pType" colspan="6">大小</th>
+                        <th width="300" class="pType" colspan="6">欧赔</th>
+                    </tr>
+                    <tr>
+                        <td width="150" colspan="3">初盘</td>
+                        <td class="bgLg" width="150" colspan="3">即时</td>
+                        <td width="150" colspan="3">初盘</td>
+                        <td class="bgLg" width="150" colspan="3">即时</td>
+                        <td width="150" colspan="3">初盘</td>
+                        <td class="bgLg" width="150" colspan="3">即时</td>
+                    </tr>
+                    <tr class="hover_bg">
+                        <td rowspan="4" class="bgLg">
+                            <div class="team_content clearfix">
+                                <p><em><em class="language simplified homeLanguage <if condition="$indicesLanguageSle neq 1 And $indicesLanguageSle neq ''"> hidden </if>">{$vo[13]}</em><em class="language traditional homeLanguage <if condition="$indicesLanguageSle neq 2 OR $indicesLanguageSle eq ''"> hidden </if> ">{$vo[14]}</em><em class="language english homeLanguage <if condition="$indicesLanguageSle neq 3 OR $indicesLanguageSle eq ''"> hidden </if>">{$vo[15]}</em><if condition="$vo[20] neq ''"> [{$vo[19]}] </if></em></p>
+                                <p class="team_vs"><em>VS</em><span></span></p>
+                                <p><em><em class="language simplified awayLanguage <if condition="$indicesLanguageSle neq 1 And $indicesLanguageSle neq ''"> hidden </if> ">{$vo[16]}</em><em class="language traditional awayLanguage <if condition="$indicesLanguageSle neq 2 OR $indicesLanguageSle eq ''"> hidden </if>">{$vo[17]}</em><em class="language english awayLanguage <if condition="$indicesLanguageSle neq 3 OR $indicesLanguageSle eq ''"> hidden </if>">{$vo[18]}</em><if condition="$vo[20] neq ''"> [{$vo[20]}] </if></em></p>
+                                <div class="pk_msg">
+                                    <a href="{:U('/ypOdds@bf',['game_id'=>$vo[0],'sign'=>1])}" target="_blank">亚</a>
+                                    <a href="{:U('/ypOdds@bf',['game_id'=>$vo[0],'sign'=>2])}" target="_blank">大</a>
+                                    <a href="{:U('/eur_index@bf',['game_id'=>$vo[0]])}" target="_blank">欧</a>
+                                    <a href="{:U('/dataFenxi@bf',['game_id'=>$vo[0]])}" target="_blank">析</a>
+                                    <if condition="$vo[24] eq 1">
+                                        <a href="{:U('/gambleDetails@bf',['game_id'=>$vo[0]])}" target="_blank" style="margin-right: 0">猜</a>
+                                    </if>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <volist name="vo['companyInstant']" id="item" >
+                        <tr class="hover_bg oddsList <if condition="!in_array($key,$companyId)"> hidden <else/> oddsShow </if>" data-companyId="{$key}" ><td width="50" height="50" class="td_second companyIdClass" data-companyId="{$key}" data-gameId="{$vo[0]}"><if condition="$item[21][1] neq '' OR $item[22][1] eq '' OR $item[23][1] eq ''"> {$item[21][1]} </if><if condition="$item[21][1] eq '' and ($item[22][1] neq '' OR $item[23][1] eq '')"> {$item[22][1]} </if><if condition="$item[21][1] eq '' and $item[22][1] eq '' and $item[23][1] neq ''"> {$item[23][1]} </if><if condition="$item[21][1] eq '' and $item[22][1] eq '' and $item[23][1] eq ''"> -- </if></td><td width="50" height="50" data-odds="{$item[21][2]}" class="text-999 plate one"><if condition="$item[21][2] neq ''">{$item[21][2]}<else/>--</if></td><td width="50" height="50" data-odds="{$item[21][3]}" class="text-999 plate two"><if condition="$item[21][3] neq ''">{:changeExp($item[21][3])}<else/>--</if></td><td width="50" height="50" data-odds="{$item[21][4]}" class="text-999 plate three"><if condition="$item[21][4] neq ''">{$item[21][4]}<else/>--</if></td><td width="50" height="50" class="bgLg <if condition='$item[21][2] GT $item[21][5]'>text-green</if><if condition='$item[21][2] LT $item[21][5]'>text-red</if><if condition='$item[21][2] EQ $item[21][5]'></if> plate changeOne"><if condition="$item[21][5] neq ''">{$item[21][5]}<else/>--</if></td><td width="50" height="50" class="bgLg <if condition='$item[21][3] GT $item[21][6]'>text-green</if><if condition='$item[21][3] LT $item[21][6]'>text-red</if><if condition='$item[21][3] EQ $item[21][6]'></if> plate changeTwo"><if condition="$item[21][6] neq ''">{:changeExp($item[21][6])}<else/>--</if></td><td width="50" height="50" class="bgLg <if condition='$item[21][4] GT $item[21][7]'>text-green</if><if condition='$item[21][4] LT $item[21][7]'>text-red</if><if condition='$item[21][4] EQ $item[21][7]'></if> plate changeThree"><if condition="$item[21][7] neq ''">{$item[21][7]}<else/>--</if></td><td width="50" height="50" data-odds="{$item[23][2]}" class="text-999 size one"><if condition="$item[23][2] neq ''">{$item[23][2]}<else/>--</if></td><td width="50" height="50" data-odds="{$item[23][3]}" class="text-999 size two"><if condition="$item[23][3] neq ''">{:changeExp($item[23][3])}<else/>--</if></td><td width="50" height="50" data-odds="{$item[23][4]}" class="text-999 size three"><if condition="$item[23][4] neq ''">{$item[23][4]}<else/>--</if></td><td width="50" height="50" class="bgLg <if condition='$item[23][2] GT $item[23][5]'>text-green</if><if condition='$item[23][2] LT $item[23][5]'>text-red</if><if condition='$item[23][2] EQ $item[23][5]'></if> size changeOne"><if condition="$item[23][5] neq ''">{$item[23][5]}<else/>--</if></td><td width="50" height="50" class="bgLg <if condition='$item[23][3] GT $item[23][6]'>text-green</if><if condition='$item[23][3] LT $item[23][6]'>text-red</if><if condition='$item[23][3] EQ $item[23][6]'></if> size changeTwo"><if condition="$item[23][6] neq ''">{:changeExp($item[23][6])}<else/>--</if></td><td width="50" height="50" class="bgLg <if condition='$item[23][4] GT $item[23][7]'>text-green</if><if condition='$item[23][4] LT $item[23][7]'>text-red</if><if condition='$item[23][4] EQ $item[23][7]'></if> size changeThree"><if condition="$item[23][7] neq ''">{$item[23][7]}<else/>--</if></td><td width="50" height="50" data-odds="{$item[22][2]}" class="text-999 compensate one">{$item[22][2]|default='--'}</td><td width="50" height="50" data-odds="{$item[22][3]}" class="text-999 compensate two">{$item[22][3]|default='--'}</td><td width="50" height="50" data-odds="{$item[22][3]}" class="text-999 compensate three">{$item[22][4]|default='--'}</td><td width="50" height="50" class="bgLg <if condition='$item[22][2] GT $item[22][5]'>text-green</if><if condition='$item[22][2] LT $item[22][5]'>text-red</if><if condition='$item[22][2] EQ $item[22][5]'></if> compensate changeOne"> {$item[22][5]|default='--'} </td><td width="50" height="50" class="bgLg <if condition='$item[22][3] GT $item[22][6]'>text-green</if><if condition='$item[22][3] LT $item[22][6]'>text-red</if><if condition='$item[22][3] EQ $item[22][6]'></if> compensate changeTwo"> {$item[22][6]|default='--'}</td><td width="50" height="50" class="bgLg <if condition='$item[22][4] GT $item[22][7]'>text-green</if><if condition='$item[22][4] LT $item[22][7]'>text-red</if><if condition='$item[22][4] EQ $item[22][7]'></if> compensate changeThree"> {$item[22][7]|default='--'} </td></tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </volist>
+        </section>
+    </div>
+    <input id="minTime" type="hidden" value="{$minTime}">
+    <input id="maxTime" type="hidden" value="{$maxTime}">
+    <if condition="$header eq ''">
+    <include file="Public:s_elevator"/>
+    <include file="Public:footer"/>
+    </if>
+</div>
+</body>
+</html>
+<!--引入本页所需js-->
+<script type="text/javascript" src="__PUBLIC__/Home/backend_js/common/cookie.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/score/js/indices.js?d=20170415"></script>
+</block>

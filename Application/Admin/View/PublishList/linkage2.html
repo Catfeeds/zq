@@ -1,0 +1,78 @@
+<select id="first2" name="" class="textInput  changeUserUrl">
+    <option value="">请选择</option>
+</select>
+<select id="second2" name="" class="textInput  changeUserUrl">
+    <option value="">请选择</option>
+</select>
+<select id="third2" name="" class="textInput  changeUserUrl">
+    <option value="">请选择</option>
+</select>
+<script type="text/javascript">
+    var first = "{$first2}";
+    var second2 = "{$second2}";
+    var third2 = "{$third2}";
+    $(function () {
+        function Init(node) {
+            return node.html("<option>---请选择---</option>");
+        }
+
+        //多维数组做数据来源
+        var db = {};
+        $.ajax({
+            url: '/qqty_admin/PublishList/getPublishClass.html',
+            type: 'post', //GET
+            async: false,    //或false,是否异步
+            data: {},
+            timeout: 5000,    //超时时间
+            dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            success: function (data) {
+                db = data.data;
+            },
+            error: function (xhr, textStatus) {
+            },
+            complete: function () {
+            }
+        });
+        //初始化select节点
+        $.each(db, function (changShang) {
+            $("#first2").append("<option>" + changShang + "</option>");
+        })
+
+        //一级变动
+        $("#first2").change(function () {
+            //清空二三级
+            Init($("#second2"));
+            Init($("#third2"));
+            $.each(db, function (cs, pps) {
+                $("input[name='second2']").val('');
+                $("input[name='third2']").val('');
+                if ($("#first2 option:selected").text() == cs) {
+                    $.each(pps, function (pp, xhs) {
+                        $("#second2").append("<option>" + pp + "</option>");
+                    });
+                    $("#second2").change(function () {
+                        Init($("#third2"));
+                        $.each(pps, function (pp, xhs) {
+                            if ($("#second2 option:selected").text() == pp) {
+                                $("input[name='second2']").val($("#second2 option:selected").text());
+                                $("input[name='third2']").val('');
+                                $.each(xhs.split(','), function () {
+                                    if(this != '')
+                                    {
+                                        $("#third2").append("<option>" + this + "</option>");
+                                    }
+                                })
+                            }
+                        })
+                    })
+                }
+            })
+            $("input[name='first2']").val($("#first2 option:selected").text());
+        })
+
+        $('#third2').on('change',function(){
+            $("input[name='third2']").val($("#third2 option:selected").text());
+        })
+
+    })
+</script>

@@ -1,0 +1,113 @@
+<!-- <include file="Public:pagerForm" /> -->
+<form id="pagerForm" action="__URL__/loginNum" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+    <volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);"  method="post">
+	<input type="hidden" name="username" value="{$_REQUEST.username}">
+	<input type="hidden" name="nick_name" value="{$_REQUEST.nick_name}">
+	<input type="hidden" name="type" value="{$_REQUEST.type}">
+	<input type="hidden" name="status" value="{$_REQUEST.status}">
+	<input type="hidden" name="inviteFriend" value="{$_REQUEST.inviteFriend}">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>登录时间：</label>
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd H:m:s" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="15">至
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd H:m:s" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="15">
+			</li>
+			<li>
+				<label >用户名：</label>
+				<input type="text" name="username" value="{$_REQUEST.username}"/>
+			</li>
+			<li>
+				<label >昵称：</label>
+				<input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+			</li>
+			<li>
+				<label>是否有效：</label>
+				<select name="type" onchange="$(form).submit()" class="combox">
+					<option value="">全部</option>
+					<option <if condition="$_REQUEST.type eq '1'">selected </if> value="1">有效</option>
+					<option <if condition="$_REQUEST.type eq '2'"> selected </if> value="2">无效</option>
+				</select>
+			</li>
+			<li>
+				<label>是否结算：</label>
+				<select name="status" onchange="$(form).submit()" class="combox">
+					<option value="">全部</option>
+					<option <if condition="$_REQUEST.status eq '1'">selected </if> value="1">结算</option>
+					<option <if condition="$_REQUEST.status eq '0'"> selected </if> value="0">未结算</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li>
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<a class="icon" href="__URL__/loginNum.html?Export=2&{:http_build_query($_REQUEST)}"  warn="导出"><span>导出</span></a>
+			</li>
+			<notempty name="backUrl">
+				<li >
+					<a class="icon" href="{$backUrl}" target="navTab" mask="false"><span>返回</span></a>
+				</li>
+			</notempty>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th>ID</th>
+			<th>用户ID</th>
+			<th>用户名（昵称）</th>
+			<th>注册时间</th>
+			<th>最后登录时间</th>
+			<th>最后登录次数</th>
+			<th>是否有效</th>
+			<th>是否结算</th>
+			<th>充值单号</th>
+			<th>创建时间</th>
+			<th>最后结算时间</th>
+		</tr>
+		</thead>
+		<tbody>
+		<volist id="vo" name="list">
+			<tr target="sid_user" rel="{$vo['id']}">
+				<td>{$vo['id']}</td>
+				<td>{$vo['user_id']}</td>
+				<td>{$vo['username']}({$vo['nick_name']})</td>
+				<td>{:date('Y-m-d H:i:s',$vo['register_time'])}</td>
+				<td>{:date('Y-m-d H:i:s',$vo['login_time'])}</td>
+				<td>{$vo['login_num']}</td>
+				<td><if condition="$vo['type'] eq 1">有效<else />无效</if></td>
+				<td><if condition="$vo['status'] eq 1">结算<else />未结算</if></td>
+				<td>{$vo['pay_no']}</td>
+				<td>{:date('Y-m-d H:i:s',$vo['create_time'])}</td>
+				<td>{:date('Y-m-d H:i:s',$vo['update_time'])}</td>
+			</tr>
+		</volist>
+		</tbody>
+	</table>
+    <include file="Public:pagerNum" />
+
+</div>
+
+

@@ -1,0 +1,66 @@
+<div class="page">
+    <div class="pageContent">
+
+    <form method="post" action="__URL__/customPush/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)">
+        <div class="pageFormContent" layoutH="58">
+                <div class="unit">
+                <label>指定平台：</label>
+                <select class="combox" name="platform">
+                    <option value="0">所有</option>
+                    <option value="2">ios</option>
+                    <option value="3">android</option>
+                </select>
+            </div>
+            <div class="unit">
+                <label>指定用户推送：</label>
+                <select class="combox" name="customType">
+                    <option value="0">全部用户</option>
+                    <option value="1">7-14天未登录</option>
+                    <option value="2">15-29天未登录</option>
+                    <option value="3">30天以上未登录</option>
+
+                </select>
+            </div>
+            <div class="unit">
+                <label>测试推送：</label>
+                <select class="combox" name="testPush">
+                    <option value="0">&nbsp; 否 &nbsp;</option>
+                    <option value="1">&nbsp; 是 &nbsp;</option>
+                </select>
+                （平台是android时有效）
+            </div>
+            <div class="unit">
+
+                <label>消息打开方式：</label>
+                <select class="combox" name="module">
+                    <option value="0">进入APP</option>
+                    <option value="1">进入资讯</option>
+                    <option value="2">进入图集</option>
+                    <option value="9">打开外链</option>
+                    <option value="10">进入个人中心</option>
+                    <!-- <option value="0">其他</option> -->
+                </select>
+                （0-进入APP；1-进入资讯；2-进入图集；9-打开外链；10-进入个人中心；11进入足球赛事详情；12进入篮球赛事详情；13进入帖子详情）
+            </div>
+            <div class="unit">
+                <label>指定参数值：</label>
+                <input type="text" class="required" name="moduleValue">
+                （对应打开方式0-不填；为1时填资讯板块ID；为2时填图集板块ID；为9时填全连接；为10时填用户ID；为11时填足球赛事ID；为12时填篮球赛事ID；为13时填帖子ID）
+            </div>
+          <div class="unit">
+            <label>内容：</label>
+            <textarea name="content" class="required" editor="{:uniqid()}" cols="80" rows="15"></textarea>
+          </div>
+        </div>
+
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+    </div>
+</div>
+

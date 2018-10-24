@@ -1,0 +1,61 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userInfo/draw_money.css">
+</block>
+<block name="content">
+    <include file="Public:top_user"/>
+    <div class="body">
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <div class="data-graph draw-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="javascript:void(0);" class="current">提款</a></li>
+                                    <li role="presentation"><a href="{:U('UserInfo/bindBankCard')}">绑定银行卡</a></li>
+                                    <li role="presentation"><a href="{:U('UserInfo/bindAlipay')}">绑定支付宝</a></li>
+                                </ul>
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <!-- 充值开始 -->
+                                    <div id="draw" class="line-graph clearfix">
+                                        <div class="draw-list">
+                                            <dl class="clearfix">
+                                                <dt class="pull-left">可提现金金额：</dt>
+                                                <dd class="pull-left"><em class="text-red">{$exMoney}</em>元</dd>
+                                            </dl>
+                                            <div class="noitice">
+                                                <div class="noitice-left">
+                                                    <h4>您是第一次提款，请完善</h4>
+                                                    <present name="noUsername"><a href="{:U('UserInfo/bind_phone')}">绑定手机</a><span></present>
+                                                    <present name="noTrueName"><a href="{:U('UserInfo/identity')}">身份认证</a><span></present>
+                                                    <present name="noBindBank"></span><a href="{:U('UserInfo/bindBankCard')}">绑定银行卡</a>
+                                                        或 <a href="{:U('UserInfo/bindAlipay')}">绑定支付宝</a>
+                                                    </present>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 充值结束 -->
+                                </div>
+                                <!-- Tab panes -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+</block>

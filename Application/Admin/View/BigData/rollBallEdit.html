@@ -1,0 +1,80 @@
+<div class="pageContent">
+    <form method="post" action="__URL__/rollBallSave" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)" target="callbackframe">
+        <input type="hidden" name="id" value="{$id}" />
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>所属分类：</label>
+                <select name="type"  class="combox type_fix">
+                    <option value="1" <if condition="$data.type eq 1">selected='true' </if>>危险进攻</option>
+                    <option value="2" <if condition="$data.type eq 2">selected='true' </if>>射门数</option>
+                </select>
+            </div>
+            <div class="box-1 block_box">
+                <div class="unit">
+                    <label>触发条件：</label>
+                    <input name="condition_start_1" value="{$data.condition_start}" type="text" size="2"/>
+                    <span class="inputInfo">次危险进攻</span>
+                    <input name="condition_end_1" value="{$data.condition_end}" type="text" size="2" style="float:none"/>
+                    <span class="inputInfo">次危险进攻</span>
+                </div>
+                <div class="unit">
+                    <select name="team_block_1"  class="combox">
+                        <option value="1" <if condition="$data.team_block eq 1">selected='true' </if>>主队/客队</option>
+                        <option value="2" <if condition="$data.team_block eq 2">selected='true' </if>>无</option>
+                    </select>
+                </div>
+                <span class="inputInfo">（开头读取占优的一队: 主队/客队 XX）</span>
+                <div class="unit">
+                    <textarea name="string_1" rows="4" cols="57" type="text" maxlength="20">{$data.string}</textarea>
+                </div>
+            </div>
+            <div class="box-2 hide_box">
+                <div class="unit">
+                    <label>触发条件：</label>
+                    <input name="condition_start_2" value="{$data.condition_start}" type="text" size="2"/>
+                    <span class="inputInfo">次进球</span>
+                    <input name="condition_end_2" value="{$data.condition_end}" type="text" size="2" style="float:none" />
+                    <span class="inputInfo">次进球</span>
+                </div>
+                <input name="team_block_2" value="0" type="hidden"/>
+                <div class="unit">
+                    <textarea name="string_2" type="text" rows="4" cols="57" maxlength="20">{$data.string}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                 <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+</div>
+<style type="text/css">
+    .tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+    .poiter a:hover{color:red;}
+    .tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+    .tabImg li div a{ line-height: 80px;}
+    .hide_box {display: none;}
+    .block_box {display: block;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+    $(function(){
+        $('.tabImg li').hover(function(e) {
+            $(this).children('div').stop().animate({'top':'0'},300);
+        },function(){
+            $(this).children('div').stop().animate({'top':'80px'},300);
+        });
+        $("select.type_fix").change(function() {
+            if($(this).val() == 1) {
+                $("div.box-1").addClass("block_box").removeClass("hide_box");
+                $("div.box-2").addClass("hide_box").removeClass("block_box");
+            } else if ($(this).val() == 2) {
+                $("div.box-1").addClass("hide_box").removeClass("block_box");
+                $("div.box-2").addClass("block_box").removeClass("hide_box");
+            }
+        })
+    });
+</script>

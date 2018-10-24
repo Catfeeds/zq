@@ -1,0 +1,143 @@
+<extend name="Public/Olympic/base" />
+<block name="seo">
+    <title>2016里约奥运会赛事直播_全球体育手机网</title>
+</block>
+<block name="append">
+    <link rel="stylesheet" href="__CSS__/Olympic/swiper_banner.css"> 
+</block>
+<block name="content">
+    <!-- 视频 s-->
+    <section class="schedule_show">
+
+       <div class="pt_tool pt_tool_guess video_tree">
+           <ul> 
+             <li><a href="{:U('live')}"><img src="__PUBLIC__/Mobile/images/Olympic/live.png" alt="直播">直播</a></li>
+             <li class="on"><a href="{:U('video')}"><img src="__PUBLIC__/Mobile/images/Olympic/video.png" alt="视频">视频</a></li> 
+           </ul>
+        </div>
+        
+        <div class="video_con">
+            <ul id='js-list' class="clearfix">
+                <volist name='list' id='v'>
+                    <li class="js-detail" data-id='{$v.id}'>
+<!--                        <a <eq name="v.m_ischain" value="1">href="{$v.m_url}" target='_blank'<else/>href="{:U('video_detail@m',array('id'=>$v['id']))}"</eq>>-->
+                            <figure><img src="{$v.img|default='__IMAGES__/default.jpg'}" alt="{$v.title}"></figure>
+                            <figcaption class="q-two">{$v.title}</figcaption>
+                            <em></em>
+                            <i>{$v.click_num}</i>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+        
+        <div class="paged boxs" style="bottom: 0.2rem;">
+            <div class="load_gif fs24 text-999" <lt name="list|count" value="6">style="display:none;"</lt>>
+                <span><img style='width:auto;' src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>正在加载更多的数据...</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="<eq name="list|count" value="6">display:none;</eq>cursor:default;" id="showLess">已经全部加载完毕</a>
+        </div>
+    </section>
+    <!-- 视频 e-->
+</block>
+<block name='scripts'>
+    <!-- 公共js -->
+    <script type="text/javascript" src="__JS__/Olympic/common.js"></script>
+    <script src="__JS__/Olympic/swiper_banner.js"></script>   
+    <script>
+        $(function () {
+                    //金牌快讯
+        var swiper = new Swiper('.swiper-container-teacher', {
+            direction: 'vertical',
+            autoplay: 2500
+        });
+        $(document).on('click','#js-list li',function(){
+            $this=$(this);
+            var id=$this.data('id');
+            $.ajax({
+                    type: 'post',
+                    url: "/Olympic/toVideo.html",
+                    data: {id:id},
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.status==1){
+                            var num=$this.find('i').html();
+                            var num= parseInt(num)+1;
+                            $this.find('i').html(num);
+                            if(data.info=='1'){
+                                window.open(data.url);
+                            }else{
+                                location.href=data.url;
+                            }
+                        }else{
+                            alert(data.info);
+                        }
+                    }
+                });
+        });
+            var DOMAIN = "__DOMAIN__";
+            var p = 2;// 初始化页面，点击事件从第二页开始
+            var flag = false;
+            $(window).scroll(function () {
+                //初始状态，如果没数据return ,false;否则
+                if ($(document).height() - ($(document).scrollTop() + $(window).height()) <= 400) {
+                    send();
+                }
+            });
+            function send() {
+                if (flag) {
+                    return false;
+                }
+                flag = true;
+                var params = {
+                    page: p,
+                }
+                $.ajax({
+                    type: 'post',
+                    url: "",
+                    data: params,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 1) {
+                            var list = data.info;
+                            if (list != null) {
+                                $.each(list, function (k, v) {
+                                    var is_like = '';
+                                    var like_img = 'yy.png';
+                                    if (v.is_like == '1') {
+                                        is_like = 'on';
+                                        like_img = 'p_zan.png';
+                                    }
+                                    var html = '<li data-id="'+v.id+'">';
+                                    var img=v.img;
+                                    if(img==''){
+                                        img='__PUBLIC__/Mobile/images/default.jpg';
+                                    }
+                                    html+='<figure><img src="'+img+'" alt="'+v.title+'"></figure>'+
+                                        '<figcaption class="q-two">'+v.title+'</figcaption><em></em><i>'+v.click_num+'</i></li>';
+                                    $("#js-list>li:last").after(html);
+                                });
+                                flag = false;
+                                if (list.length < 6) {
+                                    $('.load_gif').hide();
+                                    $('#showLess').show();
+                                    flag = true;
+                                }
+                            }else{
+                                $('.load_gif').hide();
+                                $('#showLess').show();
+                                flag = true;
+                            }
+                            
+                        } else {
+                            $('.load_gif').hide();
+                            $('#showLess').show();
+                            flag = true;
+                        }
+                    }
+                });
+                p++;
+            }
+        });
+    </script>
+</block>

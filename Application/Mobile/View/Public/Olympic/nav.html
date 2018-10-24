@@ -1,0 +1,46 @@
+    <!-- 奖牌  -->
+    <section class="medals">
+      
+        <i>中国奖牌情况</i>  
+        
+        <div><a href="{:U('medal_ch',['id'=>1])}"><em><img src="__IMAGES__/Olympic/NO1.png" alt="金牌">{$medal_ch.gold|default='0'}</em></a><a href="{:U('medal_ch',['id'=>2])}"><em><img src="__IMAGES__/Olympic/NO2.png" alt="银牌">{$medal_ch.silver|default='0'}</em></a><a href="{:U('medal_ch',['id'=>3])}"><em><img src="__IMAGES__/Olympic/NO3.png" alt="铜牌">{$medal_ch.copper|default='0'}</em></a></div>
+        
+        <a href="{:U('medal')}">
+        <span>奖牌榜 <img src="__IMAGES__/Olympic/more.png" alt="更多"></span>
+      </a>
+    </section> 
+
+    <!-- 金牌快讯  -->
+    <notempty name='adver'>
+    <section style="width: 100%;height: .8rem;overflow: hidden;">
+             <!-- Swiper -->
+        <div class="swiper-container-teacher">
+
+            <div class="gold_msg"><img src="__IMAGES__/Olympic/notice.png" alt="消息">  <i>金牌快讯</i></div>
+
+            <div class="swiper-wrapper gold_news"> 
+                <volist name='adver' id='v'>
+               <section class="notice swiper-slide q-one"> 
+                 <switch name='v.module'>
+                    <case value='1'><a href="{:U('Olympic/news_detail',array('id'=>$v['url']))}"></case>
+                    <case value='2' ><a href="{:U('Olympic/photo_detail',array('id'=>$v['url']))}"></case>
+                    <case value='9' ><a href="{$v['url']}" target='_blank'></case>
+                    </switch>
+                     {$v.title}</a>
+               </section>
+                    </volist>
+            </div> 
+        </div>
+     </section>
+        </notempty>
+    
+     <div class="line"><img src="__IMAGES__/Olympic/line.png" alt=""></div>
+     
+     <!-- 导航 -->
+     <nav class="nav_list">
+         <a href="{:U('Olympic/index')}" <eq name='Think.ACTION_NAME' value='index'>class="on"</eq>>资讯</a>
+       <a href="{:U('Olympic/schedule')}" <eq name='Think.ACTION_NAME' value='schedule'>class="on"</eq>>赛程</a>
+       <a href="{:U('Olympic/guess')}" <eq name='Think.ACTION_NAME' value='guess'>class="on"</eq>>推荐</a>
+       <a href="{:U('Olympic/photo')}" <eq name='Think.ACTION_NAME' value='photo'>class="on"</eq>>图片</a>
+       <a href="{:U('Olympic/live')}" <eq name='title' value='video'>class="on"</eq>>直播</a>
+     </nav>

@@ -1,0 +1,56 @@
+<include file="Public:pagerForm" />
+
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="49">
+		<thead>
+		<tr>
+			<th width="6%">序号</th>
+			<th width="6%">榜类型</th>
+			<th width="10%">时间</th>
+			<th width="6%">排名</th>
+			<th width="13%">昵称</th>
+			<th width="10%">竞猜场数</th>
+			<th width="6%">赢</th>
+			<th width="6%" <if condition="$_REQUEST.gameType eq 2">style="display:none;"</if>>赢半</th>
+			<th width="6%">平</th>
+			<th width="6%">输</th>
+			<th width="6%" <if condition="$_REQUEST.gameType eq 2">style="display:none;"</if>>输半</th>
+			<th width="6%">胜率</th>
+			<th width="7%">总积分</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$i}</td>
+					<td>
+					<switch name="vo.dateType">
+				        <case value="1">周榜</case>
+				        <case value="2">月榜</case>
+				        <case value="3">季榜</case>
+				    </switch>
+				    </td>
+				    <td>{$vo['begin_date']} - {$vo['end_date']}（周{$vo.end_date|returnWeek}）</td>
+					<td>{$vo['ranking']}</td>
+					<td>{$vo['nick_name']}</td>
+					<td>{$vo['gameCount']}</td>
+					<td>{$vo['win']}</td>
+					<td <if condition="$_REQUEST.gameType eq 2">style="display:none;"</if>>{$vo['half']}</td>
+					<td>{$vo['level']}</td>
+					<td>{$vo['transport']}</td>
+					<td <if condition="$_REQUEST.gameType eq 2">style="display:none;"</if>>{$vo['donate']}</td>
+					<td>{$vo['winrate']}%</td>
+					<td>{$vo['pointCount']}</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

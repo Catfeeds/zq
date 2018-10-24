@@ -1,0 +1,183 @@
+/**
+ * 个人主页css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-28
+**/
+/* Effect 8 */
+body{background: url(../../images/quiz_hall/guess_bg.jpg) no-repeat left top;width: 100%;min-height: 1040px;background-repeat: no-repeat;background-attachment: fixed;background-position: center top;}
+.content,.top-head .top-head-in{width: 1200px;margin: 0 auto;}
+#elevator{margin-left: 605px;}
+.pan_type {  margin: 0 auto;margin-top: 15px;width: 164px;}
+.pan_type a {border: 1px solid #354361;width: 80px;display: block;height: 30px;line-height: 30px;text-align: center;background: #354361;color: #cccccc;}
+.pan_type a.on{background: #336699;border:1px solid #efefef;color: #fff;}
+
+/* 主体左边 */
+.main-left .data-graph {height: 420px;}
+.main-left{ width: 240px; border: 1px solid #e5e5e5;  background: #fff;}
+.main-left .my-head {position: relative;}
+.main-left .my-head .face{ width: 114px; height: 114px; border-radius: 50%; overflow: hidden; margin: 0 auto; text-align: center; background: #ffffff; padding: 6px; border: 1px solid #f7f7f7; margin-top: 12px;}
+.main-left .my-head .face img{ width: 100px; height: 100px; border-radius: 50%;}
+.main-left .my-head h4{ text-align: center}
+.main-left .my-head .add-att{ display: block; width: 102px; height: 28px; line-height: 28px; padding-left: 45px; color: #fff; background: #ff7e00 url(../../images/userIndex/add.png) no-repeat 24px center;}
+.main-left .my-head .reduce{ display: block; width: 102px; height: 28px; line-height: 28px; color: #fff; background: #ff7e00; text-align: center;}
+.main-left dl{ margin-bottom: 0;}
+.main-left .intro{ font-size: 12px; padding:10px; border-bottom: 1px solid #e5e5e5;}
+.main-left .intro dt{ margin-bottom: 10px;}
+.main-left .intro dd{ line-height: 24px; color: #555; word-wrap:break-word; word-break:normal; word-break:break-all;}
+.main-left .honor{ border-bottom: 1px solid #e5e5e5; padding-bottom: 10px;padding: 10px}
+.main-left .honor dt,.main-left .title-con dt{ margin-bottom: 15px; font-size: 16px; color: #2e76c7; font-weight: normal;}
+.main-left .honor dd{ font-size: 12px; margin-bottom: 10px;}
+.main-left .honor dd .bb{ padding-left: 20px; background: url(../../images/userIndex/basketball-icon.png) no-repeat 0 center;}
+.main-left .honor dd .fb{ padding-left: 20px; background: url(../../images/userIndex/football-icon.png) no-repeat 0 center;}
+.main-left .honor dd .fb{ font-weight: normal;}
+.main-left .tabCon{ height: 382px;}
+.main-left .title-con .nav-tab li{ float: left;background-color: #f7f7f7; position: relative;}
+.main-left .title-con .nav-tab li a{ display: block; width: 106px; text-align: center; height: 35px; line-height: 35px; font-size: 16px;}
+.main-left .title-con .nav-tab .on{ background: #fff; border-bottom: 0 none;}
+.main-left .title-con .nav-tab .on a{ color: #2e76c7;}
+.main-left .time-tab{ margin: 5px 0;margin-top: 10px}
+.main-left .time-tab li{ float: left; width: 30%; text-align: center; margin-left: 5px;}
+.main-left .time-tab li a{ display: block; width: 100%; height: 27px; line-height: 25px; background: #f7f7f7;}
+.main-left .time-tab .current a{ color: #fff; background: url(../../images/userIndex/time-bg.png) no-repeat center center;}
+.main-left .time-tab .current a:hover{ color: #fff;}
+.main-left .rank-list .table tr td{ padding: 5px 2px; border: 0 none; font-size: 12px;}
+.main-left .rank-list .table .td02{ position: relative;}
+.main-left .rank-list .table .td02 a{ display: block; width: 70px;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.main-left .rank-list .table .td02 .record{ position: absolute; left: 80px; top: 4px;}
+.main-left .rank-list .table .rank-order,.main-left .rank-list .table .rank-order02{ display: block; width: 22px; height: 22px; line-height: 22px; text-align: center; background: #ff7e00; color: #fff;}
+.main-left .rank-list .table .rank-order02{ background: #e0e0e0; color: #000;}
+/* 主体右边 */
+.main-right{ width: 960px; border-right: 1px solid #e5e5e5;  background: #fff;min-height: 947px;}
+/* 足球竞猜 */
+.main-right .data-graph .nav-tabs{ margin-bottom: 10px;}
+.main-right .data-graph .nav-tabs>li>a{ display: inline-block; padding: 5px 10px; border-radius: 0; font-size: 16px;}
+.main-right .data-graph .nav-tabs>li>a.current{ border-bottom: 2px solid #2e76c7; background: #fff; color: #2e76c7; font-weight: 700;}
+.main-right .data-graph .nav-tabs>li>a:hover{border-bottom: 2px solid #2e76c7; background: #fff; color: #2e76c7;}
+.main-right .tab-content{ margin-top: 15px;}
+.main-right .record{margin-top: 20px}
+.main-right .record .re-li{ padding: 10px 0 5px 20px; margin-bottom: 2px;}
+.main-right .record .even02{ margin-left: 20px;}
+.main-right .record .even02 em,.record .even01 em{ padding: 0 5px;}
+.main-right .record .ten{ margin-bottom: 10px;}
+.main-right .record .ten span{ padding-right: 10px;}
+.main-right .record .ten em{ margin-left: 15px; display: inline-block; width: 32px; height: 32px; line-height: 30px; text-align: center; border: 1px solid #e5e5e5; border-radius: 50%; background: url(../../images/userIndex/em-bg.png)\9; border: none\9;}
+.main-right .record .week,.record .month,.record .season{ margin-bottom: 10px;}
+.main-right .record .data ul li{ float: left; margin-left: 20px;  padding-bottom: 5px;}
+.main-right .record .data ul li.w_66{ width:66px;}
+.main-right .record .data ul li.w_60{ width:60px;}
+.main-right .record .data ul li.w_50{ width:50px;}
+.main-right .record .data ul li.w_40{ width:50px;}
+.main-right .record-list{padding:0 20px;}
+.main-right .record-list .table .table-header th{ text-align: center; background: #fff;}
+.main-right .record-list .table .one{ text-align: center; background: #ffffff;}
+.main-right .record-list .table .two{ text-align: center; background: #f7f7f7;}
+.main-right .record-list .table .light-blue a{ display: block; height: 100%; color: #fff;}
+.main-right .record-list .table .begin-time em{ margin-left: 10px;}
+.main-right .table > tr{ display: table-row;  vertical-align: inherit;}
+.main-right .record-list .my-see .see{ display: inline-block; width: 60px; height: 24px; line-height: 24px; text-align: center; border-radius: 3px;}
+.main-right .record-list .seal-star{ position: relative; background: url(../../images/userIndex/star.png) no-repeat 100% 0%;}
+.main-right .record-list .seal-star .point{ position: absolute; left: 100%; top: 10%; width: 66px; height: 25px; line-height: 25px; background: url(../../images/userIndex/point-bg.png) no-repeat;}
+.main-right .record-list .my-seal{ position: relative;}
+.main-right .record-list .my-seal .seal-win,.main-right .record-list .my-seal .seal-lose,.main-right .record-list .my-seal .seal-tie{ position: absolute; left: 70%; top: 10%; z-index: 1;}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{ padding: 8px 2px;}
+.main-right .record-list .detail-btn02{ width: 60px; height: 22px; border: 1px solid #ff7e00; padding: 0;background: #ff7e00; color: #fff;border-radius: 20px;font-size: 12px!important}
+.detail-btn:hover{color: #ff7e00!important;}
+
+.jb_icon{background:#fffae9 url(../../images/userIndex/jinb.png) no-repeat 15% center;padding-left: 22px}
+/* myReord */
+.myRecord { width: 600px; z-index: 100; background: #fff; position: absolute; left: 90%; top: -10%; border: 1px solid #fff; box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.2);}
+.myRecord .arrow-l{ position: absolute; left: -9px; top: 11px; width: 10px; height: 10px; background: url(../../images/userIndex/arrow-left.png) no-repeat left center;}
+.myRecord .re-li{ padding: 0 12px; margin-bottom: 10px; text-align: left;}
+.myRecord .even02{ margin-left: 20px;}
+.myRecord .even02 em,.myRecord .even01 em{ padding: 0 5px;}
+.myRecord .ten{ margin-bottom: 10px;}
+.myRecord .ten span{ padding-right: 10px;}
+.myRecord .ten em{ margin-left: 12px;}
+.myRecord .week,.myRecord .month,.myRecord .season{ margin-bottom: 10px;}
+.myRecord .data ul li{ float: left; margin-left: 10px;}
+.myRecord .data ul li.w_40{ width: 40px;}
+.myRecord .data ul li.w_50{ width: 50px;}
+.myRecord .data ul li.w_62{ width: 62px;}
+.myRecord .data ul li .mr{ margin-right: 5px;}
+.myRecord .data ul li .ml{ margin-left: 5px;}
+.myRecord .user-name{ height: 32px; line-height: 32px; background: #2e76c7; color: #fff;}
+
+/* 模态窗口 */
+/* modal-header */
+.modal-header .close{ color: #2e76c7; opacity: 1;}
+.modal-header .close:hover{ color: #ccc; opacity: 1;}
+.modal-header h4{ color: #2e76c7;}
+.modal-header .modal-title .mach_name{ font-size: 12px; margin-right: 10px;}
+.modal-header .modal-title em{ font-size: 16px; color: #333;}
+
+/* modal-body */
+.ditai01{ width: 430px;}
+.ditai04{ width: 490px;}
+.modal-body .dl_list{ margin-bottom: 10px;}
+.modal-body .dl_list dt{ font-weight: normal; width: 70px; color: #999; text-align: right;}
+.modal-body .dl_list dd{ width: 310px; padding-left: 5px;}
+.modal-body .dl_list .mach_name{ font-size: 12px; margin-right: 10px;}
+
+.modal-body .radio-con label{ margin: 0 auto;}
+.modal-body .radio-con .selet-m{ margin-left: 10px;}
+.modal-body .radio-con input{ vertical-align: -2px;}
+.textarea_wap{ border: 1px solid #e5e5e5; border-radius: 5px; padding: 10px; background: #fff;}
+.textarea_wap .textarea{ height: 36px; border: none 0; outline: none; width: 100%; font-family: "Times New Roman",Times,sans-serif; resize:none;outline:0;-webkit-appearance:none;white-space:pre-wrap;word-wrap:break-word;background:#fff;}
+
+.price_ul li{ float: left; width: 80px; text-align: center; margin: 0 3px 10px 3px;}
+.price_ul a{ display: inline-block;  width: 80px; height: 30px; line-height: 28px; text-align: center; border: 1px solid #e5e5e5; border-radius: 15px; position: relative; background: #fff;}
+.price_ul a em{ width: 16px; height: 16px; background: url(../../images/login/icon-tick-red.png) no-repeat 0 0; position: absolute; right: 0; top: 0; display: none;}
+.price_ul .on em{ display: block;}
+.price_ul .on{ color: #eb0000; border-color: #eb0000; background: #fff1f1;}
+
+/* modal-btn */
+.modal-body .btn-con{  text-align: center; margin-top: 15px;}
+.modal-body .btn-con button{ width: 100px; border-radius: 3px; margin: 0 10px;}
+
+/*页码开始*/
+.page-con {
+    width: 100%;
+    margin-top: 0px;
+}
+
+/*页码结束*/
+
+.lv_position{position: absolute; top: 90px; right: 20px;}
+
+
+.fans_con{margin-top: 20px;border-bottom: 1px solid #ddd;padding-bottom: 20px}
+.fans_con .fans{ width: 112px;margin-bottom: 0; background: #f7f7f7; padding: 0 10px; height: 28px; line-height: 28px;margin-left: 12px}
+.foot-list-con{padding:0 5px;}
+.title-con{position: relative;}
+.jc_sele{position: absolute;right: 10px;bottom:10px;width:50px;height: 15px;color: #333333;cursor: pointer;  }
+.jc_sele .sele_option{border:1px solid #dddddd;width: 55px;height: 60px;background: #fff;text-align: center;display: none;margin-left: -2px}
+.jc_sele .sele_option a{display: block;width: 100%;float: left;padding: 6px 0}
+.jc_sele .sele_option a:hover{background: #2e76c7;color: #fff}
+
+.top_nav{height: 60px;border-bottom: 1px solid #ddd;line-height: 60px;}
+.top_nav ul{width: 450px;margin:0 auto;}
+.top_nav ul li{float: left;text-align: center;margin-right: 10px;margin-top: -2px;padding: 0 10px}
+.top_nav ul li.on{ border-bottom: 2px solid #2e76c7;}
+.top_nav ul li.on a{ color: #2e76c7}
+.top_nav ul li a{font-size: 14px;font-weight: bold; }
+.top_nav ul li a:hover{color: #2e76c7; }
+.top_nav ul .center_li{border-bottom: 0} 
+
+.pan_type { 
+    margin-top: 15px;
+    margin-left: 20px;
+    width: 164px;
+}
+
+.pan_type a.on {
+    background: #2e76c7;
+    border: 1px solid #2e76c7;
+    color: #fff;
+}
+.main-right .record-list .table tr th{padding: 12px 2px;font-weight: bold;}
+.main-right .record-list .table tr td{padding: 12px 2px}
+.g_history{margin:20px 0;margin-bottom: 10px}
+.g_history .gh_con{width: 127px;height: 32px;background: url(../../images/userIndex/guess_history.png) no-repeat right bottom; text-align: center;color: #fff;line-height: 30px;font-weight: bold;}
+.g_history .data_reset{background: #dc4242;width: 90px;height: 32px;line-height: 30px;text-align: center;}
+.g_history .data_reset a{color: #fff;font-weight: bold;display: block;}

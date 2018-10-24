@@ -1,0 +1,93 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/login/login.css">
+    <script type="text/javascript" src="__JS__/user/register.js"></script>
+</block>
+<block name="header">
+    <!-- 二级头部 s -->
+<include file="Public/header_inside"/>
+    <!-- 二级头部 e -->
+</block>
+<block name="nav"></block>
+<block name="content">
+	
+    <div class="login_panel">
+        <div class="login-container">
+            <div class="inputbox inputUser" id="account-box">
+                <div class="u-input">
+                    <label class="u-label ne_user"></label>
+                    <input name="username" class="dlemail" type="text" id="mobile" placeholder="请输入手机号" autocomplete="off">
+                    <a href="javascript:;" class="ne_close"></a>
+                </div>
+            </div>
+            <div class="inputbox inputPasswd">
+                <div class="u-input">
+                    <label class="u-label ne_passwd"></label>
+                    <input name="password" class="ycpwd" type="password" id="password" placeholder="请输入密码">
+                    <input name="password" class="xspwd" type="text" id="text" placeholder="请输入密码">
+                    <a href="javascript:;" class="ne_btn no-pw"></a>
+                </div>
+            </div>
+        </div>
+        <div class="loginbox clearfix">
+            <a href='javascript:;' id="dologin">登录并绑定</a>
+        </div>
+        <div id="dailogFixBox" class="fixBox" style="display: none">
+            <div class="fixBoxIn clearfix">
+                <div class="tip" style="line-height: 0.8rem; "><span id="dailogContent" ></span></div>
+                <a id="yesDailog" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+            </div>
+        </div>
+    </div>
+</block>
+<block name='scripts'>
+    <script>
+        $(function () {
+            $('#yesDailog').on('click',function () {
+                $('#dailogFixBox').css('display','none');
+            });
+
+        });
+
+        var flag=false;
+        $(document).on('click',"#dologin", function () {
+        var pwd=$("#password").val();
+        var mobile=$("#mobile").val();
+        if (!isMobile(mobile)) {
+            $('#dailogContent').html('请输入有效的11位手机号码！');
+            $('#dailogFixBox').css('display','block');
+            return false;
+        }
+        if (!isPwd(pwd)) {
+            $('#dailogContent').html('请输入6~16位的密码！');
+            $('#dailogFixBox').css('display','block');
+            return false;
+        }
+         var params={
+             mobile:mobile,
+             pwd:pwd,
+             is_has:1
+         };
+         if(flag){
+             $('#dailogContent').html('您的操作太频繁了,请刷新重试！');
+             $('#dailogFixBox').css('display','block');
+             return false;
+         }
+         flag=true;
+        $.post('', params, function (data) {
+            if (data.status === 1) {
+                window.location.href = data.url;
+            }else{
+                $('#dailogContent').html(data.info);
+                $('#dailogFixBox').css('display','block');
+            }
+            flag=false;
+        }, 'json');
+        return false;
+    });
+    </script>
+</block>
+<block name="footer">
+    <include file="Public/footer_phone"/>
+</block>

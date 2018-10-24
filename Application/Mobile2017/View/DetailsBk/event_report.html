@@ -1,0 +1,34 @@
+<extend name="Public/tpl-detail" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" href="__CSS__/bk/event.css">
+</block>
+<!-- 导航 s-->
+<block name="nav">
+    <include file="Details/subnavBk"/>
+</block>
+<!-- 导航 e-->
+<!-- 内容 s -->
+<block name="content">
+    <section>
+        <!-- 数据导航s -->
+        <nav class="odd_nav clearfix">
+            <ul>
+                <li class="on"><a href="#">战报</a></li>
+                <li><a href="#">赛况</a></li>
+                <li><a href="#">技术</a></li>
+                <li><a href="#">阵容</a></li>
+            </ul> 
+        </nav>
+        <!-- 数据导航e --> 
+        <!-- 战报 -->
+        <div class="live_event_news">
+            <p>前瞻战报</p>
+            <p>纽卡素大战红军利物浦，势均力敌</p> 
+            <video src="http://www.w3school.com.cn/i/movie.ogg" controls="controls" width="100%">
+                your browser does not support the video tag
+            </video>
+        </div>
+    </section>
+</block>
+<!-- 内容 e -->

@@ -1,0 +1,78 @@
+<form id="pagerForm" action="__URL__/friendList" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+    <volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" method="post">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label >顶级邀请人：</label>
+                    <input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+                </li>
+            </ul>
+            <div class="subBar">
+                 <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="113">
+        <thead>
+        <tr>
+            <th <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'" >class="{$_REQUEST._sort}"</if>>ID</th>
+            <th <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'user_id')"> class="desc"</if> orderField="user_id" <if condition="$_REQUEST._order eq 'user_id'">class="{$_REQUEST._sort}"</if>>用户ID</th>
+            <th >手机号</th>
+            <th >昵称</th>
+            <th>获得金币</th>
+            <th>第一级人的id</th>
+            <th>第一级人获得的金币</th>
+            <th>第二级人的id</th>
+            <th>第二级人获得的金币</th>
+            <th>第三级人的id</th>
+            <th>第三级人获得的金币</th>
+            <th  <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'create_time')"> class="desc"</if> orderField="create_time" <if condition="$_REQUEST._order eq 'create_time'">class="{$_REQUEST._sort}"</if>>创建时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist id="vo" name="list">
+            <tr target="sid_user" rel="{$vo['id']}">
+                <td>{$vo['id']}</td>
+                <td>{$vo['user_id']}</td>
+                <td>{$vo['username']|is_show_mobile}</td>
+                <td><a href="__ADMIN__/FrontUser/index/id/{$vo['user_id']}" target="navTab">{$vo['nick_name']}</a></td>
+                <td>{$vo['coin']}</td>
+                <td><a href="__URL__/index/invite_lv/1/inviteFriend/1/friendList/1/user_id/{$vo['first_lv_uid']}" target="navTab"><if condition="$vo['first_lv_uid'] neq 0">{$vo['first_lv_uid']}（{$vo['Lv1_nick_name']}）</if></a></td>
+                <td>{$vo['first_coin']}</td>
+                <td><a href="__URL__/index/invite_lv/1/inviteFriend/1/friendList/1/user_id/{$vo['second_lv_uid']}" target="navTab"><if condition="$vo['second_lv_uid'] neq 0">{$vo['second_lv_uid']}（{$vo['lv2_nick_name']}）</if></a></td>
+                <td>{$vo['second_coin']}</td>
+                <td><a href="__URL__/index/invite_lv/1/inviteFriend/1/friendList/1/user_id/{$vo['third_lv_uid']}" target="navTab"><if condition="$vo['third_lv_uid'] neq 0">{$vo['third_lv_uid']}（{$vo['lv3_nick_name']}）</if></a></td>
+                <td>{$vo['third_coin']}</td>
+                <td>{:date('Y-m-d h:i',$vo['create_time'])}</td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

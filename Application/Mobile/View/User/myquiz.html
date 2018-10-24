@@ -1,0 +1,337 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="__CSS__/guess.css?v=20180619">
+    <link rel="stylesheet" href="__CSS__/swiper.css">
+
+    <link rel="stylesheet" href="__CSS__/user/user.css?v=20180619">
+    <link rel="stylesheet" href="__CSS__/user/user_index.css?v=20180619">
+    <link rel="stylesheet" type="text/css" href="__CSS__/user/FocusSuccess.css?v=20180619">
+    <style>
+        .rank_nav ul li {width:25%}
+        .color_fen,.color_fen p{color: #fd6d99!important}
+        .color_orange,.color_orange p{color: #ff7e00!important}
+        .color_red,.color_red p{color: #eb0000!important}
+        .color_blue,.color_blue p{color: #0085eb!important}
+        .color_green,.color_green p{color: #01af63!important}
+        .swiper-slide{padding: 0px;}
+        .slide-top{ border-bottom: 1px solid #eee; height: 2rem;}
+    </style>
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file='Public/header_inside'/>
+</block>
+<!-- 二级头部 e -->
+<block name='nav'></block>
+<!-- 切换 s-->
+<block name='content'>
+    <section class="user_rate">
+        <!-- Swiper -->
+        <!--  scroll  -->
+        <div class="swiper-container swiper-container4 scroll">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide change">
+                    <ul class="grade clearfix">
+                        <li class="one">
+                            <span class="grade-name">亚盘等级</span>
+                            <span class="grade-photo"><img src="__IMAGES__/expert/zuan.png"></span>
+                            <span class="grade-lv blue"><p>LV</p>{$user.lv}</span>
+                        </li>
+                        <li class="two">
+                            <!-- <span class="grade-photo"><img src="__IMAGES__/expert/hz.png"></span>
+                            <span class="grade-lv orange"><p>LV</p>6</span>
+                            <span class="grade-arrows"><img src="__IMAGES__/expert/jian.png"></span>
+                            <span class="grade-name">竞彩等级</span> -->
+                        </li>
+                        <li class="three">
+                            <span class="grade-number">{$winnig.curr_victs|default='0'}</span>
+                            <span class="grade-words">当前连胜</span>
+                        </li>
+                    </ul>
+                    <div class="slide-top">
+                        <svg width="100" height="100">
+                            <text style="fill:#eb0000; font-weight: bold;" font-size="14" x="38" y="46">50%</text>
+                            <text style="fill:#eb0000;" font-size="12" x="34" y="64">周胜率</text>
+                            <circle cx="50" cy="50" r="30" stroke-width="3" stroke="#C9CACA" fill="none"></circle>
+                            <circle id="c1" cx="50" cy="50" r="30" stroke-width="3" stroke="#eb0000" fill="none" transform="matrix(0,-1,1,0,0,100)" stroke-dasharray=""></circle>
+                        </svg>
+
+                        <svg width="100" height="100">
+                            <text style="fill:#ff7e00; font-weight: bold;" font-size="14" x="38" y="46">60%</text>
+                            <text style="fill:#ff7e00;" font-size="12" x="34" y="64">周胜率</text>
+                            <circle cx="50" cy="50" r="30" stroke-width="3" stroke="#C9CACA" fill="none"></circle>
+                            <circle id="c2" cx="50" cy="50" r="30" stroke-width="3" stroke="#ff7e00" fill="none" transform="matrix(0,-1,1,0,0,100)" stroke-dasharray=""></circle>
+                        </svg>
+
+                        <svg width="100" height="100">
+                            <text style="fill:#00af62; font-weight: bold;" font-size="14" x="38" y="46">20%</text>
+                            <text style="fill:#00af62;" font-size="12" x="34" y="64">周胜率</text>
+                            <circle cx="50" cy="50" r="30" stroke-width="3" stroke="#C9CACA" fill="none"></circle>
+                            <circle id="c3" cx="50" cy="50" r="30" stroke-width="3" stroke="#00af62" fill="none" transform="matrix(0,-1,1,0,0,100)" stroke-dasharray=""></circle>
+                        </svg>
+                    </div>
+                    <div class="slide-bottom clearfix">
+                        <div class="number num-one">
+                            <p class="num">{$winnig.win|default='0'}</p>
+                            <p class="word">连胜</p>
+                        </div>
+                        <div class="number num-two">
+                            <p class="num">{$winnig.level|default='0'}</p>
+                            <p class="word">平场</p>
+                        </div>
+                        <div class="number num-three">
+                            <p class="num">{$winnig.transport|default='0'}</p>
+                            <p class="word">负场</p>
+                        </div>
+                        <div class="number num-four">
+                            <p class="num">{$winnig.max_victs|default='0'}</p>
+                            <p class="word">最大连胜</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide change">
+                    <ul class="grade clearfix">
+                        <li class="one">
+                            <span class="grade-name">竞彩等级</span>
+                            <span class="grade-photo"><img src="__IMAGES__/expert/hz.png"></span>
+                            <span class="grade-lv orange"><p>LV</p>{$user.lv_bet}</span>
+                        </li>
+                        <li class="two">
+                            <!-- <span class="grade-photo"><img src="__IMAGES__/expert/hz.png"></span>
+                            <span class="grade-lv orange"><p>LV</p>6</span>
+                            <span class="grade-arrows"><img src="__IMAGES__/expert/jian.png"></span>
+                            <span class="grade-name">竞彩等级</span> -->
+                        </li>
+                        <li class="three">
+                            <span class="grade-number">{$winnigRace.curr_victs|default='0'}</span>
+                            <span class="grade-words">当前连胜</span>
+                        </li>
+                    </ul>
+                    <div class="slide-top">
+                        <svg width="100" height="100">
+                            <text style="fill:#eb0000; font-weight: bold;" font-size="14" x="38" y="46">10%</text>
+                            <text style="fill:#eb0000;" font-size="12" x="34" y="64">周胜率</text>
+                            <circle cx="50" cy="50" r="30" stroke-width="3" stroke="#C9CACA" fill="none"></circle>
+                            <circle id="c4" cx="50" cy="50" r="30" stroke-width="3" stroke="#eb0000" fill="none" transform="matrix(0,-1,1,0,0,100)" stroke-dasharray=""></circle>
+                        </svg>
+
+                        <svg width="100" height="100">
+                            <text style="fill:#ff7e00; font-weight: bold;" font-size="14" x="38" y="46">0%</text>
+                            <text style="fill:#ff7e00;" font-size="12" x="34" y="64">周胜率</text>
+                            <circle cx="50" cy="50" r="30" stroke-width="3" stroke="#C9CACA" fill="none"></circle>
+                            <circle id="c5" cx="50" cy="50" r="30" stroke-width="3" stroke="#ff7e00" fill="none" transform="matrix(0,-1,1,0,0,100)" stroke-dasharray=""></circle>
+                        </svg>
+
+                        <svg width="100" height="100">
+                            <text style="fill:#00af62; font-weight: bold;" font-size="14" x="38" y="46">78%</text>
+                            <text style="fill:#00af62;" font-size="12" x="34" y="64">周胜率</text>
+                            <circle cx="50" cy="50" r="30" stroke-width="3" stroke="#C9CACA" fill="none"></circle>
+                            <circle id="c6" cx="50" cy="50" r="30" stroke-width="3" stroke="#00af62" fill="none" transform="matrix(0,-1,1,0,0,100)" stroke-dasharray=""></circle>
+                        </svg>
+                    </div>
+                    <div class="slide-bottom clearfix">
+                        <div class="number num-one">
+                            <p class="num">{$winnigRace.win|default='0'}</p>
+                            <p class="word">连胜</p>
+                        </div>
+                        <!--<div class="number num-two">-->
+                        <!--<p class="num">{$winnigRace.level|default='0'}</p>-->
+                        <!--<p class="word">平场</p>-->
+                        <!--</div>-->
+                        <div class="number num-three">
+                            <p class="num">{$winnigRace.transport|default='0'}</p>
+                            <p class="word">负场</p>
+                        </div>
+                        <div class="number num-four">
+                            <p class="num">{$winnigRace.max_victs|default='0'}</p>
+                            <p class="word">最大连胜</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 如果需要分页器-->
+            <div class="swiper-pagination sco">
+                <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+                <span class="swiper-pagination-bullet"></span>
+            </div>
+        </div>
+        <!-- Swiper JS -->
+        <script type="text/javascript">
+            $(function(){
+                //banner 切换
+                var gambleType = "{$gambleType}";
+                var initialSlide = 0;
+                var initialSlide = $('#type').val() == '2'
+                || $('#type').val() == '-2'
+                        ? 1 : 0;
+                var swiper = new Swiper('.swiper-container4', {
+                    initialSlide: initialSlide,
+                    pagination: '.sco',
+                    paginationClickable: true,
+                    spaceBetween: 30,
+                    centeredSlides: true,
+                    autoplay: false,
+                    autoplayDisableOnInteraction: false
+                });
+            });
+        </script>
+        <script>
+            var circle = document.getElementById("c1");
+            var percent = 0.5, perimeter = Math.PI * 2 * 30;
+            circle.setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));
+        </script>
+        <script>
+            var circle = document.getElementById("c2");
+            var percent = 0.6, perimeter = Math.PI * 2 * 30;
+            circle.setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));
+        </script>
+        <script>
+            var circle = document.getElementById("c3");
+            var percent = 0.2, perimeter = Math.PI * 2 * 30;
+            circle.setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));
+        </script>
+        <script>
+            var circle = document.getElementById("c4");
+            var percent = 0.1, perimeter = Math.PI * 2 * 30;
+            circle.setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));
+        </script>
+        <script>
+            var circle = document.getElementById("c5");
+            var percent = 0, perimeter = Math.PI * 2 * 30;
+            circle.setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));
+        </script>
+        <script>
+            var circle = document.getElementById("c6");
+            var percent = 0.78, perimeter = Math.PI * 2 * 30;
+            circle.setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));
+        </script>
+
+    </section>
+    <!-- 切换 e-->
+
+
+    <section class="her_tj clearfix">
+        <div class="ht_left fl">推荐场次
+            <span>
+              <if condition="$type eq '2' OR $type eq '-2'"> (共{$jcUserInfo.total_times}场) </if>
+              <if condition="$type eq '0'"> (共{$userInfo['total_times']+$jcUserInfo['total_times']}场) </if>
+              <if condition="$type eq '-1' OR $type eq '1'"> (共{$userInfo.total_times}场) </if>
+
+          </span>
+        </div>
+        <!-- <div class="ht_right fr">
+          <select class="guess_sele">
+            <option <eq name='type' value='0'>selected="selected"</eq> value='0'>全部</option>
+            <option <eq name='type' value='-1'>selected="selected"</eq> value="-1" >大小</option>
+            <option <eq name='type' value='1'>selected="selected"</eq> value="1">让球</option>
+          </select>
+        </div> -->
+    </section>
+
+    <div class="rank_nav">
+        <ul class="clearfix">
+            <li class="fl <eq name='type' value='0'>on</eq>"><a href="{:U('')}">全部</a></li>
+            <li class="fl <eq name='type' value='1'>on</eq>"><a href="{:U('',[type=>'1'])}">让球</a></li>
+            <li class="fl <eq name='type' value='-1'>on</eq>"><a href="{:U('',[type=>'-1'])}">大小</a></li>
+            <!--            <li class="fl "><a href="javascript:;">竞彩</a></li>-->
+            <li  <if condition="$type eq '2' OR $type eq '-2'">class="fl on"<else/>class="fl"</if>>
+            <a href="{:U('',[type=>'2'])}">竞彩</a>
+            </li>
+        </ul>
+    </div>
+    <!-- 内容new  s -->
+    <div class="new_tj com_dt clearfix myguess_new">
+        <ul id='js-list' class="posts"><volist name='list' id='v'>
+            <li>
+                <!--各种样式: 赢:win 赢半:win_half 输:lose 输半:lose_half 平:ping  新增：推迟：putoff  待定：pending 取消：cancel 中断：interrupt  腰斩：cut-->
+                <switch name='v.result'>
+                    <case value='1'><div class="win"></div></case>
+                    <case value='-1'><div class="lose"></div></case>
+                    <case value='0.5'><div class="win_half"></div></case>
+                    <case value='-0.5'><div class="lose_half"></div></case>
+                    <case value='2'><div class="ping"></div></case>
+                </switch>
+                <div class="p_1">
+                    <div class="t_vs"><if condition="$v.play_type eq '2' OR $v.play_type eq '-2'"><em>{$v['bet_code']} </em></if><em style="color: {$v.union_color}">{$v.union_name.0}</em> {$v.home_team_name.0}<span style='color:red'><if condition="$v['score'] eq '' or $v['score'] eq null">VS<else/>{$v.score}</if></span> {$v.away_team_name.0}</div><div class="dtime">{$v.day}  {$v.game_time}</div>
+                </div>
+                <div class="g_detail">
+                    <div class="guess_type">
+                        <if condition="$v.play_type eq '1'"><img src="__IMAGES__/myguess/rangq.png" alt="让球"></if>
+                        <if condition="$v.play_type eq '-1'"><img src="__IMAGES__/myguess/bsmall.png" alt="大小"></if>
+                        <if condition="$v.play_type eq '2' OR $v.play_type eq '-2'"><img src="__IMAGES__/myguess/jingcai_play.png" alt="竞彩"></if>
+                    </div>
+                    <div class="guess_right clearfix">
+                        <p>
+                            <img src="__IMAGES__/myguess/recommend.png" alt="赞">
+                            <span style="width: auto!important">
+                            <if condition="$v.play_type eq '1'">
+                                <if condition="$v.chose_side eq '1'">
+                                    {$v.home_team_name.0}
+                                    <else/>{$v.away_team_name.0}
+                                </if>
+                                {$v.handcp}
+                            </if>
+                            <if condition="$v.play_type eq '-1'">
+                                <if condition="$v.chose_side eq '1'">
+                                    大球<else/>小球
+                                </if>
+                                {$v.handcp}
+                            </if>
+                            <if condition="$v.play_type eq '2' or $v.play_type eq '-2'">
+                                {$v.home_team_name.0} ({$v.handcp})
+                                <if condition="$v.chose_side eq '1'">胜</if>
+                                <if condition="$v.chose_side eq '0'">平</if>
+                                <if condition="$v.chose_side eq '-1'">负</if>
+                            </if>
+
+                        </span>
+                            <span style="color: #ff7e00;padding-left: .1rem">({$v.odds})</span>
+                        </p>
+                        <p><span><img src="__IMAGES__/myguess/give.png" alt="投">{$v.vote_point}</span><em><img src="__IMAGES__/myguess/fen.png" alt="分">
+                            <switch name='v.result'>
+                                <case value='1||0.5'>+{$v.earn_point}</case>
+                                <case value='-1||-0.5||2'>0</case>
+                                <default/>0
+                            </switch></em></p>
+                        <p><span><img src="__IMAGES__/myguess/gold.png" alt="币">{$v.tradeCoin}</span><em><img src="__IMAGES__/myguess/buy.png" alt="购">{$v.tradeCount}</em></p>
+                    </div>
+                </div>
+                <div id="my_fenx"><span>分析：</span>{$v.desc|default='暂无分析'}</div>
+            </li>
+        </volist></ul>
+        <input id='type' type='hidden' value='{$type}'>
+        <div class="paged boxs">
+            <div class="load_gif fs24 text-999 <if condition="count($list) lt 1">new-bg</if>" >
+            <span><img src="__PUBLIC__/Mobile/images/load.gif" <if condition="count($list) lt 1">style="display:none;"</if>></span>
+            <!--<span class="textContent">正在加载更多的数据...</span>-->
+        </div>
+
+        <a href="{:U('/Guess/index')}" class="purchase chan" style="display:<if condition="count($list) gt 0">none</if> ;position:inherit;">去推荐大厅</a>
+    </div>
+    </div>
+    <!-- 内容new  e -->
+</block>
+<!-- 内容 e -->
+
+<!-- Swiper JS -->
+<block name='scripts'>
+    <!--<script src="__JS__/guess.js"></script>-->
+    <script src="__JS__/swiper.js"></script>
+    <script src="__JS__/myquiz.js?20180615"></script>
+    <script>
+        $(function(){
+            var select=$('#type').val();
+            $(document).on('change','.guess_sele',function(){
+                var type=$(this).val();
+                if(type=='' || type==0){
+                    location.href='/User/myquiz.html';
+                }else{
+                    location.href='/User/myquiz/type/'+type+'.html';
+                }
+            });
+        });
+    </script>
+</block>

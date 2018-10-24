@@ -1,0 +1,592 @@
+<?php
+/**
+ * 竞猜大厅
+ * @author huangjiezhen <418832673@qq.com> 2015.12.02
+ */
+
+class GambleHallController extends PublicController
+{
+    //首页
+    public function index()
+    {
+        $info = $this->param['info'] ?: 'football';
+
+        if ($info == 'football')
+        {
+            list($game, $union) = D('GambleHall')->matchList();
+            $adver = @Think\Tool\Tool::getAdList($classId=20,20,$this->param['platform']) ?: [];
+            $adver = D('Home')->getBannerShare($adver);//添加分享图片和标题
+
+            foreach ($adver as $k => $v)
+            {
+                unset($adver[$k]['id']);
+                unset($adver[$k]['img']);
+            }
+            $this->ajaxReturn(['matchList'=>$game,'union'=>$union,'adver'=>$adver]);
+        }
+        else if ($info == 'basketball')
+        {
+            $this->ajaxReturn();
+        }
+        else
+        {
+            $this->ajaxReturn(2001);
+        }
+    }
+
+    //赛事是否有竞猜
+    public function hasGamble()
+    {
+        $blockTime = getBlockTime(1);            /*AND g.gtime between {$blockTime['beginTime']} AND {$blockTime['endTime']}*/
+        $gameId = $this->param['game_id'];
+
+        $sql = "
+            SELECT g.id,g.fsw_exp_home,g.fsw_exp,g.fsw_exp_away,g.fsw_ball_home,g.fsw_ball,g.fsw_ball_away,g.gtime
+            FROM __PREFIX__game_fbinfo g
+            LEFT JOIN __PREFIX__union u ON g.union_id = u.union_id
+            WHERE
+                g.game_id = ".$gameId."
+            AND g.status = 1
+            AND ((g.is_show = 1 AND u.is_sub < 3) or g.is_gamble = 1)
+            AND g.fsw_exp       != ''
+            AND g.fsw_ball      != ''
+            AND g.fsw_exp_home  != ''
+            AND g.fsw_exp_away  != ''
+            AND g.fsw_ball_home != ''
+            AND g.fsw_ball_away != ''
+        ";
+
+        $game = M()->query($sql);
+
+        if ($game && $game[0]['gtime'] >= $blockTime['beginTime'] && $game[0]['gtime'] <= $blockTime['endTime'])
+            $has = 1;
+        else
+            $has = 0;
+
+        //查询实时盘口，赔率
+        $pcData = new \Home\Services\PcdataService();
+        $res = $pcData->getOddsById($gameId, 2)[$gameId];
+
+        $data = [
+            'has'           => $has,
+            'fsw_exp_home'  => $res[18] != '' ? $res[18] : ( $res[9] != '' ?  $res[9] : ($res[0] != '' ? $res[0] : $game[0]['fsw_exp_home'])),  //让球主队的赔率
+            'fsw_exp'       => $res[19] != '' ? $res[19] : ($res[10] != '' ? $res[10] : ($res[1] != '' ? $res[1] : $game[0]['fsw_exp'])),      //让球盘口
+            'fsw_exp_away'  => $res[20] != '' ? $res[20] : ($res[11] != '' ? $res[11] : ($res[2] != '' ? $res[2] : $game[0]['fsw_exp_away'])), //让球客队赔率
+            'fsw_ball_home' => $res[21] != '' ? $res[21] : ($res[12] != '' ? $res[12] : ($res[3] != '' ? $res[3] : $game[0]['fsw_ball_home'])),//大小球 大的赔率
+            'fsw_ball'      => $res[22] != '' ? $res[22] : ($res[13] != '' ? $res[13] : ($res[4] != '' ? $res[4] : $game[0]['fsw_ball'])),     //大小球盘口
+            'fsw_ball_away' => $res[23] != '' ? $res[23] : ($res[14] != '' ? $res[14] : ($res[5] != '' ? $res[5] : $game[0]['fsw_ball_away'])),//大小球 小的赔率
+        ];
+
+        $data['fsw_exp']  = changeExp($data['fsw_exp']);
+        $data['fsw_ball'] = changeExp($data['fsw_ball']);
+
+        $gamble = (array)M('Gamble')->field(['play_type','chose_side'])->where(['game_id'=>$this->param['game_id']])->select();
+
+        //计算竞猜玩法百分比
+        $spreadNum  = 0; //让分
+        $spreadHome = 0; //让分(主)
+        $totalNum   = 0; //大小球
+        $totalBig   = 0; //大小球(大)
+
+        foreach ($gamble as $v)
+        {
+            if ($v['play_type'] == 1)
+            {
+                $spreadNum++;
+
+                if ($v['chose_side'] == 1)
+                    $spreadHome++;
+            }
+            else
+            {
+                $totalNum++;
+
+                if ($v['chose_side'] == 1)
+                    $totalBig++;
+            }
+        }
+
+        $data['persent']['spreadNum']  = $spreadNum;
+        $data['persent']['spreadHome'] = $spreadHome;
+        $data['persent']['spreadAway'] = $spreadNum - $spreadHome;
+        $data['persent']['totalNum']   = $totalNum;
+        $data['persent']['totalBig']   = $totalBig;
+        $data['persent']['totalSmall'] = $totalNum - $totalBig;
+
+        $this->ajaxReturn($data);
+    }
+
+    //竞猜统计
+    public function gambleCount()
+    {
+        $page = $this->param['page'] ?: 1;
+        $pageNum = 20;
+
+        $where['game_id']   = $this->param['game_id'];
+        $where['play_type'] = $this->param['play_type'];
+
+        $gambleId = []; //本赛程查看过的竞猜记录
+        $userToken = getUserToken($this->param['userToken']);
+
+        if ($userToken && $userToken != -1)
+        {
+            $gambleId = (array)M('QuizLog')->where(['user_id'=>$userToken['userid'],'game_id'=>$this->param['game_id']])->getField('gamble_id',true);
+        }
+
+        $list = (array)M('Gamble')->alias("g")
+                                  ->join("left join qc_front_user f on f.id = g.user_id")
+                                  ->field(['g.id gamble_id','g.user_id','g.play_type','g.chose_side','g.handcp','g.odds','g.is_impt','g.result','g.tradeCoin','g.desc','g.create_time','f.head','f.nick_name','f.lv'])
+                                  ->where($where)
+                                  ->select();
+
+        $lv = $weekSort = $tradeCount = $sortTime = []; //用户排序依据数组
+
+        foreach ($list as $k => $v)
+        {
+            $lv[]                      = $v['lv'];
+            $sortTime[]                = $v['create_time'];
+            $tradeCount[]              = D('QuizLog')->where(['gamble_id'=>$v['gamble_id']])->count();
+            $list[$k]['weekPercnet']   = $weekSort[] = D('GambleHall')->CountWinrate($v['user_id'],1,1);
+            $list[$k]['monthPercnet']  = D('GambleHall')->CountWinrate($v['user_id'],1,2);
+            $list[$k]['seasonPercnet'] = D('GambleHall')->CountWinrate($v['user_id'],1,3);
+        }
+
+        array_multisort($lv,SORT_DESC, $weekSort,SORT_DESC, $tradeCount,SORT_DESC, $sortTime,SORT_DESC, $list);
+        $list = array_slice($list, ($page-1)*$pageNum, $pageNum);
+
+        foreach ($list as $k => $v)
+        {
+            //用户信息
+            $list[$k]['face']          = frontUserFace($v['head']);
+            $list[$k]['tenGamble']     = D('GambleHall')->getTenGamble($v['user_id'],1);
+            $list[$k]['is_trade']      = in_array($v['gamble_id'],$gambleId) ? 1 : 0;
+            unset($list[$k]['head']);
+            unset($list[$k]['create_time']);
+        }
+
+        $this->ajaxReturn(['gambleList'=>$list]);
+    }
+
+    //个人中心
+    public function user()
+    {
+        $winnig                    = D('GambleHall')->getWinning($this->param['user_id'],$gameType=1); //竞猜统计信息
+        $userInfo                  = M('FrontUser')->field(['nick_name','lv','descript','head face'])->where(['id'=>$this->param['user_id']])->find();
+        $userInfo                  = array_merge($userInfo,$winnig);
+        $userInfo['fansNum']       = M('FollowUser')->where(['follow_id'=>$this->param['user_id']])->count();
+        $userInfo['face']          = frontUserFace($userInfo['face']);
+        $userInfo['weekPercnet']   = D('GambleHall')->CountWinrate($this->param['user_id'],1,1);
+        $userInfo['monthPercnet']  = D('GambleHall')->CountWinrate($this->param['user_id'],1,2);
+        $userInfo['seasonPercnet'] = D('GambleHall')->CountWinrate($this->param['user_id'],1,3);
+
+        $userToken = getUserToken($this->param['userToken']);
+
+        if ($userToken)
+        {
+            $isFollow = M('FollowUser')->where(['user_id'=>$userToken['userid'],'follow_id'=>$this->param['user_id']])->find(); //是否已经关注
+            $userInfo['isFollow'] = $isFollow ? 1 : 0;
+        }
+        else
+        {
+            $userInfo['isFollow'] = 0;
+        }
+
+        $gambleList = D('GambleHall')->getGambleList($this->param['user_id']); //竞猜记录
+
+        foreach ($gambleList as $k => $v)
+        {
+            if ($userToken) //如已经登陆
+            {
+                $isTrade = M('QuizLog')->where(['user_id'=>$userToken['userid'],'gamble_id'=>$v['gamble_id']])->getField('id');
+                $gambleList[$k]['is_trade'] = $isTrade ? 1 : 0;
+            }
+            else
+            {
+                $gambleList[$k]['is_trade'] = 0;
+            }
+        }
+
+        $this->ajaxReturn(['userInfo'=>$userInfo,'gambleList'=>$gambleList]);
+    }
+
+    //用户竞猜的列表
+    public function userGamble()
+    {
+        $gamble_id = isset($this->param['gamble_id']) ? (int)$this->param['gamble_id'] : 0;
+        $userToken = getUserToken($this->param['userToken']);
+        $gambleList = D('GambleHall')->getGambleList($this->param['user_id'],$this->param['play_type'] ?: 1, $this->param['page'] ?: 1, $gamble_id); //竞猜记录
+
+        foreach ($gambleList as $k => $v)
+        {
+            if ($userToken) //如已经登陆
+            {
+                $isTrade = M('QuizLog')->where(['user_id'=>$userToken['userid'],'gamble_id'=>$v['gamble_id']])->getField('id');
+                $gambleList[$k]['is_trade'] = $isTrade ? 1 : 0;
+            }
+            else
+            {
+                $gambleList[$k]['is_trade'] = 0;
+            }
+        }
+
+        $this->ajaxReturn(['gambleList'=>$gambleList]);
+    }
+
+    //排行榜
+    public function rank()
+    {
+        $page = $this->param['page'] ?: 1;
+        $pageNum = 20;
+
+        if ($this->param['dateType'] == 4) //红人榜
+        {
+            $listDate = date('Ymd',strtotime("-1 day"));
+            $exist = M('RedList')->where(['list_date'=>$listDate,'game_type'=>1])->field('id')->find();
+
+            if (!$exist)
+                $listDate = date('Ymd',strtotime("-2 day"));
+
+            $field = ['user_id','ranking','gameCount','win','half','level','transport','donate','winrate','pointCount'];
+            $rank = (array)M('RedList')->field($field)->where(['list_date'=>$listDate,'game_type'=>1])->page($page.','.$pageNum)->select();
+        }
+        else
+        {
+            //周、月、季
+            $rank = (array)D('GambleHall')->getRankingData($gameType=1,$this->param['dateType'],$user_id=null,$more=false,$page,$pageNum);
+        }
+
+        $userToken = getUserToken($this->param['userToken']);
+        $blockTime = getBlockTime(1,$gamble=true);
+
+        foreach ($rank as $k => $v)
+        {
+            //用户信息
+            $userInfo = M('FrontUser')->where(['id'=>$v['user_id']])->field('nick_name,head')->find();
+            $rank[$k]['nick_name']    = $userInfo['nick_name'];
+            $rank[$k]['face']         = frontUserFace($userInfo['head']);
+            $rank[$k]['today_gamble'] = M('Gamble')->where(['user_id'=>$v['user_id'],'create_time'=>['between',[$blockTime['beginTime'],$blockTime['endTime']]]])
+                                          ->getField('id') ? 1 : 0;
+
+            //是否已经关注
+            $isFollow = 0;
+
+            if ($userToken)
+                $isFollow = M('FollowUser')->where(['user_id'=>$userToken['userid'],'follow_id'=>$v['user_id']])->find();
+
+            $rank[$k]['isFollow'] = $isFollow ? 1 : 0;
+        }
+
+        $this->ajaxReturn(['rankList'=>$rank]);
+    }
+
+    /**
+     * 最新发布信息接口
+     */
+    public function hotPush(){
+        $page = $this->param['page'] ? (int)$this->param['page'] : 1;//页码大于1表示翻页,只返回竞猜数据
+        $blockTime = getBlockTime(1, $gamble = true);//获取竞猜分割日期的区间时间
+
+        if($page == 1){
+            //图片地址
+            $img = M('recommendClass')->alias("rc")->join("left join qc_recommend re on rc.id = re.class_id")->where(['rc.sign' => 'appHotPush'])->field('re.img')->find();
+            $img  = @Think\Tool\Tool::imagesReplace($img['img']);
+
+            //先查缓存
+            $dakaCahe = S('dakaCahe');
+            if(empty($dakaCahe)) {
+                //热门大咖,热门大咖，取值周榜连胜50名中取7个
+                $paramType = 1;//取周榜
+                $rankDate = getRankDate($paramType);//获取上周的日期
+
+                $sql1 = " SELECT count(*) AS num from qc_ranking_list WHERE dateType = {$paramType} AND gameType = 1 AND begin_date >= {$rankDate[0]} AND end_date <= {$rankDate[1]} ";
+                $count = M()->query($sql1);
+                if (!$count[0]['num']){
+                    $rankDate = getTopRankDate($paramType);//获取上上周的数据
+                }
+
+                $sql = " SELECT r.user_id, u.nick_name, u.head
+                    FROM qc_ranking_list AS r
+                    LEFT JOIN qc_front_user AS u ON r.user_id = u.id
+                    WHERE r.dateType = {$paramType}
+                    AND r.gameType = 1
+                    AND r.begin_date >= {$rankDate[0]} AND r.end_date <= {$rankDate[1]} AND r.id > 0
+                    ORDER BY  r.ranking ASC LIMIT 50 ";
+
+                $arr = M()->query($sql);
+                $currArr = array();//排序数组
+
+                foreach ($arr as $k => $v) {
+                    $arr[$k]['face'] = frontUserFace($v['head']);
+                    $arr[$k]['tenGamble'] = D('GambleHall')->getTenGamble($v['user_id'], 1);
+                    $winnig = D('GambleHall')->getWinning($v['user_id'], $gameType = 1); //连胜记录
+                    $currArr[] = $winnig['curr_victs'];//当前连胜场数
+
+                    unset($arr[$k]['head']);
+                }
+                array_multisort($currArr, SORT_DESC, $arr);
+
+                $data1 =  array_slice($arr, 0, 7);//取前七
+
+                //缓存3个小时
+                S('dakaCahe', json_encode($data1), 2*60);
+                $daka = $data1;
+                unset($data1);
+            }else{//返回缓存
+                $daka = $dakaCahe;
+            }
+        }else{
+            $daka = array();
+            $img = '';
+        }
+
+        //最新竞猜
+        $pageNum = 10;
+        $pageSize = ($page-1)*$pageNum;
+        $playType = $this->param['playType'] ? (int)$this->param['playType'] : 0;//0:全部;1:让分;-1:大小
+        $orderType = $this->param['orderType'] ? (int)$this->param['orderType'] : 0;//0:默认按时间倒序;1:价格低到高;2:价格高到低;3:销量高到低
+
+        $where = " g.create_time between {$blockTime['beginTime']} AND {$blockTime['endTime']} AND g.result = 0 AND g.id > 0 ";//竞猜赛程期间内，且未出结果的
+        if($playType){
+            $where .=  " AND g.play_type = {$playType} " ;
+        }
+
+        $order = ' g.create_time DESC ';
+        if($orderType == 1 || $orderType == 2){//价格
+            $d = ($orderType == 1) ? 'ASC' : 'DESC';
+            $order =  " g.tradeCoin {$d}, g.create_time DESC ";
+        }else if($orderType == 3){//销量,只出现金币不为0的，先按销量排，再按竞猜时间排
+            $where .= ' AND g.tradeCoin > 0 ';
+            $order = ' g.quiz_number DESC, g.create_time DESC ';
+        }
+
+        $userToken = getUserToken($this->param['userToken']);
+        $sql4 = " SELECT g.id as gamble_id, g.user_id, g.union_name, g.game_date, g.game_time, g.home_team_name, g.away_team_name,
+                  g.play_type, g.chose_side, g.tradeCoin, g.handcp, g.odds, g.result, g.`desc`, g.create_time, u.nick_name, u.head, u.lv, qu.union_color
+                  FROM qc_gamble AS g
+                  LEFT JOIN qc_front_user AS u ON g.user_id = u.id
+                  LEFT JOIN qc_union AS qu ON g.union_id = qu.union_id
+                  WHERE {$where}
+                  ORDER BY  {$order} limit {$pageSize}, {$pageNum} ";
+        $jingcaiArr = (array)M()->query($sql4);
+
+        if(!empty($jingcaiArr)){
+            foreach($jingcaiArr as $k2 => $v2){
+                $jingcaiArr[$k2]['face'] = frontUserFace($v2['head']);
+                $jingcaiArr[$k2]['union_name']     = explode(',', $v2['union_name']);
+                $jingcaiArr[$k2]['home_team_name'] = explode(',', $v2['home_team_name']);
+                $jingcaiArr[$k2]['away_team_name'] = explode(',', $v2['away_team_name']);
+
+                if ($userToken) {//如已经登陆
+                    //判断当前用户是否有购买当前信息
+                    $jingcaiArr[$k2]['is_trade'] = M('QuizLog')->where(['gamble_id'=>$v2['gamble_id'], 'user_id'=>$userToken['userid']])->getField('id') ? 1 : 0;//是否已查看购买过
+                }else{
+                    //无登录则全部没有购买
+                    $jingcaiArr[$k2]['is_trade'] = 0;
+                }
+                unset($jingcaiArr[$k2]['head']);
+            }
+        }
+
+
+        if($page == 1){
+            $this->ajaxReturn(['daka' => $daka, 'dakaImg' => $img,  'jingcai' => $jingcaiArr]);
+        }else{
+            $this->ajaxReturn(['jingcai' => $jingcaiArr]);
+        }
+    }
+
+
+    /**
+     * 热门大咖--更多信息
+     */
+    public function bigShotInfo(){
+        $page = $this->param['page'] ? (int)$this->param['page'] : 1;//页码大于1表示翻页
+        $pageNum = 10;
+        $pageSize = ($page-1)*$pageNum;
+        $playType = $this->param['playType'] ? (int)$this->param['playType'] : 0;//0:全部;1:让分;-1:大小
+        $recordType = $this->param['recordType'] ? (int)$this->param['recordType'] : 1;//1:默认周胜率;2:月胜率;3:人气;
+
+        if($page >= 5){//不能大于等于5，只取前50名
+            $this->ajaxReturn(['bigShotInfo' => array()]);
+        }
+        if(!in_array($playType, array(-1,0,1)) || !in_array($recordType, array(1,2,3))){
+            $this->ajaxReturn(101);
+        }
+
+        if(in_array($recordType, array(1,2))){//周胜率，月胜率
+            $paramType = ($recordType==1) ? 1 : 2;
+            $rankDate = getRankDate($paramType);//获取上周的日期
+
+            $sql1 = " SELECT count(*) AS num from qc_ranking_list WHERE dateType = {$recordType} AND gameType = 1 AND begin_date >= {$rankDate[0]} AND end_date <= {$rankDate[1]} ";
+            $count = M()->query($sql1);
+            if (!$count[0]['num']){
+                $rankDate = getTopRankDate($paramType);  //获取上上周的数据
+            }
+
+            $sql = " SELECT r.user_id, r.winrate, u.nick_name,u.head,u.lv,r.ranking
+                    FROM qc_ranking_list AS r
+                    LEFT JOIN qc_front_user AS u ON r.user_id = u.id
+                    WHERE r.dateType = {$recordType}
+                    AND r.gameType = 1
+                    AND r.begin_date >= {$rankDate[0]} AND r.end_date <= {$rankDate[1]} AND r.id > 0
+                    ORDER BY  r.ranking ASC LIMIT 50 ";
+        }else if($recordType == 3){//人气
+            $listDate = date('Ymd', strtotime("-1 day"));
+            $exist = M('RedList')->where(['list_date' => $listDate, 'game_type' => 1])->field('id')->find();
+
+            if (!$exist) {//昨天不存在就找前天
+                $listDate = date('Ymd', strtotime("-2 day"));
+            }
+            $sql = " SELECT l.user_id, l.winrate, u.nick_name, u.head, u.lv,l.ranking
+                    FROM qc_red_list as l
+                    LEFT JOIN qc_front_user as u on l.user_id = u.id
+                    WHERE l.list_date = {$listDate} AND l.game_type = 1 AND l.id > 0
+                    ORDER BY l.ranking ASC LIMIT 50 ";
+        }
+        $arr = M()->query($sql);
+        $blockTime = getBlockTime(1, $gamble = true);//获取赛程分割日期的区间时间
+        $rankSort = $playTypeSort = $createTimeSort = $weekSort = $monthSort = $redList = $playTypeArr = $backupArr = $backupTimeArr = array();//排序数组
+
+        foreach ($arr as $k => $v) {
+            $arr[$k]['face'] = frontUserFace($v['head']);
+            $arr[$k]['tenGamble'] = D('GambleHall')->getTenGamble($v['user_id'], 1);
+            $winnig = D('GambleHall')->getWinning($v['user_id'], $gameType=1); //连胜记录
+            $arr[$k]['curr_victs_ftball'] = $winnig['curr_victs'];//连胜场数
+            $arr[$k]['win']  = $winnig['win'];//胜数
+            $rankSort[] = $redList[] = $v['ranking'];
+
+            if($recordType == 1 && $playType == 0){//周胜率
+                $arr[$k]['weekPercnet'] = $weekSort[] = $arr[$k]['winrate'] = D('GambleHall')->CountWinrate($v['user_id'], 1, 1);//周胜率
+                $arr[$k]['monthPercnet'] = $monthSort[] = D('GambleHall')->CountWinrate($v['user_id'], 1, 2);//月胜率
+            }else if($recordType == 2 && $playType == 0){//月胜率
+                $arr[$k]['weekPercnet'] = $weekSort[] = D('GambleHall')->CountWinrate($v['user_id'], 1, 1);//周胜率
+                $arr[$k]['monthPercnet'] = $monthSort[] = $arr[$k]['winrate'] = D('GambleHall')->CountWinrate($v['user_id'], 1, 2);
+            }else if(in_array($recordType, array(1, 2)) && in_array($playType, array(-1, 1))){
+                $arr[$k]['weekPercnet'] = $weekSort[] = D('GambleHall')->CountWinrate($v['user_id'], 1, 1, false, false, $playType);//周胜率
+                $arr[$k]['monthPercnet'] = $monthSort[] = D('GambleHall')->CountWinrate($v['user_id'], 1, 2, false, false, $playType);
+                $winnig = D('GambleHall')->getWinning($v['user_id'], $gameType=1, $playType); //连胜记录
+                $arr[$k]['win']  = $winnig['win'];//胜数
+                $arr[$k]['winrate'] = ($recordType == 1) ? $arr[$k]['weekPercnet'] : $arr[$k]['monthPercnet'];
+            }else if($recordType == 3 && in_array($playType, array(-1, 1))){//人气
+                $arr[$k]['weekPercnet'] = $weekSort[] = D('GambleHall')->CountWinrate($v['user_id'], 1, 1, false, false, $playType);//周胜率
+                $arr[$k]['monthPercnet'] = $monthSort[] = D('GambleHall')->CountWinrate($v['user_id'], 1, 2, false, false, $playType);
+                $winnig = D('GambleHall')->getWinning($v['user_id'], $gameType=1, $playType); //连胜记录
+                $arr[$k]['win']  = $winnig['win'];//胜数
+                //计算昨天的胜率
+                $where['user_id']   = $v['user_id'];
+                $where['create_time'] = ['between',[$blockTime['beginTime']-86400, $blockTime['endTime']-86400]];
+                $where['result'] = ['NEQ', 0];
+                $where['play_type'] = $playType;
+                $gameArray = M('gamble')->where($where)->select();
+                $yestWinRate = $this->YestWinrate($gameArray, 1);
+                $arr[$k]['winrate'] = $redList[] = $yestWinRate['winrate'];
+            }else if($recordType == 3 && $playType == 0) {
+                $arr[$k]['weekPercnet'] = $weekSort[] = D('GambleHall')->CountWinrate($v['user_id'], 1, 1);//周胜率
+                $arr[$k]['monthPercnet'] = $monthSort[] = D('GambleHall')->CountWinrate($v['user_id'], 1, 2);//月胜率
+            }
+
+            $playWhere = ($playType != 0) ? $playType : ['in', [-1,1]];
+            $arr[$k]['todayNum'] = M('Gamble')->where(['user_id' => $v['user_id'], 'play_type'=>$playWhere, 'create_time' => ['between', [$blockTime['beginTime'], $blockTime['endTime']]]])->count();//当天推荐场数
+            $one = M('Gamble')->where(['user_id' => $v['user_id'], 'play_type'=>$playWhere, 'create_time' => ['between', [$blockTime['beginTime'], $blockTime['endTime']]]])->order('id desc')->find();
+
+            if($one){//若当天推荐存在
+                $arr[$k]['todayHomeName'] = explode(',', $one['home_team_name']);//当天推荐主队名称
+                $arr[$k]['todayAwayName'] = explode(',', $one['away_team_name']);//当天推荐客队名称
+                $arr[$k]['playType'] = $playTypeSort[] = $one['play_type'];
+                $arr[$k]['createTime'] = $createTimeSort[] = $one['create_time'];
+
+                if(in_array($playType, array(-1, 1))){
+                    $playTypeArr[] = $arr[$k];
+                }
+            }else{
+                $arr[$k]['todayHomeName'] = '';//当天推荐主队名称
+                $arr[$k]['todayAwayName'] = '';//当天推荐客队名称
+                $arr[$k]['playType'] = $playTypeSort[] = 0;
+                $arr[$k]['createTime'] = $createTimeSort[] = 0;
+            }
+            unset($one);
+        }
+
+        if(in_array($playType, array(-1, 1))){//如果选玩法，则只出现玩法的内容
+            $arr = $playTypeArr;
+            foreach ($arr as $k => $v) {
+                $backupArr[] = ($recordType == 1) ? $v['weekPercnet'] : (($recordType == 2) ? $v['monthPercnet'] : $v['winrate']);
+                $backupTimeArr[] = $v['createTime'];
+            }
+            array_multisort($backupArr, SORT_DESC, $backupTimeArr, SORT_DESC, $arr);
+        }else{//全部情况下，都是按照排名排序
+            array_multisort($rankSort, SORT_ASC, $createTimeSort, SORT_DESC, $arr);
+        }
+
+        //释放无用的数据
+        foreach ($arr as $k => $v) {
+            unset($arr[$k]['head'], $arr[$k]['playType'], $arr[$k]['winrate'], $arr[$k]['createTime'], $arr[$k]['ranking']);
+        }
+        unset($rankSort, $playTypeSort, $createTimeSort, $weekSort, $monthSort, $redList, $backupArr, $backupTimeArr);
+        $arr = array_slice($arr, $pageSize, $pageNum);
+
+        $this->ajaxReturn(['bigShotInfo' => $arr]);
+    }
+
+    /**
+     * 获取昨日胜率
+     *
+     * @param int  $array     竞猜记录
+     * @param int  $gameType  赛事类型(1:足球   2:篮球   默认为1)
+     *
+     * @return  array
+     */
+    public function YestWinrate($array, $gameType=1){
+        //计算胜率
+        $win        = 0;
+        $half       = 0;
+        $level      = 0;
+        $transport  = 0;
+        $donate     = 0;
+        $pointCount = 0;
+        foreach ($array as $k => $v) {
+            if($v['result'] == '1'){
+                $win++;
+            }
+            if($v['result'] == '0.5'){
+                $half++;
+            }
+            if($v['result'] == '2'){
+                $level++;
+            }
+            if($v['result'] == '-1'){
+                $transport++;
+            }
+            if($v['result'] == '-0.5'){
+                $donate++;
+            }
+            if($v['earn_point'] > 0){
+                $pointCount += $v['earn_point'];
+            }
+        }
+        if($gameType == 1)
+        {
+            $winTotal    = $win + $half*0.5;
+            $gambleTotal = $winTotal + $transport + $donate*0.5;
+            $winrate     = $gambleTotal ? round(($winTotal/$gambleTotal)*100) : 0;
+        }
+        else
+        {
+            $gambleTotal = $win + $transport;
+            $winrate     = $gambleTotal ? round(($win/$gambleTotal)*100) : 0;
+        }
+        return array(
+            "winrate"    =>  $winrate,
+            'win'        =>  $win,
+            'half'       =>  $half,
+            'level'      =>  $level,
+            'transport'  =>  $transport,
+            'donate'     =>  $donate,
+            'pointCount' =>  $pointCount,
+        );
+    }
+
+}
+
+
+ ?>

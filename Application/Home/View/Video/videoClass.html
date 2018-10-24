@@ -1,0 +1,231 @@
+<extend name="Public:layout"/>
+<block name="seo">
+    <title>{$className}_视频直播_视频集锦_全球体育qqty.com</title>
+    <meta name="keywords" content="{$info.title},赛前分析、足球推荐、足球分析、竞彩推荐、竞彩分析、篮球分析、篮球推荐"/>
+    <meta name="description" content="{$info.title},全球体育为广大彩民提供最新的足球推荐、竞彩分析、篮球预测、英超、意甲、西甲、德甲、欧冠等新闻资讯、赛事直播和比赛视频"/>
+</block>
+<block name="css">
+    <!-- 页面所需css -->
+    <link rel="stylesheet" href="__CSS__/publish_index/index.css">
+    <style>
+        .re_title{width:100%;height:60px;line-height:60px;border-bottom:1px solid #e5e5e5;background:url(__IMAGES__/userIndex/publish_index/rtitle.png) no-repeat left center}
+        .author img {margin-right: 10px;}
+        .list-li{display: block;height: 125px;}
+    </style>
+</block>
+<block name="content">
+    <!-- 顶部二级栏 -->
+    <include file="Public:top_user"/>
+    <!-- 顶部二级栏 -->
+
+    <!--隐藏获取分类id-->
+    <input class="hidden-className" type="hidden" value="{$className}">
+    <!--隐藏获取分类id-->
+
+    <!-- main -->
+    <div class="main">
+        <div class="position">
+            当前位置：<span class="now"><a href="{:U('/')}">全球体育首页</a></span> &gt; <span class="now"><a href="{:U('/foot@Video')}">视频专区</a></span> &gt; {$className}</div>
+        <div class="expLiCon clearfix">
+            <div class="re_title">
+                <em class="f24 fb pl10">{$className}</em> <span class="f16 pl5"></span>
+            </div>
+            <!-- expLiL -->
+            <div class="pull-left expLiL">
+
+                <notempty name="list">
+                    <div class="expLiBox grayShadow">
+                        <ul>
+                            <volist name="list" id="item">
+                                <li class="liInfor ">
+                                        <div class="list-li">
+                                            <div class="pull-left inforImg">
+                                                <a href="{$item.href}" target="_blank" class="clearfix inforLink">
+                                                    <img class="lazy" data-original="{$item.img}" width="180" height="124">
+                                                </a>
+                                            </div>
+
+                                            <div class="pull-left inforArt">
+                                                <a href="{$item.href}" target="_blank" class="clearfix inforLink">
+                                                    <article class="text-hidden"><strong>{$item.title}</strong></article>
+                                                    <p class="text-999 inforArtP">{$item.remark|msubstr=###,0,65,'utf-8'}</p>
+                                                </a>
+                                                <div class="clearfix author">
+                                                    <span class="pull-left text-999 leftUser"><a target="_blank" href="{:U('/expuser/'.$item['user_id'])}"><img class="img-circle lazy" data-original="{$userInfoArr[$item['user_id']]['head']}" width="28" height="28">{$userInfoArr[$item['user_id']]['name']}&nbsp;&nbsp;&nbsp;</a></span>
+                                                    <span class="pull-left text-999 leftUser">{$item.add_time|date="Y-m-d H:i",###}</span>
+                                                    <span class="pull-right text-999 rightEye">{$item.click_number}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </li>
+                            </volist>
+                        </ul>
+                        <!--页码开始-->
+                        <div class="pageNum">
+                            <nav aria-label="...">
+                                <ul class="pagination clearfix">
+                                    {$show}
+                                    <li><input class="form-control isTxt" type="text" value="{$_REQUEST.p|default=1}" name="p"></li>
+                                    <li id="GO"><a href="javascript:void(0)">GO</a></li>
+                                </ul>
+                                <div class="">共有{$totalCount}条，每页显示：{$numPerPage}条</div>
+                            </nav>
+                        </div>
+                        <input type="hidden" id="class_id" name="class_id" value="{$Think.get.class_id}">
+                        <!--页码结束-->
+                    </div>
+                    <else/>
+                    <p>没有找到相关视频哦！ <a href="{:U('@video')}"><i class="icon-arrow-right text-tie"> 返回视频集锦</i></a></p>
+                </notempty>
+            </div>
+            <!-- expLiL -->
+
+            <!-- expLiR -->
+            <div class="pull-right expLiR">
+                <div class="fxBox grayShadow">
+                    <div class="clearfix listTitle"><div class="pull-left fxTit"><strong class="">独家解盘</strong></div><a href="{:U('/list_n/10@news')}" class="text-666 pull-right moreTit">更多></a></div>
+                    <!-- 独家解盘 end-->
+                    <div class="listBox01">
+                        <ul>
+                            <volist name="quiz" id="item">
+                                <li><a target="_blank" href="{$item.href}">{$item.title}</a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <!-- 独家解盘 end-->
+                    <div class="clearfix listTitle"><div class="pull-left fxTit"><strong class="">推荐指数</strong></div><a href="{:U('@jc')}" class="text-666 pull-right moreTit">更多></a></div>
+                    <!-- 竞彩指数 -->
+                    <div class="listBox02">
+                        <ul class="clearfix">
+                            <volist name="Marvellous" id="item" offset="0" length='2'>
+                                <li class="liList">
+                                    <p class="time"><span class="text-555">{$item.union_name|mb_substr=###,0,5,'utf-8'}</span>&nbsp;&nbsp;<em class="text-555">{$item.gtime|date='d日 H:i',###}</em></p>
+                                    <div class="clearfix">
+                                        <a href="javascript:;" class="hover pull-left">
+                                            <div class="team1">
+                                                <span><img class="lazy" data-original="{$item.homeTeamLogo}" width="55" height="55" style="display: inline;"></span>
+                                                <p class="team-name">{$item.home_team_name}</p>
+                                            </div>
+                                        </a>
+                                        <div class="pull-left against">
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                <tr bgcolor="#f7f7f7">
+                                                    <td >{$item.fsw_exp_home}</td>
+                                                    <td><if condition="$item.fsw_exp lt 0">受</if>{$item.fsw_exp|abs|handCpSpread}</td>
+                                                    <td>{$item.fsw_exp_away}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{$item.fsw_ball_home}</td>
+                                                    <td>{$item.fsw_ball|handCpTotal}</td>
+                                                    <td>{$item.fsw_ball_away}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <a href="javascript:;" class="hover pull-right">
+                                            <div class="team2">
+                                                <span><img class="lazy" data-original="{$item.awayTeamLogo}" width="55" height="55" style="display: inline;"></span>
+                                                <p class="team-name">{$item.away_team_name}</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="pro-con clearfix">
+                                        <div class="pull-left zhu"><span class="text-555">主队</span> <em class="<if condition='$item.mainNumber egt 50'>text-red<else/>text-tie</if>">{$item.mainNumber}%</em></div>
+                                        <div class="pull-left content">
+                                            <div class="col">
+                                                <ul id="skill" class="clearfix">
+                                                    <li class="ft-percent">
+                                                        <a style="background: <if condition='$item.mainNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="javascript:;" class="ft-percent-real animation-progress expand left" data-percent="{$item.mainNumber}%" data-animation="progress" ></a>
+                                                    </li>
+                                                    <li class="ft-percent">
+                                                        <a style="background: <if condition='$item.guestNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="javascript:;" class="ft-percent-real animation-progress expand right" data-percent="{$item.guestNumber}%" data-animation="progress"></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="pull-right ke"><span class="text-555">客队</span><em class="<if condition='$item.guestNumber egt 50'>text-red<else/>text-tie</if>">{$item.guestNumber}%</em></div>
+                                    </div>
+                                    <div class="pro-con clearfix">
+                                        <div class="pull-left zhu"><span class="text-555">大球</span><em class="<if condition='$item.bigNumber egt 50'>text-red<else/>text-tie</if>">{$item.bigNumber}%</em></div>
+                                        <div class="pull-left content">
+                                            <div class="col">
+                                                <ul id="skill">
+                                                    <li class="ft-percent">
+                                                        <a style="background: <if condition='$item.bigNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="javascript:;" class="ft-percent-real animation-progress expand left" data-percent="{$item.bigNumber}%" data-animation="progress" ></a>
+                                                    </li>
+                                                    <li class="ft-percent">
+                                                        <a style="background: <if condition='$item.smallNumber egt 50'>#f28782<else/>#7dd9b0</if>;" href="javascript:;" class="ft-percent-real animation-progress expand right" data-percent="{$item.smallNumber}%" data-animation="progress"></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="pull-right ke"><span class="text-555">小球</span> <em class="<if condition='$item.smallNumber egt 50'>text-red<else/>text-tie</if>">{$item.smallNumber}%</em></div>
+                                    </div>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <!-- 竞彩指数 -->
+                    <div class="clearfix listTitle"><div class="pull-left fxTit"><strong class="">赛事直播</strong></div><a href="{:U('@Video')}" class="text-666 pull-right moreTit">更多></a></div>
+                    <!-- 赛事直播 -->
+                    <div class="listBox03">
+                        <ul>
+                            <volist name="live" id="item" offset="0" length='6'>
+                                <li class="clearfix <if condition="$key % 2 eq 1">li02</if>">
+                                <a class="pull-left mat team">
+                                    <span><img class="lazy" data-original="{$item.homeTeamLogo}" width="45" height="45"></span>
+                                    <p>{$item.home_team_name|switchName=0,###}</p>
+                                </a>
+                                <div class="pull-left mat">
+                                    <p>{$item.union_name|switchName=0,###}</p>
+                                    <p>{$item.game_date|strtotime|date="m-d",###} {$item.game_time}</p>
+                                    <p class="text-orange team-vs"><strong>VS</strong></p>
+                                    <!--暂时不需要比分显示-->
+                                    <!--<if condition="!in_array($item['game_state'],[1,2,3,4])">-->
+                                    <!--<p>{$item.game_date|strtotime|date="m-d",###} {$item.game_time}</p>-->
+                                    <!--<p class="text-orange team-vs"><strong>VS</strong></p>-->
+                                    <!--<else/>-->
+                                    <!--<p class="text-green">{:C('game_state')[$vo['game_state']]}</p>-->
+                                    <!--<p class="team-vs"><strong class="text-8a">{:explode('-',$item['score'])[0]}</strong><em>:</em><strong class="text-red">{:explode('-',$item['score'])[1]}</strong></p>-->
+                                    <!--</if>-->
+                                    <!--暂时不需要比分显示-->
+                                </div>
+                                <a class="pull-left mat team">
+                                    <span><img class="lazy" data-original="{$item.awayTeamLogo}" width="45" height="45" title="" style=""></span>
+                                    <p>{$item.away_team_name|switchName=0,###}</p>
+                                </a>
+                                <div class="vds-link">
+                                    <volist name="item.web_video" id="vo" offset="0" length='3'>
+                                        <a target="_blank" href="<if condition="$vo.web_ischain eq 0">http://www.jrssports.com/Index/live/gameid/{$item['game_id']}<else/>{$vo.weburl}</if>">{$vo.webname}</a>
+                                    </volist>
+                                </div>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <!-- 赛事直播 -->
+                    <div class="clearfix listTitle"><div class="pull-left fxTit"><strong class="">赛事锦集</strong></div><a href="{:U('@video')}" class="text-666 pull-right moreTit">更多></a></div>
+                    <!-- 赛事锦集 start-->
+                    <div class="listBox04">
+                        <ul>
+                            <volist name="highlights" id="item">
+                                <li>
+                                    <a target="_blank" href="{$item['href']}"><span></span><img class="lazy" data-original="{$item.img}" width="302" height="175" /><p>{$item.title}</p></a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <!-- 赛事锦集 start-->
+                </div>
+            </div>
+            <!-- expLiR -->
+        </div>
+    </div>
+    <!-- main -->
+</block>
+
+<block name="js">
+    <script type="text/javascript" src="__JS__/publish_index/jquery.inview.min.js"></script>
+    <script type="text/javascript" src="__JS__/publish_index/index.js"></script>
+</block>

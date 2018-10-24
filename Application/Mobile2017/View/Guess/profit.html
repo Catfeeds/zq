@@ -1,0 +1,235 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" href="__CSS__/guess.css">
+    <link rel="stylesheet" href="__CSS__/login/login.css">
+    <link rel="stylesheet" href="__CSS__/play_rank.css">
+    <!-- 本页需要引用的js --> 
+    <script src="__JS__/guess.js"></script>
+    <style>
+        .hidden{display: none;}
+    </style>
+</block>
+<block name="header">
+    <include file="Public/header_rules"/>
+</block>
+<!-- 导航 s-->
+<block name="nav">
+    <include file="Guess/nav"/>
+</block>
+<block name="content">
+    <section class="main contentPt">
+        <div class="rank_nav">
+            <ul class="clearfix">
+                <li class="fl <if condition='($_GET.dateType eq 4) OR ($_GET.dateType eq null)'>on</if>"><a href="{:U('Guess/profit',['dateType'=>4])}">日榜</a></li>
+                <li class="fl <if condition='$_GET.dateType eq 1'>on</if>"><a href="{:U('Guess/profit',['dateType'=>1])}">周榜</a></li>
+                <li class="fl <if condition='$_GET.dateType eq 2'>on</if>"><a href="{:U('Guess/profit',['dateType'=>2])}">月榜</a></li>
+                <li class="fl <if condition='$_GET.dateType eq 3'>on</if>"><a href="{:U('Guess/profit',['dateType'=>3])}">季榜</a></li>
+            </ul>
+        </div>
+        <style>
+
+        </style>
+        <!-- 胜率榜 盈率榜 s-->
+        <nav class="win_rank">
+            <a href="{:U('Guess/rank',['dateType'=>$dateType])}" >胜率榜</a>
+            <a href="{:U('Guess/profit',['dateType'=>$dateType])}" class="on">盈利榜</a>
+        </nav>
+        <!-- 胜率榜 盈率榜 s-->
+  
+        <div class="rank_item" >
+          <input id='is_login' type='hidden' value='{$is_login}'>
+            <table class="table" width="100%" cellpadding="0" cellspacing="0">
+                <!--
+                <tr bgcolor="#fff">
+                    <td colspan="8" class="f-td">
+                         <div class="fl fs22 text-999">每天12:45更新榜单</div>
+                        <div class="fr text-999">
+                            显示有推荐用户&nbsp;&nbsp;<input type="checkbox" id="check" value="">
+                        </div>
+                    </td>
+                </tr>
+                <present name="myRank">
+                <tr bgcolor="#fee4c9" id="rank_tr"> 
+                    <td colspan="3">我的排名：<span>{$myRank.ranking|default='未上榜'}</span></td>
+                    <td class="fs24" colspan="2"><em class="red">{$myRank.pointCount|default='0'}</em>积分</td>
+                    <td class="fs24"></td>
+                </tr>
+                </present>
+                <volist name='list' id='v' mod="2" >
+                    <tr class="js-list ios_touch <eq name='mod' value='1'>ff<else/>f7</eq> <if condition='($v.today_gamble eq 0) AND ($is_quiz eq 1)'>hidden</if>"
+                        data-quiz='{$v.today_gamble}' data-id='{$v.user_id}'>
+                        <td width="8%" class="rankImg">
+                            <switch name='v.ranking'>
+                                <case value='1' break='1'><img src="__IMAGES__/rank01.png"></case>
+                                <case value='2'><img src="__IMAGES__/rank02.png"></case>
+                                <case value='3'><img src="__IMAGES__/rank03.png"></case>
+                                <default/>
+                                {$v.ranking}
+                            </switch>
+                        </td>
+                        <td width="12%" class="headImg"><img src="{$v.face}"/></td>
+                        <td width="52%" class="q-tl flogImg ios_touch js-name">
+                            <p class="fs26 clearfix">
+                                <em class="fl">{$v.nick_name}</em>
+                                <eq name="v.today_gamble" value="1">
+                                    <span class="fl"></span>
+                                </eq>
+                            </p>
+                            <p class="fs22 text-999">推荐{$v['gameCount']}场</p>
+                        </td>
+                        <td width="20%" class="fs24" colspan="2"><em class="red">{$v['pointCount']}</em>积分</td>
+                        <td width="8%">
+                            <a href="javascript:;" style="display:block;"
+                               class="star_img <in name='v.user_id' value='$followIds'>star_img_on</in>">&nbsp;
+                            </a>
+                        </td>
+                    </tr>
+                </volist>
+
+                -->
+            </table>
+        </div>
+        <script>
+            //胜率榜 切换
+             $(function(){
+
+             })  
+        </script>
+        <div class="paged boxs">
+            <a href="javascript:;" class="btn btn-green boxs" id="loadMore">加载更多</a> 
+            <div class="load_gif fs24 text-999" style='display: none;'>
+                <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>正在加载更多的数据...</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已经全部加载完毕</a>
+        </div>
+    </section>
+</block>
+<block name="scripts">
+    <script type="text/javascript">
+        $(function () {
+            if($('.js-list').length<30){
+                $('#loadMore').hide();
+                $('#showLess').show();
+            }
+            var DOMAIN = "__DOMAIN__";
+            var p = 2;// 初始化页面，点击事件从第二页开始
+            var flag = false;
+            $(document).on('click','#loadMore',function(){
+                send();
+            }).on('click','.js-list',function(){
+                var userid=$(this).data('id');
+                location.href = '//m.'+DOMAIN+'/Guess/other_page/user_id/'+userid+'.html';
+            }).on('click', '.table .star_img', function () {
+                var is_login = $("#is_login").val();
+                if (is_login == '')
+                {
+                    location.href = '/User/login';
+                    return false;
+                }
+                var type;
+                var $this = $(this);
+                if ($this.hasClass('star_img_on')) {
+                    type = 2;
+                } else {
+                    type = 1;
+                }
+                var params = {
+                    type: type,
+                    id: $this.parent().parent().data('id')
+                };
+                $.ajax({
+                    type: 'post',
+                    url: "/Guess/focus.html",
+                    data: params,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 1) {
+                            if (type == 2) {
+                                $this.removeClass('star_img_on');
+                            } else {
+                                $this.addClass('star_img_on');
+                            }
+                        } else {
+                            alert(data.info);
+                        }
+                    }
+                });
+                return false;
+            });
+            function send() {
+                if (flag) {
+                    return false;
+                }
+                $("#loadMore").hide();
+                $('.load_gif').show();
+                flag = true;
+                var params = {
+                    page: p,
+                }
+                $.ajax({
+                    type: 'post',
+                    url: "",
+                    data: params,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 1) {
+                            var list = data.info;
+                            if (list != null) {
+                                var m_quiz=Cookie.getCookie('m_quiz');
+                                $.each(list, function (k, v) {
+                                    var bg = '';
+                                    if (k % 2 == 1) {
+                                        bg = ' ff ';
+                                    }else{
+                                        bg=' f7 ';
+                                    }
+                                    var hide = '';
+                                    if (v.today_gamble == 0 && m_quiz=='1') {
+                                        hide = 'hidden';
+                                    }
+                                    var html = '<tr class="js-list ios_touch' + bg + hide + '" data-quiz=' + v.today_gamble + ' data-id=' + v.user_id + '>' +
+                                            '<td width="8%" class="rankImg">' + v.ranking + '</td>' +
+                                            '<td width="12%" class="headImg"><a href="//m.' + DOMAIN + '/Guess/other_page/user_id/' + v.user_id + '"><img src="' + v.face + '" /></a></td>' +
+                                            '<td width="32%" class="q-tl flogImg">' +
+                                            '<p class="fs26 clearfix"><a class="fl" href="//m.' + DOMAIN + '/Guess/other_page/user_id/' + v.user_id + '">' + v.nick_name + '</a>';
+                                    if (v.today_gamble == 1) {
+                                        html += '<span class="fl"></span>';
+                                    }
+                                    html += '</p><p class="fs22 text-999">推荐' + v['gameCount'] + '场</p></td>';
+                                    html += '<td width="20%" class="fs24" colspan="2"><em class="red">'+v['pointCount']+'</em>积分</td>';
+                                    var star = '';
+                                    if (v.isFollow == 1) {
+                                            star = 'star_img_on';
+                                    }
+                                    html += '<td width="8%" class="star_img ' + star + '"><a href="javascript:;"  style="display:block;" class="star_img ' + star + '">&nbsp;</a></td>';
+                                    $(".js-list:last").after(html);
+                                });
+                                flag = false;
+                                if (data.info.length < 30) {
+                                    $("#showLess").show();
+                                    flag = true;
+                                }else{
+                                    $("#loadMore").show();
+                                }
+                            } else {
+                                $("#showLess").show();
+                                flag = true;
+                            }
+                        } else {
+                            $("#showLess").show();
+                            flag = true;
+                        }
+                    },
+                    complete:function(){
+                        $(".load_gif").hide();
+                    }
+                });
+                p++;
+            }
+        });
+
+         
+    </script>
+</block>

@@ -1,0 +1,24 @@
+/* 弹出层 */
+.modalReisger{ display: block;  position: fixed;  top: 20%;  left: 50%; width: 72%; margin-left: -36%; background-color: transparent;  z-index:1050;}
+.fullModal{ width: 100%; margin-left: -50%;}
+.modal-backdrop {
+    /* display: none; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1040;
+    background-color: #000000;
+    opacity: 0.5;
+    overflow-x: hidden;
+}
+.newGift i{ position: absolute; right: -.36rem; top: .98rem; width: .92rem; height: .92rem; cursor: pointer;}
+.newGift .getBtn{ position: absolute; left: 50%; bottom: .26rem; width: 72%; height: 1rem; margin-left: -36%;}
+.ponGift p{ position: absolute; width: 100%; top: 2.4rem; text-align: center; color: #fff; font-size: .36rem;}
+.ponGift p em{ color: #f0ee30; font-size: .32rem;}
+.ponGift .btnBox{ position: absolute; left: 50%; bottom: .26rem; width: 60%; margin-left: -30%;}
+.ponGift .btnBox .leftBtn,.ponGift .btnBox .rightBtn{ width: 1.9rem; height: .76rem; line-height: .76rem; background: #ffffff; text-align: center; border-radius: .38rem; border: 2xp solid #999999; color: #666666;}
+.ponGift .btnBox .leftBtn{ background: #fabb26; color: #333333; border: 2xp solid #a97700;}

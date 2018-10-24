@@ -1,0 +1,38 @@
+<extend name="Public/base" />
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/photo/index.css?v=20180120">
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file="Public:titleHead"/>
+</block>
+<!-- 二级头部 e -->
+<block name="nav"></block>
+
+<!-- 用户所有明细 -->
+<block name="content">
+    <!-- nav -->
+    <include file="Public:navHead"/>
+    <!-- 主体内容 -->
+    <section class="container clearfix">
+    <ul class="refer">
+    </ul>
+    <!-- 返回顶部 -->
+    <div class="backtop clearfix">
+        <a><img src="__IMAGES__/index/backtop.png"></a>
+    </div>
+    </section>
+    <div class="more">
+        <span class="loading">数据加载中</span>
+        <span class="nothing" style="display:none;">无更多数据</span>
+    </div>
+</block>
+<block name='scripts'>
+    <script>
+        var page = 1;
+        var listtime = "{:time()}";
+        var IMAGES = "__IMAGES__";
+    </script>
+    <script type="text/javascript" src="__JS__/photo/index.js?20180629"></script>
+</block>

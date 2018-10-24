@@ -1,0 +1,201 @@
+<extend name="Public:layout"/>
+<block name="seo">
+    <title>
+        {$user['name']}_专家个人主页_全球体育
+    </title>
+</block>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userIndex/expUser.css">
+</block>
+<block name="content">
+    
+    <!-- 顶部二级栏 -->
+    <include file="Public:top_user"/>
+    <!-- 顶部二级栏 -->
+    
+    <!-- main -->
+    <div class="main" style="width: 1024px;">
+        <div class="position">
+        	当前位置：<span class="now"><a href="{:U('/')}">全球体育首页</a></span>  &gt;专家主页</div>
+        <!-- expHead -->
+	  	<div class="expHead">
+        	<div class="expBanner" style="background:url(__IMAGES__/userIndex/expert/user-bg.jpg) no-repeat 0 0; background-size: 100% 100%;"><!-- <img src="__IMAGES__/userIndex/expert/user-bg.jpg" width="1024" height="166" alt="专家号"> --></div>
+          	<div class="uInfor clearfix">
+            	<div class="uFace"><img src="{$user.head}" width="100" height="100" alt="{$user.head}"></div>
+            	<div class="pull-left">
+                	<div class="uName clearfix mb10"><h2 class="pull-left mr15">{$user.name}</h2> <span class="pull-left">特约专家</span></div>
+                    <p class="text-999 uIntro">简介：{$user.descript}</p>
+                </div>
+                <div class="pull-right atteBtn">
+                    <if condition="$is_follow eq 1">
+                        <button val="{$user.id}" type="button" class="follow btn btn-blue is_follow"><span class="plus added">已关注</span></button>
+                        <else/>
+                        <button val="{$user.id}" type="button" class="follow btn btn-blue"><span class="plus add">关注</span></button>
+                    </if>
+                </div>
+          	</div>
+      	</div>
+        <!-- expHead -->
+        <div class="expLiCon clearfix">
+        	<!-- expLiL -->
+        	<div class="pull-left expLiL">
+            	<div class="navList grayShadow">
+                    <ul class="clearfix navTitle">
+                        <li class="pull-left active" val="1" sonDiv="zxDiv"><a href="javascript:;" title="资讯文章" class="navLink">资讯文章</a></li>
+                        <li class="pull-left" val="2" sonDiv="tjDiv"><a href="javascript:;" title="推荐文章" class="navLink">推荐文章</a></li>
+                        <li class="pull-left" val="3" sonDiv="spDiv"><a href="javascript:;" title="视频" class="navLink">视频</a></li>
+                    </ul>                               
+                </div>
+                <!--资讯-->
+                <div class="expLiBox grayShadow zxDiv">
+                    <ul>
+                        {$listH['news']['html']}
+                    </ul>
+                    <!-- 页码开始 -->
+                    <link rel="stylesheet" href="__CSS__/special/list_page.css">
+                    <div class="page-con"> <nav> <ul class="pagination PzxDiv pull-rigth">{$listH['news']['page']|default='无更多数据!!'}</ul> </nav> </div>
+                    <!-- 页码结束 -->
+                </div>
+                <!--推荐-->
+                <div class="expLiBox grayShadow tjDiv" style="display:none;">
+                    <ul>
+                        {$listH['tuijian']['html']}
+                    </ul>
+                    <!-- 页码开始 -->
+                    <link rel="stylesheet" href="__CSS__/special/list_page.css">
+                    <div class="page-con"> <nav> <ul class="pagination PtjDiv pull-rigth">{$listH['tuijian']['page']|default='无更多数据!!'}</ul> </nav> </div>
+                    <!-- 页码结束 -->
+                </div>
+                <!--视频-->
+                <div class="expLiBox grayShadow spDiv" style="display:none;">
+                    <ul>
+                        {$listH['video']['html']}
+                    </ul>
+                    <!-- 页码开始 -->
+                    <link rel="stylesheet" href="__CSS__/special/list_page.css">
+                    <div class="page-con"> <nav> <ul class="pagination PspDiv pull-rigth">{$listH['video']['page']|default='无更多数据!!'}</ul> </nav> </div>
+                    <!-- 页码结束 -->
+                </div>
+            </div>
+            <!-- expLiL -->
+            
+            <!-- expLiR -->
+            <div class="pull-right expLiR">
+            	<!-- classBox -->
+            	<div class="classBox grayShadow">
+                	<ul class="clearfix classUl">
+                		<li class="pull-left artiNum">
+                        	<p><strong>{$user.total}</strong></p>
+                            <p class="text-999">文章数</p>
+                        </li>
+                        <li class="pull-left fansNum">
+                        	<p><strong>{$user.followNum}</strong></p>
+                            <p class="text-999">粉丝</p>
+                        </li>
+                	</ul>
+                </div>
+                <!-- classBox -->
+                <div class="fxBox grayShadow">
+                	<div class="clearfix listTitle"><h2 class="pull-left fxTit">独家解盘</h2><a target="_blank" title="独家解盘-更多" href="{:U('/dujia@sporttery')}" class="text-666 pull-right moreTit">更多></a></div>
+                    <!-- 独家解盘 end-->
+                    <div class="listBox01">
+                        <ul>
+                            <volist name="quiz" id="item">
+                                <li><a target="_blank" href="{$item.href}">{$item.title}</a></li>
+                            </volist>
+                    	</ul>
+                    </div>
+                    <!-- 独家解盘 end-->
+                    <div class="clearfix listTitle"><h2 class="pull-left fxTit">推荐指数</h2></div>
+                    <!-- 竞彩指数 -->
+                    <div class="listBox02">
+                    	<ul class="clearfix">
+                            <volist name="Marvellous" id="item" offset="0" length='3'>
+                                <li class="liList">
+                                    <p class="time"><span class="text-555">{$item.union_name|mb_substr=###,0,5,'utf-8'}</span>&nbsp;&nbsp;<em class="text-555">{$item.gtime|date='d日 H:i',###}</em></p>
+                                    <div class="clearfix">
+                                        <a href="javascript:;" title="{$item.home_team_name}" class="hover pull-left">
+                                            <div class="team1">
+                                                <span><img class="lazy" data-original="{$item.homeTeamLogo}" width="55" height="55" original="{$item.homeTeamLogo}" style="display: inline;"></span>
+                                                <p class="team-name">{$item.home_team_name}</p>
+                                            </div>
+                                        </a>
+                                        <div class="pull-left against">
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                <tr bgcolor="#f7f7f7">
+                                                    <td class="gray">{$item.fsw_exp_home}</td>
+                                                    <td class="gray"><if condition="$item.fsw_exp lt 0">受</if>{$item.fsw_exp|abs|handCpSpread}</td>
+                                                    <td class="gray">{$item.fsw_exp_away}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{$item.fsw_ball_home}</td>
+                                                    <td>{$item.fsw_ball|handCpTotal}</td>
+                                                    <td>{$item.fsw_ball_away}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <a href="javascript:;" title="{$item.away_team_name}" class="hover pull-right">
+                                            <div class="team2">
+                                                <span><img class="lazy" data-original="{$item.awayTeamLogo}" width="55" height="55" original="{$item.awayTeamLogo}" style="display: inline;"></span>
+                                                <p class="team-name">{$item.away_team_name}</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="pro-con clearfix">
+                                        <div class="pull-left zhu"><span class="text-555">主队</span> <em class="<if condition='$item.mainNumber egt 50'>text-red<else/>text-tie</if>">{$item.mainNumber}%</em></div>
+                                        <div class="pull-left content">
+                                            <div class="col">
+                                                <ul id="skill" class="clearfix">
+                                                    <li class="ft-percent">
+                                                        <a href="javascript:;" class="ft-percent-real animation-progress expand left" data-percent="{$item.mainNumber}%" data-animation="progress"></a>
+                                                    </li>
+                                                    <li class="ft-percent">
+                                                        <a href="javascript:;" class="ft-percent-real animation-progress expand right" data-percent="{$item.guestNumber}%" data-animation="progress"></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="pull-right ke"><span class="text-555">客队</span> <em class="<if condition='$item.guestNumber egt 50'>text-red<else/>text-tie</if>">{$item.guestNumber}%</em></div>
+                                    </div>
+                                    <div class="pro-con clearfix">
+                                        <div class="pull-left zhu"><span class="text-555">大球</span> <em class="<if condition='$item.bigNumber egt 50'>text-red<else/>text-tie</if>">{$item.bigNumber}%</em></div>
+                                        <div class="pull-left content">
+                                            <div class="col">
+                                                <ul id="skill">
+                                                    <li class="ft-percent">
+
+                                                        <a href="javascript:;" class="ft-percent-real animation-progress expand left" data-percent="{$item.bigNumber}%" data-animation="progress"></a>
+                                                    </li>
+                                                    <li class="ft-percent">
+                                                        <a href="javascript:;" class="ft-percent-real animation-progress expand right" data-percent="{$item.smallNumber}%" data-animation="progress"></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="pull-right ke"><span class="text-555">小球</span> <em class="<if condition='$item.smallNumber egt 50'>text-red<else/>text-tie</if>">{$item.smallNumber}%</em></div>
+                                    </div>
+                                </li>
+                            </volist>
+                    	</ul>
+                    </div>
+                    <!-- 竞彩指数 -->
+                </div>
+            </div>
+            <!-- expLiR -->
+        </div>
+    </div>
+    <!-- main -->
+
+
+</block>
+<block name="js">
+    <!-- 页面所需的js -->
+    <script>
+        var user_id = "{$user['id']}";
+        var time = "{:time()}";
+    </script>
+    <script type="text/javascript" src="__JS__/userindex/expUser.js?20180410"></script>
+    <script type="text/javascript" src="__JS__/common/jquery.inview.min.js"></script>
+</block>

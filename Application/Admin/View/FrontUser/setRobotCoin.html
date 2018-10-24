@@ -1,0 +1,193 @@
+<style>
+	.table-config tr{
+		height: 35px;
+	}
+	.table-config td{
+		text-align: center;
+		padding-right: 10px;
+	}
+</style>
+<div class="pageContent">
+	<form method="post" action="__URL__/setRobotCoin" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>机器人定价设置：</label>
+				<table class="table-config">
+					<tr>
+						<td>Lv1：</td>
+						<td>0元</td>
+						<td>2元</td>
+					</tr>
+					<tr>
+						<td>数量：</td>
+						<td><input type="text" size="3" name="robot_coin[1][0]" value="{$vo[robot_coin][1][0]}"></td>
+						<td><input type="text" size="3" name="robot_coin[1][2]" value="{$vo[robot_coin][1][2]}"></td>
+					</tr>
+					<tr>
+						<td>Lv2：</td>
+						<td>0元</td>
+						<td>2元</td>
+						<td>4元</td>
+					</tr>
+					<tr>
+						<td>数量：</td>
+						<td><input type="text" size="3" name="robot_coin[2][0]" value="{$vo[robot_coin][2][0]}"></td>
+						<td><input type="text" size="3" name="robot_coin[2][2]" value="{$vo[robot_coin][2][2]}"></td>
+						<td><input type="text" size="3" name="robot_coin[2][4]" value="{$vo[robot_coin][2][4]}"></td>
+					</tr>
+					<tr>
+						<td>Lv3：</td>
+						<td>0元</td>
+						<td>2元</td>
+						<td>4元</td>
+						<td>8元</td>
+					</tr>
+					<tr>
+						<td>数量：</td>
+						<td><input type="text" size="3" name="robot_coin[3][0]" value="{$vo[robot_coin][3][0]}"></td>
+						<td><input type="text" size="3" name="robot_coin[3][2]" value="{$vo[robot_coin][3][2]}"></td>
+						<td><input type="text" size="3" name="robot_coin[3][4]" value="{$vo[robot_coin][3][4]}"></td>
+						<td><input type="text" size="3" name="robot_coin[3][8]" value="{$vo[robot_coin][3][8]}"></td>
+					</tr>
+					<tr>
+						<td>Lv4：</td>
+						<td>0元</td>
+						<td>2元</td>
+						<td>4元</td>
+						<td>8元</td>
+						<td>16元</td>
+					</tr>
+					<tr>
+						<td>数量：</td>
+						<td><input type="text" size="3" name="robot_coin[4][0]"  value="{$vo[robot_coin][4][0]}"></td>
+						<td><input type="text" size="3" name="robot_coin[4][2]"  value="{$vo[robot_coin][4][2]}"></td>
+						<td><input type="text" size="3" name="robot_coin[4][4]"  value="{$vo[robot_coin][4][4]}"></td>
+						<td><input type="text" size="3" name="robot_coin[4][8]"  value="{$vo[robot_coin][4][8]}"></td>
+						<td><input type="text" size="3" name="robot_coin[4][16]" value="{$vo[robot_coin][4][16]}"></td>
+					</tr>
+					<tr>
+						<td>Lv5：</td>
+						<td>0元</td>
+						<td>2元</td>
+						<td>4元</td>
+						<td>8元</td>
+						<td>16元</td>
+						<td>32元</td>
+					</tr>
+					<tr>
+						<td>数量：</td>
+						<td><input type="text" size="3" name="robot_coin[5][0]"  value="{$vo[robot_coin][5][0]}"></td>
+						<td><input type="text" size="3" name="robot_coin[5][2]"  value="{$vo[robot_coin][5][2]}"></td>
+						<td><input type="text" size="3" name="robot_coin[5][4]"  value="{$vo[robot_coin][5][4]}"></td>
+						<td><input type="text" size="3" name="robot_coin[5][8]"  value="{$vo[robot_coin][5][8]}"></td>
+						<td><input type="text" size="3" name="robot_coin[5][16]" value="{$vo[robot_coin][5][16]}"></td>
+						<td><input type="text" size="3" name="robot_coin[5][32]" value="{$vo[robot_coin][5][32]}"></td>
+					</tr>
+					<tr>
+						<td>Lv6：</td>
+						<td>0元</td>
+						<td>2元</td>
+						<td>4元</td>
+						<td>8元</td>
+						<td>16元</td>
+						<td>32元</td>
+						<td>64元</td>
+					</tr>
+					<tr>
+						<td>数量：</td>
+						<td><input type="text" size="3" name="robot_coin[6][0]"  value="{$vo[robot_coin][6][0]}"></td>
+						<td><input type="text" size="3" name="robot_coin[6][2]"  value="{$vo[robot_coin][6][2]}"></td>
+						<td><input type="text" size="3" name="robot_coin[6][4]"  value="{$vo[robot_coin][6][4]}"></td>
+						<td><input type="text" size="3" name="robot_coin[6][8]"  value="{$vo[robot_coin][6][8]}"></td>
+						<td><input type="text" size="3" name="robot_coin[6][16]" value="{$vo[robot_coin][6][16]}"></td>
+						<td><input type="text" size="3" name="robot_coin[6][32]" value="{$vo[robot_coin][6][32]}"></td>
+						<td><input type="text" size="3" name="robot_coin[6][64]" value="{$vo[robot_coin][6][64]}"></td>
+					</tr>
+					<tr>
+						<td>Lv7：</td>
+						<td>0元</td>
+						<td>2元</td>
+						<td>4元</td>
+						<td>8元</td>
+						<td>16元</td>
+						<td>32元</td>
+						<td>64元</td>
+						<td>128元</td>
+					</tr>
+					<tr>
+						<td>数量：</td>
+						<td><input type="text" size="3" name="robot_coin[7][0]"   value="{$vo[robot_coin][7][0]}"></td>
+						<td><input type="text" size="3" name="robot_coin[7][2]"   value="{$vo[robot_coin][7][2]}"></td>
+						<td><input type="text" size="3" name="robot_coin[7][4]"   value="{$vo[robot_coin][7][4]}"></td>
+						<td><input type="text" size="3" name="robot_coin[7][8]"   value="{$vo[robot_coin][7][8]}"></td>
+						<td><input type="text" size="3" name="robot_coin[7][16]"  value="{$vo[robot_coin][7][16]}"></td>
+						<td><input type="text" size="3" name="robot_coin[7][32]"  value="{$vo[robot_coin][7][32]}"></td>
+						<td><input type="text" size="3" name="robot_coin[7][64]"  value="{$vo[robot_coin][7][64]}"></td>
+						<td><input type="text" size="3" name="robot_coin[7][128]" value="{$vo[robot_coin][7][128]}"></td>
+					</tr>
+					<tr>
+						<td>Lv8：</td>
+						<td>0元</td>
+						<td>2元</td>
+						<td>4元</td>
+						<td>8元</td>
+						<td>16元</td>
+						<td>32元</td>
+						<td>64元</td>
+						<td>128元</td>
+						<td>256元</td>
+					</tr>
+					<tr>
+						<td>数量：</td>
+						<td><input type="text" size="3" name="robot_coin[8][0]"   value="{$vo[robot_coin][8][0]}"></td>
+						<td><input type="text" size="3" name="robot_coin[8][2]"   value="{$vo[robot_coin][8][2]}"></td>
+						<td><input type="text" size="3" name="robot_coin[8][4]"   value="{$vo[robot_coin][8][4]}"></td>
+						<td><input type="text" size="3" name="robot_coin[8][8]"   value="{$vo[robot_coin][8][8]}"></td>
+						<td><input type="text" size="3" name="robot_coin[8][16]"  value="{$vo[robot_coin][8][16]}"></td>
+						<td><input type="text" size="3" name="robot_coin[8][32]"  value="{$vo[robot_coin][8][32]}"></td>
+						<td><input type="text" size="3" name="robot_coin[8][64]"  value="{$vo[robot_coin][8][64]}"></td>
+						<td><input type="text" size="3" name="robot_coin[8][128]" value="{$vo[robot_coin][8][128]}"></td>
+						<td><input type="text" size="3" name="robot_coin[8][256]" value="{$vo[robot_coin][8][256]}"></td>
+					</tr>
+					<tr>
+						<td>Lv9：</td>
+						<td>0元</td>
+						<td>2元</td>
+						<td>4元</td>
+						<td>8元</td>
+						<td>16元</td>
+						<td>32元</td>
+						<td>64元</td>
+						<td>128元</td>
+						<td>256元</td>
+						<td>512元</td>
+					</tr>
+					<tr>
+						<td>数量：</td>
+						<td><input type="text" size="3" name="robot_coin[9][0]"   value="{$vo[robot_coin][9][0]}"></td>
+						<td><input type="text" size="3" name="robot_coin[9][2]"   value="{$vo[robot_coin][9][2]}"></td>
+						<td><input type="text" size="3" name="robot_coin[9][4]"   value="{$vo[robot_coin][9][4]}"></td>
+						<td><input type="text" size="3" name="robot_coin[9][8]"   value="{$vo[robot_coin][9][8]}"></td>
+						<td><input type="text" size="3" name="robot_coin[9][16]"  value="{$vo[robot_coin][9][16]}"></td>
+						<td><input type="text" size="3" name="robot_coin[9][32]"  value="{$vo[robot_coin][9][32]}"></td>
+						<td><input type="text" size="3" name="robot_coin[9][64]"  value="{$vo[robot_coin][9][64]}"></td>
+						<td><input type="text" size="3" name="robot_coin[9][128]" value="{$vo[robot_coin][9][128]}"></td>
+						<td><input type="text" size="3" name="robot_coin[9][256]" value="{$vo[robot_coin][9][256]}"></td>
+						<td><input type="text" size="3" name="robot_coin[9][512]" value="{$vo[robot_coin][9][512]}"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+
+
+

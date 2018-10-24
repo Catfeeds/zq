@@ -1,0 +1,95 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/login/login.css">
+
+    <!-- 本页需要引用的js -->
+    <script type="text/javascript" src="__JS__/user/register.js"></script>
+    <style>
+        .fixBox{
+            position: fixed;}
+        .fixBoxIn .tip_btn{background:#fff;width:100%}
+    </style>
+</block>
+<block name="header">
+    <!-- 二级头部 s -->
+    <include file="Public/header_inside"/>
+    <!-- 二级头部 e -->
+</block>
+<block name="nav"></block>
+<block name="content">
+    <div class="login_panel">
+        <form id="login-form" action="" method="post">
+            <div class="login-container">
+                <div class="inputbox inputUser" id="account-box">
+                    <div class="u-input">
+                        <label class="u-label ne_user"></label>
+                        <input name="username" class="dlemail" type="text" token="{$token}" id="mobile" placeholder="请输入您的账号" autocomplete="off">
+                        <a href="javascript:;" class="ne_close"></a>
+                    </div>
+                </div>
+                <div class="inputbox inputPasswd">
+                    <div class="u-input">
+                        <label class="u-label ne_code"></label>
+                        <input name="code" class="code" type="code" id="code" placeholder="请输入验证码">
+                        <a href="javascript:;" class="made_code fs30">获取验证码</a>
+                    </div>
+                </div>
+            </div>
+            <input type='hidden' id='change' value='1'>
+            <div class="loginbox clearfix">
+                <a href="javascript:;" id="dologin">下一步</a>
+            </div>
+        </form>
+        <!--<div class="fixBox">-->
+            <!--<div class="fixBoxIn">-->
+                <!--<div class="tip"></div>-->
+                <!--<a href="javascript:;" class="tip_btn fs30">确定</a>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+    <div id="dailogFixBox" class="fixBox" style="display: none">
+        <div class="fixBoxIn clearfix">
+            <div class="tip" style="line-height: 0.8rem; "><span id="dailogContent" ></span></div>
+            <a id="yesDailog" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+        </div>
+    </div>
+</block>
+<block name="footer">
+    <include file="Public/footer_phone"/>
+</block>
+<block name='scripts'>
+    <script>
+        $('#yesDailog').on('click',function () {
+            $('#dailogFixBox').css('display','none');
+        });
+
+        $(document).on('click', "#dologin", function () {
+            var code = $("#code").val();
+            var mobile = $("#mobile").val();
+            if (!isMobile(mobile)) {
+                $('#dailogContent').html('请输入有效的11位手机号码！');
+                $('#dailogFixBox').css('display','block');
+                return false;
+            }
+            if (code.length != 4) {
+                $('#dailogContent').html('请输入正确的验证码！');
+                $('#dailogFixBox').css('display','block');
+
+                return false;
+            }
+            var params = {
+                mobile: mobile,
+                code: code
+            };
+            $.post('', params, function (data) {
+                if (data.status === 1) {
+                    window.location.href = data.url;
+                } else {
+                    alert(data.info);
+                }
+            }, 'json');
+            return false;
+        });
+    </script>
+</block>

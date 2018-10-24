@@ -1,0 +1,35 @@
+<div class="page">
+    <div class="pageContent">
+        <form method="post" action="__URL__/saveLogConf/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+            <div class="pageFormContent" layoutH="58">
+                <!--
+                <div class="unit">
+                    <label>记录总开关：</label>
+                    <select name="appLogOn" class="required">
+                        <option value="0" <eq name="vo.appLogOn" value="0">selected=selected</eq>>关闭</option>
+                        <option value="1" <eq name="vo.appLogOn" value="1">selected=selected</eq>>开启</option>
+                    </select>
+                </div>
+                -->
+              <div class="unit">
+                <label>记录的控制器或方法：
+                    <p style="line-height: 150%;color: red;">1.不填则是不记录；<br>
+                        2.写1则表示全部记录；<br>
+                        3.方法：控制器/方法；<br>
+                        4.过滤部分控制器或方法<br>多个请用逗号隔开
+                    </p>
+                </label>
+                <textarea name="adminLogList" class="" editor="{:uniqid()}" cols="60" rows="10">{$vo.adminLogList}</textarea>
+                <label ><p></p></label>
+              </div>
+            </div>
+
+            <div class="formBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                    <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>

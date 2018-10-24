@@ -1,0 +1,100 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label>比赛时间：</label>
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="20">至
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="20">
+                </li>
+                <li>
+                    <label>赛程类型：</label>
+                    <select name="game_class"  onchange="$(form).submit()">
+                        <option value="">全部</option>
+                        <volist name="gameClassRes" id="item">
+                            <option <if condition="$item['id'] eq  $_REQUEST['game_class']">selected</if>  value="{$item['id']}">{$item['name']}</option>
+
+                        </volist>
+                    </select>
+                </li>
+                <li>
+                    <label>赛事名称：</label>
+                    <input type="text" name="union_name" value="{$_REQUEST.union_name}">
+                </li>
+                <li>
+                    <label>球队名称：</label>
+                    <input type="text" name="team_name" value="{$_REQUEST.team_name}">
+                </li>
+                <li>
+                    <label>比赛状态：</label>
+                    <select name="status" onchange="$(form).submit()">
+                        <option value="">全部</option>
+                        <option <if condition=" $_REQUEST.status eq '1'">selected</if>  value="1">未结束</option>
+                        <option <if condition=" $_REQUEST.status eq '0'">selected</if>  value="0">已结束</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="3%">ID</th>
+            <th width="5%">赛程类型</th>
+            <th width="7%">赛事名称</th>
+            <th width="10%">球队名称</th>
+            <th width="5%">主队名称</th>
+            <th width="5%">客队名称</th>
+            <th width="4%">观看数量</th>
+            <th width="7%">比赛时间</th>
+            <th width="3%">直播状态</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name='list'>
+            <volist name='list' id='vo'>
+                <tr target="sid_record" rel="{$vo['id']}">
+                    <td>{$vo['id']}</td>
+                    <td>{$vo['name']}</td>
+                    <td>{$vo['union_name']}</td>
+                    <td>{$vo['team_name']|default='--'}</td>
+                    <td>{$vo['home_name']|default='--'}</td>
+                    <td>{$vo['away_name']|default='--'}</td>
+
+                    <td>{$vo['check_live']|default=0}</td>
+                    <td>{$vo['game_time']|date="Y-m-d H:i",###}</td>
+                    <td>
+                        <if condition="$vo.status eq 1">
+                            <div  id="td_{$vo['id']}"><img src="/Public/Images/ok.gif" width="20" height="20" border="0" alt="正常"></div>
+                            <else/>
+                            <div  id="td_{$vo['id']}"><img src="/Public/Images/locked.gif" width="20" height="20" border="0" alt="禁用"></div>
+                        </if>
+                    </td>
+
+
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+    </table>
+    <include file="Public:pagerNum" />
+
+</div>
+
+

@@ -1,0 +1,163 @@
+<div class="pageContent">
+    <form method="post" action="__URL__/save" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)" target="callbackframe">
+        <input type="hidden" name="id" value="{$missionRes.id}" />
+        <input type="hidden" name="type" value="{$_REQUEST.type}" />
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <if condition='$_REQUEST.type eq 1'>
+                    <label>宝箱名称：</label>
+                    <textarea rows="3" cols="20" name="name" class="required" maxlength="9">{$missionRes.name}</textarea>
+                    <span style="padding-left:20px;color:red;">注：在数字前一定加回车键(不过8个字)</span>
+                <else/>
+                    <label>成就名称：</label>
+                    <textarea rows="3" cols="20" name="name" class="required" maxlength="13">{$missionRes.name}</textarea>
+                    <span style="padding-left:20px;color:red;">注：在数字前一定加回车键(不过12个字)</span>
+                </if>
+
+            </div>
+            <div class="unit">
+                <label>标识：</label>
+                <select class="small bLeft"  name="sign">
+                    <if condition="$_REQUEST.type eq 1">
+                        <option <eq name="missionRes.sign" value="publishGamble" >selected</eq> value="publishGamble">
+                            {$configSign['mission']['publishGamble']}
+                        </option>
+                        <option <eq name="missionRes.sign" value="buyGamble" >selected</eq> value="buyGamble">
+                            {$configSign['mission']['buyGamble']}
+                        </option>
+                        <option <eq name="missionRes.sign" value="shareGamble" >selected</eq> value="shareGamble">
+                            {$configSign['mission']['shareGamble']}
+                        </option>
+                        <option <eq name="missionRes.sign" value="shareNews" >selected</eq> value="shareNews">
+                            {$configSign['mission']['shareNews']}
+                        </option>
+                        <option <eq name="missionRes.sign" value="replyNews" >selected</eq> value="replyNews">
+                            {$configSign['mission']['replyNews']}
+                        </option>
+                        <option <eq name="missionRes.sign" value="publishArticle" >selected</eq> value="publishArticle">
+                            {$configSign['mission']['publishArticle']}
+                        </option>
+                    <else/>
+                        <option <eq name="missionRes.sign" value="gambleNum" >selected</eq> value="gambleNum">
+                            {$configSign['achievement']['gambleNum']}
+                        </option>
+                        <option <eq name="missionRes.sign" value="winNum" >selected</eq> value="winNum">
+                            {$configSign['achievement']['winNum']}
+                        </option>
+                        <option <eq name="missionRes.sign" value="getBuyNum" >selected</eq> value="getBuyNum">
+                            {$configSign['achievement']['getBuyNum']}
+                        </option>
+                        <option <eq name="missionRes.sign" value="buyNum" >selected</eq> value="buyNum">
+                            {$configSign['achievement']['buyNum']}
+                        </option>
+                        <option <eq name="missionRes.sign" value="fansNum" >selected</eq> value="fansNum">
+                            {$configSign['achievement']['fansNum']}
+                        </option>
+                        <option <eq name="missionRes.sign" value="publishComment" >selected</eq> value="publishComment">
+                            {$configSign['achievement']['publishComment']}
+                        </option>
+                    </if>
+                </select>
+            </div>
+
+            <div class="unit">
+                <label>数量：</label>
+                <input type="text"  name="num" value="{$missionRes.num}" class="required digits" min="1">
+            </div>
+            <div class="unit">
+                <label>排序：</label>
+                <input type="text" class="required digits" name="sort" value="{$missionRes.sort}" min="1" >
+            </div>
+            <div class="unit">
+                <label>积分：</label>
+                <input type="text" class="required digits" name="points" value="{$missionRes.points}">
+            </div>
+            <empty name='missionRes.create_time'>
+                <div class="unit">
+
+                    <input type="hidden" name="create_time"  value="{:intval(strtotime(date('Y-m-d',time())))}">
+                </div>
+            </empty>
+            <div class="unit">
+                <label>状态：</label>
+                <select class="small bLeft"  name="status">
+                    <option <eq name="missionRes.status" value="1" >selected</eq> value="1">启用</option>
+                    <option <eq name="missionRes.status" value="0" >selected</eq> value="0">禁用</option>
+                </select>
+            </div>
+            <div class="unit">
+                <label>图片：</label>
+                <ul class="tabImg">
+                    <li>
+                        <input id="viewUploadInput_555" name="fileInput" type="file" onChange="previewImage(555)" style="display:none;" />
+                        <a href="javascript:void(0);">
+                             <span id="viewUploadDiv_555">
+                                <empty name="missionRes.img">
+                                    <img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_555"/>
+                                <else/>
+                                    <img id="viewUploadImg_555" width='80' height='80' border=0 src="{$missionRes['img']}">
+                                </empty>
+                             </span>
+                        </a>
+                        <div id="poiter_555" class="poiter">
+                            <empty name="missionRes.img">
+                                <a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_555')">添加图片</a>
+                            <else/>
+                                <a title="删除" onclick="delPic({$missionRes.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_555')">重传</a>
+                            </empty>
+                        </div>
+                    </li>
+                </ul>
+                <span class="inputInfo">（提示：请尽量上传正方形图片）</span>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                 <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+<style type="text/css">
+    .tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+    .poiter a:hover{color:red;}
+    .tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+    .tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+    $(function(){
+        $('.tabImg li').hover(function(e) {
+            $(this).children('div').stop().animate({'top':'0'},300);
+        },function(){
+            $(this).children('div').stop().animate({'top':'80px'},300);
+        });
+    });
+    function delPic(id){
+        if(confirm("确认要删除吗？") == false){
+            return false;
+        }
+        //异步执行删除
+        $.ajax({
+            type: "POST",
+            url: "__ADMIN__/Mission/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                    $("#viewUploadInput_555").val("");
+                    $("#viewUploadImg_555").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+                    var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_555')\">添加图片</a>";
+                    $("#poiter_555").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+    }
+</script>

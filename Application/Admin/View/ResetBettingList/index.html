@@ -1,0 +1,160 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li >
+				<label>竞猜时间：</label>
+				<input  class="date textInput" type="text" datefmt="yyyy-MM-dd HH:mm" name="startTime" value="{$_REQUEST.startTime}" size="16">
+				至
+				<input  class="date textInput" type="text" datefmt="yyyy-MM-dd HH:mm" name="endTime" value="{$_REQUEST.endTime}" size="16">
+			</li>
+			<li>
+				<label>手机号：</label>
+				<input name="username" value="{$_REQUEST.username}" type="text" size="10"/>
+			</li>
+			<li>
+				<label>昵称：</label>
+				<input name="nick_name" value="{$_REQUEST.nick_name}" type="text" size="10"/>
+			</li>
+            <li>
+                <label>赛事：</label>
+                <input type="text" value="{$_REQUEST.union_name}" placeholder="赛事" name="union_name" size="10">
+            </li>
+			<li>
+				<label>主队名称：</label>
+				<input type="text" value="{$_REQUEST.home_team_name}" placeholder="主队名称" name="home_team_name" size="10">
+			</li>
+			<li>
+				<label>客队名称：</label>
+				<input type="text" value="{$_REQUEST.away_team_name}" placeholder="客队名称" name="away_team_name" size="10">
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<a class="icon" href="__URL__/index.html?Export=1&totalCount={$totalCount}&{:http_build_query($_REQUEST)}"  warn="导出"><span>导出</span></a>
+			</li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="3%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="4%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'game_id')"> class="desc"</if> orderField="game_id" <if condition="$_REQUEST._order eq 'game_id'">class="{$_REQUEST._sort}"</if>>赛程ID</th>
+			<th width="4%">赛事名称</th>
+			<th width="3%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'bet_code')"> class="desc"</if> orderField="bet_code" <if condition="$_REQUEST._order eq 'bet_code'">class="{$_REQUEST._sort}"</if>>标识码</th>
+			<th width="6%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'game_date')"> class="desc"</if> orderField="game_date" <if condition="$_REQUEST._order eq 'game_date'">class="{$_REQUEST._sort}"</if>>比赛时间</th>
+			<th width="6%">用户昵称</th>
+			<if condition="$_REQUEST.aceType neq ''">
+				<th width="6%" style="color:red;">高手筛选</th>
+			</if>
+			<th width="6%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'create_time')"> class="desc"</if> orderField="create_time" <if condition="$_REQUEST._order eq 'create_time'">class="{$_REQUEST._sort}"</if>>竞猜时间</th>
+			<th width="4%">竞猜玩法</th>
+			<th width="5%">主队</th>
+			<th width="5%">全场（半场）</th>
+			<th width="5%">客队</th>
+			<th width="3%">竞猜内容</th>
+			<th width="5%">让球（赔率）</th>
+			<th width="4%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'vote_point')"> class="desc"</if> orderField="vote_point" <if condition="$_REQUEST._order eq 'vote_point'">class="{$_REQUEST._sort}"</if>>竞猜积分</th>
+			<th width="3%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'tradeCoin')"> class="desc"</if> orderField="tradeCoin" <if condition="$_REQUEST._order eq 'tradeCoin'">class="{$_REQUEST._sort}"</if>>金币</th>
+			<th width="3%">结算结果</th>
+			<th width="3%">目前结果</th>
+			<th width="4%"<if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'earn_point')"> class="desc"</if> orderField="earn_point" <if condition="$_REQUEST._order eq 'earn_point'">class="{$_REQUEST._sort}"</if>>获得积分</th>
+			<th width="4%"<if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'quiz_number')"> class="desc"</if>  orderField="quiz_number" <if condition="$_REQUEST._order eq 'quiz_number'">class="{$_REQUEST._sort}"</if>>购买人数</th>
+			<th width="3%">销售金币</th>
+			<th width="4%">渠道类型</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['game_id']}</td>
+					<td>{$vo['union_name']}</td>
+					<td>{$vo['bet_code']}</td>
+					<td>{$vo['game_date']} {$vo['game_time']}</td>
+					<td>
+						<a href="__URL__/index/user_id/{$vo['user_id']}" target="navTab" rel="1{:time()}{$vo['id']}" title="{$vo['nick_name']}-足球竞猜">{$vo['nick_name']|msubstr=###,0,6}（{$vo['username']|is_show_mobile}）</a>
+					</td>
+				    <td>{$vo['create_time']|date="Ymd H:i",###}</td>
+				    <td>
+						<switch name="vo.play_type">
+					        <case value="2">胜平负</case>
+					        <case value="-2">让球胜平负</case>
+					        <default/>--
+					    </switch>
+					</td>
+					<td>{$vo['home_team_name']|msubstr=###,0,7}</td>
+					<td>{$vo['score']|default="--"}（{$vo['half_score']|default="--"}）</td>
+					<td>{$vo['away_team_name']|msubstr=###,0,7}</td>
+					<td>
+						{$vo['Answer']|msubstr=###,0,5}
+					</td>
+					<td>{$vo['handcp']}（{$vo['odds']}）</td>
+					<td>{$vo['vote_point']}</td>
+					<td>{$vo['tradeCoin']}</td>
+					<td>
+						<switch name="vo.result">
+	                        <case value="1"><div style="color:red;">赢</div></case>
+	                        <case value="-1"><div style="color:blue;">输</div></case>
+	                        <case value="-10"><div style="color:black;">取消</div></case>
+	                        <case value="-11"><div style="color:black;">待定</div></case>
+	                        <case value="-12"><div style="color:black;">腰斩</div></case>
+	                        <case value="-13"><div style="color:black;">中断</div></case>
+	                        <case value="-14"><div style="color:black;">推迟</div></case>
+	                        <default/>--
+	                    </switch>
+					</td>
+					<td>
+						<if condition="$vo.game_state eq '-1'">
+							<switch name="vo.show_result">
+		                        <case value="1"><div style="color:red;">赢</div></case>
+		                        <case value="-1"><div style="color:blue;">输</div></case>
+		                        <case value="-10"><div style="color:black;">取消</div></case>
+		                        <case value="-11"><div style="color:black;">待定</div></case>
+		                        <case value="-12"><div style="color:black;">腰斩</div></case>
+		                        <case value="-13"><div style="color:black;">中断</div></case>
+		                        <case value="-14"><div style="color:black;">推迟</div></case>
+		                        <case value="0"><div style="color:black;">未开</div></case>
+		                    </switch>
+		                <else/>
+		                	--
+		                </if>
+					</td>
+					<td>{$vo['earn_point']|default="--"}</td>
+					<td>{$vo['quiz_number']}</td>
+					<td>{$vo['tradeCoin']*$vo['quiz_number']}</td>
+					<td>
+						<switch name="vo.platform">
+					        <case value="1">web</case>
+					        <case value="2">IOS</case>
+					        <case value="3">andriod</case>
+					        <case value="4">M站</case>
+					    </switch>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+</div>
+
+

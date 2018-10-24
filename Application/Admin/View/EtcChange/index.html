@@ -1,0 +1,80 @@
+<include file="Public:pagerForm" />
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li style="width: auto;">
+                    <label>选择导出时间：</label>
+                    <input id="startTime" type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm:ss" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="20">至
+                    <input id="endTime" type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm:ss" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="20">
+                </li>
+
+                <li>
+                    <label>ID：</label>
+                    <input type="text" name="id" value="{$_REQUEST.id}">
+                </li>
+
+                <li>
+                    <label>用户ID：</label>
+                    <input type="text" name="user_id" value="{$_REQUEST.user_id}">
+                </li>
+                <li>
+                    <label>昵称：</label>
+                    <input type="text" name="keyWord" value="{$_REQUEST.keyWord}">
+                </li>
+
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="__URL__/index.html?Export=1&{:http_build_query($_REQUEST)}" ><span>导出</span></a>
+            </li>
+
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+            <th>用户ID</th>
+            <th>昵称</th>
+            <th>兑换积分</th>
+            <th>add_time</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name='list'>
+            <volist name='list' id='vo'>
+                <tr target="sid_record" rel="{$vo['id']}">
+                    <td>{$vo['id']}</td>
+                    <td>{$vo['user_id']}</td>
+                    <td>{$vo['nick_name']}</td>
+                    <td>{$vo['change_integral']}</td>
+                    <td>{$vo['add_time']|date='Ymd H:i:s',###}</td>
+
+
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+</table>
+
+<include file="Public:pagerNum" />
+
+
+</div>
+

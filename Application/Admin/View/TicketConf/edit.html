@@ -1,0 +1,67 @@
+  <div class="page">
+	<div class="pageContent">
+
+	<form method="post" action="__URL__/save" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="{$_REQUEST.id}">
+		<div class="pageFormContent" layoutH="58">
+        <div <if condition="$vo['start_time'] neq 0 and $vo['start_time'] lt time()">style="display:none;"</if>>
+            <div class="unit">
+                <label>体验券名称：</label>
+                <input type="text" class="required" name="name" value="{$vo.name}">
+            </div>
+            <div class="unit">
+              <label>推荐价格：</label>
+              <select class="small bLeft required"  name="price">
+                <option value="">请选择</option>
+                <option <eq name="vo['price']" value="2">selected</eq> value="2">2金币推荐一场</option>
+                <option <eq name="vo['price']" value="4" >selected</eq> value="4">4金币推荐一场</option>
+                <option <eq name="vo['price']" value="8" >selected</eq> value="8">8金币推荐一场</option>
+                <option <eq name="vo['price']" value="16" >selected</eq> value="16">16金币推荐一场</option>
+                <option <eq name="vo['price']" value="32" >selected</eq> value="32">32金币推荐一场</option>
+                <option <eq name="vo['price']" value="64" >selected</eq> value="64">64金币推荐一场</option>
+                <option <eq name="vo['price']" value="128" >selected</eq> value="128">128金币推荐一场</option>
+                <option <eq name="vo['price']" value="256" >selected</eq> value="256">256金币推荐一场</option>
+                <option <eq name="vo['price']" value="512" >selected</eq> value="512">512金币推荐一场</option>
+              </select>
+            </div>
+            <div class="unit">
+                <label>销售价格：</label>
+                <input type="text" class="number required" name="sale" value="{$vo['sale']}">
+            </div>
+            <div class="unit">
+                <label>发行时间</label>
+                <input type="text" size="20" readonly="true" datefmt="yyyy-MM-dd H:m:s" class="date textInput readonly required valid" value="<if condition='$vo.start_time eq 0'>{:date('Y-m-d H:i:s')}<else/>{$vo.start_time|date='Y-m-d H:i:s',###}</if>" name="start_time" size="15"> <label style="width:15px">至</label>
+                <input type="text" size="20" readonly="true" datefmt="yyyy-MM-dd H:m:s" class="date textInput readonly required valid" value="<if condition='$vo.end_time gt 0'>{$vo.end_time|date='Y-m-d H:i:s',###}</if>" name="end_time" size="15">
+            </div>
+            <div class="unit">
+                <label>券有效期</label>
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput required readonly valid" value="<if condition='$vo.over_time gt 0'>{$vo.over_time|date='Y-m-d',###}</if>" name="over_time" size="20">
+            </div>
+            <div class="unit">
+                <label>总数量：</label>
+                <input type="text" class="required digits" name="totle_num" value="{$vo.totle_num}" >
+            </div>
+        </div>
+            <div class="unit">
+                <label>剩余数量：</label>
+                <input type="text" class="required digits" name="over_num" value="{$vo.over_num}" >
+            </div>
+            <div class="unit">
+              <label>状态：</label>
+              <select class="small bLeft"  name="status" >
+                <option <eq name="vo['status']" value="1" >selected</eq> value="1">启用</option>
+                <option <eq name="vo['status']" value="0" >selected</eq> value="0">禁用</option>
+              </select>
+            </div>
+		</div>
+
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+	</div>
+</div>

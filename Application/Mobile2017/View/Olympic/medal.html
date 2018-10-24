@@ -1,0 +1,93 @@
+<extend name="Public/Olympic/base" />
+<block name="seo">
+    <title>2016里约奥运会奖牌榜_全球体育网</title>
+</block>
+<!-- 本页需要引用的css -->
+<block name="append">
+    <style type="text/css">
+    #other_header span{  
+    padding: .1rem .2rem;
+    position: relative;
+    background: #fff;
+    cursor: pointer;
+    font-size: .26rem;
+    }
+    #other_header span:nth-child(2){ margin-left: -1px;}
+    #other_header span.on{color: #fff;background-color: #00d0b0;}
+    </style>
+
+    <!-- 本页需要引用的js -->
+    <script type="text/javascript">
+        $(function () {
+            $(document).on('click','#js-ch',function(){
+                location.href='/Olympic/medal_ch';
+            });
+            $('.only_option a').click(function (e) {
+                $(this).toggleClass('on');
+            });
+            //设置时间列宽高
+            var timeList_width = $('.time_list ul li').width();//'+timeList_width +'
+            $('.time_list ul li a').css('height', '' + timeList_width + 'px');
+            $('.time_list ul li').click(function (e) {
+                $(this).addClass('on').siblings().removeClass('on');
+            });
+        })
+    </script>  
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <header id="other_header">
+        <a href="{:U('Olympic/index')}"></a><span class="on">奖牌榜</span><span id='js-ch'>中国奖牌榜</span> 
+    </header>
+</block>
+<!-- 二级头部 e --> 
+<block name="nav"></block>
+<!-- 是否只显示中国对球赛 -->
+<block name="content">
+    <section>
+        <div class="matchCon">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td width="14%">排名</td>
+                        <td width="30%">国家</td>
+                        <td width="14%">金牌</td>
+                        <td width="14%">银牌</td>
+                        <td width="14%">铜牌</td>
+                        <td width="14%">总数</td>
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name='list' id='v'>
+                    <tr>
+                        <td class="fs24 td_rank <gt name='v.ranking' value='3'></gt>">
+                                <switch name='v.ranking'>
+                                    <case value='1'><img src="__IMAGES__/Olympic/top-list01.png"></case>
+                                    <case value='2'><img src="__IMAGES__/Olympic/top-list02.png"></case>
+                                    <case value='3'><img src="__IMAGES__/Olympic/top-list03.png"></case>
+                                    <default/>{$v.ranking}
+                                </switch>
+                                </td>
+                        <td class="td_name">
+                            <span><img src="{$v.img}" alt="{$v.country}"></span>
+                            <span class="fs30">{$v.country}</span>
+                        </td>
+                        <td class="fs26 text-666">{$v.gold}</td>
+                        <td class="fs26 text-666">{$v.silver}</td>
+                        <td class="fs26 text-666">{$v.copper}</td>
+                        <td class="fs26 text-666">{$v.count}</td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!-- 公共js -->
+    <script type="text/javascript" src="__JS__/Olympic/common.js"></script>
+</block>
+
+
+
+
+

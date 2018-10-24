@@ -1,0 +1,43 @@
+  <div class="page">
+	<div class="pageContent">
+
+	<form method="post" action="__URL__/addCode" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>合作商名称</label>
+                <input type="text" class="required" name="shop_name" value="{$_REQUEST.shop_name}">
+            </div>
+            <div class="unit">
+                <label>推荐价格</label>
+                <select class="small bLeft required" name="price">
+                  <option value="">请选择</option>
+                  <option value="2">2金币推荐一场</option>
+                  <option value="4">4金币推荐一场</option>
+                  <option value="8">8金币推荐一场</option>
+                  <option value="16">16金币推荐一场</option>
+                  <option value="32">32金币推荐一场</option>
+                  <option value="64">64金币推荐一场</option>
+                  <option value="128">128金币推荐一场</option>
+                  <option value="256">256金币推荐一场</option>
+                  <option value="512">512金币推荐一场</option>
+                </select>
+            </div>
+            <div class="unit">
+                <label>券有效期</label>
+                <input type="text" size="20" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly required valid" value="{$_REQUEST.over_time}" name="over_time">
+            </div>
+            <div class="unit">
+                <label>生成数量：</label>
+                <input type="text" class="required digits" name="totle_num" value="{$_REQUEST.totle_num}" >
+            </div>
+		</div>
+
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	</div>
+</div>

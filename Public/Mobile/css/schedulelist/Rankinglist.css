@@ -1,0 +1,108 @@
+/**
+ * @author Weiqianqian <1937025663@qq.com>
+ *
+ * @since  2018-03-06
+**/
+body{ margin: 0; padding: 0; float: left; background-color: #fff;}
+/*头部*/
+.top{ padding-top: 0rem; width: 100%; float:left; float: left; background-color: #f9f9fa;}
+.head-top{ width: 100%;  padding: .3rem; border-top: 1px solid #eee; border-bottom: 1px solid #eee; float: left; }
+.head-top li{ float: left; list-style-type: none;}
+.head-top .l-g{ margin-left: 2.6rem;}
+.head-top .f-h img{ width: .2rem; }
+.head-top .l-g img{ width: auto; margin-right: .2rem; max-height: 30px;}
+.head-top .nba img{ width: .3rem;}
+.head-top .l-g .photo{ font-size:.32rem; line-height: .4rem; height: .4rem;}
+.head-top .calendar{ margin:  0 0.1rem 0 2.1rem;}
+.head-top .calendar img{ width: .4rem;}
+
+/*data-nav 导航*/
+.wrapCon{width: 100%;}
+.n_module{ background: #fff; width: 100%; }
+.nav_list{ margin: 0 auto; padding: 0 .2rem; width: 100%;}
+.nav_list li{ float: left;}
+.nav_list li a{color: #666666; display: block; text-align: center; height: .7rem; line-height: .7rem;}
+.nav_list02 li{ width: 50%;}
+.nav_list03 li{ width: 33.333%;}
+.nav_list04 li{ width: 25%;}
+.nav_list05 li{ width: 20%;}
+nav_list li a.on span{ display: inline-block; position: relative; padding-bottom: 1px;}
+.nav_list li a.on span:after{ content: ""; width: 100%; height: 2px; border-radius: 2px; background: #0a94e4; position: absolute; left: 0; bottom: 0;}
+.nav_list li a.on{ color: #0a94e4;}
+.nav_list li a .arrow{ width: 6px; height: 6px; border-top: 6px solid #666; border-bottom: none; border-left:6px solid transparent; border-right: 6px solid transparent; margin-left: 1.8rem; margin-top: -.38rem;}
+.nav_list li a .arrow:hover{ border-top: none; border-bottom: 6px solid #000;}
+/*二级导航*/
+.second-list{ width: 100%; float: left; border-top: 1px solid #eee; border-bottom: 0px solid #eee; padding: .1rem 0rem; font-size: .28rem; line-height: .3rem; }
+.second-list-t{width: 100%; float: left; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: .2rem 0rem; font-size: .28rem; line-height: .5rem;}
+.second-list li{ margin-right: .4rem ; margin-left: .4rem; float: left;}
+.second-list-t li{ margin-right: 0rem ; margin-left: .28rem; float: left;}
+.second-list .name{padding: .2rem .1rem;}
+.second-list .name a{  color: #666;}
+.second-list .on a{ padding: .1rem .1rem .1rem .1rem; color: #0a94e4; border: 1px solid #0a94e4; border-radius: .1rem;float:left; text-align: center; margin-top: .1rem;}
+.second-list-t .name a{padding: .05rem .1rem;  color: #666;}
+.second-list-t .on a{padding: 0rem .1rem; color: #0a94e4; border: 1px solid #0a94e4; border-radius: .1rem; float: left;}
+
+/*list*/
+.list{ background-color: #f9f9fa; float: left; width: 100%; padding: .1rem .3rem .1rem .3rem; border-bottom: 1px solid #eee; font-size: .3rem; color: #666;}
+.list li{ float: left; list-style-type: none;}
+.list .ranking{ margin-right: 1.5rem;}
+.list .team{ margin-right: 1.8rem;}
+.list .session{ margin-right: 1.2rem;}
+.list .session-b{ margin-right: 1rem;}
+.list .session-f{ margin-right: 44px;}
+.list .league-win-lose{ margin-right: 1rem;}
+.list .session-l{margin-right:1rem;}
+
+.list .ranking-s{ margin-right: 1.1rem;}
+.list .rankteam{ margin-right: .8rem;}
+.list .remove{ margin-right: 1.2rem;}
+.list .team-s{ margin-right: 2rem;}
+.list .gameteam{ margin-right: 2rem;}
+.list .session-s,.list .flat-s,.list .lose-s,.list .success-s{ margin-right: .4rem;}
+.list .league-team{ margin-right: 1.6rem;}
+
+.list .b-time{ width: 1.6rem;}
+.list .b-team{ width: 1rem; text-align: center;}
+.list .b-session{ width:3rem; text-align: right;}
+.list .b-success{ width: 1.2rem; text-align: right;}
+
+
+/*主体*/
+.matchCon{ float: left; padding: .2rem .2rem 1rem .2rem; width: 100%;}
+.wrapCon-l{ float: left; padding: 0rem 0rem 1rem 0rem; width: 100%; }
+.matchCon li,.matchCon-l li{ float: left; list-style-type: none; width: 100%; padding: .2rem; border-bottom: 1px solid #eee; height: 1rem; line-height: .5rem;}
+.matchCon li .serial-number,.matchCon-l li .serial-number { width: .34rem; height: .34rem; display: block; text-align: center;font-size: .24rem; line-height: .3rem; height: .3rem;color: #fff; border-radius: .05rem; float: left;}
+.matchCon li .one,.matchCon-l li .one{ background-color: #ec2626;  margin-right: .6rem;}
+.matchCon li .two,.matchCon-l li .two{  background-color: #ed8d11; font-size: .24rem; margin-right: .6rem;}
+.matchCon li .three,.matchCon-l li .three{ background-color: #edb711; font-size: .24rem; margin-right: .6rem;}
+.matchCon li .four,.matchCon li .five,.matchCon li .six,.matchCon li .seven,.matchCon li .eight,.matchCon li .nine,.matchCon li .ten,.matchCon li .eleven{ background-color: #c0c0c0; margin-right: .6rem;}
+.matchCon-l li .four,.matchCon-l li .five,.matchCon-l li .six,.matchCon-l li .seven,.matchCon-l li .eight,.matchCon-l li .nine,.matchCon-l li .ten,.matchCon-l li .eleven{ background-color: #c0c0c0; margin-right: .6rem;}
+.matchCon li .one-f,.matchCon-l li .one-f{ background-color: #ec2626;  margin-right: .5rem; margin-top: .2rem;}
+.matchCon li .two-f,.matchCon-l li .two-f{  background-color: #ed8d11; font-size: .24rem; margin-right: .5rem; margin-top: .2rem;}
+.matchCon li .three-f,.matchCon-l li .three-f{ background-color: #edb711; font-size: .24rem; margin-right: .5rem; margin-top: .2rem;}
+.matchCon li .four-f,.matchCon li .five-f,.matchCon li .six-f,.matchCon li .seven-f,.matchCon li .eight-f,.matchCon li .nine-f,.matchCon li .ten-f,.matchCon li .eleven-f{ background-color: #c0c0c0; margin-right: .5rem; margin-top: .2rem;}
+.matchCon-l li .four-f,.matchCon-l li .five-f,.matchCon-l li .six-f,.matchCon-l li .seven-f,.matchCon-l li .eight-f,.matchCon-l li .nine-f,.matchCon-l li .ten-f,.matchCon-l li .eleven-f{ background-color: #c0c0c0; margin-right: .6rem; margin-top: .2rem;}
+.matchCon li .one-t,.matchCon-l li .one-t{ background-color: #ec2626;  margin-right: .4rem; margin-top: .1rem;}
+.matchCon li .two-t,.matchCon-l li .two-t{  background-color: #ed8d11; font-size: .24rem; margin-right: .6rem; margin-top: .1rem;}
+.matchCon li .three-t,.matchCon-l li .three-t{ background-color: #edb711; font-size: .24rem; margin-right: .6rem; margin-top: .1rem;}
+.matchCon li .four-t,.matchCon li .five-t,.matchCon li .six-t,.matchCon li .seven-t,.matchCon li .eight-t,.matchCon li .nine-t,.matchCon li .ten-t,.matchCon li .eleven-t{ background-color: #c0c0c0; margin-right: .6rem; margin-top: .1rem;}
+.matchCon-l li .four-t,.matchCon-l li .five-t,.matchCon-l li .six-t,.matchCon-l li .seven-t,.matchCon-l li .eight-t,.matchCon-l li .nine-t,.matchCon-l li .ten-t,.matchCon-l li .eleven-t{ background-color: #c0c0c0; margin-right: .6rem; margin-top: .1rem;}
+.matchCon li .pho,.matchCon-l li .pho{ margin-right: .18rem; float: left;}
+.matchCon li .pho-l,.matchCon-l li .pho-l{ margin-right: .18rem; float: left;}
+.matchCon li .pho img,.matchCon-l li .pho img{ width: .34rem;}
+.matchCon li .pho-l img,.matchCon-l li .pho-l img{ width: .34rem;}
+.matchCon li .pho-f,.matchCon-l li .pho-f{ float: left; height: .6rem; width: .6rem; line-height: .6rem;}
+.matchCon li .pho-f-l,.matchCon-l li .pho-f-l{ margin-right: .1rem; float: left; width: .6rem; height: .6rem;}
+.matchCon li .pho-f img,.matchCon-l li .pho-f img{ width: .6rem; height: .6rem; line-height: .6rem; border: 1px solid #dfdfdf; background-color: #dfdfdf; border-radius: 50%;}
+.matchCon li .pho-f-l img,.matchCon-l li .pho-f-l img{ width: .6rem; border: .01rem solid #dfdfdf; background-color: #dfdfdf; border-radius: 50%;}
+.matchCon li .team-name,.matchCon-l li .team-name{ font-size: .28rem; color: #4c4c4c; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 1.45rem; display: block; float: left; text-align: center; margin-right: 8px;}
+.matchCon li .team-name-f,.matchCon-l li .team-name-f{ font-size: .28rem; color: #4c4c4c; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 1.8rem; display: block; float: left; text-align: center; margin-right: 6px;}
+.matchCon li .number-l,.matchCon-l li .number-l{ font-size: .28rem; color: #4c4c4c; margin-left: 1.2rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: .68rem; display: block; float: left; text-align: center;}
+.matchCon li .number-r,.matchCon-l li .number-r{ font-size: .28rem; color: #4c4c4c; margin-left: 1.2rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: .68rem; display: block; float: left;text-align: center;}
+.matchCon li .t{font-size: .28rem; color: #4c4c4c; margin-left: 1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: .68rem; display: block; float: left;text-align: center;}
+.matchCon li .number-left,.matchCon-l li .number-left{ font-size: .28rem; color: #4c4c4c; margin-left: 1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 1.2rem; display: block; float: left; text-align: center; margin-right: -8px;}
+.matchCon li .number-right,.matchCon-l li .number-right{ font-size: .28rem; color: #4c4c4c; margin-left: .9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: .68rem; display: block; float: left;text-align: center;}
+.matchCon li .number-left-f,.matchCon-l li .number-left-f{ font-size: .28rem; color: #4c4c4c; margin-left: .44rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 1.8rem; display: block; float: left; text-align: center;}
+.matchCon li .number-right-f,.matchCon-l li .number-right-f{ font-size: .28rem; color: #4c4c4c; margin-left: .28rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: .8rem; display: block; float: left;text-align: center;}
+
+

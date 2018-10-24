@@ -1,0 +1,89 @@
+<extend name="Public:layout"/>
+<block name="seo">
+    <title>网站地图_全球体育网qqty.com</title>
+    <meta name="keywords" content="网站地图"/>
+    <meta name="description" content="全球体育网站地图"/>
+</block>
+<block name="css">
+    <link rel="stylesheet" href="__CSS__/copyright/station_map.css">
+</block>
+<block name="content">
+    <include file="Public:top_about"/>
+	<div class="body">
+        <!-- 主体内容开始 -->
+        <div class="home clearfix">
+            <div class="navs-con">
+            	<ul class="navs-con-ul">
+                    <li class="navs-list bg-white">
+                        <dl class="clearfix">
+                            <a target="_blank" href="{:U('/')}"><dt class="pull-left">资讯情报</dt></a>
+                            <dd class="pull-left">
+                            <volist name="newsMap" id="vo">
+                                <a href="{$vo.href}" target="_blank">{$vo.name}</a>
+                            </volist>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="navs-list bg-white">
+                        <dl class="clearfix">
+                            <a target="_blank" href="{:U('@sporttery')}"><dt class="pull-left">专家说彩</dt></a>
+                            <dd class="pull-left">
+                                <a href="{:U('/dujia@sporttery')}" target="_blank">独家解盘</a>
+                                <a href="{:U('/jingcai@sporttery')}" target="_blank">竞彩前瞻</a>
+                                <a href="{:U('/beidan@sporttery')}" target="_blank">北单推荐</a>
+                                <a href="{:U('/djmj@sporttery')}" target="_blank">独家秘笈</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="navs-list bg-white">
+                        <dl class="clearfix">
+                            <a target="_blank" href="{:U('@bf')}"><dt class="pull-left">足球比分</dt></a>
+                            <dd class="pull-left">
+                                <a href="{:U('/@bf')}" target="_blank">即时比分</a>
+                                <a href="{:U('/schedule@bf')}" target="_blank">完场赛事</a>
+                                <a href="{:U('/schtoday@bf')}" target="_blank">未来赛事</a>
+                                <a href="{:U('/indices@bf')}" target="_blank">即时指数</a>
+                                <a href="{:U('/generate@bf')}" target="_blank">免费调用</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="navs-list bg-white">
+                        <dl class="clearfix">
+                            <a target="_blank" href="{:U('/lanqiu/@bf')}"><dt class="pull-left">蓝球比分</dt></a>
+                            <dd class="pull-left">
+                                <a href="{:U('/lanqiu/@bf')}" target="_blank">即时比分</a>
+                                <a href="{:U('/lanqiu/schedule@bf')}" target="_blank">完场赛事</a>
+                                <a href="{:U('/lanqiu/schtoday@bf')}" target="_blank">未来赛事</a>
+                                <a href="{:U('/lanqiu/indices@bf')}" target="_blank">即时指数</a>
+                                <a href="{:U('/lanqiu/generate@bf')}" target="_blank">免费调用</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="navs-list bg-white">
+                        <dl class="clearfix">
+                            <a target="_blank" href="{:U('@video')}"><dt class="pull-left">视频专区</dt></a>
+                            <dd class="pull-left">
+                                <a href="{:U('/foot/@video')}" target="_blank">足球</a>
+                                <a href="{:U('/bask@video')}" target="_blank">篮球</a>
+                                <a href="{:U('/others@video')}" target="_blank">综合体育</a>
+                                <a href="{:U('/esports@video')}" target="_blank">电竞</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="navs-list bg-white">
+                        <dl class="clearfix">
+                            <a target="_blank" href="{:U('@photo')}"><dt class="pull-left">图片专区</dt></a>
+                            <dd class="pull-left">
+                                <a href="{:U('/photo_football/@photo')}" target="_blank">足球</a>
+                                <a href="{:U('/photo_basketball@photo')}" target="_blank">篮球</a>
+                                <a href="{:U('/wuzhou@photo')}" target="_blank">五洲</a>
+                                <a href="{:U('/photo_allsports@photo')}" target="_blank">综合体育</a>
+                            </dd>
+                        </dl>
+                    </li>
+            	</ul>
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+</block>

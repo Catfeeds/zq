@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta charset="UTF-8">
+	<title>全球体育网</title>
+	<!-- jquery -->
+    <script type="text/javascript" src="__PUBLIC__/Api/NoviceGuide/js/jquery-1.11.1.min.js"></script>
+
+	<!-- 引入公共样式 -->
+    <link rel="shortcut icon" href="__PUBLIC__/Api/NoviceGuide/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/NoviceGuide/css/base.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/NoviceGuide/css/common.css">
+	<!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Api/NoviceGuide/js/htmlwidth.js"></script>
+
+	<!-- 本页需要引用的js -->
+    <script type="text/javascript" src="__PUBLIC__/Mobile/js/swiper.js"></script>
+    <script type="text/javascript">
+	$(function(){
+		//banner 切换
+		var swiper = new Swiper('.swiper-container', {
+			pagination: '.swiper-pagination',
+			paginationClickable: true,
+			spaceBetween: 30,
+			centeredSlides: true,
+			autoplayDisableOnInteraction: false,
+		});
+	})
+    </script> 
+    
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__PUBLIC__/Mobile/css/swiper.css">
+    <link rel="stylesheet" href="__PUBLIC__/Api/NoviceGuide/css/guide/guide.css">
+</head>
+<body>
+	<section class="swiper-con">
+   		<!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="height: auto;">
+                	<header id="other_header">
+                        <a href="__MODULE__/Index/noviceGuide"></a>如何获取金币
+                    </header>
+                    <h2 class="title_notice">
+                    	1.充值购买金币（充值的金币只能用于购买推荐，
+                        无法提现）；
+                        <br><br>
+                        2.通过推荐比赛获得金币，可提现；
+                        <br><br>
+                        3.用积分兑换金币，可提现；
+                        <br><br>
+                        4.排行榜奖励，可提现。
+                        <br><br>
+                        金币：用于购买高手推荐，1金币=1元，达到50
+                        个金币即可提现；
+                    </h2>
+					<a href="javacript:;"><img src="__PUBLIC__/Api/NoviceGuide/images/app-guide/swiper-con-bg.jpg"></a>
+                </div>
+                <div class="swiper-slide" style="height: auto;">
+                	<header id="other_header">
+                        <a href="__MODULE__/Index/noviceGuide"></a>如何充值金币
+                    </header>
+                    <h2 class="title_notice">点击首页左上角头像进入个人中心，点击“充值”</h2>
+					<a href="javacript:;"><img src="__PUBLIC__/Api/NoviceGuide/images/app-guide/07-2.jpg"></a>
+                </div>
+                <div class="swiper-slide" style="height: auto;">
+                	<header id="other_header">
+                        <a href="__MODULE__/Index/noviceGuide"></a>如何充值金币
+                    </header>
+                    <h2 class="title_notice">多种充值方式可供选择，祝您红单满箩</h2>
+					<a href="javacript:;"><img src="__PUBLIC__/Api/NoviceGuide/images/app-guide/07-3.jpg"></a>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination swiper-pagination-second"></div>
+        </div>
+	</section>
+</body>
+	<!-- 公共js -->
+    <script type="text/javascript" src="__PUBLIC__/Api/NoviceGuide/js/common.js"></script>
+</html>

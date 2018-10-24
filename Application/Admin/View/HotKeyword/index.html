@@ -1,0 +1,111 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+		<div class="searchBar">
+			<ul class="searchContent">
+				<li>
+					<label >ID：</label>
+					<input type="text" name="id" value="{$_REQUEST.id}"/>
+				</li>
+				<li>
+					<label>所属分类：</label>
+					<select name="class_id" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<volist name="PublishClass" id="item">
+							<option value="{$item.id}" <eq name="item.id" value="$_REQUEST.class_id">selected</eq> >{$item.name}</option>
+							<notempty name="item.childs">
+								<volist name="item.childs" id="item2">
+									<option value="{$item2.id}" <eq name="item2.id" value="$_REQUEST.class_id">selected</eq> >|_{$item2.name}</option>
+									<notempty name="item2.childs">
+										<volist name="item2.childs" id="item3">
+											<option value="{$item3.id}" <eq name="item3.id" value="$_REQUEST.class_id">selected</eq> >|__{$item3.name}</option>
+										</volist>
+									</notempty>
+								</volist>
+							</notempty>
+						</volist>
+					</select>
+				</li>
+				<li>
+					<label >关键词/标签：</label>
+					<input type="text" name="keyword" value="{$_REQUEST.keyword}"/>
+				</li>
+				<li>
+					<label >英文简写：</label>
+					<input type="text" name="url_name" value="{$_REQUEST.url_name}"/>
+				</li>
+				<li>
+					<label>日期：</label>
+					<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="10">至
+					<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="10">
+				</li>
+			</ul>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/key_edit" target="dialog" mask="true" height="300"><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/delete/id/{sid_record}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择标签"><span>删除</span></a></li>
+			<li>
+				<a class="delete" href="__URL__/delAll" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要删除这些记录吗?">
+					<span>批量删除</span>
+				</a>
+			</li>
+			<li><a class="edit" href="__URL__/key_edit/id/{sid_record}" target="dialog" mask="true" height="300" warn="请选择标签"><span>编辑</span></a></li>
+			<!--<li><a class="icon"  target="navTab" href="__URL__/index/is_up/1" ><span>更新数据</span></a></li>-->
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="2%">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th width="2%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th width="10%">分类名称</th>
+			<th width="20%">关键词/标签</th>
+			<th width="8%">日期</th>
+			<th width="10%">链接的域名</th>
+			<th width="8%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="item" name="list">
+				<tr target="sid_record" rel="{$item['id']}">
+					<td>
+						<div>
+							<input type="checkbox" value="{$item.id}" name="id">
+						</div>
+					</td>
+					<td>{$item.id}</td>
+					<td>{$item.name}</td>
+					<td>{$item.keyword}</td>
+					<td>{$item.update_time|date="Y-m-d H:i",###}</td>
+					<td>{$item.url_name|default="-"}</td>
+					<td>
+						<a href="__URL__/key_edit/id/{$item.id}" target="dialog" mask="true" height="300" title="{$item.name}编辑" rel="editPage">编辑</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+</div>
+
+

@@ -1,0 +1,85 @@
+<div class="pageContent">
+	<form method="post" action="__URL__"class="pageForm" onsubmit="return navTabSearch(this);">
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit" width="200" height="50">
+				<label>发布时间：</label>
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="10"><label style="width:10px">至</label>
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="10">
+			</div>
+			<div class="unit" width="200">
+				<label>帖子标题：</label>
+            	<input type="text" name="base64_title" value="{$inputQuest.base64_title}"/>
+			</div>
+			<div class="unit" width="200">
+				<label >手机号：</label>
+           	 	<input type="text" name="username" value="{$_REQUEST.username}"/>
+			</div>
+			<div class="unit" width="200">
+				<label >昵称：</label>
+            	<input type="text" name="nick_name" value="{$inputQuest.nick_name}"/>
+			</div>
+			<div class="unit" width="200">
+				<label>编辑：</label>
+                <select name="editor_id" class="combox" onchange="$(form).submit()">
+                    <option value="" selected>全部</option>
+                    <volist name="editor" id="item">
+                        <option value="{$item.id}" <eq name="item.id" value="$_REQUEST.editor_id">selected</eq> >{$item.nickname}</option>
+                    </volist>
+                </select>
+			</div>
+			<div class="unit" width="200">
+				<label>帖子状态：</label>
+                <select name="status" class="combox" onchange="$(form).submit()">
+                    <option value="" selected>全部</option>
+                    <option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >正常</option>
+                    <option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >屏蔽</option>
+                </select>
+			</div>
+			<div class="unit" width="200">
+				<label>是否举报：</label>
+                <select name="report_num" class="combox" onchange="$(form).submit()">
+                    <option value="" selected>全部</option>
+                    <option value="1" <if condition="$_REQUEST.report_num eq '1'">selected</if> >是</option>
+                    <option value="0" <if condition="$_REQUEST.report_num eq '0'">selected</if> >否</option>
+                </select>
+			</div>
+			<div class="unit" width="200">
+				<label>是否置顶：</label>
+                <select name="top_recommend" class="combox" onchange="$(form).submit()">
+                    <option value="" selected>全部</option>
+                    <option value="1" <if condition="$_REQUEST.top_recommend eq '1'">selected</if> >是</option>
+                    <option value="0" <if condition="$_REQUEST.top_recommend eq '0'">selected</if> >否</option>
+                </select>
+			</div>
+			<div class="unit" width="200">
+				 <label>所属分类：</label>
+                <select name="cid" class="combox" onchange="$(form).submit()">
+                    <option value="" selected>全部</option>
+                    <volist name="CommunityClass" id="item">
+                        <option value="{$item.id}" <eq name="item.id" value="$_REQUEST.cid">selected</eq> >{$item.name}</option>
+                        <notempty name="item.childs">
+                            <volist name="item.childs" id="item2">
+                                <option value="{$item2.id}" <eq name="item2.id" value="$_REQUEST.cid">selected</eq> >|_{$item2.name}</option>
+                                <notempty name="item2.childs">
+                                    <volist name="item2.childs" id="item3">
+                                        <option value="{$item3.id}" <eq name="item3.id" value="$_REQUEST.cid">selected</eq> >|__{$item3.name}</option>
+                                    </volist>
+                                </notempty>
+                            </volist>
+                        </notempty>
+                    </volist>
+                </select>
+			</div>
+		</div>
+
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">开始检索</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="reset">清空重输</button></div></div></li>
+			</ul>
+		</div>
+
+	</form>
+</div>
+

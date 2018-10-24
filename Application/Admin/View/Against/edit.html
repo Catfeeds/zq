@@ -1,0 +1,48 @@
+<div class="pageContent">
+
+	<form method="post" action="__URL__/save" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="id" value="{$vo.id}">
+			<div class="unit">
+				<label>半场让分主队赔率：</label>
+				<input type="text" size="40" class="" maxlength="30" name="psw_exp_home" value="{$vo.psw_exp_home}"/>
+			</div>
+
+			<div class="unit">
+				<label>半场让分盘口：</label>
+				<input type="text" size="40" class="" maxlength="30" name="psw_exp" value="{$vo.psw_exp}"/>
+			</div>
+
+			<div class="unit">
+				<label>半场让分客队赔率：</label>
+				<input type="text" size="40" class="" maxlength="30" name="psw_exp_away" value="{$vo.psw_exp_away}"/>
+			</div>
+
+			<div class="unit">
+				<label>半场大小赔率（大）：</label>
+				<input type="text" size="40" class="" maxlength="30" name="psw_total_home" value="{$vo.psw_total_home}"/>
+			</div>
+
+			<div class="unit">
+				<label>半场大小盘口：</label>
+				<input type="text" size="40" class="" maxlength="30" name="psw_total" value="{$vo.psw_total}"/>
+			</div>
+
+			<div class="unit">
+				<label>半场大小赔率（小）：</label>
+				<input type="text" size="40" class="" maxlength="30" name="psw_total_away" value="{$vo.psw_total_away}"/>
+			</div>
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+
+

@@ -1,0 +1,154 @@
+<include file="Etc/head"/>
+<link rel="stylesheet" href="__CSS__/etc/ex_enter.css">
+<body>
+	<!-- 导航 s-->
+	<!-- 二级头部 s -->
+	<header id="other_header">
+    	<a href="javascript:;"></a>参与抽奖
+    </header>
+    <!-- 二级头部 e -->
+    
+	<section class="main">
+    	<div class="guess_infor">
+        	<figure class="clearfix">
+                <div class="fl headImg">
+                    <img src="<notempty name='user_auth.head_url'>{$user_auth.head_url}<else/>__IMAGES__/user/headImg.png</notempty>">
+                </div>
+                <figcaption class="fl head_infor">
+                    <p class="name"><notempty name='user_auth.nick_name'>{$user_auth.nick_name}<else/>-</notempty></p>
+                    <p>
+                        <notempty name='user_auth.head_url'>
+                            推荐币：<span id="_coin">{$user_auth.coin}</span>,有<span id='coin'>{:floor($user_auth['coin']/1000)}</span>次机会获得iPhone6S
+                        <else/>
+                            请先登录
+                        </notempty>
+                    </p>
+                </figcaption>
+            </figure>
+        </div>
+      	<div class="change_con">
+            <p class="text-fff q-tc"><span class="text-gold">提示：</span>1000推荐币可以兑换1次抽奖机会 </p>
+            <p class="text-fff q-tc p02">
+                <span>兑换抽奖次数：</span>
+                <input id="number" type="text" value="" />
+                <a href="javascript:;" class="showPrompt">生成兑换码</a>
+            </p>
+            <p class="text-fff q-tc p02">兑换码：<span class="text-gold" id="code" style="width: 50%">{$code}</span></p>
+            <p id="js-copy" class="text-fff q-tc" <empty name="code">style="display:none"</empty>>长按复制</p>
+            <p>
+            <img src="__IMAGES__/etc/load-nioce.png" alt="" />
+            </p>
+            <p class="p05"><a href="javascript:;" id="load_btn"><img src="__IMAGES__/etc/click-load.png"></a></p>
+      	</div>
+      	<section class="guide_con">
+        	<div class="title"><img src="__IMAGES__/etc/title02.png"></div>
+            <div class="img_list">
+            	<dl>
+                	<dt>1.打开APP，点击下方推荐王</dt>
+                    <dd><img src="__IMAGES__/etc/imgList01.png"></dd>
+                </dl>
+                <dl>
+                	<dt>2.在推荐王页面，点击导航兑换中心</dt>
+                    <dd><img src="__IMAGES__/etc/imgList02.png"></dd>
+                </dl>
+                <dl>
+                	<dt>3.在兑换中心页面中，点击上方banner图</dt>
+                    <dd><img src="__IMAGES__/etc/imgList03.png"></dd>
+                </dl>
+                <dl>
+                	<dt>4.进入抽奖页面后，点击抽奖按钮即可进行抽奖</dt>
+                    <dd><img src="__IMAGES__/etc/imgList04.png"></dd>
+                </dl>
+            </div>
+      	</section>
+    </section>
+    <input type="hidden" value="{$user_auth.id}" id="user_id" />
+    <!-- 模态窗口开始 -->
+    <div id="show" class="modal">
+    	<div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="hidediv()"><span></span></button>
+                <h4 class="modal-title">兑换提示</h4>
+            </div>
+            <div class="modal-body modal_pading">
+            	<ul class="modal_ul">
+            		<li class="mach_title">您确认消耗<em class="red coin_b"></em>推荐币兑换<em class="red coin_n"></em>次抽奖机会吗?</li>
+            	</ul>
+                <div class="modal-btn">
+                    <button type="button" class="btn btn-orange submit fs24 getCode">确定</button>
+                    <button type="button" class="btn btn-default fs24" data-dismiss="modal" onclick="hidediv()">取消</button>            
+                </div>
+            </div>
+        </div>
+    </div>   
+    <div id="bg" class="modal-backdrop" style="z-index: 1040;"></div>  
+    <!-- 模态窗口结束 -->
+</body>
+</html>
+<script type="text/javascript" src="__PUBLIC__/Api/Home/picDetail/js/panDuan.js"></script>
+<script>
+//确认兑换框
+$('.showPrompt').on('click',function(){
+    var user_id = $('#user_id').val();
+    if(user_id == ''){
+        showMsg('请先登录！','error');
+        return;
+    }
+    var coin = $("#coin").text();
+    if(Number(coin) <= 0){
+        showMsg('您的推荐币不足','error');
+        return;
+    }
+    var number = $.trim($("#number").val());
+    if(Number(number) > Number(coin)){
+        showMsg('您最多可以兑换'+coin+'次抽奖机会噢！','error');
+        return;
+    }
+    if(number == '' || number == 0 || isNaN(number)){
+        showMsg('请输入兑换次数！','error');
+        return;
+    }
+    if(!(/^(\+|-)?\d+$/.test( number ))){
+        showMsg("请输入整数！",'error');
+        return;
+    }
+    
+    $("#show").find('.coin_b').text(number*1000);
+    $("#show").find('.coin_n').text(number);
+    showdiv();
+
+})
+//弹出层
+function showdiv() {      
+    document.getElementById("bg").style.display ="block";
+    document.getElementById("show").style.display ="block";
+}
+function hidediv() {
+    document.getElementById("bg").style.display ='none';
+    document.getElementById("show").style.display ='none';
+}
+//提交兑换
+$('.getCode').on('click',function(){
+    $(this).attr('disabled','disabled');
+    var number = $("#number").val();
+    $.ajax({
+        type:"post",
+        url : "/Etc/getCode.html",
+        data:{number:number},
+        dataType:'json',
+        success: function(data){
+            if(data.status==1){
+                $("#code").text(data.info.code);
+                $("#_coin").text(data.info.coin);
+                $("#coin").text(data.info.number);
+                $("#js-copy").css('display','');
+                showMsg("兑换成功！");
+            }else{
+                showMsg(data.info,'error');
+            }
+            $('.getCode').removeAttr('disabled');
+            hidediv();
+        }
+    });
+})
+</script>

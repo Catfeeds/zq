@@ -1,0 +1,72 @@
+/**
+ * 名师解盘css样式文件
+ * 
+ * @author pengjian <710348662pengjian@qq.com>
+ *
+ * @since  2016-03-17
+**/
+
+/* 主体盒子 */ 
+.home,.main{ width: 1000px; margin: 0 auto }
+.main-left{width: 660px}
+.main-right{width: 302px}
+
+/* 当前位置 */
+.position{ height: 38px; line-height: 38px; font-size: 12px; color: #999;}
+.position .now{ font-size: 12px; color: #000;}
+.re_title{ width: 100%; height: 60px;line-height: 60px; border-bottom:1px solid #e5e5e5 ; background: url(../../images/publish_index/rtitle.png) no-repeat left center; }
+.re_title span{color:#2e76c7;}
+.main-left-con p{float: left; width: 100%}
+.main-left-con ul{float: left}
+.main-left-con ul li{width:100%;padding: 20px 0;float: left;border-bottom: 1px solid #f2f2f2; position: relative;height: 152px;}
+.main-left-con ul li .tuijian{position: absolute;right: 0; top:0;background: url(../../images/publish_index/tuij-top.png) no-repeat left center; width: 50px; height: 50px;display: block}
+.main-left-con .mlc_title a{max-width:540px;font-size: 20px; float: left;overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.main-left-con ul li:last-child{border-bottom: 0}
+.main-left-con .mlc_title span{font-size: 12px;float: left; color: #999999; padding-left: 10px; line-height: 24px}
+
+.main-left-con .mlc_des{color: #666666; line-height: 150%;margin-bottom: 0;height: 40px} 
+.main-left-con .mlc_des{height: 54px;margin-bottom: 0}
+.main-left-con .mlc_share .s_main{width: 50px; height: 24px; float: left;margin-left: 30px;position: relative;}
+.main-left-con .mlc_share .s_main div{ width: 150px; height: 30px;border:1px solid #e5e5e5; position: absolute; top: -5px; left: 45px; display: none; }
+.main-left-con .mlc_share .s_main div a{padding: 0 6px}
+.main-left-con .mlc_share .share{display: block; width: 50px; height: 24px; background: url(../../images/publish_index/share.png) no-repeat left center;float: left;  padding-left: 15px;}
+.main-left-con .mlc_share .share:hover{background: url(../../images/publish_index/share_hover.png) no-repeat left center;color: #2ac782}
+.main-left-con .mlc_share {width:100%; height: 25px;line-height: 25px; padding-top: 6px; color:#999999; font-size: 12px;}
+.main-left-con .mlc_share .pinl{ float: right; color:#999999; padding-left: 18px; background: url(../../images/publish_index/eye-icon.png) no-repeat left center;}
+
+.rec_img{ width: 82px; height: 82px; float: left;margin: 0 10px;
+    border-radius: 50%; 
+    text-align: center;
+    background: #ffffff;
+    padding: 3px;
+    border: 1px solid #e5e5e5;  }
+.rec_img img{ width: 72px; height: 72px; border-radius:50%; }
+.rec_img p{    padding-top: 18px;
+    color: #2e76c7;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 82px;}
+.rec_right{ width: 557px; float: right; padding-right: 10px }
+
+.add_time { float: right !important; margin-right: 20px; }
+.posts{position: relative;}
+#load{width: 50px;height: 50px;background:#000 url(../../images/publish_index/loader.gif) no-repeat 45% 45%;position: absolute;top: 90%;left: 47%;z-index: 100;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

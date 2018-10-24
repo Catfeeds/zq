@@ -1,0 +1,37 @@
+/**
+ * 全彩公用css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-17
+**/
+.home{ width: 1000px; margin: 12px auto; margin-top: 12px\9; margin-bottom: 12px\9}
+.top-center .center-right{line-height: 24px;}
+.contact-list{ margin-top: 23px;}
+.contact-list li{ float: left;  height: 24px; margin-left: 15px;}
+.contact-list li a{ display: block; height: 24px;  padding-left: 34px;}
+.contact-list li.one a{background: url(../../images/link_page/icon-home.png) no-repeat 0 center;}
+.contact-list li.two a{background: url(../../images/link_page/icon-kefu.png) no-repeat 0 center;}
+.contact-list li.three a{background: url(../../images/link_page/icon-compart.png) no-repeat 0 center;}
+.navs-con .navs-con-ul{ width: 1000px; border: 1px solid #e5e5e5;}
+.navs-con .navs-list{ padding: 15px 20px; margin-bottom: 0; border-bottom: 1px solid #e5e5e5;}
+.navs-con .navs-list dl{ margin-bottom: 0px;}
+.navs-con .navs-list dt{ width: 80px; text-align: center; font: 16px "微软雅黑","黑体"; font-weight: normal; color: #336699;}
+ .navs-con .navs-list dd{ width: 868px; line-height: 24px;}
+.navs-con .navs-list dd a{ margin-left: 20px;}
+/* 首页导航 */
+.nav-con{ width: 100%; min-width: 1000px; height: 42px; background: #10af63; box-shadow: 0 2px 3px 1px rgba(0,0,0,0.2);}
+.nav-con .nav { width: 1000px; margin:0 auto; }
+.nav-con .nav ul li{ float: left; text-align: center; position: relative;}
+.nav-con .nav ul li .hot-new{ position: absolute; right: 20px; top: -5px; width: 22px; height: 12px; background: url(../../Home/images/index/hot-new.gif) no-repeat;}
+.nav-con .nav ul li a{position: relative; display: block; height: 42px; padding: 0 25px; color: #fff; font-size: 16px; line-height: 42px; text-decoration: none; }
+.nav-con .nav ul li a:hover{ background: #2db77b;}
+.nav-con .nav .on a{ background: #108f58;}
+.nav-con .nav .on a:hover{background: #108f58;}
+.body{ min-width: 1000px;}
+.top{ width: 100%; *width: auto; background: #fff;}
+.top-center{ width: 1000px; height: 90px; margin:0 auto; padding: 10px 0;}
+#logo h1{ margin: 10px 0 0 0;}
+.top-center .center-left .show{ margin-top: 10px;}
+.top-center .center-right{ width: 416px; height: 70px; line-height: 70px; text-align: right;}
+.top-center .center-right .number{ font-size: 24px; color: #ff7e00; margin: 0 5px;}
+.top-center .center-right .kefu-icon{ line-height: 68px;}

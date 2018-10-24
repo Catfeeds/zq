@@ -1,0 +1,520 @@
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .table {
+        width: 486px;
+        margin-left: 130px;
+    }
+
+    .addtl {
+        width: 120px;
+        height: 50px;
+        border: 1px solid #797979;
+        color: #797979;
+        margin: 0 20px 10px 0;
+        float: left;
+        text-align: center;
+        word-wrap: break-word;
+        line-height: 25px;
+        position: relative;
+    }
+
+    .add_img {
+        cursor: pointer;
+        width: 140px;
+        float: left;
+        text-align: center;
+    }
+
+    .cha_img {
+        position: absolute;
+        top: -10px;
+        width: 18px;
+        right: -10px;
+        height: 18px;
+    }
+
+</style>
+<div class="page">
+    <div class="pageContent">
+
+        <form method="post" action="__URL__/save" class="pageForm required-validate" enctype="multipart/form-data"
+              onsubmit="return iframeCallback(this, dialogAjaxDone);" target="callbackframe">
+            <input type="hidden" name="id" value="{$info.id}">
+            <div class="pageFormContent" layoutH="58">
+                <div class="unit">
+                    <label>礼包名称：</label>
+                    <input type="text" class="required" name="name" value="{$info.name}">
+                </div>
+                <div class="unit">
+                    <label>礼包类型：</label>
+                    <select class="small bLeft gift" name="type"
+                    <eq name="system" value="1"> disabled="disabled"</eq>
+                    >
+                    <option
+                    <eq name="info['type']" value="1">selected</eq>
+                    value="1">注册赠送</option>
+                    <option
+                    <eq name="system" value="1">selected</eq>
+                    <neq name="system" value="1">style="display:none;"</neq>
+                    value="2">系统赠送</option>
+                    <option
+                    <eq name="info['type']" value="3">selected</eq>
+                    value="3">活动赠送</option>
+                    </select>
+                </div>
+
+                <div class="unit range" <neq name="system" value="1">style="display:none;"</neq>>
+                    <label>赠送范围：</label>
+                    <input type="radio" name="range" value="1" select_type="0"
+                    <if condition="$info['user_list'] eq ''">checked</if>
+                    >所有人
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="range" value="2" select_type="1"
+                    <if condition="$info['user_list'] neq ''">checked</if>
+                    >自定义
+                </div>
+
+                <div class="unit user_list" style="display:none">
+                    <label>赠送人：</label>
+                    <input name="FrontUser.id" class="" type="hidden"/>
+                    <textarea class="text_user" rows="5" cols="35" name="FrontUser.nick_name" readonly/></textarea>
+                    <a width="800" height='600' lookupgroup="FrontUser" href="__ADMIN__/FrontUser/findFrontUser"
+                       class="btnLook">选择赠送人</a>
+                </div>
+
+            <div class="unit">
+                <label>推荐体验劵：</label>
+                <div class="table ty_l">
+                    <volist name="info.ty" id="ty_a">
+                        <div class="addtl" coins="{$ty_a.coins}" num="{$ty_a.num}" ide="{$ty_a.coins}_{$ty_a.num}">
+                            {$ty_a.coins}金币推荐体验券 X{$ty_a.num}<img class="cha_img" src="__PUBLIC__/Images/cha.png"
+                                                                  tabindex="0"></div>
+                    </volist>
+                    <div class="add_img" type="ty">
+                        <img src="__PUBLIC__/Images/kuang.png" tabindex="0">
+                    </div>
+                </div>
+            </div>
+            <div class="ty_info info">
+                <volist name="info.ty" id="ty_a">
+                    <input type="hidden" name="ty[]" coins="{$ty_a.coins}" value="{$ty_a.coins}_{$ty_a.num}"
+                           ide="{$ty_a.coins}_{$ty_a.num}">
+                </volist>
+            </div>
+
+            <div class="unit ty" style="display:none;">
+                <label>&nbsp;</label>
+                <select class="small bLeft ty_s">
+                    <option value="2" selected>2金币推荐一场</option>
+                    <option value="4">4金币推荐一场</option>
+                    <option value="8">8金币推荐一场</option>
+                    <option value="16">16金币推荐一场</option>
+                    <option value="32">32金币推荐一场</option>
+                    <option value="64">64金币推荐一场</option>
+                    <option value="128">128金币推荐一场</option>
+                    <option value="256">256金币推荐一场</option>
+                    <option value="512">512金币推荐一场</option>
+                </select>
+                <label style="width:50px;">&nbsp;&nbsp;&nbsp;数量：</label>
+                <input type="number" class="ty_num">
+                &nbsp;
+                <button type="button" class="b_type" b_type="ty" op_type="add">添加</button>
+                <button type="button" class="b_type" b_type="ty">取消</button>
+            </div>
+
+            <div class="unit">
+                <label>充值优惠劵：</label>
+                <div class="table cz_l">
+                    <volist name="info.coin" id="cz_a">
+                        <div class="addtl" ide="{$cz_a.op}_{$cz_a.tcp}_{$cz_a.num}" cz_op="{$cz_a.op}"
+                             cz_tcp="{$cz_a.tcp}" cz_num="{$cz_a.num}">充值限额{$cz_a.op}元，赠送金额{$cz_a.tcp}元 X{$cz_a.num}<img
+                                class="cha_img" src="__PUBLIC__/Images/cha.png" tabindex="0"></div>
+                    </volist>
+                    <div class="add_img" type="cz">
+                        <img src="__PUBLIC__/Images/kuang.png" tabindex="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="unit cz" style="display:none;">
+                <label>&nbsp;</label>
+                充值限额：
+                <input type="number" class="cz_op">
+                赠送金额：
+                <input type="number" class="cz_tcp">
+                &nbsp;&nbsp;&nbsp;数量：
+                <input type="number" class="cz_num">
+                &nbsp;
+                <button type="button" class="b_type" b_type="cz" op_type="add">添加</button>
+                <button type="button" class="b_type" b_type="cz">取消</button>
+            </div>
+
+            <div class="cz_info info">
+                <volist name="info.coin" id="cz_a">
+                    <input type="hidden" ide="{$cz_a.op}_{$cz_a.tcp}_{$cz_a.num}" name="cz[]" cz_op="{$cz_a.op}"
+                           cz_tcp="1{$cz_a.tcp}" value="{$cz_a.op}_{$cz_a.tcp}_{$cz_a.num}">
+                </volist>
+            </div>
+
+            <div class="unit" <eq name="system" value="1">style="display:none;"</eq>>
+                <label>发行时间：</label>
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm"
+                       class="date textInput readonly valid <neq name="system" value="1">required</neq>"
+                       value="<if condition=" $info['start_time'] gt 0">{$info.start_time|date='Y-m-d H:i',###}</if>"
+                name="startTime" size="20"> <label style="width:15px">至</label>
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd HH:mm"
+                       class="date textInput readonly valid <neq name="system" value="1">required</neq>"
+                       value="<if condition=" $info['end_time'] gt 0">{$info.end_time|date='Y-m-d H:i',###}</if>"
+                name="endTime" size="20">
+            </div>
+            <div class="unit">
+                <label>有效期(天数)：</label>
+                <input type="text" class="textInput valid required" value="{$info.over_day}" name="over_day" size="10">
+            </div>
+            <div class="unit" <eq name="system" value="1">style="display:none;"</eq>>
+                <label>状态：</label>
+                <select class="small bLeft" name="status">
+                    <option
+                    <eq name="info['status']" value="1">selected</eq>
+                    value="1">启用</option>
+                    <option
+                    <eq name="info['status']" value="0">selected</eq>
+                    value="0">禁用</option>
+                </select>
+            </div>
+            <div class="unit">
+                <label>描 述：</label>
+                <textarea name="remark" rows="3" cols="53" class="textInput">{$info.remark}</textarea>
+            </div>
+            <div class="unit" <eq name="system" value="1">style="display:none;"</eq>>
+                <label>领取前图片：</label>
+                <ul class="tabImg">
+                    <li>
+                        <input id="viewUploadInput_555" name="fileInput1" type="file" onChange="previewImage(555)"
+                               style="display:none;"/>
+                        <a href="javascript:void(0);">
+                             <span id="viewUploadDiv_555">
+                                <empty name="info.before_img">
+                                    <img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80"
+                                         id="viewUploadImg_555"/>
+                                <else/>
+                                    <img id="viewUploadImg_555" width='80' height='80' border=0
+                                         src="{$info.before_img}">
+                                </empty>
+                             </span>
+                        </a>
+                        <div id="poiter_555" class="poiter">
+                            <empty name="info.before_img">
+                                <a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_555')">添加图片</a>
+                                <else/>
+                                <a title="删除" onclick="delTeamPic({$info.id},1);">删除</a>|<a title="重传"
+                                                                                            onclick="selectViewUploadImg('#viewUploadInput_555')">重传</a>
+                            </empty>
+                        </div>
+                    </li>
+                </ul>
+                <span class="inputInfo">（提示：请尽量上传正方形图片）</span>
+            </div>
+            <div class="unit" <eq name="system" value="1">style="display:none;"</eq>>
+                <label>领取后图片：</label>
+                <ul class="tabImg">
+                    <li>
+                        <input id="viewUploadInput_666" name="fileInput2" type="file" onChange="previewImage(666)"
+                               style="display:none;"/>
+                        <a href="javascript:void(0);">
+                             <span id="viewUploadDiv_666">
+                                <empty name="info.after_img">
+                                    <img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80"
+                                         id="viewUploadImg_666"/>
+                                <else/>
+                                    <img id="viewUploadImg_666" width='80' height='80' border=0 src="{$info.after_img}">
+                                </empty>
+                             </span>
+                        </a>
+                        <div id="poiter_666" class="poiter">
+                            <empty name="info.after_img">
+                                <a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_666')">添加图片</a>
+                                <else/>
+                                <a title="删除" onclick="delTeamPic({$info.id},2);">删除</a>|<a title="重传"
+                                                                                            onclick="selectViewUploadImg('#viewUploadInput_666')">重传</a>
+                            </empty>
+                        </div>
+                    </li>
+                </ul>
+                <span class="inputInfo">（提示：请尽量上传正方形图片）</span>
+            </div>
+
+            </div>
+
+            <div class="formBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button class="save_button" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="button">
+                            <div class="buttonContent">
+                                <button type="button" class="close">取消</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+
+    </div>
+</div>
+<style type="text/css">
+    .tabImg li {
+        float: left;
+        margin-right: 15px;
+        position: relative;
+        border: 1px solid #f2f2f2;
+        width: 80px;
+        height: 80px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .poiter a:hover {
+        color: red;
+    }
+
+    .tabImg li div {
+        position: absolute;
+        left: 0;
+        top: 80px;
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        text-align: center;
+        color: #fff;
+        background: rgba(44, 170, 236, 1);
+        font-size: 12px;
+    }
+
+    .tabImg li div a {
+        line-height: 80px;
+    }
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+    $(function () {
+        $('.tabImg li').hover(function (e) {
+            $(this).children('div').stop().animate({'top': '0'}, 300);
+        }, function () {
+            $(this).children('div').stop().animate({'top': '80px'}, 300);
+        });
+    });
+    function delTeamPic(id, teamType) {
+        if (confirm("确认要删除吗？") == false) {
+            return false;
+        }
+        //异步执行删除
+        $.ajax({
+            type: "POST",
+            url: "__ADMIN__/GiftsConf/delTeamPic.html",
+            data: {'id': id, 'teamType': teamType},
+            dataType: "json",
+            success: function (data) {
+                if (data.status) {
+                    if (teamType == 1) {
+                        $("#viewUploadInput_555").val("");
+                        $("#viewUploadImg_555").attr("src", "__PUBLIC__/Home/images/common/add_gray.png").attr("style", "width:80px;height:80px");
+                        var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_555')\">添加图片</a>";
+                        $("#poiter_555").html(str);
+                    }
+                    else if (teamType == 2) {
+                        $("#viewUploadInput_666").val("");
+                        $("#viewUploadImg_666").attr("src", "__PUBLIC__/Home/images/common/add_gray.png").attr("style", "width:80px;height:80px");
+                        var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_666')\">添加图片</a>";
+                        $("#poiter_666").html(str);
+                    }
+                    alert("删除成功！");
+                } else {
+                    alert("删除失败！");
+                }
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        var str = "{$info['user_list']}";
+        if (str) {
+            $(".text_user").val(str);
+        }
+    });
+    //点击增加显示增加表格
+    $(".add_img").on('click', function () {
+        var type = $(this).attr('type');
+        $("." + type + "").css('display', 'block');
+    });
+    //点击确定取消按钮相应对应操作
+    $(".b_type").on('click', function () {
+        var b_type = $(this).attr('b_type');
+        var op_type = $(this).attr('op_type');
+        var html = '';
+        if (typeof(op_type) == 'undefined') {
+            hid_div(b_type);
+        } else {
+            if (b_type == 'ty') {
+                html = ty_i();
+            } else if (b_type == 'cz') {
+                html = cz_i();
+            }
+        }
+        if (html[0] == 'error') {
+            alert('请输入大于0的数值');
+            return false;
+        }
+        if (html[0] == null) {
+            return false;
+        } else {
+            add_list(b_type, html);
+        }
+    });
+
+    //点击确定处理体验优惠券数据
+    function cz_i() {
+        var op = $(".cz_op").val();
+        var tcp = $(".cz_tcp").val();
+        var num = $(".cz_num").val();
+        var cz_html = new Array();
+        if (num < 1 || op < 1 || tcp < 1) {
+            cz_html[0] = 'error';
+            return cz_html;
+        }
+        var cz_status = true;
+        $(".cz_l div").each(function () {
+            var cz_op = $(this).attr('cz_op');
+            var cz_tcp = $(this).attr('cz_tcp');
+            if (cz_op == op && cz_tcp == tcp) {
+                var cz_num = $(this).attr('cz_num');
+                num = parseInt(cz_num) + parseInt(num);
+                $(this).attr('cz_num', num);
+                $(this).html('充值限额' + op + '元，赠送金额' + tcp + '元 X' + num + '<img class="cha_img" src="__PUBLIC__/Images/cha.png" tabindex="0">');
+                $(".cz_info input").each(function () {
+                    if (op == $(this).attr('cz_op') && tcp == $(this).attr('cz_tcp')) {
+                        $(this).val(op + '_' + tcp + '_' + num);
+                    }
+                });
+                $(".cha_img").on('click', function () {
+                    var ide = $(this).parent().attr('ide');
+                    $(".info input[ide='" + ide + "']").remove();
+                    $(this).parent('.addtl').remove();
+                });
+                cz_status = false;
+                hid_div('cz');
+            }
+        });
+        if (cz_status) {
+            cz_html[0] = '<input type="hidden" ide="' + op + '_' + tcp + '_' + num + '" name="cz[]" cz_op="' + op + '" cz_tcp="' + tcp + '" value="' + op + '_' + tcp + '_' + num + '">';
+            cz_html[1] = '<div class="addtl" ide="' + op + '_' + tcp + '_' + num + '" cz_op="' + op + '" cz_tcp="' + tcp + '" cz_num="' + num + '">充值限额' + op + '元，赠送金额' + tcp + '元 X' + num + '<img class="cha_img" src="__PUBLIC__/Images/cha.png" tabindex="0"></div>';
+        }
+        return cz_html;
+    }
+
+    //点击取消隐藏对应表单
+    function hid_div(b_type) {
+        $("." + b_type + "").css('display', 'none');
+        if (b_type == 'ty') {
+            ty_s();
+        } else if (b_type == 'cz') {
+            cz_s();
+        }
+    }
+
+    //清理填选内容
+    function cz_s() {
+        $(".cz_op").val('');
+        $(".cz_tcp").val('');
+        $(".cz_num").val('');
+    }
+
+    //清理填选内容
+    function ty_s() {
+        $(".ty_num").val('');
+        $(".ty_s").find("option[value='2']").attr("selected", true);
+    }
+
+    //点击确定处理体验优惠券数据
+    function ty_i() {
+        var ty_status = true;
+        var money = $(".ty_s option:selected").val();
+        var num = $(".ty_num").val();
+        var ty_html = new Array();
+        if (num < 1) {
+            ty_html[0] = 'error';
+            return ty_html;
+        }
+        $(".ty_l div").each(function () {
+            if ($(this).attr('coins') == money) {
+                var ty_num = $(this).attr('num');
+                num = parseInt(ty_num) + parseInt(num);
+                $(this).attr('num', num);
+                $(this).html(money + '金币推荐体验券 X' + num + '<img class="cha_img" src="__PUBLIC__/Images/cha.png" tabindex="0">');
+                $(".ty_info input[coins='" + money + "']").val(money + '_' + num);
+                ty_status = false;
+                $(".cha_img").on('click', function () {
+                    var ide = $(this).parent().attr('ide');
+                    $(".info input[ide='" + ide + "']").remove();
+                    $(this).parent('.addtl').remove();
+                });
+                hid_div('ty');
+            }
+        });
+        if (ty_status) {
+            ty_html[0] = '<input type="hidden" ide="' + money + '_' + num + '" name="ty[]" coins="' + money + '" value="' + money + '_' + num + '">';
+            ty_html[1] = '<div class="addtl" ide="' + money + '_' + num + '" coins="' + money + '" num="' + num + '">' + money + '金币推荐体验券 X' + num + '<img class="cha_img" src="__PUBLIC__/Images/cha.png" tabindex="0"></div>';
+        }
+        return ty_html;
+    }
+
+    //将数据内容插入到指定位置
+    function add_list(b_type, html) {
+        $("." + b_type + "_l .add_img").before(html[1]);
+        $("." + b_type + "_info").append(html[0]);
+        $(".cha_img").on('click', function () {
+            var ide = $(this).parent().attr('ide');
+            $(".info input[ide='" + ide + "']").remove();
+            $(this).parent('.addtl').remove();
+        });
+        hid_div(b_type);
+    }
+    //点击关闭时间
+    $(".cha_img").on('click', function () {
+        var ide = $(this).parent().attr('ide');
+        $(".info input[ide='" + ide + "']").remove();
+        $(this).parent('.addtl').remove();
+    });
+    //礼包类型点击事件
+    $(".gift").on('change', function () {
+        var op_val = $(this).val();
+        if (op_val == 2) {
+            $('.range').show();
+        } else {
+            $('.range').hide();
+        }
+    });
+    //赠送人选择点击事件
+    $('.range input').on('click', function () {
+        var select_type = $(this).attr('select_type');
+        if (select_type == 1) {
+            $('.user_list').css('display', '');
+            $('.user_list input').addClass('required');
+        } else if (select_type == 0) {
+            $('.user_list').css('display', 'none');
+            $('.user_list input').removeClass('required');
+        }
+    });
+</script>

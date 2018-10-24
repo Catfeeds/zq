@@ -1,0 +1,207 @@
+<include file="Public:header"/>
+
+<!--引入本页所需css-->
+<link rel="stylesheet" href="__PUBLIC__/Home/css/personal_center/recharge.css">
+
+<body>
+    <!-- 顶部开始 -->
+    <include file="Public:top"/>
+    <!-- 顶部结束 -->
+
+    <div class="body">
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <div class="data-graph recharge-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="javascript:void(0);" class="current">充值</a></li>
+                                    <!--<li role="presentation"><a href="{:U('UserAccount/chargeLog')}">充值记录</a></li>-->
+                                </ul>
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <!-- 充值开始 -->
+                                    <div id="recharge" class="line-graph clearfix">
+                                        <form method="post" action="/Pay/getPayUrl/" target="_blank" id="topay">
+                                        <div class="recharge-list">
+                                            <dl class="clearfix">
+                                                <!--<dt class="pull-left">充值账号：</dt>-->
+                                                <!--<dd class="pull-left" style="margin-left:10px;">{$user_id}</dd>-->
+                                                <input type="hidden" name="user_id" value="{$user_id}">
+                                            </dl>
+                                            <dl>
+                                                <dt class="pull-left">自由充值：</dt>
+                                                <div class="clearfix">
+                                                    <div class="control pull-left">
+                                                      <input value="10" id="manual" name="ordtotal_fee" type="text" class="form-control" placeholder="请输入金额" />
+                                                      元&nbsp;&nbsp;<span class="text-red">*</span>至少充值10个金币
+                                                      <span class="text-red">(1元等于1金币)</span>
+                                                    </div>
+                                                </div>
+                                            </dl>
+                                            <dl class="clearfix">
+                                                <dt class="pull-left" style="height:42px; line-height: 42px;">充值金额：</dt>
+                                                <dd class="pull-left">
+                                                    <div class="sele">
+                                                        <span><label class="current" for="type1" ><input type="radio" name="price" id="type1" value="10" checked="checked">10元</label></span>
+                                                        <span><label for="type2"><input  type="radio" name="price" id="type2" value="30"  >30元</label></span>
+                                                        <span><label for="type3"><input  type="radio" name="price" id="type3" value="50"  >50元</label></span>
+                                                        <span><label for="type4"><input  type="radio" name="price" id="type4" value="100">100元</label></span>
+                                                        <span><label for="type5"><input  type="radio" name="price"  id="type5" value="200" >200元</label></span>
+                                                        <span><label for="type6"><input  type="radio" name="price" value="300" id="type6">300元</label></span>
+                                                        <span><label for="type7"><input  type="radio" name="price" value="500" id="type7">500元</label></span>
+                                                        <span><label for="type8"><input  type="radio" name="price" value="1000" id="type8">1000元</label></span>
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                            <dl class="pay-type">
+                                                <dt class="pull-left" style="height:45px; line-height: 45px;">支付方式：</dt>
+                                                <dd class="pull-left clearfix">
+                                                    <ul class="clearfix pay-type-ul">
+                                                        <li class="pull-left haveCur">
+                                                        	<span><img src="__PUBLIC__/Home/images/personal_center/zfb-pay.png" width="25" height="25"></span>
+                                                            <em>支付宝</em>
+                                                        </li>
+                                                        <li class="pull-left">
+                                                        	<span><img src="__PUBLIC__/Home/images/personal_center/wx-pay.png" width="25" height="25"></span>
+                                                            <em>微信</em>
+                                                        </li>
+                                                    </ul>
+                                                    <label>
+                                                    <br>
+                                                      <input type="checkbox" checked="checked" id="agree"/>
+                                                      我已阅读并接受<a target="_blank" href="{:U('Copyright/service')}" class="text-green">《全球体育服务协议》</a>
+                                                    </label>
+                                                    <input name="payType" type="hidden" value="1"  id="paytype">
+                                                    <input name="ordshow_url" type="hidden" value="/UserInfo/index.html" >
+                                                    <input type="submit" class="submit btn btn-blue " data-toggle="modal" id="submitpay" value="确认提交">
+                                                </dd>
+                                            </dl>
+                                            <dl class="clearfix">
+                                                <dt class="pull-left"></dt>
+                                                <dd class="pull-left" style="margin-left:10px;"></dd>
+
+                                            </dl>
+                                            <dl class="clearfix" style="color:#FF0000">
+                                                注意：
+                                                <br>  <br>
+                                                <p> 1、为了您的资金安全，请尽量不要在网吧等公共场合充值</p>
+                                                <p> 2、每次充值至少10个金币（1元=1金币）</p>
+                                                <p> 3、为了防止少数用户利用本站进行套现和洗钱行为，充值的金币本网不能提现，销售收入金币、积分兑换的金币和本站奖励的金币能进行提现</p>
+                                                <p> 4、同一账号，每日充值金额不得超过3000元</p>
+                                            </dl>
+                                        </div>
+                                        </form>
+                                    </div>
+                                    <!-- 充值结束 -->
+                                </div>
+                                <!-- Tab panes -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+
+    <!-- 支付模态窗口开始 -->
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" >
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">请付款</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="pay-title">请您在新打开的页面上完成付款</div>
+                    <div class="pay-item-type pay-item-su">
+                        <span>如已经成功支付，请点击</span>
+                        <a href="/UserInfo/index.html" class="btn"  >已完成付款</a>
+                    </div>
+                    <div class="pay-item-type pay-item-fa">
+                        <span>如付款遇到问题，你可以</span>
+                        <a href="javascript:;" class="btn" data-dismiss="modal">重新支付</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 支付模态窗口结束 -->
+
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+
+    <!--引入本页js-->
+    <script type="text/javascript">
+    	$(function(){
+            $('#paytype').val(1);
+			//球币选择
+			$('.sele span label').click(function(e) {
+                $(this).addClass('current');
+				$(this).parent('span').siblings().children('label').removeClass('current');
+                 var  fee = $(this).find('input').val();
+                $('#manual').val(fee);
+            });
+			$('.control input').focus(function(){
+			    $('.sele span label').removeClass('current');
+                $('.sele span label input').removeAttr('checked');
+			});
+			$('.control input').bind("keyup",function(){
+				if($(this).val().length > 0){
+				  $(this).css('font-size','22px');
+				}else{
+				  $(this).css('font-size','14px');
+                }
+            });
+			//支付选择
+			$('.pay-type-ul li').click(function(e) {
+                $(this).addClass('haveCur').siblings().removeClass('haveCur');
+                var index =parseInt($(this).index())+parseInt(1);
+                $("#paytype").val(index);
+            });
+            $(".submit").click(function () {
+                var number = $('#manual').val();
+                if(isNaN(number)){
+                    showMsg("金额格式错误！",0,'error');
+                    return;
+                }
+                if(!(/^(\+|-)?\d+$/.test( number )) || number < 0){
+                    showMsg("充值金额必须是整数！",0,'error');
+                    return;
+                }
+                if(number < 10){
+                    showMsg("充值金额最少10元！",0,'error');
+                    return;
+                }
+                if(number > 10000){
+                    showMsg("充值金额最多10000元！",0,'error');
+                    return;
+                }
+                if($("#agree").is(':checked')==false){
+                  _alert("提示","您必须同意全球体育服务协议！");
+                  return;
+                }
+                if($("#paytype").val()==2){
+                    $("#submitpay").attr('data-target','');
+                }
+                $("#topay").submit();
+                $('.bs-example-modal-sm').modal("show");
+            });
+		});
+    </script>
+    <!--引入本页js-->
+</body>
+</html>

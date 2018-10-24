@@ -1,0 +1,63 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="{$vo.id}" />
+		<input type="hidden" name="user_id" value="{$vo.user_id}" />
+		<input type="hidden" name="report_user" value="{$vo.report_user}" />
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>评论内容：</label>
+				<textarea class="large bLeft" disabled rows="6" cols="57">{$vo.content}</textarea>
+			</div>
+			<div class="unit">
+				<label>举报原因：</label>
+				<textarea class="large bLeft" disabled rows="2" cols="57">{$vo.report_content}</textarea>
+			</div>
+			<div class="unit">
+				<label>屏蔽评论：</label>
+				<input type="radio" name="status"  value="1" <eq name="vo.status" value="1">checked</eq> />显示
+				<input type="radio" name="status"  value="0" <eq name="vo.status" value="0">checked</eq> />屏蔽
+			</div>
+			<div class="unit">
+				<label>屏蔽用户：</label>
+                <input type="radio" name="is_gag"  value="0" <eq name="vo.is_gag" value="0">checked</eq> />正常
+                <input type="radio" name="is_gag"  value="1" <eq name="vo.is_gag" value="1">checked</eq> />屏蔽
+			</div>
+			<if condition="$vo.is_report neq 1">
+				<div class="unit">
+					<label>回复举报：</label>
+					<input type="checkbox" name="is_reply" value="1" onclick="isShow(this)" />
+				</div>
+				<div class="unit reply">
+					<label>回复内容：</label>
+					<textarea class="large bLeft" name="reply" rows="2" cols="57">尊敬的用户，您举报的用户【{$vo.nick_name}】的评论，经审核确实存在不合法言论，已被管理员屏蔽！</textarea>
+				</div>
+			<else/>
+				<br/>
+				<div class="unit">
+					<label>&nbsp;</label>
+					<span style="color: green;">已处理回复！</span>
+				</div>
+			</if>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script>
+$(function(){
+	$(".reply").hide();
+})
+function isShow(obj){
+	if($(obj).is(':checked')==false){
+		$(".reply").hide();
+	}else{
+		$(".reply").show();
+	}
+}
+</script>

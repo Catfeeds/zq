@@ -1,0 +1,239 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/add/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<input type="hidden" class=""  name="id" value="{$vo.id}" />
+		<div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>选择联赛：</label>
+                <select  name="select_type1" id="select_type1">
+                    <option value="">选择大洲</option>
+                    <volist name="continent" id="cvo">
+                        <option value="{$cvo.country_id}" cid="{$cvo.continent_id}">{$cvo.name}</option>
+                    </volist>
+                </select>
+                &nbsp;
+                <select name="select_type2" id="select_type2" style="display: none">
+                    <option value="">选择级别</option>
+                    <option value="1">国家</option>
+                    <option value="2">洲际赛事</option>
+                </select>
+
+                <select name="select_type3" id="select_type3" style="display: none">
+                    <option value="">选择国家</option>
+                </select>
+
+                <select name="select_type4" id="select_type4" style="display: none">
+                    <option value="">选择赛事</option>
+                </select>
+
+            </div>
+			<div class="unit">
+				<label>赛事名称：</label>
+				<input type="text" class="required"  name="name" value="{$vo.name}" size="40" id="t_name"/>
+			</div>
+			<div class="unit">
+				<label>联盟ID：</label>
+				<input type="text" readonly="readonly" value="{$vo.union_id}" name="union_id" id="union_id">
+			</div>
+
+			<div class="unit">
+				<label>赛事图标：</label>
+				<ul class="tabImg">
+					<li>
+						<input id="viewUploadInput_88" name="fileInput" type="file" onChange="previewImage(88)" style="display:none;" />
+						<a href="javascript:void(0);">
+							 <span id="viewUploadDiv_88">
+								<empty name="vo.logo">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_88"/>
+								<else/>
+									<if condition="pathinfo($vo['logo'], PATHINFO_EXTENSION) eq swf">
+										<embed width="80" height="80" id="viewUploadImg_88" wmode="opaque" type="application/x-shockwave-flash" src="{$vo.logo}">
+									<else/>
+									    <img id="viewUploadImg_88" width='80' height='80' border=0 src="{$vo.logo}">
+									</if>
+								</empty>
+							 </span>
+						</a>
+						<div id="poiter_88" class="poiter">
+							<empty name="vo.logo">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_88')">添加图片</a>
+							<else/>
+								<a title="删除" onclick="delPic({$vo.id},88,'_logo');">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_88')">重传</a>
+							</empty>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft"  name="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+				</select>
+			</div>
+
+			<div class="unit">
+				<label>排序：</label>
+				<input type="text" class="digits" name="sort" value="{$vo.sort}" />
+			</div>
+			</div>
+
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+	$(function(){
+		$('.tabImg li').hover(function(e) {
+			$(this).children('div').stop().animate({'top':'0'},300);
+		},function(){
+			$(this).children('div').stop().animate({'top':'80px'},300);
+		});
+
+
+		//联动选择联赛
+        $('#select_type1').change(function(){
+            getLeague(1);
+        });
+
+        $('#select_type2').change(function(){
+            getLeague(2);
+        });
+
+        $('#select_type3').change(function(){
+            getLeague(3);
+        });
+
+        $('#select_type4').change(function(){
+            var select_type4 = $('#select_type4 option:selected').val();
+            $("#union_id").val(select_type4)
+            var uname = $('#select_type4 option:selected').text();
+            $("#t_name").val(uname)
+        });
+
+        var cMap = JSON.parse('{$countryMap}');
+        var cUnions = JSON.parse('{$unions}');
+        var couUnions = JSON.parse('{$country_unions}');
+
+        var select_type1,
+            select_type2,
+            select_type3,
+            continent_id ;
+
+        function getLeague(type){
+            $('#select_type2').css('display', 'none');
+            $('#select_type4').css('display', 'none');
+            $('#select_type3').css('display', 'none');
+
+            select_type1 = $('#select_type1 option:selected').val();
+            continent_id = $('#select_type1 option:selected').attr('cid');
+            select_type2 = $('#select_type2 option:selected').val();
+            select_type3 = $('#select_type3 option:selected').val();
+
+            if(select_type1 == '52' && continent_id == 0){
+                $('#select_type4').css('display', 'block');
+                $('#select_type4').html('<option value="" >选择赛事</option>');
+
+                $.each(cUnions,function (k1,v1) {
+                    if(select_type1 == v1.country_id){
+                        $('#select_type4').append('<option value="'+v1.union_id+'">'+v1.union_name+'</option>');
+                    }
+                });
+            }else if(select_type1 != '52' && continent_id != 0 && type !=3 ){
+
+
+
+
+
+                $('#select_type2').css('display', 'block');
+                $('#select_type3').css('display', 'block');
+
+                $('#select_type3').html('<option value="" >选择国家</option>');
+                $('#select_type4').html('<option value="" >选择赛事</option>');
+
+                if(select_type2 == 1){
+                    $.each(cMap[continent_id],function (k2,v2) {
+                        $('#select_type3').append('<option value="'+v2.country_id+'">'+v2.s_name+'</option>');
+                    });
+
+                    $('#select_type4').css('display', 'block');
+
+                    $.each(couUnions,function (k3,v3) {
+                        if(select_type1 == v3.country_id){ console.log(v3);
+                            $('#select_type4').append('<option value="'+v3.union_id+'">'+v3.union_name+'</option>');
+                        }
+                    });
+
+                }else{
+                    $('#select_type4').css('display', 'block');
+                    $('#select_type3').css('display', 'none');
+
+                    $.each(cUnions, function (k4,v4) {
+                        if(select_type1 == v4.country_id){
+                            $('#select_type4').append('<option value="'+v4.union_id+'">'+v4.union_name+'</option>');
+                        }
+                    });
+                }
+            }else if(type ==3){
+                $('#select_type2').css('display', 'block');
+                $('#select_type4').css('display', 'block');
+                $('#select_type3').css('display', 'block');
+                $('#select_type4').css('display', 'block');
+
+                $('#select_type4').html('<option value="" >选择赛事</option>');
+
+                $.each(couUnions,function (k5,v5) {
+                    if(select_type3 == v5.country_id){
+                        $('#select_type4').append('<option value="'+v5.union_id+'">'+v5.union_name+'</option>');
+                    }
+                });
+			}
+        }
+        //联动选择联赛 end
+
+	});
+
+
+	function delPic(id,number,type){
+		if(confirm("确认要删除吗？") == false){
+			return false;
+		}
+		//异步执行删除
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/IntroClass/delPic.html",
+            data: {'id':id,'type':type},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                	$("#viewUploadInput_"+number+"").val("");
+					$("#viewUploadImg_"+number+"").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+					var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_"+number+"')\">添加图片</a>";
+					$("#poiter_"+number+"").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+
+
+
+</script>
+
+
+
+

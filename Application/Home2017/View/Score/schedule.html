@@ -1,0 +1,266 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>全球体育_完场比分_足球比分_篮球比分_即时比分_比分直播_未来赛程_竞彩比分</title>
+    <meta name="keywords" content="竞彩比分、足球比分、篮球比分、即时比分、完场比分、nba比分、zuqiubifen、bifenzhibo、2018世界杯"/>
+    <meta name="description" content="全球体育网是2018足球世界杯比分、竞彩比分、足球比分、篮球比分、即时比分、完场比分、nba比分、zuqiubifen、bifenzhibo的大数据比分平台"/>
+</block>
+
+<block name="body">
+<body <if condition="$header neq ''">style="background: #ffffff;"</if>>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreLive/scoreLive.css?20171226">
+
+    <div class="body">
+        <if condition="$header eq ''">
+            <include file="Public:top_score"/>
+        </if>
+        <!-- 主体内容开始 -->
+        <div class="home clearfix">
+            <!-- 导航开始 -->
+            <include file="Public:score_nav"/>
+            <section class="main">
+                <!-- 筛选功能选择开始 -->
+                <div class="control-con">
+                    <!-- 筛选导航 -->
+                    <div class="control-box clearfix">
+                        <div class="pull-left control-2">
+                            <ul class="clearfix">
+                        		<li class="on"><a href="javascript:;" class="type-li01">完整</a></li>
+                                <li><a href="javascript:;" class="type-li02">滚球</a></li>
+                                <li><a href="javascript:;" class="type-li03">竞彩</a></li>
+                                <li><a href="javascript:;" class="type-li04">精简</a></li>
+                        	</ul>
+                        </div>
+                        <div class="pull-left control-l">
+                            <ul class="control-ul clearfix">
+                                <li class="control-li control-li01"><a href="javascript:;" class="mya pitch" type="block">保留选中</a></li>
+                                <li class="control-li control-li02"><a href="javascript:;" class="mya pitch" type="none">隐藏选中</a></li>
+                                <li class="control-li control-li03">
+                                    <a href="javascript:;" class="mya dropdown event">
+                                        赛事选择<span class="caret"></span>
+                                    </a>
+                                    <div class="box-list dropdown-menu">
+                                        <div class="clearfix">
+                                        	<div class="pull-left box-title">赛事选择</div>
+                                        	<div class="pull-right box-title"><span>隐藏 <em class="text-red count menu_count" id="test2">0</em> 场</span></div>
+                                        </div>
+                                        <div class="box-team">
+                                        	<div class="box-rank clearfix">
+                                            	<ul class="rank-ul clearfix">
+                                                    <li class="rank-ul-li01 unionLevel on"><a data-unionLevel="1" level="" href="javascript:;"><i class="iconType"></i><p>一级赛事</p></a></li>
+                                                    <li class="rank-ul-li02 unionLevel on"><a data-unionLevel="2" href="javascript:;"><i class="iconType"></i><p>二级赛事</p></a></li>
+                                                    <li class="rank-ul-li03 unionLevel on"><a data-unionLevel="3" href="javascript:;"><i class="iconType"></i><p>三级赛事</p></a></li>
+                                                </ul>
+                                            </div>
+                                            <div id="menu_list">
+                                                <ul class="clearfix match-team" menu_id="1">
+                                                <volist name="list['match']" id="match_m">
+                                                    <li style="border-color: {$match_m[4]};" match_level="{$match_m[6]}">
+                                                        <label class="inline">
+                                                            <input type="checkbox" class="userid" id="" checked="" value="option1"  union_m="{$match_m[0]}">
+                                                            <span class="bg-ac">{$match_m[$lang_num+1]}</span>
+                                                            <em>[{$match_m.total}]</em>
+                                                        </label>
+                                                    </li>
+                                                </volist>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="btn-con clearfix">
+                                            <input type="button" id="checkAll" class="btn btn-blue pull-left" value="全选">
+                                            <input type="button" id="reverse" class="btn btn-red pull-left" value="反选" style="margin-left: 12px;">
+                                            <input type="button" id="ensures" class="btn btn-blue pull-right" style="margin-left: 12px;" value="确定">
+                                            <input type="button" id="removeAll" class="btn btn-default pull-right" value="关闭">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pull-left input-append">
+                            <input id="search_text" class="Colltext pull-left" type="text" placeholder="输入球队名/赛事名">
+                            <a class="Colladd pull-left btn-orange" href="javascript:;" id="check">查看</a>
+                        </div>
+                        <div class="pull-right control-r clearfix">
+                            <div class="dropdown pull-left odds-language">
+                                <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+                                    <span id="languageContent" language="1">简体</span>
+                                    <i class="caret"></i>
+                                </button>
+                                <ul id="languageSle" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation">
+                                        <a role="menuitem" data-language="1" tabindex="-1" href="javascript:;">简体</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a role="menuitem" data-language="2" tabindex="-1" href="javascript:;">繁体</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a role="menuitem" data-language="3" tabindex="-1" href="javascript:;">EN</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pull-right sh">
+                            <span>隐藏 <em class="text-red count">0</em> 赛事</span>
+                            <a href="javascript:;" onclick="show()">显示全部</a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- 筛选功能选择结束 -->
+
+                <!-- 时间选择开始 -->
+                <div class="time-con clearfix">
+                    <ul class="clearfix pull-left">
+                        <volist name="week" id="item">
+                            <li class=<if condition="$time_class eq $item['day']">"time-li on"<else/>"time-li"</if>><a href="{:U('/schedule@bf',['score_t'=>$item['time'],'header'=>$header])}" div_id="{$item['day']}">{$item['day']}({$item['week']})</a></li>
+                        </volist>
+                    </ul>
+                </div>
+                <div></div>
+                <!-- 时间选择结束 -->
+
+                <!--滚动导航栏浮动置顶开始-->
+                <div class="mytable01" style="display:none;" id="navig">
+                    <div class="navig_tr">
+                        <table class="table table-bordered no-table-bordered" width="100%" align="center" cellspacing="0" border="0" cellpadding="0">
+                            <thead>
+                            <tr class="table-header" bgcolor="#e6e6eb">
+                                <if condition="$header eq ''"><th width="74">赛事选择</th> </if>
+                                <th width="36">选</th>
+                                <th width="74">赛事</th>
+                                <th width="50">时间</th>
+                                <th width="40">状态</th>
+                                <th width="40">天气</th>
+                                <th width="200">主场球队</th>
+                                <th width="46">比分</th>
+                                <th width="200">客场球队</th>
+                                <th width="50" title="全场角球/半场比分">角/半</th>
+                                <th width="80">SB</th>
+                                <th width="50">赢盘</th>
+                                <th width="50">入球</th>
+                                <th width="50">大小</th>
+                                <th width="50">单双</th>
+                                <th width="50">半/全</th>
+                                <th width="60">数据分析</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <!--滚动导航栏浮动置顶结束-->
+
+                <!-- 表格内容开始 -->
+                <div id="game_list">
+                    <div class="loading_gif" style="text-align: center;">
+                        <img src="__PUBLIC__/Home/score/images/loading.gif" width="180">
+                    </div>
+                    <div class="contentTable clearfix" style="display:none;">
+                        <!-- left -->
+                        <div class="pull-left left-match-select">
+                            <dl class="union_list">
+                                <dt>赛事选择</dt>
+                                <dd union_id="0"class="list_all"><a href="javascript:;" class="on">全部</a></dd>
+                                <volist name="list['match']" id="match">
+                                    <dd union_id="{$match[0]}">
+                                        <a id="union_bg" href="javascript:;">
+                                            <span class="language simplified homeLanguage">{$match[1]}</span>
+                                            <span style="display: none;" class="language traditional homeLanguage">{$match[2]}</span>
+                                            <span style="display: none;" class="language english homeLanguage">{$match[3]}</span>
+                                        </a></dd>
+                                </volist>
+                            </dl>
+                        </div>
+                        <!-- right -->
+                        <div class="pull-right mytable01 right-finish-match">
+                            <div class="livescore_table">
+                                <table class="table table-bordered" width="100%" align="center" cellspacing="0" border="0" cellpadding="0">
+                                    <thead>
+                                    <tr class="table-header" id="nav_tr" bgcolor="#e6e6eb">
+                                        <th width="36">选</th>
+                                        <th width="74">赛事</th>
+                                        <th width="50">时间</th>
+                                        <th width="40">状态</th>
+                                        <th width="40">天气</th>
+                                        <th width="200">主场球队</th>
+                                        <th width="46">比分</th>
+                                        <th width="200">客场球队</th>
+                                        <th width="50" title="全场角球/半场比分">角/半</th>
+                                        <th width="80">SB</th>
+                                        <th width="50">赢盘</th>
+                                        <th width="50">入球</th>
+                                        <th width="50">大小</th>
+                                        <th width="50">单双</th>
+                                        <th width="50">半/全</th>
+                                        <th width="60">数据分析</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="game_list">
+                                    <volist name="list['info']" id="vo">
+                                        <tr game_id="{$vo[1]}" g_id="{$vo[0]}" bgcolor="<if condition='$key%2'>#f1f1f1<else/>#ffffff</if>" order="1" m_level="{$vo[6]}" grounder="{$vo[39]}" gues="{$vo[42]}">
+                                            <td class="no-b-r"><input type="checkbox" id="" value="option0"></td>
+                                            <td class="match-name no-b-r no-b-l"><a href="javascript:;" style="background: {$vo[5]}">
+                                                <span class="language simplified homeLanguage union_s">{$vo[2]}</span>
+                                                <span style="display: none;" class="language traditional homeLanguage union_s">{$vo[3]}</span>
+                                                <span style="display: none;" class="language english homeLanguage union_s">{$vo[4]}</span>
+                                            </a></td>
+                                            <td class="no-b-r no-b-l">{$vo.9}</td>
+                                            <td class="text-red no-b-r no-b-l">{$vo.game_state}</td>
+                                            <td class="no-b-r no-b-l">--</td>
+                                            <td class="text-r"><a href="javascript:"><if condition="$vo[25] gt 0"><em class="red-card mr5">{$vo.25}</em></if><if condition="$vo[27] gt 0"><em class="yellow-card mr5">{$vo.27}</em></if><em class="mr5"><if condition="!empty($vo[19])">[{$vo.19}]</if></em>
+                                                <span class="language simplified homeLanguage home_s">{$vo[13]}</span>
+                                                <span style="display: none;" class="language traditional homeLanguage home_s">{$vo[14]}</span>
+                                                <span style="display: none;" class="language english homeLanguage home_s">{$vo[15]}</span>
+                                            </a></td>
+                                            <td class="s_score" style="cursor:pointer;" first="{$vo['sb']}">
+                                            <a href="javascript:;"><strong><font color="{$vo['home_col']}">{$vo.21}</font>:<font color="{$vo['away_col']}">{$vo.22}</font></strong></a></td>
+                                            <td class="text-l"><a href="javascript:">
+                                                <span class="language simplified homeLanguage away_s">{$vo[16]}</span>
+                                                <span style="display: none;" class="language traditional homeLanguage away_s">{$vo[17]}</span>
+                                                <span style="display: none;" class="language english homeLanguage away_s">{$vo[18]}</span>
+                                            <em class="ml5"><if condition="!empty($vo[20])">[{$vo.20}]</if></em>&nbsp;<if condition="$vo[26] gt 0"><em class="red-card mr5">{$vo.26}</em></if><if condition="$vo[28] gt 0"><em class="yellow-card mr5">{$vo.28}</em></if></a></td>
+                                            <td ><div class="jqColor"><strong>{$vo.29}</strong>-<strong>{$vo.30}</strong></div><div class="bcColor"><strong>{$vo.23}-{$vo.24}</strong></div></td>
+                                            <td aloc="1" class="text-green">{$vo.sb|default="--"}</td>
+                                            <td><font color="{$vo['win_col']}">{$vo.win}</font></td>
+                                            <td class="">{$vo.total}</td>
+                                            <td class="{$vo['score_col']}">{$vo.score}</td>
+                                            <td class="{$vo['double_col']}">{$vo.double}</td>
+                                            <td class="b-l">{$vo.draw}</td>
+                                            <td class="b-l">
+                                            	<div class="dataLink">
+                                                    <a href="{:U('/ypOdds@bf',['game_id'=>$vo[0],'sign'=>1])}" target="_blank">亚</a>
+                                                    <a href="{:U('/eur_index@bf','game_id='.$vo[0])}" target="_blank">欧</a>
+                                                    <a href="{:U('/dataFenxi@bf','game_id='.$vo[0])}" target="_blank" class="text-bblue">析</a>
+                                                    <if condition="$vo[49] eq 1">
+                                                        <a href="{:U('/gambleDetails@bf',['game_id'=>$vo[0]])}" class="text-bblue" target="_blank">猜</a>
+                                                        <else/><a href="javascript:;" class="text-red">&nbsp;&nbsp;&nbsp;</a>
+                                                    </if>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- 移上全场比分出现（比分事件） -->
+                            <div id="jinq_box" style="position: absolute; z-index: 28; top: 4717px; left: 109px; width: 500px; font-size: 12px; box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 1px 2px; display: none;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 表格内容开始 -->
+          	</section>
+        </div>
+
+        <!-- 主体内容开始 -->
+        <if condition="$header eq ''">
+        <!-- 梯口模块开始 -->
+        <include file="Public:s_elevator"/>
+        <include file="Public:footer"/>
+        </if>
+    </div>
+</body>
+</html>
+<!--引入本页所需js-->
+<script type="text/javascript" src="/min/?b=Public/Home&f=backend_js/common/cookie.js,score/js/schedule.js"></script>
+
+</block>

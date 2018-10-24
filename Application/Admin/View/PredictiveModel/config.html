@@ -1,0 +1,75 @@
+<style>
+    .noFloat{float: none !important;text-align:center;}
+</style>
+<div class="pageContent">
+    <form method="post" action="__URL__/config" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>竞彩预测配置：</label>
+            </div>
+            <div class="unit">
+                <label style="width:auto;">（1）比分交易成交比例概率达 <input type="text" name="config[jc][1]" value="{$config[jc][1]}" class="noFloat digits" size="1">% 以上比赛</label>
+            </div>
+            <div class="unit">
+                <label style="width:auto;">（2）成交概率 <input type="text" name="config[jc][2]" value="{$config[jc][2]}" class="noFloat digits" size="1">% 以上的，预测结果是概率最大的选项</label>
+            </div>
+            <div class="unit">
+                <label style="width:auto;">（3）成交概率 <input type="text" name="config[jc][3][1]" value="{$config[jc][3][1]}" class="noFloat digits" size="1">% 至 <input type="text" name="config[jc][3][2]" value="{$config[jc][3][2]}" class="noFloat digits" size="1">% 成交价高于1.60的，预测结果是概率最大的两个选项</label>
+            </div>
+            <div class="unit">
+                <label style="width:auto;">（4）成交概率 <input type="text" name="config[jc][4][1]" value="{$config[jc][4][1]}" class="noFloat digits" size="1">% 至 <input type="text" name="config[jc][4][2]" value="{$config[jc][4][2]}" class="noFloat digits" size="1">% 成交价小于等于1.60的，预测结果是概率最大的两个选项</label>
+            </div>
+            <div class="unit"></div>
+            <div class="unit">
+                <label>让球预测配置：</label>
+            </div>
+            <div class="unit">
+                <label style="width:auto;">（1）实力对抗差异值超过 <input type="text" name="config[yp][1]" value="{$config[yp][1]}" class="noFloat digits" size="1"></label>
+            </div>
+            <div class="unit">
+                <label style="width:auto;">（2）亚盘倾向值差异超过 <input type="text" name="config[yp][2]" value="{$config[yp][2]}" class="noFloat digits" size="1"></label>
+            </div>
+            <div class="unit"></div>
+            <div class="unit">
+                <label>预测模型服务模式：</label>
+                <input type="radio" name="config[model_type]" value="0" <eq name="config[model_type]" value="0">checked</eq>>免费
+                <input type="radio" name="config[model_type]" value="1" <eq name="config[model_type]" value="1">checked</eq>>付费
+            </div>
+            <div class="unit"></div>
+            
+            <div class="unit vipConfig" <if condition="$config[model_type] eq '0'">style="display:none"</if>>
+                <label>预测模型收费配置：</label>
+                <label>
+                    价格：<input type="text" name="config[vipConfig][price]" value="{$config[vipConfig][price]}" class="noFloat digits vipConfig" size="1"/>元
+                </label>
+                <label>
+                    天数：<input type="text" name="config[vipConfig][days]" value="{$config[vipConfig][days]}" class="noFloat digits vipConfig" size="1">天
+                </label>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+<script>
+    $(function(){
+        //免费时隐藏配置
+        $("input[name='config[model_type]']").on('click',function(){
+            var model_type = $(this).val();
+            if(model_type == 0){
+                $(".vipConfig").hide();
+            }else{
+                $(".vipConfig").show();
+            }
+        })
+    })
+</script>
+
+
+
+

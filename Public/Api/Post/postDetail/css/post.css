@@ -1,0 +1,171 @@
+/**
+ * 新闻css样式文件
+ * 
+ * @author pengjian <710348662@qq.com>
+ *
+ * @since  2016-04-11
+**/
+
+/*--------------------------------- 新闻详情 ---------------------------------*/
+.art_main{padding: .2rem; width: 100%;padding-bottom: 0}
+.art_main2{ }
+.art_main3{padding-top: .25rem;}
+/*标题*/
+.art_title {
+    clear: both;  
+    padding: .3rem 0 .1rem 0;
+}
+.art_title h1 { 
+    font-weight: bold;
+    font-size: .38rem; 
+}
+.art_title time {  
+    font-size: .24rem; 
+    color: #999999
+}
+
+/*内容*/
+.article_main {
+    clear: both; 
+    text-align: justify; 
+    font-size: .36rem;  
+    line-height: 180%;
+    overflow: hidden;  
+}
+.article_main p{ 
+    text-align:justify;
+}
+.article_main pre{ margin: .1rem 0; word-break: break-all;  word-wrap: break-word;}
+.article_main img{ 
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    width: 100%;
+    border-radius: .1rem;
+     }
+
+/*相关*/
+.about_link{width:100%; min-height:1.3rem; border-top: 1px solid #e6e6e6; margin-top: .4rem; padding-top: .4rem;}
+.about_link .line{ width: 100%; height: 1rem; background: #fafafa; float: left;margin-top: 1.2rem }
+.about_l{ display: inline-block; line-height: .6rem; border-left: 0.07rem solid #01af63; color: #01af63; font-size: .36rem; text-align: center;padding-left: .2rem }
+.about_r a{display: inline-block; color:#ff7e00; padding: 0 .1rem; line-height:.7rem; text-align: center; border:1px solid #ff7e00; border-radius: 0.05rem; margin-left: .3rem; margin-bottom: .1rem; font-size: .34rem}
+
+/*评论*/
+.article_hotcmnt{}
+.cmmt_title{ color: #fff;height: .65rem;line-height: .65rem; background: #00af62;padding: 0 .2rem }
+.comment_box{width:100%;border-bottom: 1px solid #e6e6e6; margin-top: .3rem;padding: 0 .2rem;-webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+   box-sizing: border-box;   }
+
+
+.head{border-radius: 50%; width: .8rem; height:  .8rem; float: left; }
+.head img{border-radius: 50%; width:  .8rem; height:  .8rem; }
+
+.comment_wrap{  
+  overflow: hidden;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box; /* Firefox */
+  -webkit-box-sizing:border-box; /* Safari */
+  padding-left: .2rem;
+  position: relative;
+}
+.comment_wrap aside{position: absolute;top:.05rem; right: .1rem}
+.comment_wrap aside a img{ width: .06rem;height: .3rem }
+.comment_wrap p{float: left; width: 100%; height: auto}
+.comment_wrap p span{float: left; color: #333333; font-size: .28rem}
+.comment_wrap p span em{font-size: .24rem;color: #999;padding-left: .05rem}
+.comment_wrap p a.on{color: #ff7e00; background: url(../images/yy_on.png) no-repeat left center; background-size: .36rem .36rem;height: .36rem;line-height: .36rem; display: block; float: right; padding-left: .4rem;font-size: .28rem;}
+.comment_wrap time{color: #999999; font-size: .22rem; display: block; width: 100%; float: left;padding-top: .1rem}
+.comment_wrap article{padding: 0.1rem 0; font-size: .3rem;float: left;width: 100%; line-height: 150%  }
+.comment_wrap .lz{border-bottom: 1px solid #e6e6e6; }
+
+.comment_wrap .reply{color: #666666;}
+.comment_wrap .reply em{color: #b2b2b2;}
+.comment_wrap .reply em span{color: #1490d8;}
+.comment_wrap .reply:first-child{border-top: 1px solid #e6e6e6;}
+
+.more_btn{width:100%;margin: .2rem 0;float: left;text-align: center;}
+
+/*查看更多*/
+.view_more{padding: .3rem 0; }
+.view_more a{ width: 80%; height: .8rem; line-height: .8rem; display: block; text-align: center; margin: 0 auto;  color: #fff; border-radius:0.2rem; background: #fe7000; font-size: .34rem    }
+
+.news_page{height: .8rem;line-height: .8rem;border-bottom: 1px solid #e6e6e6;text-align: center;font-size: .3rem;padding:0 .2rem}
+.news_page a{color: #999999}
+.news_page span{color: #01af63}
+.news_page .pre{float: left;}
+.news_page .next{float: right;}
+/*分享*/
+#other_header{position: relative;}
+#other_header .share{float: right;display: block;}
+#other_header .share img{width: .4rem; height: .4rem;vertical-align: middle;}
+/*评论框*/
+.pl_main{height: 1rem;  background: #f7f7f7;padding:0 .2rem;}
+.pl_main textarea{width: 83%; height: .7rem;line-height: .5rem;border:1px solid #999999;margin-top: .15rem;font-size: .26rem;border-radius: 5px;padding: .1rem;padding-left: .15rem }
+.pl_main .submit{background: url(../images/put.png) no-repeat center center; background-size: .34rem .4rem; width: .7rem;height: .7rem; cursor: pointer; float: right;margin-top: .15rem;border:1px solid #dedede; border-radius: 50%;line-height: .7rem }
+
+
+/*---------------------------------新闻-热盘---------------------------------*/
+.news_hot ul li{padding:.2rem .2rem; border-bottom: 1px solid #dddddd;}
+.news_hot p{width: 100%}
+/*top*/
+.news_hot .nh_top aside{float: left; width: .8rem; height: .8rem; border-radius: 50%}
+.news_hot .nh_top aside img{width: .8rem; height: .8rem; border-radius: 50%}
+.news_hot .nh_top .nht_right{padding-left: .25rem;}
+.news_hot .nh_top .nht_right p{color: #ff7e00; font-size: .26rem;padding-top: .05rem;    width: 100%;
+    display: block;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;}
+.news_hot .nh_top .nht_right p span{color: #00b15e;font-size: .28rem; padding-right: .35rem }
+.news_hot .nh_top .nht_right h3{padding-top: .12rem;font-size: .32rem;font-weight: normal;}
+/*des*/
+.news_hot .nt_des{padding-top: .2rem; color: #666666}
+
+/* app下载 */
+.app-bar{ overflow: hidden; width:100%; height: 1.1rem; background: #f7f7f7;  font-family: "Microsoft Yahei";}
+.app-bar .app-logo{float:left; width: .8rem; margin: .15rem 0 0 .5rem;}
+.app-btn{ float:right; background-color: #ff7e00; border-radius: .08rem; width: 1.8rem; height: .68rem; line-height: .68rem; font-size: 0.34rem; text-align: center; margin: .21rem .2rem 0 0; color:#FFF;}
+.app-bar .app-title{ float: left; margin-left: .42rem; padding: .15rem 0;}
+.app-bar .app-title .p1{ font-size: .32rem;}
+.app-bar .app-title .p2{ font-size: .24rem;}
+
+/*用户信息*/
+.user_msg{position: absolute;top:.3rem;left: 0.2rem}
+.user_msg .user_head{width: .9rem;height: .9rem;border-radius: 50%;}
+.user_msg .user_else{width: auto;height: .8rem}
+.user_msg .user_else p{line-height: .32rem;float: left;width: 100%;text-align: left;text-indent: 0;margin-left: .2rem;padding-top: .16rem;color: #222;}
+.user_msg .user_else p:nth-child(2){color: #999999;font-size: .22rem}
+
+/*等级*/
+.lv0 {background: url(../images/level/ic_lv0@2x.png) no-repeat center center;}
+.lv1 {background: url(../images/level/ic_lv1@2x.png) no-repeat center center;}
+.lv2 {background: url(../images/level/ic_lv2@2x.png) no-repeat center center;}
+.lv3 {background: url(../images/level/ic_lv3@2x.png) no-repeat center center;}
+.lv4 {background: url(../images/level/ic_lv4@2x.png) no-repeat center center;}
+.lv5 {background: url(../images/level/ic_lv5@2x.png) no-repeat center center;}
+.lv6 {background: url(../images/level/ic_lv6@2x.png) no-repeat center center;}
+.lv7 {background: url(../images/level/ic_lv7@2x.png) no-repeat center center;}
+.lv8 {background: url(../images/level/ic_lv8@2x.png) no-repeat center center;}
+.lv9 {background: url(../images/level/ic_lv9@2x.png) no-repeat center center;}
+
+.level {
+    display: block;
+    width: .4rem;
+    height: .28rem;
+    background-size: .4rem .28rem; 
+    display: inline-block;
+}
+
+
+
+/*点赞*/
+.zan div{position: relative;width: 1.4rem; height: 1.4rem; border:1px solid #999999; border-radius:50%;background:url(../images/z.png) no-repeat center 0.4rem; margin:0 auto; margin-top: .6rem; background-size: .46rem .46rem;}
+.zan div span{ text-align: center; width: 1.4rem; display: block; vertical-align: middle; line-height: 2.1rem; font-size: .24rem;color: #999999 }
+.zan.on div{border:1px solid #ea6464; background:url(../images/z_on.png) no-repeat center 0.4rem; background-size: .46rem .46rem;}
+.zan.on div span{color: #eb6363}
+.zan div p{color:#fff; width: .6rem; height: .4rem; line-height: .4rem; background-color: #ef8282;font-size: .28rem; text-align: center; border-radius: 5px; position: absolute; left: 50%; top:0; margin-left: -0.3rem; display: none;   }
+
+.article_img{margin-top: .2rem}
+.article_img img{margin-bottom: .1rem}

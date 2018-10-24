@@ -1,0 +1,24 @@
+<!-- 左边导航开始 -->
+<div class="pull-left left">
+    <ul class="q-leftNav">
+    <volist name="helpClass" id="item">
+        <li class="<if condition="$Think.get.classId eq $item['id'] or ($Think.get.classId eq '' and $i eq 1)">active</if>">
+            <a href="javascript:;" class="q-slideBtn clearfix"><span class="icon <if condition="$key eq 1">icon-auto</if><if condition="$key eq 2">icon-nav</if>"></span><em class="text-em">{$item.name}</em> <i class="icon-arrow"></i></a>
+            <div class="q-slideNav" <if condition="$Think.get.classId eq $item['id'] or ($Think.get.classId eq '' and $i eq 1)">style="display:block"</if>>
+                <ul>
+                <volist name="item.childClass" id="item2">
+                    <li>
+                    <if condition="$item2.url eq NUll">
+                    <a <if condition="$Think.get.class_id eq $item2['id']">class="q-current"</if> href="{:U('/help_list/'.$item2['pid'].'/'.$item2['id'].'')}">{$item2.name}</a>
+                    <else/>
+                    <a target="_blank" href="{$item2.url}">{$item2.name}</a>
+                    </if>
+                    </li>
+                </volist>
+                </ul>
+            </div>
+        </li>
+    </volist>
+    </ul>
+</div>
+<!-- 左边导航结束 -->

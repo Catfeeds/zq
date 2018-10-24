@@ -1,0 +1,72 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>国家名称：</label>
+				<input type="text" name="country" value="{$_REQUEST.country}"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true"><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/foreverdelete/id/{sid_record}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择记录"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" warn="请选择记录"><span>编辑</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="10%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="15%">国家名称</th>
+			<th width="15%">国家图片</th>
+			<th width="10%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'ranking')"> class="desc"</if> orderField="ranking" <if condition="$_REQUEST._order eq 'ranking'">class="{$_REQUEST._sort}"</if>>排名</th>
+			<th width="10%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'gold')"> class="desc"</if> orderField="gold" <if condition="$_REQUEST._order eq 'gold'">class="{$_REQUEST._sort}"</if>>金牌数</th>
+			<th width="10%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'silver')"> class="desc"</if> orderField="silver" <if condition="$_REQUEST._order eq 'silver'">class="{$_REQUEST._sort}"</if>>银牌数</th>
+			<th width="10%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'copper')"> class="desc"</if> orderField="copper" <if condition="$_REQUEST._order eq 'copper'">class="{$_REQUEST._sort}"</if>>铜牌数</th>
+			<th width="10%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['country']}</td>
+					<td>
+						<a target="_blank" href="{$vo.img}">
+							<img src="{$vo.img}" alt="国家图片" width="40" height="25">
+						</a>
+					</td>
+					<td>{$vo['ranking']}</td>
+					<td>{$vo['gold']}</td>
+					<td>{$vo['silver']}</td>
+					<td>{$vo['copper']}</td>
+					<td>
+					<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" title="编辑" rel="editPage">编辑</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

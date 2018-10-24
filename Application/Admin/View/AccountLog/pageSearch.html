@@ -1,0 +1,101 @@
+
+<if condition="$_REQUEST.SignaccountLogIndex eq '1'">
+	<div class="pageContent">
+		<form method="post" action="{$_REQUEST.actionName}"class="pageForm" onsubmit="return navTabSearch(this);">
+			<input type="hidden" name="logType" value="{$_REQUEST.logType}"/>
+		    <input type="hidden" name="amount" value="{$_REQUEST.amount}"/>
+		    <input type="hidden" name="drawing" value="{$_REQUEST.drawing}"/>
+		    <input type="hidden" name="user_id" value="{$_REQUEST.user_id}"/>
+			<div class="pageFormContent" layoutH="58">
+
+				<div class="unit" width="200" height="50">
+					<label>创建时间：</label>
+	                <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="11"><label style="width:10px">至</label>
+	                <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="11">
+				</div>
+				<div class="unit" width="200">
+					<label>处理时间：</label>
+	                <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.start_time}" name="start_time" size="11"><label style="width:10px">至</label>
+	                <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.end_time}" name="end_time" size="11">
+				</div>
+				<div class="unit" width="200">
+					<label>手机号：</label>
+                    <input name="username" value="{$_REQUEST.username}" type="text" placeholder="手机号"/>
+				</div>
+				<div class="unit" width="200">
+					<label>昵称：</label>
+                    <input name="nick_name" value="{$_REQUEST.nick_name}" type="text" placeholder="昵称"/>
+				</div>
+				<div class="unit" width="200">
+					<label>订单交易号：</label>
+                    <input name="alipay_trade_no" size="50" value="{$_REQUEST.alipay_trade_no}" type="text" placeholder="订单交易号"/>
+				</div>
+				<div class="unit" width="200">
+					<label>说明：</label>
+                	<input name="desc" value="{$_REQUEST.desc}" type="text" size="15" />
+				</div>
+				<div class="unit" width="200">
+					<label>渠道：</label>
+	                <select name="platform" class="combox" onchange="$(form).submit()">
+	                    <option value="">全部</option>
+	                    <option value="1" <if condition="$_REQUEST.platform eq 1">selected</if>>web</option>
+	                    <option value="2" <if condition="$_REQUEST.platform eq 2">selected</if>>IOS</option>
+	                    <option value="3" <if condition="$_REQUEST.platform eq 3">selected</if>>ANDRIOD</option>
+	                    <option value="4" <if condition="$_REQUEST.platform eq 4">selected</if>>m站</option>
+                	</select>
+				</div>
+				<if condition="($_REQUEST.logType eq '' or $_REQUEST.logType eq '2') and $_REQUEST.drawing eq ''">
+					<div class="unit" width="200">
+	                    <label>状态：</label>
+	                    <select name="log_status" class="combox" onchange="$(form).submit()">
+	                        <option value=""  >全部</option>
+	                        <volist name=":C('accountStatus')" id="item" offset="1" length='10'>
+	                            <option value="{$key}" <if condition="$_REQUEST.log_status eq $key">selected</if>>{$item}</option>
+	                        </volist>
+	                    </select>
+					</div>
+				</if>
+				<if condition="$_REQUEST.logType eq '' and $_REQUEST.drawing eq ''">
+				<div class="unit" width="200">
+                    <label>类型：</label>
+                    <select name="log_type" class="combox" onchange="$(form).submit()">
+                        <option value="">全部</option>
+                        <volist name=":C('accountType')" id="item">
+                            <option value="{$key}" <if condition="$_REQUEST.log_type eq $key">selected</if>>{$item}</option>
+                        </volist>
+                    </select>
+				</div>
+				</if>
+					<div class="unit" width="200" <if condition="$_REQUEST.logType neq 1">style="display:none;"</if>>
+		                    <label>类型：</label>
+		                    <select name="log_type" class="combox" onchange="$(form).submit()">
+		                        <option value="">全部</option>
+		                        <option value="1" <if condition="$_REQUEST.log_type eq 1">selected</if>>手动充值</option>
+		                        <option value="8" <if condition="$_REQUEST.log_type eq 8">selected</if>>自动充值</option>
+		                    </select>
+		            </div>
+					<div class="unit" width="200" <if condition="$_REQUEST.logType neq 1">style="display:none;"</if>>
+	                    <label>支付方式：</label>
+	                    <select name="pay_way" class="combox" onchange="$(form).submit()">
+	                        <option value="">全部</option>
+	                        <option value="1" <if condition="$_REQUEST.pay_way eq 1">selected</if>>支付宝</option>
+	                        <option value="2" <if condition="$_REQUEST.pay_way eq 2">selected</if>>微信</option>
+	                        <option value="3" <if condition="$_REQUEST.pay_way eq 3">selected</if>>网银</option>
+	                        <option value="4" <if condition="$_REQUEST.pay_way eq 4">selected</if>>移动支付</option>
+	                        <option value="5" <if condition="$_REQUEST.pay_way eq 5">selected</if>>苹果支付</option>
+	                        <option value="6" <if condition="$_REQUEST.pay_way eq 6">selected</if>>苹果沙盒</option>
+	                    </select>
+					</div>
+
+			</div>
+			<if condition="$_REQUEST.SignaccountLogIndex eq '1' ">
+				<div class="formBar">
+					<ul>
+						<li><div class="buttonActive"><div class="buttonContent"><button type="submit">开始检索</button></div></div></li>
+						<!--- <li><div class="button"><div class="buttonContent"><button type="reset">清空重输</button></div></div></li> -->
+					</ul>
+				</div>
+			</if>
+		</form>
+	</div>
+</if>

@@ -1,0 +1,1054 @@
+<extend name="Public/tpl-detail" />
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/odd_guess.css"> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/scrollCss3/animateTeam.css">
+    <style>
+        a.disable{filter:alpha(opacity=70);  
+      -moz-opacity:0.7;
+      -khtml-opacity: 0.7;  
+      opacity: 0.7;}
+    </style>
+
+    <!-- 本页需要引用的js -->
+    <script type="text/javascript" src="__PUBLIC__/Mobile/Plugs/jquery.lazyload.min.js"></script>
+    <script type="text/javascript" src="__JS__/scrollCss3/collapsingToolbarLayout.js"></script>
+</block>
+
+
+
+<block name="content">
+    <nav class="jc_type">
+      <a id="yp" href="javascript:;" <eq name="ypHas" value='0'> style="background-color: gainsboro"</eq> <if condition="$_REQUEST.gambleType eq '1' or $_REQUEST.gambleType eq ''">class="on"<else/>class="jc"</if> ><i></i>亚盘</a>
+      <a id="jc" href="javascript:;" <eq name="game.is_betting" value='0'> style="background-color: gainsboro"</eq> <if condition="$_REQUEST.gambleType eq '2' ">class="on"<else/>class="jc"</if>><i></i>竞彩</a>
+    </nav>
+    <!-- tip -->
+    <eq name="ypHas" value='0'>
+        <section id="ypHas" class="com_nodata" style="display: none">
+            <img src="__IMAGES__/icon/guess_nomore.png" alt="暂无数据">
+            <p>该场次不参与推荐</p>
+        </section>
+    </eq>
+    <eq name="game.is_betting" value='0'>
+        <section id="jcHas" class="com_nodata" style="display: none;">
+            <img src="__IMAGES__/icon/guess_nomore.png" alt="暂无数据">
+            <p>该场次不参与推荐</p>
+        </section>
+    </eq>
+
+    <section class="data_con2 guess_sele_con" style="height: auto!important;">
+        <neq name="ypHas" value='0'>
+            <table id="ypTable" style="display: block;" class="tb_guess_sele" border="0" cellpadding="5" cellspacing="5">
+                <tbody>
+                <tr>
+                    <th colspan="3"><em></em>免费推荐 <span class="have_tip"><i>温馨提示：</i>剩余<span id="normLeftTimes">{$normLeftTimes}</span>场；错了不扣分，对了送100*赔率积分</span></th>
+                </tr>
+                <tr class="zk">
+                    <td>全场让球</td>
+                    <td>
+                        <a title="让球" class="<eq name='stop' value='1'> disable </eq> <notpresent name='mygamble[1]'>js-option<else/>disable</notpresent> <eq name='mygamble[1]' value='1'>on</eq>"
+                           href="javascript:;" data-type="1" data-side="1"  data-handcp="{$data_fsw_exp}">
+                            主&nbsp;<span id="handcpLetHome">{$game.fsw_exph}</span><span id="oddsLetHome">({$game.fsw_exp_home})</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a title="让球" class="<eq name='stop' value='1'> disable </eq> <notpresent name='mygamble[1]'>js-option<else/>disable</notpresent> <eq name='mygamble[1]' value='-1'>on</eq>"
+                           href="javascript:;" data-type="1" data-side="-1" data-handcp="{$data_fsw_exp}">
+                            客&nbsp;<span id="handcpLetAway">{:changeExp($game['fsw_exp'])}</span><span id="oddsLetAway">({$game.fsw_exp_away})</span>
+                        </a>
+                    </td>
+                </tr>
+                <tr class="dx">
+                    <td>全场大小</td>
+                    <td>
+                        <a  title="大小" class="<eq name='stop' value='1'> disable </eq> <notpresent name='mygamble[-1]'>js-option<else/>disable</notpresent> <eq name='mygamble[-1]' value='1'>on</eq>"
+                           href="javascript:;" data-type="-1" data-side="1" data-handcp="{$game.fsw_ball}">
+                            大&nbsp;<span id="handcpSizeHome">{$game.fsw_ball}</span><span id="oddsSizeHome">({$game.fsw_ball_home})</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a title="大小" class="<eq name='stop' value='1'> disable </eq> <notpresent name='mygamble[-1]'>js-option<else/>disable</notpresent> <eq name='mygamble[-1]' value='-1'>on</eq>"
+                           href="javascript:;" data-type="-1" data-side="-1" data-handcp="{$game.fsw_ball}">
+                            小&nbsp;<span id="handcpSizeAway">{$game.fsw_ball}</span><span id="oddsSizeAway">({$game.fsw_ball_away})</span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </neq>
+        <neq name="game.is_betting" value='0'>
+            <table id="jcTable" style="display: none;" class="tb_guess_sele" border="0" cellpadding="5" cellspacing="5">
+                <tbody>
+                <tr>
+                    <th colspan="4">
+                        <em></em>
+                        免费推荐 <span class="have_tip">
+                        <i>温馨提示：</i>
+                        剩余<span id="jcNormLeftTimes">{$jcNormLeftTimes}</span>场；错了不扣分，对了送100*赔率积分</span>
+                    </th>
+                </tr>
+                <tr class="zk">
+                    <td>竞彩(0)</td>
+                    <td>
+                        <if condition="$jcGame['home_odds'] neq '' and $jcGame['draw_odds'] neq '' and $jcGame['away_odds'] neq '' ">
+                            <a title="非让球" class="<eq name='stop' value='1'> disable </eq> <notpresent name='mygamble[2]'>js-option<else/>disable</notpresent> <eq name='mygamble[2]' value='1'>on</eq>"
+                               href="javascript:;" data-type="2" data-side="1" data-handcp="0">
+                                胜&nbsp;<span>{$jcGame['home_odds']}</span>
+                            </a>
+                            <else/>
+                            <a title="非让球" class="disable"
+                               href="javascript:;" data-type="2" data-side="1" data-handcp="0">
+                                未开盘
+                            </a>
+                        </if>
+
+                    </td>
+                    <td>
+                        <if condition="$jcGame['home_odds'] neq '' and $jcGame['draw_odds'] neq '' and $jcGame['away_odds'] neq '' ">
+                            <a title="非让球" class="<eq name='stop' value='1'> disable </eq> <notpresent name='mygamble[2]'>js-option<else/>disable</notpresent> <eq name='mygamble[2]' value='0'>on</eq>"
+                               href="javascript:;" data-type="2" data-side="0" data-handcp="0">
+                                平&nbsp;<span>{$jcGame['draw_odds']}</span>
+                            </a>
+                            <else/>
+                            <a title="非让球" class="disable"
+                               href="javascript:;" data-type="2" data-side="1" data-handcp="0">
+                                未开盘
+                            </a>
+                        </if>
+
+                    </td>
+                    <td>
+                        <if condition="$jcGame['home_odds'] neq '' and $jcGame['draw_odds'] neq '' and $jcGame['away_odds'] neq '' ">
+                            <a title="非让球" class="<eq name='stop' value='1'> disable </eq> <notpresent name='mygamble[2]'>js-option<else/>disable</notpresent> <eq name='mygamble[2]' value='-1'>on</eq>"
+                               href="javascript:;" data-type="2" data-side="-1" data-handcp="0">
+                                负&nbsp;<span>{$jcGame['away_odds']}</span>
+                            </a>
+                            <else/>
+                            <a title="非让球" class="disable"
+                               href="javascript:;" data-type="2" data-side="1" data-handcp="0">
+                                未开盘
+                            </a>
+                        </if>
+                    </td>
+                </tr>
+                <tr class="dx">
+                    <td id="jcLetHandcp">竞彩({$jcGame['let_exp']})</td>
+                    <td>
+                        <if condition="$jcGame['home_letodds'] neq '' and $jcGame['draw_letodds'] neq '' and $jcGame['away_letodds'] neq '' ">
+                            <a title="让球" class="<eq name='stop' value='1'> disable </eq> <notpresent name='mygamble[-2]'>js-option<else/>disable</notpresent> <eq name='mygamble[-2]' value='1'>on</eq>"
+                               href="javascript:;" data-type="-2" data-side="1"
+                               data-handcp="{$jcGame['let_exp']}">
+                                胜&nbsp;<span id="jcLetWinOdds">{$jcGame['home_letodds']}</span>
+                            </a>
+                            <else/>
+                            <a title="非让球" class="disable"
+                               href="javascript:;" data-type="2" data-side="1" data-handcp="0">
+                                未开盘
+                            </a>
+                        </if>
+                    </td>
+                    <td>
+                        <if condition="$jcGame['home_letodds'] neq '' and $jcGame['draw_letodds'] neq '' and $jcGame['away_letodds'] neq '' ">
+                            <a title="让球" class="<eq name='stop' value='1'> disable </eq> <notpresent name='mygamble[-2]'>js-option<else/>disable</notpresent> <eq name='mygamble[-2]' value='0'>on</eq>"
+                               href="javascript:;" data-type="-2" data-side="0"
+                               data-handcp="{$jcGame['let_exp']}">
+                                平&nbsp;<span id="jcLetDrawOdds">{$jcGame['draw_letodds']}</span>
+                            </a>
+                            <else/>
+                            <a title="非让球" class="disable"
+                               href="javascript:;" data-type="2" data-side="1" data-handcp="0">
+                                未开盘
+                            </a>
+                        </if>
+                    </td>
+                    <td>
+                        <if condition="$jcGame['home_letodds'] neq '' and $jcGame['draw_letodds'] neq '' and $jcGame['away_letodds'] neq '' ">
+                            <a title="让球" class="<eq name='stop' value='1'> disable </eq> <notpresent name='mygamble[-2]'>js-option<else/>disable</notpresent> <eq name='mygamble[-2]' value='-1'>on</eq>"
+                               href="javascript:;" data-type="-2" data-side="-1"
+                               data-handcp="{$jcGame['let_exp']}">
+                                负&nbsp;<span id="jcLetLoseOdds">{$jcGame['away_letodds']}</span>
+                            </a>
+                            <else/>
+                            <a title="非让球" class="disable"
+                               href="javascript:;" data-type="2" data-side="1" data-handcp="0">
+                                未开盘
+                            </a>
+                        </if>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </neq>
+
+        <script>
+            //获取字符串长度（汉字算两个字符，字母数字算一个）
+            function getByteLen(val) {
+                var len = 0;
+                for (var i = 0; i < val.length; i++) {
+                    var a = val.charAt(i);
+                    if (a.match(/[^\x00-\xff]/ig) != null) {
+                        len += 1;
+                    }
+                    else {
+                        len += 1;
+                    }
+                }
+                return len;
+            }
+            // 只要键盘一抬起就验证编辑框中的文字长度，最大字符长度可以根据需要设定
+            function ypCheckLength(obj) {
+                var maxChars = 50;//最多字符数
+                var curr = maxChars - getByteLen(obj.value);
+                if (curr > 0) {
+                    document.getElementById("ypChecklen").innerHTML = curr.toString();
+                } else {
+                    document.getElementById("ypChecklen").innerHTML = '0';
+                    document.getElementById("ypDesc").readOnly = true;
+                }
+            }
+        </script>
+
+        <div id="maskLayer" style="display: none;"></div>
+        <neq name="ypHas" value='0'>
+            <div id="ypDescForm" class="descForm" style="display: none;">
+                <table class="tb_guess_sele" border="0" cellpadding="5" cellspacing="5">
+                    <tbody>
+                    <tr>
+                       <th style="height: .2rem;">{$against.home_team_name.0} VS {$against.away_team_name.0}
+                           <img src="__IMAGES__/icon/close.png" id="ypGuessClose" class="guess_close" alt="">
+                       </th>
+                    </tr>
+                    <tr>
+                        <th style="height: .2rem;"><span id="ypTuiType"></span>：<span style="color: #ff7e00;" id="ypTuiCon"></span>  </th>
+                    </tr>
+                    <tr>
+                        <th colspan="4"><em></em>推荐理由<span style="color: red">（选填）</span></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="textarea_wap">
+                             <textarea id="ypDesc" maxlength="50" class="textarea" name="text"
+                                       placeholder="{$config['gamble_desc_tip']}" onkeyup="ypCheckLength(this)"></textarea>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_tarea">还可以输入<span id="ypChecklen" class="red">50</span>个字</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="form_con">
+                    <div id="ypPrice" class="price_select">
+
+                        <div class="price_select">
+                          <div class="price_title" id="yp_sm">
+                                <span>推荐售价:</span><a href="javascript:;"><img src="__IMAGES__/sm.png" alt="等级说明">等级说明</a>
+                          </div>
+                            <!--<div class="sm_img"><img src="__IMAGES__/sm_show.png" alt="说明"></div>-->
+                           </div>
+                           <!--<div id="yp_sm_img"><img src="__IMAGES__/sm_show.png" alt="说明"></div>-->
+
+                        <ul class="price_ul clearfix">
+                            <notempty name="gameConf.userLv">
+                                <volist name="gameConf.userLv" id='item'>
+                                    <li><a data-coin="{$item.letCoin}" href="javascript:;"
+                                           class="<if condition='$lv egt $key'>odd<else/>text-999</if> <if condition='$key eq $lv'>on</if>">
+                                        <if condition='$key neq 0'>{$item.letCoin}金币
+                                            <else/>
+                                            免费
+                                        </if>
+                                        <em></em></a></li>
+                                </volist>
+                                <else/>
+
+                            </notempty>
+
+                        </ul>
+                    </div>
+                    <div class="isseued_btn">
+                        <a href="javascript:;" class="fs30 text-fff bg-orange" id="yp_sub_game">发布推荐</a>
+                    </div>
+                </div>
+            </div>
+        </neq>
+
+
+        <script>
+            // 只要键盘一抬起就验证编辑框中的文字长度，最大字符长度可以根据需要设定
+            function jcCheckLength(obj) {
+                var maxChars = 50;//最多字符数
+                var curr = maxChars - getByteLen(obj.value);
+                if (curr > 0) {
+                    document.getElementById("jcChecklen").innerHTML = curr.toString();
+                } else {
+                    document.getElementById("jcChecklen").innerHTML = '0';
+                    document.getElementById("jcDesc").readOnly = true;
+                }
+            }
+        </script>
+
+            <div id="jcDescForm" class="descForm" style="display: none;">
+                <table class="tb_guess_sele" border="0" cellpadding="5" cellspacing="5">
+                    <tbody>
+                    <tr>
+                        <th style="height: .2rem;">{$against.home_team_name.0} VS {$against.away_team_name.0}
+                            <img src="__IMAGES__/icon/close.png" id="jcGuessClose" class="guess_close" alt="">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th style="height: .2rem;"><span id="jcTuiType"></span>：<span style="color: #ff7e00;" id="jcTuiCon"></span>   </th>
+                    </tr>
+                    <tr>
+                        <th colspan="4"><em></em>推荐理由<span style="color: red">（选填）</span></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="textarea_wap">
+                             <textarea id="jcDesc" maxlength="50" class="textarea" name="text"
+                                       placeholder="{$config['gamble_desc_tip']}" onkeyup="jcCheckLength(this)"></textarea>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_tarea">还可以输入<span id="jcChecklen" class="red">50</span>个字</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="form_con">
+                    <div id="jcPrice" class="price_select">
+                        <!--<div class="price_title">-->
+                            <!--<span>推荐售价:</span>-->
+                        <!--</div>-->
+                        <div class="price_select">
+                            <div class="price_title" id="jc_sm">
+                                <span>推荐售价:</span><a href="javascript:;"><img src="__IMAGES__/sm.png" alt="等级说明">等级说明</a>
+                            </div>
+                            <!--<div class="sm_img"><img src="__IMAGES__/sm_show.png" alt="说明"></div>-->
+
+                        </div>
+
+
+                        <ul class="price_ul clearfix">
+                            <volist name="jcGameConf.userLv" id='item'>
+                                <li><a data-coin="{$item.letCoin}" href="javascript:;"
+                                       class="<if condition='$lv_bet egt $key'>odd<else/>text-999</if> <if condition='$key eq $lv_bet'>on</if>">
+                                    <if condition='$key neq 0'>{$item.letCoin}金币
+                                        <else/>
+                                        免费
+                                    </if>
+                                    <em></em></a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <div class="isseued_btn">
+                        <a href="javascript:;" class="fs30 text-fff bg-orange" id="jc_sub_game">发布推荐</a>
+                    </div>
+                </div>
+            </div>
+        </neq>
+
+    </section>
+
+    <!-- 亚盘统计推荐 s -->
+    <neq name="ypHas" value='0'>
+        <div id="ypGambleCount" style="display: block;">
+            <aside class="guess_count_b">
+                <div class="gcb_left fl"><img src="__IMAGES__/count_title.png" alt="">查看高手推荐</div>
+                <div class="fr">
+                    <a class="gcb_right" href="{:U('Details/guess_count',array('scheid'=>$scheid,'type'=>1))}">
+                        <span id="ypCount">{$data['spreadNum']+$data['totalNum']}</span>
+                        人参与<img src="__IMAGES__/np_more.png" alt=""></a></div>
+            </aside>
+            <section class="guess_count clearfix">
+                <ul id="">
+                    <volist name="ypRecommend" id="v">
+                        <a href="{:U('Guess/other_page',['user_id'=>$v['user_id'],'type'=>1])}">
+                            <li>
+                                <div class="gc_top clearfix">
+                                    <img class="lazy" data-original="{$v['face']}" src="__IMAGES__/index/headImg.png"
+                                         alt="{$v.nick_name}">
+                                    <div class="gct_right fl">
+                                        <p>{$v['nick_name']}<em class="lv lv{$v['lv']}"></em></p>
+                                        <p>周胜：<span>{$v['weekPercnet']|default=0}% </span> 月胜：<span>{$v['monthPercnet']|default=0}%</span>
+                                            季胜：<span>{$v['seasonPercnet']|default=0}%</span></p>
+                                    </div>
+                                </div>
+                                <div class="gc_bottom clearfix">
+                                    <span>近十场</span>
+                                    <volist name="v['tenGamble']" id="item">
+                                        <if condition="$item eq '1' OR $item eq '0.5'"><em class="c_win">红</em></if>
+                                        <if condition="$item eq '-1' OR $item eq '-0.5'"><em class="c_lose">黑</em></if>
+                                        <if condition="$item eq '2' "><em class="c_ping">走</em></if>
+                                    </volist>
+                            </li>
+                        </a>
+                    </volist>
+                </ul>
+            </section>
+            <div class="foot_tip">数据仅供中国足球彩票参考使用，不涉及任何购彩业务</div>
+        </div>
+    </neq>
+    <!-- 亚盘统计推荐 s -->
+
+    <!-- 竞彩统计推荐 s -->
+    <neq name="game.is_betting" value='0'>
+        <div id="jcGambleCount" style="display: none;">
+            <aside class="guess_count_b">
+                <div class="gcb_left fl"><img src="__IMAGES__/count_title.png" alt="">查看高手推荐</div>
+                <div class="fr">
+                    <a class="gcb_right" href="{:U('Details/guess_count',array('scheid'=>$scheid,'type'=>2))}">
+                        <span id="jcCount">{$data['raceNotLetNum']+$data['raceLetNum']}</span>人参与<img
+                        src="__IMAGES__/np_more.png" alt=""></a></div>
+            </aside>
+            <section class="guess_count clearfix">
+                <ul id="">
+                    <volist name="jcRecommend" id="v">
+                        <a href="{:U('Guess/other_page',['user_id'=>$v['user_id'],'type'=>2])}">
+                            <li>
+                                <div class="gc_top clearfix">
+
+
+                                    <img class="lazy" data-original="{$v['face']}" src="__IMAGES__/index/headImg.png"
+                                         alt="{$v.nick_name}">
+                                    <div class="gct_right fl">
+                                        <p>{$v['nick_name']}<em class="lv jc_lv{$v['lv']}""></em></p>
+                                        <p>周胜：<span>{$v['weekPercnet']|default=0}% </span> 月胜：<span>{$v['monthPercnet']|default=0}%</span>
+                                            季胜：<span>{$v['seasonPercnet']|default=0}%</span></p>
+                                    </div>
+
+                                </div>
+                                <div class="gc_bottom clearfix">
+                                    <span>近十场</span>
+                                    <volist name="v['tenGamble']" id="item">
+                                        <if condition="$item eq '1' OR $item eq '0.5'"><em class="c_win">红</em></if>
+                                        <if condition="$item eq '-1' OR $item eq '-0.5'"><em class="c_lose">黑</em></if>
+                                        <if condition="$item eq '2' "><em class="c_ping">走</em></if>
+                                    </volist>
+                            </li>
+                        </a>
+                    </volist>
+                </ul>
+            </section>
+            <div class="foot_tip">数据仅供中国足球彩票参考使用，不涉及任何购彩业务</div>
+        </div>
+
+    </neq>
+    <!-- 竞彩统计推荐 e -->
+
+    <div class="sm_img_dailog" id="smDailog" style="display: none;">
+        <div class="title_dailog">推荐价格规则说明
+            <img src="__IMAGES__/icon/close.png" class="guess_close" alt=""></div>
+        <img src="__IMAGES__/sm_show.png" alt="说明">
+    </div>
+
+    <div id="dailogFixBox" class="fixBox" style="display: none">
+        <div class="fixBoxIn clearfix">
+            <div class="tip" style="line-height: 0.8rem; "><span id="dailogContent" ></span></div>
+            <a id="yesDailog" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+        </div>
+    </div>
+
+    <div id="fixBox" class="fixBox" style="display: none">
+        <div class="fixBoxIn clearfix">
+            <div class="tip"><span id="changeHandcp" >盘口已变为1.2 </span><p>是否继续推荐</p></div>
+            <a id="yesFixBox" href="javascript:;" class="tip_btn fs30">是,继续</a>
+            <a id="noFixBox" href="javascript:;" class="tip_btn fs30 red">否,考虑</a>
+        </div>
+    </div>
+
+
+<!-- 分享 s-->
+<!--<section class="sub_share" id="con">
+  <a href="javascript:;" id="share_close"></a>
+  <p class="share_txt">分享立送积分</p>
+  <em class="share_score">100</em>
+  <aside class="share_con">
+       JiaThis Button BEGIN 
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_cqq"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+ JiaThis Button END 
+    <a href="#" class="weibo"></a>
+    <a href="#" class="WeChat"></a>
+    <a href="#" class="cfriend"></a>
+    <a href="#" class="qq"></a>
+    <a href="#" class="qq_zone"></a> 
+  </aside>
+</section>-->
+<div class="bubbleTips"></div>
+<!-- 分享 e-->
+</block>
+<block name="scripts">
+    <script>
+        $(function () {
+
+            //头像懒加载
+            $("img.lazy").lazyload({
+                effect: "fadeIn",
+                threshold : 10,
+                failurelimit:10
+            });
+
+            //查看推荐统计列表时--亚盘
+            $('#ypGambleCount .guess_count_b .fr a').on('click',function () {
+                Cookie.setCookie('oddGuessGambleType', 1, 60000);//筛选的玩法
+            });
+            //查看推荐统计列表时--竞彩
+            $('#jcGambleCount .guess_count_b .fr a').on('click',function () {
+                Cookie.setCookie('oddGuessGambleType', 2, 60000);//筛选的玩法
+            });
+
+            //用来判断定位到竞彩还是亚盘
+            var gambleType = "{$_REQUEST.gambleType}";
+            if (gambleType == null || gambleType == undefined || gambleType == '')
+            {
+                var oddGuessGambleType = Cookie.getCookie('oddGuessGambleType');
+                Cookie.delCookie('oddGuessGambleType');
+                gambleType = oddGuessGambleType;
+            }
+
+            if (gambleType == 2)
+            {
+                $('#yp').removeClass('on');
+                $('#jc').addClass('on');
+
+                //赛程不能推荐时显示
+                $('#ypHas').css({'display':'none'});
+                if ($('#jcHas').html() != undefined)
+                {
+                    $('#jcHas').css({'display':'block'});
+                }
+
+                $('#ypTable').css({'display':'none'});
+                $('#ypDescForm').css({'display':'none'});
+                $('#jcTable').css({'display':'block'});
+
+                $('#ypGambleCount').css({'display':'none'});
+                $('#jcGambleCount').css({'display':'block'});
+            }
+            else
+            {
+                $('#jc').removeClass('on');
+                $('#yp').addClass('on');
+
+                //赛程不能推荐时显示
+                $('#jcHas').css({'display':'none'});
+                if ($('#ypHas').html() != undefined)
+                {
+                    $('#ypHas').css({'display':'block'});
+                }
+
+                $('#jcTable').css({'display':'none'});
+                $('#jcDescForm').css({'display':'none'});
+                $('#ypTable').css({'display':'block'});
+
+
+                $('#jcGambleCount').css({'display':'none'});
+                $('#ypGambleCount').css({'display':'block'});
+            }
+
+
+
+            //隐藏提示框
+            $('#yesDailog').on('click',function () {
+                $('#dailogFixBox').css({'display':'none'});
+
+            });
+            //隐藏盘口变化提示框
+            $('#noFixBox').on('click',function () {
+                $('#fixBox').css({'display':'none'});
+            });
+
+            //弹出盘口提示框后，重新提交表单
+            $('#yesFixBox').on('click',function () {
+                $('#fixBox').css({'display':'none'});
+                if ($('#yp').hasClass('on'))
+                {
+                    ypGamble(1);
+                }
+                if ($('#jc').hasClass('on'))
+                {
+
+                }
+
+            });
+
+            //亚盘
+            $('#yp').on('click',function () {
+                $('#jc').removeClass('on');
+                $('#yp').addClass('on');
+
+                //赛程不能推荐时显示
+                $('#jcHas').css({'display':'none'});
+                if ($('#ypHas').html() != undefined)
+                {
+                    $('#ypHas').css({'display':'block'});
+                }
+
+                $('#jcTable').css({'display':'none'});
+                $('#jcDescForm').css({'display':'none'});
+                $('#ypTable').css({'display':'block'});
+
+
+                $('#jcGambleCount').css({'display':'none'});
+                $('#ypGambleCount').css({'display':'block'});
+
+            });
+
+            var is_betting =  "{$game['is_betting']}";
+
+            //竞彩
+            $('#jc').on('click',function () {
+
+                if (is_betting == 0){
+                    return;
+                }
+
+                $('#yp').removeClass('on');
+                $('#jc').addClass('on');
+
+                //赛程不能推荐时显示
+                $('#ypHas').css({'display':'none'});
+                if ($('#jcHas').html() != undefined)
+                {
+                    $('#jcHas').css({'display':'block'});
+                }
+
+                $('#ypTable').css({'display':'none'});
+                $('#ypDescForm').css({'display':'none'});
+                $('#jcTable').css({'display':'block'});
+
+                $('#ypGambleCount').css({'display':'none'});
+                $('#jcGambleCount').css({'display':'block'});
+            });
+
+            //亚盘点击
+            $('#ypTable tr td a').on('click',function(){
+
+                if (!$(this).hasClass('disable on') && !$(this).hasClass('disable'))
+                {
+                    $('#ypTable tr td a.js-option').removeClass('on');
+                    $(this).addClass('on');
+
+                    $('#ypTuiType').html($(this).attr('title'));
+                    $('#ypTuiCon').html($(this).text());
+
+                    $('textarea').val('');
+                    document.getElementById("ypChecklen").innerHTML = '50';
+
+                    $('#maskLayer').css({'display':'block'});
+                    $('#ypDescForm').css({'display':'block'});
+
+                }
+
+            });
+            //亚盘提交弹窗关闭
+            $('#ypGuessClose').on('click',function () {
+                $('#ypDescForm').css({'display':'none'});
+                $('#maskLayer').css({'display':'none'});
+            });
+            //竞彩点击
+            $('#jcTable tr td a').on('click',function(){
+
+                if (!$(this).hasClass('disable on') && !$(this).hasClass('disable'))
+                {
+                    $('#jcTable tr td a.js-option').removeClass('on');
+                    $(this).addClass('on');
+
+                    $('#jcTuiType').html($(this).attr('title'));
+                    $('#jcTuiCon').html($(this).text());
+
+                    $('textarea').val('');
+                    document.getElementById("jcChecklen").innerHTML = '50';
+
+                    $('#maskLayer').css({'display':'block'});
+                    $('#jcDescForm').css({'display':'block'});
+                }
+
+            });
+            //竞彩提交弹窗关闭
+            $('#jcGuessClose').on('click',function () {
+                $('#jcDescForm').css({'display':'none'});
+                $('#maskLayer').css({'display':'none'});
+            });
+
+
+            //亚盘推荐金额设置
+            $('#ypPrice ul li a.odd').on('click',function () {
+                $('#ypPrice ul li a').removeClass('on');
+                $(this).addClass('on');
+            });
+
+            //竞彩推荐金额设置
+            $('#jcPrice ul li a.odd').on('click',function () {
+                $('#jcPrice ul li a').removeClass('on');
+                $(this).addClass('on');
+            });
+            //亚盘提交
+            $('#yp_sub_game').on('click',function () {
+
+                ypGamble(0)
+
+            });
+
+            function ypGamble(confirm) {
+                //判断是否亚盘玩法都推荐了
+                if (!$('#ypTable tr td a').hasClass('js-option'))
+                {
+                    return false;
+                }
+                //判断是否在提交中
+                if($('#yp_sub_game').hasClass("notallowed")){
+                    return false;
+                }
+
+                //判断是否在登录的状态
+                var isLogin = false;
+                $.ajax({
+                    type: 'post',
+                    async : false,
+                    url: "/Guess/show_guess.html",
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.status==1){
+                            isLogin = true;
+                        }else{
+                            isLogin = false;
+                            if(data.url!=''){
+                                location.href=data.url;
+                            }
+                        }
+                    }
+                });
+
+                if (! isLogin)
+                    return false;
+
+                if (!$('#ypTable tr td a').hasClass('js-option on'))
+                {
+                    $('#dailogContent').html('请选择推荐选项！');
+                    $('#dailogFixBox').css({'display':'block'});
+                    return false;r
+                }
+                if (!$('#ypPrice ul li a').hasClass('odd on'))
+                {
+                    $('#dailogContent').html('请选择推荐售价！');
+                    $('#dailogFixBox').css({'display':'block'});
+
+                    return false;
+                }
+
+
+                var desc=$("#ypDesc").val();
+                if(desc.length>0 && (desc.length<10 || desc.length>50))
+                {
+                    $('#dailogContent').html('请输入10-50字的内容分析！');
+                    $('#dailogFixBox').css({'display':'block'});
+                    return false;
+                }
+                $('#yp_sub_game').addClass("notallowed").html('正在发布中...');
+                var params={
+                    chose_side:$("#ypTable tr td a.js-option.on").data('side'),
+                    handcp:$("#ypTable tr td a.js-option.on").data('handcp'),
+                    desc:desc,
+                    game_id:$('#scheid').val(),
+                    play_type:$("#ypTable tr td a.js-option.on").data('type'),
+                    tradeCoin:$('#ypPrice ul li a.odd.on').data('coin'),
+                    confirm:confirm
+                };
+                //隐藏分析输入框和添加按钮
+                $('#ypDescForm').css({'display':'none'});
+                $('#maskLayer').css({'display':'none'});
+                $.ajax({
+                    type: 'post',
+                    url: "/Guess/do_guess.html",
+                    data: params,
+                    dataType: 'json',
+                    success: function (data) {
+
+                        if(data.status==1){
+
+                            //判断判断是否有变化
+                            if (data.info.ststusCode == '2018')
+                            {
+                                if ($("#ypTable tr td a.js-option.on").data('type') == '1')
+                                {
+                                    if (data.info.oddHandcp > 0)
+                                    {
+                                        $('#handcpLetHome').html('-'+data.info.newhHandcp);//让球主队盘口
+                                        $('#handcpLetAway').html('+'+data.info.newhHandcp);//让球客队盘口
+                                    }
+                                    else if (data.info.oddHandcp < 0)
+                                    {
+                                        $('#handcpLetHome').html('+'+data.info.homeHandcp);//让球主队盘口
+                                        $('#handcpLetAway').html(data.info.newhHandcp);//让球客队盘口
+                                    }
+                                    else
+                                    {
+                                        $('#handcpLetHome').html(data.info.newhHandcp);//让球主队盘口
+                                        $('#handcpLetAway').html(data.info.newhHandcp);//让球客队盘口
+                                    }
+                                    $('#oddsLetHome').html(data.info.odds);//让球主队赔率
+                                    $('#oddsLetAway').html(data.info.odds_other);//让球客队赔率
+                                    $('#ypTable .zk td a').data('handcp',data.info.newhHandcp);
+                                }
+                                if ($("#ypTable tr td a.js-option.on").data('type') == '-1')
+                                {
+                                    $('#handcpSizeHome').html(data.info.newhHandcp);//让球主队盘口
+                                    $('#oddsSizeHome').html(data.info.odds);//让球主队赔率
+
+                                    $('#handcpSizeAway').html(data.info.newhHandcp);//让球客队盘口
+                                    $('#oddsSizeAway').html(data.info.odds_other);//让球客队赔率
+
+                                    $('#ypTable .dx td a').data('handcp',data.info.newhHandcp);
+                                }
+
+                                $('#changeHandcp').html('盘口已变为'+data.info.newhHandcp);
+                                $('#fixBox').css({'display':'block'});
+
+                            }
+                            else if(data.info.ststusCode == '2004')
+                            {
+                                $('#dailogContent').html('今日推荐已达上限！');
+                                $('#dailogFixBox').css({'display':'block'});
+                            }
+                            else
+                            {
+                                $('#normLeftTimes').html(data.info.normLeftTimes);
+                                //当选择亚盘让球时
+                                if ($("#ypTable tr td a.js-option.on").data('type') == '1')
+                                {
+                                    $('#ypTable .zk td a').removeClass('js-option');
+                                    $('#ypTable .zk td a').addClass('disable');
+                                }
+
+                                //当选择亚盘大小时
+                                if ($("#ypTable tr td a.js-option.on").data('type') == '-1')
+                                {
+                                    $('#ypTable .dx td a').removeClass('js-option');
+                                    $('#ypTable .dx td a').addClass('disable');
+                                }
+
+                                //更新推荐统计
+                                $('#ypCount').html(data.info.data.spreadNum + data.info.data.totalNum);
+                                $('#ypSpreadHomeRatio').css({'width':data.info.data.spreadHome+'%'});
+                                $('#ypSpreadHomeRatio1').html(data.info.data.spreadHome+'%');
+                                $('#ypSpreadAwayRatio').css({'width':data.info.data.spreadAway+'%'});
+                                $('#ypSpreadAwayRatio1').html(data.info.data.spreadAway+'%');
+                                $('#ypTotalBigRatio').css({'width':data.info.data.totalBig+'%'});
+                                $('#ypTotalBigRatio1').html(data.info.data.totalBig+'%');
+                                $('#ypTotalMallRatio').css({'width':data.info.data.totalMall+'%'});
+                                $('#ypTotalMallRatio1').html(data.info.data.totalMall+'%');
+
+
+
+
+                                //判断是否亚盘玩法都推荐了
+                                if (!$('#ypTable tr td a').hasClass('js-option'))
+                                {
+                                    //隐藏分析输入框和添加按钮
+                                    $('#ypDescForm').css({'display':'none'});
+                                    $('#maskLayer').css({'display':'none'});
+                                }
+                                $("#ypDesc").val();//清空分析内容
+                                $('#dailogContent').html('推荐成功！');
+                                $('#dailogFixBox').css({'display':'block'});
+                            }
+
+//                            //$('.bubbleTips').html('推荐成功!').stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+//                            location.reload();
+                        }else{
+//                            $(".issued_main").hide();
+                            $('.bubbleTips').html(data.info).stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                        }
+                        $('#yp_sub_game').removeClass("notallowed").html('提交');
+                    }
+                });
+            }
+            //竞彩提交
+            $('#jc_sub_game').on('click',function () {
+
+                jcGamble(0);
+            });
+            //竞彩
+            function jcGamble(confirm)
+            {
+                //判断是否竞彩玩法都推荐了
+                if (!$('#jcTable tr td a').hasClass('js-option'))
+                {
+                    return false;
+                }
+                //判断是否在提交中
+                if($('#jc_sub_game').hasClass("notallowed"))
+                {
+                    return false;
+                }
+                //判断是否在登录的状态
+                var isLogin = false;
+                $.ajax({
+                    type: 'post',
+                    async : false,
+                    url: "/Guess/show_guess.html",
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.status==1){
+                            isLogin = true;
+                        }else{
+                            isLogin = false;
+                            if(data.url!=''){
+                                location.href=data.url;
+                            }
+
+                        }
+                    }
+                });
+                if (! isLogin)
+                    return false;
+
+                if (!$('#jcTable tr td a').hasClass('js-option on'))
+                {
+                    $('#dailogContent').html('请选择推荐选项!');
+                    $('#dailogFixBox').css({'display':'block'});
+                    return false;
+                }
+                if (!$('#jcPrice ul li a').hasClass('on'))
+                {
+                    $('#dailogContent').html('请选择推荐售价!');
+                    $('#dailogFixBox').css({'display':'block'});
+                    return false;
+                }
+                var desc=$("#jcDesc").val();
+                if(desc.length>0 && (desc.length<10 || desc.length>50))
+                {
+                    $('#dailogContent').html('请输入10-50字的内容分析！');
+                    $('#dailogFixBox').css({'display':'block'});
+                    return false;
+                }
+                $('#jc_sub_game').addClass("notallowed").html('正在发布中...');
+
+                var params={
+                    chose_side:$("#jcTable tr td a.js-option.on").data('side'),
+                    handcp:$("#jcTable tr td a.js-option.on").data('handcp'),
+                    desc:desc,
+                    game_id:$('#scheid').val(),
+                    play_type:$("#jcTable tr td a.js-option.on").data('type'),
+                    tradeCoin:$('#jcPrice ul li a.odd.on').data('coin'),
+                    confirm:confirm
+                };
+
+                //隐藏分析输入框和添加按钮
+                $('#jcDescForm').css({'display':'none'});
+                $('#maskLayer').css({'display':'none'});
+
+                $.ajax({
+                    type: 'post',
+                    url: "/Guess/do_guess.html",
+                    data: params,
+                    dataType: 'json',
+                    success: function (data) {
+
+                        if(data.status==1){
+
+                            //判断判断是否有变化
+                            if (data.info.ststusCode == '2018')
+                            {
+                                if ($("#jcTable tr td a.js-option.on").data('type') == '-2')
+                                {
+                                    $('#jcLetHandcp').html(data.info.newhHandcp);//竞彩让球盘口
+                                    $('#jcTable .dx td a').data('handcp',data.info.newhHandcp);//让球输赔率
+                                    $('#jcLetWinOdds').html(data.info.home_letodds);//让球主胜赔率
+                                    $('#jcLetDrawOdds').html(data.info.draw_letodds);//让球平赔率
+                                    $('#jcLetLoseOdds').html(data.info.away_letodds);//让球输赔率
+
+                                }
+
+                                $('#changeHandcp').html('盘口已变为'+data.info.newhHandcp);
+                                $('#fixBox').css({'display':'block'});
+
+                            }
+                            else if(data.info.ststusCode == '2004')
+                            {
+                                $('#dailogContent').html('今日推荐已达上限！');
+                                $('#dailogFixBox').css({'display':'block'});
+                            }
+                            else
+                            {
+
+                                $('#jcNormLeftTimes').html(data.info.normLeftTimes);
+
+                                //当选择竞彩不让球时
+                                if ($("#jcTable tr td a.js-option.on").data('type') == '2')
+                                {
+                                    $('#jcTable .zk td a').removeClass('js-option');
+                                    $('#jcTable .zk td a').addClass('disable');
+                                }
+
+                                //当选择竞彩让球时
+                                if ($("#jcTable tr td a.js-option.on").data('type') == '-2')
+                                {
+                                    $('#jcTable .dx td a').removeClass('js-option');
+                                    $('#jcTable .dx td a').addClass('disable');
+                                }
+
+                                //竞彩推荐统计
+                                $('#jcCount').html(data.info.data.raceNotLetNum + data.info.data.raceLetNum);
+                                $('#raceNotLetWin').css({'width':data.info.data.raceNotLetWin+'%'});
+                                $('#raceNotLetWin1').html(data.info.data.raceNotLetWin+'%');
+                                $('#raceNotLetFlat').css({'width':data.info.data.raceNotLetFlat+'%'});
+                                $('#raceNotLetFlat1').html(data.info.data.raceNotLetFlat+'%');
+                                $('#raceNotLetLose').css({'width':data.info.data.raceNotLetLose+'%'});
+                                $('#raceNotLetLose1').html(data.info.data.raceNotLetLose+'%');
+                                $('#raceLetWin').css({'width':data.info.data.raceLetWin+'%'});
+                                $('#raceLetWin1').html(data.info.data.raceLetWin+'%');
+                                $('#raceLetFlat').css({'width':data.info.data.raceLetFlat+'%'});
+                                $('#raceLetFlat1').html(data.info.data.raceLetFlat+'%');
+                                $('#raceLetLose').css({'width':data.info.data.raceLetLose+'%'});
+                                $('#raceLetLose1').html(data.info.data.raceLetLose+'%');
+
+                                //判断是否竞彩玩法都推荐了
+                                if (!$('#jcTable tr td a').hasClass('js-option'))
+                                {
+                                    //隐藏分析输入框和添加按钮
+                                    $('#jcDescForm').css({'display':'none'});
+                                    $('#maskLayer').css({'display':'none'});
+                                }
+                                $("#jcDesc").val();//清空分析内容
+                                $('#dailogContent').html('推荐成功！');
+                                $('#dailogFixBox').css({'display':'block'});
+                            }
+
+                        }else{
+                            $('.bubbleTips').html(data.info).stop().fadeIn(300).animate({'top': '40%'}, 1500).hide(0).animate({'top': '50%'});
+                        }
+                        $('#jc_sub_game').removeClass("notallowed").html('发布推荐');
+                    }
+                });
+
+            }
+
+        });
+
+        $("#yp_sm a").click(function(){
+            $('#smDailog').css({'display':'block'});
+            //$("#sm_img").toggle();
+//            $(this).parents('div').next('.sm_img').toggle();
+        })
+        $("#jc_sm a").click(function(){
+            //$("#sm_img").toggle();
+//            $(this).parents('div').next('.sm_img').toggle();
+            $('#smDailog').css({'display':'block'});
+        })
+        $('#smDailog').on('click',function () {
+            $('#smDailog').css({'display':'none'});
+        })
+    </script>
+</block>

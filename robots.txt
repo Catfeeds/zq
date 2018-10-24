@@ -1,0 +1,12 @@
+# robots.txt qqty.com
+User-agent: *
+Disallow: 
+Disallow: /info_n
+Disallow: /UserInfo
+Disallow: /User
+Disallow: /list_p
+Disallow: /info_p
+Disallow: /qqt
+Disallow: /adver
+Disallow: /userindex
+Sitemap: https://www.qqty.com/Crawler/sitemap.xml

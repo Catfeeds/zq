@@ -1,0 +1,117 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+    <div class="searchBar">
+        <input type="hidden" name="game_type" value="{$_REQUEST.game_type}">
+        <ul class="searchContent">
+            <li style="width: auto;margin-right: 25px;">
+                <label>创建时间：</label>
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="11">至
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="11">
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+
+        <ul class="toolBar">
+            <if condition="$_REQUEST['game_type'] == 1">
+                <li style="margin-left:20px;">
+                    <a class="icon" href="__URL__/index.html?Export=1&{:http_build_query($_REQUEST)}"  >
+                        <span>导出</span>
+                    </a>
+                </li>
+            </if>
+             <li>
+                <span style='color:red;padding-left:0px;'>
+                    充值总金额：{$totalAmount|default=0}
+                </span>
+             </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="2%">序号</th>
+            <th width="4%">日期</th>
+            <if condition="getUserPower()['is_show_count'] eq 1">
+                <th width="4%">充值金额</th>
+                <th width="4%">营销支出</th>
+                <th width="4%">赠送金额</th>
+            </if>
+            <th width="5%">被购买推荐总数</th>
+            <if condition="getUserPower()['is_show_count'] eq 1">
+                <th width="5%">金币总消费</th>
+                <th width="5%">体验券消费</th>
+            </if>
+            <th width="5%">总购买人数</th>
+            <th width="5%">用户被购买数</th>
+            <if condition="getUserPower()['is_show_count'] eq 1">
+                <th width="4%">消费金额</th>
+            </if>
+            <th width="5%">赢 （胜率）</th>
+            <th width="3%">输</th>
+            <th width="3%">平</th>
+            <th width="5%">机器人被购买数</th>
+            <if condition="getUserPower()['is_show_count'] eq 1">
+                <th width="4%">消费金额</th>
+            </if>
+            <th width="5%">赢 （胜率）</th>
+            <th width="3%">输</th>
+            <th width="3%">平</th>
+            <th width="3%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist id="vo" name="list">
+            <tr target="sid_user" rel="{$vo['id']}">
+                <td>{$i+$numPerPage*$desc_pag}</td>
+                <td>{$vo['log_time']|default="Y/m/d H:i:s"}</td>
+                <if condition="getUserPower()['is_show_count'] eq 1">
+                    <td>{$vo['autoRecharge']|default=0}</td>
+                    <td>{$vo['manualRecharge']|default=0}</td>
+                    <td>{$vo['givingCount']|default=0}</td>
+                </if>
+                <td>{$vo['gambleSum']|default=0}</td>
+                <if condition="getUserPower()['is_show_count'] eq 1">
+                    <td>{$vo['consumeCoin']|default=0}</td>
+                    <td>{$vo['ticketCoin']|default=0}</td>
+                </if>
+                <td>{$vo['gambleCount']|default=0}</td>
+                <td>{$vo['gambleNotRobotSum']|default=0}</td>
+                <if condition="getUserPower()['is_show_count'] eq 1">
+                    <td>{$vo['gambleBuySum']|default=0}</td>
+                </if>
+                <td>{$vo['gambleWinCount']} （{$vo.gambleWin}%）</td>
+                <td>{$vo['gambleLoseCount']}</td>
+                <td>{$vo['gambleFlatCount']}</td>
+                <td>{$vo['gambleIsRobotSum']|default=0}</td>
+                <if condition="getUserPower()['is_show_count'] eq 1">
+                    <td>{$vo['gambleIsBuySum']|default=0}</td>
+                </if>
+                <td>{$vo['gambleWinIRCount']} （{$vo.gambleWinIR}%）</td>
+                <td>{$vo['gambleLoseIRCount']}</td>
+                <td>{$vo['gambleFlatIRCount']}</td>
+                <td>
+                    <a href="__ADMIN__/GambleList/buyDetails/startTime/{$vo['log_time']}/endTime/{$vo['log_time']}/game_type/{$_REQUEST.game_type}/coin/1" target="navTab" mask="true" rel="1{:time()}{$vo['log_time']}" title="{$vo['log_time']|default='Y/m/d H:i:s'}-足球销售统计" style="color:blue;">查看</a>
+                </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+
+

@@ -1,0 +1,33 @@
+<extend name="Public/euro/base" />
+<block name="seo">
+    <title>{$data.title}_全球体育欧洲杯专题</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/euro/hot.css"> 
+</block>
+
+<block name="nav">  
+    <!-- 二级头部 s -->
+    <header id="other_header">
+        <a href="javascript:history.go(-1)"></a>资讯速递  
+    </header>
+    <!-- 二级头部 e --> 
+</block>
+
+<block name="content">
+        <section class="article_show">
+            <!-- 标题 start-->
+            <section class="art_title">
+                <h1>{$data.title}</h1>
+                <time datetime="{$data.add_time|date='Y/m/d',###}">{$data.add_time|date='Y/m/d H:i:s',###} {$data.source}</time>
+            </section>
+            <!-- 标题 end-->
+
+            <!-- 文章内容 start -->
+            <article class="article_main">
+               {$data.content|htmlspecialchars_decode}
+           </article>
+           <!-- 文章内容end -->
+        </section>
+</block>

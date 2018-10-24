@@ -1,0 +1,148 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>手机全球体育网_即时足球比分,比分直播,足球直播,比分预测,赔率分析</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/shake/yaoyao.css">
+</block>
+{//头部}
+<block name="header"></block>
+{//导航}
+<block name="nav"></block>
+<block name="body"></block>
+
+<block name="content">
+    <section class="yy_content" style="background: url({$vo.bg_logo}) no-repeat left top;width: 100%;min-height: 12.06rem; background-size: 100% 100%;">
+
+        <!-- 背景层 -->
+        <div id="maskLayer"></div>
+        <!-- 弹窗s -->
+        <div class="get_money">
+            <div class="gm_top">
+                <p>{$vo.price}<span>元</span></p>
+            </div>
+            <div class="gm_btn">
+                <p><span>{$vo.price}元红包已进账</span>可直接购买等额推荐</p>
+                <div class="use_now">立即使用</div>
+            </div>
+        </div>
+        <!-- 弹窗e -->
+        <!-- 已领取s -->
+        <div class="use_over">
+            <div class="uo_tip">温馨提示</div>
+            <div class="use_money">{$vo.price}<span>元</span></div>
+            <div class="have_get">您已经领取过了！</div>
+            <div class="use_btn clearfix">
+                <div class="uo_btn fl" id="user_now2">立即使用</div>
+                <div class="uo_btn fr" id="uo_close">关闭</div>
+            </div>
+        </div>
+        <!-- 已领取e -->
+
+        <div class="get_code">
+            <div class="get_count">已有 <span>{$vo.nums}</span> 人领取</div>
+            <div class="input_con">
+                <div class="txt_pone"><input type="text" name='mobile' placeholder="请输入手机号"></div>
+                <div class="txt_getcode clearfix">
+                    <input type="text" class="txt_code fl" name='code' placeholder="请输入验证码">
+                    <a href="javascript:;" class="btn_gcode fr" onclick="sendMobileMsg()"><span id="sendMobileBtn">获取验证码</span></a>
+                </div>
+                <div class="sub_btn" id="getRedPackage"></div>
+            </div>
+        </div>
+        <div class="scan"><img style="width: 100%;opacity: 1" src="__IMAGES__/shake/scan.png?20170825" alt="二维码识别"></div>
+        <div class="ac_rule">
+            <div class="ac_gold"></div>
+            <p>活动规则</p>
+            <p>1、每个手机号只能领取一次红包。</p>
+            <p>2、领取的红包仅限在全球体育免费体验高手推荐，不能提现。</p>
+            <p>3、全球体育APP是广东全彩科技有限公司旗下产品，专注足球大数据分析、足球比分直播等。</p>
+            <p>4、活动最终解释权归广东全彩科技有限公司所有。</p>
+        </div>
+    </section>
+</block>
+<block name="footer"></block>
+<block name="scripts">
+    <script>
+        //获取验证码
+        function sendMobileMsg(){
+            var mobile = $("input[name='mobile']").val();
+            $.ajax({
+                type: "POST",
+                url: "/Shake/sendCode.html",
+                data: {'mobile': mobile},
+                dataType: "json",
+                success: function (data) {
+                    if(data.code == 200){
+                        daojishi(60);
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            });
+
+        }
+        //倒计时
+        function daojishi(S){
+            if (S>0){
+                var S = S-1;
+                $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>秒后重发").removeAttr("onclick").attr("disabled","disabled");
+                $("#sendMobileBtn").html(S);
+                setTimeout("daojishi("+S+")",1000);
+                return;
+            } else {
+                $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>获取验证码").attr("onclick",'sendMobileMsg()').removeAttr("disabled");
+            }
+        }
+
+    </script>
+
+    <script>
+        var DOMAIN = "m."+"__DOMAIN__";
+        $(function(){
+            $("#maskLayer").click(function(){
+                $('.get_money,#maskLayer').hide();
+            });
+            $("#uo_close").click(function(){
+                $('.use_over,#maskLayer').hide();
+            });
+
+            $(".use_now").click(function(){
+                window.location.href="//"+ DOMAIN +"/Guess/new_put.html";
+            });
+            $("#user_now2").click(function(){
+                window.location.href="//"+ DOMAIN +"/Guess/new_put.html";
+            });
+        })
+
+        //领取红包
+        $(".sub_btn").on('click',function() {
+            var mobile = $("input[name='mobile']").val();
+            var code = $("input[name='code']").val();
+            var sign = "{$vo.sign}";
+            $.ajax({
+                type: "POST",
+                url: "/Shake/getRedPackage.html",
+                data: {'mobile': mobile, 'code': code, 'sign': sign},
+                dataType: "json",
+                success: function (data) {
+                    var is_get_price = data.data.is_get_price;
+                    switch (data.code){
+                        case 200:
+                            $('.get_money,#maskLayer').show();
+                            break;
+                        case 1005:
+                            $('.use_over,#maskLayer').show();
+                            $('.use_money').html(is_get_price+"<span>元</span>");
+                            break;
+                        default:
+                            alert(data.msg);
+                    }
+                }
+            });
+        });
+    </script>
+</block>
+
+

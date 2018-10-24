@@ -1,0 +1,104 @@
+<include file="Public:header"/>
+
+<!--引入本页所需css-->
+<link rel="stylesheet" href="__PUBLIC__/Home/css/personal_center/recharge02.css">
+
+<body>
+    <!-- 顶部开始 -->
+    <include file="Public:top"/>
+    <!-- 顶部结束 -->
+
+    <div class="body">
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <div class="data-graph recharge-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="{:U('UserAccount/charge')}">充值</a></li>
+                                    <li role="presentation"><a href="javascript:void(0);" class="current">充值记录</a></li>
+                                </ul>
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <!-- 充值记录开始 -->
+                                    <div id="recharge-record" class="line-graph clearfix">
+                                    <notempty name="list">
+                                        <div class="recharge-record-list">
+                                             <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr class="table-header">
+                                                        <th>序号</th>
+                                                        <th>类型</th>
+                                                        <th>时间</th>
+                                                        <th>金额</th>
+                                                        <th>账户余额</th>
+                                                        <th>说明</th>
+                                                    </tr>
+                                                    <volist name="list" id="vo" key="k">
+                                                        <tr <if condition="$k % 2 != 0">class="one" <else /> class="two" </if>>
+                                                            <td>{$k}</td>
+                                                            <td>充值</td>
+                                                            <td class="begin-time"><span>{$vo.log_time|date='Y-m-d H:i:s',###}</span></td>
+                                                            <td>{$vo.change_num} 元</td>
+                                                            <td>{$vo.total_coin}币</td>
+                                                            <td>在线充值</td>
+                                                        </tr>
+                                                    </volist>
+                                                </tbody>
+                                            </table>
+                                            <!--页码开始-->
+                                            <div class="page-con">
+                                                <nav>
+                                                    <ul class="pagination pull-right">
+                                                        {$show}
+                                                        <li><input class="isTxtBig" type="text" value="{$_REQUEST.p|default=1}" name="p"></li>
+                                                        <li id="GO"><a href="javascript:void(0)">GO</a></li>
+                                                    </ul>
+                                                    <div class="pull-right">共有{$totalCount}条，每页显示：{$numPerPage}条</div>
+                                                </nav>
+                                            </div>
+                                            <!--页码结束-->
+                                        </div>
+                                    <else/>
+                                        <p>没有充值记录哦</p>
+                                    </notempty>
+                                    </div>
+                                    <!-- 充值记录结束 -->
+                                </div>
+                                <!-- Tab panes -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+</body>
+</html>
+<script>
+//绑定a标签
+$("#GO").find("a").bind("click", function(){
+    var p = $("input[name='p']").val();
+    if (isNaN(p)) {
+        return;
+    } else if (p>0){
+        window.location.href="/UserAccount/chargeLog/p/"+p+".html";
+    }
+});
+</script>

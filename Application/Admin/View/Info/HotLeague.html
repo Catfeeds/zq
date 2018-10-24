@@ -1,0 +1,76 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/HotLeague" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>赛事名称：</label>
+				<input type="text" name="name" value="{$_REQUEST.name}"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true" height="450"><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/delete/id/{sid_record}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择广告"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/add/id/{sid_record}" target="dialog" mask="true" height="450" warn="请选择用户"><span>编辑</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="3%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th>赛事名称</th>
+			<th width="25%">赛事logo</th>
+			<th width="10%">unionID</th>
+			<th width="8%" orderField="sort" <if condition="$_REQUEST._order eq 'sort'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>排序</th>
+			<th width="8%" orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>状态</th>
+			<th width="8%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['name']}</td>
+					<td>
+					<empty name="vo.logo">没有上传
+					<else/>
+					<if condition="pathinfo($vo['logo'], PATHINFO_EXTENSION) eq swf">
+						<a href="{$vo.background}" target="_blank" title="查看分类背景图">
+						<embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$vo.background}">
+						</a>
+					<else/>
+					    <a href="{$vo.background}" target="_blank" title="查看分类背景图"><img src="{$vo['logo']}" alt="分类背景图" width="30" height="30" /></a>
+					</if>
+					</empty>
+					</td>
+					<td>{$vo['union_id']}</td>
+					<td>{$vo['sort']}</td>
+					<td>{$vo['status']|getStatus}</td>
+					<td>
+						<a href="__URL__/add/id/{$vo.id}" target="dialog" mask="true" height="450" title="{$vo.name}编辑" rel="editPage">编辑</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+
+

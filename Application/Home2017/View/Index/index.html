@@ -1,0 +1,459 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>全球体育_足球比分_篮球比分_体育新闻资讯_足球分析_足球推荐</title>
+    <meta name="keywords" content="足球即时比分网、足球推荐、足球分析、比分现场、2018世界杯、zuqiubifen、bifenzhibo、篮球比分、NBA现场、nba即时比分、足球现场"/>
+    <meta name="description" content="全球体育网是专业提供2018足球世界杯比分、NBA篮球比分、足球推荐分析、足球情报、篮球情报综合球类的体育彩票大数据资讯平台"/>
+</block>
+<block name="css"><link rel="stylesheet" href="__PUBLIC__/Home/css/index/index.css"><script>if(navigator.userAgent.toLowerCase().indexOf("android")!=-1||navigator.userAgent.toLowerCase().indexOf("iphone")!=-1||navigator.userAgent.toLowerCase().indexOf("mobile")!=-1){if((navigator.userAgent.indexOf("Gecko")!=-1||navigator.userAgent.indexOf("MQQBrowser")!=-1)&&navigator.userAgent.toLowerCase().indexOf("pad")==-1){if(document.URL.toLowerCase().indexOf("from=m")!=-1){document.cookie="from=m"}var strCook=document.cookie;if(strCook.indexOf("from=m")==-1){window.location.href="//m."+DOMAIN}}};</script></block>
+<block name="body">
+<body>
+    <include file="Public:top_index" />
+    <div class="body">
+        <!-- 主体内容 -->
+        <div class="home">
+            <section class="main">
+                <!-- banner+news s -->
+                <div class="focus-con clearfix">
+                    {$HomeNews|htmlspecialchars_decode}
+                    <script>
+                        $(".new-con h3 a,.new-list ul li a").css("padding-right","6px");
+                        $(".new-con h3 a:last-child,.new-list ul li a:last-child").css("padding-right","0");
+                    </script>
+                    <div class="pull-right focus-banner">
+                        <!-- banner -->
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <volist name="AdCarousel" id="item">
+                                    <li data-target="#myCarousel" data-slide-to="{$key}" <if condition="$key eq 0">class="active"</if>></li>
+                                </volist>
+                            </ol>
+                            <div class="carousel-inner">
+                                <volist name="AdCarousel" id="item">
+                                    <div class="<if condition="$key eq 0">active</if> item"><a href="{$item.url}" target="_blank"><img class="lazy" src="{$item.img}" style="width:620px;height:341px;"></a><div class="fbanner_title"><a target="_blank" href="{$item.url}">{$item.title}</a></div></div>
+                                </volist>
+                            </div>
+                            <a class="carousel-control left" href="#myCarousel" data-slide="prev"><span class="banner_arrow"></span></a>
+                            <a class="carousel-control right" href="#myCarousel" data-slide="next"><span class="banner_arrow"></span></a>
+                        </div>
+                        <!-- video -->
+                        <div class="focus-video">
+                            <div class="video-title-con clearfix">
+                                <div class="pull-left clearfix tl">
+                                    <i class="pull-left videoIcon"></i>
+                                    <h3 class="pull-left">精彩集锦</h3>
+                                </div>
+                            </div>
+                            <div class="video-list-con">
+                                <ul class="clearfix">
+                                    <volist name="highlights" id="vo">
+                                        <li class=" <if condition='$key%3 eq "0"'> nom </if>">
+                                            <a href="<if condition='$vo.web_ischain eq 0'>{:U('Video/lives',['type'=>$vo['game_type'],'game_id'=>$vo['game_id'],'jj_id'=>$vo['id']])}<else/>{$vo.web_url}</if>" target="_blank" class="figure" tabindex="-1">
+                                                <img class="lazy" src="{$vo['img']}" width="196" height="110" alt="{$vo['title']}" style="display: inline;">
+                                                <div class="title">{$vo['title']}</div><i class="play-icon"></i><i class="playBtn"></i>
+                                            </a>
+                                        </li>
+                                    </volist>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- video -->
+                    </div>
+                </div>
+                <notempty name="AdIndex1">
+                    <div style="line-height: 0;">
+                        <if condition="pathinfo($AdIndex1[0]['img'], PATHINFO_EXTENSION) eq swf">
+                            <embed width="1000" height="70" wmode="opaque" type="application/x-shockwave-flash" src="{$AdIndex1.0.img}">
+                            <a style="display:block;width:1000px;height:90px;margin:-70px 0 0 0;position:relative;left:0;top:0;z-index:1;background:#fff;opacity:0;filter:alpha(opacity=0);" target="_blank" href="{$AdIndex1.0.url}"></a>
+                        <else/>
+                            <a target="_blank" href="{$AdIndex1.0.url}"><img class="lazy" src="{$AdIndex1.0.img}" width="1000" height="90" /></a>
+                        </if>
+                    </div>
+                </notempty>
+                <!-- 情报资讯 -->
+                <div class="infor-con">
+                    <div class="zqBox clearfix">
+                        <div class="pull-left zqLeft">
+                            <!-- 足球情报 -->
+                            <div class="zqqb" style="height: 810px;">
+                                <!-- titleNav -->
+                                <div class="fitem-title clearfix">
+                                     <div class="fitem-left clearfix">
+                                        <h4><i class="pull-left qb"></i><span class="pull-left">独家情报</span></h4>
+                                     </div>
+                                     <div class="fitem-line pull-right qbTab">
+                                        <ul class="pull-right">
+                                            <li class="on"><a href="javascript:;">情报分析</a><span>|</span></li>
+                                            <li><a href="javascript:;">独家秘笈</a></li>
+                                        </ul>
+                                     </div>
+                                </div>
+                                <!-- newsContent -->
+                                <div class="newsCon clearfix" >
+                                    <div class="newsBig01">
+                                        <div class="pull-left newsLeft">
+                                            <!-- banner -->
+                                            <div id="myGs01"  class="carousel slide" data-ride="carousel">
+                                                <ol class="carousel-indicators">
+                                                    <volist name="AdInfoNew" id="item">
+                                                        <li data-target="#myGs01" data-slide-to="{$key}" <if condition="$key eq 0">class="active"</if>></li>
+                                                    </volist>
+                                                </ol>
+                                                <div class="carousel-inner">
+                                                    <volist name="AdInfoNew" id="item">
+                                                        <div class="<if condition="$key eq 0">active</if> item"><a href="{$item.url}" target="_blank"><img class="lazy" src="{$item.img}" style="width:310px;height:140px;"></a><div class="fbanner_title"><a target="_blank" href="{$item.url}">{$item.title}</a></div></div>
+                                                    </volist>
+                                                </div>
+                                            </div>
+                                            <!-- banner -->
+                                            <div class="newsBox">
+                                                <div class="clearfix newsTitle">
+                                                    <div class="pull-left"><h4 class="text-blue">独家解盘</h4></div>
+                                                </div>
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="bfInfoNew['infoAnalyze']" id="vo" offset="0" length='5'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="bfInfoNew['infoAnalyze']" id="vo" offset="5" length='5'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="bfInfoNew['infoAnalyze']" id="vo" offset="10" length='5'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pull-right newsRight">
+                                            <div class="newsBox">
+                                                <div class="clearfix newsTitle">
+                                                    <div class="pull-left"><h4 class="text-blue">竞彩前瞻</h4></div>
+                                                </div>
+                                                <div class="newsList" style="margin-bottom: 8px;">
+                                                    <ul>
+                                                        <volist name="bfInfoNew['asiaInfo']" id="vo">
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="newsBox">
+                                                <div class="clearfix newsTitle">
+                                                    <div class="pull-left"><h4 class="text-blue">北单推荐</h4></div>
+                                                </div>
+                                                <div class="newsList" style="margin-bottom: 8px;">
+                                                    <ul>
+                                                        <volist name="bfInfoNew['europeInfo']" id="vo">
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="newsBox">
+                                                <div class="clearfix newsTitle">
+                                                    <div class="pull-left"><h4 class="text-blue">篮彩情报</h4></div>
+                                                </div>
+                                                <div class="newsList" style="margin-bottom: 8px;">
+                                                    <ul>
+                                                        <volist name="bfInfoNew['jcBkInfo']" id="vo">
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="newsBig01" style="display: none">
+                                        <div class="pull-left newsLeft">
+                                            <!-- banner -->
+                                            <div id="myGs03" class="carousel slide" data-ride="carousel">
+                                                <ol class="carousel-indicators">
+                                                    <volist name="AdInfoNew" id="item">
+                                                        <li data-target="#myGs03" data-slide-to="{$key}" <if condition="$key eq 0">class="active"</if>></li>
+                                                    </volist>
+                                                </ol>
+                                                <div class="carousel-inner">
+                                                    <volist name="AdInfoNew" id="item">
+                                                        <div class="<if condition="$key eq 0">active</if> item">
+                                                            <a href="{$item.url}" target="_blank"><img class="lazy" src="{$item.img}" style="width:310px;height:140px;"></a><div class="fbanner_title"><a target="_blank" href="{$item.url}">{$item.title}</a></div>
+                                                        </div>
+                                                    </volist>
+                                                </div>
+                                            </div>
+                                            <!-- banner -->
+                                            <div class="newsBox" style="margin-top: 3px;">
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="bfInfoNew['exclusiveInfo']" id="vo" offset="0" length='5'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="bfInfoNew['exclusiveInfo']" id="vo" offset="5" length='5'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="bfInfoNew['exclusiveInfo']" id="vo" offset="10" length='6'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pull-right newsRight">
+                                            <div class="newsBox">
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="bfInfoNew['exclusiveInfo']" id="vo" offset="16" length='5'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="newsBox">
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="bfInfoNew['exclusiveInfo']" id="vo" offset="21" length='5'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="newsBox">
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="bfInfoNew['exclusiveInfo']" id="vo" offset="26" length='5'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="newsBox">
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="bfInfoNew['exclusiveInfo']" id="vo" offset="31" length='5'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 足球分析 -->
+                            <div class="zqzx">
+                                <!-- titleNav -->
+                                <div class="fitem-title clearfix">
+                                     <div class="fitem-left clearfix">
+                                        <h4><i class="pull-left zx"></i><span class="pull-left">体育资讯</span></h4>
+                                     </div>
+                                     <div class="fitem-line pull-right zxTab">
+                                        <ul class="pull-right">
+                                            <li class="on"><a href="javascript:;">足球资讯</a><span>|</span></li>
+                                            <li><a href="javascript:;">篮球资讯</a></li>
+                                        </ul>
+                                     </div>
+                                </div>
+                                <!-- newsCon02 -->
+                                <div class="newsCon clearfix">
+                                    <div class="newsBig02">
+                                        <!-- newsLeft -->
+                                        <div class="pull-left  newsLeft">
+                                            <div class="newsBox">
+                                                <div class="newsHot">
+                                                    <a href="{:getNewsUrl($messageNew['fbMessage'][0]['id'],$messageNew['fbMessage'][0]['is_original'])}" title="{$messageNew['fbMessage'][0]['title']}" target="_blank">
+                                                        <p><img class="lazy" src="{$messageNew['fbMessage'][0]['img']}" width="310" height="202" alt="{$messageNew['fbMessage'][0]['title']}"></p>
+                                                        <div class="newsHotIfor">
+                                                            <h5 style="margin-bottom: 3px;"><strong>{$messageNew['fbMessage'][0]['title']}</strong></h5>
+                                                            <p class="text-999">{$messageNew['fbMessage'][0]['remark']|msubstr=###,0,35}<span class="text-blue pull-right">详情>></span></p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="messageNew['fbMessage']" id="vo" offset="3" length='6'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- newsRight -->
+                                        <div class="pull-right  newsRight">
+                                            <div class="newsBox">
+                                                <div class="itemList clearfix">
+                                                    <ul>
+                                                        <volist name="messageNew['fbMessage']" id="vo" offset="1" length='2'>
+                                                            <li>
+                                                                <a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" class="clearfix" title="{$vo['title']}" target="_blank">
+                                                                    <div class="pull-left rec_img"><img class="lazy" src="{$vo['img']}" width="124" height="86" style="display: inline;" title="{$vo['title']}"></div>
+                                                                    <div class="pull-left  rec_right">
+                                                                        <h5 class="mlc_title">{$vo['title']|msubstr=###,0,22}</h5><p class="mlc_des">{$vo['remark']|msubstr=###,0,27}</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="messageNew['fbMessage']" id="vo" offset="9" length='8'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="newsBig02" style="display:none">
+                                        <!-- newsLeft -->
+                                        <div class="pull-left  newsLeft">
+                                            <div class="newsBox">
+                                                <div class="newsHot">
+                                                    <a href="{:getNewsUrl($messageNew['bkMessage'][0]['id'],$messageNew['bkMessage'][0]['is_original'])}" title="{$messageNew['bkMessage'][0]['title']}" target="_blank">
+                                                        <p><img class="lazy" src="{$messageNew['bkMessage'][0]['img']}" width="310" height="202" alt="{$messageNew['bkMessage'][0]['title']}"></p>
+                                                        <div class="newsHotIfor">
+                                                            <h5 style="margin-bottom: 3px;"><strong>{$messageNew['bkMessage'][0]['title']}</strong></h5>
+                                                            <p class="text-999">{$messageNew['bkMessage'][0]['remark']|msubstr=###,0,35}<span class="text-blue pull-right">详情>></span></p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="messageNew['bkMessage']" id="vo" offset="3" length='6'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- newsRight -->
+                                        <div class="pull-right  newsRight">
+                                            <div class="newsBox">
+                                                <div class="itemList clearfix">
+                                                    <ul>
+                                                        <volist name="messageNew['bkMessage']" id="vo" offset="1" length='2'>
+                                                            <li>
+                                                                <a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" class="clearfix" title="{$vo['title']}" target="_blank">
+                                                                    <div class="pull-left rec_img"><img class="lazy" src="{$vo['img']}" width="124" height="86" style="display: inline;" title="{$vo['title']}"></div>
+                                                                    <div class="pull-left  rec_right">
+                                                                        <h5 class="mlc_title">{$vo['title']|msubstr=###,0,22}</h5><p class="mlc_des">{$vo['remark']|msubstr=###,0,27}</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                                <div class="newsList">
+                                                    <ul>
+                                                        <volist name="messageNew['bkMessage']" id="vo" offset="9" length='8'>
+                                                            <li><a href="{:getNewsUrl($vo['id'],$vo['is_original'])}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+                                                        </volist>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- right -->
+                        <div class="pull-right zqRight">
+                            <div class="bigShot">
+                                <div class="shotTitle clearfix">
+                                    <div class="pull-left shotHot"><h4>大咖用户</h4></div>
+                                </div>
+                                <div class="shotBox">
+                                    <ul>
+                                        <volist name="list" id="vo">
+                                            <li>
+                                                <a href="{:U('/userindex/'.$vo['user_id'].'')}" class="clearfix" target="_blank">
+                                                    <div class="pull-left faceImg"><img class="lazy" src="{$vo['face']}" alt="{$vo['nick_name']}"></div>
+                                                    <div class="pull-left uShot">
+                                                        <p>{$vo['nick_name']}<span class="text-red">近5W{$vo['five_num']|default=0}</span></p><p class="f12"><if condition="in_array($vo['play_type'],[1,-1])">亚盘<else/>竞彩</if>：{$vo['home_team_name']|msubstr=###,0,5} VS {$vo['away_team_name']|msubstr=###,0,5}</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </volist>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- ad -->
+                            <notempty name="AdIndex4">
+                                <div style="line-height: 0;">
+                                    <a target="_blank" href="{$AdIndex4.0.url}"><img class="lazy" src="{$AdIndex4.0.img}" width="312" height="138"  /></a>
+                                </div>
+                            </notempty>
+                            <div class="bigShot">
+                                <div class="shotTitle clearfix">
+                                    <div class="pull-left shotHot"><h4>超值高手</h4></div>
+                                </div>
+                                <div class="shotBox">
+                                    <ul>
+                                        <volist name="superList" id="vo">
+                                            <li>
+                                                <a href="{:U('/userindex/'.$vo['user_id'].'')}" class="clearfix" target="_blank">
+                                                    <div class="pull-left faceImg"><img class="lazy" src="{$vo['face']}" alt="{$vo['nick_name']}"></div>
+                                                    <div class="pull-left uShot">
+                                                        <p>{$vo['nick_name']}<span class="text-red">近5W{$vo['five_num']|default=0}</span></p><p class="f12"><if condition="in_array($vo['play_type'],[1,-1])">亚盘<else/>竞彩</if>：{$vo['home_team_name']|msubstr=###,0,5} VS {$vo['away_team_name']|msubstr=###,0,5}</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </volist>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- ad -->
+                            <notempty name="AdIndex5">
+                                <div style="line-height: 0;">
+                                    <a target="_blank" href="{$AdIndex5.0.url}"><img class="lazy" src="{$AdIndex5.0.img}" width="312" height="138"  /></a>
+                                </div>
+                            </notempty>
+                        </div>
+                    </div>
+                </div>
+                <notempty name="AdIndex2">
+                <div style="line-height: 0;padding-top: 5px;">
+                    <if condition="pathinfo($AdIndex2[0]['img'], PATHINFO_EXTENSION) eq swf">
+                        <embed width="1000" height="70" wmode="opaque" type="application/x-shockwave-flash" src="{$AdIndex2.0.img}">
+                        <a style="display:block;width:1000px;height:70px;margin:-70px 0 0 0;position:relative;left:0;top:0;z-index:1;background:#fff;opacity:0;filter:alpha(opacity=0);" target="_blank" href="{$AdIndex2.0.url}"></a>
+                    <else/>
+                        <a target="_blank" href="{$AdIndex2.0.url}"><img class="lazy" src="{$AdIndex2.0.img}" width="1000" height="70" /></a>
+                    </if>
+                </div>
+                </notempty>
+                <div class="friend-con">
+                    <div class="clearfix stat-title">
+                        <div><h4><span>友情链接</span></h4></div>
+                    </div>
+                    <div class="fs-link">
+                        <ul class="clearfix">
+                        <volist name="Link" id="item">
+                            <li><a href="{$item.url}" target="_blank">{$item.name}</a></li>
+                        </volist>
+                        </ul>
+                    </div>
+                </div>
+          </section>
+        </div>
+    </div>
+    <include file="Public:footer"/>
+    <include file="Public:elevator"/>
+    <script type="text/javascript" src="/min/?b=Public/Home/js&f=index/index.js"></script>
+</body>
+</html>
+</block>

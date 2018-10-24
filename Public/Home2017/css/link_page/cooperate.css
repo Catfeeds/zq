@@ -1,0 +1,24 @@
+/**
+ * 全彩关于我们css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-12-25
+**/
+/* 主体内容 */
+.home,.main{ width: 1000px; margin: 0 auto; margin-top: 12px\9; margin-bottom: 12px\9}
+.main{ margin: 12px 0; display: block; min-height: 650px;}
+.home h2{ margin: 38px 0 50px 0;}
+.main h2{ margin: 38px 0 50px 0;}
+.main h2 img{ display: block}
+.coo-ul{ padding-top: 50px;}
+.coo-ul .coo-ul-li{ width: 166px; float: left; margin: 0 82px;}
+.coo-ul .par{ margin-top: 26px; padding-top: 24px; border-top: 1px dashed #e5e5e5;}
+.coo-ul .par li{ margin-bottom: 10px;}
+.myPhoto{ width: 160px; height: 205px; margin:0 auto; position: relative; }
+/*.myPhoto img{ position: absolute; backface-visibility: hidden; -moz-transition: all 1s; -ms-transition: all 1s; -o-transition: all 1s; -webkit-transition: all 1s; transition: all 1s;}
+.myPhoto:hover .zc{ -moz-transform: rotateX(540deg); -ms-transform: rotateX(540deg); -o-transform: rotateX(540deg); -webkit-transform: rotateX(540deg); transform: rotateX(540deg);}
+.sb{ -moz-transform: rotateX(-540deg); -ms-transform: rotateX(-540deg); -o-transform: rotateX(-540deg); -webkit-transform: rotateX(-540deg); transform: rotateX(-540deg)}
+.myPhoto:hover .sb{ -moz-transform: rotateX(0deg); -ms-transform: rotateX(0deg); -o-transform: rotateX(0deg); -webkit-transform: rotateX(0deg); transform: rotateX(0deg);} */
+.coo-ul .par .left{ width: 70px; text-align: right; color: #8a8a8a;}
+.coo-ul .par .right a{ display: block; width: 90px; height: 24px; line-height: 24px; border-radius: 12px; padding-left: 25px; background: #68d8aa url(../../images/link_page/qq.png) no-repeat 8px center; color: #fff;}
+.coo-ul .par .right a:hover{ background: #ffb759 url(../../images/link_page/qq.png) no-repeat 8px center;}

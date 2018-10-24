@@ -1,0 +1,41 @@
+/**
+ * 全彩竞猜大厅首页css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-28
+**/
+/* 右边内容 */
+.g_content_main{ width: 800px;}
+
+.title{ border-bottom: 1px solid #e5e5e5;}
+.section-title h4{ font-weight: bold;display: inline-block; font-size: 16px; color: #ffffff; padding: 10px 0 10px 15px; margin: 0 0 0 10px; background-image: url(../../images/quiz_hall/title01.png); background-repeat: no-repeat; background-position: left center;}
+.r-noice{ height: 44px; line-height: 44px; color:#fff;margin-top: 10px;margin-left: 100px;}
+.r-noice select{ color: #2e76c7;}
+.input-append{ height: 30px; margin-left: 8px; margin-top: 18px;margin-right: 20px; position: relative;}
+.input-append .Colltext{ width: 200px; height: 30px; line-height: 28px; border: 1px solid #ccc; padding: 0 10px;}
+.input-append .Colltext:focus{ outline: none;}
+.input-append .Colladd{ line-height: 26px; margin-left: -1px; position: relative; top: 0px\9;border:0;background-color: #ff871e;color: #fff;height: 30px;padding: 0 15px}
+.input-append .Colladd:hover{ color: #ffffff; background: #ff7e00; border-color: #ff7e00;}
+/*胜率榜、盈利榜TAb*/
+.nav-tab{ margin-top: 14px;margin-left: 20px}
+.nav-tab li { float: left; border: 1px solid #e5e5e5; background-color: #fff; position: relative; margin-left: -1px;}
+.nav-tab li a { display: block; text-align: center; height: 32px; line-height: 30px; padding: 0 20px;}
+.nav-tab li.on{ border-color: #336699;}
+.nav-tab li.on a{ color: #fff; background: #336699;}
+.box-right .table-con{ padding: 14px 0;}
+.box-right .table-con table{font-size: 12px;}
+.rank-list .table .one{ text-align: center; background: #ffffff;}
+.rank-list .table .two{ text-align: center; background: #f7f7f7;}
+.rank-list .table td .face-r img{ border-radius: 50%;}
+.rank-list .table .fan-num{ float: left; width: 60px; height: 28px; line-height: 28px; border: 1px solid #e5e5e5; background: #fff; overflow: auto;text-overflow: ellipsis;display: -webkit-box-orient: vertical;  overflow: hidden; border-top-left-radius: 3px; border-bottom-left-radius: 3px;}
+.rank-list .table .fan-ate{ float: left; width: 60px; height: 28px; line-height: 28px; border-top-right-radius: 3px; border-bottom-right-radius: 3px;}
+.rank-list .iden{ text-align: left;}
+.rank-list .iden a{float: left;}
+.rank-list .iden div{ display: inline-block; width: 170px; overflow: hidden;text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; -ms-text-overflow: ellipsis; text-overflow: ellipsis; -moz-text-overflow: ellipsis; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; -webkit-text-overflow: ellipsis; overflow: hidden; white-space: nowrap; -moz-white-space: nowrap; -ms-white-space: nowrap; -o-white-space: nowrap; -webkit-white-space: nowrap;}
+.rank-list .table .table-header .iden{ text-align: left; }
+.rank-list .iden img{ margin-top: -5px;}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td { border-top: 0 none; }
+
+.rank_con{width: 100%;font-size: 14px}
+.rank-list .table .table-header th{background: #e5e5e5;border-bottom: 1px solid #dddddd;font-size: 14px;}
+.rank-list .table tr td{font-size: 14px}

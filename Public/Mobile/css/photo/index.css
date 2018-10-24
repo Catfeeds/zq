@@ -1,0 +1,57 @@
+/*
+* @Author: Weiqianqian
+* @Date:   2018-04-14 15:14:31
+* @Last Modified time: 2018-04-27 15:10:33
+*/
+
+
+body{ padding: 0; margin: 0; background-color: #fff;}
+.content{ background-color: #fff;}
+.refer{ background-color: #fff; }
+.refer li{ padding: 0 .2rem 0 .2rem;}
+.most{  border-bottom: 1px solid #eeeeee;}
+h2{ font-size: .32rem; line-height: .8rem; height: .8rem; font-weight: 300; font-family: "PingFangSC-Medium", "Source Han Sans CN", sans-serif; text-align: justify;}
+.counsel{ padding: .1rem 0 .1rem 0;}
+.counsel .phone{ width:33.33333% ; height: 1.5rem;float: left;}
+.counsel .phone img{ width: 2.3rem; height: 1.5rem; min-height: 1.5rem; min-width: 2.3rem;background-color: #686868; }
+
+.hotspot{ width: 100%; float: left; height:.6rem; line-height: .6rem; margin: 0 0 .2rem 0; }
+.hotspot .hotphone,.hotspot .htime,.hotspot .hnumber,.hotspot .review{ float: left;}
+.hotspot .hotphone{ padding: 0 .2rem 0 0;}
+.hotspot .hotphone img{ width: .26rem; margin-left: 2px;}
+.hotspot .review{ padding: 0 .1rem 0 .1rem;}
+.hotspot .review img{ width: .3rem;}
+.hotspot .htime{ font-size: .22rem; color: #999; padding: 0 .1rem 0 0;}
+.hotspot .hnumber{ font-size: .22rem; color: #999;margin-left: .5rem;}
+.topnav{ position: relative;}
+.scroller{display: block; height: 35px; position: relative; overflow: hidden; background-color: rgba(255,255,255,.3);  -webkit-transition: background 500ms ease-out, padding 300ms; transition: background 500ms ease-out, padding 300ms; padding-top: 0;}
+.scroller::after{  content: '';   display: block;  position: absolute;  left: 0;  bottom: 0;  background-color: #e4e4e4; width: 100%;  height: 1px; -webkit-transform: scaleY(0.5);  -ms-transform: scaleY(0.5);  transform: scaleY(0.5);  -webkit-transform-origin: bottom left; -ms-transform-origin: bottom left;  transform-origin: bottom left;  }
+
+/*.scroller .main-n .track .list-n .navLink,.navlink{ }
+.scroller .main-n .track .list-n a.current:after{ background-color: #0a94e4;}*/
+.scroller .track a.tuijian::after, .scroller .main-n .expand-btn.hasnew::after, .fulllist .channels-area .channels-list a.tuijian::after{ content: ''; background: #ed5151;  display: block; width: 6px;  height: 6px; border-radius: 50%; float: right;  margin: 3px -8px 0 2px; position: relative; }
+.scroller .main-n .gradient-l, .scroller .main-n .gradient-r, .scroller .main-n .expand-btn{ height: 35px;  position: absolute;  pointer-events: none;  top: 0;  width: 30px;  -webkit-backface-visibility: hidden;  backface-visibility: hidden; -webkit-transition: opacity .2s ease-out; transition: opacity .2s ease-out;}
+.scroller .main-n .gradient-r{ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%);right: 0; opacity: 1; width: 60px;
+}
+.scroller .main-n .gradient-l{  background: linear-gradient(to left, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);  left: 0;  opacity: 0;}
+.scroller .main-n .expand-btn{  width: 40px; height: 34px; right: 0px;  pointer-events: auto;  z-index: 3;}
+.scroller .main-n .expand-btn i{ display: block;  height: 100%;   background-image: url(../../images/index/plus.png);  background-position: center 6px;   background-repeat: no-repeat;  background-size: 20px 20px;  -webkit-transform-origin: center; -ms-transform-origin: center; transform-origin: center;}
+/*内容*/
+.left{ margin-right: .22rem;}
+.left,.right{ width: 3.44rem;  float: left;}
+.all{ list-style-type: none; background-color: #fff; margin: .2rem 0rem; padding-bottom: .1rem;}
+.all a{ text-decoration: none; cursor: auto;}
+
+.pho{ position: relative; width: 100%;}
+.pho img{ width: 100%; display: inline-block;}
+.pho .number{font-size: .24rem; position: absolute; width: .78rem; height: .4rem; z-index: 2; right: 0; bottom: 0rem; color: #fff; background-color: rgba(0,0,0,.4); text-align: center;}
+
+.tit-n{ box-sizing: border-box; padding: 0 .2rem; margin: .2rem 0; font-size: .32rem; height: .8rem; line-height: .4rem; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-break: break-all;  position: relative;}
+
+.tit-n img{ width: .24rem; margin-right: .1rem;}
+.like { font-size: .22rem; color: #ccc; position: absolute; font-style: normal; right: .2rem; bottom: 0;}
+
+/*返回顶部*/
+.backtop{ position: fixed;right: .2rem; bottom: 3.1rem; z-index: 999;width: .8rem; height: .8rem;}
+.backtop a{ display: block;}
+.backtop img{ width: .8rem; height: .8rem; pointer-events: none;}

@@ -1,0 +1,32 @@
+/**
+ * 设置css样式文件
+ * 
+ * @author pengjian <710348662@qq.com>
+ *
+ * @since  2016-04-19
+**/
+.tb_set{width: 100%} 
+.tb_set tr th{ height: .9rem; border-bottom: 1px solid #dddddd;text-align: left; padding-left: .2rem;font-size: .3rem;background: #f7f7f7; font-weight: normal}
+
+.tb_set tr td{color: #666666;height: .98rem;border-bottom: 1px solid #dddddd; }
+.tb_set tr td:first-child{width: 3.2rem;padding-left: .2rem}
+/*.tb_set tr td:nth-child(2){width: 1.9rem}*/
+.tb_set tr td:last-child{width: 2.2rem;}
+
+.tb_set tr td input{vertical-align:middle; margin-top:-3px; }
+.tb_set tr td .checkbox{margin-right: .1rem; width: .3rem; height: .3rem; border:1px solid #999999;}
+.tb_set tr td .radio{margin-right: .1rem;width: .3rem; height: .3rem;}
+.tb_set tr td .select{width: 1.3rem;padding-left: .3rem; height: .5rem;line-height: .5rem;border:1px solid #999999; border-radius: 5px;font-size: .26rem; color: #666666;}
+#sele_confirm {
+    width: 1.2rem;
+    height: .6rem;
+    line-height: .65rem;
+    display: inline-block;
+    background-color: #ff7e00;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+}
+
+
+

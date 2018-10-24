@@ -1,0 +1,41 @@
+<include file="Public:header"/>
+<link rel="stylesheet" href="__PUBLIC__/Home/css/index/index.css">
+
+<body>
+<link rel="stylesheet" href="__PUBLIC__/Home/css/gamble/gamble.css?d=20170614">
+<include file="Public:top_include"/>
+
+
+
+<div class="g_content">
+	<div class="head_con clearfix">
+        <include file="user_info"/>
+        <div class="fr rules">
+            <a class=""  id="gambleLog" href="{:U('Activity/gamble')}" >推荐首页</a>
+            <a class="gamUser on"  id="gambleLog" href="{:U('Activity/gambleLog')}" >推荐记录</a>
+            <a href="{:U('Activity/rule',['activityId'=>$activityId])}">活动规则</a>
+        </div>
+    </div>
+
+    <div class="content_main">
+        <div class="timeT"><p><img src="__PUBLIC__/Home/images/gamble/recordT.png" alt="活动规则"></p></div>
+        <div class="guess_history">
+            <ul>
+                <volist name="list" id="item">
+                <li>
+                    <p class="ght_time">{$item.add_time}</p>
+                    <div class="gh_con">
+                        您参加了全球体育“{$item.single_title}”免费推荐，您的推荐选项为:<em>{$item.options}</em>。获奖名单于活动结束后在全球体育APP以及“全球体育网”公众号推文发布。快叫小伙伴一起来“捡”钱吧！
+                    </div>
+                    <a href="{:U('Activity/gambleDetails',['activityId'=>$item['id']])}" class="clearfix">
+                        <div class="gh_link pull-right">点击查看详情&gt;&gt;</div>
+                    </a>
+                    <div class="g_state {$item.status}"></div>
+                </li>
+                </volist>
+            </ul>
+        </div>
+</div>
+<input type="hidden" value="{$activityId}" id="activityId">
+</body>
+</html>

@@ -1,0 +1,235 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			<div class="unit">
+				<label>显示内容：</label>
+				<input type="text" class="required"  name="title" value="{$vo.title}" size="50"/>
+			</div>
+			<div class="unit">
+				<label>广告平台：</label>
+				<select name="platform" class="required">
+					    <option value="">请选择</option>
+						<option value="1" <if condition="$vo.platform eq '1'">selected</if> >web</option>
+						<option value="2" <if condition="$vo.platform eq '2'">selected</if> >ios</option>
+						<option value="3" <if condition="$vo.platform eq '3'">selected</if> >安卓</option>
+						<option value="4" <if condition="$vo.platform eq '4'">selected</if> >m站</option>
+						<option value="5" <if condition="$vo.platform eq '5'">selected</if> >手机平台</option>
+						<option value="6" <if condition="$vo.platform eq '6'">selected</if> >全平台</option>
+				</select>
+			</div>
+			<div class="unit">
+				<label>显示位置：</label>
+				<select name="class_id" class="required" id="showTishi">
+						<option value="">请选择</option>
+					<volist name="AdverClass" id="item">
+						<option value="{$item.id}" <eq name="item.id" value="$vo.class_id">selected</eq> >{$item.name}</option>
+					</volist>
+				</select>
+			</div>
+			<div class="unit">
+				<label>所属模块：</label>
+				<select name="module" class="required">
+						<option value="">请选择</option>
+						<option value="1" <if condition="$vo.module eq '1'">selected</if> >资讯</option>
+						<option value="2" <if condition="$vo.module eq '2'">selected</if> >图库</option>
+						<!-- <option value="3" <if condition="$vo.module eq '3'">selected</if> >视频</option> -->
+						<option value="9" <if condition="$vo.module eq '9'">selected</if> >外链</option>
+						<option value="10" <if condition="$vo.module eq '10'">selected</if> >个人主页</option>
+						<option value="11" <if condition="$vo.module eq '11'">selected</if> >足球推荐页面</option>
+						<option value="12" <if condition="$vo.module eq '12'">selected</if> >篮球推荐页面</option>
+						<option value="13" <if condition="$vo.module eq '13'">selected</if> >帖子</option>
+						<option value="15" <if condition="$vo.module eq '15'">selected</if> >体验券</option>
+						<option value="16" <if condition="$vo.module eq '16'">selected</if> >球王</option>
+						<option value="17" <if condition="$vo.module eq '17'">selected</if> >无跳转</option>
+						<option value="18" <if condition="$vo.module eq '18'">selected</if> >商城</option>
+				</select>
+			</div>
+
+			<div class="unit" id="grzx" style="display: none;">
+				<label>细分选择：</label>
+				<select name="grzx">
+					<option value="" <if condition="explode('_',$vo['url'])[1] eq ''">selected</if> >个人主页-默认页</option>
+					<option value="_1" <if condition="explode('_',$vo['url'])[1] eq '1'">selected</if> >个人主页-足球-亚盘页</option>
+					<option value="_2" <if condition="explode('_',$vo['url'])[1] eq '2'">selected</if> >个人主页-足球-竞彩页</option>
+					<option value="_3" <if condition="explode('_',$vo['url'])[1] eq '3'">selected</if> >个人主页-篮球-让分页</option>
+					<option value="_4" <if condition="explode('_',$vo['url'])[1] eq '4'">selected</if> >个人主页-篮球-总分页</option>
+					<option value="_5" <if condition="explode('_',$vo['url'])[1] eq '5'">selected</if> >个人主页-篮球-全部页</option>
+				</select>
+			</div>
+
+			<div class="unit">
+				<label>传入模块参数：</label>
+				<input type="text" class="required" name="url" value="{$url}" size="50"/>
+				<input type="hidden" id="module_type" value="{$vo.module}">
+				<span class="inputInfo"></span>
+			</div>
+
+			<div class="unit">
+				<label>app是否浏览器播放：</label>
+				<input type="radio" name="app_isbrowser" value="0" checked>否
+				<input type="radio" name="app_isbrowser" value="1" <if condition="$vo.app_isbrowser eq 1">checked</if>>是
+			</div>
+
+			<div class="unit">
+				<label>销售价格：</label>
+				<input type="text" class="required" name="price" value="{$vo.price|default=0}" size="30"/>
+			</div>
+
+			<div class="unit">
+				<label>销售人：</label>
+				<input type="text" class="" name="sales_people" value="{$vo.sales_people}" size="30"/>
+			</div>
+
+			<div class="unit">
+				<label>排序：</label>
+				<input type="text" class="required" name="sort" value="{$vo.sort}" />
+			</div>
+
+			<div class="unit">
+				<label>上架时间：</label>
+				<input type="text" class="date textInput readonly" datefmt="yyyy-MM-dd HH:mm" readonly="true" name="online_time" <if condition="$vo['online_time'] eq 0">value="<?php echo date('Y-m-d H:i',time());?>" <else /> value="{$vo['online_time']|date="Y-m-d H:i",###}"</if> />
+				<a class="inputDateButton" href="JavaScript:;">选择</a>
+			</div>
+			<div class="unit">
+				<label>下架时间：</label>
+				<input type="text" class="date textInput readonly" datefmt="yyyy-MM-dd HH:mm" readonly="true" name="end_time"  <if condition="$vo['end_time'] eq 0"> value="<?php echo date('Y-m-d H:i',time());?>"<else /> value="{$vo['end_time']|date="Y-m-d H:i",###}"</if>/>
+				<a class="inputDateButton" href="JavaScript:;">选择</a>
+			</div>
+
+			<div class="unit">
+			<label>说明：</label>
+			<textarea maxlength="255" class="large bLeft" name="remark"  rows="3" cols="47">{$vo.remark}</textarea>
+			</div>
+			<div class="unit">
+				<label>广告图片：</label>
+				<ul class="tabImg">
+					<li>
+						<input id="viewUploadInput_88" name="fileInput" type="file" onChange="previewImage(88)" style="display:none;" />
+						<a href="javascript:void(0);">
+							 <span id="viewUploadDiv_88">
+								<empty name="vo.titleimg">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_88"/>
+								<else/>
+									<if condition="pathinfo($vo['titleimg'], PATHINFO_EXTENSION) eq swf">
+										<embed width="80" height="80" id="viewUploadImg_88" wmode="opaque" type="application/x-shockwave-flash" src="{$vo.titleimg}">
+									<else/>
+									    <img id="viewUploadImg_88" width='80' height='80' border=0 src="{$vo.titleimg}">
+									</if>
+								</empty>
+							 </span>
+						</a>
+						<div id="poiter_88" class="poiter">
+							<empty name="vo.titleimg">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_88')">添加图片</a>
+							<else/>
+								<a title="删除" onclick="delPic({$vo.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_88')">重传</a>
+							</empty>
+						</div>
+					</li>
+				</ul>
+				<span class="inputInfo android <if condition="$vo.class_id neq 16">hidden</if>" style="color: red">注意：安卓APP启动页图片必须为2K尺寸</span>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+	.hidden{display: none;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+	$(function(){
+		$('.tabImg li').hover(function(e) {
+			$(this).children('div').stop().animate({'top':'0'},300);
+		},function(){
+			$(this).children('div').stop().animate({'top':'80px'},300);
+		});
+        var module_type = $('#module_type').val();
+        if(module_type == '10'){
+            $("#grzx").css('display','block');
+        }
+        $("#showTishi").on('change',function(){
+        	var class_id = $(this).val();
+        	if(class_id == 16){
+        		$('.android').show();
+        	}else{
+        		$('.android').hide();
+        	}
+        })
+	});
+	function delPic(id){
+		if(confirm("确认要删除吗？") == false){
+			return false;
+		}
+		//异步执行删除
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/AdverList/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                	$("#viewUploadInput_88").val("");
+					$("#viewUploadImg_88").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+					var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_88')\">添加图片</a>";
+					$("#poiter_88").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+
+    $("select[name='module']").change(function() {
+        var val = $(this).val();
+        var notice = '';
+        if(val == 10){
+            $("#grzx").css('display','block');
+        }else{
+            $("#grzx").val(null);
+            $("#grzx").css('display','none');
+        }
+        switch (val){
+			case '1':
+                notice = '请填写资讯ID';break;
+            case '2':
+                notice = '请填写图库ID';break;
+            case '9':
+                notice = '请填写链接地址';break;
+            case '10':
+                notice = '请填写用户ID';break;
+            case '11':
+                notice = '请填写足球赛事ID，填0时进入竞猜大厅';break;
+            case '12':
+                notice = '请填写篮球赛事ID，填0时进入竞猜大厅';break;
+            case '15':
+                notice = '固定0';break;
+            case '16':
+                notice = '请填写球王产品ID，填0进入球王首页';break;
+            case '17':
+                notice = '填0';break;
+            case '18':
+                notice = '请填写商城商品ID，0时进入商城首页';break;
+            case '19':
+                notice = '请填写帖子ID';break;
+		}
+		$(".inputInfo").text(notice);
+    });
+</script>
+
+
+
+

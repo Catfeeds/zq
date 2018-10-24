@@ -1,0 +1,11 @@
+.pay-con{ width: 802px; margin:0 auto; padding: 30px 18px 30px 42px; border-bottom: 1px solid #e5e5e5;}
+.right-con{ width: 371px; height: 469px; background: url(../../images/pay/weixin-main-bg.jpg) no-repeat right top;}
+.left-con{ width: 224px;}
+.saoma{ width: 224px; text-align: center; padding-bottom: 10px;}
+.pay-nioce{ height: 50px; background: url(../../images/pay/pay-nioce.png) no-repeat right top; margin-top: 15px;}
+.pay-item{ text-align: right; margin: 25px 40px; display: block;}
+.pay-item em{ font-size: 28px;}
+.item-list ul li{ margin-bottom: 12px;}
+.item-list .span-l{ width: 66px; text-align: right;}
+.item-list .span-r{ width: 158px; padding-left: 10px;}
+.text-no-pay{ color: #77da7b;}

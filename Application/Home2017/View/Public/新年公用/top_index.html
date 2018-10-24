@@ -1,0 +1,29 @@
+<include file="Public:top_include"/>
+<div class="top-center-con">
+    <div class="top-center">
+      <div class="pull-left center-left">
+            <div class="pull-left" id="logo"><a href="http://www.__DOMAIN__/"><img width="272" height="59" src="__PUBLIC__/Home/images/2017/logo.png" alt="logo"></a></div>
+      </div>
+        <div class="pull-right center-right" style="text-align: right">
+            <a href="http://www.__DOMAIN__/Api/Index/introduce.html" target="_blank;"><img src="__PUBLIC__/Home/images/2017/top-ad.png" width="665" height="67"></a>
+        </div>
+    </div>
+</div>
+<!-- 导航开始 -->
+<div class="nav-con">
+    <div class="nav-top-line"></div>
+    <div class="lantern lantern_left"></div>
+    <div class="lantern lantern_right"></div>
+    <div class="nav">
+        <ul class="clearfix">
+            <li <eq name="Think.CONTROLLER_NAME" value="Index">class="on"</eq> ><a href="http://www.__DOMAIN__/">首页</a></li>
+            <li <eq name="Think.ACTION_NAME" value="analysts">class="on"</eq>><a href="{:U('/analysts')}">情报分析</a></li>
+            <li <eq name="Think.get.class_id" value="football">class="on"</eq>><a href="{:U('/list_n/football')}">足球</a></li>
+            <li <eq name="Think.get.class_id" value="NBA">class="on"</eq>><a href="{:U('/list_n/NBA')}">NBA</a></li>
+            <li <eq name="Think.CONTROLLER_NAME" value="Score">class="on"</eq>><a href="{:U('Score/index')}">足球比分</a></li>
+            <li <eq name="Think.CONTROLLER_NAME" value="Video">class="on"</eq>><a href="{:U('/Video')}">视频直播</a></li>
+            <li class="last-li"><a target="_blank" href="http://b2b.qqty.com"> 体育商机</a></li>
+        </ul>
+    </div>
+</div>
+<!-- 导航结束 -->

@@ -1,0 +1,123 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userInfo/identity.css">
+</block>
+<block name="content">
+    <include file="Public:top_user"/>
+    <div class="body">
+
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <div class="data-graph identity-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="javascript:void(0);" class="current">身份认证</a></li>
+                                </ul>
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div id="identity" class="line-graph clearfix">
+                                        <div class="pull-left form identity-list">
+                                            <form>
+                                                <div class="form-in clearfix">
+                                                    <div class="pull-left input-name">真实姓名：</div>
+                                                    <div class="pull-left input-con">
+                                                        <input id="txt" class="form-control" name="true_name" type="text" <notempty name="data.identfy">value="{$data.true_name|mb_substr=###,0,1,'utf-8'}**" readonly disabled</notempty> placeholder="真实姓名"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-in clearfix">
+                                                    <div class="pull-left input-name">身份证号码：</div>
+                                                    <div class="pull-left input-con">
+                                                        <input id="card" class="form-control" name="identfy" type="text" <notempty name="data.identfy">value="{$data.identfy|substr_replace=###,'**********',4,-4}" readonly disabled</notempty> placeholder="身份证号码"/>
+                                                    </div>
+                                                </div>
+                                                <empty name="data.identfy">
+                                                    <div class="reg-btn clearfix form-in">
+                                                        <input type="submit" class="btn btn-green pull-right tijiao" value="确认提交" style="width:220px;" />
+                                                    </div>
+                                                </empty>
+                                                <p class="text-red no-change">*提交后不能修改</p>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- Tab panes -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+
+    </div>
+</block>
+<block name='js'>
+    <script>
+        $(function(){
+            $("form").validate({
+                onkeyup:false,
+                rules: {
+                    true_name:{
+                        required:true,
+                        chinese:true,
+                        rangelength:[2,10],
+                    },
+                    identfy : {
+                        required:true,
+                        idcard:true,
+                        remote: {
+                            url: "/UserInfo/checkIdentfy.html",
+                            type: "post",
+                            data: {
+                                fieldValue: function() {
+                                    return $( "#card" ).val();
+                                },
+                            }
+                        }
+                    },
+                },
+                messages: {
+                    true_name:{
+                        required:"真实姓名不能为空",
+                    },
+                    identfy:{
+                        required:"身份证号码不能为空",
+                        remote:"该身份证号码已经存在,不能使用" ,
+                    },
+                },
+                submitHandler:function(form){
+                    var form = $(form);
+                    var data = form.serialize();
+                    $.ajax({
+                        type: "POST",
+                        data: data,
+                        url: "/UserInfo/identity.html",
+                        beforeSend:function(){
+                            $(".tijiao").attr('disabled','disabled').val("正在提交...");
+                        },
+                        success: function(data){
+                            if(data.status){
+                                _alert('提示',data.info,"window.location.reload()");
+                            }else{
+                                _alert('提示',data.info);
+                            }
+                        },
+                        complete:function(){
+                            $(".tijiao").removeAttr('disabled').val("确认提交");
+                        },
+                    });
+                }
+            })
+        })
+    </script>
+</block>

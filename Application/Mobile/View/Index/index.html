@@ -1,0 +1,221 @@
+<extend name="Public/base" />
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/new_base.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/new_common.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/index/new_index.css?v=20180420">
+    <link rel="stylesheet" type="text/css" href="__CSS__/index/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/index/navCss.css?v=20180504">
+    <script type="text/javascript" src="__JS__/index/swiper.min.js"></script>
+    <script type="text/javascript" src="__JS__/index/zepto.min.js"></script>
+    <script type="text/javascript" src="__JS__/index/IndexData.js?20180711"></script>
+    <!--引入store插件-->
+    <script type="text/javascript" src="__PUBLIC__/Plugs/store/store.js"></script>
+    <script type="text/javascript" src="__JS__/editNav/navHead.js"></script>
+    <script>
+        var navId = "{$thisNav}";
+        var swiper=new Swiper(".list",{pagination:{el:".swiper-pagination",type:"progressbar",},});
+    </script>
+</block>
+<block name="header">
+    <!-- 二级头部 s -->
+        <include file="Public:titleHead"/>
+</block>
+<block name="nav"></block>
+<block name="content">
+    <!--无意义,用于获取距离顶部距离-->
+    <div class="disTop"></div>
+
+    <div class="top-nav">
+        <div class="scroller">
+            <div class="scrol-in" >
+                <ul></ul>
+            </div>
+            <a class="expand-btn  " aria-label="点击跳转" role="button" href="{:U('/editNav')}" ><i></i></a>
+        </div>
+    </div>
+
+    <!-- 主体内容 -->
+    <!-- banner -->
+    <div class="swiper-container swiper-container1 banner-w">
+        <div class="swiper-wrapper">
+            <volist name="mobileAdvert['banner']" id="v">
+                <div class="swiper-slide b">
+                    <a href="{$v['url']}" target="_blank" title="{$v['title']}"><img src="{$v['img']}" alt="{$v['title']}"></a>
+                    <div class="thirdly">
+                        <span>{$v['title']}</span>
+                    </div>
+                </div>
+            </volist>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination ban">
+        </div>
+    </div>
+
+    <!-- live  -->
+    <div class="swiper-container live">
+        <div class="swiper-wrapper">
+            <volist name="live" id="v">
+                <div class="swiper-slide live-top">
+                    <if condition="($v['gameType'] eq 1)">
+                        <a class="start" href="{:U('/Details/data/scheid/'.$v['gameId'].'')}">
+                        <else />
+                        <a class="start" href="{:U('/DetailsBk/data/scheid/'.$v['gameId'].'')}">
+                    </if>
+                        <div class="prompt">
+                            {$v['gtime']} {$v['unionName']}
+                        </div>
+                        <div class="team">
+                            <span class="left-live">
+                                <img src="{$v['homeTeamLogo']}" alt="{$v['homeTeamName']}">
+                                <p class="tname">{$v['homeTeamName']}</p>
+                            </span>
+                            <span   <if condition="($v['gameState'] gt 0) and ($v['gameState'] lt 7)">class="middle-live"<else />class="middle-live-l"</if> >
+                                <if condition="($v['gameState'] gt 0) and ($v['gameState'] lt 7)">
+                                    {$v['score'][0]} - {$v['score'][1]}
+                                    <div class="l-i">直播</div>
+                                <elseif condition="$v['gameState'] eq 0" />
+                                    - -
+                                    <div class="l-t">未开</div>
+                                <elseif condition="$v['gameState'] eq -1" />
+                                   {$v['score'][0]} - {$v['score'][1]}
+                                    <div class="l-t">完赛</div>
+                                <elseif condition="$v['gameState'] eq -14"/>
+                                    - -
+                                    <div class="l-t">推迟</div>
+                                <elseif condition="$v['gameState'] eq -13" />
+                                    - -
+                                    <div class="l-t">中断</div>
+                                <else />
+                                    - -
+                                    <div class="l-t">取消</div>
+                                </if>
+                            </span>
+                            <span class="right-live">
+                                <img src="{$v['awayTeamLogo']}" alt="{$v['awayTeamName']}">
+                                <p class="tname">{$v['awayTeamName']}</p>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </volist>
+        </div>
+    </div>
+    <!-- 主体内容 -->
+    <section class="container clearfix">
+        <!-- 英超 -->
+        <div class="premier-box clearfix">
+            <ul class="premier">
+                <!--Js动态插入数据-->
+                <volist name="newsData.indexNews" id="vo">
+                    <li>
+                        <a class="clearfix" href="{$vo.news_url}" title="{$vo.title}">
+                        <div class="left-part">
+                            <h2>{$vo.title}</h2>
+                            <div class="Tit-t">
+                                <if condition="$vo.hot eq 1">
+                                    <span class="hot"><img src="/Public/Mobile/images/index/hot.png"></span>
+                                </if>
+                                <span>{$vo.time}</span>
+                                <span class="num click_number">
+                                    {$vo.click_number}
+                                    <img src="/Public/Mobile/images/eye-icon.png" alt="浏览数">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="right-part"><img src="{$vo.img}" alt="{$vo.title}"></div>
+                        </a>
+                    </li>
+                </volist>
+            </ul>
+            <ul class="pictrue clearfix">
+            <!--Js动态插入数据-->
+            <volist name="newsData.pictureData" id="vo">
+                <li class="nom <if condition="$key eq 0">one</if>">
+                    <a href="/photo/{$vo.id}.html" title="{$vo.title}">
+                        <img src="{$vo.cover}" alt="{$vo.title}">
+                        <div class="explain">
+                            <span>{$vo.img_count}</span>
+                            <span><img src="Public/Mobile/images/index/i.png" alt="浏览数"></span>
+                        </div>
+                        <h3>{$vo.title}</h3>
+                    </a>
+                </li>
+            </volist>
+            </ul>
+        </div>
+        <!-- 广告 -->
+        <notempty name="mobileAdvert.platform">
+            <div class="advertisement">
+                <a class="adv" href="{$mobileAdvert['platform'][0]['url']}" target="_blank" title="{$mobileAdvert['platform'][0]['title']}"><img src="{$mobileAdvert['platform'][0]['img']}" alt="{$mobileAdvert['platform'][0]['title']}"></a>
+            </div>
+        </notempty>
+        <div class="topicsData">
+            <!-- 所有数据 -->
+            <volist name="newsData.topicsData" id="vo">
+                <div class="swiper-container list swiper-container-horizontal swiper-container-android">
+                    <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+                        <volist name="vo.Nav" id="nav">
+                            <div class="swiper-slide percent swiper-slide-active" style="width: 59px;">
+                                <a href="{$nav.url}" title="{$nav.name}">
+                                <div class="shrink">
+                                    <img src="{$nav.iconUrl}" alt="{$nav.name}">
+                                </div>
+                                <span>{$nav.name}</span></a>
+                            </div>
+                        </volist>
+                    </div>
+                </div>
+                <div class="premier-box clearfix">
+                    <ul class="premier">
+                    <volist name="vo.Data" id="Data">
+                        <li>
+                            <a class="clearfix" href="{$Data.news_url}" title="{$Data.title}">
+                            <div class="left-part">
+                                <h2>{$Data.title}</h2>
+                                <div class="Tit-t">
+                                    <if condition="$Data.hot eq 1">
+                                        <span class="hot"><img src="/Public/Mobile/images/index/hot.png"></span>
+                                    </if>
+                                    <span>{$Data.time}</span>
+                                    <span class="num click_number">
+                                        {$Data.click_number}
+                                        <img src="/Public/Mobile/images/eye-icon.png" alt="浏览数">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="right-part"><img src="{$Data.img}" alt="{$Data.title}"></div>
+                            </a>
+                        </li>
+                    </volist>
+                    </ul>
+                    <ul class="pictrue clearfix">
+                        <volist name="vo.Video" id="Video">
+                            <li class="nom <if condition="$key eq 0">one</if>">
+                                <a href="{$Video.m_url}" title="{$Video.title}">
+                                <img src="{$Video.img_url}" alt="{$Video.title}">
+                                <h3>{$Video.title}</h3>
+                                </a>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+            </volist>
+        </div>
+    </section>
+    <!-- 刷新 -->
+    <div class="foot-discuss clearfix">
+        <a><img src="__IMAGES__/index/x-s.png"></a>
+    </div>
+    <!-- 返回顶部 -->
+    <div class="backtop clearfix">
+        <a><img src="__IMAGES__/index/backtop.png"></a>
+    </div>
+</block>
+<block name="footer">
+    <include file="Public/footer"/>
+</block>
+<block name="scripts">
+    
+</block>
+

@@ -1,0 +1,258 @@
+/**
+ * 公共css样式文件
+ * 
+ * @author pengjian <710348662@qq.com>
+ *
+ * @since  2016-04-11
+**/
+
+/*头部*/
+#header{width: 100%; height: .89rem; background: #01af63;}
+#header .logo{float: left;padding:.15rem 0 0 .2rem;}
+#header .logo img{width: 2rem;height: .6rem;}
+#header .set_list{float: right;padding: .25rem .2rem 0 0}
+#header .set_list a{float: left;margin-left: .3rem}
+#header .set_list .set{width: .42rem;height: .42rem;}
+#header .set_list .list{width: .35rem;height: .35rem;margin-top: .05rem}
+/*内页 - 二级头部*/
+#other_header{width: 100%; height: .89rem;line-height: .89rem;text-align: center;color: #fff;font-size: .34rem;background:#01af63 url(../images/back.png) no-repeat .25rem center; background-size: .22rem .4rem; text-indent: -.44rem}
+#other_header a{width: .6rem;height: 100%;display: block;float: left;}
+
+/*导航01*/
+.cur{
+  color: #01af63;
+  border-bottom: .1rem solid #01af63;
+}
+
+/*导航02*/
+.n_module{height: .4rem;line-height: .4rem; background: #f7f7f7; border-bottom: 1px solid #dddddd}
+.nav_list{margin: 0 auto; padding: 0 2%;}
+.nav_list a{ width: 17.2%; color: #666666; display: block;float: left; text-align: center;height: .4rem;margin: 0 1%;}
+.nav_list02 a{ width: 30%;font-size: .18rem}
+/*.nav_list a:hover{color: #01af63;border-bottom: .1rem solid #01af63;}*/
+.nav_list a.on{color: #01af63;border-bottom: .03rem solid #01af63;}
+
+/*时间导航*/
+.n_time{background: #ffe4cb;}
+.nav_time{margin: 0 auto; padding: 0 2%;}
+.nav_time a{ width: 14.2%; color: #b87027; display: block;float: left; text-align: center; padding: 0.05rem 0; position:relative;}
+.nav_time a.on{color: #fff; background: #f1b47b; border-radius: 0.05rem;}
+.nav_time a.on:before{content: ""; position: absolute; bottom: -0.1rem; border-width: 0.1rem 0.1rem 0;  border-style: solid; display: block; width: 0; left: 50%; margin-left: -0.1rem;  border-color: #f1b47b transparent;}
+
+/*底部*/
+#footer{width: 100%; height: 2.45rem; background: #f7f7f7;padding-top: .55rem;text-align: center; color: #999999;margin-top: .3rem}
+#footer .version{height: .5rem; line-height: .5rem}
+#footer .version{ text-align: center; }
+#footer .version a{color: #01af63;font-size: .28rem}
+#footer .version .touch{color: #999}
+#footer .copyright{height: .5rem; line-height: .5rem;padding-top: .2rem;font-size: .24rem}
+#footer .tel{height: .5rem; line-height: .5rem;padding-top: .2rem;font-size: .24rem}
+
+/*日期选择*/
+.day{padding: .05rem 0;width: 100%;position: relative; text-align: center;}
+.day .day_sele{width:3.7rem;height: .68rem;line-height: .68rem;font-size: .28rem; border:1px solid #dddddd; border-radius: 5px; padding-left:.2rem; }
+.day .today{width: .9rem; height: .68rem; line-height: .68rem; background: #eeeeee; border-radius: 5px; text-align: center;position: absolute;right: .2rem;bottom: .05rem}
+
+/*赔率-球队比分*/
+.score{width: 100%;padding:.25rem 0; }
+.score_main{width: 6.5rem; margin: 0 auto;}
+.s_left{width: 1.9rem;float: left;text-align: center;}
+.s_center{width: 2.6rem; padding: 0 .2rem;float: left; text-align: center;}
+.s_right{float: right; }
+/*border: .08rem solid #eeeeee;*/
+.s_left .t_logo{width: 1.8rem; height: 1.8rem; border-radius: 50%; padding: .1rem}
+.s_left .t_logo img{width: auto; height: 100%;}
+.s_left p{padding-top:.2rem;font-size: .22rem}
+.s_center .sc_score{ width: 100%; height: .58rem; background: #fe7000; line-height: .58rem; color: #fff;font-size: .42rem; border-radius: 5px;font-weight: bold; margin: .4rem 0 .3rem 0}
+.s_center time,.s_center p{color: #999999;font-size: .24rem}
+
+/* nav - 公司and赛事*/
+.subnav{background: #ffe3cb;height: .7rem;border-bottom: 1px solid #dddddd}
+.subnav a{width: 50%; text-align: center; float: left; line-height: .7rem;background: url(../images/san.png) no-repeat center center; text-indent: -1rem;background-size: .12rem .08rem; }
+.subnav a.on{background: url(../images/san_on.png) no-repeat center center;color: #fe7000;background-size: .12rem .08rem;} 
+
+/*-----------------------------赛事赛选 s---------------------------------*/
+/* 赛事赛选 - 级别*/
+.subnav_level{ padding: .4rem 0; text-align: center;}
+.subnav_level a{ float: left; width: 29.333%; height: 100%; line-height: .7rem; margin: 0 2%; background-color:#dd6565;color: #fff;border-top: 2px solid #b15151;border-radius: 5px }
+.subnav_level a.on{background-color:#ffad54;border-bottom: 2px solid #b2793b;border-top: 0}
+
+/* 赛事赛选 - 列表*/
+.subnav_list{width: 100%;text-align: center; min-height: 4rem}
+.subnav_list a{width: 21%;height: .68rem;line-height: .7rem; margin: 2%; margin-bottom: .22rem;  display: inline-block;  border:1px solid #e5e5e5; text-align: center;background-color: #fff;float: left;}
+.subnav_list a.on{border:1px solid #ff7e00;color: #ff7e00;background: url(../images/on.png) no-repeat right bottom; background-size: .24rem .24rem;background-color: #fff}
+/*选择*/
+.nav_sele{display:none;background: #f7f7f7; height: .9rem; position: fixed; bottom: 0; left: 0; z-index: 999;width: 100%;padding: 0 .2rem; line-height: .9rem}
+.nav_sele .ns_l{float: left; width: 1.2rem;}
+.nav_sele .ns_l span{color: #ec1010}
+.nav_sele .ns_r{float: right;width: 5.8rem; text-align: right;  }
+.nav_sele .ns_r a{width:1rem; height: .6rem;line-height: .65rem; display: inline-block; background-color: #ff7e00; text-align: center; color: #fff;border-radius: 5px;margin-left: .3rem}
+.nav_sele .ns_r a:last-child{}
+
+#header{position: relative; z-index: 2;}
+#zhishu_event{ width: 100%; display: none;top:.89rem;position: absolute; z-index: 2;}
+/*遮罩层*/
+ #maskLayer{ width:100%; height: 100%; background-color:#000000; opacity:0.8; -moz-opacity:0.8; filter:alpha(opacity=80); position: fixed; top: 0; left: 0;z-index: 1;display: none;}
+/*-----------------------------赛事赛选 e---------------------------------*/
+
+
+
+/*-----------------------------分页 s---------------------------------*/
+.paged{float: left; width: 100%; text-align: center; margin-top: .2rem;}
+.paged .load_gif{ height: .3rem;}
+.paged .load_gif img { width: .3rem; vertical-align: middle;}
+.paged a{ width: 100%; display: inline-block; font-size: .24rem;}
+.paged a:hover{color: #fff}
+
+/* 绿色 */
+.btn-green {
+  color: #ffffff;
+  background-color: #2ac782;
+  border-color: #2ac782;
+}
+.btn-green:hover,
+.btn-green:focus,
+.btn-green.focus,
+.btn-green:active,
+.btn-green.active,
+.open > .dropdown-toggle.btn-green {
+  color: #ffffff;
+  background-color: #2db77b;
+  border-color: #2db77b;
+}
+.btn-green:active,
+.btn-green.active,
+.open > .dropdown-toggle.btn-green {
+  background-image: none;
+}
+.btn-green.disabled,
+.btn-green[disabled],
+fieldset[disabled] .btn-green,
+.btn-green.disabled:hover,
+.btn-green[disabled]:hover,
+fieldset[disabled] .btn-danger:hover,
+.btn-green.disabled:focus,
+.btn-green[disabled]:focus,
+fieldset[disabled] .btn-green:focus,
+.btn-green.disabled.focus,
+.btn-green[disabled].focus,
+fieldset[disabled] .btn-green.focus,
+.btn-green.disabled:active,
+.btn-green[disabled]:active,
+fieldset[disabled] .btn-green:active,
+.btn-green.disabled.active,
+.btn-green[disabled].active,
+fieldset[disabled] .btn-green.active {
+  background-color: #2ac782;
+  border-color: #2ac782;
+}
+
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  /*border-radius: 4px;*/
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+  outline:none;
+}
+.btn:hover,
+.btn:focus,
+.btn.focus {
+  color: #333333;
+  text-decoration: none;
+  outline:none
+}
+.btn:active,
+.btn.active {
+  outline: 0 none;
+  background-image: none;
+  /* -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); */
+  /* box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); */
+}
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.btn-default {
+  color: #fff;
+  background-color: #ccc;
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default.focus,
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+  color: #fff;
+  background-color: #bebebe;
+}
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+  background-image: none;
+}
+.btn-default.disabled,
+.btn-default[disabled],
+fieldset[disabled] .btn-default,
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+fieldset[disabled] .btn-default:hover,
+.btn-default.disabled:focus,
+.btn-default[disabled]:focus,
+fieldset[disabled] .btn-default:focus,
+.btn-default.disabled.focus,
+.btn-default[disabled].focus,
+fieldset[disabled] .btn-default.focus,
+.btn-default.disabled:active,
+.btn-default[disabled]:active,
+fieldset[disabled] .btn-default:active,
+.btn-default.disabled.active,
+.btn-default[disabled].active,
+fieldset[disabled] .btn-default.active {
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+.btn-default .badge {
+  color: #ffffff;
+  background-color: #333333;
+}
+
+/*-----------------------------分页 e---------------------------------*/
+
+/*暂无数据*/
+.nodata{color: #999;padding:.2rem;}
+
+.odds_con,.n_module,.score,.data_con{ width:1000px; margin: 0 auto; }
+
+.red{color:#eb0000;}
+.green{color:#10af63;}

@@ -1,0 +1,51 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/login/login.css">
+    <script type="text/javascript" src="__JS__/user/register.js"></script>
+</block>
+<block name="header">
+
+    <!-- 二级头部 s -->
+    <header id="other_header" style='background:#01af63;'>
+        <a href="javascript:;"></a>用户昵称
+        <a href="javascript:;" id='dosave' class="share" style="font-size:.3rem;">保存</a>
+    </header>
+    <!-- 二级头部 e -->
+</block>
+<block name="nav"></block>
+<block name="content">
+    <div class="login_panel">
+        <form id="login-form" onkeydown="if(event.keyCode==13)return false;">
+            <div class="login-container">
+                <div class="inputbox inputUser" id="account-box">
+                    <div class="u-input">
+                        <label class="u-label ne_name">用户昵称</label>
+                        <input name="username" class="dlemail ne_name_input" type="text" id="email" placeholder="用户名称" autocomplete="off">
+                        <a href="javascript:;" class="ne_close"></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</block>
+<block name='scripts'>
+    <script>
+        $(document).on('click', "#dosave", function () {
+            var username = $("input[name='username']").val();
+            if (username < 2 || username > 10) {
+                alert('用户昵称必须大于2位,小于10位');
+                return;
+            }
+            $.post('', {username: username}, function (data) {
+                if(data.status == 0){
+                    alert(data.info);
+                    return;
+                }else{
+                    alert(data.info);
+                    window.location.href = data.url;
+                }
+            }, 'json');
+        });
+    </script>
+</block>

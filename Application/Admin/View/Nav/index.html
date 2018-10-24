@@ -1,0 +1,210 @@
+<include file="Public:pagerForm" />
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="" method="post">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label>导航分类：</label>
+                    <select name="type" class="combox" onchange="$(form).submit()">
+                        <option value="" selected>请选择</option>
+                        <option value="1" <if condition="$_REQUEST.type eq '1'">selected</if> >App首页情报导航</option>
+                        <option value="2" <if condition="$_REQUEST.type eq '2'">selected</if> >App大咖广场导航</option>
+                        <option value="3" <if condition="$_REQUEST.type eq '3'">selected</if> >App世界杯底部导航</option>
+                        <option value="4" <if condition="$_REQUEST.type eq '4'">selected</if> >Web首页顶部导航1</option>
+                        <option value="5" <if condition="$_REQUEST.type eq '5'">selected</if> >Web首页足球专栏</option>
+                        <option value="6" <if condition="$_REQUEST.type eq '6'">selected</if> >Web首页蓝球专栏</option>
+                        <option value="7" <if condition="$_REQUEST.type eq '7'">selected</if> >Web首页综合体育</option>
+                        <option value="8" <if condition="$_REQUEST.type eq '8'">selected</if> >Web首页电竞专栏</option>
+                        <option value="9" <if condition="$_REQUEST.type eq '9'">selected</if> >Web英超专题导航</option>
+                        <option value="10" <if condition="$_REQUEST.type eq '10'">selected</if> >Web西甲专题导航</option>
+                        <option value="11" <if condition="$_REQUEST.type eq '11'">selected</if> >Web德甲专题导航</option>
+                        <option value="12" <if condition="$_REQUEST.type eq '12'">selected</if> >Web意甲专题导航</option>
+                        <option value="13" <if condition="$_REQUEST.type eq '13'">selected</if> >Web欧冠专题导航</option>
+                        <option value="14" <if condition="$_REQUEST.type eq '14'">selected</if> >Web亚冠专题导航</option>
+                        <option value="15" <if condition="$_REQUEST.type eq '15'">selected</if> >Web中超专题导航</option>
+                        <option value="16" <if condition="$_REQUEST.type eq '16'">selected</if> >Web专题NBA导航</option>
+                        <option value="17" <if condition="$_REQUEST.type eq '17'">selected</if> >Web专题CBA导航</option>
+                        <option value="18" <if condition="$_REQUEST.type eq '18'">selected</if> >Web专题斯诺克导航</option>
+                        <option value="19" <if condition="$_REQUEST.type eq '19'">selected</if> >Web专题英雄联盟导航</option>
+                        <option value="20" <if condition="$_REQUEST.type eq '20'">selected</if> >Web专题刀塔2导航</option>
+                        <option value="21" <if condition="$_REQUEST.type eq '21'">selected</if> >Web王者荣耀导航</option>
+                        <option value="22" <if condition="$_REQUEST.type eq '22'">selected</if> >Web专题绝地求生导航</option>
+                        <option value="23" <if condition="$_REQUEST.type eq '23'">selected</if> >Web专题棒球导航</option>
+                        <option value="24" <if condition="$_REQUEST.type eq '24'">selected</if> >Web专题网球导航</option>
+                        <option value="25" <if condition="$_REQUEST.type eq '25'">selected</if> >Web专题NFL导航</option>
+                        <option value="26" <if condition="$_REQUEST.type eq '26'">selected</if> >Web首页顶部导航2</option>
+                        <option value="27" <if condition="$_REQUEST.type eq '27'">selected</if> >Web首页顶部导航3</option>
+                        <option value="28" <if condition="$_REQUEST.type eq '28'">selected</if> >Web首页顶部导航4</option>
+                        <option value="29" <if condition="$_REQUEST.type eq '29'">selected</if> >Web首页顶部导航5</option>
+                        <option value="30" <if condition="$_REQUEST.type eq '30'">selected</if> >Web首页国内足球导航</option>
+                        <option value="31" <if condition="$_REQUEST.type eq '31'">selected</if> >Web专题乒乓球导航</option>
+                        <option value="32" <if condition="$_REQUEST.type eq '32'">selected</if> >Web专题排球导航</option>
+                        <option value="33" <if condition="$_REQUEST.type eq '33'">selected</if> >Web专题法甲导航</option>
+                        <option value="34" <if condition="$_REQUEST.type eq '34'">selected</if> >M站首页顶部导航</option>
+                        <option value="35" <if condition="$_REQUEST.type eq '35'">selected</if> >Web世界杯专题导航</option>
+                        <option value="36" <if condition="$_REQUEST.type eq '36'">selected</if> >M站首页足球专栏导航</option>
+                        <option value="37" <if condition="$_REQUEST.type eq '37'">selected</if> >M站首页篮球专栏导航</option>
+                        <option value="38" <if condition="$_REQUEST.type eq '38'">selected</if> >M站首页综合体育专栏导航</option>
+                        <option value="39" <if condition="$_REQUEST.type eq '39'">selected</if> >M站首页电竞专栏导航</option>
+                        <option value="40" <if condition="$_REQUEST.type eq '40'">selected</if> >Web专题资料库导航</option>
+                        <option value="41" <if condition="$_REQUEST.type eq '41'">selected</if> >Web五洲专题导航</option>
+                        <option value="42" <if condition="$_REQUEST.type eq '42'">selected</if> >Web杯赛预测导航</option>
+                        <option value="43" <if condition="$_REQUEST.type eq '43'">selected</if> >Web杯赛直通车列表</option>
+                    </select>
+                </li>
+                <li>
+                    <label>状态：</label>
+                    <select name="status" class="combox" onchange="$(form).submit()">
+                        <option value="" selected>全部</option>
+                        <option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >启用</option>
+                        <option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >禁用</option>
+                    </select>
+                </li>
+            </ul>
+
+            <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="__URL__/add/type/{$_REQUEST.type}" target="dialog" mask="true" height="500"><span>新增</span></a></li>
+            <li><a class="delete" href="__URL__/delete/id/{sid_user}" target="ajaxTodo" title="你确定要删除吗？" warn="请选择导航"><span>删除</span></a></li>
+            <li><a class="edit" href="__URL__/edit/id/{sid_record}/type/{$_REQUEST.type}" height="500" target="dialog" mask="true" warn="请选择导航"><span>编辑</span></a></li>
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="3%">ID</th>
+            <th width="5%">导航名</th>
+            <th width="5%">链接（对应值）</th>
+            <if condition="$_REQUEST.type eq 1">
+                <th width="5%">导航类型</th>
+            </if>
+            <if condition="$_REQUEST.type eq 34">
+                <th width="5%">标识</th>
+            </if>
+            <if condition="$_REQUEST.type eq 3">
+                <th width="5%">标识</th>
+                <th width="5%">UI风格</th>
+                <th width="5%">图标1</th>
+                <th width="5%">图标2</th>
+            </if>
+            <if condition="$_REQUEST.type eq 36 or $_REQUEST.type eq 37 or $_REQUEST.type eq 38 or $_REQUEST.type eq 39">
+                <th width="5%">标识</th>
+                <th width="5%">图标</th>
+            </if>
+            <if condition="$_REQUEST.type eq 43">
+                <th width="5%">分组</th>
+                <th width="5%">图标</th>
+                <th width="5%">背景图</th>
+            </if>
+            <th width="5%">排列顺序</th>
+            <th width="5%">状态</th>
+            <th width="5%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist id="vo" name="list">
+            <tr target="sid_user" rel="{$vo['id']}">
+                <td>{$vo['id']}</td>
+                <td>{$vo['name']}</td>
+                <td>{$vo['ui_type_value']}</td>
+                <if condition="$_REQUEST.type eq 1">
+                    <td>{$vo['ui_type']}</td>
+                </if>
+                <if condition="$_REQUEST.type eq 34">
+                    <td>{$vo['sign']}</td>
+                </if>
+                <if condition="$_REQUEST.type eq 3">
+                    <td>{$vo['sign']}</td>
+                    <td>{$vo['ui_type']}</td>
+                    <td width="80">
+                        <empty name="vo.icon">
+                            <else/>
+                            <if condition="pathinfo($vo['icon'], PATHINFO_EXTENSION) eq swf">
+                                <a href="{$vo.icon}" target="_blank" title="查看图片">
+                                    <embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$vo.icon}">
+                                </a>
+                                <else/>
+                                <a href="{$vo.icon}" target="_blank" title="查看图片"><img src="{$vo['icon']}" alt="图片" width="30" height="30" /></a>
+                            </if>
+                        </empty>
+                    </td>
+                    <td width="80">
+                        <empty name="vo.icon2">
+                            <else/>
+                            <if condition="pathinfo($vo['icon2'], PATHINFO_EXTENSION) eq swf">
+                                <a href="{$vo.icon2}" target="_blank" title="查看图片">
+                                    <embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$vo.icon2}">
+                                </a>
+                                <else/>
+                                <a href="{$vo.icon2}" target="_blank" title="查看图片"><img src="{$vo['icon2']}" alt="图片" width="30" height="30" /></a>
+                            </if>
+                        </empty>
+                    </td>
+                </if>
+                <if condition="$_REQUEST.type eq 36 or $_REQUEST.type eq 37 or $_REQUEST.type eq 38 or $_REQUEST.type eq 39">
+                    <td>{$vo['sign']}</td>
+                    <td width="80">
+                        <empty name="vo.icon">
+                            <else/>
+                            <if condition="pathinfo($vo['icon'], PATHINFO_EXTENSION) eq swf">
+                                <a href="{$vo.icon}" target="_blank" title="查看图片">
+                                    <embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$vo.icon}">
+                                </a>
+                                <else/>
+                                <a href="{$vo.icon}" target="_blank" title="查看图片"><img src="{$vo['icon']}" alt="图片" width="30" height="30" /></a>
+                            </if>
+                        </empty>
+                    </td>
+                </if>
+                <if condition="$_REQUEST.type eq 43">
+                    <td>{$vo['sign']}</td>
+                    <td width="80">
+                        <empty name="vo.icon">
+                            <else/>
+                            <if condition="pathinfo($vo['icon'], PATHINFO_EXTENSION) eq swf">
+                                <a href="{$vo.icon}" target="_blank" title="查看图片">
+                                    <embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$vo.icon}">
+                                </a>
+                                <else/>
+                                <a href="{$vo.icon}" target="_blank" title="查看图片"><img src="{$vo['icon']}" alt="图片" width="30" height="30" /></a>
+                            </if>
+                        </empty>
+                    </td>
+                    <td width="80">
+                        <empty name="vo.icon2">
+                            <else/>
+                            <if condition="pathinfo($vo['icon2'], PATHINFO_EXTENSION) eq swf">
+                                <a href="{$vo.icon2}" target="_blank" title="查看图片">
+                                    <embed width="30" height="30" wmode="opaque" type="application/x-shockwave-flash" src="{$vo.icon2}">
+                                </a>
+                                <else/>
+                                <a href="{$vo.icon2}" target="_blank" title="查看图片"><img src="{$vo['icon2']}" alt="图片" width="30" height="30" /></a>
+                            </if>
+                        </empty>
+                    </td>
+                </if>
+                <td>{$vo['sort']}</td>
+                <td>{$vo['status']|getStatus}</td>
+                <td><a href="__URL__/edit/id/{$vo['id']}/type/{$_REQUEST.type}" target="dialog" height="500">编辑</a> | {$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",''} </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+
+</div>
+
+

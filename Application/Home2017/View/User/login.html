@@ -1,0 +1,113 @@
+<include file='Public:header'/>
+
+<body>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/login/login.css">
+    <!-- 顶部开始 -->
+    <include file='Public:top'/>
+    <!-- 顶部结束 -->
+    <div class="home">
+        <!-- 注册表单内容开始 -->
+        <div class="form-main">
+            <div class="main-in">
+                <div class="form-con">
+                    <div class="con clearfix">
+                        <div class="pull-right form">
+                            <div class="mt">
+                                <h4 style="font-size:22px; text-align: center">会员登录</h4>
+                            </div>
+                            <form>
+                                {:get_form_token()}
+                                <div class="item">
+                                    <label></label>
+                                    <input type="password" class="hidden"/>
+                                    <input type="text" class="form-control login-input required" name="username" autocomplete="off"  data-msg-required="请输入手机号码" placeholder="手机号码"/>
+                                </div>
+                                <div class="item">
+                                    <label></label>
+                                    <input type="password" class="hidden"/>
+                                    <input type="password" name="password" class="form-control pwd-input itxt-error required" autocomplete="off" data-msg-required="请输入密码"  placeholder="登录密码"/>
+                                </div>
+                                <div class="remeber">
+                                <div class="checkbox">
+                                    <label style="color:#b4b4b4">
+                                    	<input type="checkbox" name="remember" id="autoLogin"> 下次自动登录
+                                    </label>
+                                    <a href="{:U('User/re_phone')}"><label style="color:#8a8a8a;float: right;"> 忘记密码？</label></a>
+                                    <div class="msg-warn">
+                                    <b></b>
+                                    公共场所不建议自动登录，以防账号丢失
+                                    </div>
+                                </div>
+                                </div>
+
+                                <div class="login-btn">
+                                  <input class="btn btn-orange" type="submit" value="登录">
+                                </div>
+
+                                <p style=" margin-top:10px; color:#b4b4b4;">还不是全球体育会员？<a href="{:U('User/register')}" class="text-orange">免费注册</a></p>
+                                <div class="else_login">
+                                    <a href="{:U('User/sdk_login',['type'=>qq])}" target="_blank;"><img src="__PUBLIC__/Home/images/login/qq.png" >QQ登录</a>
+                                    <a href="{:U('User/sdk_login',['type'=>sina])}" target="_blank;"><img src="__PUBLIC__/Home/images/login/sina.png" >微博登录</a>
+                                    <a href="{:U('User/sdk_login',['type'=>weixin])}" target="_blank;"><img src="__PUBLIC__/Home/images/login/wx.png" >微信登录</a>
+                                </div>
+                                <script>
+                                    $(".else_login a:nth-child(3)").css("padding-right","0");
+                                </script>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 注册表单内容结束 -->
+
+        <!-- 底部版权信息开始 -->
+        <include file='Public:footer'/>
+        <!-- 底部版权信息结束 -->
+    </div>
+</body>
+</html>
+<script>
+    //安全提示
+    $("#autoLogin").on('click',function(){
+        if($(this).is(':checked') == true){
+            $(".msg-warn").show();
+        }else{
+            $(".msg-warn").hide();
+        }
+    })
+    $(function(){
+        if($("#autoLogin").is(':checked') == true){
+            $(".msg-warn").show();
+        }
+        var jump = "{$Think.get.j}";
+        $("form").validate({
+            onkeyup : false,
+            onfocusont:false,
+            submitHandler:function(form){
+                var form = $(form);
+                var data = form.serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "/User/login.html",
+                    data: data,
+                    dataType:'json',
+                    success: function(data){
+                      if(data.status){
+                        if(jump == 'index'){
+                            window.location.href=DOMAIN_URL;
+                        }else{
+                            self.location=document.referrer;
+                        }
+                      }else{
+                        $("input[name='password']").val('');
+                        var html = "<label class='field-msg field-error' for='password'>"+data.info+"</label>";
+                        $("input[name='password']").after(html);
+                      }
+                    }
+                });
+            }
+        });
+    })
+</script>

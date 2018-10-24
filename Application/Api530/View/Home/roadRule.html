@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>demo</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}
+        body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53;}
+        h1,h2,h3,h4,h5,h6{font-size:100%;}
+        address,cite,dfn,em,var{font-style:normal;}
+        code,kbd,pre,samp{font-family:courier new,courier,monospace;}
+        small{font-size:12px;}
+        ul,ol{list-style:none;}
+        a{text-decoration:none;}
+        a:hover{text-decoration:underline;}
+        sup{vertical-align:text-top;}
+        sub{vertical-align:text-bottom;}
+        legend{color:#000;}
+        fieldset,img{border:0;}
+        button,input,select,textarea{font-size:100%;}
+        table{border-collapse:collapse;border-spacing:0;}
+        .clear{clear: both;float: none;height: 0;overflow: hidden;}
+        p{font-size: 100px;}
+        #mask{
+            background: #000;
+            opacity: 0.75;
+            filter: alpha(opacity=75);
+            height: 1000px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+        }
+        #login{
+            position: fixed;
+            left: 30%;
+            top: 30%;
+            z-index:1001;
+            top: 540px !important;
+        }
+        .loginCon{
+            width: 770px;
+            height: 300px;
+            border-radius: 10px;
+            background: #fff;
+
+        }
+        #pic{
+            position: absolute;
+            top:-146px;
+            left: 120px;
+            width: 500px;
+            height: 300px;
+        }
+        #pic img{
+            width: 460px;
+            height: autox;
+        }
+        #close{
+            width: 70px;
+            height: 70px;
+            background:url(__PUBLIC__/Api/Home/roadRule/images/false.png) no-repeat center top;
+            background-size: 70px 70px;
+            cursor: pointer;
+            position: absolute;
+            right: 100px;
+            top: -110px;
+        }
+        #btnLogin{
+            width: 80px;
+            height: 40px;
+            background: #F01400;
+            margin:0 auto;
+            display: block;
+            cursor: pointer;
+            border-style: none;
+            color: #fff;
+            font-size: 16px;
+        }
+        #add{ padding: 40px 20px 20px 30px;}
+        #add div{ line-height: 40px;}
+        .loginCon{ font-size: 32px; color: #999999;}
+        .loginCon span{ font-size: 31px; color: #4d4d4d;}
+        .discription{ line-height: 60px; height: 60px;}
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    function openNew(){
+        //获取页面body！内容！的高度和宽度
+        var sHeight=document.documentElement.scrollHeight;
+        var sWidth=document.documentElement.scrollWidth;
+        //获取可视区域高度，宽度与页面内容的宽度一样
+        var wHeight=document.documentElement.clientHeight;
+        //创建遮罩层div并插入body
+        var oMask=document.createElement("div");
+        oMask.id="mask";
+        oMask.style.height=sHeight+"px";
+        //宽度直接用100%在样式里
+        document.body.appendChild(oMask);
+        //创建登录层div并插入body
+        var oLogin=document.createElement("div");
+        oLogin.id="login";
+        oLogin.innerHTML="<div class='loginCon'><div id='pic'><img src='__PUBLIC__/Api/Home/roadRule/images/pic.png'></div><div id='close'></div><div id='add'><div class='discription'><span>长龙：</span>连续有5个相同结果提示</div><div class='discription'><span>单跳：</span>两个不同结果间隔追逐地出现3次提示</div><div class='discription'><span>双跳：</span>两个不同结果连续两次出现，3次提示</div><div class='discription'><span>两房一厅：</span>两个不同结果形成二夹一，出现3次提示</div></div></div>"
+        document.body.appendChild(oLogin);
+        //获取login的宽度和高度并设置偏移值
+        var dHeight=oLogin.offsetHeight;
+        var dWidth=oLogin.offsetWidth;
+        oLogin.style.left=(sWidth-dWidth)/2+"px";
+        oLogin.style.top=(wHeight-dHeight)/2+"px";
+        //获取关闭按钮
+        var oClose=document.getElementById("close");
+        oMask.onclick=oClose.onclick=function(){
+            document.body.removeChild(oMask);
+            document.body.removeChild(oLogin);
+        }
+    }
+    openNew();
+</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userInfo/bind_phone.css">
+</block>
+<block name="content">
+    <include file="Public:top_user"/>
+    <div class="body">
+
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <div class="data-graph reset-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="javascript:void(0);" class="current">绑定手机</a></li>
+                                </ul>
+
+
+                                <notempty name="userData.username">
+                                    <div class="content-box">
+                                        <div>
+                                            <span>手机号码：<em class="phone-padding">{$userData['username']|substr_replace=###,'****',3,-4}</em></span>
+                                        </div>
+                                        <div class="prompt">
+                                            <em class="text-red">*手机号码绑定后不能解绑</em>
+                                        </div>
+                                    </div>
+                                    <else />
+                                    <div class="form-con">
+                                        <div class="con clearfix">
+                                            <div class="pull-left form" style="width: 324px">
+                                                <form  action="#" method="post">
+                                                    <div class="form-in clearfix">
+                                                        <div class="pull-left input-name">输入手机号：</div>
+                                                        <div class="pull-left input-con input-position-relative">
+                                                            <input type="password" class="hidden">
+                                                            <input token="{$token}" id="phone" class="form-control required mobile" name="mobile" type="text" placeholder="手机号" data-msg-required="请输入手机号"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix">
+                                                        <div class="form-in clearfix pull-left">
+                                                            <div class="pull-left input-name">验证码：</div>
+                                                            <div class="pull-left input-con input-position-relative captcha">
+                                                                <input type="password" class="hidden">
+                                                                <input id="ranks" class="form-control required" name="captcha" type="text" placeholder="验证码" data-msg-required="请输入验证码"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="pull-left reanks-con">
+                                                            <a href="javascript:;" onclick="sendMobileMsg();" class="btn btn-orange"><span id="sendMobileBtn"></span>发送验证码</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-in clearfix">
+                                                        <div class="form-in clearfix pull-left">
+                                                            <div class="pull-left input-name">设置登录密码：</div>
+                                                            <div class="pull-left input-con input-position-relative">
+                                                                <input type="password" class="hidden">
+                                                                <input id="password"  class="form-control required checkpass" name="password" type="password" placeholder="请输入密码" data-msg-required="请输入设置登录密码"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="reg-btn clearfix form-in">
+                                                        <input type="submit" class="btn btn-orange pull-right" value="确认提交" />
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </notempty>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+</block>
+<block name='js'>
+    <script>
+        $(function(){
+            $("form").validate({
+                onkeyup : false,
+                rules: {
+                    mobile : {
+                        remote: {
+                            url: "/User/checkMobile.html",
+                            type: "post",
+                            data: {
+                                fieldValue: function() {
+                                    return $( "#phone" ).val();
+                                },
+                            }
+                        }
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    },
+                },
+                messages : {
+                    mobile : {
+                        remote : '该手机号码已经注册，请更换',
+                    },
+                    password: {
+                        required: "请输入密码",
+                        minlength: "密码不能小于6个字符"
+                    },
+                },
+                submitHandler:function(form){
+                    var form = $(form);
+                    var data = form.serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: "/UserInfo/bind_phone.html",
+                        data: data,
+                        success: function(data){
+                            if(data.status){
+                                _alert('温馨提示',data.info,'window.location.reload()');
+                            }else{
+                                _alert('温馨提示',data.info);
+                            }
+                        }
+                    });
+                }
+            });
+        })
+        /**
+         * 发送手机验证码
+         *
+         */
+        function sendMobileMsg(){
+            var mobile = $('#phone').val();
+            //验证手机
+            if(mobile == ""){
+                _alert('温馨提示',"请输入手机号码！");
+                return false;
+            }
+            if (!/^1[3456789]{1}\d{9}$/.test(mobile)){
+                _alert('温馨提示',"手机号码格式不正确，请重新输入！");
+                return false;
+            }
+            if(mobilePass(mobile) == true)
+            {
+                return true;
+            }
+            var token = $('#phone').attr('token');
+            $.ajax({
+                url: "/User/sendMobileMsg.html",
+                type:'post',
+                data:{token:token,'mobile':mobile,'msgType':'bindPhone'},
+                dataType: "json",
+                beforeSend:function(XMLHttpRequest)
+                {
+                    $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>正在发送…").removeAttr("onclick").attr("disabled","disabled");
+                },
+                success: function(data){
+                    if(data.status){
+                        daojishi(60);
+                        _alert('温馨提示',data.info);
+                        return;
+                    }else{
+                        $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>获取验证码").attr("onclick",'sendMobileMsg()').removeAttr("disabled");
+                        _alert('温馨提示',data.info);
+                    }
+                }
+            });
+        }
+        function mobilePass(mobile)
+        {
+            var res = false;
+            $.ajax({
+                url: "/User/checkMobile.html",
+                type:'post',
+                data:{'mobile':mobile},
+                dataType: "json",
+                async: false,
+                success: function(data){
+                    if(data == false)
+                    {
+                        _alert('温馨提示','该手机号码已经注册，请更换');
+                        res = true;
+                    }
+                }
+            });
+            return res;
+        }
+        /**
+         * 倒计时
+         *
+         */
+        function daojishi(S){
+            if (S>0){
+                var S = S-1;
+                $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>秒后重发").removeAttr("onclick").attr("disabled","disabled");
+                $("#sendMobileBtn").html(S);
+                setTimeout("daojishi("+S+")",1000);
+                return;
+            } else {
+                $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>获取验证码").attr("onclick",'sendMobileMsg()').removeAttr("disabled");
+            }
+        }
+    </script>
+</block>

@@ -1,0 +1,107 @@
+<style>
+    .pageFormContent span{line-height: 21px;}
+	tr.game_tr:hover{ background-color: #7cc5e5;cursor:pointer}
+	tr.game_tr td{ padding: 5px 2px;}
+</style>
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="game_id" value="{$vo.game_id}" />
+		<input type="hidden" name="gameType" value="{$gameType}" />
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>动画赛程：</label>
+				<span>联赛名称：{$vo.union_name}</span><br/>
+				<label>&nbsp;</label>
+				<span>比赛时间：{$vo.game_timestamp|date="Y-m-d H:i:s",###}</span><br/>
+				<label>&nbsp;</label>
+				<span>主队：{$vo.home_team_name}</span><br/>
+				<label>&nbsp;</label>
+				<span>客队：{$vo.away_team_name}</span>
+			</div>
+
+			<div class="unit">
+				<label>填写要关联的赛程ID：</label>
+				<input type="text" class="required bind_id" name="bind_id" value="{$vo.bind_id}">
+			</div>
+
+			<notempty name="game">
+				<div class="unit">
+					<label>已关联赛事：</label>
+					<span>联赛名称：<span class="unionName">{$game.union_name.0}</span></span><br/>
+					<label>&nbsp;</label>
+					<span>比赛时间：<span class="gtime">{$game.game_timestamp}</span></span><br/>
+					<label>&nbsp;</label>
+					<span>主队：<span class="homeName">{$game.home_team_name.0}</span></span><br/>
+					<label>&nbsp;</label>
+					<span>客队：<span class="awayName">{$game.away_team_name.0}</span></span>
+				</div>
+			</notempty>
+
+			<div class="unit">
+				<label>是否主客隊對調：</label>
+				<input type="radio" name="is_swap" value="0" checked />否
+				<!--<input type="radio" name="is_recommend" value="1" <eq name="vo.is_recommend" value="1">checked</eq> />是-->
+				<input type="radio" name="is_swap" value="1" <eq name="is_swap" value="1">checked</eq> />是
+			</div>
+
+			<div class="unit unit-game">
+				<label>相关赛事：</label>
+				<div style="overflow-x: auto; overflow-y: auto; height: 450px; width:1000px;">
+				<table class="play-game">
+					<tr style="background: #f2f2f2;">
+						<td>赛程ID</td>
+						<td>联赛名称</td>
+						<td>比赛时间</td>
+						<td>状态</td>
+						<td>主队</td>
+						<td>客队</td>
+					</tr>
+					<volist name="moreGame" id="vo">
+						<tr game_id="{$vo.game_id}" class="game_tr" gtime="{$vo.game_start_timestamp|date='Y-m-d H:i:s',###}" unionName="{$vo.union_name.0}" homeName="{:implode(',',$vo['home_team_name'])}" awayName="{:implode(',',$vo['away_team_name'])}">
+							<td>{$vo.game_id}</td>
+							<td>{$vo.union_name.0}</td>
+							<td>{$vo.game_start_timestamp|date="Y-m-d H:i:s",###}</td>
+							<td>
+								<switch name="vo.game_state">
+								<case value="0">未开</case>
+								<case value="1">上半场</case>
+								<case value="2">中场</case>
+								<case value="3">下半场</case>
+								<case value="4">加时</case>
+								<case value="-11">待定</case>
+								<case value="-12">腰斩</case>
+								<case value="-13">中断</case>
+								<case value="-14">推迟</case>
+								<case value="-1">完场</case>
+								<case value="-10">取消</case>
+								</switch>
+							</td>
+							<td>{:implode(',',$vo['home_team_name'])}</td>
+							<td>{:implode(',',$vo['away_team_name'])}</td>
+						</tr>
+					</volist>
+				</table>
+					</div>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script>
+	$('.game_tr').on('click',function(){
+		var data = $(this);
+		var game_id = data.attr('game_id');
+		$('.bind_id').val(game_id);
+		$('.unionName').html(data.attr('unionName'));
+		$('.gtime').html(data.attr('gtime'));
+		$('.homeName').html(data.attr('homeName'));
+		$('.awayName').html(data.attr('awayName'));
+	});
+</script>

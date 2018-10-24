@@ -1,0 +1,89 @@
+<style>
+	.searchContent label{width: auto}
+	.searchContent li{width: auto !important;margin-right: 12px;}
+</style>
+<form id="pagerForm" action="__URL__/teamlinkM" method="post">
+	<input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+	<input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+	<input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+	<input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+	<volist name="map" id="m">
+		<input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+	</volist>
+</form>
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/teamlinkM" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>球队名：</label>
+				<input type="text" name="team_name" value="{$_REQUEST.team_name}"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/teameditM" target="dialog" height="500" width="600" mask="true"><span>新增</span></a></li>
+			<li>
+				<a class="delete" href="__URL__/delteamM" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要删除这些记录吗?">
+					<span>批量删除</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138" align="center">
+		<thead>
+		<tr>
+			<th width="2%" style="cursor: default;">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th width="1%">ID</th>
+			<th width="8%">球队名称（捷报）</th>
+			<th width="3%">球队id（捷报）</th>
+			<th width="6%">球队名（365）</th>
+			<th width="6%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['jb_team_id']}">
+					<td>
+						<div>
+							<input type="checkbox" value="{$vo.jb_team_id}" name="id">
+						</div>
+					</td>
+					<td>{$vo['_id']}</td>
+					<td>{$vo['jb_team_name'][0]},{$vo['jb_team_name'][1]},{$vo['jb_team_name'][2]}</td>
+					<td>{$vo['jb_team_id']}</td>
+					<td>{$vo['bet_team_name']}</td>
+					<td>
+						<a href="__URL__/teameditM/id/{$vo._id}" target="dialog" mask="true" height="500" width="600" title="编辑" rel="editPage">编辑</a>
+						<a class="delete" href="__URL__/delteamM/id/{$vo.jb_team_id}" target="ajaxTodo" title="你确定要删除吗？">
+						<span>删除</span>
+					</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

@@ -1,0 +1,74 @@
+/**
+ * index css
+ *
+ * @author Weiqianqian <1937025663@qq.com>
+ *
+ * @since  2018-01-18
+ *
+**/
+/*页码开始*/
+.page-con {
+    font-size: 12px;
+    text-align: center;
+}
+
+.page-con ul {
+    height: 22px;
+}
+
+.page-con ul li a {
+    height: 30px;
+    padding-top: 5px;
+    margin: 0px 5px;
+}
+
+.apge-con .s-l a {
+    border: none;
+}
+
+.page-con .disabled span {
+    border: none;
+    font-size: 20px;
+    margin-top: -5px;
+}
+
+.page-con .next span {
+    border: none;
+    font-size: 20px;
+    margin-top: -5px;
+}
+
+.page-con input {
+    width: 48px;
+    height: 28px;
+    margin-top: -5px;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 2;
+    color: #fff;
+    background-color: #bdbdbd;
+    border-color: #bdbdbd;
+    cursor: default;
+}
+
+.pagination > li > a {
+    color: #666;
+}
+
+.pagination > li > a {
+    padding: 2px 12px;
+    color: #666;
+}
+
+.pagination > li > a, .pagination > li > a span {
+    position: relative;
+    float: left;
+    border: 1px solid #e5e5e5;
+    margin-left: -1px;
+}
+
+a {
+    background: transparent;
+    text-decoration: none !important;
+}

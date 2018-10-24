@@ -1,0 +1,163 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input type="hidden" name="user_id" value="{$_REQUEST.user_id}"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>评论时间：</label>
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="10">至
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="10">
+			</li>
+			<li>
+				<label>资讯标题：</label>
+				<input type="text" name="title" value="{$_REQUEST.title}"/>
+			</li>
+			<li>
+				<label>用户昵称：</label>
+				<input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+			</li>
+			<li>
+				<label>评论内容：</label>
+				<input type="text" name="content" value="{$_REQUEST.content}"/>
+			</li>
+			<li>
+				<label>评论状态：</label>
+				<select name="status" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >显示</option>
+					<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >屏蔽</option>
+				</select>
+			</li>
+			<li>
+				<label>举报：</label>
+				<select name="is_report" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.is_report eq '1'">selected</if> >是</option>
+					<option value="2" <if condition="$_REQUEST.is_report eq '2'">selected</if> >否</option>
+				</select>
+			</li>
+			<li>
+				<label>渠道：</label>
+				<select name="platform" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.platform eq '1'">selected</if> >web</option>
+					<option value="2" <if condition="$_REQUEST.platform eq '2'">selected</if> >ios</option>
+					<option value="3" <if condition="$_REQUEST.platform eq '3'">selected</if> >ANDRIOD</option>
+				</select>
+			</li>
+			<li>
+				<label>用户类型：</label>
+				<select name="usertype" onchange="$(form).submit()" class="combox">
+					<option value="">全部</option>
+					<option <if condition="$_REQUEST.usertype eq '1'">selected </if> value="1">正常用户</option>
+					<option <if condition="$_REQUEST.usertype eq '2'"> selected </if> value="2">专家用户</option>
+					<option <if condition="$_REQUEST.usertype eq '3'"> selected </if> value="3">机器人用户</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+				<li>
+					<a class="button" title="查询框" mask="true" target="dialog" href="__URL__/pageSearch.html?CommentIndex=1&actionName=__ACTION__&{:http_build_query($_REQUEST)}&sign=1" height="420"><span>高级检索</span></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<!-- <li><a class="delete" href="__URL__/del/id/{sid_record}" target="ajaxTodo" title="你确定要删除吗？" warn="请选择用户"><span>删除</span></a></li> -->
+			<li>
+				<a class="delete" href="__URL__/delAll" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要删除这些记录吗?">
+					<span>批量删除</span>
+				</a>
+			</li>
+			<li>
+				<a class="delete" href="__URL__/forbidAll" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要屏蔽这些记录吗?">
+					<span>批量屏蔽</span>
+				</a>
+			</li>
+			<li><a class="edit" href="__URL__/check/id/{sid_record}" target="dialog" mask="true" warn="请选择评论"><span>查看</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th style="width: 10px; cursor: default;">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th width="20" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="100">资讯标题</th>
+			<th width="100">评论内容</th>
+			<th width="50" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'create_time')"> class="desc"</if> orderField="create_time" <if condition="$_REQUEST._order eq 'create_time'">class="{$_REQUEST._sort}"</if>>评论时间</th>
+			<th width="50">用户昵称</th>
+			<th width="40">IP</th>
+			<th width="30" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'is_gag')"> class="desc"</if> orderField="is_gag" <if condition="$_REQUEST._order eq 'is_gag'">class="{$_REQUEST._sort}"</if>>用户状态</th>
+			<th width="30" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'status')"> class="desc"</if> orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}"</if>>评论状态</th>
+			<th width="40">举报/数量</th>
+			<th width="30">渠道</th>
+			<th width="30">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist name="list" id="item">
+				<tr target="sid_record" rel="{$item.id}">
+					<td style="width: 10px;">
+						<div>
+							<input type="checkbox" value="{$item.id}" name="id">
+						</div>
+					</td>
+					<td>{$item.id}</td>
+					<td>{$item.title}</td>
+					<td >{$item.content}</td>
+					<td>{$item.create_time|date="Y-m-d H:i:s",###}</td>
+					<td><a href="__ADMIN__/FrontUser/index/id/{$item['user_id']}" target="navTab">{$item.nick_name|on_str_replace=$_REQUEST['nick_name'],###}</a></td>
+					<td>{$item.reg_ip}</td>
+					<td>
+						<eq name="item.is_gag" value='1'>
+							<a title="你确定要设为正常吗？" href="__URL__/saveIsGag/user_id/{$item.user_id}/is_gag/0" target="ajaxTodo"><div style="color:red;">禁言</div></a>
+						<else/>
+							<a title="你确定要设为禁言吗？" href="__URL__/saveIsGag/user_id/{$item.user_id}/is_gag/1" target="ajaxTodo"><div style="color:blue">正常</div></a>
+						</eq>
+					</td>
+					<td>{$item['status']|getStatus}</td>
+					<td>
+						<if condition="$item.report_num gt 0">
+							<div style="color:red;">是（{$item.report_num}）<if condition="$item.is_report eq 0">未回复<else/><span style="color: green;">已回复</span></if></div>
+							<else/>
+							<div style="color:green;">否</div>
+						</if>
+					</td>
+					<td>
+						<switch name="item.platform">
+							<case value="1">Web</case>
+							<case value="2">IOS</case>
+							<case value="3">ANDRIOD</case>
+						</switch>
+					</td>
+					<td>
+						{$item['status']|showStatus=$item['id'],'navTabAjaxDone',"__URL__",'__DWZ__',['显示','屏蔽']} |
+						<a href="{:U('__ADMIN__/Comment/check',['id'=>$item['id']])}" target="dialog" mask="true" title="查看评论" height='420'>查看</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+    <include file="Public:pagerNum" />
+
+
+</div>
+
+

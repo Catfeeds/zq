@@ -1,0 +1,302 @@
+<extend name="Public:layout"/>
+<block name="seo">
+    <title>足球比分|即时比分|世界杯比分|足彩比分|足球比分直播_即时足球比分直播频道_全球体育网</title>
+    <meta name="keywords" content="足球比分,即时比分,足球即时比分,足球比分直播,篮球比分,足彩比分,世界杯比分,球探,球探比分,球探比分网,英超比分,7M比分,捷报比分"/>
+    <meta name="description" content="全球体育网为广大球迷提供最快、最精准的足球比分直播，还有最详细的足球比分赛程、足球完场比分、足彩比分等大数据分析服务，即时比分直播赛事包含中超、英超、西甲、意甲、德甲、法甲和世界各级别联赛。"/>
+</block>
+<block name='css'>
+  <link href="__STATIC__/score/css/scoreLive/scoreLive.css?v=20180824" rel="stylesheet" />
+  <if condition="$_GET['header'] eq no">
+        <link rel="stylesheet" href="__STATIC__/score/css/scoreLive/width-media.css?v20180613">
+    </if>
+</block>
+<block name="content">
+    <if condition="$_GET['header'] neq no"><include file="Public:top_score"/></if>
+    <!-- 主体内容开始 -->
+    <div class="home clearfix">
+        <!-- 导航开始 -->
+        <include file="Public:score_nav"/>
+        <section class="main">
+            <div class="control-con">
+                <!-- 筛选导航 -->
+                <div class="control-box clearfix">
+                	<div class="pull-left control-2">
+                    	<ul class="clearfix" id="centerNav">
+                    		<li class="on"><a href="javascript:;" onclick="gameLottery(this,'all')" class="type-li01">完整</a></li>
+                            <li><span>|</span></li>
+                            <li><a href="javascript:;" onclick="gameLottery(this,'grounder')">滚球</a></li>
+                            <li><span>|</span></li>
+                            <li><a href="javascript:;" onclick="gameLottery(this,'jc')">竞彩</a></li>
+                            <li><span>|</span></li>
+                            <li><a href="javascript:;" onclick="gameLottery(this,'streamline')" class="type-li04">精简</a></li>
+                    	</ul>
+                    </div>
+                    
+                    <div class="pull-left control-l">
+                        <ul class="control-ul clearfix">
+                            <li class="control-li control-li01"><a href="javascript:;" class="mya pitch" type="block">保留选中</a></li>
+                            <li class="control-li control-li02"><a href="javascript:;" class="mya pitch" type="none">隐藏选中</a></li>
+                            <li class="control-li control-li03">
+                                <a href="javascript:;" class="mya dropdown event">赛事选择<span class="caretCon"><span class="caret"></span></span></a>
+                                <div id="unionLevel" class="box-list dropdown-menu"> 
+                                    <div class="clearfix">
+                                    	<div class="pull-left box-title">赛事选择</div>
+                                    	<div class="pull-right box-title"><span>隐藏 <em class="text-red menu_count">0</em> 场</span></div>
+                                    </div>
+                                    <div class="box-team">
+                                        <div class="box-rank clearfix">
+                                            <ul class="rank-ul clearfix">
+                                                <li class="rank-ul-li01 on"><a data-unionLevel="1" href="javascript:;"><i class="iconType"></i><p>一级赛事</p></a></li>
+                                                <li class="rank-ul-li02 on"><a data-unionLevel="2" href="javascript:;"><i class="iconType"></i><p>二级赛事</p></a></li>
+                                                <li class="rank-ul-li03 on"><a data-unionLevel="3" href="javascript:;"><i class="iconType"></i><p>三级赛事</p></a></li>
+                                            </ul>
+                                        </div>
+                                        <div id="menu_list">
+                                            <ul class="clearfix match-team"></ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-con clearfix">
+                                        <input type="button" id="checkAll" class="btn btn-blue pull-left" value="全选">
+                                        <input type="button" id="reverse" class="btn btn-red pull-left" value="反选" style="margin-left: 12px;">
+                                        <input type="button" id="removeAll" class="btn btn-default pull-right" style="margin-left: 12px;" value="关闭">
+                                        <input type="button" id="ensure" class="btn btn-blue pull-right" value="确定">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="control-li control-li04">
+                                <a href="javascript:;" class="mya dropdown fun">功能选择<span class="caretCon"><span class="caret"></span></span></a>
+                                <div class="layer-list dropdown-menu">
+                                    <div class="feat-select" style="line-height: 24px;">
+                                        <label><input type="checkbox" value="0" checked> 红牌弹窗提示</label>
+                                        <label><input type="checkbox" value="1" checked> 比分进球弹框</label>
+                                        <label><input type="checkbox" value="2" checked> 显示黄牌</label>
+                                        <label><input type="checkbox" value="3" checked> 进球提示音</label>
+                                        <label><input type="checkbox" value="4" checked> 球队排名</label>
+                                        <label><input type="checkbox" value="5" checked> 半场显示往绩</label>
+                                        <label>提示窗显示位置
+                                            <select>
+                                                <option value="1" selected>正上方</option>
+                                                <option value="0">正下方</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div class="bts"><input type="button" class="btn btn-default" name="button" id="" value="" style="cursor:pointer; outline:none;"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pull-left sh">
+                        <span>隐 <em class="text-red" id="gameHideCount">0</em> 场</span>
+                        <a href="javascript:;" onclick="gameLottery(this,'all')">全部</a>
+                    </div>
+                    <div class="pull-right control-r clearfix">
+                        <!-- <div class="dropdown pull-left odds-company">
+                            <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+                                <span>赔率(澳门)</span>
+                                <i class="caret"></i>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">SB</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">澳门</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">利记</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">沙巴</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">立博</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">Bet365</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">易胜博</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">明陞</a>
+                                </li>
+                            </ul>
+                        </div> -->
+                        <div class="dropdown pull-left odds-language">
+                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                <span id="languageContent">简体</span>
+                                <i class="caret"></i>
+                            </button>
+                            <ul id="languageSle" class="dropdown-menu" role="menu">
+                                <li><a data-language="0" href="javascript:;">简体</a></li>
+                                <li><a data-language="1" href="javascript:;">繁体</a></li>
+                                <li><a data-language="2" href="javascript:;">EN</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="pull-right cb">
+                        <form action="">
+                            <ul>
+                                <li>
+                                    <input type="checkbox" id="ypCheck" value="8">
+                                    <label  class="inline myLabel01" for="ypCheck" >亚盘</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="sizeCheck" value="9">
+                                    <label  class="inline myLabel01" for="sizeCheck" >大小</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="ouCheck" value="10">
+                                    <label  class="inline myLabel02" for="ouCheck" >欧赔</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="halfCheck" value="7">
+                                    <label  class="inline myLabel01" for="halfCheck" >半场</label>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>  
+                </div>
+                <!--滚动导航栏浮动置顶开始-->
+                <div class="mytable01" id="navig" style="display:none;">
+                    <div class="navig_tr">
+                        <table class="table table-bordered no-table-bordered" width="100%" align="center" cellspacing="0" border="0" cellpadding="0">
+                            <thead>
+                                <tr bgcolor="#e6e6eb">
+                                    <th width="30">选</th>
+                                    <th width="74">赛事</th>
+                                    <th width="46">时间</th>
+                                    <th width="40">状态</th>
+                                    <th width="40">天气</th>
+                                    <th width="170">主场球队</th>
+                                    <th width="50">比分</th>
+                                    <th width="150">客场球队</th>
+                                    <th width="30">直播</th>
+                                    <th width="30">现场</th>
+                                    <th width="40">角/半</th>
+                                    <th width="200" colspan="3">全场(SB)</th>
+                                    <th width="200" colspan="3" class="halfCheck">半场(SB)</th>
+                                    <th width="60">数据分析</th>
+                                    <th width="40">置顶</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <!--滚动导航栏浮动置顶结束-->
+            </div>
+            
+            <!-- 表格内容开始 -->
+            <div class="mytable01">
+                <div class="livescore_table hidden" style="opacity: 0;">
+                    <table class="table table-bordered" width="100%" align="center" cellspacing="0" border="0" cellpadding="0">
+                        <thead>
+                            <tr class="table-header" bgcolor="#e6e6eb">
+                                <th width="30">选</th>
+                                <th width="74">赛事</th>
+                                <th width="46">时间</th>
+                                <th width="40">状态</th>
+                                <th width="40">天气</th>
+                                <th width="170">主场球队</th>
+                                <th width="50">比分</th>
+                                <th width="150">客场球队</th>
+                                <th width="30">直播</th>
+                                <th width="30">现场</th>
+                                <th width="40">角/半</th>
+                                <th width="200" colspan="3">全场(SB)</th>
+                                <th width="200" colspan="3" class="halfCheck">半场(SB)</th>
+                                <th width="60">数据分析</th>
+                                <th width="40">置顶</th>
+                            </tr>
+                        </thead>
+                        <tbody id="do_game">
+                            <tr bgcolor="#f2f2f7">
+                                <td colspan="18" class="text-l p10 liveTxt">
+                                    <span>正在进行中</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody id="no_game">
+                            <tr bgcolor="#f2f2f7">
+                                <td colspan="18" class="text-l p10 notBeginTxt">
+                                    <span>未开始</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody id="over_game">
+                            <tr bgcolor="#f2f2f7">
+                                <td colspan="18" class="text-l p10 endTxt">
+                                    <span>已结束</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="loading_gif" style="position: fixed;z-index: 999; top: 210px; left: 50%; margin-left: -82px;">
+                    <img src="__STATIC__/score/images/loading.gif" width="180">
+                </div>
+                <!-- 比分事件 -->
+                <div id="jinq_box"></div>
+                <!-- 红牌进球弹框 -->
+                <div class="prompt" style="position: fixed; z-index: 999; top: 210px; left: 50%; margin-left: -242px; min-width: 484px;"></div>
+                <div class="prompt-bottom" style="position: fixed; z-index: 999; bottom: 10px;; left: 50%; margin-left: -242px; min-width: 484px;"></div>
+                <!-- 半场比分出现（有比赛记录） -->
+                <div id="winScore">
+                    <table class="table" width="100%" border="0" cellpadding="0" cellspacing="0" style="margin-bottom:0">
+                        <tbody>
+                            <tr>
+                                <td width="43%" bgcolor="#ffffff" style="text-align:right;border-top: none;"><b class="winScore-home"></b></td>
+                                <td width="14%" bgcolor="#ffffff">VS</td>
+                                <td width="43%" bgcolor="#ffffff" style="text-align:left;border-top: none;"><b class="winScore-away"></b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="margin-bottom: 0px;" class="table table-bordered" width="530" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <thead>
+                                <tr align="center" bgcolor="#f7f7f7">
+                                    <th width="60">赛事</th>
+                                    <th width="55">时间</th>
+                                    <th>主场球队</td>
+                                    <th width="35">比分</th>
+                                    <th>客场球队</td>
+                                    <th width="35">半场</th>
+                                    <th width="45">盘口</td>
+                                    <th width="35">盘路</th>
+                                    <th width="35">胜负</th>
+                                    <th width="35">大小</th>
+                                    <th width="35">单双</th>
+                                </tr>
+                            </thead>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 半场比分出现（无比赛记录） -->
+                <div id="noScore">
+                    <table class="table" style="background-color:#FFFFFF;width:276px;">
+                        <tbody>
+                            <tr><td style="line-height:30px; border: 1px solid #e5e5e5"><b id="noScoreContent"></b></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- 表格内容开始 -->
+      	</section>
+    </div>
+    <audio id="goalAudio"><source src="__STATIC__/score/video/goal.mp3"></audio>
+    <audio id="cardAudio"><source src="__STATIC__/score/video/card.mp3"></audio>
+</block>
+<block name="js">
+    <script>
+        var sprScore = {:json_encode(C('score'),JSON_UNESCAPED_UNICODE)};
+        var company  = {:json_encode(C('DB_COMPANY_INFO'),JSON_UNESCAPED_UNICODE)};
+        var mqHost = window.location.protocol == 'https:'? 'wss://'+'{$mqttOpt.ssl_host}'+':8084':'ws://'+'{$mqttOpt.host}'+':8083';
+        var mqUser = JSON.parse('{$mqttUser|json_encode}');
+    </script>
+    <script type="text/javascript" src="__STATIC__/score/js/mqtt.min.js"></script>
+    <script type="text/javascript" src="__JS__/common/cookie.js"></script>
+    <script type="text/javascript" src="__STATIC__/score/js/mqttConnect.js?v=20180827"></script>
+    <script type="text/javascript" src="__STATIC__/score/js/scoreLive.js?v=20180914"></script>
+
+</block>

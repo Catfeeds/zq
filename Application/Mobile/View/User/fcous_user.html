@@ -1,0 +1,96 @@
+<extend name="Public/base" />
+<block name='append'>
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/guess.css?v201805814">
+    <script>
+        var DOAMIN="m."+"__DOMAIN__";
+        var IMAGES = "__IMAGES__";
+    </script>
+</block>
+
+
+    <!-- 二级头部 s -->
+<block name='header'>
+    <include file="Public/header_inside"/>
+</block>
+    <!-- 二级头部 e --> 
+     
+    <!-- nav s-->
+    <block name='nav'>
+    <section class="n_module">
+     <ul class="nav_list clearfix nav_list02">
+          <li><a href="{:U('User/fcous_dt')}">动态</a></li>
+          <li><a href="{:U('User/fcous_user')}" class="on">用户</a> </li>
+     </ul>
+    </section>
+    </block>
+    <!-- nav e -->
+
+
+    <!-- 内容 s-->
+    <block name='content'>
+    <style>
+      .n_top_right{float: left;}
+      .n_top_right em{margin-top: .05rem}
+      .n_top_right .lians{margin-top: .02rem} 
+    </style>
+    <section class="clearfix">
+       <table class="table tb_myFcous_user">
+          <tbody id='js-list'>
+              <volist name='list' id='v'>
+                 <tr class="list">
+                   <td><a href="{:U('/expUser/'.$v['user_id'].'/1')}"><img  class="lazy" data-original="{$v['face']}" src="__IMAGES__/index/headImg.png" ></a></td>
+                   <td>
+                     <a href="{:U('/expUser/'.$v['user_id'].'/1')}">
+                         <div>
+                             <span class="q_name">{$v.nick_name}</span>
+                             <em class="lv lv{$v.lv}"></em>
+                             <em class="lv jc_lv{$v.lv_bet}"></em>
+
+                         </div>
+                       <p class="q-one"><span>{$v.descript}</span></p>
+                     </a>
+                   </td>
+                   <td class="star_img_on" data-id='{$v.user_id}'></td> 
+                 </tr>
+              </volist>
+          </tbody>
+       </table>
+       <notempty name="list">
+         <div class="paged boxs">
+            <div class="load_gif fs24 text-999">
+                <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>正在加载更多的数据...</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">已经全部加载完毕</a>
+         </div>
+       <else/>
+         <div class="paged boxs">
+           <div class="bg-photos">
+              <span class="attention">暂无数据！</span>  
+             <a class="butt" href="{:U('/Guess/rank')}">马上关注！</a>
+           </div>  
+         </div>
+       </notempty>
+    </section>
+    </block>
+    <!-- 内容 e -->
+    <block name='scripts'> 
+        <script type="text/javascript" src="__JS__/user/fcous_user.js?20180611"></script>
+        <script type="text/javascript">
+            //头像懒加载
+            function lazyload(){
+                $("img.lazy").lazyload({
+                    effect: "fadeIn",
+                    threshold : 10,
+                    failurelimit:10
+                });
+            }
+
+            $(function () {
+                //头像懒加载
+                lazyload();
+
+            });
+        </script>
+    </block>

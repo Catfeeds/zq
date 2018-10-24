@@ -1,0 +1,67 @@
+<extend name="Public/base" />
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/video/info.css">
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file="Public:titleHead"/>
+</block>
+<!-- 二级头部 e -->
+<block name="nav"></block>
+<block name="content">
+
+        <!-- 主体内容 -->
+        <section class="container">
+            <div class="main">
+                <div class="videoCont" style="display: none;">
+                    <video src="{$data['m_url']}"  type="video/mp4"></video>
+                </div>
+                <div class="videoLogo">
+                    <div class="master-map"><img src="{$data['img']}"></div>
+                    <div class="video"><img src="__IMAGES__/video/video.png"></div>
+                    <div class="state">
+                        <span class="degree">{$data['click_num']}次播放</span>
+                    </div>
+                </div>
+            </div>
+            <div class="headline">
+                <p class="head-tit">{$data['title']}</p>
+                <span class="time-t">{$data['add_time']|date="Y-m-d H:i",###}</span>
+            </div>
+            <div class="user">
+                <ul class="entirety">
+                    <li class="HeadPortrait">
+                        <a class="" href="<if condition="$_GET['header'] eq no">javascript:;<else/>{:U('/expUser/'.$data['user_id'])}</if>">
+                        <img src="{$data['head']}">
+                        </a>
+                    </li>
+                    <li class="Name">
+                        <a class="" href="<if condition="$_GET['header'] eq no">javascript:;<else/>{:U('/expUser/'.$data['user_id'])}</if>">
+                        <span>{$data['name']}</span>
+                        </a>
+                    </li>
+                </ul> 
+            </div>
+            <div class="declare">
+                <span>{$data['remark']}</span>
+            </div>
+            <if condition="$data['label'] neq '' and $_GET['header'] neq 'no'">
+                <div class="label-list">
+                    <ul>
+                        <volist name="data['label']" id="vo">
+                            <li>
+                                <span><a href="/video/{$vo[1]}.html<eq name="_GET['header']" value="no">?header=no</eq>">{$vo[0]}</a></span>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+            </if>
+            <eq name="_GET['header']" value="no">
+                <include file="Public:go_back_pack"/>
+            </eq>
+        </section>
+</block>
+<block name='scripts'>
+    <script type="text/javascript" src="__JS__/video/info.js"></script>
+</block>

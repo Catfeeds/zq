@@ -1,0 +1,135 @@
+<extend name="Public/euro/base" />
+<block name="seo">
+    <title>2016欧洲杯赛程_全球体育欧洲杯专题</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/euro/euro2016.css">
+
+    <!-- 本页需要引用的js -->  
+    <script type="text/javascript">
+        $(function () {
+            //点击切换系列赛
+            $('.planNav li.click').click(function (e) {
+                $(this).addClass('on').siblings().removeClass('on');
+                var liNum = $(this).index();
+                $('.plan_con').eq(liNum).show().siblings('.plan_con').hide();
+                if (liNum > 2) {
+                    $('.plan_main').css('background-image', 'url(__IMAGES__/euro/plan-bg2.png)');
+                } else {
+                    $('.plan_main').css('background-image', 'url(__IMAGES__/euro/plan-bg.jpg)');
+                }
+                ;
+            });
+        });
+    </script>
+</block>
+<block name="sub_nav">
+    <include file="Euro/live_nav"/>
+</block>
+
+<!-- 内容 s -->
+<block name="content">
+    <section class="content plan_main">
+        <ul class="planNav clearfix">
+            <li class="click startLi"><a href="javascript:;">小组赛</a></li>
+            <li class="click"><a href="javascript:;">1/8决赛</a></li>
+            <li class="click"><a href="javascript:;">1/4决赛</a></li>
+            <li class="click"><a href="javascript:;">半决赛</a></li>
+            <li class="click endLi on"><a href="javascript:;">决赛</a></li>
+        </ul>
+
+        <div class="plan_con clearfix" style="display:none">
+       	  	<div class="fl plan">
+                    <a class="plan_list A" href="{:U('Euro/live_lists@m',array('group'=>'A'))}"></a>
+          	</div>
+        	<div class="fl plan">
+            	<a class="plan_list B" href="{:U('live_lists@m',array('group'=>'B'))}"></a>
+            </div>
+        	<div class="fl plan">
+            	<a class="plan_list C" href="{:U('live_lists@m',array('group'=>'C'))}"></a>
+            </div>
+        	<div class="fl plan">
+            	<a class="plan_list D" href="{:U('live_lists@m',array('group'=>'D'))}"></a>
+            </div>
+        	<div class="fl plan">
+            	<a class="plan_list E" href="{:U('live_lists@m',array('group'=>'E'))}"></a>
+            </div>
+        	<div class="fl plan">
+            	<a class="plan_list F" href="{:U('live_lists@m',array('group'=>'F'))}"></a>
+            </div>
+        </div>
+
+
+        <div class="plan_con plan_con_8 clearfix"  style="display:none">
+
+
+
+        <div class="fenqu clearfix"><span>上半区</span><span>下半区</span></div>
+
+        
+            <div class="fl plan">
+                <a class="plan_list A" href="javascript:;"></a>
+            </div>
+            <div class="fl plan">
+                <a class="plan_list E" href="javascript:;"></a>
+            </div>
+
+            
+            <div class="fl plan">
+                <a class="plan_list C" href="javascript:;"></a>
+            </div>
+           
+            <div class="fl plan">
+                <a class="plan_list G" href="javascript:;"></a>
+            </div>
+            <div class="fl plan">
+                <a class="plan_list B" href="javascript:;"></a>
+            </div>
+            <div class="fl plan">
+                <a class="plan_list F" href="javascript:;"></a>
+            </div>
+           
+            <div class="fl plan">
+                <a class="plan_list D" href="javascript:;"></a>
+            </div>
+
+            <div class="fl plan">
+                <a class="plan_list H" href="javascript:;"></a>
+            </div>
+        </div>
+
+        <div class="plan_con plan_con_4 clearfix" style="display:none">
+            <div class="fl plan">
+                <a class="plan_list A" href="javascript:;"></a>
+            </div>
+            <div class="fl plan">
+                <a class="plan_list B" href="javascript:;"></a>
+            </div>
+            <div class="fl plan">
+                <a class="plan_list C" href="javascript:;"></a>
+            </div>
+            <div class="fl plan">
+                <a class="plan_list D" href="javascript:;"></a>
+            </div>
+        </div>
+
+        <div class="plan_con plan_con_2 clearfix" style="display:none">
+            <div class="plan">
+                <a class="plan_list A" href="javascript:;"></a>
+            </div>
+            <div class="plan">
+                <a class="plan_list B" href="javascript:;"></a>
+            </div>
+            <div class="boy"></div>
+        </div>
+
+        <div class="plan_con plan_con_1 clearfix">
+            <div class="plan">
+                <a class="plan_list A" href="javascript:;"></a>
+            </div>
+        </div>
+
+    </section>
+    <!-- 内容 e -->
+</block>

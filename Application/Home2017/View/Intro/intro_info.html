@@ -1,0 +1,242 @@
+<include file="Public:header" />
+
+<body>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/intro/qw_index.css">
+    <script type="text/javascript" src="__PUBLIC__/Home/js/intro/echarts-all-3.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/common/qw_buy.js"></script>
+    <include file="Public:top_index" />
+	<div class="body">
+                
+        <!-- 主体内容开始 -->
+        <div class="qw_content clearfix">
+            
+            <div class="qwc_left fl">
+                <div class="jx_title"><img src="__PUBLIC__/Home/images/qw/morning.png" alt="">每日精选</div>
+                <volist name="left_list['choice']" id="item">
+                <div class="game_list">
+                    <a href="{:U('Intro/intro_info',['id'=>$item['id']])}">
+                    <div class="game_state <if condition="$item['confirm'] eq 1"> game_hold</if>"></div>
+                    <div class="gl_head"><img src="{$item['logo']}" alt=""></div>
+                    <div class="gl_main">
+                        <p class="glm_name">{$item.name}</p>
+                        <p class="glm_perc">累计回报率: <span>{$item.total_rate}%</span> </p>
+                        <p class="glm_buy">购买人数：{$item.remain_num}/{$item.total_num}</p>
+                    </div>
+                    <div class="gl_foot">
+                        <div class="ng_zhong"><em>近10中{$item.ten_num}</em><span><i>{$item.sale}</i>金币/3场</span></div>
+                    </div>
+                    </a>
+                </div>
+                </volist>
+                <div class="ad_detail">
+                    <a href="{$left_ad.url}"><img src="{$left_ad.img}" alt="_blank" width="235px" height="140px"></a>
+                </div>
+                <div class="jx_title" style="background:#ED6A6A;"><img src="__PUBLIC__/Home/images/qw/morning.png" alt="">热门产品</div>
+                    <volist name="left_list['hot']" id="item">
+                        <div class="game_list">
+                            <a href="{:U('Intro/intro_info',['id'=>$item['id']])}">
+                                <div class="game_state <if condition="$item['confirm'] eq 1"> game_hold</if>"></div>
+                        <div class="gl_head"><img src="{$item['logo']}" alt=""></div>
+                        <div class="gl_main">
+                            <p class="glm_name">{$item.name}</p>
+                            <p class="glm_perc">累计回报率: <span>{$item.total_rate}%</span> </p>
+                            <p class="glm_buy">购买人数：{$item.remain_num}/{$item.total_num}</p>
+                        </div>
+                        <div class="gl_foot">
+                            <div class="ng_zhong"><em>近10中{$item.ten_num}</em><span><i>{$item.sale}</i>金币/3场</span></div>
+                        </div>
+                        </a>
+                        </div>
+                    </volist>
+            </div>
+
+            <div class="qwc_right clearfix fr">
+                <div class="qwc_right_ad">
+                    <a href="{$info_ad.url}"><img src="{$info_ad.img}" alt="_blank" width="740px" height="71px"></a>
+                </div>
+                <div class="qwc_right_con clearfix">
+                    <div class="xingxing" <if condition="$follow eq 1">style="background: url('__PUBLIC__/Home/images/qw/save_sele.png');"</if>></div>
+                    <div class="qrc_header clearfix">
+                        <div class="qrch_head fl">
+                            <img src="{$products_info.logo}" alt="">
+                        </div>
+                        <div class="qrch_right fr">
+                              <div class="qrchr_top clearfix">
+                                <div class="ng_zhong fl"><span>{$products_info.name}</span><em>近10中{$products_info.ten_num}</em></div>
+                                <div class="qrchrt_perc fr">累计回报率:<span>{$products_info.total_rate}<i>%</i></span> </div>
+                             </div>
+                               <div class="qrchr_foot">
+                                简介:{$products_info.desc}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qrc_percent">
+                        <div class="qrcp_title">累计回报率走势</div>
+                        <div class="qrcp_con">
+                            
+ 
+                     <div id="container" style="width: 700px;height: 300px;"></div>
+                            
+                        <script type="text/javascript">
+                            var dom = document.getElementById("container");
+                            var myChart = echarts.init(dom);
+                            var app = {};
+                            option = null;
+                            var DOMAIN = "__DOMAIN__";
+                            var url = DOMAIN_URL+'/Intro/history_tab?key=' + "{$products_info['key']}";
+                            $.getJSON(url, function (data) {
+                                data = eval('(' + data + ')');
+                                myChart.setOption(option = {
+                                    title: {
+                                        //text: 'Beijing AQI'
+                                    },
+                                    tooltip: {
+                                        trigger: 'axis'
+                                    },
+                                    xAxis: {
+                                        boundaryGap: false,
+                                        data: data.map(function (item) {
+                                            return item[0];
+                                        })
+                                    },
+                                    yAxis: {
+                                        splitLine: {
+                                            show: true
+                                        }
+                                    },
+                                    toolbox: {
+                                        // left: 'center',
+                                        // feature: {
+                                        //     dataZoom: {
+                                        //         yAxisIndex: 'none'
+                                        //     },
+                                        //     restore: {},
+                                        //     saveAsImage: {}
+                                        // }
+                                    },
+                                    dataZoom: [{
+                                        startValue: '2014-06-01'
+                                    }, {
+                                        type: 'inside'
+                                    }],
+                                   
+                                    series: {
+                                        name: '回报率',
+                                        type: 'line',
+                                        data: data.map(function (item) {
+                                            return item[1];
+                                        }),
+                                        label: {
+                                            normal: {
+                                                show: true,
+                                                position: 'top',
+                                                formatter: '{c}%'
+                                            }
+                                        },
+                                        markLine: {
+                                            silent: true,
+                                            data: []
+                                        }
+                                    }
+                                });
+                            });;
+                            if (option && typeof option === "object") {
+                                myChart.setOption(option, true);
+                            }
+       </script>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 最新推介 s-->
+                 <include file="intro_new" />
+                <!-- 最新推介 e-->
+                
+                <!-- 历史推介 s -->
+                <div class="history_tj">
+                    <div class="nt_title" style="background: #2e76c7">历史推介</div>
+                    <div class="ht_con">
+                        <volist name="history['arr']" id="item">
+                            <include file="intro_his_tab" />
+                        </volist>
+                    </div>
+
+                    <!--页码开始-->
+                    <div class="page-con" style="text-align: center;">
+                        <nav>
+                            <ul class="pagination">
+                                <if condition="$pageCount gt 1">{$show}</if>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!--页码结束-->
+                </div>
+                <!-- 历史推介 e -->
+
+            </div>
+
+        </div>
+
+        <!-- 主体内容结束 -->
+
+
+        <include file="Public:footer" />
+    </div>
+</body>
+<!--引入本页js-->
+    <script type="text/javascript">
+
+        $(".xingxing").on('click',function(){
+            var productId = {$products_info['id']};
+            var user = {$follow};
+            if(user)
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "/Intro/user_follow.html",
+                    data: {'productId': productId},
+                    dataType: "json",
+                    success: function (data) {
+                        if(data == 1)
+                        {
+                            $(".xingxing").css('background',"url('__PUBLIC__/Home/images/qw/save_sele.png')");
+                            showMsg('关注成功!');
+                        }else if (data == 2){
+                            $(".xingxing").css('background',"url('__PUBLIC__/Home/images/qw/xingxing.png')");
+                            showMsg('取消关注成功!');
+                        }
+                    }
+                });
+            }else{
+                var $modalHtml = '<div class="modal-scrollable" style="z-index: 1050;">' +
+                        ' <div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="false" style="display: block; margin-top: -99.5px;top: 45%;">' +
+                        ' <div class="modal-content">' +
+                        ' <div class="modal-header" style="text-align:center;color: #000000;">' +
+                        ' <button  type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>' +
+                        ' <h4 class="modal-title" style="color: #000000;">温馨提示</h4>' +
+                        ' </div>' +
+                        ' <div class="modal-body" style="padding: 20px 50px;">' +
+                        ' <dl class="clearfix text-center">' +
+                        ' <dt style="padding-bottom: 10px; border-bottom: 1px solid #e5e5e5; font-weight: normal; font-size: 16px; margin-bottom: 10px;">' +
+                        ' 您还未登入，是否登入？ ' +
+                        ' </dt>' +
+                        '</dl>' +
+                        ' <div class="btn-con" style="text-align: center; margin-top: 15px;">' +
+                        ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-orange"  onclick="window.open(\'//www.' + DOMAIN + '/User/login.html\')">马上去' +
+                        ' </button>' +
+                        ' <button style="width: 100px; border-radius: 3px;" type="button" class="btn btn-default" data-dismiss="modal" onclick="$(\'.modal-scrollable\').addClass(\'hidden\')">再逛逛</button>' +
+                        ' </div>' +
+                        ' </div>' +
+                        ' </div>' +
+                        ' </div>' +
+                        ' <div class="modal-backdrop fade in" style="z-index: 1040;"></div>' +
+                        ' </div>'
+                $('body').append($modalHtml);
+            }
+        });
+    </script> 
+</html>

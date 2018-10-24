@@ -1,0 +1,139 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>赛程ID：</label>
+				<input type="text" name="game_id" value="{$_REQUEST.game_id}">
+			</li>
+			<li>
+				<label>分组字母：</label>
+			 	<input type="text" name="rno" value="{$_REQUEST.rno}">
+			</li>
+			<li style="width: 200px;">
+				<label>类型：</label>
+				<select name="runno" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<volist name="runno" id="item">
+						<option value="{$item.runno}" <if condition="$_REQUEST.runno eq $item['runno']">selected</if> >{$item.run_name|switchName=0,###}</option>
+					</volist>
+				</select>
+			</li>
+			<li style="width: 200px;">
+				<label>比赛状态：</label>
+				<select name="game_state" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="0" <if condition="$_REQUEST.game_state eq '0'">selected</if> >未开</option>
+					<option value="1" <if condition="$_REQUEST.game_state eq '1'">selected</if> >上半场</option>
+					<option value="2" <if condition="$_REQUEST.game_state eq '2'">selected</if> >中场</option>
+					<option value="3" <if condition="$_REQUEST.game_state eq '3'">selected</if> >下半场</option>
+					<option value="4" <if condition="$_REQUEST.game_state eq '4'">selected</if> >加时</option>
+					<option value="-11" <if condition="$_REQUEST.game_state eq '-11'">selected</if> >待定</option>
+					<option value="-12" <if condition="$_REQUEST.game_state eq '-12'">selected</if> >腰斩</option>
+					<option value="-13" <if condition="$_REQUEST.game_state eq '-13'">selected</if> >中断</option>
+					<option value="-14" <if condition="$_REQUEST.game_state eq '-14'">selected</if> >推迟</option>
+					<option value="-1" <if condition="$_REQUEST.game_state eq '-1'">selected</if> >完场</option>
+					<option value="-10" <if condition="$_REQUEST.game_state eq '-10'">selected</if> >取消</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="{:U('__URL__/EuroScorer')}" target="navTab" title="射手榜" warn="请选择赛程"><span>射手榜</span></a></li>
+			<li><a class="add" href="{:U('__URL__/EuroIntegral')}" target="navTab" title="积分榜" warn="请选择赛程"><span>积分榜</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'game_id')"> class="desc"</if> orderField="game_id" <if condition="$_REQUEST._order eq 'game_id'">class="{$_REQUEST._sort}"</if>>赛程ID</th>
+			<th>赛事名称</th>
+			<th>联盟级别/联盟ID</th>
+			<th <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'game_date')"> class="desc"</if> orderField="game_date" <if condition="$_REQUEST._order eq 'game_date'">class="{$_REQUEST._sort}"</if>>比赛时间</th>
+			<th>比赛状态</th>
+			<th>主队</th>
+			<th>全场（半场）</th>
+			<th>客队</th>
+			<th>类型</th>
+			<th>添加前瞻</th>
+			<th>添加集锦</th>
+			<th>发布资讯</th>
+			<th>赛程状态</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['game_id']}</td>
+					<td>{$vo['union_name']}</td>
+					<td>{$vo['is_sub']}（{$vo.union_id}）</td>
+					<td>{$vo['game_date']} {$vo['game_time']}</td>
+					<td>
+						<switch name="vo.game_state">
+					        <case value="0">未开</case>
+					        <case value="1">上半场</case>
+					        <case value="2">中场</case>
+					        <case value="3">下半场</case>
+					        <case value="4">加时</case>
+					        <case value="-11">待定</case>
+					        <case value="-12">腰斩</case>
+					        <case value="-13">中断</case>
+					        <case value="-14">推迟</case>
+					        <case value="-1">完场</case>
+					        <case value="-10">取消</case>
+					    </switch>
+					</td>
+					<td>{$vo['home_team_name']}</td>
+					<td>{$vo['score']|default="--"}（{$vo['half_score']|default="--"}）</td>
+					<td>{$vo['away_team_name']}</td>
+					<td>
+						{$vo.run_name|switchName=0,###}（{$vo.rno}）
+					</td>
+					<td>
+						<a style="color: green" href="{:U('__ADMIN__/Highlights/add',['game_id'=>$vo['game_id'],'union_id'=>$vo['union_id'],'gameType'=>1,'is_prospect'=>1])}" height="480" width="650" target="dialog" mask="true" warn="请选择赛事">添加前瞻</a> |
+						<a href="{:U('__ADMIN__/Highlights/index',['game_id'=>$vo['game_id'],'gameType'=>1,'is_prospect'=>1])}" target="navTab" mask="true" warn="请选择赛事">查看</a>
+					</td>
+					<td>
+						<a style="color: blue" href="{:U('__ADMIN__/Highlights/add',['game_id'=>$vo['game_id'],'union_id'=>$vo['union_id'],'gameType'=>1])}" height="480" width="650" target="dialog" mask="true" warn="请选择赛事">添加集锦</a> |
+						<a href="{:U('__ADMIN__/Highlights/index',['game_id'=>$vo['game_id'],'gameType'=>1])}" target="navTab" mask="true" warn="请选择赛事">查看</a>
+					</td>
+					<td>
+	                 	<a style="color: green" href="__ADMIN__/PublishList/add/game_id/{$vo.game_id}/class_id/29" target="navTab" mask="true"><span>发布资讯</span></a> |
+	                 	<a href="__ADMIN__/PublishList/index/game_id/{$vo.game_id}" target="navTab" mask="true"><span>查看</span></a>
+					</td>
+					<td>
+						<eq name="vo.status" value='0'>
+							<a title="你确定要设为正常吗？" href="__URL__/saveIsGamble/id/{$vo.id}/status/1" target="ajaxTodo"><div style="color:red;">隐藏</div></a>
+						<else/>
+							<a title="你确定要设为隐藏吗？" href="__URL__/saveIsGamble/id/{$vo.id}/status/0" target="ajaxTodo"><div style="color:blue">正常</div></a>
+						</eq>
+					</td>
+
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

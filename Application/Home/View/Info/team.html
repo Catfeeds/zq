@@ -1,0 +1,647 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/info/dataDase.css">
+    <link rel="stylesheet" href="__PUBLIC__/Plugs/myscroll/jquery.mCustomScrollbar.css">
+</block>
+<block name="content">
+<!-- 顶部栏 -->
+    <div class="themeBox">
+    	<div class="topBanner"></div>
+        <div class="themeNavConBox">
+            <div class="themeNavCon">
+                <div class="themeNavBox">
+                    <div class="clearfix themeNavIn">
+                        <h1 class="pull-left themeLogo"><a href="{:U('/')}" title="全球体育首页" class="skewLeft"><img class="skewRight" src="__IMAGES__/special/theme-logo.png" width="142" height="35"></a></h1>
+                        <div class="pull-left themeNav skewLeft">
+                            <ul class="clearfix skewRight">
+                                <volist name="nav" id="vo">
+                                    <li class="pull-left"><a target="_blank" href="{$vo.url}"><span>{$vo.name}</span> </a></li>
+                                </volist>
+                            </ul>                                
+                        </div>
+                    </div> 
+                </div> 
+            </div>
+        </div>
+        <!-- main -->
+        <div class="main">
+            <!-- 当前位置 -->
+            <div class="position">
+                当前位置：<span class="now"><a href="{:U('/@data')}" >资料库</a></span>&gt;<span class="text-red">{$teamInfo.team_name}</span>
+            </div> 
+        	<div class="hotMatch">
+                <div class="clearfix title">
+                	<h2 class="pull-left">热门赛事</h2>
+                    <!--<div class="col-lg-3 pull-right hotSearch">-->
+                        <!--<div class="input-group">-->
+                            <!--<input type="text" class="form-control" placeholder="搜索">-->
+                            <!--<span class="input-group-btn">-->
+                                <!--<button class="btn" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>-->
+                            <!--</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="matchList">
+                	<ul class="clearfix">
+                        <volist name="hot_league" id="voHot">
+                            <li class="pull-left">
+                                <a href="{$voHot.jump_url}" target="_blank" title="{$voHot.name}">
+                                    <img src="{$voHot.logo}" width="30" height="20">{$voHot.name}
+                                </a>
+                            </li>
+                        </volist>
+                	</ul>
+                </div>
+            </div>
+        	  
+            <!-- typeMatch -->
+
+            <div class="typeMatch typeMatch02 clearfix">
+            	<div class="pull-left clearfix matBox">
+                    <span class="team-rank">{$teamInfo['team_rank']}</span>
+                    <div class="pull-left matLogo"><img class="img-circle" src="{$teamInfo.logo}" width="96" height="96"></div>
+                    <div class="pull-left matName ml20 pt10">
+                        <h3>{$teamInfo.team_name}</h3>
+                        <!-- Split button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn butText">{$teamInfo.team_name}</button>
+                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <volist name="teamInfo['team_groups']" id="tg">
+                                    <li><a href="/team/{$tg.team_id}.html">{$tg['team_name'][0]}</a></li>
+                                </volist>
+                            </ul>
+                        </div>
+                        <!-- Split button -->
+                    </div>
+                </div>
+                <div class="pull-right matInfo">
+                	<ul class="clearfix">
+                        <li class="pull-left clearfix column">
+                            <volist name="teamInfo['ability_value']" id="ability">
+                                <div class="pull-left">
+                                    <div class="progBox">
+                                        <div class="progBoxBar {$ability[2]}" style="height: {$ability[1]}%"><span>{$ability[1]}</span></div>
+                                    </div>
+                                    <p class="text-666 text-center mt5">{$ability[0]}</p>
+                                </div>
+                            </volist>
+                        </li>
+                        <li class="pull-left info">
+                        	<p>球队身价：<span class="text-blue">{$teamInfo.team_value}</span>欧元</p>
+                            <p class="f12"><span class="text-666">成立时间：</span> {$teamInfo.formed}</p>
+                            <p class="f12"><span class="text-666">所在城市：</span> {$teamInfo.country}</p>
+                        </li>
+                        <li class="pull-left info">
+                        	<p>主教练：<span class="text-blue f12">{$teamInfo.coach}</span></p>
+                            <p class="f12 "><span class="text-666 ">球队主场：</span> {$teamInfo.stadium_name}</p>
+                            <p class="f12"><span class="text-666">官方网址：</span> <a href="{$teamInfo.url}" class="text-blue" target="_blank" rel="nofollow">进入网址</a></p>
+                        </li>
+                	</ul>
+                </div>
+            </div>
+            <!-- typeMatch -->
+            <!-- content -->
+            <if condition='$hasData  eq 1'>
+
+                <div class="content clearfix">
+                    <div class="pull-left dataLeft">
+
+                        <!-- tableData -->
+                        <div class="tableData tableData01">
+                            <div class="statTit longStatTit clearfix">
+                                <h3 class="title text-fff pull-left" title="球队特点"><span class="f18 mr10 strong">球队特点</span> <span class="f12 text-uppercase">team characteristics</span></h3>
+                                <!-- Split button -->
+                                <!--<div class="btn-group pull-right mr20">-->
+                                <!--<button type="button" class="btn rouNum">第3轮</button>-->
+                                <!--<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                                <!--<span class="caret"></span>-->
+                                <!--<span class="sr-only">Toggle Dropdown</span>-->
+                                <!--</button>-->
+                                <!--<ul class="dropdown-menu">-->
+                                <!--<li><a href="#">第3轮</a></li>-->
+                                <!--<li><a href="#">第3轮</a></li>-->
+                                <!--<li><a href="#">第3轮</a></li>-->
+                                <!--</ul>-->
+                                <!--</div>-->
+                                <!-- Split button -->
+                            </div>
+
+                            <table class="table table01 pull-left" cellspacing="0" cellpadding="0" >
+                                <thead>
+                                <tr bgcolor="#cfd2dd">
+                                    <th width="100%" colspan="2"><span class="glyphicon glyphicon-plus text-green mr5"></span>优势</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <volist name="teamInfo['character'][1]" id="ch1">
+                                    <tr bgcolor="#f8f9fd">
+                                        <td width="50%" class="line">{$ch1[0][2]}</td>
+                                        <td width="50%" class="b-r">{$ch1[1][2]}</td>
+                                    </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+                            <table class="table  pull-right" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr bgcolor="#cfd2dd">
+                                    <th width="100%" colspan="2"><span class="glyphicon glyphicon-minus text-red mr5"></span>弱点</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <volist name="teamInfo['character'][2]" id="ch2">
+                                    <tr bgcolor="#f8f9fd">
+                                        <td width="50%" class="line">{$ch2[0][2]}</td>
+                                        <td width="50%" class="b-r">{$ch2[1][2]}</td>
+                                    </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+
+                            <table class="table teamTd02" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr bgcolor="#cfd2dd">
+                                    <th width="100%" colspan="2">风格</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <volist name="teamInfo['character'][3]" id="ch3">
+                                    <tr bgcolor="#f8f9fd">
+                                        <td width="50%" class="line">{$ch3[0][2]}</td>
+                                        <td width="50%" class="b-r">{$ch3[1][2]}</td>
+                                    </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- tableData -->
+                        <!-- tableData -->
+                        <div class="tableData tableData01" id="teamData">
+                            <div class="statTit clearfix">
+                                <h3 class="title text-fff pull-left" title="球队数据"><span class="f18 mr10 strong">球队数据</span> <span class="f12 text-uppercase">Team data</span></h3>
+                                <!-- Split button -->
+                                <div class="btn-group pull-right mr20">
+                                    <button type="button" class="btn rouNum" data-type="{$teamInfo['count_sum'][0][0]}">
+                                        {:explode('^', $teamInfo['count_sum'][0][1])[0]}
+                                    </button>
+                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <volist name="teamInfo['count_sum']" id="cs">
+                                            <li data-type="{$cs[0]}"><a href="javascript:;" >{:explode('^', $cs[1])[0]}</a></li>
+                                        </volist>
+
+                                    </ul>
+                                </div>
+                                <!-- Split button -->
+                            </div>
+                            <ul class="clearfix tabNav teamDataNav">
+                                <li class="pull-left on" sub-type="0"><a href="javascript:;" >进攻数据</a></li>
+                                <li class="pull-left" sub-type="1"><a href="javascript:;" >防守数据</a></li>
+                            </ul>
+                            <table class="table teamData01" cellspacing="0" cellpadding="0" id="teamCount">
+                                <thead>
+                                <tr bgcolor="#acb0c5">
+                                    <th width="30">胜</th>
+                                    <th width="30">平</th>
+                                    <th width="30">负</th>
+                                    <th width="46">胜率</th>
+                                    <th width="50">犯规</th>
+                                    <th width="50">黄牌</th>
+                                    <th width="50">红牌</th>
+                                    <th width="60">控球率</th>
+                                    <th width="117">射门(射正)</th>
+                                    <th width="117">传球(成功)</th>
+                                    <th width="100">传球成功率</th>
+                                    <th width="60">评分</th>
+                                </tr>
+                                <tr bgcolor="#acb0c5">
+                                    <th width="30">胜</th>
+                                    <th width="30">平</th>
+                                    <th width="30">负</th>
+                                    <th width="46">胜率</th>
+                                    <th width="50">角球</th>
+                                    <th width="50">越位</th>
+                                    <th width="117">头球(成功)</th>
+                                    <th width="60">救球</th>
+                                    <th width="60">铲球</th>
+                                    <th width="100">射门不中</th>
+                                    <th width="100">射门被挡</th>
+                                    <th width="60">界外球</th>
+                                    <th width="60">评分</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <table class="table teamData02" cellspacing="0" cellpadding="0" id="teamDataGlist">
+                                <thead>
+                                <tr bgcolor="#f8eff2">
+                                    <th width="68">赛事</th>
+                                    <th width="76">时间</th>
+                                    <th width="">主队</th>
+                                    <th width="40">比分</th>
+                                    <th width="">客队</th>
+                                    <th width="">犯规</th>
+                                    <th width="">黄牌</th>
+                                    <th width="">红牌</th>
+                                    <th width="">控球率</th>
+                                    <th width="50">射门<br>(射正)</th>
+                                    <th width="50">传球<br>(成功)</th>
+                                    <th width="80">传球成功率</th>
+                                    <th width="">评分</th>
+                                </tr>
+
+                                <tr bgcolor="#f8eff2">
+                                    <th width="68">赛事</th>
+                                    <th width="76">时间</th>
+                                    <th width="">主队</th>
+                                    <th width="40">比分</th>
+                                    <th width="">客队</th>
+                                    <th width="">角球</th>
+                                    <th width="">越位</th>
+                                    <th width="50">头球(成功)</th>
+                                    <th width="">救球</th>
+                                    <th width="">铲球</th>
+                                    <th width="">射门被挡</th>
+                                    <th width="">界外球</th>
+                                    <th width="">评分</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- tableData -->
+
+                        <div class="tableData tableData01" id="schedule">
+                            <div class="statTit longStatTit clearfix">
+                                <h3 class="title text-fff pull-left"><span class="f18 mr10 strong">球队赛程</span> <span class="f12 text-uppercase">Team race</span></h3>
+                            </div>
+                            <table class="table teamData02" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr bgcolor="#acb0c5">
+                                    <th width="68">赛事</th>
+                                    <th width="50">时间</th>
+                                    <th width="">主场</th>
+                                    <th width="40">比分</th>
+                                    <th width="">客场</th>
+                                    <th width="40">半场</th>
+                                    <th width="40">让球</th>
+                                    <th width="40">大小</th>
+                                    <th width="40">胜负</th>
+                                    <th width="80">资料</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <volist name="teamInfo['schedule']" id="schedule" >
+                                    <tr bgcolor="#ffffff" style="<if condition='$key lt 10'><else />display:none</if>">
+                                        <td bgcolor="{$schedule[2]}" class="text-fff">{$schedule[8]}</td>
+                                        <td>{$schedule[3]}</td>
+                                        <td><a href="{:U('/team/'.$schedule[4]['team_id'].'@data')}" target="_blank">{$schedule[4]['team_name']}</a></td>
+                                        <td>{$schedule[6]}</td>
+                                        <td><a href="{:U('/team/'.$schedule[5]['team_id'].'@data')}" target="_blank">{$schedule[5]['team_name']}</a></td>
+                                        <td>{$schedule[7]}</td>
+                                        <td>{$schedule[21]}</td>
+                                        <td>{$schedule[22]}</td>
+                                        <td>{$schedule[23]}</td>
+                                        <td>
+                                            <a href="{$schedule['y_url']}" target="_blank">亚</a>&nbsp;&nbsp;
+                                            <a href="{$schedule['o_url']}" target="_blank">欧</a>&nbsp;&nbsp;
+                                            <a href="{$schedule['x_url']}" target="_blank" class="text-bblue">析</a>
+                                            <a href="{$schedule['d_url']}" target="_blank" class="text-bblue">大</a>
+                                        </td>
+                                    </tr>
+                                </volist>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- tableData -->
+                        <div class="tableData tableData01" id="tournamentSt">
+                            <div class="statTit clearfix">
+                                <h3 class="title text-fff pull-left" title="赛事统计"><span class="f18 mr10 strong">赛事统计</span> <span class="f12 text-uppercase">Tournament statistics</span></h3>
+                                <!-- Split button -->
+                                <div class="btn-group pull-right mr20">
+                                    <button type="button" class="btn rouNum">{$teamInfo.team_name}</button>
+                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <volist name="teamInfo['team_groups']" id="tg">
+                                            <li><a href="/team/{$tg.team_id}.html" target="_blank">{$tg['team_name'][0]}</a></li>
+                                        </volist>
+                                    </ul>
+
+                                    <ul class="dropdown-menu" style="display:none">
+                                        <volist name="teamInfo['cup_data']" id="cd">
+                                            <li union-id="{$cd[0]}"><a href="javascript:;" >{$cd[1]}</a></li>
+                                        </volist>
+                                    </ul>
+                                </div>
+                                <!-- Split button -->
+                            </div>
+                            <ul class="clearfix tabNav matchTjNav">
+                                <li class="pull-left on" data-type="1"><a href="javascript:;" title="联赛统计">联赛统计</a></li>
+                                <li class="pull-left" data-type="2" union-id="{$teamInfo.cup_data.0.0}"><a href="javascript:;" title="杯赛统计">杯赛统计</a></li>
+                            </ul>
+                        </div>
+                        <!-- tableData -->
+
+                        <!-- tableData -->
+                        <if condition="$teamInfo['lineup'] neq null ">
+                            <div class="tableData">
+                                <div class="statTit longStatTit clearfix">
+                                    <h3 class="title text-fff pull-left" title="球队阵容"><span class="f18 mr10 strong">球队阵容</span> <span class="f12 text-uppercase">Team rosters</span></h3>
+                                </div>
+                                <table class="table teamZr" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                    <tr bgcolor="#cfd1dd">
+                                        <th width="40">号码</th>
+                                        <th width="90">姓名</th>
+                                        <th width="40">出生</th>
+                                        <th width="40">身高</th>
+                                        <th width="40">体重</th>
+                                        <th width="40">位置</th>
+                                        <th width="80">国籍</th>
+                                        <th width="70">预计身价</th>
+                                        <th width="70">合同截止</th>
+                                        <th width="70">首发/进球</th>
+                                        <th width="70">首发/替补</th>
+                                        <th width="40">助攻</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="teamInfo['lineup']" id="lp">
+                                        <tr bgcolor="#f8f9fd" class="f12">
+                                            <td>{$lp[1]}</td>
+                                            <td ><a href="/player/{$lp[0]}.html" class="text-blue text-l" target="_blank">{$lp[2]}</a></td>
+                                            <td><p>{$lp[5]|substr=###,0,4}</p><p class="text-999">{$lp[5]|substr=###,5,10}</p></td>
+                                            <td>{$lp[6]}</td>
+                                            <td>{$lp[7]}</td>
+                                            <td>{$lp[8]}</td>
+                                            <td>{$lp[9]}</td>
+                                            <td>{$lp[11]}<if condition='$lp[11] neq ""'>万英镑</if></td>
+                                            <td><p>{$lp[12]|substr=###,0,4}</p><p class="text-999">{$lp[12]|substr=###,5,10}</p></td>
+                                            <td>{$lp[13]}/{$lp[14]}</td>
+                                            <td>{$lp[15]}/{$lp[16]}</td>
+                                            <td>{$lp[17]}</td>
+                                        </tr>
+                                    </volist>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </if>
+
+                        <!-- tableData -->
+
+                        <!-- tableData -->
+                        <if condition="$teamInfo['player_data'] neq null ">
+                            <div class="tableData">
+                                <div class="statTit longStatTit clearfix">
+                                    <h3 class="title text-fff pull-left" title="球员统计"><span class="f18 mr10 strong">球员统计</span> <span class="f12 text-uppercase">player statistics</span></h3>
+                                </div>
+                                <table class="table playerTj" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                    <tr bgcolor="#cfd1dd">
+                                        <th width="40">号码</th>
+                                        <th width="120">姓名</th>
+                                        <th width="150">国籍</th>
+                                        <th width="70">总进球数</th>
+                                        <th width="70">进球/胜</th>
+                                        <th width="70">进球/平</th>
+                                        <th width="70">进球/负</th>
+                                        <th width="50">黄牌数</th>
+                                        <th width="50">红牌数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="teamInfo['player_data']" id="player">
+                                        <tr bgcolor="#f8f9fd" class="f12">
+                                            <td>{$player[0]}</td>
+                                            <td ><a href="/player/{$player[1][0]}.html" target="_blank" class="text-blue">{$player[1][1]}</a></td>
+                                            <td>{$player[1][2]}</td>
+                                            <td>{$player[2]}</td>
+                                            <td>{$player[3]}</td>
+                                            <td>{$player[4]}</td>
+                                            <td>{$player[5]}</td>
+                                            <td>{$player[6]}</td>
+                                            <td>{$player[7]}</td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </if>
+                        <!-- tableData -->
+
+                        <!-- tableData -->
+                        <if condition="$teamInfo['team_tran']['intable'] neq null ">
+                            <div class="tableData">
+                                <div class="statTit longStatTit clearfix">
+                                    <h3 class="title text-fff pull-left" title="球员转会"><span class="f18 mr10 strong">球员转会</span> <span class="f12 text-uppercase">player transfer</span></h3>
+                                </div>
+                                <table class="table playerZh" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                    <tr bgcolor="#f9eef2">
+                                        <th width="100%" colspan="5" class="strong">转入球员</th>
+                                    </tr>
+                                    <tr bgcolor="#f9eef2">
+                                        <th width="130">时间</th>
+                                        <th width="160">球员</th>
+                                        <th width="100">位置</th>
+                                        <th width="120">来自</th>
+                                        <th width="180">类型</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="teamInfo['team_tran']['intable']" id="intable">
+                                        <tr bgcolor="#f8f9fd" class="f12">
+                                            <td>{$intable[0]}</td>
+                                            <td ><a <if condition="$intable[2] neq '主教练'">href="/player/{$intable[1][0]}.html"</if> target="_blank" class="text-blue">{$intable[1][1]}</a></td>
+                                            <td>{$intable[2]}</td>
+                                            <td><a href="/team/{$intable[3][0]}.html" target="_blank" class="text-blue">{$intable[3][1]}</a></td>
+                                            <td>{$intable[4]}</td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                                <table class="table playerZh" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                    <tr bgcolor="#f9eef2">
+                                        <th width="100%" colspan="5" class="strong">转出球员</th>
+                                    </tr>
+                                    <tr bgcolor="#f9eef2">
+                                        <th width="130">时间</th>
+                                        <th width="160">球员</th>
+                                        <th width="100">位置</th>
+                                        <th width="120">来自</th>
+                                        <th width="180">类型</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="teamInfo['team_tran']['outtable']" id="intable">
+                                        <tr bgcolor="#f8f9fd" class="f12">
+                                            <td>{$intable[0]}</td>
+                                            <td ><a href="/player/{$intable[1][0]}.html" target="_blank" class="text-blue">{$intable[1][1]}</a></td>
+                                            <td>{$intable[2]}</td>
+                                            <td><a href="/team/{$intable[3][0]}.html" target="_blank" class="text-blue">{$intable[3][1]}</a></td>
+                                            <td>{$intable[4]}</td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </if>
+                        <!-- tableData -->
+
+                    </div>
+                    <div class="pull-right dataRight">
+                        <!-- rIntro -->
+                        <if condition="$teamInfo['team_intro'] neq null ">
+                            <div class="rIntro">
+                                <div class="statTit clearfix">
+                                    <h3 class="title text-fff pull-left" title="球队介绍"><span class="f18 mr10 strong">球队介绍</span> <span class="f12 text-uppercase">team Introduction</span></h3>
+                                </div>
+                                <div class="introBox">
+                                    <p>{$teamInfo.team_intro}</p>
+                                </div>
+                            </div>
+                        </if>
+                        <!-- rIntro -->
+
+                        <!-- rIntro -->
+                        <if condition="$teamInfo['honor'] neq null ">
+                            <div class="rGlory">
+                                <div class="statTit clearfix">
+                                    <h3 class="title text-fff pull-left" title="球队荣耀"><span class="f18 mr10 strong">球队荣耀</span> <span class="f12 text-uppercase">Player glory</span></h3>
+                                </div>
+                                <ul>
+                                    <volist name="teamInfo['honor']" id="hv">
+                                        <li class="clearfix odd">
+                                            <div class="pull-left cupImg"></div>
+                                            <div class="pull-left cupInfo">
+                                                <h3>{$hv[0]}</h3>
+                                                <p class="text-999"><span class="mr10">{$hv[1]}</span></p>
+                                            </div>
+                                        </li>
+                                    </volist>
+                                </ul>
+                            </div>
+                        </if>
+                        <!-- rIntro -->
+
+                        <!-- rBest -->
+                        <div class="rBest">
+                            <div class="statTit clearfix">
+                                <h3 class="title text-fff pull-left" title="最快进步"><span class="f18 mr10 strong">最快进步</span> <span class="f12 text-uppercase"> The fastest progress</span></h3>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr bgcolor="#f8f9fd">
+                                    <th width="40">排名</th>
+                                    <th width="160" class="text-l">球员</th>
+                                    <th width="54">评分</th>
+                                    <th width="54">提升</th>
+                                </tr>
+                                </thead>
+                                <tbody id="mipRank">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- rBest -->
+
+                        <!-- rBest -->
+                        <div class="rBest">
+                            <div class="statTit clearfix">
+                                <h3 class="title text-fff pull-left strong" title="状态火热"><span class="f18 mr10 strong">状态火热</span> <span class="f12 text-uppercase">Hot state</span></h3>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr bgcolor="#f8f9fd">
+                                    <th width="40">排名</th>
+                                    <th width="160" class="text-l">球员</th>
+                                    <th width="54">进球</th>
+                                    <th width="54">评分</th>
+                                </tr>
+                                </thead>
+                                <tbody id="hotRank">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- rBest -->
+
+                        <!-- rBest -->
+                        <div class="rBest">
+                            <div class="statTit clearfix">
+                                <h3 class="title text-fff pull-left" title="射手榜"><span class="f18 mr10 strong">射手榜</span> <span class="f12 text-uppercase">Shooter list</span></h3>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr bgcolor="#f8f9fd">
+                                    <th width="40">排名</th>
+                                    <th width="195" class="text-l">球员</th>
+                                    <th width="54">进球</th>
+                                </tr>
+                                </thead>
+                                <tbody id="goalsRank">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- rBest -->
+
+                        <!-- rBest -->
+                        <div class="rBest">
+                            <div class="statTit clearfix">
+                                <h3 class="title text-fff pull-left" title="助攻榜"><span class="f18 mr10 strong">助攻榜</span> <span class="f12 text-uppercase">Assists list</span></h3>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr bgcolor="#f8f9fd">
+                                    <th width="40">排名</th>
+                                    <th width="195" class="text-l">球员</th>
+                                    <th width="54">助攻</th>
+                                </tr>
+                                </thead>
+                                <tbody id="passRank">
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- rBest -->
+
+                    </div>
+                </div>
+                <else />
+                <div class="left-no-data"></div>
+            </if>
+            <!-- content -->
+        </div>
+        <!-- main -->
+    </div>
+</block>
+<block name="js">
+    <script>
+        var count_sum = '{$teamInfo["count_sum"]|json_encode}';
+        var team_count = '{$teamInfo["team_count"]|json_encode}';
+        var cup_groups = '{$teamInfo["cup_data"]|json_encode}';
+        var team_groups = '{$teamInfo["team_groups"]|json_encode}';
+        var union_id = '{$teamInfo["union_id"]}';
+        var team_id = '{$teamInfo["team_id"]}';
+        var team_logo = '{$teamInfo["logo"]}';
+        var team_name = '{$teamInfo["team_name"]}';
+        var schedule = JSON.parse('{$teamInfo["schedule"]|json_encode}');
+    </script>
+    <script type="text/javascript" src="__JS__/info/team.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Plugs/myscroll/jquery.mCustomScrollbar.concat.min.js"></script>
+</block>

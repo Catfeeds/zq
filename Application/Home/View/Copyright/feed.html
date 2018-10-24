@@ -1,0 +1,85 @@
+<extend name="Public:layout_feed"/>
+<block name="seo">
+    <title>技术支持</title>
+</block>
+<block name="css">
+    <link rel="stylesheet" href="__CSS__/copyright/feedback.css">
+    <link rel="stylesheet" href="__PUBLIC__/Plugs/bootstrap/css/bootstrap.css">
+</block>
+<block name="content">
+    <div class="body">
+
+        <!-- 主体内容开始 -->
+        <div class="home clearfix">
+            <section class="main clearfix">
+                <h2><img src="__IMAGES__/copyright/title05.png"></h2>
+                <div class="feedback">
+                    <form id="feedForm" method="post">
+                        <dl class="clearfix">
+                            <dt class="text-555 pull-left" style="margin-right: 8px;">
+                                技术支持
+                            </dt>
+                            <dd class="textarea pull-left">
+                                <div class="text-con">
+                                    <textarea class="form-control txtUserName required" placeholder="亲爱的用户：我们非常重视你的建议，请在这里填写告诉我们，可能无法逐一回复，但我们会参考您的建议，不断优化产品，为你提供更好的服务。" name="content"></textarea>
+                                </div>
+                            </dd>
+                        </dl>
+                        <div class="sub-con phone1">
+                            <div class="control-groupt phone2" style="position:relative">
+                               <label for="" class="control-label" style="margin-right: 4px;">联系电话</label>
+                               <input type="text" class="form-control" name="phone" placeholder="请填写您的手机号码" style="display: inline-block;">
+                               <span style="font-size: 12px;color: #999; margin-left: 15px; margin-right:100px;">(我们会对您的联系方式严格保密)</span>
+                            </div>
+                            <input type="submit" value="提交留言" class="btn-orange">
+                        </div>
+                        {:get_form_token()}
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</block>
+<block name="js">
+
+    <!--引入本页js-->
+    <script type="text/javascript">
+        $(function(){
+            $("#feedForm").validate({
+                onkeyup:false,
+                rules: {
+                    content : {required:true},
+                },
+                messages: {
+                    content : { required:"请输入反馈意见！"},
+                },
+                submitHandler:function(form){
+                    var userId = $("input[name='userId']").val();
+                    if (userId == '')
+                    {
+                        modalLogin();
+                        return false;
+                    }
+                    $('.btn-orange').val('正在提交...').attr('disabled','disabled');
+                    var form = $(form);
+                    var data = form.serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: "/tiyubf.html",
+                        data: data,
+                        success: function(data){
+                            if(data.status){
+                                $('form')[0].reset();
+                                $('.posi-p').show();
+                                _alert("提示",data.info);
+                            }else{
+                                showMsg(data.info,'','error');
+                            }
+                            $('.btn-orange').val('提交留言').removeAttr('disabled');
+                        }
+                    });
+                }
+            })
+        });
+    </script>
+</block>

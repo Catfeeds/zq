@@ -1,0 +1,102 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li style="width: 250px;">
+				<label>名称：</label>
+				<input type="text" name="name" value="{$_REQUEST.name}"/>
+			</li>
+			<li style="width: 250px;">
+				<label>运动员：</label>
+				<input type="text" name="player_name" value="{$_REQUEST.player_name}"/>
+			</li>
+			<li style="width: 250px;">
+				<label>项目：</label>
+				<input type="text" name="sport_name" value="{$_REQUEST.sport_name}"/>
+			</li>
+			<li style="width: 200px;">
+				<label>奖牌类型：</label>
+				<select name="medal_type" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.medal_type eq '1'">selected</if> >金</option>
+					<option value="2" <if condition="$_REQUEST.medal_type eq '2'">selected</if> >银</option>
+					<option value="3" <if condition="$_REQUEST.medal_type eq '3'">selected</if> >铜</option>
+				</select>
+			</li>
+			<li>
+				<label>状态：</label>
+				<select name="status" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >启用</option>
+					<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >禁用</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true"><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/foreverdelete/id/{sid_record}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择记录"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" warn="请选择记录"><span>编辑</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="5%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'id')"> class="desc"</if> orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="10%">名称</th>
+			<th width="10%">运动员</th>
+			<th width="10%">项目</th>
+			<th width="10%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'get_time')"> class="desc"</if> orderField="get_time" <if condition="$_REQUEST._order eq 'get_time'">class="{$_REQUEST._sort}"</if>>时间</th>
+			<th width="10%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'medal_type')"> class="desc"</if> orderField="medal_type" <if condition="$_REQUEST._order eq 'medal_type'">class="{$_REQUEST._sort}"</if>>奖牌类型</th>
+			<th width="25%">详情</th>
+			<th width="10%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'status')"> class="desc"</if> orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}"</if>>状态</th>
+			<th width="10%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>{$vo['name']}</td>
+					<td>{$vo['player_name']}</td>
+					<td>{$vo['sport_name']}</td>
+					<td>{$vo['get_time']|date="Y-m-d H:i",###}</td>
+					<td>
+						<switch name="vo.medal_type">
+							<case value="1">金</case>
+							<case value="2">银</case>
+							<case value="3">铜</case>
+						</switch>
+					</td>
+					<td>{$vo['url']}</td>
+					<td>{$vo['status']|getStatus}</td>
+					<td>
+					{$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",'__DWZ__'} |
+					<a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" title="编辑" rel="editPage">编辑</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

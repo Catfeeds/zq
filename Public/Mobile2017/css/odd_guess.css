@@ -1,0 +1,173 @@
+/**
+ * 竞猜css样式文件
+ * 
+ * @author pengjian <710348662@qq.com>
+ *
+ * @since  2016-04-26
+**/
+ /*竞猜选项*/
+.guess_sele_con{padding: .1rem;padding-top: 0;border-top:1px solid #ddd;margin-top: .2rem}
+.data_con{padding-top: .1rem; clear: both; width: 100%; position: relative; overflow-y: scroll; -webkit-overflow-scrolling: touch;}
+.tb_guess_sele tr th em{ width: .18rem; height: .18rem;display: block; background-color: #01af63;float: left; margin-right: .1rem;margin-top: .05rem; border-radius: 50% }
+
+.tb_guess_sele{width: 100%;text-align: left; }
+.tb_guess_sele tr th{color: #666666;height: .5rem; font-weight: normal; }
+.tb_guess_sele tr td{ text-align: center;height: .9rem}
+.tb_guess_sele tr td a{ display: block ;border:1px solid #dddddd; text-align: center;height: .9rem; line-height: .9rem; cursor: pointer;}
+.tb_guess_sele tr td a span{color: #f7774a;padding-left: .05rem}
+.tb_guess_sele tr td:last-child,.tb_guess_sele tr td:nth-child(2){}
+.tb_guess_sele tr td:first-child{background: #e6e6e6;  width: 1.6rem;}
+.tb_guess_sele tr td a.on{background:#01af63;border:1px solid #01af63;color: #fff;}
+.tb_guess_sele tr td a.on span{color: #fff;}
+
+.tb_guess_sele tr td a.no_sele{background: #dddddd}
+.tb_guess_sele tr td a.on_sub{border:1px solid #eb0000;color: #333333;}
+.state{ margin-top: .2rem;}
+/*提交*/
+.guess_btn{ height: .9rem; background: #00af62; line-height: .9rem; color: #fff; text-align: center; border-radius: .05rem;margin: 0 .1rem;margin-top: .1rem }
+.guess_btn a{ color: #fff;font-size: .36rem;display: block; }
+
+/*竞猜统计*/
+.guess_count_b{width: 100%; height: .8rem;line-height: .8rem; border-top:1px solid #ddd;border-bottom:1px solid #ddd;margin-top: .1rem;padding: 0 .2rem}
+/*.gcb_left{background: url(../images/count_title.png) no-repeat left center; background-size: .35rem auto;padding-left: .5rem;vertical-align: middle;}*/
+.gcb_left img{ width:.35rem; height:auto;vertical-align: middle; margin-top: -.1rem;margin-right: .1rem }
+.gcb_right{color: #999999}
+.gcb_right img{ width:.22rem; height:auto;vertical-align: middle; margin-left: .2rem }
+.tb_gc{padding: 0 .2rem}
+.tb_gc tr td{ }
+.tb_gc tr td:first-child{  text-align: left; }
+.tb_gc tr td:last-child{ text-align: right; }
+.tb_gc tr td p{width: 100%;float: left;}
+.tb_gc tr td p:first-child{margin-bottom: .03rem}
+.tb_gc tr td p span{display: block; width: .8rem; height: .45rem; color: #fff;background:url(../images/p_bgl.png) no-repeat left center; background-size: .8rem; height: .45rem}
+.tb_gc tr td p span:last-child{display: block; width: .8rem; height: .45rem; color: #fff;background:url(../images/p_bgr.png) no-repeat left center; background-size: .8rem; height: .45rem}
+.tb_gc tr td p em{display: block;float: left; height: .1rem;background: #ff7e00;}
+.tb_gc tr td p em:first-child{}
+.tb_gc tr td p em:nth-child(2){background: #00b15d}
+.tb_gc tr td p em:last-child{background: #1490d8; }
+
+
+/*提交*/
+.issued_main{ height: auto; background: #f7f7f7; position: absolute; top: 0;left: 0;z-index: 999999!important;border-radius: .1rem .1rem 0 0; display: none;width: 100%}
+.issued_title{ font-size: .32rem; height: .9rem; line-height: .9rem;border-top: 1px solid #ddd; margin: 0 .2rem;color: #666666}
+.price_title{ height: .66rem; line-height: .66rem;color: #666666;padding-bottom: .1rem}
+.price_title span{float: left;}
+.price_title a{float: right;color: #3a98d6}
+.price_title a img{width: .28rem;height: .28rem;vertical-align: middle;margin-right: .1rem;margin-top: -.08rem}
+.form_con{padding-bottom: .1rem}
+/*说明*/
+.sm_img{position: absolute;bottom: .86rem;right: 0rem;z-index: 9999;width: 80%;display: none;}
+
+.textarea_wap{ background: #f7f7f7;}
+.textarea_wap .textarea{ height: 2.5rem; border: none 0; width: 100%; font-size: .28rem; font-family: "Times New Roman",Times,sans-serif;border:1px solid #ddd;padding: .1rem }
+.price_select{ padding: .2rem;padding-top: 0;position: relative;}
+.price_select .price_ul li{ float: left; width: 20%; text-align: center; margin-bottom: .25rem;}
+
+
+.table_con .table > thead > tr > th,.table_con .table > tbody > tr > td{ font-weight: normal; border-bottom: none 0; padding: .1rem 0;}
+.table_con .table > thead > tr > th.pl-20,.table_con .table > tbody > tr > td.pl-20{ padding-left: .2rem;}
+.table_con .table .odd,.price_select .price_ul a{ display: inline-block; width: 1.1rem; height: .68rem; line-height: .66rem; text-align: center; border: 1px solid #e5e5e5; border-radius: .34rem; position: relative; background: #fff;font-size: .26rem}
+.price_select .price_ul a{ width: 1.3rem;}
+.table_con .table .odd em,.price_select .price_ul a em{ width: .29rem; height: .29rem; background: url(../images/icon/icon-tick.png) no-repeat 0 0; background-size: .29rem auto; position: absolute; right: 0; top: 0; display: none;}
+.table_con .table .on em,.price_select .price_ul .on em{ display: block;}
+.table_con .table .on,.price_select .price_ul .on{ color: #01af63; border-color: #01af63;}
+
+.next_con{ height: 1.2rem; padding: .2rem; width: 100%; position: fixed; bottom: 0; left: 0;}
+.next_con a,.isseued_btn a{ display: block; height: .9rem; line-height: .9rem; text-align: center; border-radius: .1rem;}
+.isseued_btn{ height: 1.2rem; padding: 0 .2rem; width: 100%;margin-top: -.2rem}
+/*队名*/
+.sele_team{background: #fff; padding:.3rem .2rem .2rem;position: relative;border-radius: .5rem;border-radius: .1rem .1rem 0 0}
+.sele_team em{display: block; width:.34rem; height: .34rem; background: url(../images/icon/close.png) no-repeat 0 0; position: absolute; right: .3rem; top: .3rem;background-size: .34rem auto;cursor: pointer;  }
+.sele_team .p_1{font-size: .36rem;margin-bottom: .1rem}
+.sele_team .p_2 span{color: #f7774a}
+/*竞猜*/
+.touzhu{border-top: 1px solid #ddd;padding: .3rem .2rem;}
+.touzhu_m{color: #666666; }
+.touzhu_m em{color: #333333; width: 2.2rem; height: .7rem;  border:1px solid #ddd; border-radius: .1rem;line-height: .7rem; text-align: center; display: inline-block; cursor: pointer;margin-left: .2rem;}
+.touzhu_m em.on{ background-color: #00af62;color: #fff;border: 1px solid #00af62 }
+.touzhu p{margin-top: .3rem;color: #999999}
+.touzhu p span{color: #eb0000}
+
+/*分享*/
+.sub_share{width:6rem;height: 6.4rem; margin:0 auto;background:url(../images/sub_sc.png) no-repeat left top;background-size: 6rem 6.4rem; z-index: 9999;position: absolute;left: 50%;top: auto;margin-left: -3rem;display: none;margin-top: 3.2rem }
+.sub_share #share_close{display: block; width: .7rem;height: .7rem; position: absolute; top: .3rem;right: .6rem}
+.sub_share .share_txt{margin-top: 1.2rem; text-align: center;font-size: .32rem}
+.sub_share .share_score{color: #fbcb23; font-size: .46rem;position: absolute;top: 2.06rem;right: 1.8rem;}
+.sub_share .share_con{margin-top: 1.4rem;margin-left: .6rem}
+.sub_share .share_con a{width: 2.3rem;height: 1rem;display: inline-block;}
+
+/*2016年11月15日 11:30:52;*/
+.jc_type{width: 90%;height: .7rem;border:1px solid #00b15d;margin:0 auto;border-radius: 2px;margin-top: .2rem;line-height: .68rem}
+.jc_type a{width: 50%;height: 100%;display: block;text-align: center;display: inline-block;float: left;}
+.jc_type a.on{background: #00b15d;color: #fff}
+.jc_type a i{background:url(../images/guess/yp.png) no-repeat left top;background-size: .26rem .26rem;width:.26rem;height: .26rem;display:inline-block;margin-right: .1rem }
+.jc_type a.on i{background:url(../images/guess/yp_on.png) no-repeat left top;background-size: .26rem .26rem;}
+.jc_type .jc i{background:url(../images/guess/jc.png) no-repeat left top;background-size: .26rem .26rem;}
+.jc_type .jc.on i{background:url(../images/guess/jc_on.png) no-repeat left top;background-size: .26rem .26rem;}
+
+.have_tip{font-size: .2rem}
+.have_tip i{color: red;font-style: normal;margin-left: .2rem}
+
+.td_tarea{text-align: right!important;background: #fff!important;height: auto!important}
+.td_title{text-align: center!important;height: .5rem!important;padding: .1rem 0}
+.percent{color: #9a9a9a}
+.percent td{padding:.05rem 0 .2rem 0}
+.percent td:first-child span{color: #ff7e00}
+.percent td:nth-child(2) span{color: #00b15d}
+.percent td:last-child span{color: #1490d8}
+
+
+
+.td_tarea{font-size: .24rem;color: #666;}
+
+.foot_tip{color:#999;text-align: center;margin:.1rem 0 .3rem 0}
+
+
+
+/*竞猜统计 内容*/
+.guess_count ul li{border:2px solid #ddd;margin-top: .2rem;border-radius: 5px;margin:.2rem;position: relative;}
+.guess_count .win,.guess_count .win_half,.guess_count .lose,.guess_count .lose_half,.guess_count .ping{top:2rem;}
+
+.gc_top{padding: .2rem;position: relative;}
+.gc_top .free{    width: 1.59rem;
+    height: .9rem;
+    background: url(../images/free_top.png) no-repeat left top;
+    background-size: 1.59rem .9rem;
+    position: absolute;
+    top: 0rem;
+    right: .4rem;}
+.gc_top img{float: left;width: .6rem;height: .6rem;border-radius: 50%;}
+.gct_right{padding-left: .2rem}
+.gct_right p:first-child{color: #333333;font-size: .30rem}
+.gct_right p{color: #999999;font-size: .24rem}
+.gct_right p span{color: #eb0000;padding-right: .1rem}
+
+.gc_bottom{border-top: 2px solid #ddd;padding: .1rem .2rem;line-height: .5rem;padding-right: 0;background: #fdfdf9}
+.gc_bottom span{float: left;margin-top:.03rem; }
+.gc_bottom em{margin-left: .11rem}
+/*.c_win{ width: .48rem; height: .48rem;background: url(../images/c_win.png) no-repeat left top; background-size:  .46rem  .46rem;display: block;float: left;}*/
+.c_win,.c_lose,.c_ping{ width: .48rem; height: .48rem; background: #EB0000; background-size: .46rem .46rem; display: block; float: left; border-radius: 50%; color: #fff; text-align: center; line-height: .48rem; }
+.c_lose{background-color: #C8C8C8}
+.c_ping{background-color: #1490D8}
+
+/*.c_ping{ width: .48rem; height: .48rem;background: url(../images/c_ping.png) no-repeat left top; background-size:  .46rem  .46rem;display: block;float: left;}*/
+.null{ width: .48rem; height: .48rem;background: #dbdbdb; border-radius: 50%; background-size:  .46rem  .46rem;display: block;float: left;}
+.gc_des{padding: .2rem;}
+.gold{ width: 3rem; height: .6rem;line-height: .63rem; background: #ff7e00;display: block;color: #fff; text-align: center; border-radius: 5rem;margin:0 auto; }
+.bg_green{background: #01af63!important}
+
+.gc_des p{line-height: 150%}
+.gc_des .p_4 span{color: #f7774a}
+.gc_des .p_5 span{color: #666666}
+
+.pic_new_title{ text-align: center;padding-top: .3rem;  padding-bottom: .1rem; }
+.pic_new_title img{width: 7.12rem; height: auto;margin: 0 auto}
+
+
+.descForm{position: fixed;top:15%;left: 2%;background:#fff;z-index:9999;width: 96%;border-radius: .1rem}
+.guess_close{width: .34rem;height: .34rem;float: right;}
+
+/*等级弹框*/
+.sm_img_dailog{position: absolute; top: 6%; right: 0rem; z-index: 9999; display: none; border-radius: .2rem; background: #fff; padding: .4rem; margin: 0 .2rem;}
+.sm_img_dailog .title_dailog { height: .8rem; line-height: .6rem; border-bottom: 1px solid #e5e5e5; margin-bottom: .3rem; font-size: .32rem; font-weight: bold;
+}

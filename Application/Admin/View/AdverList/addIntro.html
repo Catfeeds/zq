@@ -1,0 +1,58 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/saveIntro/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			<input type="hidden" value="31" name="class_id">
+			<div class="unit">
+				<label>广告标题：</label>
+				<input type="text" class="required"  name="title" value="{$vo.title}" size="30"/>
+			</div>
+			<div class="unit">
+				<label>广告平台：</label>
+				<select name="platform" class="required">
+					    <option value="">请选择</option>
+						<option value="1" <if condition="$vo.platform eq '1'">selected</if> >web</option>
+						<option value="2" <if condition="$vo.platform eq '2'">selected</if> >ios</option>
+						<option value="3" <if condition="$vo.platform eq '3'">selected</if> >安卓</option>
+						<option value="4" <if condition="$vo.platform eq '4'">selected</if> >m站</option>
+						<option value="5" <if condition="$vo.platform eq '5'">selected</if> >手机平台</option>
+						<option value="6" <if condition="$vo.platform eq '6'">selected</if> >全平台</option>
+				</select>
+			</div>
+			<div class="unit">
+				<label>排序：</label>
+				<input type="text" class="required" name="sort" value="{$vo.sort}" />
+			</div>
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft"  name="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+				</select>
+			</div>
+			<div class="unit">
+				<label>上架时间：</label>
+				<input type="text" class="date textInput readonly" datefmt="yyyy-MM-dd HH:mm" readonly="true" name="online_time" <if condition="$vo['online_time'] eq 0">value="<?php echo date('Y-m-d H:i',time());?>" <else /> value="{$vo['online_time']|date="Y-m-d H:i",###}"</if> />
+				<a class="inputDateButton" href="JavaScript:;">选择</a>
+			</div>
+			<div class="unit">
+				<label>下架时间：</label>
+				<input type="text" class="date textInput readonly" datefmt="yyyy-MM-dd HH:mm" readonly="true" name="end_time"  <if condition="$vo['end_time'] eq 0"> value="<?php echo date('Y-m-d H:i',time());?>"<else /> value="{$vo['end_time']|date="Y-m-d H:i",###}"</if>/>
+				<a class="inputDateButton" href="JavaScript:;">选择</a>
+			</div>
+			<div class="unit">
+			<label>广告语：</label>
+			<textarea maxlength="255" class="large bLeft" name="remark"  rows="3" cols="47">{$vo.remark}</textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+
+

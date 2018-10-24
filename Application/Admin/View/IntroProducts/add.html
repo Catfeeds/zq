@@ -1,0 +1,180 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id">
+			<if condition="in_array($_SESSION['authId'],C('RBAC_LOGIN_USER'))">
+				<div class="unit">
+					<label>产品名称：</label>
+					<input type="text" class="required"  name="name" value="{$vo.name}" size="30"/>
+				</div>
+				<if condition="$_REQUEST.id eq ''">
+					<div class="unit">
+						<label>所属分类：</label>
+						<select class="small bLeft required"  name="class_id">
+							<option value="">请选择</option>
+							<volist name="IntroClass" id="item">
+								<option <if condition="$item['id'] eq $vo['class_id']">selected</if> value="{$item.id}">{$item.name}</option>
+							</volist>
+						</select>
+					</div>
+				</if>
+	            <div class="unit">
+	                <label>发布者：</label>
+	                <select class="small bLeft required"  name="admin_id">
+	                    <option value="">请选择</option>
+	                    <volist name="adminArr" id="item">{$item['id']}
+	                        <option <if condition="$item['id'] eq $vo['admin_id']">selected</if> value="{$item.id}">{$item.nickname}</option>
+	                    </volist>
+	                </select>
+	            </div>
+				<div class="unit">
+					<label>推介描述：</label>
+					<textarea maxlength="255" class="large bLeft" name="desc"  rows="2" cols="57">{$vo.desc}</textarea>
+				</div>
+				<div class="unit">
+					<label>产品宣传语：</label>
+					<textarea maxlength="255" class="large bLeft" name="remark"  rows="2" cols="57">{$vo.remark}</textarea>
+				</div>
+				<div class="unit">
+					<label>限购数量：</label>
+					<input type="text" class="required digits" name="total_num" value="{$vo.total_num}" />
+				</div>
+				<div class="unit">
+					<label>自动添加虚拟购买数：</label>
+					<select class="small bLeft"  name="is_auto_pay">
+						<option <eq name="vo.is_auto_pay" value="0" >selected</eq> value="0">否</option>
+						<option <eq name="vo.is_auto_pay" value="1" >selected</eq> value="1">是</option>
+					</select>
+				</div>
+				<div class="unit">
+					<label>设置已预购数量：</label>
+					<input type="text" class="required digits" name="pay_num" value="{$vo.pay_num}" />
+				</div>
+				<if condition="$_REQUEST.id eq ''">
+					<div class="unit">
+						<label>销售价格：</label>
+						<input type="text" class="required digits" name="sale" value="{$vo.sale}" />
+					</div>
+					<div class="unit">
+						<label>推介包含几场比赛：</label>
+						<select class="small bLeft"  name="game_num">
+							<option <eq name="vo.game_num" value="1" >selected</eq> value="1">1场</option>
+							<option <eq name="vo.game_num" value="3" >selected</eq> value="3">3场</option>
+						</select>
+					</div>
+				</if>
+				<div class="unit">
+					<label>排序：</label>
+					<input type="text" class="required digits" name="sort" value="{$vo.sort}" />
+				</div>
+				<div class="unit">
+					<label>产品logo：</label>
+					<ul class="tabImg">
+						<li>
+							<input id="viewUploadInput_88" name="fileInput" type="file" onChange="previewImage(88)" style="display:none;" />
+							<a href="javascript:void(0);">
+								 <span id="viewUploadDiv_88">
+									<empty name="vo.logo">
+										<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_88"/>
+									<else/>
+										<if condition="pathinfo($vo['logo'], PATHINFO_EXTENSION) eq swf">
+											<embed width="80" height="80" id="viewUploadImg_88" wmode="opaque" type="application/x-shockwave-flash" src="{$vo.logo}">
+										<else/>
+										    <img id="viewUploadImg_88" width='80' height='80' border=0 src="{$vo.logo}">
+										</if>
+									</empty>
+								 </span>
+							</a>
+							<div id="poiter_88" class="poiter">
+								<empty name="vo.logo">
+									<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_88')">添加图片</a>
+								<else/>
+									<a title="删除" onclick="delPic({$vo.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_88')">重传</a>
+								</empty>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="unit">
+					<label>状态：</label>
+					<select class="small bLeft"  name="status">
+						<option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+						<option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+					</select>
+				</div>
+				<else/>
+				<div class="unit">
+					<label>产品宣传语：</label>
+					<textarea maxlength="255" class="large bLeft" name="remark"  rows="2" cols="57">{$vo.remark}</textarea>
+				</div>
+			</if>
+			<div class="unit">
+				<label>路径标识：</label>
+				<input type="text" class="required" name="path" value="{$vo.path}" />
+			</div>
+			<div class="unit">
+				<label>SEO标题：</label>
+				<textarea maxlength="100" class="large bLeft" name="seo_title"  rows="2" cols="59">{$vo.seo_title}</textarea>
+			</div>
+			<div class="unit">
+				<label>SEO关键词：</label>
+				<textarea maxlength="120" class="large bLeft" name="seo_keys"  rows="3" cols="59">{$vo.seo_keys}</textarea>
+			</div>
+			<div class="unit">
+				<label>SEO描述：</label>
+				<textarea maxlength="150" class="large bLeft" name="seo_desc"  rows="4" cols="59">{$vo.seo_desc}</textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+	$(function(){
+		$('.tabImg li').hover(function(e) {
+			$(this).children('div').stop().animate({'top':'0'},300);
+		},function(){
+			$(this).children('div').stop().animate({'top':'80px'},300);
+		});
+	});
+	function delPic(id){
+		if(confirm("确认要删除吗？") == false){
+			return false;
+		}
+		//异步执行删除
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/IntroProducts/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                	$("#viewUploadInput_88").val("");
+					$("#viewUploadImg_88").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+					var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_88')\">添加图片</a>";
+					$("#poiter_88").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+</script>
+
+
+
+

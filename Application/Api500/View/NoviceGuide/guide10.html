@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta charset="UTF-8">
+	<title>全球体育网</title>
+	<!-- jquery -->
+    <script type="text/javascript" src="__PUBLIC__/Api/NoviceGuide/js/jquery-1.11.1.min.js"></script>
+
+	<!-- 引入公共样式 -->
+    <link rel="shortcut icon" href="__PUBLIC__/Api/NoviceGuide/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/NoviceGuide/css/base.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/NoviceGuide/css/common.css">
+	<!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Api/NoviceGuide/js/htmlwidth.js"></script>
+
+	<!-- 本页需要引用的js -->
+    <script type="text/javascript" src="__PUBLIC__/Mobile/js/swiper.js"></script>
+    <script type="text/javascript">
+	$(function(){
+		//banner 切换
+		var swiper = new Swiper('.swiper-container', {
+			pagination: '.swiper-pagination',
+			paginationClickable: true,
+			spaceBetween: 30,
+			centeredSlides: true,
+			autoplayDisableOnInteraction: false,
+		});
+	})
+    </script> 
+    
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__PUBLIC__/Mobile/css/swiper.css">
+    <link rel="stylesheet" href="__PUBLIC__/Api/NoviceGuide/css/guide/guide.css">
+</head>
+<body>
+	<section class="swiper-con">
+   		<!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="height: auto;">
+                	<header id="other_header">
+                        <a href="__MODULE__/Index/noviceGuide"></a>体育资讯
+                    </header>
+                    <h2 class="title_notice">包含五大联赛、中超、欧冠、NBA、CBA、集锦、图片等专栏频道点击右边“+”图标可调整首页栏目频道</h2>
+					<a href="javacript:;"><img src="__PUBLIC__/Api/NoviceGuide/images/app-guide/09-1.jpg"></a>
+                </div>
+                <div class="swiper-slide" style="height: auto;">
+                	<header id="other_header">
+                        <a href="__MODULE__/Index/noviceGuide"></a>体育资讯
+                    </header>
+                    <h2 class="title_notice">手指按住具体频道可拖动调整排序</h2>
+					<a href="javacript:;"><img src="__PUBLIC__/Api/NoviceGuide/images/app-guide/09-2.jpg"></a>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination swiper-pagination-second"></div>
+        </div>
+	</section>
+</body>
+	<!-- 公共js -->
+    <script type="text/javascript" src="__PUBLIC__/Api/NoviceGuide/js/common.js"></script>
+</html>

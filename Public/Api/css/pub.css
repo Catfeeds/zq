@@ -1,0 +1,31 @@
+/**
+ * 大数据APP帮助中心
+ *
+ * @author Weiqianqian <1937025663@qq.com>
+ *
+ * @since  2017-12-28 
+**/
+
+body ,html{background: #f2f3f7;height:100%;}
+.container{width:100%; padding:.39rem .38rem;}
+.container dl{padding:.0rem .0rem;}
+.tit{padding:.3rem .0rem;}
+.container dt{color:#4d4d4d;font-weight:bold;}
+.container dl dd{text-indent:.6rem; padding-top: .3rem; color:#666666; line-height: 24px;}
+.container dl:nth-child(2){padding:.5rem .0rem;}
+.container dl:nth-child(2) dd{ text-indent: 0;color:#808080;padding:.2rem .0rem;}
+.explain{position:fixed; width:100%; padding:.3rem .35rem; bottom:0; left:0;}
+.explain p{text-indent:0.6rem; color:#999999;}
+
+.figure{ text-align: center; margin-top: .6rem;}
+.figure img{ width: 60%; pointer-events: none;}
+
+
+
+
+
+
+
+
+
+

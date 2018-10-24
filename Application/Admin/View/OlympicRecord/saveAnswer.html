@@ -1,0 +1,53 @@
+<style>
+	#table tr{
+		height: 35px;
+	}
+</style>
+<div class="pageContent">
+	<form method="post" action="__URL__/saveAnswer" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="{$vo.id}" />
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>赛事名称：</label>
+				<span class="textInput">{$vo.union_name}</span>
+			</div>
+
+			<div class="unit">
+				<label>竞猜标题：</label>
+				<span class="textInput">{$vo.title}</span>
+			</div>
+
+			<div class="unit">
+				<label>目前竞猜：</label>
+				<span class="textInput">{$vo.title_answer}</span>
+			</div>
+
+			<div class="unit">
+				<label>修改为：</label>
+				<!-- <table width="400" id='table'>
+					<volist name="vo.question" id="item">
+						<tr>					
+							<td style="width: 30px;"><input type='radio' name='answer' <if condition="$vo['answer'] eq $item['id']">checked</if>></td>
+							<td>
+								{$item.title}
+							</td>	
+						</tr>
+					</volist>
+				</table> -->
+				<volist name="vo.question" id="item">
+					<input type="radio" name="answer_id" value="{$item.id}" <if condition="$vo['answer_id'] eq $item['id']">checked</if> />{$item.title}&nbsp;&nbsp;
+				</volist>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

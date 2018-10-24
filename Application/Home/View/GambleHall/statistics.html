@@ -1,0 +1,249 @@
+<extend name="Public:layout"/>
+<block name="seo">
+    <title>{$gameArr.home_team_name|switchName=0,###}vs{$gameArr.away_team_name|switchName=0,###}_足彩推荐_足彩预测_足球推荐_全球体育</title>
+    <meta name="keywords" content="竞彩推荐市场、足球推荐推荐、亚盘心水分析、足球推荐、足球竞彩、足彩推荐、亚盘推荐、亚盘推荐、竞彩推荐分析"/>
+    <meta name="description" content="全球体育推荐王擂台是专业提供足球预测推荐分析和免费参与足球篮球推荐的体育彩票网站、特别邀请足球、分析名家每日原创足彩预测、亚盘推荐和竞彩分析、是广大球迷和彩民必选的足彩推荐网站"/>
+</block>
+<block name="css">
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__CSS__/quiz_hall/qh_common.css">
+    <link rel="stylesheet" href="__CSS__/quiz_hall/statistics.css">
+</block>
+<block name="content">
+<div class="con-main" sytle="border: 1px solid #0f0;">
+    <div class="guess_content clearfix">
+        <include file="Public:top_gamble"/>
+        <!-- 统计 s -->
+        <div class="tongji">
+            <!-- 比分 s-->
+            <div class="t_core">
+                <div class="team_name">
+                    <img src="{$gameArr.home_logo}" alt="{$gameArr.home_team_name|switchName=0,###}">
+                    <p>{$gameArr.home_team_name|switchName=0,###}</p>
+                </div>
+                <div class="tc_main">
+                    <div class="p4" style="background:{$gameArr.union_color}">{$gameArr.union_name|switchName=0,###}</div>
+                        <p class="p2">{$gameArr.gtime|date="Y-m-d H:i",###}</p>
+                        <switch name="gameArr.game_state">
+                            <case value="0|-10|-11|-12|-13|-14">
+                                <p class="p2">{:C('game_state')[$gameArr['game_state']]}</p>
+                            </case>
+                            <case value="-1|1|2|3|4">
+                                <if condition="!in_array($gameArr['game_state'],[1,3])">
+                                    <p class="text-success">{:C('game_state')[$gameArr['game_state']]}</p>
+                                <else />
+                                    <time class="text-danger">{$gameArr['game_half_time']|showGameTime=###,$gameArr['game_state']}</time><img src="__PUBLIC__/Home/images/common/in.gif">
+                                </if>
+                                <p class="p3">{$gameArr['score']}</p>
+                                <p class="p5">
+                                    <if condition="$gameArr['game_state'] neq 1 && $gameArr['game_state'] neq 2">({$gameArr.half_score})</if>
+                                </p>
+                            </case>
+                        </switch>
+                    </div>
+                <div class="team_name fr">
+                    <img src="{$gameArr.away_logo}" alt="{$gameArr.union_name|switchName=0,###}">
+                    <p>{$gameArr.away_team_name|switchName=0,###}</p>
+                </div>
+            </div>
+            <!-- 推荐 -->
+            <notempty name="news">
+                <div class="tj_tuij">
+                    <a target="_blank" href="{:U('info_n/'.$news['id'].'')}">资讯推荐：{$news.title}</a>
+                </div>
+            </notempty>
+            <div class="play_type clearfix">
+                <ul>
+                    <li>
+                        <a href="{:U('/statistics/'.$gameArr['game_id'].'/1@jc')}" <if condition="$Think.get.play_type eq 1 or $Think.get.play_type eq ''"> class="on" </if>>
+                            <p><em></em></p>
+                            <p>让球</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:U('/statistics/'.$gameArr['game_id'].'/-1@jc')}" <if condition="$Think.get.play_type eq -1"> class="on" </if>>
+                            <p><em></em></p>
+                            <p>大小</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:U('/statistics/'.$gameArr['game_id'].'/2@jc')}" <if condition="$Think.get.play_type eq 2"> class="on" </if>>
+                            <p><em></em></p>
+                            <p>胜平负</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:U('/statistics/'.$gameArr['game_id'].'/-2@jc')}" <if condition="$Think.get.play_type eq -2"> class="on" </if>>
+                            <p><em></em></p>
+                            <p>让球胜平负</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="t_show">
+                <if condition="$Think.get.play_type eq 1 or $Think.get.play_type eq ''">
+                    让球（<if condition="$gameArr.fsw_exp lt 0">受</if>{$gameArr.fsw_exp|abs|handCpSpread}）
+                    <else/>
+                    大小（{$gameArr.fsw_ball|handCpTotal}）
+                </if>
+            </div>
+            <div class="t_content clearfix">
+                <ul class="con-list clearfix">
+                <notempty name="QuizUser">
+                <volist name="QuizUser" id="item">
+                    <li class="list-li">
+                        <div class="infor-con clearfix">
+                            <div class="pull-left face">
+                                <a target="_blank" href="{:U('/userindex/'.$item['user_id'].'')}">
+                                    <img src="{$item.face}" width="100" height="100">
+                                </a>
+                            </div>
+                            <div class="pull-left face-infor">
+                                <ul>
+                                    <li class="re-li user-name">
+                                        <a class="uname_a" target="_blank" href="{:U('/userindex/'.$item['user_id'].'')}">
+                                            <strong>{$item.nick_name}</strong>
+                                            <span class="myIcon level lv{$item.lv}"></span>
+                                            <em title="该用户已参与今日推荐"></em>
+                                        </a>
+                                        <span class="plus">粉丝：</span>
+                                        <span>{$item.FollowNumber}</span>
+                                        <if condition="$userId neq $item['user_id']">
+                                            <if condition="in_array($item['user_id'],$followIds)">
+                                                <a href="javascript:;" class="fan-ate btn-default" onclick="cancelFollow({$item.user_id},'statistics',this);" title="已关注">已关注</a>
+                                            <else/>
+                                            <a href="javascript:;" class="fan-ate btn-orange" onclick="addFollow({$item.user_id},'statistics',this);" title="+关注">+关注</a>
+                                            </if>
+                                        </if>
+                                    </li>
+                                    <li class="re-li">
+                                        <span class="even01 text-8a">当前连胜：
+                                        <em class="text-red">{$item.Winning.curr_victs}</em></span>
+                                    </li>
+                                    <li class="re-li">
+                                        <div class="ten" style="font-size:13px">
+                                            <span class="text-8a">近10场：</span>
+                                            <volist name="item.tenArray" id="item2">
+                                                <switch name="item2">
+                                                    <case value="1"><em class="text-red">胜</em></case>
+                                                    <case value="0.5"><em class="text-red">胜半</em></case>
+                                                    <case value="2"><em class="text-8a">平</em></case>
+                                                    <case value="-1"><em class="text-green">负</em></case>
+                                                    <case value="-0.5"><em class="text-green">负半</em></case>
+                                                </switch>
+                                            </volist>
+                                        </div>
+                                    </li>
+                                    <li class="re-li">
+                                        <div class="week clearfix">
+                                            <div class="pull-left title text-8a">周胜率：
+                                                <em class="text-red ml">{$item.weekWin}%</em></div>
+                                            <div class="pull-left title text-8a" style="margin-left: 10px;">月胜率：
+                                                <em class="text-red ml">{$item.monthWin}%</em></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <!-- 金币购买显示状态 s-->
+                                <if condition="$item.result neq 0 or $item.user_id eq is_login() or $item.is_check neq NULL">
+                                    <div class="st_count">
+                                        <div class="stc_left fl">
+                                            <em class="<if condition='$item.tradeCoin eq 0'>free</if>"></em>
+                                            <p>推荐情况：
+                                                <em>{$item.Answer}</em>
+                                                &nbsp;&nbsp;&nbsp;盘口：<span style="color: red">{$item.handcp}</span>
+                                                &nbsp;&nbsp;&nbsp;赔率：<span style="color: red">({$item.odds})</span>
+                                            </p>
+                                            <p class="fenxi q-two">独家分析：
+                                            <notempty name="item.desc">
+                                                <span>
+                                                    <span>{$item.desc|msubstr=###, 0 ,85}</span>
+                                                    <if condition="mb_strlen($item['desc'],'utf-8') gt 85">
+                                                        <a href="javascript:;" class="guess_view" desc="{$item.desc}">展开详情</a>
+                                                    </if>
+                                                </span>
+                                            <else/>
+                                                <span style="color: #8a8a8a">暂无分析</span>
+                                            </notempty>
+                                            </p>
+                                        </div>
+                                    </div>
+                                <else/>
+                                    <!-- 金币购买显示状态 s-->
+                                    <div class="st_count">
+                                        <div class="stc_left fl"> 
+                                            <p>推荐情况：<em>购买后显示</em></p>
+                                            <p>独家分析：<em>购买后显示</em></p>
+                                        </div>
+                                        <div class="stc_right fl <if condition="$item.tradeCoin gt 0">txt_gold</if>">
+                                            <a href="javascript:;" page_type="statistics" onclick="payment(this,{$item.id},{$item.tradeCoin})">
+                                            <if condition="$item.tradeCoin eq 0">
+                                                免费
+                                            <else/>
+                                                <span>{$item.tradeCoin}</span>金币
+                                            </if>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </if>
+                                <if condition="$item.result neq 0">
+                                <div class="game-result">
+                                    <switch name="item.result">
+                                        <case value="1"><img src="__IMAGES__/quiz_hall/win.png" width="40" height="40"></case>
+                                        <case value="0.5"><img src="__IMAGES__/quiz_hall/win.png" width="40" height="40"></case>
+                                        <case value="2"><img src="__IMAGES__/quiz_hall/tie.png" width="40" height="40"></case>
+                                        <case value="-1"><img src="__IMAGES__/quiz_hall/lose.png" width="40" height="40"></case>
+                                        <case value="-0.5"><img src="__IMAGES__/quiz_hall/lose.png" width="40" height="40"></case>
+                                    </switch>
+                                </div>
+                                </if>
+                                <!-- 金币购买显示状态 e-->
+                            </div>
+                        </div>
+                    </li>
+                </volist>
+                <else/>
+                    <div style="height: 150px;text-align: center;">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <p>没有用户参与推荐哦！<a href="{:U('/football@jc')}"><i class="icon-arrow-right text-tie"> 去推荐大厅</i></a></p>
+                    </div>
+                </notempty>
+                </ul>
+                
+            </div>
+        </div>
+        <!--页码开始-->
+        <div class="page-con" style="text-align: center;">
+           <nav>
+                <ul class="pagination">
+                    <if condition="$pageCount gt 1">{$show}</if>
+                </ul>
+           </nav>
+        </div>
+    </div>
+</div>
+</block>
+<block name="js">
+    <script>
+        //$('.list-li:nth-child(2n)').css('float','right')
+        //展开和隐藏
+        $('.guess_view').click(function(){
+            var s_val  = $(this).prev().text();
+            var g_val  = $(this).attr('desc');
+            var g_html = $(this).html();
+            $(this).prev().html(g_val);
+            $(this).attr('desc',s_val);
+            if(g_html=='展开详情'){
+                $(this).parents('.list-li').addClass('h_auto');
+                $(this).html('收起');
+            }else{
+                $(this).parents('.list-li').removeClass('h_auto');
+                $(this).html('展开详情');
+            }
+        });
+    </script>
+    <!--引入本页js-->
+    <script type="text/javascript" src="__JS__/common/follow.js"></script>
+    <script type="text/javascript" src="__JS__/common/trade.js"></script>
+</block>

@@ -1,0 +1,44 @@
+/**
+ * 公共css样式文件
+ * 
+ * @author  Weiqianqian <1937025663@qq.com>
+ *
+ * @since  2018-03-07
+**/
+
+html,body{ width: 100%; height: 100%;}
+
+
+/* load gif */
+.paged{ width: 100%; text-align: center; margin-top: .2rem;}
+.paged .load_gif img { width: .3rem; vertical-align: middle;}
+.paged a{ width: 100%; display: inline-block; font-size: .24rem;}
+.paged a:hover{color: #fff;}
+
+/* return-top */
+/*.return-top { position: fixed; left: 85%; top: 75%; display: none;}
+.return-top a { display: block; width: 48px; height: 48px; background: #e32332; color: #fff; text-align: center; font-size: 12px; padding-top: 5px;}
+.return-top a:hover { background: #e32332;}
+.return-top a .ft_bg{display: block; height: 22px;  background: url(../images/common/icon-return-top.png) no-repeat center center; margin-bottom: 2px;}
+*/
+/* Reset swiper of css */
+/*.swiper-pagination-bullet{ background: #fff; opacity: 1;}
+.swiper-pagination-bullet-active{ background: #ff4b4b;}*/
+
+/*导航*/
+.ALL li{ list-style-type: none; float: left;}
+/* wrapCon */
+.wrapCon{ padding-top: 0rem;}
+.wrapCon .plus{ width: 7%; padding: .1rem; background-color: #0a94e4;}
+.wrapMain{ padding: .2rem;}
+/*data-nav*/
+.n_module{height: .9rem;line-height: .7rem; background: #fff; border-bottom: 1px solid #eeeeee; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+ width: 100%; float: left;}
+.nav_list{margin: 0 auto;}
+.nav_list a{ font-size: .28rem; color: #666666; display: block; float: left; text-align: center; height: .91rem;}
+.nav_list03 a{ padding: .1rem 1.3rem .2rem 1.3rem;}
+.nav_list04 a{ width: 25%;}
+.nav_list05 a{ width: 20%;}
+.nav_list a.on{color: #0a94e4;/* border-bottom: 2px solid #0a94e4;*/}
+
+

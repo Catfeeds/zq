@@ -1,0 +1,83 @@
+/**
+ * @author Weiqianqian <1937025663@qq.com>
+ *
+ * @since  2018-03-08
+ * 
+**/
+
+/*banner*/
+.banner-w{ height: 3.9rem; width: 100%; padding: 0; margin: 0;}
+.b{ width: 100%; top: 0; left: 0;}
+.banner-w img{ width: 100%; padding: 0; margin: 0; margin-left: 0rem; height: 4rem; min-height: 4rem;}
+.banner-w .thirdly{ text-align: center; position: absolute; width: 100%; margin-top: -54px; color: #fff; padding: .3rem .2rem .3rem .4rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; background: -webkit-gradient(linear,1% 1%,1% 100%,color-stop(0,rgba(0,0,0,0)), color-stop(0.3,rgba(0,0,0,0.1)), color-stop(1,rgba(0,0,0,0.6)) ); z-index: 99;}
+.banner-w .thirdly span{ width: 94%; overflow: hidden; display: block; white-space: nowrap; text-overflow: ellipsis;}
+.banner-w .ban{ bottom: 0; left: 0; height: 40px; padding-top: 30px;}
+.banner-w .ban .swiper-pagination-bullet-active{ background-color: #fff; width: .22rem;}
+.banner-w .ban span{ border-radius: 0%; width: .1rem; height: .06rem; background-color: #c9caca;}
+.live{ background-color: #ffff; width: 100%; padding:0 4rem 0 0rem; font-size: .18rem; border-bottom: .18rem solid #f5f5f5;}
+.live-top{ float: left; padding: .14rem 0 .08rem 0;  width: 30%; margin-bottom: .1rem; font-size: .18rem;}
+.live a{ float: left; font-size: .18rem; background-color: #fff; width: 3.3rem; border: 1px solid #dedede; border-radius: 5px; margin-top: 2px; padding-bottom: .1rem; margin-left: 10px; margin-bottom: .1rem;}
+.prompt{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .18rem; text-align: center; width: 100%; height: .6rem; line-height: .6rem; color: #999;}
+.left-live{ text-align: center; width: 1rem; height: 1.2rem; float: left;}
+.left-live img{ max-width: .54rem; max-height: .6rem; line-height: .6rem;}
+.left-live p{ width: 1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; height: .6rem; line-height: .6rem;}
+
+.middle-live{ width: 1.2rem; height: 1.2rem; text-align: center; float: left ; padding: .1rem 0 .1rem 0; font-size: .24rem; color: #e32000;}
+.middle-live .l-i{ color: #fff; border-radius: .4rem; background-color: #e32000; width: .6rem; margin-left: .3rem; margin-top: .26rem; font-size: .18rem;}
+.middle-live-l{ width: 1.2rem; height: 1.2rem; text-align: center; float: left ; padding: .1rem 0 .1rem 0; font-size: .24rem; color: #4c4c4c;}
+.middle-live-l .l-t{ color: #fff; border-radius: .4rem; background-color: #b7b7b7; width: .6rem; margin-left: .3rem; margin-top: .26rem; font-size: .18rem;}
+
+
+.right-live{ width: 1rem;  height: 1.2rem; text-align: center; float: left;}
+.right-live img{ max-width: .54rem; max-height: .6rem; line-height: .6rem; }
+.right-live p{ width: 1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; height: .6rem; line-height: .6rem;}
+/*tabs-content 英超*/
+.premier-box{  width: 100%; padding: 0 .2rem .1rem .2rem; background-color: #fff;}
+.premier li{ border-bottom: 1px solid #eee; padding: .2rem 0 .2rem 0;}
+.left-part{ width: 66%; float: left; padding: .1rem .4rem .1rem 0; }
+.left-part h2{font-size: 17px; line-height: 26.5px; min-height: 1rem; font-weight: 300; overflow: hidden; word-break:break-all; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; font-family: "PingFangSC-Medium", "Source Han Sans CN", sans-serif; text-align: justify;}
+.hot img{ width: .2rem; margin-right: .1rem;line-height: .4rem;}
+.Tit-t{ font-size: .22rem; color: #999; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: .4rem; line-height: .4rem;}
+.Tit-t span{ font-size: .22rem;}
+.Tit-t .y-c{ background-color: #f00; background-color: #ef6a6a; border-radius: .1rem; margin-left: .1rem; color: #fff; font-size: .16rem; padding: 1px 4px 1px 4px;}
+.right-part{float: left; width: 34%;}
+.right-part img{width: 2.4rem; height: 1.54rem;}
+
+.pictrue{ width: 100%;}
+.nom{width: 3.4rem; float: left; position: relative;}
+.nom img{ width: 3.4rem; height: 2.25rem;}
+.one{ margin-right: .24rem;}
+
+.explain{ font-size: .24rem; color: #fff; top: 0rem; right: 0rem; width: .8rem; height: .5rem; line-height: .4rem; float: left; position: absolute; text-align: center; background-color: rgba( 0,0,0,0.5);}
+.explain span{ padding-right: .1rem;}
+.explain span img{ width: .2rem; height:auto; }
+h3{  font-weight: 300; display: block; position: absolute; top: 1.85rem; width: 100%; font-size: .24rem; height: .4rem; line-height: .4rem; background-color: rgba(0,0,0,0.5); color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 .1rem 0 .1rem;}
+/*广告*/
+.advertisements{ height: 1.4rem; float: left; width: 100%; padding: 0 0rem; margin-bottom: .2rem;}
+.advertisements img{ height: 1.4rem; width: 100%;}
+.adv img{ height: 1.1rem;}
+/*list*/
+.list{ height: 1.32rem; width: 100%; padding:0 6.1rem 0 .2rem; margin-top: .16rem; border-bottom: 1px solid #eee;}
+.list .percent{ height: 1.32rem; text-align: center; margin: 0 .1rem 0 .1rem;}
+.list .percent a{ width: .6rem; height: 1rem; padding-top: .05rem;}
+.list .percent a img{ width: auto; height: .4rem; margin-top: .1rem; max-width: .55rem; margin-bottom: 10px;}
+.list .percent a span{font-size: .28rem; color: #999;}
+/*点击查看更多*/
+.more{ width: 100%; text-align: center; padding: .3rem .1rem; background-color: #fff; float: left; border-bottom: .01rem solid #eee;}
+.more span{ font-size: .28rem; color:#0a94e4;}
+.more img{ width: .12rem; margin-left: .1rem; height: 1.1rem;}
+/*刷新*/
+.foot-discuss{ position: fixed; right: .2rem; bottom: 4.1rem; z-index: 999; width: .8rem; height: .8rem;}
+.foot-discuss a{ display: block;}
+.foot-discuss img{ width: .8rem; height: .8rem; pointer-events: none;}
+
+/*返回顶部*/
+.backtop{ position: fixed; right: .2rem; bottom: 3.1rem; z-index: 999;  width: .8rem; height: .8rem;}
+.backtop a{ display: block;}
+.backtop img{ width: .8rem; height: .8rem; pointer-events: none;}
+
+h2 {font-size: .34rem; font-weight: 300; line-height:.5rem; color: #333;}
+
+/*反馈*/
+.return-top a{ width: .8rem; height: .8rem; line-height: .6rem; margin-left: 13px;}
+.click_number img{ width: .3rem ; height: .2rem; margin-left: .1rem; margin-bottom: 4px;}

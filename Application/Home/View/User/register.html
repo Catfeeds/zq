@@ -1,0 +1,244 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/login/register.css">
+</block>
+<block name="content">
+<include file="Public:top_user"/>
+<div class="home">
+    <!-- 注册表单内容开始 -->
+    <div class="form-main">
+        <div class="form-nav">
+            <ul class="clearfix">
+                <li class="li1 cur1">手机注册</li>
+                <li class="ml li2">输入用户信息</li>
+                <li class="ml li3">完成注册</li>
+            </ul>
+        </div>
+        <div class="form-con">
+            <div class="con clearfix">
+                <div class="pull-left form" style="width: 324px">
+                    <form  action="#" method="post">
+                        {:get_form_token()}
+                        <div class="form-in clearfix">
+                            <div class="pull-left input-name">输入手机号：</div>
+                            <div class="pull-left input-con input-position-relative">
+                                <input token="{$token}" id="phone" class="form-control required mobile" name="mobile" type="text" placeholder="手机号" data-msg-required="请输入手机号"/>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="form-in clearfix pull-left">
+                                <div class="pull-left input-name">手机验证码：</div>
+                                <div class="pull-left input-con input-position-relative captcha">
+                                    <input id="ranks" class="form-control required" name="captcha" type="text" placeholder="手机验证码" data-msg-required="请输入手机验证码"/>
+                                </div>
+                            </div>
+                            <div class="pull-left reanks-con">
+                                <a href="javascript:;" onclick="sendMobileMsg();" class="btn btn-orange"><span id="sendMobileBtn"></span>发送验证码</a>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="form-in clearfix pull-left">
+                                <div class="pull-left input-name">图文验证码：</div>
+                                <div class="pull-left input-con input-position-relative captcha">
+                                    <input id="verify" class="form-control required" name="verify" type="text" style="width: 220px;" placeholder="图文验证码" data-msg-required="请输入图文验证码"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="form-in clearfix pull-left">
+                                <div class="pull-left input-name"></div>
+                                <div class="pull-left reanks-con">
+                                  <img id="verifyImg" src="/Public/verify/" onclick="fleshVerify()" border="0" alt="点击刷新图文验证码" style="cursor:pointer;width: 220px;margin-bottom: 10px;" align="absmiddle">
+                              </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="checkbox" style="margin-left: 100px;">
+                                <label>
+                                    <input type="checkbox" checked id="agree">我已阅读并接受<a target="_blank" href="{:U('Copyright/service')}" class="text-green">《全球体育服务协议》</a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="reg-btn clearfix form-in">
+                            <input type="submit" class="btn btn-orange pull-right" value="下一步" id="btn"/>
+                        </div>
+                        <div class="haven pull-right">
+                            <p style="font-size:12px;">已有账号，<a href="{:U('User/login')}" class="text-orange">马上登录！</a></p>
+                        </div>
+                        <p class="login_tip">您也可以使用以下账号登录</p>
+                        <div class="else_login">
+                            <a href="{:U('User/sdk_login',['type'=>qq])}" target="_blank;"><img src="__IMAGES__/login/qq.png" >QQ登录</a>
+                            <a href="{:U('User/sdk_login',['type'=>sina])}" target="_blank;"><img src="__IMAGES__/login/sina.png" >微博登录</a>
+                            <a href="{:U('User/sdk_login',['type'=>weixin])}" target="_blank;"><img src="__IMAGES__/login/wx.png" >微信登录</a>
+                        </div>
+                        <input id="deviceID" class="form-control required" name="deviceID" type="text" style="display:none;"/>
+                    </form>
+                </div>
+                <div class="pull-right clearfix">
+                    <div class="ew-ma"><img src="__IMAGES__/login/ew-ma.jpg" width="264" height="264"></div>
+                    <div class="ew-nioce">
+                        <p>扫二维码，下载全球体育APP<br/>随时获取最新信息！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 注册表单内容结束 -->
+</div>
+</block>
+<block name="js">
+  <!--<script src="__JS__/common/gt.js"></script>-->
+  <!--引入store插件-->
+  <script type="text/javascript" src="__PUBLIC__/Plugs/store/store.js"></script>
+  <script type="text/javascript">
+    //生成uuid
+    var uuid = '';
+    if(store('registerUuid') == undefined)
+    {
+        uuid = getUuid();
+        store('registerUuid',uuid);
+    }else{
+        uuid = store('registerUuid');
+    }
+    $('#deviceID').val(uuid);
+
+    $(function(){
+      $("form").validate({
+        onkeyup : false,
+        rules: {
+          mobile : {
+            remote: {
+              url: "/User/checkMobile.html",
+              type: "post",
+              data: {
+                fieldValue: function() {
+                return $( "#phone" ).val();
+                },
+              }
+            }
+          },
+        },
+        messages : {
+          mobile : {
+            remote : '该手机号码已经注册，请更换',
+          },
+        },
+        submitHandler:function(form){
+              if($("#agree").is(':checked')==false){
+                _alert("提示","您必须同意注册协议！");
+                return;
+              }
+              var form = $(form);
+              var data = form.serialize();
+              $.ajax({
+                  type: "POST",
+                  url: "/User/register.html",
+                  data: data,
+                  success: function(data){
+                    if(data.status){
+                      window.location.href="/User/infor.html";
+                    }else{
+                      _alert('温馨提示',data.info);
+                    }
+                  }
+              });
+          }
+      });
+    })
+    /**
+   * 发送手机验证码
+   *
+  */
+  function sendMobileMsg(){
+    var mobile = $('#phone').val();
+    //验证手机
+    if(mobile == ""){
+      _alert('温馨提示',"请输入手机号码！");
+      return false;
+    }
+    if (!/^1[3456789]{1}\d{9}$/.test(mobile)){
+      _alert('温馨提示',"手机号码格式不正确，请重新输入！");
+      return false;
+    }
+    var token = $("input[name='token']").val();
+
+    $.ajax({
+      url: "/User/sendMobileMsg.html",
+      type:'post',
+      data:{token:token,'mobile':mobile,'msgType':'registe'},
+      dataType: "json",
+      beforeSend:function(XMLHttpRequest)
+        {
+          $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>正在发送…").removeAttr("onclick").attr("disabled","disabled");
+        },
+      success: function(data){
+        if(data.status){
+          _alert('温馨提示',data.info);
+          daojishi(60);
+          return;
+        }else{
+          $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>获取验证码").attr("onclick",'sendMobileMsg()').removeAttr("disabled");
+          _alert('温馨提示',data.info);
+        }
+      }
+    });
+  }
+  /**
+   * 倒计时
+  */
+  function daojishi(S){
+    if (S>0){
+      var S = S-1;
+      $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>秒后重发").removeAttr("onclick").attr("disabled","disabled");
+      $("#sendMobileBtn").html(S);
+      setTimeout("daojishi("+S+")",1000);
+      return;
+    } else {
+      $("#sendMobileBtn").parent().html("<span id='sendMobileBtn'></span>获取验证码").attr("onclick",'sendMobileMsg()').removeAttr("disabled");
+    }
+  }
+
+  //验证码部分
+//    var handler = function (captchaObj) {
+//        captchaObj.appendTo('#captcha');
+//        captchaObj.onReady(function () {
+//            $("#wait").addClass('hide').removeClass('show');
+//        });
+        // $('#btn').click(function () {
+        //     var result = captchaObj.getValidate();
+        //     if (!result) {
+        //         _alert('温馨提示',"请完成验证！");
+        //         return false;
+        //     }
+        // })
+        // 更多接口说明请参见：http://docs.geetest.com/install/client/web-front/
+//        window.gt = captchaObj;
+//    };
+
+    // $('#btn').click(function () {
+    //     $.ajax({
+    //         url: "/User/RegVerification.html",
+    //         type:'post',
+    //         dataType: "json",
+    //         success: function(data){
+    //             if(data.info)
+    //             {
+    //                 _alert('温馨提示',data.info);
+    //             }
+    //         }
+    //     });
+    // });
+    function fleshVerify(type){
+        //重载验证码
+        var timenow = new Date().getTime();
+        // if (type){
+        //     $('#verifyImg').attr("src", '__URL__/verify/adv/1/'+timenow);
+        // }else{
+        //     $('#verifyImg').attr("src", '__URL__/verify/'+timenow);
+        // }
+        $('#verifyImg').attr('src', '/Public/verify/'+timenow);
+    }
+
+  </script>
+</block>

@@ -1,0 +1,25 @@
+<!-- common 赛事筛选 s -->
+<!-- <div id="maskLayer"></div> 遮罩层 -->
+<section class="zhishu_event clearfix" id="zhishu_event" style="background:url(__IMAGES__/s_bg.png) repeat; padding-bottom: .2rem"> 
+    <nav class="subnav_level clearfix">
+        <a href="javascript:;" >一级</a>
+        <a href="javascript:;" >二级</a>
+        <a href="javascript:;" >三级</a>
+    </nav>
+    <nav class="subnav_list clearfix">
+            <volist name='league' id='v' key="k">
+                    <volist name='v' id='vo'>
+                        <a id="schetype{$key}" href="javascript:;" data-level="{$k}"  data-key='{$key}' class='leagus{$k-1} <in name="key" value="$chioce">on</in>'>{$vo}</a>
+                    </volist>
+            </volist>
+    </nav>
+</section>
+<section class="nav_sele boxs" id="nav_sele">
+    <div class="ns_l">隐藏 <span id='shai_hide'></span></div>
+    <div class="ns_r">
+            <a href="javascript:;" id="sele_confirm">确定</a>
+            <a href="javascript:;" id="sele_cancel">取消</a>
+        <a href="javascript:;" id="sele_all">全选</a>
+        <a href="javascript:;" id="sele_all_no">不全选</a></div>
+</section>
+<!-- common 赛事筛选 e -->

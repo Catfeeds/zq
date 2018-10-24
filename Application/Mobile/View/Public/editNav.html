@@ -1,0 +1,66 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+
+    <title>频道拖动</title>
+
+    <link rel="apple-touch-icon" href="__PUBLIC__/Api/images/app-logo.png">
+    <link rel="shortcut icon" href="__PUBLIC__/Home/images/icon/16X16.ico">
+    <!-- jquery -->
+    <script type="text/javascript" src="__JS__/jquery-1.11.1.min.js"></script>
+    <!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__JS__/htmlwidth.js"></script>
+    <!--引入store插件-->
+    <script type="text/javascript" src="__PUBLIC__/Plugs/store/store.js"></script>
+    <!-- 引入公共样式 -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/editNav/base.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/editNav/common.css">
+
+</head>
+
+<body>
+<!-- 页面所需css -->
+<link rel="stylesheet" type="text/css" href="__CSS__/editNav/index.css">
+
+<!-- 头部 -->
+<header class="header">
+    <ul>
+        <li class="f-l">
+            <ul class="photos">
+                <li><img src="__IMAGES__/logo.png"></li>
+            </ul>
+        </li>
+    </ul>
+</header>
+<!-- 二级头部 -->
+<div class="second clearfix">
+    <ul>
+        <li><span class="text-center">频道管理</span></li>
+        <li><a href="{$backUrl}"><img src="__IMAGES__/jia.png"></a></li>
+    </ul>
+</div>
+<!-- 内容部分 -->
+<div class="container">
+    <div class="channel">
+        <ul>
+            <li class="left-l">切换频道</li>
+            <li class="right-r"><a class="editButton">编辑</a></li>
+        </ul>
+    </div>
+    <div class="cut">
+        <ul class="showArea"></ul>
+    </div>
+    <div class="channel">
+        <ul>
+            <li class="left-t">点击添加更多频道</li>
+            <li class="right-r"><a></a></li>
+        </ul>
+    </div>
+    <div class="cut">
+        <ul class="hiddenArea"></ul>
+    </div>
+</div>
+<script type="text/javascript" src="__JS__/editNav/editNav.js"></script>
+</body>
+</html>

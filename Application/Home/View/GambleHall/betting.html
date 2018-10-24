@@ -1,0 +1,287 @@
+<extend name="Public:layout"/>
+<block name="seo">
+    <title>足球竞彩推荐_全球体育网</title>
+    <meta name="keywords" content="足球竞猜推荐,足球推荐,竞彩足球预测,足球分析"/>
+    <meta name="description" content="全球体育推荐王足球频道为您提供足球最新预测,足球数据分析,足球竞彩赛事推荐等数据！"/>
+</block>
+<block name="css">
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__CSS__/quiz_hall/qh_common.css?v=20180815">
+    <link rel="stylesheet" href="__CSS__/quiz_hall/myScroll/jquery.mCustomScrollbar.css">
+</block>
+<body>
+<block name="content">
+    <div class="con-main">
+      <!-- 推荐内容 s -->
+      <div class="guess_content">
+         <include file="Public:top_gamble"/>
+         <div class="guessHead clearfix">
+            <div class="pull-left typeBox">
+                <div class="matchType clearfix thisType">
+                    <a href="{:U('@jc')}">
+                        <i class="iconZq"><img src="__IMAGES__/quiz_hall/football.png" alt="足球推荐" /></i>足球推荐
+                    </a>
+                    <div class="matchType clearfix tabType">
+                        <a href="{:U('/basketball@jc')}">
+                            <i class="iconLq"><img src="__IMAGES__/quiz_hall/basketball.png" alt="篮球推荐" /></i>篮球推荐
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="pull-left pankouBox">
+                <a href="{:U('@jc')}">亚盘</a><a href="{:U('/betting@jc')}" class="on">竞彩</a>
+            </div>
+            <div class="pull-right ex_pay clearfix">
+                <div class="head pull-left"><a href="javascript:;"><img src="{$userInfo.head|frontUserFace}"></a></div>
+                <div class="show_gold pull-left">
+                    <a href="javascript:;">
+                        <p class="name text-fff">{$userInfo.nick_name|default='--'}</p>
+                        <p><span class="userPoint">金币：{$userInfo.coin|default=0}</span><span class="userScore">积分：{$userInfo.point|default=0}</span></p>
+                    </a>
+                </div>
+            </div>
+         </div>
+         <div class="matchHead clearfix">
+            <div class="pull-left all"><a id="showAll" href="javascript:;">显示全部</a></div>
+            <div class="pull-left eventChoose">
+                <a href="javascript:;">赛事筛选</a>
+                <div class="box-list">
+                    <div class="btn-con clearfix">
+                        <input type="button" id="checkAll" class="btn btn-green pull-left" value="全选">
+                        <input type="button" id="removeAll" class="btn btn-green pull-left" value="反选" style="margin-left: 20px;" >
+                        <input type="button" class="btn closed btn-default pull-right" value="关闭">
+                    </div>
+                    <div class="menu_list">
+                        <form action="" class="form">
+                            <ul class="clearfix">
+                            <volist name="union" id="vo">
+                                <li>
+                                    <label class="inline"><input type="checkbox" value="{$vo.union_id}" checked="checked" value="1">
+                                        <em class="changeLang" langName="{$vo.union_name}">{$vo.union_name|switchName=cookie('lang'),###}</em>
+                                        <span>({$vo.union_num})</span>
+                                    </label>
+                                </li>
+                            </volist>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="pull-left hideMac">（共{:count($game)}场，隐藏 <span>0</span> 场）</div>
+            <div class="pull-left language">
+                <form action="" class="form">
+                    <div class="form_inline">
+                        <label class="radio-inline">
+                            <input type="radio" name="lang" value="0" <if condition="I('cookie.lang') eq 0">checked</if>/>
+                             简体
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="lang" value="1" <if condition="I('cookie.lang') eq 1">checked</if>>
+                            繁体
+                        </label>
+                    </div>
+                </form>
+            </div>
+         </div>
+         <div class="g_content_main">
+            <table class="tb_guess table" width="100%" cellpadding="0" cellspacing="0">
+                <tbody id="game_table">
+                    <tr class="tr_title">
+                        <th>时间</th>
+                        <th></th>
+                        <th>赛事</th>
+                        <th width="5%"></th>
+                        <th>主队</th>
+                        <th></th>
+                        <th>客队</th>
+                        <th>竞彩玩法</th>
+                        <th>数据</th>
+                    </tr>
+                    <volist name="game" id="vo">
+                        <tr gameid="{$vo.game_id}" unionid="{$vo.union_id}">
+                            <td class="g_td_1">
+                                <p>{$vo.gtime|date='m/d',###}</p>
+                                <p>{$vo.gtime|date='H:i',###}</p>
+                            </td>
+                            <td class="g_td_2 bet_code"><p>{$vo.bet_code|mb_substr=###,0,2,'utf-8'}</p><p>{$vo.bet_code||mb_substr=###,2,5,'utf-8'}</p> </td>
+                            <td class="g_td_3 union_name">
+                                <em style="background: {$vo.union_color}" class="changeLang" langName="{$vo.union_name}">{$vo.union_name|switchName=cookie('lang'),###}</em>
+                            </td>
+                            <td class="g_td_4 status" status="{$vo.game_state}">
+                                <switch name="vo.game_state">
+                                    <case value="0|-10|-11|-12|-13|-14">
+                                        <span class="wentStatus <if condition="$vo['game_state'] neq 0">red</if>">
+                                            {:C('game_state')[$vo['game_state']]}
+                                        </span>
+                                    </case>
+                                    <case value="-1|1|2|3|4|5">
+                                        <span class="wentStatus red">
+                                            <if condition="!in_array($vo['game_state'],[1,3])">
+                                                {:C('game_state')[$vo['game_state']]}
+                                            <else />
+                                                <time>{$vo['game_half_time']|showGameTime=###,$vo['game_state']}</time><img src="__PUBLIC__/Home/images/common/in.gif">
+                                            </if>
+                                        </span>
+                                    </case>
+                                </switch>
+                            </td> 
+                            <td class="g_td_5">
+                                <p><img src="{$vo.homeTeamLogo}" class="lazy" title="{$vo.home_team_name|switchName=0,###}"/></p> 
+                                <p class="home_team_name">
+                                    <em class="changeLang" langName="{$vo.home_team_name}">{$vo.home_team_name|switchName=cookie('lang'),###}</em>
+                                </p> 
+                            </td>
+                            <td class="td_score">
+                                <switch name="vo.game_state">
+                                    <case value="-1|1|2|3|4|5">
+                                        <div class="game_score">
+                                            <p class="all_score red">
+                                                {$vo['score']}
+                                            </p>
+                                            <if condition="$vo['game_state'] gt 1">
+                                                <p class="half_score gold">({$vo.half_score})</p>
+                                            </if>
+                                        </div>
+                                    </case>
+                                    <default/>
+                                        <div class="game_score">
+                                            <p class="all_score blue">VS</p>
+                                            <p class="half_score gold"></p>
+                                        </div>
+                                </switch>
+                            </td>
+                            <td class="g_td_5">
+                                <p><img src="{$vo.awayTeamLogo}" class="lazy" title="{$vo.away_team_name|switchName=0,###}"/></p> 
+                                <p class="away_team_name">
+                                    <em class="changeLang" langName="{$vo.away_team_name}">{$vo.away_team_name|switchName=cookie('lang'),###}</em>
+                                </p> 
+                            </td>
+                            <td class="g_td_6 odds_change" reverse="{$vo.is_reverse}">
+                                <div class="odds odds_asia">
+                                    <ul playTypeVal='2'>
+                                      <li class="rangq">0</li>
+                                      <li><a href="javascript:;" class="gamble" choseSideVal="1">胜 <span class="home_odds">{$vo.home_odds}</span></a></li>
+                                      <li><a href="javascript:;" class="gamble" choseSideVal="0">平 <span class="draw_odds">{$vo.draw_odds}</span></a></li>
+                                      <li><a href="javascript:;" class="gamble" choseSideVal="-1">负 <span class="away_odds">{$vo.away_odds}</span></a></li> 
+                                    </ul>
+                                </div>
+                                <div class="odds odds2 odds_asia">
+                                    <ul playTypeVal='-2'>
+                                      <li class="rangq rangq2 let_exp">{$vo.let_exp}</li>
+                                      <li><a href="javascript:;" class="gamble" choseSideVal="1">胜 <span class="home_letodds">{$vo.home_letodds}</span></a></li>
+                                      <li><a href="javascript:;" class="gamble" choseSideVal="0">平 <span class="draw_letodds">{$vo.draw_letodds}</span></a></li>
+                                      <li><a href="javascript:;" class="gamble" choseSideVal="-1">负 <span class="away_letodds">{$vo.away_letodds}</span></a></li> 
+                                    </ul>
+                                </div>
+                            </td>
+                            <td class="g_td_7">
+                                <div class="g_data">
+                                    <ul>
+                                        <li><a target="_blank" href="{:U('/ypOdds@bf',['game_id'=>$vo['game_id'],'sign'=>1])}">亚</a></li>
+                                        <li><a target="_blank" href="{:U('/eur_index@bf',['game_id'=>$vo['game_id']])}">欧</a></li>
+                                        <li>
+                                            <if condition="$vo.game_state eq 0">
+                                                <a href="{:U('/dataFenxi@bf',['game_id'=>$vo['game_id']])}" target="_blank">析</a>
+                                            <else/>
+                                                <a href="{:U('/event_technology@bf',['game_id'=>$vo['game_id']])}" target="_blank">析</a>
+                                            </if>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="g_data g_data_foot">
+                                    <ul>
+                                        <li><a target="_blank" href="{:U('/gambleDetails@bf',['game_id'=>$vo['game_id'],'play_type'=>2])}">高手推荐</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </volist>
+                </tbody>
+            </table>
+         </div>
+      </div>
+      <!-- 推荐内容 e -->
+      <div class="modal mySelect ditai04 fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="margin-top: 10%;margin-left: 38%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                    <span class="mach_name union_name" style="color:#5b8ae9;"></span>
+                    <em class="team_name"></em>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <dl class="clearfix dl_list">
+                        <dt class="pull-left">玩法类型：</dt>
+                        <dd class="pull-left">
+                            <span class="playType"></span>
+                            <em class="text-red" style="margin-left: 42px;"> 
+                                <span class="choseSide"></span>    
+                                <span class="handcp"></span>（<span class="_odds"></span>）
+                            </em>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix dl_list">
+                        <dt class="pull-left">推荐积分：</dt>
+                        <dd class="pull-left">
+                            <div class="radio-con">
+                                <span class="selet">
+                                    <input type="radio" id="type1" name="point" value="0" checked/>
+                                    <label class="" for="type1">{$gameConf.norm_point}积分 </label>
+                                </span>
+                            </div>
+                        </dd>
+                    </dl>
+                    <div class="text-555" style="padding-left:0px; margin-bottom: 10px;">
+                        <span class="text-red">温馨提示：</span>
+                        {$gameConf.norm_point}积分：剩余<span class="normLeftTimes text-red"> {$normLeftTimes} </span>场
+                    </div>
+                    <dl class="dl_list">
+                        <dt style="margin-bottom: 10px;">独家分析：</dt>
+                        <dd style="width:440px;">
+                            <div class="textarea_wap">
+                                <textarea class="textarea desc" <gt name="gameConf.gamble_desc" value="0">placeholder="{$gameConf.gamble_desc_tip}"</gt>></textarea>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dl_list">
+                        <dt style="margin-bottom: 10px; width:auto;" class="clearfix">
+                            <span class="pull-left">推荐价格：</span> 
+                            <a href="javascript:;" class="pull-right int">说明<div class="leve"></div></a>
+                        </dt>
+                        <dd style="width:440px;">
+                            <ul class="price_ul clearfix tradeCoin">
+                            <volist name="gameConf.userLv" id='item'>
+                                <li><a value="{$item.letCoin}" href="javascript:;" class="<if condition='$lv egt $key'>odd<else/>text-999</if> <if condition='$key eq $lv'>on default-coin</if>"><if condition='$key neq 0'>{$item.letCoin}金币<else/>免费</if> <em></em></a></li>
+                            </volist>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <!-- 按钮 -->
+                    <div class="btn-con">
+                        <button type="button" class="btn btn-orange" id="makeGamble">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                    <input type="hidden" class="game_id" value="">
+                </div>
+            </div>
+      </div>
+
+    </div>
+
+</block>
+</body>
+<block name="js">
+    <script type="text/javascript">
+        var sprScore = {:json_encode(C('score'),JSON_UNESCAPED_UNICODE)};
+        var gambleList = {:json_encode($gambleList)};
+        var mqHost = window.location.protocol == 'https:'? 'wss://'+'{$mqttOpt.ssl_host}'+':8084':'ws://'+'{$mqttOpt.host}'+':8083';
+        var mqUser = JSON.parse('{$mqttUser|json_encode}');
+    </script>
+    <script type="text/javascript" src="__STATIC__/score/js/mqtt.min.js"></script>
+    <script type="text/javascript" src="__JS__/common/cookie.js"></script>
+    <script type="text/javascript" src="__STATIC__/score/js/mqttConnect.js"></script>
+    <script type="text/javascript" src="__JS__/GambleHall/betting.js?v=20180822"></script>
+    <script type="text/javascript" src="__CSS__/quiz_hall/myScroll/jquery.mCustomScrollbar.concat.min.js"></script>
+
+</block>

@@ -1,0 +1,112 @@
+<include file="Public:header"/>
+
+<!--引入本页所需css-->
+<link rel="stylesheet" href="__PUBLIC__/Home/css/personal_center/account_list.css">
+
+<body>
+    <!-- 顶部开始 -->
+    <include file="Public:top"/>
+    <!-- 顶部结束 -->
+
+    <div class="body">
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <div class="data-graph account-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="{:U('UserAccount/details')}" <eq name="Think.ACTION_NAME" value="details">class="current"</eq>>账户明细</a></li>
+                                    <li role="presentation"><a href="{:U('UserAccount/wait_details')}" <eq name="Think.ACTION_NAME" value="wait_details">class="current"</eq>>待结算明细</a></li>
+                                </ul>
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div id="account" class="line-graph clearfix">
+                                        <div class="select-con">
+                                            <strong>待结算总金币：<span class="text-orange">{$income}</span></strong>
+                                        </div>
+                                        <notempty name="list">
+                                        <div class="account-list">
+                                             <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr class="table-header">
+                                                        <th>序号</th>
+                                                        <th>比赛时间</th>
+                                                        <th>推荐赛事</th>
+                                                        <th>玩法</th>
+                                                        <th>推荐</th>
+                                                        <th>购买人数</th>
+                                                        <th>收入</th>
+                                                        <th>状态</th>
+                                                    </tr>
+                                                    <volist name="list" id="vo" key="k">
+                                                        <tr <if condition="$k % 2 != 0">class="one" <else /> class="two" </if>>
+                                                            <td>{$k}</td>
+                                                            <td>{$vo.game_date|strtotime|date='Y-m-d',###} {$vo.game_time}</td>
+                                                            <td>{$vo.gameType}&nbsp;【{$vo.home_team_name|switchName=0,###} <span class="text-orange">VS</span> {$vo.away_team_name|switchName=0,###}】</td>
+                                                            <td class="text-orange">
+                                                                {$vo['playDesc']}
+                                                            </td>
+                                                            <td>{$vo.Answer|msubstr=###,0,5,'utf-8'}</td>
+                                                            <td>{$vo.quiz_number}</td>
+                                                            <td>{$vo.income}</td>
+                                                            <td>待结算</td>
+                                                        </tr>
+                                                    </volist>
+                                                </tbody>
+                                            </table>
+                                            <!--页码开始-->
+                                            <div class="page-con">
+                                                <nav>
+                                                    <ul class="pagination pull-right">
+                                                        {$show}
+                                                        <li><input class="isTxtBig" type="text" value="{$_REQUEST.p|default=1}" name="p"></li>
+                                                        <li id="GO"><a href="javascript:void(0)">GO</a></li>
+                                                    </ul>
+                                                    <div class="pull-right">共有{$totalCount}条，每页显示：{$numPerPage}条</div>
+                                                </nav>
+                                            </div>
+                                            <!--页码结束-->
+                                        </div>
+                                        <else/>
+                                            <p>没有明细记录哦</p>
+                                        </notempty>
+                                    </div>
+                                </div>
+                                <!-- Tab panes -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+</body>
+</html>
+<script>
+//绑定a标签
+$("#GO").find("a").bind("click", function(){
+    var p = $("input[name='p']").val();
+    if (isNaN(p)) {
+
+    } else if (p>0){
+        var dateType = $(".form-control").val();
+        window.location.href="/UserAccount/wait_details/p/"+p+".html";
+    }
+});
+</script>

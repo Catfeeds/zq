@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="no" id="fullscreen" />
+    <meta name="format-detection" content="telephone=no" />
+	<meta name="keywords" content="" />
+
+    <meta name="description" content="" />
+	<title>全球体育网</title>
+	<!-- jquery -->
+    <script type="text/javascript" src="__PUBLIC__/Api/NoviceGuide/js/jquery-1.11.1.min.js"></script>
+
+	<!-- 引入公共样式 -->
+    <link rel="shortcut icon" href="__PUBLIC__/Api/NoviceGuide/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/NoviceGuide/css/base.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Api/NoviceGuide/css/common.css">
+	<!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Api/NoviceGuide/js/htmlwidth.js"></script>
+
+	<!-- 本页需要引用的js -->
+    <script type="text/javascript">
+	$(function(){
+		$('.nav-ul li a').click(function(e) {
+			$(this).parent('li').addClass('on').siblings().removeClass('on');
+			<!-- $(this).parent('li').siblings().removeClass('on') -->
+            var num = $(this).attr('num');
+            var url = "__MODULE__/Index/noviceGuideJump?num="+num;
+
+            setTimeout(function(){
+                window.location.href = url;
+            }, 1000);
+		});
+
+        $('.jumpBack').click(function() {
+            window.location.href = 'jumpBack:';
+        });
+	})
+    </script> 
+    
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__PUBLIC__/Api/NoviceGuide/css/guide/guide.css">
+</head>
+<body>
+	<header id="other_header">
+        <a href="javascript:void(0);" class="jumpBack"></a>
+    </header>
+	<section class="nav-con">
+   		<ul class="nav-ul clearfix">
+   			<li class="nav-item nav-item-top-left">
+            	<a href="javascript:void(0);" num="1">
+                	<p>如何注册</p>
+                </a>
+            </li>
+            <li class="nav-item nav-item-p2 nav-item-top-center">
+            	<a href="javascript:void(0);" num="2">
+                	<p>如何</p>
+                    <p>查看推荐</p>
+                </a>
+            </li>
+            <li class="nav-item nav-item-top-right">
+            	<a href="javascript:void(0);" num="3">
+                	<p>排行榜奖励</p>
+                </a>
+            </li>
+            <li class="nav-item nav-item-p2 nav-item-center-left">
+            	<a href="javascript:void(0);" num="4">
+                	<p>如何</p>
+                    <p>发布推荐</p>
+                </a>
+            </li>
+            <li class="nav-item nav-item-p2 nav-item-center">
+            	<a href="javascript:void(0);" num="5">
+                	<p>球王</p>
+                    <p>猛料保赢</p>
+                </a>
+            </li>
+            <li class="nav-item nav-item-p2 nav-item-center-right">
+            	<a href="javascript:void(0);" num="6">
+                	<p>如何</p>
+                    <p>查看分析</p>
+                </a>
+            </li>
+            <li class="nav-item nav-item-bottom-left">
+            	<a href="javascript:void(0);" num="7">
+                	<p>关于金币</p>
+                </a>
+            </li>
+            <li class="nav-item">
+            	<a href="javascript:void(0);" num="8">
+                	<p>比赛直播</p>
+                </a>
+            </li>
+            <li class="nav-item nav-item-bottom-right">
+            	<a href="javascript:void(0);" num="9">
+                	<p>关于积分</p>
+                </a>
+            </li>
+   		</ul>
+	</section>
+</body>
+	<!-- 公共js -->
+    <script type="text/javascript" src="__PUBLIC__/Api/NoviceGuide/js/common.js"></script>
+</html>

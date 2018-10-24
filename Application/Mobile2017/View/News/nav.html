@@ -1,0 +1,22 @@
+<div id="nav-smartSetup" class="ui-navigator navFixed" >
+    <ul class="ui-navigator-list">
+        <li><a <if condition="($class_id eq 10)">class="cur"</if> href='{:U("/list_n/10")}'>独家</a></li>
+        <li><a <if condition="($class_id eq 54)">class="cur"</if> href='{:U("/list_n/54")}'>竞彩</a></li>
+        <li><a <if condition="($class_id eq 55)">class="cur"</if> href='{:U("/list_n/55")}'>北单</a></li>
+        <li><a <if condition="($class_id eq 62)">class="cur"</if> href='{:U("/list_n/62")}'>秘笈</a></li>
+        <li><a <if condition="$class_id eq 'girl'">class="cur"</if> href='{:U("/list_n/girl")}'>美女</a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    // 使用另一个库的 $ 的代码
+    $(function () {
+        /*组件初始化js begin*/
+        Zepto('#nav-smartSetup').navigator();
+        //smart setup方式创建 推荐方式
+        //计算固定定位的高度加添padding-top值
+        var uiNavHight = $('.ui-navigator').outerHeight(true),
+            headerHight = $('#header').outerHeight(true)*1,
+            news_hotP = uiNavHight + headerHight;
+        $('.news_hot').css({'padding-top': news_hotP + 'px'});
+    });
+</script>

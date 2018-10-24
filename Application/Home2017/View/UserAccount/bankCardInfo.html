@@ -1,0 +1,100 @@
+<include file="Public:header"/>
+
+<!--引入本页所需css-->
+<link rel="stylesheet" href="__PUBLIC__/Home/css/personal_center/drawing_money.css">
+
+<body>
+    <!-- 顶部开始 -->
+    <include file="Public:top"/>
+    <!-- 顶部结束 -->
+
+    <div class="body">
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <div class="data-graph draw-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation">
+                                        <a href="{:U('UserAccount/extract')}" >提款</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <if condition="$user.bank_card_id neq ''">
+                                           <a href="javascript:void(0);" class="current">绑定银行卡</a>
+                                        <else/>
+                                            <a href="{:U('UserAccount/bindBankCard')}">绑定银行卡</a>
+                                        </if>
+                                    </li>
+                                    <li role="presentation">
+                                        <if condition="$alipay_id neq ''">
+                                           <a href="javascript:void(0);" class="current">绑定支付宝</a>
+                                        <else/>
+                                            <a href="{:U('UserAccount/bindAlipay')}">绑定支付宝</a>
+                                        </if>
+
+                                    </li>
+
+                                </ul>
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <!-- 绑定银行卡开始 -->
+                                    <div id="bind" class="line-graph clearfix">
+                                        <div class="banded-list">
+                                            <!--银行已绑定开始-->
+                                            <div class="suc"></div>
+                                            <notempty name="alipay_id">
+                                                <dl class="clearfix">
+                                                    <dt class="pull-left">支付宝账号：</dt>
+                                                    <dd class="pull-left">{$alipay_id}</dd>
+                                                </dl>
+                                            </notempty>
+                                            <notempty name="user">
+                                                <dl class="clearfix">
+                                                    <dt class="pull-left">开户银行：</dt>
+                                                    <dd class="pull-left">{$user.bank_name}</dd>
+                                                </dl>
+                                                <dl class="clearfix">
+                                                    <dt class="pull-left">开户省份：</dt>
+                                                    <dd class="pull-left">{$user.bank_region}</dd>
+                                                </dl>
+                                                <dl class="clearfix">
+                                                    <dt class="pull-left">银行卡号：</dt>
+                                                    <dd class="pull-left">{$user.bank_card_id|mb_substr=###,0,4,'utf-8'} **** **** **** {$user.bank_card_id|mb_substr=###,-4,4,'utf-8'}</dd>
+                                                </dl>
+                                                <dl class="clearfix">
+                                                    <dt class="pull-left">真实姓名：</dt>
+                                                    <dd class="pull-left">{$user.true_name}</dd>
+                                                </dl>
+                                            </notempty>
+
+                                            <!--银行已绑定结束-->
+                                        </div>
+                                    </div>
+                                    <!-- 绑定银行卡结束 -->
+                                </div>
+                                <!-- Tab panes -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer"/>
+    <!-- 底部版权信息结束 -->
+</body>
+</html>

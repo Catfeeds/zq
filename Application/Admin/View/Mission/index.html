@@ -1,0 +1,107 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+    <input type="hidden" name="type" value="{$_REQUEST.type}" />
+    <div class="searchBar">
+
+        <ul class="searchContent">
+
+            <li>
+                <if condition='$_REQUEST.type eq 1'>
+                    <label>宝箱名称：</label>
+                <else/>
+                    <label>成就名称：</label>
+                </if>
+                <input name="name" value="{$_REQUEST.name}" type="text"/>
+
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="add" href="__URL__/edit/type/{$_REQUEST.type}" target="dialog" mask="true" title="{$vo.name}新增" height="400" ><span>新增</span></a>
+            </li>
+            <li>
+                <a class="edit" href="__URL__/edit/id/{sid_mission}/type/{$_REQUEST.type}" target="dialog" mask="true"  title="{$vo.name}编辑"  height="400"><span>编辑</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th style="width: 10px; cursor: default;">
+
+            </th>
+            <th width="30" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+            <if condition='$_REQUEST.type eq 1'>
+                <th width="80">宝箱名称</th>
+            <else/>
+                <th width="80">成就名称</th>
+            </if>
+
+            <th width="50">排序</th>
+            <th width="50">积分</th>
+            <th width="50">图片</th>
+            <if condition='$_REQUEST.type eq 1'>
+                <th width="100">今日任务完成(次)</th>
+            <else/>
+                <th width="100">解锁成功人数(人)</th>
+            </if>
+            <if condition='$_REQUEST.type eq 1'>
+                <th width="100">积累任务完成(次)</th>
+            </if>
+
+            <th width="50">状态</th>
+            <th width="50">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist id="vo" name="list">
+            <tr target="sid_mission" rel="{$vo['id']}">
+                <td style="width: 10px;">
+                    <div>
+                        <input type="checkbox" value="{$vo.id}" name="id">
+                    </div>
+                </td>
+                <td>{$vo['id']}</td>
+                <td>{$vo['name']}</td>
+                <td>{$vo['sort']}</td>
+                <td>{$vo['points']}</td>
+                <td><a target="_blank" href="{$vo['img']}"><img  width="30" height="30" src="{$vo['img']}"/></a></td>
+                <td>
+                    <if condition='$_REQUEST.type eq 1'>
+                        {$vo['todayNum']|default=0}
+                    <else/>
+                        {$vo['AllNum']|default=0}
+                    </if>
+                </td>
+                <if condition='$_REQUEST.type eq 1'>
+                    <td>{$vo['AllNum']|default=0}</td>
+                </if>
+                <td>{$vo['status']|getStatus}</td>
+                <td>
+                    {$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",''} |
+                    <a href="__URL__/edit/id/{$vo.id}/type/{$_REQUEST.type}" target="dialog" mask="true" title="{$vo.name}编辑" rel="editPage" height="400">编辑</a>
+                </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+
+</div>
+
+

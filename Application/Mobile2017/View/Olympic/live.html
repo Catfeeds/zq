@@ -1,0 +1,93 @@
+<extend name="Public/Olympic/base" />
+<block name="seo">
+    <title>2016里约奥运会赛事直播_全球体育网</title>
+</block>
+<block name="append">
+    <link rel="stylesheet" href="__CSS__/Olympic/swiper_banner.css"> 
+      <link href="http://vjs.zencdn.net/5.10.7/video-js.css" rel="stylesheet">
+  <!-- If you'd like to support IE8 -->
+  <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+</block>
+<block name="content">
+    <!-- 视频 s-->
+    <section class="schedule_show">
+
+        <div class="pt_tool pt_tool_guess video_tree">
+            <ul> 
+                <li class="on"><a href="javascript:;"><img src="__PUBLIC__/Mobile/images/Olympic/live.png" alt="直播">{$tv[0]} &nbsp;<img src="__PUBLIC__/Mobile/images/Olympic/show.png" id="cgtype" alt=""></a>
+                    <div>
+                        <a href="{:U('',[type=>1])}">CCTV5</a>
+                        <a href="{:U('',[type=>2])}">广东体育</a>
+                        <a href="{:U('',[type=>3])}">欧洲足球</a>
+                    </div>
+                </li>
+                <li><a href="{:U('video')}"><img src="__PUBLIC__/Mobile/images/Olympic/video.png" alt="视频">视频</a></li> 
+            </ul>
+        </div> 
+ 
+
+
+        <!-- 直播 -->
+        <div class="live">
+<!--            <video style="width:100%; height:5rem;" poster="__PUBLIC__/Mobile/images/Olympic/live_img.jpg" controls>
+                <source src="{$tv[1]}" type="application/vnd.apple.mpegurl"  />  
+                <p class="warning">Your browser does not support HTML5 video.</p>  
+            </video> -->
+              <video id="my-video" class="video-js" controls preload="auto" style="width:100%; height:5rem;" poster="__PUBLIC__/Mobile/images/Olympic/live_img.jpg" data-setup="{}">
+              <source src="{$tv[1]}" type='application/vnd.apple.mpegurl'>
+              <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a web browser that
+                <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+              </p>
+            </video>
+        </div>
+
+
+        <div class="matchCon">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td width="25%">时间</td>
+                        <td width="20%">类型</td>
+                        <td width="35%">项目</td>
+                        <td width="20%">赛事</td>
+                    </tr>
+                </thead>
+                <tbody id="js-tbody">
+                <volist name='list' id='v'>
+                    <tr>
+                        <td class="fs24">{$v.game_time}</td>
+                        <td class="fs24">{$v.game_type}</td>
+                        <td class="fs24">{$v.game_name}</td>
+                        <td class="fs24">{$v.run_name}</td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!-- 视频 e-->
+</block>
+<block name='scripts'>
+    <!-- 公共js -->
+    <script type="text/javascript" src="__JS__/Olympic/common.js"></script>
+    <script src="__JS__/Olympic/swiper_banner.js"></script>   
+    <script src="http://vjs.zencdn.net/5.10.7/video.js"></script>
+  <script src="__JS__/videojs-live.js"></script>
+    <script>
+        $(function () {
+            //金牌快讯
+            var swiper = new Swiper('.swiper-container-teacher', {
+                direction: 'vertical',
+                autoplay: 2500
+            }); 
+            //直播选择
+            $(".video_tree ul li").click(function(){ 
+               $(this).children("div").stop().fadeToggle(200,function(){ 
+               var $imgSrc = $(".video_tree ul li img").eq(1);
+                $imgSrc.attr("src") == "__PUBLIC__/Mobile/images/Olympic/show.png" ? $imgSrc.attr("src","__PUBLIC__/Mobile/images/Olympic/hide.png") : $imgSrc.attr("src","__PUBLIC__/Mobile/images/Olympic/show.png");   
+              }); 
+            });
+        });
+    </script>
+</block>

@@ -1,0 +1,99 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li style="width: auto;margin-right: 25px;">
+                    <label>抽奖时间：</label>
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="11">至
+                    <input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="11">
+                </li>
+                <li>
+                    <label style="width: 100px;">手机号&nbsp;/ &nbsp;昵称：</label>
+                    <input name="username_nickname" value="{$_REQUEST.username_nickname}" type="text" placeholder="用户名、昵称"/>
+                </li>
+                <li>
+                    <label>奖品：</label>
+                    <select name="prize_id" class="combox"  onchange="$(form).submit()">
+                        <option value="" selected>全部</option>
+                        <option value="1" <if condition="$_REQUEST.prize_id eq '1'">selected</if> >iphone6S(128G)</option>
+                        <option value="2" <if condition="$_REQUEST.prize_id eq '2'">selected</if> >恒大7月VIP门票</option>
+                        <option value="3" <if condition="$_REQUEST.prize_id eq '3'">selected</if> >联通/电信100,移动70M</option>
+                        <option value="4" <if condition="$_REQUEST.prize_id eq '4'">selected</if> >行车记录仪</option>
+                        <option value="5" <if condition="$_REQUEST.prize_id eq '5'">selected</if> >2000积分</option>
+                        <option value="6" <if condition="$_REQUEST.prize_id eq '6'">selected</if> >移动/电信30,联通50M</option>
+                        <option value="7" <if condition="$_REQUEST.prize_id eq '7'">selected</if> >1000积分</option>
+                        <option value="8" <if condition="$_REQUEST.prize_id eq '8'">selected</if> >欧洲杯官方T恤</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="10%">ID</th>
+            <th width="25%">用户名（昵称）</th>
+            <th width="25%">奖品</th>
+            <th width="10%">是否已领取</th>
+            <th width="30%" <if condition="($_REQUEST._order eq '') or ($_REQUEST._order neq 'add_time')"> class="desc"</if> orderField="add_time" <if condition="$_REQUEST._order eq 'add_time'">class="{$_REQUEST._sort}"</if>>抽奖时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name='list'>
+            <volist name='list' id='vo'>
+                <tr target="sid_record" rel="{$vo['id']}">
+                    <td>{$vo['id']}</td>
+                    <td>{$vo['username']|is_show_mobile}（{$vo.nick_name}）</td>
+                    <td>
+                        <switch name="vo.prize_id">
+                            <case value='1'>iphone6S(128G)</case>
+                            <case value='2'>恒大7月VIP门票</case>
+                            <case value='3'>联通/电信100,移动70M</case>
+                            <case value='4'>行车记录仪</case>
+                            <case value='5'>2000积分</case>
+                            <case value='6'>移动/电信30,联通50M</case>
+                            <case value='7'>1000积分</case>
+                            <case value='8'>欧洲杯官方T恤</case>
+                        </switch>
+                    </td>
+                    <td><if condition="$vo.status eq 1">
+                        <div style="color: blue">是</div>
+                    <else/>
+                        <div style="color: red">
+                        <a style="color: red;" href="__URL__/resume/id/{$vo.id}" target="ajaxTodo" title="你确定要设为已领取吗？" warn="请选择用户">否</a>
+                        </div>
+                    </if>
+                    </td>
+                    <td>{$vo['add_time']|date="Y-m-d H:i:s",###}</td>
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+</table>
+
+<include file="Public:pagerNum" />
+
+
+</div>
+
+
+
+
+

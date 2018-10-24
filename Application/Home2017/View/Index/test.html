@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/reset.css">
+    <link rel="stylesheet" href="__PUBLIC__/Plugs/bootstrap/css/bootstrap.css" >
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/common.css">
+</head>
+<body>
+    <!-- 顶部开始 -->
+    <div class="top">
+        <div class="top-head">
+            <div class="top-head-in">
+                <div class="top-left pull-left clearfix">
+                    <span class="dropdown dropdown-top phone">
+                        <a class="lnk-phone" href="#">手机版</a>
+                        <span class="caret"></span>
+                        <ul class="dropdown-menu clearfix">
+                            <li class="pull-left ia-wm"><img src="__PUBLIC__/Home/images/index/ia-ewm.png" width="85" height="88"></li>
+                            <li class="pull-left ia-load">
+                                <dl>
+                                    <dt>全球体育客户端</dt>
+                                    <dd style="margin-bottom:6px;" class="ios"><a href="javascript:;"></a></dd>
+                                    <dd class="android"><a href="javascript:;"></a></dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </span>
+                    <div class="lnk-welcome" title="您好，欢迎来到全球体育">您好，欢迎来到全球体育</div>
+                    <empty name="Think.session.user_auth">
+                        <a class="lnk-login" href="{:U('User/login')}">登录</a>
+                        <a class="lnk-reg" href="{:U('User/register')}">注册</a>
+                    <else/>
+                        <span class="dropdown dropdown-top user-name">
+                            <a href="#" class="nav on" title="{$Think.session.user_auth.nick_name}">{$Think.session.user_auth.nick_name}</a>
+                            <span class="caret"></span>
+                            <ul class="dropdown-menu" >
+                                <li><a href="{:U('UserInfo/index')}">个人中心</a></li>
+                                <li><a href="{:U('UserInfo/basic_infor')}">帐号设置</a></li>
+                                <li><a href="{:U('User/logout')}">退出</a></li>
+                            </ul>
+                        </span>
+                        <a class="link-info" href="{:U('UserInfo/station_notice')}">
+                            <img src="__PUBLIC__/Home/images/index/link-info.png" width="16" height="12">
+                            <notempty name="noRead"><span class="info"></span></notempty>
+                        </a>
+                    </empty>
+                </div>
+                <div class="top-right">
+                    <a class="lnk-user-center" href="{:U('Index/index')}">首页</a>
+                    <a class="lnk-user-center" href="javascript:void(0)" title="APP下载">加入收藏</a>
+                    <a class="lnk-user-center" href="#" title="我的订单">帮助</a>
+                    <span class="dropdown dropdown-top dropdown-nav">
+                        <a href="#" class="nav">网站导航</a>
+                        <span class="caret"></span>
+                        <ul class="dropdown-menu" >
+                            <li class="top-navs-li">
+                                <dl class="clearfix">
+                                    <dt class="pull-left">
+                                        <div><img src="__PUBLIC__/Home/images/index/cup.png" width="32" height="31"></div>
+                                        <span class="text-green">推荐</span>
+                                    </dt>
+                                    <dd class="pull-left">
+                                        <ul class="clearfix">
+                                            <li class="pull-left"><a href="{:U('GambleHall/index')}" target="_blank">推荐大厅</a></li>
+                                            <li class="pull-left"><a href="{:U('GambleHall/rank')}" target="_blank">排行榜</a></li>
+                                            <li class="pull-left"><a href="{:U('GambleHall/exchange')}" target="_blank">兑换中心</a></li>
+                                            <li class="pull-left"><a href="{:U('GambleHall/myGamble')}" target="_blank">我的推荐</a></li>
+                                            <li class="pull-left"><a href="{:U('GambleHall/rule')}" target="_blank">推荐规则</a></li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="top-navs-li">
+                                <dl class="clearfix">
+                                    <dt class="pull-left">
+                                        <div><img src="__PUBLIC__/Home/images/index/score.png" width="32" height="31"></div>
+                                        <span class="text-green">比分</span>
+                                    </dt>
+                                    <dd class="pull-left">
+                                        <ul class="clearfix">
+                                            <li class="pull-left"><a href="javascript:;" target="_blank">足球比分</a></li>
+                                            <li class="pull-left"><a href="javascript:;" target="_blank">篮球比分</a></li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="top-navs-li" style="border-bottom:none">
+                                <dl class="clearfix">
+                                    <dt class="pull-left">
+                                        <div><img src="__PUBLIC__/Home/images/index/dex.png" width="32" height="31"></div>
+                                        <span class="text-green">指数</span>
+                                    </dt>
+                                    <dd class="pull-left">
+                                        <ul class="clearfix">
+                                            <li class="pull-left"><a href="javascript:;" target="_blank">足球指数</a></li>
+                                            <li class="pull-left"><a href="javascript:;" target="_blank">篮球指数</a></li>
+                                            <li class="pull-left"><a href="javascript:;" target="_blank">百家指数</a></li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="top-center">
+        <div class="pull-left center-left">
+            <div class="pull-left" id="logo"><h1><a href="{:U('Index/index')}"><img src="__PUBLIC__/Home/images/index/logo.png"></a></h1></div>
+            <div class="pull-left show"><img src="__PUBLIC__/Home/images/index/show.png" width="142" height="58"></div>
+        </div>
+        <div class="pull-right center-right">
+            <a href="javascript:;"><img src="../../../../Public/Home/images/index/top-ad.gif" width="410" height="70"></a>
+        </div>
+    </div>
+
+    <!-- 导航开始 -->
+    <div class="nav-con">
+        <div class="nav">
+            <ul class="clearfix">
+                <li <eq name="Think.CONTROLLER_NAME" value="Index">class="on"</eq> ><a href="{:U('Index/index')}">首页</a></li>
+                <li><a href="{:U('GambleHall/index')}">推荐大厅</a> <span class="hot-new"></span></li>
+                <li><a href="javascript:;">足球比分</a></li>
+                <li><a href="javascript:;">足球指数</a></li>
+                <li><a href="javascript:;">篮球比分</a></li>
+                <li><a href="javascript:;">篮球指数</a></li>
+                <li <eq name="Think.CONTROLLER_NAME" value="PublishIndex">class="on"</eq>><a href="{:U('PublishIndex/index')}">资讯快报</a></li>
+                <li <eq name="Think.CONTROLLER_NAME" value="GalleryIndex">class="on"</eq>><a href="{:U('GalleryIndex/index')}">精彩图库</a></li>
+                <li><a href="javascript:;">资料库</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 导航结束 -->
+    <!-- 顶部结束 -->
+    <div class="body">
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <!-- 底部版权信息开始 -->
+    <div class="footer">
+        <div class="link">
+            <a href="{:U('Copyright/about')}">关于我们</a>
+            |
+            <a href="{:U('Copyright/cooperate')}">商务合作</a>
+            |
+            <a href="{:U('Copyright/recruit')}">高薪聘请</a>
+            |
+            <a href="{:U('Copyright/map')}">网站地图</a>
+            |
+            <a href="{:U('Copyright/service')}">法律声明</a>
+            |
+            <a href="{:U('Copyright/feedback')}">意见反馈</a>
+            |
+            <a href="{:U('Copyright/contact')}">联系我们</a>
+        </div>
+        <p>©2001-2015广东全彩科技有限公司 版权所有 客服热线：4000-500-500  备案：粤ICP备11007122号-2  增值电信业务经营许可证：粤B2-20070298</p>
+        <p>粤网文：[2013]0802-202号   全彩体育郑重提示：彩票有风险，推荐需谨慎  不向未满18周岁的青少年出售彩票</p>
+    </div>
+    <!-- 底部版权信息结束 -->
+</body>
+</html>

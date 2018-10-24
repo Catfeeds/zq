@@ -1,0 +1,81 @@
+<div class="pageContent">
+    <form method="post" action="__URL__/save" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="{$vo.id}" />
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>活动类型：</label>
+                <select class="small bLeft" name="multiple" id="multiple">
+                    <option value="2" selected>全部</option>
+                    <option value="0" <if condition="$_REQUEST.multiple eq '0'">selected</if> >单场</option>
+                    <option value="1" <if condition="$_REQUEST.multiple eq '1'">selected</if> >多场</option>
+                </select>
+            </div>
+            <div class="unit">
+                <label>关联活动：</label>
+                <select class="small bLeft" name="title_id" id="title">
+                <volist name="option" id="re" key="key">
+                <option <if condition="$vo['title_id'] eq $re['single_title_id']">selected</if> value={$re.title_id}>{$re.single_title}</option>
+                </volist>
+                </select>
+            </div>
+
+            <div class="unit">
+                <label>活动规则：</label>
+                <textarea rows="10" cols="50" name="rule">{$vo.rule}</textarea>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <notempty name='vo'>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <else/>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">添加</button></div></div></li>
+                </notempty>
+
+
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+<script>
+    //遍历input对象
+    function eachTr(){
+        $(".answer input").each(function(index){
+            $(this).val(index);
+        });
+    }
+
+    $("#multiple").on('change',function () {
+        var op_val = $(this).val();
+        $("#title").empty();
+        single_title(op_val);
+    });
+    function getinfo($id) {
+        var result;
+        //用ajax的“同步方式”调用一般处理程序
+        $.ajax({
+            url: "__URL__/ajaxget",
+            async: false,//改为同步方式
+            type: "GET",
+            data: { multiple:$id },
+            success: function (courseDT4) {
+                result = courseDT4;
+            }
+        });
+        return result;
+    }
+
+    function single_title($id)
+    {
+        var data = getinfo($id);
+        var res = eval('(' + data + ')');
+        for(var i=0;i<res.length;i++){
+            $("#title").append('<option value="'+res[i]['title_id']+'">'+res[i]['single_title']+"</option>");
+        }
+        eachTr();
+    }
+
+</script>
+

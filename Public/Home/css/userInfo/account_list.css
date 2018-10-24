@@ -1,0 +1,14 @@
+/**
+ * 全彩个人中心css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-23
+**/
+
+/* 账户明细 */
+.select-con{ margin-bottom: 15px;}
+.select-con select{ width: 150px; font-size: 12px;}
+.account-list .table .table-header th{ text-align: center; background: #f7f7f7;}
+.account-list .table .one{ text-align: center; background: #ffffff;}
+.account-list .table .two{ text-align: center; background: #f7f7f7;}
+.account-list .table .begin-time em{ margin-left: 10px;}

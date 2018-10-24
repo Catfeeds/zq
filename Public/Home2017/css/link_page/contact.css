@@ -1,0 +1,22 @@
+/**
+ * 全彩关于我们css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-12-25
+**/
+/* 主体内容 */
+.home,.main{ width: 1000px; margin: 0 auto; margin-top: 12px\9; margin-bottom: 12px\9}
+.main{ margin: 12px 0; display: block}
+.home h2{ margin: 38px 0 50px 0;}
+.main h2{ margin: 38px 0 50px 0;}
+.main h2 img{ display: block}
+.con-banner{ width: 1000px; height: 240px; overflow: hidden;}
+.con-banner .left{ width: 742px; height: 240px;}
+.con-banner .right{ width: 258px; height: 240px; background: #336699; color: #ffffff; padding-left: 20px; padding-top: 20px; padding-right: 13px;}
+.con-banner .right h4{ font-size: 24px; line-height: 0.7;}
+.con-banner .right h4 a{ font-size: 14px; color: #fff;}
+.con-ban-ul li{ line-height: 28px;}
+.address{ padding-top: 15px;}
+.address .map{ width: 554px; height: 419px; background: url(../../images/link_page/map-bg.jpg) no-repeat center center;}
+.job_intro_info{ line-height: 24px; color: #8a8a8a; margin-bottom: 28px;}
+.job_intro_info span{ color: #555; font-size: 16px;}

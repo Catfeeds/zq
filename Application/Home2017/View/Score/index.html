@@ -1,0 +1,609 @@
+<extend name="Public:header"/>
+<block name="seo">
+    <title>足球比分_篮球比分_即时比分_比分现场_完场比分_未来赛程_竞彩比分_全球体育网</title>
+    <meta name="keywords" content="竞彩比分、足球比分、篮球比分、即时比分、完场比分、nba比分、zuqiubifen、bifenzhibo、2018世界杯"/>
+    <meta name="description" content="全球体育网是2018足球世界杯比分、竞彩比分、足球比分、篮球比分、即时比分、完场比分、nba比分、zuqiubifen、bifenzhibo的大数据比分平台"/>
+</block>
+<block name='css'><link rel="stylesheet" href="__PUBLIC__/Home/score/css/scoreLive/scoreLive.css?20171226"></block>
+<block name="body">
+<body id="body" <if condition="$header neq ''">style="background: #ffffff;"</if> >
+	<div class="body">
+        <if condition="$header eq ''">
+            <include file="Public:top_score"/>
+        </if>
+        <!-- 主体内容开始 -->
+        <div class="home clearfix">
+            <!-- 导航开始 -->
+            <include file="Public:score_nav"/>
+            <section class="main">
+                <div class="control-con">
+                    <!-- 筛选导航 -->
+                    <div class="control-box clearfix">
+                    	<div class="pull-left control-2">
+                        	<ul class="clearfix" id="centerNav">
+                        		<li class="on"><a href="javascript:;" class="type-li01" id="all">完整</a></li>
+                                <li><span>|</span></li>
+                                <li><a href="javascript:;" onclick="gameLottery(this,'grounder')">滚球</a></li>
+                                <li><span>|</span></li>
+                                <li><a href="javascript:;" onclick="gameLottery(this,'jc')">竞彩</a></li>
+                                <li><span>|</span></li>
+                                <li><a href="javascript:;" onclick="gameLottery(this,'streamline')" class="type-li04">精简</a></li>
+                        	</ul>
+                        </div>
+                        
+                        <div class="pull-left control-l">
+                            <ul class="control-ul clearfix">
+                                <li class="control-li control-li01"><a href="javascript:;" class="mya pitch" type="block">保留选中</a></li>
+                                <li class="control-li control-li02"><a href="javascript:;" class="mya pitch" type="none">隐藏选中</a></li>
+                                <li class="control-li control-li03">
+                                    <a href="javascript:;" class="mya dropdown event">赛事选择<span class="caretCon"><span class="caret"></span></span></a>
+                                    <div id="unionLevel" class="box-list dropdown-menu"> 
+                                        <div class="clearfix">
+                                        	<div class="pull-left box-title">赛事选择</div>
+                                        	<div class="pull-right box-title"><span>隐藏 <em class="text-red menu_count">0</em> 场</span></div>
+                                        </div>
+                                        <div class="box-team">
+                                            <div class="box-rank clearfix">
+                                                <ul class="rank-ul clearfix">
+                                                    <li class="rank-ul-li01 on"><a data-unionLevel="1" href="javascript:;"><i class="iconType"></i><p>一级赛事</p></a></li>
+                                                    <li class="rank-ul-li02 on"><a data-unionLevel="2" href="javascript:;"><i class="iconType"></i><p>二级赛事</p></a></li>
+                                                    <li class="rank-ul-li03 on"><a data-unionLevel="3" href="javascript:;"><i class="iconType"></i><p>三级赛事</p></a></li>
+                                                </ul>
+                                            </div>
+                                            <div id="menu_list">
+                                                <ul class="clearfix match-team">
+                                                    <volist name="union" id="item" menu_id="1">
+                                                        <li style="border-color: {$item[4]};"><label class="inline"><input type="checkbox" data-unionLevel="{$item[6]}" data-gameCount="{$item['gameCount']|default=0}" class="userid" checked value="{$item[0]}"><span class='bg-ac language simplified <if condition="I('cookie.indicesLanguageSle') neq 1 And I('cookie.indicesLanguageSle') neq ''"> hidden </if>'>{$item[1]}</span><span class='bg-ac language traditional <if condition="I('cookie.indicesLanguageSle') neq 2 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if>'>{$item[2]}</span><span class='bg-ac language english <if condition="I('cookie.indicesLanguageSle') neq 3 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if>'>{$item[3]}</span><em>[{$item['gameCount']|default=0}]</em></label></li>
+                                                    </volist>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="btn-con clearfix">
+                                            <input type="button" id="checkAll" class="btn btn-blue pull-left" value="全选">
+                                            <input type="button" id="reverse" class="btn btn-red pull-left" value="反选" style="margin-left: 12px;">
+                                            <input type="button" id="removeAll" class="btn btn-default pull-right" style="margin-left: 12px;" value="关闭">
+                                            <input type="button" id="ensure" class="btn btn-blue pull-right" value="确定">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="control-li control-li04">
+                                    <a href="javascript:;" class="mya dropdown fun">功能选择<span class="caretCon"><span class="caret"></span></span></a>
+                                    <div class="layer-list dropdown-menu">
+                                        <div class="feat-select" style="line-height: 24px;">
+                                            <label><input type="checkbox" value="0" <if condition="checkFbCookie(0) eq 1">checked</if>> 红牌弹窗提示</label>
+                                            <label><input type="checkbox" value="1" <if condition="checkFbCookie(1) eq 1">checked</if>> 比分进球弹框</label>
+                                            <label>提示窗显示位置
+                                                <select>
+                                                    <option value="1" <if condition="checkFbCookie(6) eq 1">selected</if>>正上方</option>
+                                                    <option value="0" <if condition="checkFbCookie(6) eq 0">selected</if>>正下方</option>
+                                                </select>
+                                            </label>
+                                            <label><input type="checkbox" value="2" <if condition="checkFbCookie(2) eq 1">checked</if>> 显示黄牌</label>
+                                            <label><input type="checkbox" value="3" <if condition="checkFbCookie(3) eq 1">checked</if>> 进球提示音</label>
+                                            <label><input type="checkbox" value="4" <if condition="checkFbCookie(4) eq 1">checked</if>> 球队排名</label>
+                                            <label><input type="checkbox" value="5" <if condition="checkFbCookie(5) eq 1">checked</if>> 半场显示往绩</label>
+                                        </div>
+                                        <div class="bts"><input type="button" class="btn btn-default" name="button" id="" value="" style="cursor:pointer; outline:none;"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="pull-left sh">
+                            <span>隐藏 <em class="text-red" id="gameHideCount">0</em> 赛事</span>
+                            <a href="javascript:;" id="showGameAll">显示全部</a>
+                        </div>
+                        <div class="pull-right control-r clearfix">
+                            <div class="dropdown pull-left odds-language">
+                                <button type="button" class="btn dropdown-toggle" id="" data-toggle="dropdown">
+                                    <span id="languageContent" language="<if condition="I('cookie.indicesLanguageSle') eq 1 OR  I('cookie.indicesLanguageSle') eq ''">1<else/>{:I('cookie.indicesLanguageSle')}</if>" >
+                                         <if condition="I('cookie.indicesLanguageSle') eq 1 OR  I('cookie.indicesLanguageSle') eq ''"> 简体 </if>
+                                         <if condition="I('cookie.indicesLanguageSle') eq 2"> 繁体 </if>
+                                         <if condition="I('cookie.indicesLanguageSle') eq 3"> EN </if>
+                                    </span><i class="caret"></i>
+                                </button>
+                                <ul id="languageSle" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation"><a role="menuitem" data-language="1" tabindex="-1" href="javascript:;">简体</a></li>
+                                    <li role="presentation"><a role="menuitem" data-language="2" tabindex="-1" href="javascript:;">繁体</a></li>
+                                    <li role="presentation"><a role="menuitem" data-language="3" tabindex="-1" href="javascript:;">EN</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pull-right cb">
+                            <form action="">
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" id="halfCheck" value="7">
+                                        <label  class="inline <if condition="checkFbCookie(7) eq 1">myLabel01<else/>myLabel02</if>" for="halfCheck" >半场</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="ypCheck" value="8">
+                                        <label  class="inline <if condition="checkFbCookie(8) eq 1">myLabel01<else/>myLabel02</if>" for="ypCheck" >亚盘</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="sizeCheck" value="9">
+                                        <label  class="inline <if condition="checkFbCookie(9) eq 1">myLabel01<else/>myLabel02</if>" for="sizeCheck" >大小</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="ouCheck" value="10">
+                                        <label  class="inline <if condition="checkFbCookie(10) eq 1">myLabel01<else/>myLabel02</if>" for="ouCheck" >欧赔</label>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>  
+                    </div>
+                    <!--滚动导航栏浮动置顶开始-->
+                    <div class="mytable01" id="navig" style="display:none;">
+                        <div class="navig_tr">
+                            <table class="table table-bordered no-table-bordered" width="100%" align="center" cellspacing="0" border="0" cellpadding="0">
+                                <thead>
+                                    <tr class="table-header" bgcolor="#e6e6eb">
+                                        <th width="30">选</th>
+                                        <th width="74">赛事</th>
+                                        <th width="46">时间</th>
+                                        <th width="40">状态</th>
+                                        <th width="40">天气</th>
+                                        <th width="170">主场球队</th>
+                                        <th width="50">比分</th>
+                                        <th width="170">客场球队</th>
+                                        <th width="40">现场</th>
+                                        <th width="40">角/半</th>
+                                        <th width="200" colspan="3">全场(SB)</th>
+                                        <th width="200" colspan="3" class="halfCheck <if condition="checkFbCookie(7) eq 0">hidden</if>">半场(SB)</th>
+                                        <th width="60">数据分析</th>
+                                        <th width="40">置顶</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!--滚动导航栏浮动置顶结束-->
+                </div>
+                
+                <!-- 表格内容开始 -->
+                <div class="mytable01">
+                    <div class="loading_gif" style="text-align: center;">
+                        <img src="__PUBLIC__/Home/score/images/loading.gif" width="180">
+                    </div>
+                    <div class="livescore_table hidden">
+                        <table class="table table-bordered" width="100%" align="center" cellspacing="0" border="0" cellpadding="0">
+                            <thead>
+                                <tr class="table-header" bgcolor="#e6e6eb">
+                                    <th width="30">选</th>
+                                    <th width="74">赛事</th>
+                                    <th width="46">时间</th>
+                                    <th width="40">状态</th>
+                                    <th width="40">天气</th>
+                                    <th width="170">主场球队</th>
+                                    <th width="50">比分</th>
+                                    <th width="170">客场球队</th>
+                                    <th width="40">现场</th>
+                                    <th width="40">角/半</th>
+                                    <th width="200" colspan="3">全场(SB)</th>
+                                    <th width="200" colspan="3" class="halfCheck <if condition="checkFbCookie(7) eq 0">hidden</if>">半场(SB)</th>
+                                    <th width="60">数据分析</th>
+                                    <th width="40">置顶</th>
+                                </tr>
+                            </thead>
+                            <tbody id="do_game">
+                                <tr bgcolor="#f2f2f7">
+                                    <td colspan="18" class="text-l p10 liveTxt">
+                                        <span>正在进行中</span>
+                                    </td>
+                                </tr>
+                                <notempty name="do_game">
+                                    <volist name="do_game" id="vo">
+                                        <tr class="gameList" data-sub="{$vo.6}" data-unionId="{$vo[1]}" game_id="{$vo.0}" data-jc="{$vo[42]}" data-grounder="{$vo[39]}" bgcolor="<if condition=" $key%2 eq 0 ">#ffffff<else/>#f7f7f7</if>">
+                                            <td class="no-b-r">
+                                                <input class="gameId" type="checkbox" value="{$vo[0]}">
+                                            </td>
+                                            <td class="match-name no-b-r no-b-l" union_color="{$vo.5}"><a href="javascript:;" style="background: {$vo.5}"><span class='language simplified <if condition="I('cookie.indicesLanguageSle') neq 1 And I('cookie.indicesLanguageSle') neq ''"> hidden </if> ' >{$vo[2]}</span><span class='language traditional <if condition="I('cookie.indicesLanguageSle') neq 2 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if> '>{$vo[3]}</span><span class='language english <if condition="I('cookie.indicesLanguageSle') neq 3 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if> '>{$vo[4]}</span></a></td>
+                                            <td class="no-b-r no-b-l">{$vo.9}</td>
+                                            <td game_state="{$vo.7}" class="gameStatusStr text-999 no-b-r no-b-l">
+                                                <switch name="vo.7">
+                                                    <case value="0|-10|-11|-12|-13|-14"><span <if condition="$vo[7] neq 0">class="text-red"</if>>{:C('game_state')[$vo[7]]}</span></case>
+                                                    <case value="-1|1|2|3|4"><span class="text-red"><if condition="!in_array($vo[7],[1,3])">{:C('game_state')[$vo[7]]} <else/><time>{$vo[10]|showGameTime=###,$vo[7]}</time><img src="__PUBLIC__/Home/score/images/scoreLive/time.gif"></if></span></case>
+                                                </switch>
+                                            </td>
+                                            <td class="no-b-r no-b-l">
+                                                <notempty name="vo.45">
+                                                <i class="icon-weather {$vo.weather_class}"><span class="tip">{$vo[45]}</span></i>
+                                                </notempty>
+                                            </td>
+                                            <td class="gameHomeName no-b-r" style="text-align: right;"><a href="javascript:"><em class="<notempty name="vo.25">red-card</notempty> homeRedCard"><notempty name="vo.25">{$vo.25}</notempty></em><em class="<notempty name="vo.27">yellow-card</notempty><if condition="checkFbCookie(2) eq 0">hidden</if> homeYellowCard"><notempty name="vo.27">{$vo.27}</notempty></em><span><notempty name="vo.19"><em class="mr5 rank <if condition="checkFbCookie(4) eq 0">hidden</if>">[{$vo.19}]</em></notempty><span class='language simplified <if condition="I('cookie.indicesLanguageSle') neq 1 And I('cookie.indicesLanguageSle') neq ''"> hidden </if> '>{$vo[13]}</span><span class='language traditional <if condition="I('cookie.indicesLanguageSle') neq 2 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if>'>{$vo[14]}</span><span class='language english <if condition="I('cookie.indicesLanguageSle') neq 3 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if>'>{$vo[15]}</span></span></a></td>
+                                            <td class="show_score gameScoreSign no-b-r no-b-l" first="<if condition=" $vo.34 neq '' ">{$vo.34|handCpSpread}</if>">
+                                                <a class="text-blue" target="_blank" href="{:U('/event_technology@bf',['game_id'=>$vo[0]])}"><strong><span>{$vo.21}-{$vo.22}</span></strong></a>
+                                            </td>
+                                            <td class="gameAwayName no-b-l no-b-r" style="text-align: left;"><a href="javascript:"><span><span class='language simplified <if condition="I('cookie.indicesLanguageSle') neq 1 And I('cookie.indicesLanguageSle') neq ''"> hidden </if> '>{$vo[16]}</span><span class='language traditional <if condition="I('cookie.indicesLanguageSle') neq 2 OR I('cookie.indicesLanguageSle') eq ''"> hidden</if> '>{$vo[17]}</span><span class='language english <if condition="I('cookie.indicesLanguageSle') neq 3 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if>'>{$vo[18]}</span><notempty name="vo.20"><em class="ml5 rank <if condition="checkFbCookie(4) eq 0">hidden</if>">[{$vo.20}]</em></notempty></span><em class="<notempty name="vo.28">yellow-card</notempty><if condition="checkFbCookie(2) eq 0">hidden</if> awayYellowCard"><notempty name="vo.28">{$vo.28}</notempty></em><em class="<notempty name="vo.26">red-card</notempty> awayRedCard"><notempty name="vo.26">{$vo.26}</notempty></em></a></td>
+                                            <td class="no-b-r no-b-l">
+                                                <if condition="$vo[40] eq 1 or $vo[41] eq 1">
+                                                    <a target="_blank" href="http://bf.{:DOMAIN}/live/{$vo[0]}.html">
+                                                        <if condition="$vo[40] eq 1">
+                                                            <img src="__PUBLIC__/Home/score/images/scoreLive/icon-tv.png" width="24" height="24">
+                                                        <else/>
+                                                            <img src="__PUBLIC__/Home/score/images/scoreLive/icon-flash.png" width="24" height="24">
+                                                        </if>
+                                                    </a>
+                                                </if>
+                                            </td>
+                                            <td class="record_score">
+                                                <div class="gameCornerScore jqColor">
+                                                    <switch name="vo.7">
+                                                        <case value="0|-10|-11|-12|-13|-14">--</case>
+                                                        <default/>
+                                                        {$vo.29}-{$vo.30}
+                                                    </switch>
+                                                </div>
+                                                <div class="gameHalfScoreSign text-red">
+                                                   <switch name="vo.7">
+                                                       <case value="-1|1|2|3|4"><font>{$vo.23}</font>-<font>{$vo.24}</font> </case>
+                                                       <default/> <span>--</span>
+                                                   </switch>
+                                                </div>
+                                            </td>
+                                            <td class="oddss no-b-r">
+                                                <a target="_blank" href="{:U('/oddsinfo@bf',['game_id'=>$vo[0],'compid'=>3,'sign'=>1])}">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">{$vo.fsw_exp_home}</div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">{$vo.fsw_ball_home}</div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">{$vo.fsw_europe_home}</div>
+                                                </a>
+                                            </td>
+                                            <td class="oddss pankou show_handcp no-b-r no-b-l">
+                                                <a target="_blank" href="{:U('/oddsinfo@bf',['game_id'=>$vo[0],'compid'=>3,'sign'=>1])}">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.fsw_exp neq ''">
+                                                        {$vo.fsw_exp|handCpSpread} </if>
+                                                </div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.fsw_ball neq ''">{$vo.fsw_ball|handCpTotal}</if>
+                                                </div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.fsw_europe neq ''">{$vo.fsw_europe}</if>
+                                                </div>
+                                                </a>
+                                            </td>
+                                            <td class="oddss no-b-r no-b-l">
+                                                <a target="_blank" href="{:U('/oddsinfo@bf',['game_id'=>$vo[0],'compid'=>3,'sign'=>1])}">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">{$vo.fsw_exp_away}</div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">{$vo.fsw_ball_away}</div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">{$vo.fsw_europe_away}</div>
+                                                </a>
+                                            </td>
+                                            <td class="oddss no-b-r halfCheck <if condition="checkFbCookie(7) eq 0 ">hidden</if>">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">{$vo.half_exp_home}</div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">{$vo.half_ball_home}</div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">{$vo.half_europe_home}</div>
+                                            </td>
+                                            <td class="oddss no-b-r no-b-l pankou halfCheck half_handcp <if condition=" checkFbCookie(7) eq 0 ">hidden</if>">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.half_exp neq ''">
+                                                        {$vo.half_exp|handCpSpread} </if>
+                                                </div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.half_ball neq ''">{$vo.half_ball|handCpTotal}</if>
+                                                </div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.half_europe neq ''">{$vo.half_europe}</if>
+                                                </div>
+                                            </td>
+                                            <td class="oddss no-b-r no-b-l halfCheck <if condition=" checkFbCookie(7) eq 0 ">hidden</if>">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">{$vo.half_exp_away}</div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">{$vo.half_ball_away}</div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">{$vo.half_europe_away}</div>
+                                            </td>
+                                            <td class="data-a"><div class="dataLink"><a href="{:U('/ypOdds@bf',['game_id'=>$vo[0],'sign'=>1])}" target="_blank">亚</a><a href="{:U('/eur_index@bf',['game_id'=>$vo[0]])}" target="_blank">欧</a><a href="{:U('/dataFenxi@bf',['game_id'=>$vo[0]])}" target="_blank" class="text-bblue">析</a>
+                                                <if condition="$vo[44] eq 1"><a href="{:U('/gambleDetails@bf',['game_id'=>$vo[0]])}" target="_blank" class="text-bblue">猜</a>
+                                                    <else/><a href="javascript:;" class="text-bblue">&nbsp;&nbsp;&nbsp;</a></if></div>
+                                            </td>
+                                            <td class="no-b-l">
+                                                <a href="javascript:;" class="tdBtn icon-default placeToTop"></a>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </notempty>
+                            </tbody>
+                            <tbody id="no_game">
+                                <tr bgcolor="#f2f2f7">
+                                    <td colspan="18" class="text-l p10 notBeginTxt">
+                                        <span>未开始</span>
+                                    </td>
+                                </tr>
+                                <notempty name="no_game">
+                                    <volist name="no_game" id="vo">
+                                        <tr class="gameList" data-sub="{$vo.6}" data-unionId="{$vo[1]}" game_id="{$vo.0}" data-jc="{$vo[42]}" data-grounder="{$vo[39]}" bgcolor="<if condition=" $key%2 eq 0 ">#ffffff<else/>#f7f7f7</if>">
+                                            <td class="no-b-r">
+                                                <input class="gameId" type="checkbox" value="{$vo[0]}">
+                                            </td>
+                                            <td class="match-name no-b-r no-b-l" union_color="{$vo.5}"><a href="javascript:;" style="background: {$vo.5}"><span class='language simplified <if condition="I('cookie.indicesLanguageSle') neq 1 And I('cookie.indicesLanguageSle') neq ''"> hidden </if> ' >{$vo[2]}</span><span class='language traditional <if condition="I('cookie.indicesLanguageSle') neq 2 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if> '>{$vo[3]}</span><span class='language english <if condition="I('cookie.indicesLanguageSle') neq 3 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if> '>{$vo[4]}</span></a></td>
+                                            <td class="no-b-r no-b-l">{$vo.9}</td>
+                                            <td game_state="{$vo.7}" class="gameStatusStr text-999 no-b-r no-b-l">
+                                                <switch name="vo.7">
+                                                    <case value="0|-10|-11|-12|-13|-14"><span <if condition="$vo[7] neq 0">class="text-red"</if>>{:C('game_state')[$vo[7]]}</span></case>
+                                                    <case value="-1|1|2|3|4"><span class="text-red"><if condition="!in_array($vo[7],[1,3])">{:C('game_state')[$vo[7]]} <else/><time>{$vo[10]|showGameTime=###,$vo[7]}</time><img src="__PUBLIC__/Home/score/images/scoreLive/time.gif"></if></span></case>
+                                                </switch>
+                                            </td>
+                                            <td class="no-b-r no-b-l">
+                                                <notempty name="vo.45">
+                                                <i class="icon-weather {$vo.weather_class}"><span class="tip">{$vo[45]}</span></i>
+                                                </notempty>
+                                            </td>
+                                            <td class="gameHomeName no-b-r" style="text-align: right;"><a href="javascript:"><em class="<notempty name="vo.25">red-card</notempty> homeRedCard"><notempty name="vo.25">{$vo.25}</notempty></em><em class="<notempty name="vo.27">yellow-card</notempty><if condition="checkFbCookie(2) eq 0">hidden</if> homeYellowCard"><notempty name="vo.27">{$vo.27}</notempty></em><span><notempty name="vo.19"><em class="mr5 rank <if condition="checkFbCookie(4) eq 0">hidden</if>">[{$vo.19}]</em></notempty><span class='language simplified <if condition="I('cookie.indicesLanguageSle') neq 1 And I('cookie.indicesLanguageSle') neq ''"> hidden </if> '>{$vo[13]}</span><span class='language traditional <if condition="I('cookie.indicesLanguageSle') neq 2 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if>'>{$vo[14]}</span><span class='language english <if condition="I('cookie.indicesLanguageSle') neq 3 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if>'>{$vo[15]}</span></span></a></td>
+                                            <td class="show_score gameScoreSign no-b-r no-b-l" first="<if condition=" $vo.34 neq '' ">{$vo.34|handCpSpread}</if>">
+                                                <a target="_blank" href="{:U('/event_technology@bf',['game_id'=>$vo[0]])}"><strong><span>--</span></strong></a>
+                                            </td>
+                                            <td class="gameAwayName no-b-l no-b-r" style="text-align: left;"><a href="javascript:"><span><span class='language simplified <if condition="I('cookie.indicesLanguageSle') neq 1 And I('cookie.indicesLanguageSle') neq ''"> hidden </if> '>{$vo[16]}</span><span class='language traditional <if condition="I('cookie.indicesLanguageSle') neq 2 OR I('cookie.indicesLanguageSle') eq ''"> hidden</if> '>{$vo[17]}</span><span class='language english <if condition="I('cookie.indicesLanguageSle') neq 3 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if>'>{$vo[18]}</span><notempty name="vo.20"><em class="ml5 rank <if condition="checkFbCookie(4) eq 0">hidden</if>">[{$vo.20}]</em></notempty></span><em class="<notempty name="vo.28">yellow-card</notempty><if condition="checkFbCookie(2) eq 0">hidden</if> awayYellowCard"><notempty name="vo.28">{$vo.28}</notempty></em><em class="<notempty name="vo.26">red-card</notempty> awayRedCard"><notempty name="vo.26">{$vo.26}</notempty></em></a></td>
+                                            <td class="no-b-r no-b-l">
+                                                <if condition="$vo[40] eq 1 or $vo[41] eq 1">
+                                                    <a target="_blank" href="http://bf.{:DOMAIN}/live/{$vo[0]}.html">
+                                                        <if condition="$vo[40] eq 1">
+                                                            <img src="__PUBLIC__/Home/score/images/scoreLive/icon-tv.png" width="24" height="24">
+                                                            <else/>
+                                                            <img src="__PUBLIC__/Home/score/images/scoreLive/icon-flash.png" width="24" height="24">
+                                                        </if>
+                                                    </a>
+                                                </if>
+                                            </td>
+                                            <td class="record_score">
+                                                <div class="gameCornerScore jqColor">
+                                                    <switch name="vo.7">
+                                                        <case value="0|-10|-11|-12|-13|-14">--</case>
+                                                        <default/>
+                                                        {$vo.29}-{$vo.30}
+                                                    </switch>
+                                                </div>
+                                                <div class="gameHalfScoreSign text-red">
+                                                   <switch name="vo.7">
+                                                       <case value="-1|1|2|3|4"><font>{$vo.23}</font>-<font>{$vo.24}</font> </case>
+                                                       <default/> <span>--</span>
+                                                   </switch>
+                                                </div>
+                                            </td>
+                                            <td class="oddss no-b-r">
+                                                <a target="_blank" href="{:U('/oddsinfo@bf',['game_id'=>$vo[0],'compid'=>3,'sign'=>1])}">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">{$vo.fsw_exp_home}</div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">{$vo.fsw_ball_home}</div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">{$vo.fsw_europe_home}</div>
+                                                </a>
+                                            </td>
+                                            <td class="oddss pankou show_handcp no-b-r no-b-l">
+                                                <a target="_blank" href="{:U('/oddsinfo@bf',['game_id'=>$vo[0],'compid'=>3,'sign'=>1])}">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.fsw_exp neq ''">
+                                                        {$vo.fsw_exp|handCpSpread} </if>
+                                                </div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.fsw_ball neq ''">{$vo.fsw_ball|handCpTotal}</if>
+                                                </div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.fsw_europe neq ''">{$vo.fsw_europe}</if>
+                                                </div>
+                                                </a>
+                                            </td>
+                                            <td class="oddss no-b-r no-b-l">
+                                                <a target="_blank" href="{:U('/oddsinfo@bf',['game_id'=>$vo[0],'compid'=>3,'sign'=>1])}">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">{$vo.fsw_exp_away}</div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">{$vo.fsw_ball_away}</div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">{$vo.fsw_europe_away}</div>
+                                                </a>
+                                            </td>
+                                            <td class="oddss no-b-r halfCheck <if condition="checkFbCookie(7) eq 0 ">hidden</if>">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">{$vo.half_exp_home}</div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">{$vo.half_ball_home}</div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">{$vo.half_europe_home}</div>
+                                            </td>
+                                            <td class="oddss no-b-r no-b-l pankou halfCheck half_handcp <if condition=" checkFbCookie(7) eq 0 ">hidden</if>">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.half_exp neq ''">
+                                                        {$vo.half_exp|handCpSpread} </if>
+                                                </div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.half_ball neq ''">{$vo.half_ball|handCpTotal}</if>
+                                                </div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.half_europe neq ''">{$vo.half_europe}</if>
+                                                </div>
+                                            </td>
+                                            <td class="oddss no-b-r no-b-l halfCheck <if condition=" checkFbCookie(7) eq 0 ">hidden</if>">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">{$vo.half_exp_away}</div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">{$vo.half_ball_away}</div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">{$vo.half_europe_away}</div>
+                                            </td>
+                                            <td class="data-a"><div class="dataLink"><a href="{:U('/ypOdds@bf',['game_id'=>$vo[0],'sign'=>1])}" target="_blank">亚</a><a href="{:U('/eur_index@bf',['game_id'=>$vo[0]])}" target="_blank">欧</a><a href="{:U('/dataFenxi@bf',['game_id'=>$vo[0]])}" target="_blank" class="text-bblue">析</a>
+                                                <if condition="$vo[44] eq 1"><a href="{:U('/gambleDetails@bf',['game_id'=>$vo[0]])}" target="_blank" class="text-bblue">猜</a>
+                                                    <else/><a href="javascript:;" class="text-bblue">&nbsp;&nbsp;&nbsp;</a></if></div>
+                                            </td>
+                                            <td class="no-b-l">
+                                                <a href="javascript:;" class="tdBtn icon-default placeToTop"></a>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </notempty>
+                            </tbody>
+                            <tbody id="over_game">
+                                <tr bgcolor="#f2f2f7">
+                                    <td colspan="18" class="text-l p10 endTxt">
+                                        <span>已结束</span>
+                                    </td>
+                                </tr>
+                                <notempty name="over_game">
+                                    <volist name="over_game" id="vo">
+                                        <tr class="gameList" data-sub="{$vo.6}" data-unionId="{$vo[1]}" game_id="{$vo.0}" data-jc="{$vo[42]}" data-grounder="{$vo[39]}" bgcolor="<if condition=" $key%2 eq 0 ">#ffffff<else/>#f7f7f7</if>">
+                                            <td class="no-b-r">
+                                                <input class="gameId" type="checkbox" value="{$vo[0]}">
+                                            </td>
+                                            <td class="match-name no-b-r no-b-l" union_color="{$vo.5}"><a href="javascript:;" style="background: {$vo.5}"><span class='language simplified <if condition="I('cookie.indicesLanguageSle') neq 1 And I('cookie.indicesLanguageSle') neq ''"> hidden </if> ' >{$vo[2]}</span><span class='language traditional <if condition="I('cookie.indicesLanguageSle') neq 2 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if> '>{$vo[3]}</span><span class='language english <if condition="I('cookie.indicesLanguageSle') neq 3 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if> '>{$vo[4]}</span></a></td>
+                                            <td class="no-b-r no-b-l">{$vo.9}</td>
+                                            <td game_state="{$vo.7}" class="gameStatusStr text-999 no-b-r no-b-l">
+                                                <switch name="vo.7">
+                                                    <case value="0|-10|-11|-12|-13|-14"><span <if condition="$vo[7] neq 0">class="text-red"</if>>{:C('game_state')[$vo[7]]}</span></case>
+                                                    <case value="-1|1|2|3|4"><span class="text-red"><if condition="!in_array($vo[7],[1,3])">{:C('game_state')[$vo[7]]} <else/><time>{$vo[10]|showGameTime=###,$vo[7]}</time><img src="__PUBLIC__/Home/score/images/scoreLive/time.gif"></if></span></case>
+                                                </switch>
+                                            </td>
+                                            <td class="no-b-r no-b-l">
+                                                <notempty name="vo.45">
+                                                <i class="icon-weather {$vo.weather_class}"><span class="tip">{$vo[45]}</span></i>
+                                                </notempty>
+                                            </td>
+                                            <td class="gameHomeName no-b-r" style="text-align: right;"><a href="javascript:"><em class="<notempty name="vo.25">red-card</notempty> homeRedCard"><notempty name="vo.25">{$vo.25}</notempty></em><em class="<notempty name="vo.27">yellow-card</notempty><if condition="checkFbCookie(2) eq 0">hidden</if> homeYellowCard"><notempty name="vo.27">{$vo.27}</notempty></em><span><notempty name="vo.19"><em class="mr5 rank <if condition="checkFbCookie(4) eq 0">hidden</if>">[{$vo.19}]</em></notempty><span class='language simplified <if condition="I('cookie.indicesLanguageSle') neq 1 And I('cookie.indicesLanguageSle') neq ''"> hidden </if> '>{$vo[13]}</span><span class='language traditional <if condition="I('cookie.indicesLanguageSle') neq 2 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if>'>{$vo[14]}</span><span class='language english <if condition="I('cookie.indicesLanguageSle') neq 3 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if>'>{$vo[15]}</span></span></a></td>
+                                            <td class="show_score gameScoreSign no-b-r no-b-l" first="<if condition=" $vo.34 neq '' ">{$vo.34|handCpSpread}</if>">
+                                                <a target="_blank" href="{:U('/event_technology@bf',['game_id'=>$vo[0]])}">
+                                                    <strong><span class="<if condition="$vo[21] lt $vo[22]">text-blue<else/>text-red</if>">{$vo.21}</span>-<span class="<if condition="$vo[22] lt $vo[21]">text-blue<else/>text-red</if>">{$vo.22}</span></strong>
+                                                </a>
+                                            </td>
+                                            <td class="gameAwayName no-b-l no-b-r" style="text-align: left;"><a href="javascript:"><span><span class='language simplified <if condition="I('cookie.indicesLanguageSle') neq 1 And I('cookie.indicesLanguageSle') neq ''"> hidden </if> '>{$vo[16]}</span><span class='language traditional <if condition="I('cookie.indicesLanguageSle') neq 2 OR I('cookie.indicesLanguageSle') eq ''"> hidden</if> '>{$vo[17]}</span><span class='language english <if condition="I('cookie.indicesLanguageSle') neq 3 OR I('cookie.indicesLanguageSle') eq ''"> hidden </if>'>{$vo[18]}</span><notempty name="vo.20"><em class="ml5 rank <if condition="checkFbCookie(4) eq 0">hidden</if>">[{$vo.20}]</em></notempty></span><em class="<notempty name="vo.28">yellow-card</notempty><if condition="checkFbCookie(2) eq 0">hidden</if> awayYellowCard"><notempty name="vo.28">{$vo.28}</notempty></em><em class="<notempty name="vo.26">red-card</notempty> awayRedCard"><notempty name="vo.26">{$vo.26}</notempty></em></a></td>
+                                            <td class="no-b-r no-b-l">
+                                                <if condition="$vo[40] eq 1 or $vo[41] eq 1">
+                                                    <a target="_blank" href="http://bf.{:DOMAIN}/live/{$vo[0]}.html">
+                                                        <if condition="$vo[40] eq 1">
+                                                            <img src="__PUBLIC__/Home/score/images/scoreLive/icon-tv.png" width="24" height="24">
+                                                            <else/>
+                                                            <img src="__PUBLIC__/Home/score/images/scoreLive/icon-flash.png" width="24" height="24">
+                                                        </if>
+                                                    </a>
+                                                </if>
+                                            </td>
+                                            <td class="record_score">
+                                                <div class="gameCornerScore jqColor">
+                                                    <switch name="vo.7">
+                                                        <case value="0|-10|-11|-12|-13|-14">--</case>
+                                                        <default/>
+                                                        {$vo.29}-{$vo.30}
+                                                    </switch>
+                                                </div>
+                                                <div class="gameHalfScoreSign text-red">
+                                                   <switch name="vo.7">
+                                                       <case value="-1|1|2|3|4"><font>{$vo.23}</font>-<font>{$vo.24}</font> </case>
+                                                       <default/> <span>--</span>
+                                                   </switch>
+                                                </div>
+                                            </td>
+                                            <td class="oddss no-b-r">
+                                                <a target="_blank" href="{:U('/oddsinfo@bf',['game_id'=>$vo[0],'compid'=>3,'sign'=>1])}">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">{$vo.fsw_exp_home}</div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">{$vo.fsw_ball_home}</div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">{$vo.fsw_europe_home}</div>
+                                                </a>
+                                            </td>
+                                            <td class="oddss pankou show_handcp no-b-r no-b-l">
+                                                <a target="_blank" href="{:U('/oddsinfo@bf',['game_id'=>$vo[0],'compid'=>3,'sign'=>1])}">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.fsw_exp neq ''">
+                                                        {$vo.fsw_exp|handCpSpread} </if>
+                                                </div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.fsw_ball neq ''">{$vo.fsw_ball|handCpTotal}</if>
+                                                </div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.fsw_europe neq ''">{$vo.fsw_europe}</if>
+                                                </div>
+                                                </a>
+                                            </td>
+                                            <td class="oddss no-b-r no-b-l">
+                                                <a target="_blank" href="{:U('/oddsinfo@bf',['game_id'=>$vo[0],'compid'=>3,'sign'=>1])}">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">{$vo.fsw_exp_away}</div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">{$vo.fsw_ball_away}</div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">{$vo.fsw_europe_away}</div>
+                                                </a>
+                                            </td>
+                                            <td class="oddss no-b-r halfCheck <if condition="checkFbCookie(7) eq 0 ">hidden</if>">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">{$vo.half_exp_home}</div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">{$vo.half_ball_home}</div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">{$vo.half_europe_home}</div>
+                                            </td>
+                                            <td class="oddss no-b-r no-b-l pankou halfCheck half_handcp <if condition=" checkFbCookie(7) eq 0 ">hidden</if>">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.half_exp neq ''">
+                                                        {$vo.half_exp|handCpSpread} </if>
+                                                </div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.half_ball neq ''">{$vo.half_ball|handCpTotal}</if>
+                                                </div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">
+                                                    <if condition="$vo.half_europe neq ''">{$vo.half_europe}</if>
+                                                </div>
+                                            </td>
+                                            <td class="oddss no-b-r no-b-l halfCheck <if condition=" checkFbCookie(7) eq 0 ">hidden</if>">
+                                                <div class="ypCheck <if condition=" checkFbCookie(8) eq 0 ">hidden</if>">{$vo.half_exp_away}</div>
+                                                <div class="sizeCheck <if condition=" checkFbCookie(9) eq 0 ">hidden</if>">{$vo.half_ball_away}</div>
+                                                <div class="ouCheck <if condition=" checkFbCookie(10) eq 0 ">hidden</if>">{$vo.half_europe_away}</div>
+                                            </td>
+                                            <td class="data-a"><div class="dataLink"><a href="{:U('/ypOdds@bf',['game_id'=>$vo[0],'sign'=>1])}" target="_blank">亚</a><a href="{:U('/eur_index@bf',['game_id'=>$vo[0]])}" target="_blank">欧</a><a href="{:U('/dataFenxi@bf',['game_id'=>$vo[0]])}" target="_blank" class="text-bblue">析</a>
+                                                <if condition="$vo[44] eq 1"><a href="{:U('/gambleDetails@bf',['game_id'=>$vo[0]])}" target="_blank" class="text-bblue">猜</a>
+                                                    <else/><a href="javascript:;" class="text-bblue">&nbsp;&nbsp;&nbsp;</a></if></div>
+                                            </td>
+                                            <td class="no-b-l">
+                                                <a href="javascript:;" class="tdBtn icon-default placeToTop"></a>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </notempty>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 比分事件 -->
+                    <div id="jinq_box"></div>
+                    <!-- 红牌进球弹框 -->
+                    <div class="prompt" style="position: fixed; z-index: 999; top: 210px; left: 50%; margin-left: -242px; min-width: 484px;"></div>
+                    <div class="prompt-bottom" style="position: fixed; z-index: 999; bottom: 10px;; left: 50%; margin-left: -242px; min-width: 484px;"></div>
+                    <!-- 半场比分出现（有比赛记录） -->
+                    <div id="winScore">
+                        <table class="table" width="100%" border="0" cellpadding="0" cellspacing="0" style="margin-bottom:0">
+                            <tbody>
+                                <tr>
+                                    <td width="43%" bgcolor="#ffffff" style="text-align:right;border-top: none;"><b class="winScore-home"></b></td>
+                                    <td width="14%" bgcolor="#ffffff">VS</td>
+                                    <td width="43%" bgcolor="#ffffff" style="text-align:left;border-top: none;"><b class="winScore-away"></b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table style="margin-bottom: 0px;" class="table table-bordered" width="530" border="0" align="center" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <thead>
+                                    <tr align="center" bgcolor="#f7f7f7">
+                                        <th width="60">赛事</th>
+                                        <th width="55">时间</th>
+                                        <th>主场球队</td>
+                                        <th width="35">比分</th>
+                                        <th>客场球队</td>
+                                        <th width="35">半场</th>
+                                        <th width="45">盘口</td>
+                                        <th width="35">盘路</th>
+                                        <th width="35">胜负</th>
+                                        <th width="35">大小</th>
+                                        <th width="35">单双</th>
+                                    </tr>
+                                </thead>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 半场比分出现（无比赛记录） -->
+                    <div id="noScore">
+                        <table class="table" style="background-color:#FFFFFF;width:276px;">
+                            <tbody>
+                                <tr><td style="line-height:30px; border: 1px solid #e5e5e5"><b id="noScoreContent"></b></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- 表格内容开始 -->
+          	</section>
+        </div>
+        <if condition="$header eq ''">
+            <include file="Public:s_elevator"/>
+            <include file="Public:footer"/>
+        </if>
+    </div>
+    <audio id="goalAudio"><source src="__PUBLIC__/Home/score/video/goal.mp3"></audio>
+    <audio id="cardAudio"><source src="__PUBLIC__/Home/score/video/card.mp3"></audio>
+</body>
+</html>
+<script>
+	var sprScore = {:json_encode(C('score'),JSON_UNESCAPED_UNICODE)};
+	var company  = {:json_encode(C('DB_COMPANY_INFO'),JSON_UNESCAPED_UNICODE)};
+    var mqHost = window.location.protocol == 'https:'? 'wss://'+'{$mqttOpt.ssl_host}'+':8084':'ws://'+'{$mqttOpt.host}'+':8083';
+</script>
+<script type="text/javascript" src="__PUBLIC__/Home/score/js/mqtt.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/backend_js/common/cookie.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/score/js/scoreLive.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/score/js/mqttConnect.js"></script>
+</block>

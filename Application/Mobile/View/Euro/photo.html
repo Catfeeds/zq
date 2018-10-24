@@ -1,0 +1,81 @@
+<extend name="Public/euro/base" />
+<block name="seo">
+    <title>2016欧洲杯美图_全球体育欧洲杯专题</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/euro/photo.css"> 
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="__CSS__/euro/swiper.css">
+    <script type="text/javascript" src="__JS__/euro/photo.js"></script> 
+        <script>
+        var DOMAIN="__DOMAIN__";
+    </script>
+</block>
+<block name="content">    
+    <!-- banner 切换 s-->
+    <section class="main_banner">
+        <!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <volist name='recommend' id='v'>
+                    <figure class="swiper-slide">
+                        <a href="{$v['url']}" target='_blank'>
+                            <img src="{$v.img}" alt="{$v.title}">
+                        </a>
+                        <figcaption>{$v.title}</figcaption>
+                    </figure>
+                </volist>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+    <!-- banner 切换 e-->
+
+
+
+
+    <!-- 视频 s-->
+    <section class="schedule_show"> 
+
+        <div class="photo_con clearfix">
+            <ul id='posts'>
+                <volist name='list' id='v'>
+                        <li class='js-list'>
+                            <a href="{:U('photo_detail@m',array('id'=>$v['id']))}">
+                                <figure><img src="{$v.img_array.1}" alt="{$v.title}"></figure>
+                                <figcaption class="q-two">{$v.title}</figcaption>
+                            </a>
+                        </li>
+                </volist>
+            </ul>
+        </div>
+        <input type="hidden" id="auto_load" value="1">
+            <div class="paged boxs">
+            <div class="load_gif fs24 text-999">
+                <span><img src="__PUBLIC__/Mobile/images/load.gif"></span>
+                <span>数据加载中，请稍候......</span>
+            </div>
+            <a href="javascript:;" class="btn btn-default boxs" style="display:none;cursor:default;" id="showLess">没有更多了</a>
+          </div>
+
+    </section>
+    <include file="Public/app-bar"/>
+    <!-- 视频 e-->
+</block>
+<block name='scripts'>
+    <!-- Swiper JS -->
+    <script src="__JS__/euro/swiper.js"></script>  
+    <script>
+        //banner 切换
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: 10000,
+            autoplayDisableOnInteraction: false
+        });
+    </script>
+</block>

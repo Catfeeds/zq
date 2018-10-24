@@ -1,0 +1,90 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<input type="hidden" name="gameType" value="{$_REQUEST.gameType}"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>上榜日期：</label>
+				<input type="text" readonly="true" datefmt="yyyyMMdd" class="date textInput readonly valid" value="{$_REQUEST.list_date}" name="list_date"><a class="inputDateButton" href="javascript:;">选择</a>
+			</li>
+			<li >
+				<label>手机号：</label>
+				<input name="username" value="{$_REQUEST.username}" type="text" placeholder="用户名"/>
+			</li>
+			<li >
+				<label>昵称：</label>
+				<input name="nick_name" value="{$_REQUEST.nick_name}" type="text" placeholder="昵称"/>
+			</li>
+			<li>
+				<label>排名筛选：</label>
+				<select name="rank" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.rank  eq '1'">selected</if> >前10名</option>
+					<option value="2" <if condition="$_REQUEST.rank  eq '2'">selected</if> >前50名</option>
+					<option value="3" <if condition="$_REQUEST.rank  eq '3'">selected</if> >前100名</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="icon" href="__URL__/breakRanking/gameType/{$_REQUEST.gameType}" target="ajaxTodo" title="你确定要刷新排行榜吗？"><span>刷新昨日红人榜</span></a></li>
+		</ul>
+	</div>
+
+	<table class="list" width="100%" layoutH="117">
+		<thead>
+		<tr>
+			<th width="3%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>ID</th>
+			<th width="5%">上榜时间</th>
+			<th width="5%" orderField="ranking" <if condition="$_REQUEST._order eq 'ranking'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>排名</th>
+			<th width="10%">昵称</th>
+			<th width="5%">竞猜场数</th>
+			<th width="5%">赢</th>
+			<th width="5%" <if condition="$_REQUEST.gameType eq 2">style="display:none;"</if>>赢半</th>
+			<th width="5%">平</th>
+			<th width="5%">输</th>
+			<th width="5%" <if condition="$_REQUEST.gameType eq 2">style="display:none;"</if>>输半</th>
+			<th width="5%">胜率</th>
+			<th width="5%">获得积分</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+				    <td>{$vo['list_date']}（周{$vo.list_date|returnWeek}）</td>
+					<td>{$vo['ranking']}</td>
+					<td><a style="color: black" href="__ADMIN__/FrontUser/index/id/{$vo['user_id']}" target="navTab">{$vo['nick_name']}</a></td>
+					<td>{$vo['gameCount']}</td>
+					<td>{$vo['win']}</td>
+					<td <if condition="$_REQUEST.gameType eq 2">style="display:none;"</if>>{$vo['half']}</td>
+					<td>{$vo['level']}</td>
+					<td>{$vo['transport']}</td>
+					<td <if condition="$_REQUEST.gameType eq 2">style="display:none;"</if>>{$vo['donate']}</td>
+					<td>{$vo['winrate']}%</td>
+					<td>{$vo['pointCount']}</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

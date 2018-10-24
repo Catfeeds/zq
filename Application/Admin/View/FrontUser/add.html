@@ -1,0 +1,251 @@
+<style>
+    .pageFormContent span{line-height: 21px;}
+</style>
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone);" target="callbackframe">
+		<input type="hidden" name="id" value="{$vo.id}" />
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<span style="color: red;padding-left: 130px;">注意：手机号、QQ绑定、微信绑定、微博绑定至少填一个</span>
+			</div>
+			<div class="unit">
+				<label>手机号<b style="color:red">！</b>：</label>
+				<input type="text" class="alphanumeric" name="username" value="{$vo.username}" placeholder="带！号必填其一"  size="40">
+			</div>
+			<div class="unit">
+				<label>密码：</label>
+				<input type="text" name="password" size="40" rangelength="6,15" placeholder="密码" class="<empty name='vo.id'>required</empty> alphanumeric checkpass"/>
+			</div>
+			<div class="unit">
+				<label>昵称：</label>
+				<input type="text" class="required" name="nick_name" rangelength="2,10" value="{$vo.nick_name}" placeholder="用户昵称" size="40">
+			</div>
+			<div class="unit">
+				<label>擅长联赛：</label>
+				<input type="text" class="" name="be_good_at" value="{$vo.be_good_at}" placeholder="擅长联赛" size="40">
+			</div>
+			<div class="unit">
+				<label>真实姓名：</label>
+				<input type="text" class="" name="true_name" value="{$vo.true_name}" placeholder="真实姓名" size="40">
+			</div>
+			<div class="unit">
+				<label>个人简介：</label>
+				<textarea name="descript" rows="2" cols="50" maxlength="20" placeholder="个人简介">{$vo.descript}</textarea>
+			</div>
+			<div class="unit">
+				<label>专家广告语：</label>
+				<textarea name="avder" rows="1" maxlength="12" cols="50" placeholder="广告语">{$vo.avder}</textarea>
+			</div>
+			<div class="unit">
+				<label>排序：</label>
+				<input type="text" class="digits" name="sort" value="{$vo.sort}"  placeholder="专家排序">
+			</div>
+            <div class="unit">
+				<label>身份证：</label>
+				<input type="text" class="" name="identfy" value="{$vo.identfy}"  placeholder="身份证号码" size="40">
+			</div>
+			<div class="unit">
+				<label>支付宝：</label>
+				<input type="text" class="" name="alipay_id" value="{$vo.alipay_id}"  placeholder="支付宝账号" size="40">
+			</div>
+			<div class="unit">
+				<label>银行卡号：</label>
+				<input type="text" class="" name="bank_card_id" value="{$vo.bank_card_id}"  placeholder="银行卡号" size="40">
+			</div>
+			<div class="unit" style="margin-left: 125px;">
+				<span>银行名称：</span>
+				<span style="color: red;">{$vo.bank_name}</span>
+				&nbsp;&nbsp;
+				<span >开户银行名称：</span>
+				<span style="color: red;">{$vo.bank_full_name}</span>
+			</div>
+			<div class="unit">
+				<label>开户地址：</label>
+				<input type="text" class="" name="bank_region" value="{$vo['bank_region']}" placeholder="银行卡开户地址" size="40">
+			</div>
+			<div class="unit">
+				<label>QQ绑定<b style="color:red">！</b>：</label>
+				<input type="text" class="" name="qq_unionid" value="{$vo.qq_unionid}" placeholder="带！号必填其一" size="40">
+			</div>
+
+			<div class="unit">
+				<label>微信绑定<b style="color:red">！</b>：</label>
+				<input type="text" class="" name="weixin_unionid" value="{$vo.weixin_unionid}" placeholder="带！号必填其一" size="40">
+			</div>
+			<div class="unit">
+				<label>微博绑定<b style="color:red">！</b>：</label>
+				<input type="text" class="" name="sina_unionid" value="{$vo.sina_unionid}" placeholder="带！号必填其一" size="40">
+			</div>
+            <div class="unit">
+				<label>移动绑定<b style="color:red">！</b>：</label>
+				<input type="text" class="" name="mm_unionid" value="{$vo.mm_unionid}" placeholder="带！号必填其一" size="40">
+			</div>
+			<if condition="$_REQUEST['id'] neq ''">
+				 <div class="unit">
+					<label>积分：{$vo.point}</label>
+					<label>总金币：{$vo['unable_coin']+$vo['coin']}</label>
+					<label>可提金币：{$vo.coin}</label>
+					<label>冻结金币：{$vo.frozen_coin}</label>
+				</div>
+				<div class="unit">
+					<label style="width: 250px;">注册时间：{:date('Y-m-d H:i:s',$vo['reg_time'])}</label>
+					<label style="width: 250px;">上次登录：{:date('Y-m-d H:i:s',$vo['login_time'])}</label>
+				</div>
+				<div class="unit">
+					<label style="width: 160px;">登录ip：{$vo.last_ip}</label>
+					<label style="width: 120px;">登陆版本：{$vo.last_login_ver}</label>
+					<label style="width: 80px;">渠道：{$vo.channel_code}</label>
+					<label style="width: 80px;">平台：{$vo.platform}</label>
+				</div>
+			</if>
+			<div class="unit">
+				<label style="width: 150px;">是否机器人：
+					<select class="small bLeft"  name="is_robot" style="float: none;">
+						<option <eq name="vo.is_robot" value="0" >selected</eq> value="0">否</option>
+						<option <eq name="vo.is_robot" value="1" >selected</eq> value="1">是</option>
+					</select>
+				</label>
+				<label  style="width: 150px;">是否专家：
+					<select class="small bLeft"  name="is_expert" style="float: none;">
+						<option <eq name="vo.is_expert" value="0" >selected</eq> value="0">否</option>
+						<option <eq name="vo.is_expert" value="1" >selected</eq> value="1">是</option>
+					</select>
+				</label>
+			</div>
+			<div class="unit">
+				<label style="width: 160px;">邀请好友状态：
+					<select class="small bLeft"  name="invite_status" style="float: none;">
+						<option <eq name="vo.invite_status" value="1" >selected</eq> value="1">可用</option>
+						<option <eq name="vo.invite_status" value="0" >selected</eq> value="0">禁用</option>
+					</select>
+				</label>
+				<label style="width: 170px;">专家发布类型：
+					<select class="small bLeft"  name="expert_type" style="float: none;">
+						<option <eq name="vo.expert_type" value="1" >selected</eq> value="1">足球</option>
+						<option <eq name="vo.expert_type" value="2" >selected</eq> value="2">篮球</option>
+						<option <eq name="vo.expert_type" value="3" >selected</eq> value="3">电竞</option>
+						<option <eq name="vo.expert_type" value="4" >selected</eq> value="4">综合</option>
+						<option <eq name="vo.expert_type" value="5" >selected</eq> value="5">运营专用</option>
+					</select>
+				</label>
+			</div>
+			<div class="unit">
+				<label>是否会员：</label>
+				<select class="small bLeft" name="is_vip" id="changeVip">
+					<option <eq name="vo.is_vip" value="0" >selected</eq> value="0">否</option>
+					<option <eq name="vo.is_vip" value="1" >selected</eq> value="1">是</option>
+				</select>
+				<label style="width: 300px">
+					<span style="float: left;">到期时间：</span>
+					<input type="text" class="date textInput readonly" datefmt="yyyy-MM-dd" readonly="true" name="vip_time" <if condition="$vo['vip_time'] gt 0"> value="{$vo['vip_time']|date="Y-m-d",###}"<else />value=""</if> size="10" />
+				</label>
+			</div>
+			<div class="unit">
+				<label>屏蔽资讯评论：</label>
+                <input type="radio" name="is_gag"  value="0" <eq name="vo.is_gag" value="0">checked</eq> />正常
+                <input type="radio" name="is_gag"  value="1" <eq name="vo.is_gag" value="1">checked</eq> />屏蔽
+			</div>
+			<div class="unit" style="padding-top:10px;">
+			    <label>屏蔽帖子评论：</label>
+			    <input name="community_status" type="radio" value="0" <if condition="$vo['community_status'] eq 0 or $vo['community_status'] lt time()">checked</if> />否
+			    <input name="community_status" type="radio" value="1" <if condition="!in_array($vo['community_status'],[0,2]) and $vo['community_status'] gt time()">checked</if> />禁言一天
+			    <input name="community_status" type="radio" value="2" <if condition="$vo.community_status eq 2">checked</if> />永久
+			</div>
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft" name="status" id="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+				</select>
+			</div>
+			<div id="status_desc" class="unit" <if condition="$vo.status eq 1">style="display: none;"</if>>
+				<label>禁用原因：</label>
+				<textarea name="status_desc" rows="1" maxlength="12" cols="50" placeholder="禁用原因">{$vo.status_desc}</textarea>
+			</div>
+			<div class="unit">
+				<label>头像：</label>
+				<ul class="tabImg">
+					<li>
+						<input id="viewUploadInput_555" name="fileInput" type="file" onChange="previewImage(555)" style="display:none;" />
+						<a href="javascript:void(0);">
+							 <span id="viewUploadDiv_555">
+								<empty name="vo.face">
+									<img src="__PUBLIC__/Home/images/common/face.png" width="80" height="80" id="viewUploadImg_555"/>
+								<else/>
+									<img id="viewUploadImg_555" width='80' height='80' border=0 src="{$vo.face}">
+								</empty>
+							 </span>
+						</a>
+						<div id="poiter_555" class="poiter">
+							<empty name="vo.face">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_555')">添加图片</a>
+							<else/>
+								<a title="删除" onclick="delPic({$vo.id});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_555')">重传</a>
+							</empty>
+						</div>
+					</li>
+				</ul>
+				<span class="inputInfo">（提示：请尽量上传正方形图片）</span>
+			</div>
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+	$(function(){
+		$('.tabImg li').hover(function(e) {
+			$(this).children('div').stop().animate({'top':'0'},300);
+		},function(){
+			$(this).children('div').stop().animate({'top':'80px'},300);
+		});
+	});
+	function delPic(id){
+		if(confirm("确认要删除吗？") == false){
+			return false;
+		}
+		//异步执行删除
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/FrontUser/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                	$("#viewUploadInput_555").val("");
+					$("#viewUploadImg_555").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+					var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_555')\">添加图片</a>";
+					$("#poiter_555").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+	$("#status").on('change',function(){
+		var status = $(this).val();
+		if(status == 0){
+			$('#status_desc').show();
+		}else{
+			$('#status_desc').hide();
+		}
+	})
+</script>
+
+

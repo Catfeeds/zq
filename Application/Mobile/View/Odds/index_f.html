@@ -1,0 +1,31 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>全球体育手机网赔率指数</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/zhishu.css">
+    <script type="text/javascript" src="__JS__/odds.js"></script>
+</block>
+<block name="header"></block>
+<block name="nav"></block>
+<block name="footer"></block>
+<block name="content">
+    <!-- 内容 s -->
+    <section class="odds_con contentPt clearfix" style="padding-top: 0;">
+        <div class="gameLive"></div>
+        <div id="rankListMore" class="paged boxs" style="display:block;">
+            <div class="load_gif fs24 text-999">
+                <span><img src="__IMAGES__/load.gif"></span>
+                <span>正在加载更多的数据...</span>
+            </div>
+        </div>
+    </section>
+    <!-- 内容 e -->
+</block>
+<block name="scripts">
+    <script>
+        var cookieUa = '_f';
+    </script>
+    <script type="text/javascript" src="__JS__/Odds/index.js"></script>
+</block>

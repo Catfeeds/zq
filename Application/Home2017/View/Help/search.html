@@ -1,0 +1,19 @@
+<div class="hc-banner">
+	<div class="hc-serch-con">
+    	<div class="form">
+            <input type="text" id="key" value="{$keyword}" class="text" placeholder="请输入你关心的问题关键字">
+            <button onclick="search()" class="button btn-blue">搜索</button>
+        </div>
+    </div>
+</div>
+
+<script>
+	function search(){
+		var keyword = $("#key").val();
+		if(keyword == ''){
+			showMsg("请输入你关心的问题关键字",'','error');
+			return;
+		}
+		window.location.href="/help_search/"+keyword+".html";
+	}
+</script>

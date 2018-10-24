@@ -1,0 +1,77 @@
+<extend name="Public/base" />
+<block name="body">
+    <body onload="showState()">
+</block>
+<block name="header">
+    <!-- 顶部开始 -->
+    <include file="Public/header_inside"/>
+    <!-- 顶部结束 -->
+</block>
+<block name="append">
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__CSS__/pageSet.css"> 
+    <!-- 本页需要引用的js --> 
+    <script type="text/javascript" src="__JS__/pageSet.js"></script>
+</block>
+<block name="nav"></block>
+
+<block name="content">
+	   <!-- 内容 s -->
+	   <section class="set_con clearfix">
+
+	   	    <table class="tb_set" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+              <tr>
+                  <th colspan="3">提示设置</th>  
+              </tr>
+           
+              <tr>
+                  <td>进球提示</td>
+                  <td><input type="checkbox" class="checkbox" id="scoreSound"  onclick="clickScoreSound(this)"  /><label for="scoreSound">声音</label></td>
+                  <td><input type="checkbox" class="checkbox" id="scoreTan" onclick="clickScoreTan(this)" /><label for="scoreTan">弹窗</label></td>
+              </tr> 
+              <tr>
+                  <td>红牌提示</td>
+                  <td><input type="checkbox" class="checkbox" id="redSound" onclick="clickRedSound(this)" /><label for="redSound">声音</label></td>
+                  <td><input type="checkbox" class="checkbox" id="redTan" onclick="clickRedTan(this)" /><label for="redTan">弹窗</label></td>
+              </tr> 
+
+              <tr>
+                  <th colspan="3">首页设置</th>  
+              </tr>
+              <tr>
+                  <td>黄牌显示</td>
+                  <td><input type="checkbox" class="checkbox" id="yellowShow" onclick="clickYellowShow(this)" /><label for="yellowShow">&nbsp;</label></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>排名显示</td>
+                  <td><input type="checkbox" class="checkbox" id="rankShow" onclick="clickRankShow(this)" /><label for="rankShow">&nbsp;</label></td>
+                  <td></td>
+              </tr> 
+
+              <tr>
+                  <th colspan="3">其它设置</th>  
+              </tr>
+              <tr>
+                  <td>语言设置</td>
+                  <td><label><input type="radio" class="radio" name="lang" <eq name='Think.cookie.language' value='0'>checked="checked"</eq> value="0" onclick="clickLanguage(this)" />简体</label></td>
+                  <td><label><input type="radio" class="radio" name="lang" <eq name='Think.cookie.language' value='1'>checked="checked"</eq> value="1" onclick="clickLanguage(this)" />繁体</label></td> 
+              </tr>
+              <tr>
+                  <td>页面刷新间隔</td>
+                  <td>
+                  <select name="select"  class="select" id="refreshTime" onchange="selectRefresh(this)">
+                    <option value="3">3秒</option>
+                    <option value="5">5秒</option>
+                    <option value="8">8秒</option>    
+                    <option value="10">10秒</option>
+                  </select>
+                  </td>
+                  <td class="q-tc"><a href="{$Think.cookie.redirectUrl}" id="sele_confirm">确定</a></td>
+              </tr> 
+            </tbody>
+          </table> 
+	   </section>
+	   <!-- 内容 e -->
+</block>

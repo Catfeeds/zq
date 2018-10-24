@@ -1,0 +1,95 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/rewardLog" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li style="width: auto;margin-right: 25px;">
+				<label>时间段：</label>
+				<input type="text" readonly="true" datefmt="yyyyMMdd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="11">至
+				<input type="text" readonly="true" datefmt="yyyyMMdd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="11">
+			</li>
+			<li >
+				<label style="width:100px;">用户名&nbsp;/&nbsp;昵称：</label>
+				<input name="username" value="{$_REQUEST.username}" type="text" placeholder="用户名、昵称"/>
+			</li>
+			<li style="width: 250px;">
+				<label>赛事类型：</label>
+				<select name="game_type" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.game_type eq '1'">selected</if> >足球</option>
+					<option value="2" <if condition="$_REQUEST.game_type eq '2'">selected</if> >篮球</option>
+				</select>
+			</li>
+			<li>
+				<label>榜类型：</label>
+				<select name="date_type" class="combox" onchange="$(form).submit()">
+					<option value="" selected>全部</option>
+					<option value="1" <if condition="$_REQUEST.date_type eq '1'">selected</if> >周榜</option>
+					<option value="2" <if condition="$_REQUEST.date_type eq '2'">selected</if> >月榜</option>
+					<option value="3" <if condition="$_REQUEST.date_type eq '3'">selected</if> >季榜</option>
+				</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<span>发放总金额：<em style="color: red;">{$coin}</em></span>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="10%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>
+			<th width="10%">榜类型</th>
+			<th width="10%">赛事类型</th>
+			<th width="15%">时间</th>
+			<th width="10%" orderField="ranking" <if condition="$_REQUEST._order eq 'ranking'">class="{$_REQUEST._sort}"</if>>排名</th>
+			<th width="25%">昵称</th>
+			<th width="20%">奖励金额</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>
+					<switch name="vo.date_type">
+				        <case value="1">周榜</case>
+				        <case value="2">月榜</case>
+				        <case value="3">季榜</case>
+				    </switch>
+				    </td>
+			    	<td>
+			    	<switch name="vo.game_type">
+			            <case value="1">足球</case>
+			            <case value="2">篮球</case>
+			        </switch>
+			        </td>
+				    <td>{$vo['begin_date']} - {$vo['end_date']}</td>
+					<td>{$vo['ranking']}</td>
+					<td>{$vo['nick_name']}</td>
+					<td>{$vo.coin}</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

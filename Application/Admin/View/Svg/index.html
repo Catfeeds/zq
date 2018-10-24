@@ -1,0 +1,143 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+		<input type="hidden" name="gameType" value="{$_REQUEST.gameType}"/>
+        <div class="searchBar">
+            <ul class="searchContent">
+				<li>
+					<label>賽程ID(365)：</label>
+					<input type="text" value="{$_REQUEST.bet_game_id}" placeholder="賽程ID(365)" name="bet_game_id" size="15">
+				</li>
+                <li>
+                    <label>比赛时间：</label>
+                    <input class="date textInput" type="text" datefmt="yyyy-MM-dd HH:mm" name="startTime" value="{$_REQUEST.startTime}" size="16">
+                    至
+                    <input class="date textInput" type="text" datefmt="yyyy-MM-dd HH:mm" name="endTime" value="{$_REQUEST.endTime}" size="16">
+                </li>
+                <li>
+                    <label>联赛名称：</label>
+                    <input type="text" value="{$_REQUEST.union_name}" placeholder="联赛名称" name="union_name" size="15">
+                </li>
+                <li>
+                    <label>主队名称：</label>
+                    <input type="text" value="{$_REQUEST.home_team_name}" placeholder="主队名称" name="home_team_name" size="15">
+                </li>
+                <li>
+                    <label>客队名称：</label>
+                    <input type="text" value="{$_REQUEST.away_team_name}" placeholder="客队名称" name="away_team_name" size="15">
+                </li>
+                <li>
+                    <label>赛程ID：</label>
+                    <input type="text" value="{$_REQUEST.game_id}" placeholder="" name="game_id">
+                </li>
+                <li>
+                    <label>状态：</label>
+                    <select name="is_crawl" class="combox" onchange="$(form).submit()">
+                        <option value="" selected>全部</option>
+                        <option value="0" <if condition="$_REQUEST.is_crawl eq '0'">selected</if> >未开始</option>
+                        <option value="1" <if condition="$_REQUEST.is_crawl eq '1'">selected</if> >进行中</option>
+                        <option value="-1" <if condition="$_REQUEST.is_crawl eq '-1'">selected</if> >完结</option>
+                    </select>
+                </li>
+                <li>
+                    <label>是否关联上：</label>
+                    <select name="is_link" class="combox" onchange="$(form).submit()">
+                        <option value="" selected>全部</option>
+                        <option value="1" <if condition="$_REQUEST.is_link eq '1'">selected</if> >是</option>
+                        <option value="0" <if condition="$_REQUEST.is_link eq '0'">selected</if> >否</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<!--<th width="9%" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"</if>>ID</th>-->
+			<th width="5%" orderField="game_id" <if condition="$_REQUEST._order eq 'game_id'">class="{$_REQUEST._sort}"</if>>赛程ID</th>
+			<th width="5%">赛程ID（365）</th>
+			<th width="8%">源动画ID</th>
+			<th width="12%">联赛名称</th>
+			<th width="3%">比赛状态</th>
+			<th width="10%">主队名称</th>
+			<th width="10%">客队名称</th>
+			<th width="8%">比赛时间(捷报)</th>
+			<th width="8%">比赛时间(365)</th>
+			<th width="8%">更新时间</th>
+			<th width="6%">抓取状态</th>
+			<th width="4%">是否关联上</th>
+			<th width="5%">動畫圖標(365)</th>
+			<th width="4%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<!--<td>{$vo['id']}</td>-->
+					<td><a href="{$vo['svg_url']}" target="_blank" title="查看动画">{$vo['game_id']}</a></td>
+					<td>{$vo['game_id_365']}</td>
+					<td>{$vo['game_key']}</td>
+				    <td>{$vo['union_name']}</td>
+				    <td>
+						<switch name="vo.game_state">
+					        <case value="0">未开</case>
+					        <case value="1">上半场</case>
+					        <case value="2">中场</case>
+					        <case value="3">下半场</case>
+					        <case value="4">加时</case>
+					        <case value="-11">待定</case>
+					        <case value="-12">腰斩</case>
+					        <case value="-13">中断</case>
+					        <case value="-14">推迟</case>
+					        <case value="-1">完场</case>
+					        <case value="-10">取消</case>
+					    </switch>
+					</td>
+					<td>{$vo['home_team_name']}</td>
+					<td>{$vo['away_team_name']}</td>
+					<td>{$vo['jb_time']}</td>
+					<td>{$vo['game_date']}</td>
+					<td>{$vo['update_time']}</td>
+					<td>
+						<switch name="vo.is_crawl">
+							<case value='1'><div style="color: red">抓取中</div></case>
+							<case value='-1'><div style="color: green">已完成</div></case>
+							<default />未开始
+						</switch>
+					</td>
+					<td>
+						<switch name="vo.is_link">
+							<case value='0'><div style="color: red">待关联</div></case>
+							<case value='1'>{$vo['is_link']|getStatus}</case>
+						</switch>
+					</td>
+					<td>
+						{$vo['is_icon']|getStatus}
+					</td>
+					<td>
+						<a href="__URL__/doLink/id/{$vo.game_id_365}/gameType/{$_REQUEST.gameType}" target="dialog" mask="true" height="800" width="1200">编辑</div></a>
+						<!--<a href="__ADMIN__/Against/index/gameType/{$_REQUEST.gameType}/gtime/{$vo['gtime']}" target="navTab" mask="true" title="相关赛程" rel="checkgame">查看</a>-->
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+	<include file="Public:pagerNum" />
+</div>
+

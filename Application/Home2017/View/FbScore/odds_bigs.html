@@ -1,0 +1,48 @@
+<include file="Public:header"/>
+<block name="body">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/common.css"> 
+    <!-- 本页需要引用的css --> 
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/score/odds.css"> 
+	<!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__PUBLIC__/Home/js/score/htmlwidth.js"></script>
+        <include file="Public:top_index" />
+        <include file="FbScore/against"/>
+            <include file="FbScore/subnav"/>
+    <section class="odds_con clearfix">
+
+        <!-- 导航切换 s-->
+        <nav class="odds_nav clearfix">
+            <ul>
+                <li><a href="{:U('odds_asia/'.$_GET['scheid'].'@bf')}">亚赔</a></li>
+                <li><a href="{:U('odds_euro/'.$_GET['scheid'].'@bf')}">欧赔</a></li>
+                <li class="on"><a href="{:U('odds_bigs/'.$_GET['scheid'].'@bf')}">大小</a></li>
+            </ul> 
+        </nav> 
+        <!-- 导航切换 e-->
+
+        <table class="tb_odds_bigs" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <th colspan="1">公司</th>
+                    <th colspan="3">初盘</th>
+                    <th colspan="3">即时盘</th>
+                </tr>
+            <volist name='data' id='v'>
+                <tr>
+                    <td>{$v.0}</td>
+                    <td>{$v.1}</td>
+                    <td>{$v.2}</td>
+                    <td>{$v.3}</td>
+                    <td <gt name='v.4' value='$v.1'>class='red'</gt><lt name='v.4' value='$v.1'>class='green'</lt>>{$v.4}</td>
+                    <td <gt name='v.res_now' value='$v.res_star'>class='red'</gt><lt name='v.res_now' value='$v.res_star'>class='green'</lt>>{$v.5}</td>
+                    <td <gt name='v.6' value='$v.3'>class='red'</gt><lt name='v.6' value='$v.3'>class='green'</lt>>{$v.6}</td>
+                </tr>
+            </volist>
+            </tbody>
+        </table> 
+    </section>
+    <!-- 内容 e -->
+<include file="Public:footer"/>
+<include file="Public:return_top"/>
+
+</block>

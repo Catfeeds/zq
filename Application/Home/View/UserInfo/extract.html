@@ -1,0 +1,155 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/userInfo/drawing_money.css">
+</block>
+<block name="content">
+    <include file="Public:top_user"/>
+    <div class="body">
+        <!-- 主体内容开始 -->
+        <div class="main">
+            <div class="main-in">
+                <!-- 内容切换开始 -->
+                <div class="main-mid clearfix">
+
+                    <!-- 左边的主体内容 -->
+                    <include file="Public:leftMenu"/>
+
+                    <!-- 右边的主体内容 -->
+                    <div class="pull-right">
+                        <div class="right-main">
+                            <div class="data-graph draw-con">
+                                <!-- Nav tabs -->
+                                <ul class="top-nav nav nav-tabs">
+                                    <li role="presentation"><a href="javascript:void(0);" class="current">提款</a></li>
+                                    <li role="presentation"><a href="{:U('UserInfo/bindBankCard')}">绑定银行卡</a></li>
+                                    <li role="presentation"><a href="{:U('UserInfo/bindAlipay')}">绑定支付宝</a></li>
+                                </ul>
+                                <!-- Nav tabs -->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <!-- 充值开始 -->
+                                    <div id="draw" class="line-graph clearfix">
+                                        <div class="drawing-list">
+                                            <dl class="clearfix">
+                                                <dt class="pull-left">可提现金金额：</dt>
+                                                <dd class="pull-left"><strong><em class="text-red">{$user.coin}</em>元</strong></dd>
+                                            </dl>
+                                            <if condition="$user.bank_card_id neq ''">
+                                                <dl class="clearfix">
+                                                    <dt class="pull-left">银行卡号：</dt>
+                                                    <dd class="pull-left">{$user.bank_card_id|mb_substr=###,0,4,'utf-8'} **** **** **** {$user.bank_card_id|mb_substr=###,-4,4,'utf-8'}</dd>
+                                                </dl>
+                                                <dl class="clearfix">
+                                                    <dt class="pull-left">银行名称：</dt>
+                                                    <dd class="pull-left">{$user.bank_name}</dd>
+                                                </dl>
+                                            </if>
+                                            <if condition="$user.alipay_id neq ''">
+                                                <dl class="clearfix">
+                                                    <dt class="pull-left">支付宝账号：</dt>
+                                                    <dd class="pull-left">{$user.alipay_id|hideStar}</dd>
+                                                </dl>
+                                            </if>
+
+
+                                            <form id="jsFrom">
+                                                <dl class="clearfix">
+                                                    <dt class="pull-left">提款金额：</dt>
+                                                    <dd class="pull-left input-position-relative">
+                                                        <input style="display: none;" type="password"/>
+                                                        <input id="txtUserName" class="form-control money" max="{$user.coin}" autocomplete="off" name="coin" type="text" placeholder="提款金额" data-msg-max="可提现金额为{$user.coin}元"/>
+                                                    </dd>
+                                                </dl>
+                                                <dl class="clearfix">
+                                                    <dt class="pull-left">提款密码：</dt>
+                                                    <dd class="pull-left input-position-relative">
+                                                        <input style="display: none;" type="password"/>
+                                                        <input id="paw" class="form-control" autocomplete="off" name="bank_extract_pwd" type="password" placeholder="提款密码"/>
+                                                    <dt style="font-weight: inherit;">&nbsp;&nbsp;&nbsp;<a href="{:U('User/re_phone',array('operation'=>'backDrawPass'))}" style="color: blue;">忘记密码？</a> </dt>
+                                                    </dd>
+                                                </dl>
+                                                <div class="form-group">
+                                                    <div class="checkbox" style="margin-left: 70px;">
+                                                        <label>
+                                                            <input type="checkbox" checked id="agree">我已阅读并接受<a target="_blank" href="{:U('Copyright/service')}" class="text-green">《全球体育服务协议》</a>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix">
+                                                    <input type="submit" class="btn btn-blue" value="确认提款" />
+                                                </div>
+                                            </form>
+                                            <div class="notice">
+                                                <dl>
+                                                    <dt class="text-red">注意：</dt>
+                                                    <dd><span>1、</span><em class="text-danger">周一至周五每日工作时间内处理提款，法定节假日除外。</em></dd>
+                                                    <dd><span>2、</span><em class="text-danger">提款时，单次最低提款金额为{$minMoney}元，最高可提金额10000元，且为整数。</em></dd>
+                                                    <dd><span>3、</span><em class="text-danger">会员每天可申请提款一次。</em></dd>
+                                                    <dd><span>4、</span><em class="text-danger">提款审核至到帐时间一般为3-5个工作日!</em></dd>
+                                                    <dd><span>5、</span><em class="text-danger">若超过一周仍未到账，请及时与本站工作客服联系。</em></dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 充值结束 -->
+                                </div>
+                                <!-- Tab panes -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容切换结束 -->
+            </div>
+        </div>
+        <!-- 主体内容开始 -->
+    </div>
+</block>
+<block name='js'>
+    <script>
+        var minMoney = "{$minMoney}";
+        console.log(minMoney);
+        $(function(){
+            $("#jsFrom").validate({
+                onkeyup : false,
+                rules: {
+                    coin: {required: true,range:[minMoney,10000],digits:true},
+                    bank_extract_pwd: {required: true},
+                },
+
+                messages : {
+                    coin :{
+                        required:"请输入提款金额",
+                        range:"每次提款金额最小为"+minMoney+"元,最大为10000元",
+                        digits:"请输入整数"
+                    },
+                    bank_extract_pwd :{
+                        required:"请输入提款密码"
+                    },
+                },
+                submitHandler:function(form){
+                    if($("#agree").is(':checked')==false){
+                        _alert("提示","您必须同意全球体育服务协议！");
+                        return;
+                    }
+                    var form = $(form);
+                    var data = form.serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: "/UserInfo/extract.html",
+                        data: data,
+                        dataType:'json',
+                        success: function(data){
+                            if(data.status){
+                                _alert("提示",data.info,"window.location.reload()");
+                            }else{
+                                $('#paw').val('');
+                                var html = "<label class='field-msg field-error' for='paw'>"+data.info+"</label>"
+                                $('#paw').after(html);
+                            }
+                        }
+                    });
+                }
+            });
+        })
+    </script>
+</block>

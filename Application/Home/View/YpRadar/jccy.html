@@ -1,0 +1,144 @@
+<extend name="Public:layout"/>
+<block name='seo'>
+    <title>竞彩差异_全球体育网</title>
+    <meta name="keywords" content="让球盘,数据分析">
+    <meta name="description" content="指数公司会对每场比赛的结果都做出概率判断，而结合上百家公司的概率数据跟官方实际的投注比例进行模型对比，当差异值比较大时，说明官方机构投注会存在较大的赔付风险，比赛爆冷的概率增加。">
+</block>
+<block name='css'>
+    <!-- 页面所需css -->
+    <link rel="stylesheet" href="__CSS__/ypRadar/radarData.css">
+</block>
+
+<block name="content">
+    <!-- theme -->
+    <div class="themeBox rdBody">
+    	<div class="themeBanner"><div class="themeBanTet">全球体育大数据全年已经覆盖450余个各级别足球赛事，近60000场比赛，每日处理赛前数据2000万条,利用独创的大数据AI人工智能算法结合比赛基本面、球队技战术数据、赔率必发等进行分析计算给出独有的分析数据，大大提高你的胜率。</div></div>
+        <include file="YpRadar:topLink" />
+        
+        <!-- main -->
+        <div class="main">
+            <div class="explain">
+                <p>赔率公司会对每场比赛的结果都做出概率判断，而结合上百家公司的概率数据跟官方实际的投注比例进行模型对比，当差异值比较大时，说明官方机构投注会存在较大的赔付风险，比赛爆冷的概率增加</p>
+                <p><span class="text-red">风险提示：</span>本产品所提供的数据内容仅供浏览和参考之用</p>
+            </div>
+            <!-- 当前位置 -->
+            <div class="position">
+                当前位置：<span class="now"><a href="https://www.qqty.com/" title="全球体育">全球体育首页</a></span> &gt; <span class="now"><a href="{:U('@sporttery')}" title="专家说彩">专家说彩</a></span> &gt;<span class="text-blue">盈盘雷达</span></div>
+            <!-- 当前位置 -->
+            <div class="subNav cySubNav clearfix">
+                <div class="subNavL pull-left">
+                    <ul class="clearfi">
+                      <li class="pull-left on"><a href="javascript:void(0);" title="竞彩差异"><span>竞彩差异</span> </a></li>
+                    </ul>
+                </div>
+                <a href="javascript:void(0);" title="竞彩差异" class="ctLink-class ctLink <eq name="param['playType']" value="1">on</eq>" data-playType="1">不让球</a>
+                <span class="ctLink">|</span>
+                <a href="javascript:void(0);" title="竞彩差异" class="ctLink-class ctLink <eq name="param['playType']" value="2">on</eq>" data-playType="2">让球</a>
+                <div class="subNavR pull-right">
+                    <div class="dropdown">
+                      <a id="dLabel" title="时间筛选" class="ddTime" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        时间筛选
+                        <span class="glyphicon glyphicon-menu-down"></span>
+                      </a>
+                    
+                      <ul class="dropdown-menu" aria-labelledby="dLabel">
+                          <foreach name="week" item="v" key="k">
+                              <li <eq name="param['date']" value="$v">class="on"</eq>><a href="#" data-date="{$v}" title="时间筛选">{$k}</a></li>
+                          </foreach>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="secSubNav cySecNav">
+                <a title="竞彩差异-主胜" href="javascript:void(0);" <eq name="param['chooseSide']" value="1">class="on"</eq> data-chooseSide="1">主胜</a>
+                <a title="竞彩差异-平局" href="javascript:void(0);" <eq name="param['chooseSide']" value="2">class="on"</eq> data-chooseSide="2">平局</a>
+                <a title="竞彩差异-客胜" href="javascript:void(0);" <eq name="param['chooseSide']" value="3">class="on"</eq> data-chooseSide="3">客胜</a>
+            </div>
+            <div class="dtTypeCon">
+                <!-- jccyBox -->
+                <empty name="data">
+                    <div class="dtBox dtNoneBox clearfix">
+                        <div><img src="__IMAGES__/ypRadar/none-data-bg.jpg" width="520" height="234"></div>
+                        <p><a href="javascript:void(0);" title="回査数据" class="text-666">回査数据 >></a></p>
+                    </div>
+                    <else />
+                    <div class="dtBox jccyBox jccySub clearfix">
+                    <div class="pull-left dtBoxIn">
+                        <ul>
+                            <foreach name="data" item="v" key="k">
+                            <li class="clearfix list <if condition='$k%4 eq 2'>graListL<elseif condition='$k%4 eq 3'/>graListR</if>">
+                                <a class=clearfix" title="竞彩差异"  target="_blank" href="{:U('/dataFenxi/game_id/'.$v['gameId'].'@bf')}">
+                                <div class="pull-left dLeft">
+                                    <div class="clearfix mb20">
+                                        <span class="pull-left text-999 mr10">{$v['betCode']}  {$v['unionName']|switchName=0,###}  {$v['gtime']}</span>
+                                        <notempty  name="v['handcp']">
+                                            <span class="pull-left text-666">{$v['handcp']}</span>
+                                        </notempty>
+                                    </div>
+                                    <p class="f16 mb10 text-hidden" title="{$v['homeTeamName']|switchName=0,###}"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,0}</span></empty>{$v['homeTeamName']|switchName=0,###}</p>
+                                    <p class="f16 text-hidden" title="{$v['awayTeamName']|switchName=0,###}"><empty name="v['score']"><else /><span class="pull-left text-red mr5">{$v['score'] | switchGoal=###,1}</span></empty>{$v['awayTeamName']|switchName=0,###}</p>
+                                </div>
+                                <div class="pull-left tzbl">
+                                    <p class="f16 text-center mb35 text-999">投注比例</p>
+                                    <p class="rowNum text-center">{$v['dealRatio']}</p>
+                                </div>
+                                <div class="pull-left gl">
+                                    <p class="f16 text-center mb35 text-999">概率</p>
+                                    <p class="rowNum text-center">{$v['probability']}</p>
+                                </div>
+                                <div class="pull-left cyz">
+                                    <p class="f16 text-center mb35 text-999">差异值</p>
+                                    <p class="rowNum text-center">{$v['differenceRatio']}</p>
+                                </div>
+                                </a>
+                            </li>
+                            </foreach>
+                        </ul>
+                    </div>
+                </div>
+                </empty>
+                <!-- jccyBox -->
+            </div>
+        </div>
+        <!-- main -->
+        
+    </div>
+    <!-- theme -->
+</block>
+
+<block name="js">
+    <!-- 页面所需的js -->
+    <script type="text/javascript" src="__JS__/ypRadar/radarData.js"></script>
+    <script type="text/javascript">
+        $(function(){
+
+            $('.ctLink-class').click(function(){
+                var playType = $(this).data('playtype');
+                var chooseSide = $('.secSubNav a.on').data('chooseside');
+                var date = $('.dropdown-menu li.on a').data('date');
+
+                loadData(playType, chooseSide, date);
+            });
+
+            $('.secSubNav a').click(function(){
+                var playType = $('.cySubNav a.on').data('playtype');
+                var chooseSide = $(this).data('chooseside');
+                var date = $('.dropdown-menu li.on a').data('date');
+
+                loadData(playType, chooseSide, date);
+            });
+
+            $('.dropdown-menu li a').click(function(){
+                var playType = $('.cySubNav a.on').data('playtype');
+                var chooseSide = $('.secSubNav a.on').data('chooseside');
+                var date = $(this).data('date');
+
+                loadData(playType, chooseSide, date);
+            });
+
+            function loadData(playType, chooseSide, date){
+                window.location.href = '?playType='+playType+'&chooseSide='+chooseSide+'&date='+date;
+            }
+        })
+    </script>
+</block>

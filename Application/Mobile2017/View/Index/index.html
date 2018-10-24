@@ -1,0 +1,759 @@
+<extend name="Public/base" />
+<block name="append">
+    <link rel="stylesheet" href="__CSS__/Olympic/swiper_banner.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/news.css?v=20171107">
+    <link rel="stylesheet" type="text/css" href="__CSS__/index/index.css">
+</block>
+<block name="nav">
+</block>
+<!-- 内容 s -->
+<block name="content">
+    <!-- banner 切换 s-->
+    <section class="main_banner " style="padding-top:0.8rem" >
+        <!-- Swiper -->
+        <div class="swiper-container swiper-container-horizontal">
+            <div class="swiper-wrapper">
+                <volist name='banner' id='v'>
+                    <figure class="swiper-slide" style="height: 3.4rem">
+                        <a href="{$v['url']}">
+                            <img src="{$v.img}" alt="{$v.title}" style="height: 3.6rem">
+                        </a>
+                        <figcaption>{$v.title}</figcaption>
+                    </figure>
+                </volist>
+            </div>
+            <!-- Add Pagination -->
+            <if condition="count($banner) gt 1">
+                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
+            </if>
+        </div>
+    </section>
+    <script src="__JS__/Olympic/swiper_banner.js"></script>
+    <!-- banner 切换 e-->
+    <section class="function_module" >
+        <ul class="moduleUl clearfix">
+            <li><a href="{:U('Guess/index')}"><p class="iconImg"><img src="__IMAGES__/index/icon/zqtj.png"></p><h4>足球推荐</h4></a></li>
+            <li><a href="{:U('Guess/new_put')}"><p class="iconImg"><img src="__IMAGES__/index/icon/dkgc.png"></p><h4>大咖广场</h4></a></li>
+            <li><a href="{:U('Intro/index')}"><p class="iconImg"><img src="__IMAGES__/index/icon/qwtj.png"></p><h4>球王推介</h4></a></li>
+            <li><a href="{:U('/list_n/10')}"><p class="iconImg"><img src="__IMAGES__/index/icon/djjp.png"></p><h4>独家解盘</h4></a></li>
+            <li><a href="{:U('Index/fbscore')}"><p class="iconImg"><img src="__IMAGES__/index/icon/zqbf.png"></p><h4>足球比分</h4></a></li>
+            <li><a href="{:U('Index/instantBk')}"><p class="iconImg"><img src="__IMAGES__/index/icon/lqbf.png"></p><h4>篮球比分</h4></a></li>
+            <li><a href="https://m.jrssports.com/"><p class="iconImg"><img src="__IMAGES__/index/icon/mfzb.png"></p><h4>免费直播</h4></a></li>
+            <li><a href="{:U('/list_n/54')}"><p class="iconImg"><img src="__IMAGES__/index/icon/xwzx.png"></p><h4>竞彩推荐</h4></a></li>
+        </ul>
+    </section>
+    <section class="function_module" style="padding-top: .2rem">
+        <!-- 热门大咖 s -->
+       <div class="pic_new_title"><img src="__IMAGES__/index/pic_new_title.jpg" alt="热门大咖"></div>
+        <!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="height: auto;">
+                  <div class="hot_tj clearfix">
+                        <ul>
+                            <volist name="selectList" id="vo" offset="0" length="4">
+                                <li>
+                                    <a href="{:U('Guess/other_page',['user_id'=>$vo['user_id'],'type'=>1])}">
+                                        <div class="hot_tj_img">
+                                            <img class="lazy" data-original="{$vo['face']}" src="__IMAGES__/index/headImg.png" alt="{$vo['nick_name']}">
+                                            <if condition="$vo.today_gamble eq 1"><span></span></if>
+                                        </div>
+                                        <div class="hot_tj_name">{$vo['nick_name']|msubstr=###,0,4}</div>
+                                        <div class="hot_tj_name hot_tj_type">亚盘</div>
+                                        <span class="record">近10中{$vo['tenGambleRate']}</span>
+                                    </a>
+                                </li>
+                            </volist>
+                            <volist name="selectRaceList" id="vo" offset="0" length="4">
+                                <li>
+                                    <a href="{:U('Guess/other_page',['user_id'=>$vo['user_id'],'type'=>2])}">
+                                        <div class="hot_tj_img">
+                                            <img class="lazy" data-original="{$vo['face']}" src="__IMAGES__/index/headImg.png" alt="{$vo['nick_name']}">
+                                            <if condition="$vo.today_gamble eq 1"><span></span></if>
+                                        </div>
+                                        <div class="hot_tj_name">{$vo['nick_name']|msubstr=###,0,4}</div>
+                                        <div class="hot_tj_name hot_tj_type">竞彩</div>
+                                        <span class="record">近10中{$vo['tenGambleRate']}</span>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="height: auto;">
+                    <div class="hot_tj clearfix">
+                        <ul>
+                            <volist name="selectList" id="vo" offset="4" length="4">
+                                <li>
+                                    <a href="{:U('Guess/other_page',['user_id'=>$vo['user_id'],'type'=>1])}">
+                                        <div class="hot_tj_img">
+                                            <img src="{$vo['face']}" alt="{$vo['nick_name']}">
+                                            <if condition="$vo.today_gamble eq 1"><span></span></if>
+                                        </div>
+                                        <div class="hot_tj_name">{$vo['nick_name']|msubstr=###,0,4}</div>
+                                        <div class="hot_tj_name hot_tj_type">亚盘</div>
+                                        <span class="record">近10中{$vo['tenGambleRate']}</span>
+                                    </a>
+                                </li>
+                            </volist>
+                            <volist name="selectRaceList" id="vo" offset="4" length="4">
+                                <li>
+                                    <a href="{:U('Guess/other_page',['user_id'=>$vo['user_id'],'type'=>2])}">
+                                        <div class="hot_tj_img">
+                                            <img src="{$vo['face']}" alt="{$vo['nick_name']}">
+                                            <if condition="$vo.today_gamble eq 1"><span></span></if>
+                                        </div>
+                                        <div class="hot_tj_name">{$vo['nick_name']|msubstr=###,0,4}</div>
+                                        <div class="hot_tj_name hot_tj_type">竞彩</div>
+                                        <span class="record">近10中{$vo['tenGambleRate']}</span>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="height: auto;">
+                  <div class="hot_tj clearfix">
+                        <ul>
+                            <volist name="selectList" id="vo" offset="8" length="4">
+                                <li>
+                                    <a href="{:U('Guess/other_page',['user_id'=>$vo['user_id'],'type'=>1])}">
+                                        <div class="hot_tj_img">
+                                            <img src="{$vo['face']}" alt="{$vo['nick_name']}">
+                                            <if condition="$vo.today_gamble eq 1"><span></span></if>
+                                        </div>
+                                        <div class="hot_tj_name">{$vo['nick_name']|msubstr=###,0,4}</div>
+                                        <div class="hot_tj_name hot_tj_type">亚盘</div>
+                                        <span class="record">近10中{$vo['tenGambleRate']}</span>
+                                    </a>
+                                </li>
+                            </volist>
+                            <volist name="selectRaceList" id="vo" offset="8" length="4">
+                                <li>
+                                    <a href="{:U('Guess/other_page',['user_id'=>$vo['user_id'],'type'=>2])}">
+                                        <div class="hot_tj_img">
+                                            <img src="{$vo['face']}" alt="{$vo['nick_name']}">
+                                            <if condition="$vo.today_gamble eq 1"><span></span></if>
+                                        </div>
+                                        <div class="hot_tj_name">{$vo['nick_name']|msubstr=###,0,4}</div>
+                                        <div class="hot_tj_name hot_tj_type">竞彩</div>
+                                        <span class="record">近10中{$vo['tenGambleRate']}</span>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="height: auto;">
+                    <div class="hot_tj clearfix">
+                        <ul>
+                            <volist name="selectList" id="vo" offset="12" length="4">
+                                <li>
+                                    <a href="{:U('Guess/other_page',['user_id'=>$vo['user_id'],'type'=>1])}">
+                                        <div class="hot_tj_img">
+                                            <img src="{$vo['face']}" alt="{$vo['nick_name']}">
+                                            <if condition="$vo.today_gamble eq 1"><span></span></if>
+                                        </div>
+                                        <div class="hot_tj_name">{$vo['nick_name']|msubstr=###,0,4}</div>
+                                        <div class="hot_tj_name hot_tj_type">亚盘</div>
+                                        <span class="record">近10中{$vo['tenGambleRate']}</span>
+                                    </a>
+                                </li>
+                            </volist>
+                            <volist name="selectRaceList" id="vo" offset="12" length="4">
+                                <li>
+                                    <a href="{:U('Guess/other_page',['user_id'=>$vo['user_id'],'type'=>2])}">
+                                        <div class="hot_tj_img">
+                                            <img src="{$vo['face']}" alt="{$vo['nick_name']}">
+                                            <if condition="$vo.today_gamble eq 1"><span></span></if>
+                                        </div>
+                                        <div class="hot_tj_name">{$vo['nick_name']|msubstr=###,0,4}</div>
+                                        <div class="hot_tj_name hot_tj_type">竞彩</div>
+                                        <span class="record">近10中{$vo['tenGambleRate']}</span>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="height: auto;">
+                    <div class="hot_tj clearfix">
+                        <ul>
+                            <volist name="selectList" id="vo" offset="16" length="4">
+                                <li>
+                                    <a href="{:U('Guess/other_page',['user_id'=>$vo['user_id'],'type'=>1])}">
+                                        <div class="hot_tj_img">
+                                            <img src="{$vo['face']}" alt="{$vo['nick_name']}">
+                                            <if condition="$vo.today_gamble eq 1"><span></span></if>
+                                        </div>
+                                        <div class="hot_tj_name">{$vo['nick_name']|msubstr=###,0,4}</div>
+                                        <div class="hot_tj_name hot_tj_type">亚盘</div>
+                                        <span class="record">近10中{$vo['tenGambleRate']}</span>
+                                    </a>
+                                </li>
+                            </volist>
+                            <volist name="selectRaceList" id="vo" offset="16" length="4">
+                                <li>
+                                    <a href="{:U('Guess/other_page',['user_id'=>$vo['user_id'],'type'=>2])}">
+                                        <div class="hot_tj_img">
+                                            <img src="{$vo['face']}" alt="{$vo['nick_name']}">
+                                            <if condition="$vo.today_gamble eq 1"><span></span></if>
+                                        </div>
+                                        <div class="hot_tj_name">{$vo['nick_name']|msubstr=###,0,4}</div>
+                                        <div class="hot_tj_name hot_tj_type">竞彩</div>
+                                        <span class="record">近10中{$vo['tenGambleRate']}</span>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="height: auto;">
+                    <div class="hot_tj clearfix">
+                        <ul>
+                            <volist name="selectList" id="vo" offset="20" length="4">
+                                <li>
+                                    <a href="{:U('Guess/other_page',['user_id'=>$vo['user_id'],'type'=>1])}">
+                                        <div class="hot_tj_img">
+                                            <img src="{$vo['face']}" alt="{$vo['nick_name']}">
+                                            <if condition="$vo.today_gamble eq 1"><span></span></if>
+                                        </div>
+                                        <div class="hot_tj_name">{$vo['nick_name']|msubstr=###,0,4}</div>
+                                        <div class="hot_tj_name hot_tj_type">亚盘</div>
+                                        <span class="record">近10中{$vo['tenGambleRate']}</span>
+                                    </a>
+                                </li>
+                            </volist>
+                            <volist name="selectRaceList" id="vo" offset="20" length="4">
+                                <li>
+                                    <a href="{:U('Guess/other_page',['user_id'=>$vo['user_id'],'type'=>2])}">
+                                        <div class="hot_tj_img">
+                                            <img src="{$vo['face']}" alt="{$vo['nick_name']}">
+                                            <if condition="$vo.today_gamble eq 1"><span></span></if>
+                                        </div>
+                                        <div class="hot_tj_name">{$vo['nick_name']|msubstr=###,0,4}</div>
+                                        <div class="hot_tj_name hot_tj_type">竞彩</div>
+                                        <span class="record">近10中{$vo['tenGambleRate']}</span>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination swiper-pagination-second"></div>
+        </div>
+       <!-- 热门大咖 e -->
+    </section>
+    <section class="player_con">
+        <ul class="playerUl">
+            <li class="clearfix playerUlLi">
+                <div class="fl liLeft">
+                     <div class="typeTitle"><if condition="$highListShow eq '1'">亚盘<else/>竞彩</if></div>
+                    <div class="typePic"><img src="__IMAGES__/index/hit-rate.jpg"></div>
+                </div>
+                <div class="fr liRight">
+                    <div class="clearfix liRightTop">
+                        <a <if condition="$highListShow eq '1'">href="{:U('Guess/other_page',['user_id'=>$highList['user_id'],'type'=>1])}"
+                        <else/>href="{:U('Guess/other_page',['user_id'=>$highList['user_id'],'type'=>2])}"</if> >
+                            <div class="fl topLeft01">
+                                <img src="{$highList['face']}">
+                            </div>
+                        </a>
+                        <div class="fl topLeft02">
+                            <ul>
+                                <a <if condition="$highListShow eq '1'">href="{:U('Guess/other_page',['user_id'=>$highList['user_id'],'type'=>1])}"
+                                     <else/>href="{:U('Guess/other_page',['user_id'=>$highList['user_id'],'type'=>2])}"</if> >
+                                    <li class="clearfix">
+                                        <span class="fl">{$highList['nick_name']|msubstr=###,0,6}</span>
+
+                                        <if condition="$highListShow eq '1'">
+                                            <em class="ya_text">亚: <i>LV{$highList['lv']}</i></em>
+                                            <else/>
+                                            <em class="ya_text">竞: <i>LV{$highList['lv_bet']}</i></em>
+                                        </if>
+                                        <span class="fr fs22 text-666" style="margin-top:.05rem">胜场:{$highList['win']}</span>
+                                    </li>
+                                    <li>
+                                        <ul class="clearfix rateUl fs22">
+                                            <li class="fl"><span>周胜率：</span><em>{$highList['winrate']}%</em></li>
+                                            <li class="fl"><span>月胜率：</span><em>{$highList['monthWinrate']|default=0}%</em></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="hitEm">
+                                            <em class="mingz">近10中{$highList['tenGambleRate']}</em>
+                                            <if condition="$highList.curr_victs GT '1'">
+                                                <em class="lians">{$highList['curr_victs']}连胜</em>
+                                            </if>
+
+                                        </div>
+                                    </li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="liRightBottom">
+                        <p class="fs26"><span class="text-666">最新推荐：</span>
+                        <if condition="$highList.home_team_name NEQ ''">
+                            {$highList['home_team_name']} <em class="text-orange">VS</em> {$highList['away_team_name']}</p>
+                        <else/>
+                            即将发布
+                        </if>
+                    </div>
+                </div>
+            </li>
+            <li class="clearfix playerUlLi">
+                <div class="fl liLeft">
+                 <div class="typeTitle jcTitle"><if condition="$highListShow eq '1'">竞彩<else/>亚盘</if></div>
+                    <div class="typePic"><img src="__IMAGES__/index/win-rate.jpg"></div>
+                </div>
+                <div class="fr liRight">
+                    <div class="clearfix liRightTop">
+                        <a <if condition="$highListShow eq '1'">href="{:U('Guess/other_page',['user_id'=>$winningList['user_id'],'type'=>2])}"
+                        <else/>href="{:U('Guess/other_page',['user_id'=>$winningList['user_id'],'type'=>1])}"</if> >
+                            <div class="fl topLeft01">
+                                <img src="{$winningList['face']}">
+                            </div>
+                        </a>
+                        <div class="fl topLeft02">
+                            <ul>
+                                <a <if condition="$highListShow eq '1'">href="{:U('Guess/other_page',['user_id'=>$winningList['user_id'],'type'=>2])}"
+                                    <else/>href="{:U('Guess/other_page',['user_id'=>$winningList['user_id'],'type'=>1])}"</if> >
+                                    <li class="clearfix">
+                                        <span class="fl">{$winningList['nick_name']|msubstr=###,0,6}</span>
+                                        <if condition="$highListShow eq '1'">
+                                            <em class="ya_text">竞: <i>LV{$winningList['lv_bet']}</i></em>
+                                        <else/>
+                                            <em class="ya_text">亚: <i>LV{$winningList['lv']}</i></em>
+                                        </if>
+
+                                        <span class="fr fs22 text-666">胜场:{$winningList['win']}</span>
+                                    </li>
+                                    <li>
+                                        <ul class="clearfix rateUl fs22">
+                                            <li class="fl"><span>周胜率：</span><em>{$winningList['winrate']}%</em></li>
+                                            <li class="fl"><span>月胜率：</span><em>{$winningList['monthWinrate']|default=0}%</em></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="hitEm">
+                                            <em class="mingz">近10中{$winningList['tenGambleRate']}</em>
+                                            <if condition="$winningList.curr_victs GT '1'">
+                                                <em class="lians">{$winningList['curr_victs']}连胜</em>
+                                            </if>
+                                        </div>
+                                    </li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="liRightBottom">
+                        <p class="fs26"><span class="text-666">最新推荐：</span>
+                        <if condition="$winningList.home_team_name NEQ ''">
+                            {$winningList['home_team_name']} <em class="text-orange">VS</em> {$winningList['away_team_name']}</p>
+                        <else/>
+                            即将发布
+                        </if>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <section class="new_put_con clearfix">
+        <!-- tab栏 s -->
+        <ul class="tabUl clearfix">
+            <li id="hightGamble" class="on"><a  href="javascript:;">大咖推荐</a></li>
+            <li id="exclusive" ><a href="javascript:void(0)">超值高手</a></li>
+            <li id="elite"><a href="javascript:void(0)">足球分析</a></li>
+        </ul>
+        <!--高手推荐-->
+        <div id="gambleList" class="new_tj com_dt clearfix" style="display:block;">
+            <div id="gambleListLoad" class="paged boxs" style="display:none;">
+                <div class="load_gif fs24 text-999">
+                    <span><img src="__IMAGES__/load.gif"></span>
+                    <span>正在加载更多的数据...</span>
+                </div>
+            </div>
+            <notempty name="recommendList">
+                <ul class="posts">
+                    <volist name='recommendList' id='v'>
+                        <li class="list">
+                            <a href="{:U('Guess/other_page',['user_id'=>$v['user_id'],'type'=>$v['play_type']])}">
+                                <div class="n_top clearfix">
+                                    <div class="n_top_left">
+                                        <img class="lazy" data-original="{$v['face']}" src="__IMAGES__/index/headImg.png" alt="{$v.nick_name}"/>
+                                        <div class="ntl_main fl">
+                                            <div class="ntl_name">{$v.nick_name} <em class="ya_text">
+                                                <if condition="$v.play_type eq '1' OR $v.play_type eq '-1' ">亚<else/>竞</if>: <i>LV{$v['lv']}</i></em>
+                                            </div>
+                                            <div class="ntl_per"><em>周胜: {$v['weekPercnet']}%</em>
+                                                <if condition="$v['curr_victs'] gt '1'"><em>{$v['curr_victs']}连胜</em></if>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="n_top_right">
+                                        <if condition="$v['tenGambleRate'] gt '5'">
+                                            <img src="__IMAGES__/index/ic_{$v['tenGambleRate']}.png" alt="">
+                                        </if>
+                                    </div>
+                                </div>
+                                <div class="p_1">
+                                    <div class="t_vs">
+                                        <if condition="$v.play_type eq '2' OR $v.play_type eq '-2'"><em>{$v['bet_code']} </em></if>
+                                        <em style="color: {$v.union_color}">{$v.union_name}</em>
+                                        <em>{$v['gDate']}</em>
+                                    </div>
+                                    <div class="etip">
+                                        <if condition="$v['desc'] neq '' and $v['is_trade'] eq '1'">
+                                            <span><img src="__IMAGES__/guess/fenxi.png" alt="分析"></span>
+                                        </if>
+                                        <if condition="$v['tradeCoin'] gt 0 and $v['is_trade'] eq '1'">
+                                            <span class="coins">{$v['tradeCoin']}</span>
+                                        </if>
+                                        <if condition="$v['tradeCoin'] eq 0 and $v['is_trade'] eq '1'">
+                                            <span><img src="__IMAGES__/guess/free.png" alt="免费"></span>
+                                        </if>
+                                    </div>
+                                </div>
+                                <p class="p_2">
+                                    {$v.home_team_name}
+                                    <if condition="$v.result eq 0">VS<else/><strong style="color: red">{$v.score|str_replace='-','：',###}</strong></if>
+                                    {$v.away_team_name}
+                                </p>
+                                <p class="p_3">玩法：<span>
+                                    <if condition="$v.play_type eq '1'">让球</if>
+                                    <if condition="$v.play_type eq '-1'">大小球</if>
+                                    <if condition="$v.play_type eq '2' OR $v.play_type eq '-2'">竞彩</if>
+                                </span>
+                                </p>
+                            </a>
+                            <if condition="$v['is_trade'] eq '1'">
+                                <if condition="$v.play_type eq '1' OR $v.play_type eq '-1' ">
+                                    <p class="p_4">推荐：<span>{$v.Answer} {$v.handcp} </span><em>（{$v.odds}）</em></p>
+                                </if>
+                                <if condition="$v.play_type eq '2' OR $v.play_type eq '-2' ">
+                                    <p class="p_4">推荐：<span>{$v.home_team_name} ({$v.handcp}) {$v.Answer} </span><em>（{$v.odds}）</em></p>
+                                </if>
+                                <p class="p_5 q-two">分析：<span>{$v.desc|default='暂无分析'}</span></p>
+                                <!-- 走：zou_res   黑：lose_res  红：game_res-->
+                                <if condition="$v['result'] eq '1' OR $v['result'] eq '0.5' "> <div class="game_res"> 红</div> </if>
+                                <if condition="$v['result'] eq '-1' OR $v['result'] eq '-0.5' "> <div class="game_res lose_res"> 黑</div> </if>
+                                <if condition="$v['result'] eq '2' "> <div class="game_res zou_res"> 走</div> </if>
+                                <if condition="$v['result'] eq '-10'"><div class="game_res" style="background:none;"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_cancel.png" alt=""></div></if>
+                                <if condition="$v['result'] eq '-11'"><div class="game_res" style="background:none;"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_pending.png" alt=""></div></if>
+                                <if condition="$v['result'] eq '-12'"><div class="game_res" style="background:none;"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_cut.png" alt=""></div></if>
+                                <if condition="$v['result'] eq '-13'"><div class="game_res" style="background:none;"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_interrupt.png" alt=""></div></if>
+                                <if condition="$v['result'] eq '-14'"><div class="game_res" style="background:none;"><img src="__PUBLIC__/Home/images/qw/ic_dyseal_putoff.png" alt=""></div></if>
+                                <else/>
+                                <a href="javascript:;" data-play="{$v['play_type']}"
+                                   onclick="payment(this,{$v.gamble_id},{$v.tradeCoin},1111)">
+                                    <if condition="$v.tradeCoin eq 0">
+                                        <div class="gold bg_green">免费</div>
+                                        <else/>
+                                        <div class="gold">{$v.tradeCoin}金币</div>
+                                    </if>
+                                </a>
+                            </if>
+                        </li>
+                    </volist>
+                </ul>
+                <div class="paged boxs">
+                    <a href="{:U('Guess/new_put')}" class="btn btn-green boxs" style="display:block;cursor:default;">点击查看更多</a>
+                </div>
+                <else/>
+                <div id="gambleRelease" class="paged boxs" style="margin-bottom: 1.2rem;">
+                    <div class="load_gif fs24 text-999"><span>即将发布</span></div>
+                </div>
+            </notempty>
+        </div>
+        <!--高手推荐end-->
+        <!--独家解读-->
+        <div id="superList" class="new_tj com_dt clearfix" style="display:none;height:1000px;">
+            <div id="superListLoad" class="paged boxs" style="display:none;">
+                <div class="load_gif fs24 text-999">
+                    <span><img src="__IMAGES__/load.gif"></span>
+                    <span>正在加载更多的数据...</span>
+                </div>
+            </div>
+            <ul class='posts'></ul><div id="superListMore" class="paged boxs">
+            </div>
+        </div>
+        <!--足球分析-->
+        <div id="publish6" class="news_con clearfix" style="display:none;height:1000px;">
+            <div id="publish6Load" class="paged boxs" style="display:none;">
+                <div class="load_gif fs24 text-999">
+                    <span><img src="__IMAGES__/load.gif"></span>
+                    <span>正在加载更多的数据...</span>
+                </div>
+            </div>
+            <ul class='posts'></ul>
+            <div id="publish6More" class="paged boxs">
+            </div>
+            <input type="hidden" id="class_id" value="{$class_id}">
+        </div>
+        <!-- 内容 e -->
+    </section>
+    <input id="user_auth"  type="hidden" value="{$user_auth.id}" name="user_auth" />
+    <div class="save_site" id="showDialog">
+        <div class="s_close"></div>
+            <img src="__PUBLIC__/Mobile/images/index/save_top.jpg" >
+            <div class="save_word">
+            <p>业界领先的比分赔率数据，高清直播视屏</p>
+            <p>想看就看，聚集业界知名竞彩专家，</p>
+            <p>独家解盘猛料随时享，玩推荐赢金币月入过万!</p>
+        </div>
+        <div class="save_tip">收藏网址，方便下次浏览哟~</div>
+    </div>
+    <div class="bNav clearfix">
+        <a href="{:U('Index/index')}" class="on"><i></i><span>首页</span></a>
+        <a href="{:U('Guess/new_put')}"><i></i><span>推荐王</span></a>
+        <a href="{:U('Intro/index')}"><i class=""></i><span>球王</span></a>
+        <a href="http://a.app.qq.com/o/simple.jsp?pkgname=cn.qqw.app"><i></i><span>下载APP</span></a>
+        <a href="{:U('User/index')}"><i></i><span>我的</span></a>
+    </div>
+</block>
+<block name="footer">
+    <include file="Public/footer_new"/>
+</block>
+{//js}
+<block name="scripts">
+<script>
+//收藏弹框
+$('.s_close').on('click',function(){
+   $('#maskLayer,.save_site').hide();
+});
+var DOMAIN = "m."+"__DOMAIN__";
+var IMAGES = "__IMAGES__";
+$(function(){
+    $('#js-modal-close').on('click',function () {
+        $('#show').hide();
+        $('#bg').hide();
+    });
+    //头像懒加载
+    function lazyload(){
+        $("img.lazy").lazyload({
+            effect: "fadeIn",
+            threshold : 10,
+            failurelimit:10
+        });
+    }
+    //banner 切换
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: false,
+        autoplayDisableOnInteraction: false
+    });
+    //头像懒加载
+    lazyload();
+    $('#hightGamble').click(function(event) {
+        $('#exclusive').removeClass('on');
+        $('#elite').removeClass('on');
+        $('#hightGamble').addClass('on');
+        $('#superList').css({display: 'none', });
+        $('#publish6').css({display: 'none', });
+        $('#gambleList').css({display: 'block', });
+    });
+    $('#exclusive').click(function(event) {
+        $('#exclusive').removeAttr('style')
+        $('#hightGamble').removeClass('on');
+        $('#elite').removeClass('on');
+        $('#exclusive').addClass('on');
+        $('#gambleList').css({display: 'none', });
+        $('#publish6').css({display: 'none', });
+        $('#superList').css({display: 'block', });
+        if ( $('#superList ul').html() == '')
+        {
+            $("#superListMore").html('');
+            $('#superList ul').html('');
+            $('#superListLoad').css('display', 'block');
+            superListData()
+        }
+    });
+    $('#elite').click(function(event) {
+        $('#elite').removeAttr('style')
+        $('#hightGamble').removeClass('on');
+        $('#exclusive').removeClass('on');
+        $('#elite').addClass('on');
+        $('#gambleList').css({display: 'none', });
+        $('#superList').css({display: 'none', });
+        $('#publish6').css({display: 'block', });
+        if ( $('#publish6 ul').html() == '')
+        {
+            $("#publish6More").html('');
+            $('#publish6 ul').html('');
+            $('#publish6Load').css('display', 'block');
+            getInforData();//精英分析--足球分析
+        }
+    });
+});
+function superListData()
+{
+    $.ajax({
+        type: "POST",
+        url: "/Index/superMaster.html",
+        data: {},
+        dataType: "json",
+        success: function(data){
+            if(data.status == 1)
+            {
+                var list = data.list;
+                if (list!=null && list!='')
+                {
+                    $.each(list,function(k,v){
+                        //等级
+                        var lvHtml = v['play_type'] == '1' || v['play_type'] == '-1' ? '<em class="ya_text">亚:<i>LV'+v['lv']+'</i></em>' : '<em class="ya_text">竞:<i>LV'+v['lv']+'</i></em>';
+                        //连胜
+                        var winHtml = v['curr_victs'] > 1 ? '<em>'+v['curr_victs']+'连胜</em>' : '';
+                        //十中几
+                        var tenHtml = '<img src="'+IMAGES+'/index/ic_'+v['fiveGambleRate']+'.png" alt="">';
+                        //竞彩标识
+                        var betCodeHtml = v['play_type'] == '2' || v['play_type'] == '-2' ? '<em>'+v['bet_code']+' </em>' : '';
+                        //比分
+                        var scoreHtml = v['result'] == 0 ? v['score'] : '<strong style="color: red">'+v['score']+'</strong>';
+                        //玩法
+                        var playHtml = '';
+                        switch (v['play_type'])
+                        {
+                            case '1': playHtml = '让球'; break;
+                            case '-1': playHtml = '大小球'; break;
+                            case '2': playHtml = '竞彩'; break;
+                            case '-2': playHtml = '竞彩'; break;
+                        }
+                        var resultHtml = '';
+                        var fenxiHtml = '';
+                        var coinsHtml = '';
+                        if (v['is_trade'] == 1)
+                        {
+                            //金币、免费、分析图标
+                            fenxiHtml = v['desc'] != '' && v['desc'] != null && v['desc'] != undefined ? '<span><img src="'+IMAGES+'/guess/fenxi.png" alt="分析"></span>' : '';
+                            coinsHtml = v['tradeCoin'] > 0 ? '<span class="coins">'+v['tradeCoin']+'</span>' : '<span><img src="'+IMAGES+'/guess/free.png" alt="免费"></span>';
+                            //推荐结果
+                            var answerHtml = ''
+                            if (v['play_type'] == '1' || v['play_type'] == '-1')
+                            {
+                                answerHtml = '<p class="p_4">推荐：<span>'+v['Answer']+' '+v['handcp']+' </span><em>（'+v['odds']+'）</em></p>';
+                            }
+                            if (v['play_type'] == '2' || v['play_type'] == '-2')
+                            {
+                                answerHtml = '<p class="p_4">推荐：<span>'+v['home_team_name']+' ('+v['handcp']+') '+v['Answer']+' </span><em>（'+v['odds']+'）</em>';
+                            }
+                            resultHtml += answerHtml;
+                            //分析
+                            var descHtml = v['desc'] != null && v['desc'] != '' ? '<p class="p_5 q-two">分析：<span>'+v['desc']+'</span></p>' : '<p class="p_5 q-two">分析：<span>暂无分析</span></p>';
+                            resultHtml += descHtml;
+                            switch (v['result'])
+                            {
+                                case '-1': resultHtml += '<div class="game_res lose_res">黑</div>'; break;
+                                case '-0.5': resultHtml += '<div class="game_res lose_res">黑</div>'; break;
+                                case '1': resultHtml += '<div class="game_res"> 红</div>'; break;
+                                case '0.5': resultHtml += '<div class="game_res"> 红</div>'; break;
+                                case '2': resultHtml += '<div class="game_res zou_res"> 走</div>'; break;
+                                case '-10': resultHtml += '<div class="game_res" style="background:none;"><img src="/Public/Home/images/qw/ic_dyseal_cancel.png" alt=""></div>'; break;
+                                case '-11': resultHtml += '<div class="game_res" style="background:none;"><img src="/Public/Home/images/qw/ic_dyseal_pending.png" alt=""></div>'; break;
+                                case '-12': resultHtml += '<div class="game_res" style="background:none;"><img src="/Public/Home/images/qw/ic_dyseal_cut.png" alt=""></div>'; break;
+                                case '-13': resultHtml += '<div class="game_res" style="background:none;"><img src="/Public/Home/images/qw/ic_dyseal_interrupt.png" alt=""></div>'; break;
+                                case '-14': resultHtml += '<div class="game_res" style="background:none;"><img src="/Public/Home/images/qw/ic_dyseal_putoff.png" alt=""></div>'; break;
+                            }
+                        }
+                        else
+                        {
+                            var tradeCoinHtml = v['tradeCoin'] > 0 ? '<div class="gold">'+v['tradeCoin']+'金币</div>' : '<div class="gold bg_green">免费</div>';
+                            resultHtml = '<a href="javascript:;" data-play="'+v['play_type']+'" onclick="payment(this,'+v['gamble_id']+','+v['tradeCoin']+',1111)">'+tradeCoinHtml +'</a> ';
+                        }
+                        var html = '<li class="list">' +
+                                ' <a href="//'+DOMAIN+'/Guess/other_page/user_id/'+v['user_id']+'/type/'+v['play_type']+'">' +
+                                ' <div class="n_top clearfix">' +
+                                ' <div class="n_top_left">' +
+                                ' <img class="lazy" data-original="'+v['face']+'" src="'+IMAGES+'/index/headImg.png" >' +
+                                ' <div class="ntl_main fl">' +
+                                ' <div class="ntl_name">'+v['nick_name']+lvHtml+' </div>' +
+                                ' <div class="ntl_per"><em>周胜: '+v['weekPercnet']+'%</em>'+winHtml+'</div>' +
+                                ' </div>' +
+                                ' </div>' +
+                                ' <div class="n_top_right"> '+tenHtml+'</div>' +
+                                ' </div>' +
+                                ' <div class="p_1">' +
+                                ' <div class="t_vs">'+betCodeHtml+'<em style="color: '+v['union_color']+'">'+v['union_name']+'</em> <em>'+v['gDate']+'</em> </div>' +
+                                ' <div class="etip">'+fenxiHtml+coinsHtml+'</div>' +
+                                ' </div>' +
+                                ' <p class="p_2">'+v['home_team_name']+scoreHtml+v['away_team_name']+' </p>' +
+                                ' <p class="p_3">玩法：<span>'+playHtml+'</span> </p>' +
+                                ' </a>'+resultHtml+' </li> ';
+                        $('#superList ul').append(html);
+                    });
+                }
+            }
+            else
+            {
+                alert(data.info);
+            }
+        },
+        complete:function()
+        {
+            $('#superListLoad').css('display', 'none');
+            if ( $('#superList ul').html() != '')
+            {
+                $("#superListMore").append('<div class="paged boxs">'
+                        +'<a href="//'+DOMAIN+'/Guess/new_put.html" class="btn btn-green boxs" style="display:block;cursor:default;" >点击查看更多</a>'
+                        +'</div>')
+            }
+            $("img.lazy").lazyload({
+                effect: "fadeIn",
+                threshold : 10,
+                failurelimit:10
+            });
+        },
+    });
+}
+function getInforData(publish_class_id)
+{
+    $.ajax({
+        url: "/Index/getInfoToIndex.html",
+        dataType: "json",
+        success: function(data){
+            if(data.status == 1)
+            {
+                var list = data.info;
+                if (list!=null && list!='')
+                {
+                    $.each(list,function(k,v){
+                        var html = '<li class="list clearfix">'
+                                    +'<a href="//'+DOMAIN+'/info_n/'+v['id']+'.html">'
+                                        +'<div class="n_img"><img   class="lazy" data-original="' + v['img'] + '" src="'+IMAGES+'/default.jpg"  alt="'+v['title']+'"></div>'
+                                        +'<div class="n_des">'
+                                            +'<h3 class="overflow">'+v['title']+'</h3>'
+                                            +'<p class="q-two">'+v['source']+'/'+v['name']+'</p>'
+                                        +'</div>'
+                                    +'</a>'
+                                +'</li>';
+                        $('#publish6 ul').append(html);
+                    });
+                }
+            }
+            else
+            {
+                alert(data.info);
+            }
+        },
+        complete:function()
+        {
+            $('#publish6Load').css('display', 'none');
+            $("#publish6More").append('<div class="paged boxs">'
+                +'<a href="//'+DOMAIN+'/list_n/54.html" class="btn btn-green boxs" style="display:block;cursor:default;" >点击查看更多</a>'
+            +'</div>');
+            $("img.lazy").lazyload({
+                effect: "fadeIn",
+                threshold : 10,
+                failurelimit:10
+            });
+        },
+    });
+}
+</script>
+<script src="__JS__/common/trade.js"></script>
+</block>

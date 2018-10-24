@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="__PUBLIC__/Api/Home/articleDetail/css/style.css">
+	<link rel="stylesheet" href="__PUBLIC__/Api/Home/articleDetail/css/detail.css">
+  <script type="text/javascript" src="__PUBLIC__/Plugs/jquery-1.11.1.min.js"></script>
+	<title>资讯-详情页</title>
+  <style type="text/css">
+      * {
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+      }
+  </style>
+</head>
+<body>
+   <section class="art_main">
+      <!-- 标题 start-->
+	   	<section class="art_title">
+			<h1>{$detail['title']}</h1>
+			<time>{$detail['add_time']|date='Y-m-d H:i:s',###} {$detail['source']}</time>
+		</section>
+		<!-- 标题 end-->
+
+		<!-- 文章内容 start -->
+		<section class="article_main">
+           {$detail['content']|htmlspecialchars_decode}
+	   </section>
+       <!-- 文章内容end -->
+
+       <!-- 相关 start -->
+       <section class="about_link" style="display:block">
+         <div class="about_l">相关:</div>
+         <php>$lable = explode(',',$detail['label']);</php>
+       	 <div class="about_r">
+             <volist name="lable" id="item">
+                 <a href="javascript:void(0);">{$item}</a>
+             </volist>
+            <!-- <a href="javascript:void(0);">曼联</a><a href="javascript:void(0);">英超</a> -->
+         </div>
+       </section>
+        <!-- 相关 end -->
+       </section>
+       <section class="art_main2">
+      <section class="art_main3">
+      <!-- 热门评论 strat -->
+      <section class="article_hotcmnt">
+	      <aside class="cmmt_title">热门评论</aside>
+
+          <volist name="comment" id="item">
+    	      <div class="comment_box clearfix" userid="{$item['user_id']}">
+    	      	 <div class="head">
+    	      	 	<img src="{$item['face']}" alt="head" class="user">
+    	      	 </div>
+    	      	 <div class="comment_wrap">
+    	      	 	<p><span class="user">{$item['nick_name']}</span><a href="javascript:void(0);" class="on" comment_id="{$item['id']}">({$item['like_num']})</a></p>
+    	      	 	<time>{$item['create_time']|date='Y-m-d H:i:s',###}</time>
+    	      	 	<article class="comment" comment_id="{$item['id']}">
+                  <if condition="$item['status'] eq 1">
+                      {$item['content']}
+                  <else/>
+                      <span style="color: #999">该条评论已被管理员屏蔽</span>
+                  </if>
+                </article>
+    	      	 </div>
+    	      </div>
+          </volist>
+
+          <div class="view_more" article_id="{$detail['id']}">
+          	<a href="javascript:void(0);">查看更多评论</a>
+          </div>
+
+      </section>
+      <!-- 热门评论 end -->
+
+    </section>
+   </section>
+
+  <script>
+  $(function(){
+    $('.user').click(function() {
+      window.location.href = 'user:'+$(this).parents('.comment_box').attr('userid');
+    });
+
+    $('.on').click(function() {
+      window.location.href = 'like:'+$(this).attr('comment_id');
+    });
+
+    $('.comment').click(function() {
+      window.location.href = 'comment:'+$(this).attr('comment_id');
+    });
+
+    $('.view_more').click(function() {
+      window.location.href = 'morecomment:'+$(this).attr('article_id');
+    });
+  });
+  </script>
+</body>
+</html>

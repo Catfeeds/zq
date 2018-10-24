@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta charset="UTF-8">
+    <block name="seo">
+        <title>手机全球体育网_即时足球比分,比分直播,足球直播,比分预测,赔率分析</title>
+        <meta name="keywords" content="比分网、足球推荐、足球分析、竞彩分析、竞彩推荐、比分直播、2018世界杯、zuqiubifen、bifenzhibo、足彩推荐、足彩分析、NBA直播、nba比分、足球直播"/>
+        <meta name="description" content="全球体育网是专业提供2018足球世界杯比分、NBA篮球比分、竞彩推荐分析、足球情报、篮球情报综合球类的体育彩票大数据资讯平台"/>
+    </block>
+    <link rel="apple-touch-icon"  href="__PUBLIC__/Api/images/app-logo.png" />
+    <link rel="shortcut icon" href="__PUBLIC__/Home/images/icon/16X16.ico">
+    <!-- jquery -->
+    <script type="text/javascript" src="__JS__/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Mobile/Plugs/jquery.lazyload.min.js"></script>
+    <!-- 自适应 计算html font-size -->
+    <script type="text/javascript" src="__JS__/htmlwidth.js"></script>
+    <!-- 引入公共样式 -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/common.css">
+    <!-- 引入礼包样式 ，以后可以删掉-->
+    <link rel="stylesheet" type="text/css" href="__CSS__/gift.css">
+    {//附加}
+    <block name="append"></block>
+</head>
+<block name="body"><body>
+</block>
+{//头部}
+<block name="header">
+    <include file="Public/header"/>
+</block>
+{//导航}
+<block name="nav">
+    <include file="Public/nav"/>
+</block>
+{//主内容区域}
+<block name="content"></block>
+{//底部}
+<block name="footer">
+    <include file="Public/footer"/>
+</block>
+{//赛事筛选}
+<block name='filtrate'>
+</block>
+<block name="scripts"></block>
+<!-- 公共js -->
+<script type="text/javascript" src="__JS__/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/common/cookie.js"></script>
+<block name="download">
+    <script type="text/javascript" src="__PUBLIC__/Api/Home/picDetail/js/panDuan.js"></script>
+</block>
+<body>
+    <!-- 模态窗口注册赠送 -->
+    <div class="modalReisger" id="gift1-class" style="background-color: transparent;display: none;">
+        <div class="modal-content">
+            <div class="newGift">
+                <img src="" alt="">
+                <i class="closedTbn"><img src="__IMAGES__/coupon/closedBtn.png"></i>
+                <a href="javascript:;" class="getBtn"></a>
+            </div>
+        </div>
+    </div>
+    <!-- 模态窗口活动赠送 -->
+    <div class="modalReisger" id="gift2-class" style="background-color: transparent;display: none;">
+        <div class="modal-content">
+            <div class="newGift">
+                <img src="" alt="">
+                <i class="closedTbn"><img src="__IMAGES__/coupon/closedBtn.png"></i>
+                <a href="javascript:;" class="getBtn"></a>
+            </div>
+        </div>
+    </div>
+    <div id="bg-gift" class="modal-backdrop" style="z-index: 1040;display: none;"></div>
+    <!-- <div id="app-bar" class="app-bar ios_touch" style="display:none">
+        &lt;!&ndash; <div class="app-logo"><img src="__IMAGES__/app-logo.png"></div> &ndash;&gt;
+        <a class="app-close ios_touch" id="cone" href="javascript:;">&nbsp;</a>
+        &lt;!&ndash; <a class="app-btn" href="{:U('/Api/Index/introduce')}" target='_blank'>立即下载</a> &ndash;&gt;
+    </div> -->
+</body>
+<div id="cnzz">
+    {:htmlspecialchars_decode($site_setting['mobileJs'])}
+</div>
+<script>
+    $(function(){
+        var gift1_after  = "{$gift1['after_img']}";
+        var gift1_open   = "{$gift1['open']}";
+        var gift1_close  = "{$gift1['close']}";
+        var gift2_before = "{$gift2['before_img']}";
+        var gift2_after  = "{$gift2['after_img']}";
+        var gift2_close  = "{$gift2['close']}";
+        var gift2_frame  = "{$gift2_frame}";
+        var user_auth    = "{$user_auth}";
+
+        //先登录
+        if(user_auth){
+            //注册后弹框
+            if(gift1_after && gift1_open != '' && gift1_close == '') {
+                $('#gift1-class').find('img').eq(0).attr('src', gift1_after);
+                $('#bg-gift').show();
+                $('#gift1-class').show();
+                //点击注册跳转过来活动弹框
+            }else if(gift2_before && gift2_close == '' && gift2_frame){
+                getGift2(gift2_before);
+                //只有活动弹框
+            }else if(gift2_before && gift2_close == '' && gift2_frame == ''){
+                getGift2(gift2_before);
+            }
+        }
+
+        //关闭
+        $('#gift1-class .closedTbn').click(function() {
+            $('#bg-gift').hide();
+            $('#gift1-class').hide();
+
+            $.ajax({
+                type: 'post',
+                url: "/Ticket/recordGift.html",
+                async: false,
+                data: {type: 1},
+                dataType: 'json',
+                success: function (data) {
+                    if(data.status == 1){
+                        if(user_auth != '' && gift2_before != '' && gift2_close ==''){
+                            getGift2(gift2_before);
+                        }
+                    }
+                }
+            });
+        });
+
+        $('#gift2-class .closedTbn').click(function() {
+            $('#bg-gift').hide();
+            $('#gift2-class').hide();
+
+            $.ajax({
+                type: 'post',
+                url: "/Ticket/recordGift.html",
+                async: false,
+                data: {type: 2},
+                dataType: 'json',
+                success: function (data) {
+
+                }
+            });
+        });
+
+        //注册跳转
+        $('#gift1-class .getBtn').click(function() {
+            $.ajax({
+                type: 'post',
+                url: "/Ticket/recordGift.html",
+                async: false,
+                data: {type: 1},
+                dataType: 'json',
+                success: function (data) {
+                    if(data.status == 1){
+                        window.location.href = '/Ticket/myTicket.html?gift2_frame=1';
+                    }
+                }
+            });
+        });
+
+        //活动获取
+        $('#gift2-class .getBtn').click(function() {
+            if($('#gift2-class').hasClass('done')){
+                $('#gift2-class .closedTbn').click();
+                window.location.href = '/Ticket/myTicket.html';
+            }else{
+                if(user_auth){
+                    var gift_id = "{$gift2['id']}";
+                    $.ajax({
+                        type: 'post',
+                        url: "/Ticket/getGift.html",
+                        async: false,
+                        data: {gift_id: gift_id},
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.status == 1) {
+                                $('#gift2-class .closedTbn').click();
+                                $('#gift2-class').find('img').eq(0).attr('src', gift2_after);
+                                $('#bg-gift').show();
+                                $('#gift2-class').show();
+                                $('#gift2-class').addClass('done');
+                            } else {
+                                alert(data.info);
+                            }
+                        }
+                    });
+                }
+            }
+
+        });
+        function getGift2(gift2_before){
+            $('#gift2-class').find('img').eq(0).attr('src', gift2_before);
+            $('#bg-gift').show();
+            $('#gift2-class').show();
+        }
+
+        //返回顶部
+        $(window).scroll(function(e) {
+          //$(window).height()
+            if($(window).scrollTop()> 1500){
+                $('.return-top').show();
+            }else {
+                $('.return-top').hide();
+            }
+        });
+        $('.return-top').click(function(e) {
+            $('body,html').animate({'scrollTop':'0'},100);
+
+        });
+        //隐藏网站统计
+        $('#cnzz a').css('display','none');
+
+    })
+</script>
+</html>

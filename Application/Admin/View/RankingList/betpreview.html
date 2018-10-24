@@ -1,0 +1,55 @@
+<include file="Public:pagerForm" />
+
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="49">
+		<thead>
+		<tr>
+			<th width="5%">ID</th>
+			<th width="8%">榜类型</th>
+			<th width="8%">时间</th>
+			<th width="8%">排名</th>
+			<th width="15%">昵称</th>
+			<th width="9%">竞猜场数</th>
+			<th width="9%">赢</th>
+			<th width="8%">输</th>
+			<th width="8%">胜率</th>
+			<th width="8%">总积分</th>
+			<th width="5%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="vo" name="list">
+				<tr target="sid_record" rel="{$vo['id']}">
+					<td>{$vo['id']}</td>
+					<td>
+					<switch name="vo.dateType">
+				        <case value="1">周榜</case>
+				        <case value="2">月榜</case>
+				        <case value="3">季榜</case>
+				        <case value="4">日榜</case>
+				    </switch>
+				    </td>
+				    <td>{$vo['listDate']}（周{$vo.listDate|returnWeek}）</td>
+					<td>{$vo['ranking']}</td>
+					<td><a href="{:U('__ADMIN__/AccountLog/index/',['user_id' =>$vo['user_id']])}" title="{$vo['nick_name']}" target="navTab" rel="1{:time()}{$vo['id']}" title="{$vo['nick_name']}-交易明细">{$vo['nick_name']}</a></td>
+					<td>{$vo['gameCount']}</td>
+					<td>{$vo['win']}</td>
+					<td>{$vo['transport']}</td>
+					<td>{$vo['winrate']}%</td>
+					<td>{$vo['pointCount']}</td>
+					<td>
+						<a href="__ADMIN__/GambleList/index/user_id/{$vo['user_id']}/begin_date/{$vo.begin_date}/end_date/{$vo.end_date}/gameType/{$_REQUEST.gameType}" target="navTab" rel="2{:time()}{$vo['id']}" title="{$vo['nick_name']}-竞猜记录">查看</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

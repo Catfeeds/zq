@@ -1,0 +1,28 @@
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="22">
+		<thead>
+		<tr>
+			<th>时间</th>
+			<th>文字实况</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty>
+			<volist name="list" id="vo">
+			<tr>
+				<td width="6%">{$vo.time}</td>
+				<td width="47%">{$vo.data}</td>
+			</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>共{:count($list)}条</span>
+		</div>
+	</div>
+
+</div>
+
+

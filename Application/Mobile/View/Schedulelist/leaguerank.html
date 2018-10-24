@@ -1,0 +1,95 @@
+<extend name="Public/base" />
+<block name="conflict">
+</block>
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/competition.css?v=2018050718">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/Rankinglist.css?v=20180507">
+    <link rel="stylesheet" type="text/css" href="__CSS__/schedulelist/AsianFootball.css">
+    <script type="text/javascript" src="__JS__/schedulelist/swiper.min.js"></script>
+    <script type="text/javascript" src="__JS__/schedulelist/zepto.min.js"></script>
+    <style>
+        #footer .version a {
+            color:#0a94e4;
+        }
+    </style>
+</block>
+
+<block name="header">
+    <!-- 头部 -->
+    <header class="top">
+        <ul class="head-top">
+            <li class="f-h">
+                <a href="{:U('/'.$name)}"><img src="__IMAGES__/schedule/back.png"></a>
+            </li>
+            <li class="l-g">
+                <span class="leaguesIcon"></span>
+                <span class="photo">{$unionName}</span>
+            </li>
+        </ul>
+    </header>
+</block>
+
+<block name="nav"></block>
+
+<block name="content">
+    <input type="hidden" name="level" value="{$level}">
+    <input type="hidden" name="name" value="{$name}">
+
+    <!-- 主体内容 -->
+    <section class="wrapCon">
+        <section class="n_module">
+            <ul class="nav_list nav_list03 clearfix">
+                <li><a href="{:U($name.'/info/')}"><span>资讯</span></a></li>
+                <li><a href="{:U($name.'/schedule/')}"><span>赛程</span></a></li>
+                <li><a href="{:U($name.'/rank/')}" class="on"><span>排行</span></a></li>
+            </ul>
+            <!-- 二级导航 -->
+            <div class="second-list">
+                <ul>
+                    <li class="on">
+                        <a id="integral">积分榜</a>
+                    </li>
+                    <li class="name">
+                        <a id="shooter">射手榜</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="leaguerank-rank">
+
+            </div>
+            <div class="leaguerank-shooter">
+
+            </div>
+
+
+            <!--<div class="rank-content">-->
+                <!--&lt;!&ndash; A组 &ndash;&gt;-->
+                <!--<div class="grouping clearfix">-->
+                    <!--<div class="right-s">-->
+                        <!--<span>数据截止到03月15日</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash; list &ndash;&gt;-->
+                <!--<div class="list clearfix">-->
+                    <!--<ul>-->
+                        <!--<li class="ranking-s">排名</li>-->
+                        <!--<li class="team-s">球队</li>-->
+                        <!--<li class="session-f">场次</li>-->
+                        <!--<li class="team-a">分数</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+                <!--<div class="main-s">-->
+                    <!--&lt;!&ndash;Js Data&ndash;&gt;-->
+                <!--</div>-->
+            <!--</div>-->
+        </section>
+    </section>
+</block>
+
+<block name="footer">
+</block>
+
+<block name="scripts">
+    <script type="text/javascript" src="__JS__/schedulelist/rankData.js"></script>
+</block>

@@ -1,0 +1,113 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+		<input type="hidden" name="tabType" value="{$_REQUEST.tabType}">
+		<div class="searchBar">
+			<ul class="searchContent">
+				<li>
+					<label >ID：</label>
+					<input type="text" name="id" value="{$_REQUEST.id}"/>
+				</li>
+				<li>
+					<label >用户昵称：</label>
+					<input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+				</li>
+				<li>
+					<label>状态：</label>
+					<select name="status" class="combox" onchange="$(form).submit()">
+						<option value="" selected>全部</option>
+						<option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >已通过</option>
+						<option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >待审核</option>
+						<option value="2" <if condition="$_REQUEST.status eq '2'">selected</if> >未通过</option>
+					</select>
+				</li>
+				<li>
+					<label>添加时间：</label>
+					<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="10">至
+					<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="10">
+				</li>
+				<li>
+					<label>审核时间：</label>
+					<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.upstartTime}" name="upstartTime" size="10">至
+					<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.upendTime}" name="upendTime" size="10">
+				</li>
+			</ul>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="delete" href="__URL__/delete/id/{sid_record}/navTabId/__DWZ__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择标签"><span>删除</span></a></li>
+			<li>
+				<a class="delete" href="__URL__/delAll" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确实要删除这些记录吗?">
+					<span>批量删除</span>
+				</a>
+			</li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" height="300" warn="请选择标签"><span>编辑</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="2%">
+				<div class="gridCol" title="">
+					<input class="checkboxCtrl" type="checkbox" group="id">
+				</div>
+			</th>
+			<th width="3%">ID</th>
+			<th width="5%">用户昵称</th>
+			<th width="5%">赛程ID</th>
+			<th width="5%">赛事名称</th>
+			<th width="5%">比赛时间</th>
+			<th width="5%">主队</th>
+			<th width="5%">客队</th>
+			<th width="20%">分享视频地址</th>
+			<th width="3%">视频状态</th>
+			<th width="8%">添加时间</th>
+			<th width="8%">审核时间</th>
+			<th width="5%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist id="item" name="list">
+				<tr target="sid_record" rel="{$item['id']}">
+					<td>
+						<div>
+							<input type="checkbox" value="{$item.id}" name="id">
+						</div>
+					</td>
+					<td>{$item.id}</td>
+					<td>{$item.nick_name}</td>
+					<td>{$item.game_id}</td>
+					<td>{$item.union_name|switchName=0,###}</td>
+					<td>{$item.gtime|date="Y-m-d H:i",###}</td>
+					<td>{$item.home_team_name|switchName=0,###}</td>
+					<td>{$item.away_team_name|switchName=0,###}</td>
+					<td>{$item.url}</td>
+					<td>{$item['status']}</td>
+					<td>{$item.add_time|date="Y-m-d H:i",###}</td>
+					<td><if condition="$item['update_time'] gt 0">{$item.update_time|date="Y-m-d H:i",###}</if></td>
+					<td>
+						<a href="__URL__/edit/id/{$item.id}/tabType/{$tabType}" target="dialog" mask="true" height="300" title="{$item.name}编辑" rel="editPage">编辑</a>
+					</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+</div>
+
+

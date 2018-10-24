@@ -1,0 +1,65 @@
+<include file='Public:header'/>
+
+<body>
+    <!--引入本页所需css-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/login/complete.css">
+    <!-- 注册头部开始 -->
+    <include file="Public:top" />
+    <!-- 注册头部结束 -->
+    <div class="home">
+        <!-- 注册表单内容开始 -->
+        <div class="form-main">
+            <div class="form-nav">
+            	<ul class="clearfix">
+            		<li class="li1">
+                    	手机注册
+                    </li>
+                    <li class="ml li2">
+                    	输入用户信息
+                    </li>
+                    <li class="ml li3 cur3">
+                    	完成注册
+                    </li>
+            	</ul>
+            </div>
+            <div class="form-con">
+            	<div class="con clearfix">
+                    <div class="pull-left">
+                    	 <div class="com-nioce">
+                         	<h3 style="font-size:28px; color:#000; margin-bottom: 14px; padding-left: 6px;">注册成功</h3>
+                         	<p class="jump-nioce"><span class="text-orange">5</span>秒后自动转到个人中心！</p>
+                         </div>
+                    </div>
+                    <div class="pull-right clearfix">
+                    	<div class="ew-ma"><img src="__PUBLIC__/Home/images/login/ew-ma.jpg" width="264" height="264"></div>
+                        <div class="ew-nioce">
+                        	<p>扫二维码，下载全球体育APP<br/>随时获取最新信息！</p>
+                        </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- 注册表单内容结束 -->
+
+    </div>
+    <!-- 底部版权信息开始 -->
+    <include file="Public:footer" />
+    <!-- 底部版权信息结束 -->
+</body>
+</html>
+<script type="text/javascript">
+    $(function(){      
+        var num= 5;
+        var timer01 = null;
+        timer01 = setInterval(function(){
+            num--;
+            if(num==0){
+                num=0;
+                clearInterval(timer01);
+                timer01 = null;
+                window.location.href="index.php?s=Home/UserInfo/index.html";
+            };
+            $('.jump-nioce span').html(num);
+        },1000);
+    });
+</script>

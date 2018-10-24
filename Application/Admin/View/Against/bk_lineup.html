@@ -1,0 +1,96 @@
+<style>
+	.table_video td{
+		text-align: center;
+        font-size: 14px;
+		padding: 5px;
+	}
+</style>
+<div class="pageContent">
+
+	<form method="post" action="__URL__/saveLineup" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div style="float: left; margin-left: 80px;">
+				<table class="table_video">
+					<tr style="background: #7CC5E5;">
+						<td colspan="5">
+							<strong style="font-size:14px;">
+								主队（{$h_name}）
+							</strong>
+						</td>
+					</tr>
+					<tr>
+						<td width="200">球员</td>
+						<td width="80">位置</td>
+						<td width="80">是否首发</td>
+
+					</tr>
+					<volist name="list[0]" id='item'>
+						<tr style="background: #f2f2f2;">
+							<td>{$item[0]}</td>
+							<td>
+                                <if condition="$item[3] neq ' '">
+                                    <switch name="item[3]">
+                                        <case value="G">后卫</case>
+                                        <case value="F">前锋</case>
+                                        <case value="C">中锋</case>
+                                    </switch>
+                                    <else/>
+                                </if>
+
+							</td>
+							<td>
+                                <if condition="$item[3] neq ' '">
+                                    首发
+                                    <else/>
+                                    替补
+                                </if>
+							</td>
+						</tr>
+					</volist>
+				</table>
+			</div>
+
+			<div style="float: left; margin-left: 80px;">
+                <table class="table_video">
+                    <tr style="background: #7CC5E5;">
+                        <td colspan="5">
+                            <strong style="font-size:14px;">
+                                客队（{$a_name}）
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">球员</td>
+                        <td width="80">位置</td>
+                        <td width="80">是否首发</td>
+                    </tr>
+                    <volist name="list[1]" id='item'>
+                        <tr style="background: #f2f2f2;">
+                            <td>{$item[0]}</td>
+                            <td>
+                                <if condition="$item[3] neq ' '">
+                                    <switch name="item[3]">
+                                        <case value="G">后卫</case>
+                                        <case value="F">前锋</case>
+                                        <case value="C">中锋</case>
+                                    </switch>
+                                    <else/>
+                                </if>
+
+                            </td>
+                            <td>
+                                <if condition="$item[3] neq ' '">
+                                    首发
+                                    <else/>
+                                    替补
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+
+		</div》
+	</form>
+
+</div>

@@ -1,0 +1,87 @@
+<style>
+    .searchContent label{width: auto}
+    .searchContent li{width: auto !important;margin-right: 12px;}
+</style>
+<form id="pagerForm" action="__URL__/expertStatistics" method="post">
+	<input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+	<input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+	<input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+	<input type="hidden" name="_sort" value="{$_REQUEST._sort}"/>
+	<volist name="map" id="m">
+    <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/expertStatistics" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li style="width: 380px">
+				<label>日期：</label>
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.startTime}" name="startTime" size="15">至
+				<input type="text" readonly="true" datefmt="yyyy-MM-dd" class="date textInput readonly valid" value="{$_REQUEST.endTime}" name="endTime" size="15">
+			</li>
+			<li>
+				<label>专家昵称：</label>
+				<input type="text" name="nick_name" value="{$_REQUEST.nick_name}"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li style="margin-left:20px;">
+			    <a class="icon" href="__URL__/expertStatistics.html?Export=1&totalCount={$totalCount}&{:http_build_query($_REQUEST)}"  warn="导出">
+			        <span>导出</span>
+			    </a>
+			</li>
+
+		</ul>
+	</div>
+
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+		<tr>
+			<th width="30" orderField="id" <if condition="$_REQUEST._order eq 'id'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>用户ID</th>
+			<th width="70">编辑日期</th>
+			<th width="70">专家昵称</th>
+			<th width="70" orderField="number" <if condition="$_REQUEST._order eq 'number'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>资讯发布数量</th>
+			<th width="70" orderField="click_number" <if condition="$_REQUEST._order eq 'click_number'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>资讯阅读量</th>
+		</tr>
+		</thead>
+		<tbody>
+		<notempty name="list">
+			<volist name="list" id="item">
+				<tr target="sid_record" rel="{$item.id}">
+					<td>{$item.id}</td>
+					<td>
+						<if condition="$_REQUEST.startTime eq '' and $_REQUEST.endTime eq ''">
+							{:date('Y-m-d')}
+						<else/>
+							{$_REQUEST.startTime} 至 {$_REQUEST.endTime}
+						</if>
+					</td>
+					<td>{$item.nick_name}（{$item.username}）</td>
+					<td style="font-weight: bold;"><a href="__ADMIN__/PublishList/index.html?user_id={$item.id}&{:http_build_query($_REQUEST)}"  target="navTab" mask="true" rel="{$item.nick_name}文章列表" title="{$item.nick_name}文章列表">{$item.number}</a></td>
+					<td>{$item.click_number}</td>
+				</tr>
+			</volist>
+		</notempty>
+		</tbody>
+	</table>
+
+	<include file="Public:pagerNum" />
+
+
+</div>
+
+

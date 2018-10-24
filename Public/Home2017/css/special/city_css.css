@@ -1,0 +1,83 @@
+/* reset */
+body{font:12px Tahoma, "微软雅黑", Geneva, sans-serif;}
+address, caption, cite, code, dfn, em, th, var, i, b{font-weight:normal;font-style:normal;}
+/* 共用功能 */
+.clear{clear:both;height:0px;overflow:hidden;}
+.overflow{overflow:hidden;}
+/* 城市球场地图 */
+.city_wrap{width:100%;min-width:1000px;height:577px;background:url(../../images/special/city_bg.jpg) no-repeat center 0; margin-bottom: 50px;}
+.city_main{width:1000px;height:577px;margin:0 auto;position:relative;}
+/* .city_t_gb{width:246px;height:80px;background:url(../../images/special/city_title.png) no-repeat 0 0;position:absolute;opacity:0;} */
+.city_map{/* width:488px;height:556px; */ width: 450px; height: 484px; background:url(../../images/special/city_map.png) no-repeat 0 0;position:absolute;left:230px;top:56px;_z-index:2;}
+.city_list{position:relative;}
+.city_list li{position:absolute;}
+.city_list li span{display:inline-block;padding:0 20px;line-height:35px;color:#333;font-size:18px;font-weight:bold;font-style:italic;border:1px solid #000;background:#fff;white-space:nowrap;position:absolute;z-index:3;cursor:default; border-radius: 5px;}
+.city_list li i{display:inline-block; width: 16px; height: 16px; background: url(../../images/special/det_foot.png) no-repeat 0 0; position:absolute;z-index:2;}
+.city_list li em{display:inline-block;width:33px;height:16px;position:absolute;z-index:3;}
+.city_list li.city_1 em, .city_list li.city_2 em, .city_list li.city_6 em, .city_list li.city_9 em{background:url(../../images/special/city_arr.png) no-repeat 0 0;}
+.city_list li.city_3 em, .city_list li.city_4 em, .city_list li.city_5 em{background:url(../../images/special/city_arr2.png) no-repeat 0 0;}
+.city_list li.city_10 em{background:url(../../images/special/city_arr3.png) no-repeat 0 0;}
+.city_list li.city_7 em, .city_list li.city_8 em{background:url(../../images/special/city_arr4.png) no-repeat 0 0;}
+.city_list li.city_1 span{top:74px;left:159px;}
+.city_list li.city_1 i{top:122px;left:238px;}
+.city_list li.city_1 em{top:110px;left:205px;}
+.city_list li.city_2 span{top:12px;left:192px;}
+.city_list li.city_2 i{top:58px;left:272px;}
+.city_list li.city_2 em{top:48px;left:238px;}
+.city_list li.city_3 span{top:254px;left:151px;}
+.city_list li.city_3 i{top:310px;left:136px;}
+.city_list li.city_3 em{top:290px;left:156px;}
+.city_list li.city_4 span{top:-5px;left:300px;}
+.city_list li.city_4 i{top:43px;left:288px;}
+.city_list li.city_4 em{top:31px;left:303px;}
+.city_list li.city_5 span{top:194px;left:364px;}
+.city_list li.city_5 i{top:250px;left:356px;}
+.city_list li.city_5 em{top:230px;left:372px;}
+.city_list li.city_6 span{top:350px;left:254px;}
+.city_list li.city_6 i{top:400px;left:340px;}
+.city_list li.city_6 em{top:386px;left:300px;}
+.city_list li.city_7 span{top:412px;left:425px;}
+.city_list li.city_7 i{top:375px;left:408px;}
+.city_list li.city_7 em{top:397px;left:428px;}
+.city_list li.city_8 span{top:135px;left:276px;}
+.city_list li.city_8 i{top:105px;left:260px;}
+.city_list li.city_8 em{top:120px;left:277px;}
+.city_list li.city_9 span{top:214px;left:210px;}
+.city_list li.city_9 i{top:270px;left:325px;}
+.city_list li.city_9 em{top:250px;left:290px;}
+.city_list li.city_10 span{top:415px;left:93px;}
+.city_list li.city_10 i{top:382px;left:190px;}
+.city_list li.city_10 em{top:400px;left:155px;}
+.city_list li.cp_on span{color:#10af63;border:1px solid #10af63; border-radius: 5px;}
+.city_list li.cp_on em{background-position:0 -16px;}
+.city_list li.cp_on i{background: url(../../images/special/on_foot.png) no-repeat 0 0;}
+/* 城市弹框 */
+.cp_item{width:0px;height:0px;background: #fff;position:absolute;left:500px;top:460px;z-index:1;}
+.match{width:424px;height:40px;line-height:40px;color:#fff;overflow:hidden; display: none;}
+.match span{padding:0 10px 0 20px;float:left;font-size:16px;font-style:italic;}
+.cp_vs{color:#f13d51;padding:0 5px;}
+.mqu_box{float:left;width:306px;height:40px;overflow:hidden;}
+.mqu_scoll{width:10000em;height:40px;}
+.matchList, .matchList2{float:left;}
+.matchList li, .matchList2 li{float:left;font-size:14px;margin-right:20px;}
+.cp_title{margin:0 20px;padding-top:10px;color:#002c8a;font-size:16px; font-weight: 700;}
+.cp_info{margin:10px 20px 0;overflow:hidden;}
+.cp_info dt{float:left;}
+.cp_info dd{float:left;width:195px;height:110px;margin-left:10px;line-height:18px;color:#545454;overflow:hidden;}
+.cp_pics{margin:16px 15px 0;}
+.cp_pics li{float:left;margin:0 5px;}
+.cp_more{ height: 32px; background: #002c8a; text-align: center; margin-bottom: 0; margin-top: 10px;}
+.cp_more a{ line-height: 32px; color:#f7e390;font-size:14px;}
+/* 人气调查 */
+.gs_box{position:absolute;right:68px;top:414px;}
+.gs_title{width:303px;height:39px;line-height:39px;color:#4c4c4c;font-size:18px;text-align:center;background:url(../../images/special/gs_title.gif) no-repeat 0 0;}
+.gs_list{width:286px;padding:10px 0 0 20px;}
+.gs_list li{float:left;font-size:14px;color:#fff;width:90px;padding:0 5px 5px 0;}
+.gs_list input{vertical-align:-3px;_vertical-align:-4px;margin-right:3px;}
+.gs_btn{clear:both;padding:10px 0 0 20px;}
+.gs_btn a.submit{display:inline-block;width:105px;height:39px;line-height:39px;color:#fff;font-size:16px;font-weight:bold;background:#f13d51;text-align:center;border:0;cursor:pointer;}
+.gs_btn a.view{display:inline-block;border:0;color:#fff;font-size:14px;margin:0 10px;}
+
+.body_1000 .city_main{width:1000px; background:url(../../images/special/city_bg.jpg) no-repeat center 0;}
+.body_1000 .city_map{top:40px;}
+.body_1000 .gs_box{right:38px;}

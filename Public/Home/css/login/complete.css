@@ -1,0 +1,25 @@
+/**
+ * 全彩登陆css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ * @since  2015-11-17
+**/
+
+.home{ width: 1000px; margin:0 auto;}
+.form-main{ background: #fff; margin-top: 20px;}
+.form-nav ul li{ float: left; height: 48px; line-height: 48px; text-align: center; font-size: 16px; color: #f2f2f2; position: relative;}
+.form-nav .li1{ background: url(../../images/login/nav-li01-off.png) no-repeat center center; width: 362px;}
+.form-main .form-nav .cur1{  background: url(../../images/login/nav-li01-on.png) no-repeat center center;}
+.form-nav .li2{ background: url(../../images/login/nav-li02-off.png) no-repeat center center; width: 344px;}
+.form-main .form-nav .cur2{  background: url(../../images/login/nav-li02-on.png) no-repeat center center;}
+.form-nav .li3{ background: url(../../images/login/nav-li03-off.png) no-repeat center center; width: 334px;}
+.form-main .form-nav .cur3{  background: url(../../images/login/nav-li03-on.png) no-repeat center center;}
+.form-nav .ml{ margin-left: -20px;}
+.form-con{ padding: 66px 60px 100px 60px;}
+.form-con .com-nioce{ width: 283px; height: 73px; background: url(../../images/login/success.png) no-repeat center center; margin: 30px 0 0 128px;}
+.form-con .rec-nioce{ width: 123px; height: 132px; background: url(../../images/login/return-success.png) no-repeat center center; margin: 30px 0 0 196px;}
+.form-con .com-nioce{  height: 132px; background: url(../../images/login/return-success.png) no-repeat left center; margin: 50px 0 0 130px; padding-left: 82px; padding-top: 15px;}
+.form-con .jump-nioce{ text-align: center; letter-spacing: 2px; color: #999;}
+.ew-nioce{ margin-top: 16px; padding-left: 30px; background: url(../../images/login/nioce-icon.png) no-repeat left center;}
+.ew-nioce p{ line-height: 22px; padding: 0 15px;}
+.jump-nioce02{margin-left: 110px;}

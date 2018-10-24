@@ -1,0 +1,114 @@
+<extend name="Public/base" />
+<block name="append">
+    <link rel="stylesheet" type="text/css" href="__CSS__/special/index.css?20180628">
+</block>
+
+<!-- 二级头部 s -->
+<block name="header">
+    <include file="Public:titleHead"/>
+</block>
+<!-- 二级头部 e -->
+<block name="nav"></block>
+<!-- 主题内容 -->
+<block name="content">
+    <include file="Public:navHead"/>
+    <if condition="$sConfig['publishId'] eq 96">
+    <include file="WorldCup:navHead"/>
+    </if>
+    <!-- 主体内容 -->
+    <section class="container clearfix">
+        <!-- 第一模块 -->
+        <div class="premier-box clearfix">
+            <ul class="premier HotList"></ul>
+            <ul class="pictrue clearfix ListV"></ul>
+        </div>
+        <!-- 列表 -->
+        <if condition="$sConfig['publishId'] neq 96">
+        <div class="list clearfix">
+            <div class="List">
+                <ul class="pic">
+                    <li class="listpic">
+                        <a href="{:U('/'.$sConfig['navUrl'].'/schedule')}<eq name="_GET['header']" value="no">?header=no</eq>">
+                            <div class="agenda">
+                                <img src="__IMAGES__/special/calendar.png">
+                            </div>
+                            <div class="competition"><span>赛程</span></div>
+                        </a>
+                    </li>
+                    <li class="listpic">
+                        <a href="{:U('/'.$sConfig['navUrl'].'/rank')}<eq name="_GET['header']" value="no">?header=no</eq>">
+                            <div class="agenda">
+                                <img src="__IMAGES__/special/RoundRect-4.png">
+                            </div>
+                            <div class="competition"><span>积分榜</span></div>
+                        </a>
+                    </li>
+                    <li class="listpic">
+                        <a href="{:U('/'.$sConfig['navUrl'].'/info')}<eq name="_GET['header']" value="no">?header=no</eq>">
+                            <div class="agenda">
+                                <img src="__IMAGES__/special/message.png">
+                            </div>
+                            <div class="competition"><span>资讯</span></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </if>
+        <!-- 第二模块 -->
+        <div class="premier-box clearfix">
+            <ul class="premier ListNd"></ul>
+            <neq name="_GET['header']" value="no">
+            <ul class="pictrue clearfix ListP"></ul>
+            </neq>
+        </div>
+        <!--第三模块-->
+        <div class="premier-box clearfix">
+            <ul class="premier ListRd"></ul>
+        </div>
+        <!-- 查看更多 -->
+        <if condition="$sConfig['haveNav'] eq 1 and $_GET['header'] neq no">
+            <div class="more">
+                <a href="{:U('/'.$sConfig['navUrl'].'/info')}"><span>点击查看更多<img src="__IMAGES__/index/more.png"></span></a>
+            </div>
+            <else/>
+            <div class="more">
+                <span class="loadMore">加载更多数据</span>
+                <span class="loading" style="display:none;">数据加载中</span>
+                <span class="nothing" style="display:none;">无更多数据</span>
+            </div>
+        </if>
+
+        <neq name="_GET['header']" value="no">
+            <!-- 刷新 -->
+            <div class="foot-discuss clearfix">
+                <a><img src="__IMAGES__/index/x-s.png"></a>
+            </div>
+            <!-- 返回顶部 -->
+            <div class="backtop clearfix">
+                <a><img src="__IMAGES__/index/backtop.png"></a>
+            </div>
+        </neq>
+    </section>
+
+</block>
+
+<block name="footer">
+    <include file="Public/footer"/>
+</block>
+<block name="scripts">
+    <script>
+        var htmlData = "";
+        var topHight = 0.7;
+        var noData = 0;
+        <eq name="_GET['header']" value="no">topHight = 0;htmlData = '?header=no';noData = 1;</eq>
+        var _time = "{:time()}";
+        var IMAGES = "__IMAGES__";
+        var pId = "{$sConfig['publishId']}";
+        var hId = "{$sConfig['videoId']}";
+        var iId = "{$sConfig['photoId']}";
+        var listHidden = "{$sConfig['hidden']}";
+        var _domain = "{$sConfig['domain']}";
+    </script>
+    <script type="text/javascript" src="__JS__/special/index.js?20180625"></script>
+</block>

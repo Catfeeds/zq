@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>全球体育直播聊天室</title>
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="white" name="apple-mobile-web-app-status-bar-style">
+    <link rel="stylesheet" href="__CSS__/LiveRoom/unline.css">
+    <link rel="stylesheet" href="__CSS__/LiveRoom/reset.css">
+    <script type="text/javascript" src="__JS__/jquery-1.11.1.min.js"></script>
+    <!-- 自适应 计算html font-size -->
+    <script src="__JS__/LiveRoom/jquery.nicescroll.min.js"></script>
+</head>
+<div class="wrap">
+
+    <header class="wrap-header">
+        <div class="back-shade">
+            <p class="back">
+                <span class="back-btn"><a href="javascript:history.back();"><img src="__IMAGES__/LiveRoom/back.png" alt="" height="40px"> </a></span>
+                <span class="host-name"><img src="{$roomInfo.head}"><i>{$roomInfo.nick_name}</i></span>
+            </p>
+            <div class="header-content"></div>
+            <p class="wore">主播不在家~</p>
+            <p class="wore">直播时间，暂无安排直播时间</p>
+        </div>
+    </header>
+    <div class="content">
+        <div class="module">
+            <p class="top">
+                <span>其他直播中</span>
+            </p>
+            <div class="module-content">
+                <ul>
+                    <volist name="liveList" id="vo">
+                        <li>
+                            <a href="{$vo.RoomUrl}">
+                                <img src="{$vo.img}">
+                                <div class="info">
+                                    <p class="live-icon">
+                                        <switch name="vo.live_status">
+                                            <case value="-1"><i class="lx">离线</i><img style="width:.8rem" src="__IMAGES__/LiveRoom/ic_rk_lx.png"></case>
+                                            <case value="0"><i class="hf">回播</i><img style="width:.8rem" src="__IMAGES__/LiveRoom/ic_rk_hf.png"></case>
+                                            <case value="1">直播中<img src="__IMAGES__/LiveRoom/ic_rk_zbz.png"></case>
+                                            <case value="2">直播中<img src="__IMAGES__/LiveRoom/ic_rk_zbz.png"></case>
+                                        </switch>
+                                    </p>
+                                    <p class="live-info">
+                                        <span>{$vo.nick_name}</span>
+                                        <span>{$vo.title}</span>
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                    </volist>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

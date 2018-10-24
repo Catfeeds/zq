@@ -1,0 +1,53 @@
+/**
+ * @author Weiqianqian <1937025663@qq.com>
+ *
+ * @since  2018-03-08
+**/
+body{ height: auto;}
+
+.container{ padding:0; padding: .2rem .2rem; background-color: #fff; }
+/*nav*/
+
+.topnav{ position: relative;}
+.scroller{display: block; height: 35px; position: relative; overflow: hidden; background-color: rgba(255,255,255,.3);  -webkit-transition: background 500ms ease-out, padding 300ms; transition: background 500ms ease-out, padding 300ms; padding-top: 0;}
+.scroller::after{  content: '';   display: block;  position: absolute;  left: 0;  bottom: 0;  background-color: #e4e4e4; width: 100%;  height: 1px; -webkit-transform: scaleY(0.5);  -ms-transform: scaleY(0.5);  transform: scaleY(0.5);  -webkit-transform-origin: bottom left; -ms-transform-origin: bottom left;  transform-origin: bottom left;  }
+
+
+/*.scroller .main-n .track .list-n .navLink,.navlink{ }
+.scroller .main-n .track .list-n a.current:after{ background-color: #0a94e4;}*/
+.scroller .track a.tuijian::after, .scroller .main-n .expand-btn.hasnew::after, .fulllist .channels-area .channels-list a.tuijian::after{ content: ''; background: #ed5151;  display: block; width: 6px;  height: 6px; border-radius: 50%; float: right;  margin: 3px -8px 0 2px; position: relative; }
+.scroller .main-n .gradient-l, .scroller .main-n .gradient-r, .scroller .main-n .expand-btn{ height: 35px;  position: absolute;  pointer-events: none;  top: 0;  width: 30px;  -webkit-backface-visibility: hidden;  backface-visibility: hidden; -webkit-transition: opacity .2s ease-out; transition: opacity .2s ease-out;}
+.scroller .main-n .gradient-r{ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%);right: 0; opacity: 1; width: 60px;
+}
+.scroller .main-n .gradient-l{  background: linear-gradient(to left, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);  left: 0;  opacity: 0;}
+.scroller .main-n .expand-btn{  width: 40px; height: 34px; right: 0px;  pointer-events: auto;  z-index: 3;}
+.scroller .main-n .expand-btn i{ display: block;  height: 100%;   background-image: url(../../images/index/plus.png);  background-position: center 6px;   background-repeat: no-repeat;  background-size: 20px 20px;  -webkit-transform-origin: center; -ms-transform-origin: center; transform-origin: center;}
+/*内容*/
+/*.banner{ margin-top: .2rem;}*/
+.banner a{ position: relative; height: 3.64rem; width: 100%; float: left;}
+.banner a img{ height:  3.64rem;}
+.banner .explain{ position: absolute; width: 100%; bottom: 0rem; padding: .2rem .2rem 3rem .2rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; top: 0;background: -webkit-gradient(linear,1% 1%,1% 100%,color-stop(0,rgba(0,0,0,0.5)), color-stop(0.3,rgba(0,0,0,0.3)), color-stop(1,rgba(0,0,0,0)) ); color: #fff; font-size: .32rem; letter-spacing: 1px;}
+.banner .video{ position: absolute; bottom: 1.5rem; left: 3rem;}
+.banner .video img{ width: .92rem; height: .92rem;}
+.banner .state{ position: absolute; bottom: 0; width: 100%; color: #fff; font-size: .24rem; letter-spacing: 2px; padding: .2rem .2rem .2rem .2rem; background: -webkit-gradient(linear,1% 1%,1% 100%,color-stop(0,rgba(0,0,0,0)), color-stop(0.3,rgba(0,0,0,0.1)), color-stop(1,rgba(0,0,0,0.6)) );}
+/*.banner img{ width: 100%; height: 3.64rem;}
+.banner .explain{  width: 7.1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; top: 0;background: -webkit-gradient(linear,1% 1%,1% 100%,color-stop(0,rgba(0,0,0,0.5)), color-stop(0.3,rgba(0,0,0,0.3)), color-stop(1,rgba(0,0,0,0)) ); padding: .2rem 0 3.3rem .2rem; bottom: 4rem; position: absolute;}
+.banner .explain span{ font-size: .32rem; font-weight: bold; color: #fff;}
+.banner .video{ position: absolute; width: .92rem; bottom: 2rem; left: 3rem;}
+.banner .video img{ width: .92rem; height: .92rem;}
+.banner .state{ width: 100%; position: relative; color: #fff; padding: .2rem 0 .1rem 0; background: -webkit-gradient(linear,1% 1%,1% 100%,color-stop(0,rgba(0,0,0,0)), color-stop(0.3,rgba(0,0,0,0.1)), color-stop(1,rgba(0,0,0,0.6)) );}
+.banner .state .number-s{ padding-left: .1rem;}
+.banner .state .time-s{ padding-left: 4.3rem;}*/
+
+.button{ padding: .3rem 0 .3rem 0; margin-bottom: .3rem; float: left; width: 100%; border-bottom: 1px solid #eee; }
+.one{ height: .6rem; line-height: .6rem; background-color: #eeeeee; border-radius: .1rem; font-size: ,.24rem; color: #333; padding: .1rem .1rem .1rem .1rem; margin-right: .2rem;}
+.one img{ width: .34rem; height: .34rem; border-radius: 50%; margin: 0 .1rem 0 0;}
+.one .name-o{ font-size: .2rem;}
+
+.two{height: .6rem; line-height: .6rem; background-color: #eeeeee; border-radius: .1rem; font-size: .24rem; color: #333; padding: .1rem .1rem .1rem .1rem; margin-right: .2rem; }
+
+.tally img{ width: .2rem;}
+/*返回顶部*/
+.backtop{ position: fixed;right: .2rem; bottom: 3.1rem; z-index: 999; width: .8rem; height: .8rem;}
+.backtop a{ display: block;}
+.backtop img{ width: .8rem; height: .8rem; pointer-events: none;}

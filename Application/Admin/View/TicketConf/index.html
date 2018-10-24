@@ -1,0 +1,122 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/index" method="post">
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>
+                <label>体验券名称：</label>
+                <input type="text"name="name" value="{$_REQUEST.name}">
+            </li>
+            <li>
+                <label>推荐价格：</label>
+                <select name="price" class="combox" onchange="$(form).submit();">
+                  <option value="" selected>全部</option>
+                  <option <if condition="$_REQUEST.price eq '2'">selected</if> value="2">2金币</option>
+                  <option <if condition="$_REQUEST.price eq '4'">selected</if> value="4">4金币</option>
+                  <option <if condition="$_REQUEST.price eq '8'">selected</if> value="8">8金币</option>
+                  <option <if condition="$_REQUEST.price eq '16'">selected</if> value="16">16金币</option>
+                  <option <if condition="$_REQUEST.price eq '32'">selected</if> value="32">32金币</option>
+                  <option <if condition="$_REQUEST.price eq '64'">selected</if> value="64">64金币</option>
+                  <option <if condition="$_REQUEST.price eq '128'">selected</if> value="128">128金币</option>
+                  <option <if condition="$_REQUEST.price eq '256'">selected</if> value="256">256金币</option>
+                  <option <if condition="$_REQUEST.price eq '512'">selected</if> value="512">512金币</option>
+                </select>
+            </li>
+            <li>
+                <label>状态：</label>
+                <select name="status" class="combox" onchange="$(form).submit()">
+                    <option value="" selected>全部</option>
+                    <option value="1" <if condition="$_REQUEST.status eq '1'">selected</if> >可用</option>
+                    <option value="0" <if condition="$_REQUEST.status eq '0'">selected</if> >停用</option>
+                </select>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="__URL__/add" height="350" target="dialog" mask="true"><span>新增</span></a></li>
+            <li>
+            <li><a class="delete" href="__URL__/foreverdelete/id/{sid_record}" target="ajaxTodo" title="你确定要删除吗？" warn="请选项"><span>删除</span></a></li>
+            <li><a class="edit" href="__URL__/edit/id/{sid_record}" target="dialog" mask="true" warn="请选项" height="350"><span>编辑</span></a></li>
+            <li>
+            <a class="edit" href="__URL__/onOff/sign/close" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确定都设为禁用?">
+            <span>批量设为禁用</span></a></li>
+            <li>
+            <a class="edit" href="__URL__/onOff/sign/open" posttype="string" rel="id" target="selectedTodo" warn="请选择记录" title="确定都设为启用?">
+            <span>批量设为启用</span></a></li>
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="2%" style="cursor: default;">
+                <div class="gridCol" title="">
+                    <input class="checkboxCtrl" type="checkbox" group="id">
+                </div>
+            </th>
+            <th width="3%">ID</th>
+            <th width="12%">体验券名称</th>
+            <th width="6%" orderField="price" <if condition="$_REQUEST._order eq 'price'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>推荐价格</th>
+            <th width="6%" orderField="sale" <if condition="$_REQUEST._order eq 'sale'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>销售价格</th>
+            <th width="15%">发行时间</th>
+            <th width="6%">发行状态</th>
+            <th width="10%" orderField="over_time" <if condition="$_REQUEST._order eq 'over_time'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>券有效期</th>
+            <th width="5%" orderField="totle_num" <if condition="$_REQUEST._order eq 'totle_num'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>总数量</th>
+            <th width="5%" orderField="over_num" <if condition="$_REQUEST._order eq 'over_num'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>剩余数量</th>
+            <th width="5%" orderField="buy_num" <if condition="$_REQUEST._order eq 'buy_num'">class="{$_REQUEST._sort}"<else/>class="desc"</if>>购买人数</th>
+            <th width="5%">状态</th>
+            <th width="5%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name="list">
+            <volist id="vo" name="list">
+                <tr target="sid_record" rel="{$vo['id']}" >
+                    <td>
+                        <div>
+                            <input type="checkbox" value="{$vo.id}" name="id">
+                        </div>
+                    </td>
+                    <td>{$vo['id']}</td>
+                    <td>{$vo['name']}</td>
+                    <td>{$vo['price']}</td>
+                    <td>{$vo['sale']}</td>
+                    <td>{$vo['start_time']|date="Y-m-d H:i:s",###} 至 {$vo['end_time']|date="Y-m-d H:i:s",###}</td>
+                    <td>
+                        <if condition="$vo.start_time gt time()"><div style="color: blue">未开始</div>
+                        <elseif condition="$vo.end_time lt time()" /><div style="color: red">已结束</div>
+                        <else /><div style="color: green">进行中</div>
+                        </if>
+                    </td>
+                    <td>{$vo['over_time']|date="Y-m-d",###}</td>
+                    <td>{$vo['totle_num']}</td>
+                    <td>{$vo.over_num}</td>
+                    <td style="font-weight: bold;"><a title="购买人数" href="__URL__/ticketLog/class_id/{$vo['id']}" target="navTab">{$vo.buy_num|default="0"}</a></td>
+                    <td>{$vo.status|getStatus}</td>
+                    <td>
+                        <a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" height="350" title="{$vo.name}编辑" rel="editPage">编辑</a> |
+                        {$vo['status']|showStatus=$vo['id'],'navTabAjaxDone',"__URL__",'__DWZ__'}
+                    </td>
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+
+</div>
+
+

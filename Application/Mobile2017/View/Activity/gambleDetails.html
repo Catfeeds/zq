@@ -1,0 +1,196 @@
+<extend name="Public/base" />
+<block name="seo">
+    <title>全球体育网</title>
+</block>
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/activity/game.css?d=20170615">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/Olympic/swiper_banner.css?d=20170614">
+</block>
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+<block name="header">
+    <header id="other_header" class="header_fixed">
+        <a href="{:U('Activity/gambleLog',['activityId'=>$activityId])}"></a>
+        <span>推荐详情</span>
+    </header>
+</block>
+
+<block name="nav">
+</block>
+<block name="content">
+    <!-- banner s-->
+    <!-- <section class="banner">
+        <img src="__IMAGES__/activity/gamble/banner_new.jpg" alt="banner">
+    </section> -->
+    <section class="main_banner ">
+        <!-- Swiper -->
+        <div class="swiper-container swiper-container-horizontal">
+            <div class="swiper-wrapper">
+                <volist name='banner' id='v'>
+                    <figure class="swiper-slide">
+                        <a href="{$v['url']}">
+                        <!-- <img src="{$v.img}" alt="{$v.title}"> -->
+                        <img src="/Public/Mobile/images/activity/gamble/banner_new.jpg" alt="{$v.title}">
+                        </a>
+                        <!--<figcaption>{$v.title}</figcaption>-->
+                    </figure>
+                </volist>
+            </div>
+            <!-- Add Pagination -->
+            <!-- <if condition="$bannerCount gt 1">
+                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+
+                </div>
+            </if> -->
+        </div>
+    </section>
+    <!-- banner e-->
+    <!-- content s -->
+    <section class="g_content">
+        <div class="con_bg_top">
+            <!-- 头像信息 s-->
+                    <div class="head_con clearfix" style="border-bottom:0">
+                        <div class="fl head">
+                            <a <if condition="is_login() neq ''">href="{:U('User/index')}<else/>href="{:U('User/login')}</if> ">
+                            <img src="{$userInfo['head']|default='__IMAGES__/index/headImg.png'}" alt="头像">
+                            <if condition="is_login() neq ''">
+                                {$userInfo['nick_name']}
+                                <else/>
+                                登录/注册
+                            </if>
+
+                            </a>
+
+
+                        </div>
+                        <div class="fr rules">
+                            <a id="gambleLog" href="{:U('Activity/gambleLog')}" >推荐记录</a>&nbsp;&nbsp;&nbsp;
+                            <a href="{:U('Activity/rule',['activityId'=>$activityId])}">活动规则</a>
+                        </div>
+                    </div>
+                    <!-- 头像信息 e-->
+        </div>
+        <div class="con_bg">
+            <div class="content_main">
+                <div class="timeT"><p><img src="/Public/Mobile/images/activity/gamble/timeT.png" alt="推荐截止时间"></p><p>{$end_time}</p></div>
+                <volist name="list" id="vo">
+                    <div class="guess_con">
+                        <if condition="$multiple eq '0'">
+                            <!-- 对阵信息 s-->
+                            <section class="team_vs">
+                                <table class="table">
+                                    <tbody>
+                                    <tr class="tr_vs">
+                                        <td width="35%"><img src="{$vo['homeTeamLogo']}" alt=""></td>
+                                        <td width="30%"><p style="color: {$vo['union_color']}">{$vo['union_name']}</p><p class="timeP">{$vo['game_time']}</p></td>
+                                        <td width="35%"><img src="{$vo['awayTeamLogo']}" alt=""></td>
+                                    </tr>
+                                    <tr class="tr_team_name">
+                                        <td>{$vo['home_team_name']}</td>
+                                        <td class="vs">VS</td>
+                                        <td>{$vo['away_team_name']}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+                            <!-- 对阵信息 e-->
+                        </if>
+
+
+
+                        <!-- 样式说明：赢：win；赢半：winhalf；输：lose；输半：losehalf；平：split；推迟：putoff；待定：pending；腰斩：cut；中断：interrupt；取消：cancel -->
+                        <volist name="vo.game" id="ga" key="key">
+                            <div class="guess_list">
+                                <if condition="$ga['is_true'] neq ''">
+                                    <div class="g_state {$ga['is_true']}"></div>
+                                </if>
+                                <table class="table tb_guess_con">
+                                    <tbody>
+                                    <if condition="$multiple eq '0'">
+                                        <tr class="tr_qs">
+                                            <td class="q-tl"><i>{$key}</i><span>{$ga['question']}</span></td>
+                                        </tr>
+                                        <else/>
+                                        <tr class="tr_vs">
+                                            <td width="35%"><img src="{$vo['homeTeamLogo']}" alt=""></td>
+                                            <td width="30%"><p style="color: {$vo['union_color']}">{$vo['union_name']}</p><p class="timeP">{$vo['game_time']}</p></td>
+                                            <td width="35%"><img src="{$vo['awayTeamLogo']}" alt=""></td>
+                                        </tr>
+                                        <tr class="tr_team_name">
+                                            <td>{$vo['home_team_name']}</td>
+                                            <td class="vs">VS</td>
+                                            <td>{$vo['away_team_name']}</td>
+                                        </tr>
+                                    </if>
+
+
+                                    <tr>
+                                        <td <if condition="$multiple eq '1'">colspan="3"</if> class="win_sele">
+                                        <foreach name="ga.option" item="op">
+                                            <a href="javascript:;"
+                                            <if condition="$op['is_quiz'] eq '1' and $ga['is_true'] neq '' and $ga['re_answer'] eq $op['aid']">
+                                                class="on_sele on res"
+                                                <else/>
+                                                <if condition="$op['is_quiz'] eq '1'">class="on_sele on"</if>
+                                                <if condition="$ga['is_true'] neq '' and $ga['re_answer'] eq $op['aid']">class="res"</if>
+
+                                            </if>
+
+                                            data-singid="{$ga['single_id']}" data-quizid="{$ga['id']}" data-gameid="{$vo['game_id']}" data-answer="{$op['aid']}">
+                                            {$op['option']} <span>({$op['num']}%)</span>
+                                            <if condition="$ga['is_true'] neq '' and $ga['re_answer'] eq $op['aid']"><em></em></if>
+                                            </a>
+                                        </foreach>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </volist>
+                    </div>
+                </volist>
+
+                <div class="rules_txt">
+                    <div class="ruleT"><p><img src="/Public/Mobile/images/activity/gamble/ruleT.png" alt="推荐规则"></p></div>
+                    <p class="rules_title">推荐规则：</p>
+                    {$ruleText}
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- content e -->
+
+
+</block>
+
+<block name="scripts">
+    <script>
+        $(function () {
+            $('.tb_guess_con').each(function(e){
+                $(this).find('.em_xb').html(e+1+'、')
+            });
+        })
+    </script>
+    <script src="__JS__/Olympic/swiper_banner.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //banner 切换
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: 10000,
+                autoplayDisableOnInteraction: false
+            });
+        })
+    </script>
+</block>
+
+
+

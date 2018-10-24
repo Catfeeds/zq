@@ -1,0 +1,111 @@
+<div class="pageContent">
+
+    <form method="post" action="__URL__/save" class="pageForm required-validate"
+          onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <div class="pageFormContent" layoutH="58">
+
+            <div class="unit">
+                <label>接收人手机号（短信）：</label>
+                <input name="MobileLog.id" class="" type="hidden"/>
+                <textarea rows="5" cols="35" name="MobileLog.mobile" readonly/></textarea>
+                <a width="800" height='600' lookupgroup="MobileLog" href="{:U('__URL__/mobileLog')}" class="btnLook">选择发件人</a>
+            </div>
+
+            <div class="unit">
+                <label>接收人昵称（推送）：</label>
+                <input name="FrontUser.id" class="" type="hidden"/>
+                <textarea rows="5" cols="35" name="FrontUser.nick_name" readonly/></textarea>
+                <a width="800" height='600' lookupgroup="FrontUser" href="{:U('__ADMIN__/FrontUser/findFrontUser')}"
+                   class="btnLook">选择收件人</a>
+            </div>
+
+            <div class="unit">
+                <label>指定平台：</label>
+                <select class="combox" name="platform">
+                    <option value="0">所有平台</option>
+                    <option value="2">ios</option>
+                    <option value="3">android</option>
+                </select>
+            </div>
+            <div class="unit">
+
+                <label>消息打开方式：</label>
+                <select class="combox" name="module">
+                    <option value="1">进入资讯</option>
+                    <option value="0">进入APP</option>
+                    <option value="2">进入图集</option>
+                    <option value="9">打开外链</option>
+                    <option value="10">进入个人中心</option>
+                    <option value="11">进入足球赛事详情</option>
+                    <option value="12">进入篮球赛事详情</option>
+                    <option value="13">进入帖子详情</option>
+                    <option value="14">进入个人系统通知</option>
+                    <option value="15">进入产品详情</option>
+                </select>
+                （0:进入App;1进入资讯；2进入图集；9打开外链；10进入个人中心；11进入足球赛事详情，12进入篮球赛事详情，13进入帖子详情；14进入个人系统通知。15进入产品详情）
+            </div>
+            <div class="unit">
+                <label>指定参数值：</label>
+                <input type="text" class="" name="mValue">
+                （对应module的值，比如外链时，填链接）
+            </div>
+            <div class="unit">
+                <label>发送内容：</label>
+                <textarea class="large bLeft required" name="content" maxlength="255" rows="10" cols="57"></textarea>
+            </div>
+
+            <div class="unit range">
+                <label>是否定时发送：</label>
+                <input type="radio" name="is_send" value="1" select_type="0" checked
+                >否
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="is_send" value="2" select_type="1"
+                >是
+            </div>
+
+            <div class="unit is_send" style="display: none;">
+                <label>定时发布</label>
+                <input type="text" readonly="true" datefmt="yyyy-MM-dd H:m:s"
+                       class="date textInput readonly valid"
+                       value="<if condition='$vo.send_time gt 0'>{$vo.send_time|date='Y-m-d H:i:s',###}</if>"
+                       name="send_time" size="20">
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit">保存</button>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button type="button" class="close">取消</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+
+<script>
+    //是否定时发送
+    $('.range input').on('click', function () {
+        var select_type = $(this).attr('select_type');
+        if (select_type == 1) {
+            $('.is_send').css('display', '');
+            $('.is_send input').addClass('required');
+        } else if (select_type == 0) {
+            $('.is_send').css('display', 'none');
+            $('.is_send input').removeClass('required');
+        }
+    });
+</script>
+
+
+

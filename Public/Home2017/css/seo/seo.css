@@ -1,0 +1,179 @@
+body{font-family: 微软雅黑}
+/*头部*/
+.s_top{height: 40px;width: 100%}
+/*导航*/
+.s_nav{
+    width: 100%;
+    min-width: 1000px;
+    height: 40px;
+    background: #f47600;
+}
+.s_nav ul{width: 1000px; margin: 0 auto}
+.s_nav ul li{float: left;text-align: center;}
+.s_nav ul li a {
+    position: relative;
+    display: block;
+    height: 40px;
+    padding: 0 20px;
+    color: #fff;
+    font-size: 16px;
+    line-height: 40px;
+    text-decoration: none;
+}
+.s_nav ul li a:hover{color: #fff;background: #dd031d}
+.s_nav ul li.on a{color: #fff;background: #dd031d}
+.s_nav .logo{float: left;margin-right: 25px}
+
+.home_bg{background: url(../../images/seo/home_bg.jpg) no-repeat left top}
+/*关注*/
+.s_focus{padding-top: 40px}
+.s_focus .fc_img{width: 485px;height: 350px}
+.s_focus .fc_main{width: 470px;height: 350px;}
+.s_focus .fc_main .p_1 h1{font-size: 30px;margin: 0}
+.s_focus .fc_main .p_1 a{display: block;width: 96px;height: 36px;background: url(../../images/seo/s_guanz.png) no-repeat left top;text-align: center;line-height: 36px;color: #fff;float: right;font-size: 16px}
+.s_focus .fc_main .p_1 a.on{cursor: default;}
+
+.s_focus .fc_main .p_2{font-size: 16px;line-height: 180%}
+.fcm_foot{padding-top: 20px}
+.s_download p{padding-top:22px;}
+.s_download p a{display: block;width: 165px;height: 52px;background: url(../../images/seo/s_download.png) no-repeat left top;text-align: center;line-height: 52px;color: #fff;font-size: 24px}
+.s_download p .s_register{background: url(../../images/seo/s_register.png) no-repeat left top;}
+
+/* 本例子css */
+.slideBox{ width:485px; height:350px; overflow:hidden; position:relative;  }
+.slideBox .hd{ height:15px; overflow:hidden; position:absolute; right:5px; bottom:5px; z-index:1; }
+.slideBox .bd{ position:relative; height:100%; z-index:0;   }
+.slideBox .bd li{ zoom:1; vertical-align:middle; }
+/* 下面是前/后按钮代码，如果不需要删除即可 */
+.slideBox .prev,
+.slideBox .next{ position:absolute; left:3%; top:50%; margin-top:-25px; display:block; width:32px; height:40px; background:url(images/slider-arrow.png) -110px 5px no-repeat; filter:alpha(opacity=50);opacity:0.5;   }
+.slideBox .next{ left:auto; right:3%; background-position:8px 5px; }
+.slideBox .prev:hover,
+.slideBox .next:hover{ filter:alpha(opacity=100);opacity:1;  }
+.slideBox .bd ul li .pic{ text-align:center; }
+.slideBox .bd ul li .pic img{ width:485px; height:350px; display:block; }
+.slideBox .bd ul li .title{  }
+
+.item_left{width: 660px; float: left;}
+.football-item{float: left;}
+.s_title {
+    background: url(../../images/seo/s_title.png) no-repeat 0 0!important;
+    width: 142px!important;height: 28px!important;
+    line-height: 28px!important;
+}
+.gaos {
+    background: url(../../images/seo/gaos.png) no-repeat 0 0!important;
+    width: 131px!important;height: 34px!important;
+    line-height: 34px!important;
+}
+.fitem-left{top:-7px;}
+.infor-con{margin-top: 40px}
+.fitem-title h2{    text-align: center;
+    color: #fff;
+    font-size: 16px;}
+
+/*内容右侧*/
+.con_right{ width: 310px;}
+.s_gsUl li{width: 50%;margin-bottom: 20px}
+.s_gsUl li .face{width: 48px;height: 48px;padding: 0}
+.carousel-inner .s_gsUl li .face img{width: 48px!important;height: 48px!important;border-radius: 0}
+.s_gsUl li .name{width: 100px;padding-left: 0;margin-left: 5px}
+.s_gsUl li .name h4{width: 100px;margin: 0;margin-bottom: 5px}
+.s_gsUl li .name h4 span{width: 50px;white-space:normal;font-size: 12px}
+.s_gsUl li .name h4 i{}
+.s_gsUl li .name .p1,.s_gsUl li .name .p2{font-size: 12px;margin-bottom: 5px}
+.s_gsUl li .name .p2 .span2{margin-left: 5px}
+
+.carousel-indicators li {
+    width: 32px;
+    height: 6px;
+    background: #e5e5e5;
+    border-radius: 0;
+    border-color: #e5e5e5;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.carousel-indicators .active {
+    background-color: #ff4f33;
+    border: 1px solid #ff4f33;
+    box-shadow: none;
+    margin: 0 5px!important;
+}
+.carousel{margin-top: 20px}
+.nav-tab .on{background: #da2c00}
+.time-tab .current a:hover{background: #f4492a;border-color:#f4492a;}
+.time-tab .current a{color:#fff;background: #f4492a;border-color:#f4492a;}
+.friend-con .stat-title{background:url(../../images/seo/b-line.png) repeat-x left center;}
+
+/*快速导航*/
+.fast_nav{width: 100%;float: left;height:auto;margin-top: 30px;padding: 25px 0;border-top: 1px solid #f5a49b }
+.fast_nav .fn_title{float: left;font-weight:bold;font-size: 14px}
+.fast_nav ul{float: left;}
+.fast_nav ul li{float: left;padding:0 5px;}
+
+.rightCon .data-graph{width: 300px}
+
+.backTools_list li{background: #bfbfbf}
+.backTools_list li a i{background:url(http://www.qqty.com/Public/Home/images/common/elevator-i.png) no-repeat 0 0}
+
+.slideBox .hd{ height:15px; overflow:hidden; position:absolute; right:5px; bottom:5px; z-index:1; }
+.slideBox .hd ul{ overflow:hidden; zoom:1; float:left;  }
+.slideBox .hd ul li{ float:left; margin-right:5px;  width:40px; height:8px; line-height:25px; text-align:center; background:#fff; cursor:pointer;font-size: 0 }
+.slideBox .hd ul li.on{ background:#f00; color:#fff; }
+
+
+.s_login{width: 260px;}
+.login_nav em{display: block;width: 48%;background: #dcdcdc;float: left;color: #fff;height: 25px;line-height: 25px; text-align: center;border-radius: 5px;cursor:pointer;}
+.login_nav em:last-child{float: right;}
+.login_nav em:hover{background: #ff7e00}
+.login_nav em.on{background: #ff7e00}
+.form-main{ background: #000 url(../../images/login/login-bg.jpg) no-repeat center center; width: 100%; height: 480px;}
+.form-main .main-in{  margin:0 auto;}
+.form{width: 260px;float: left; }
+.extra-r{ margin: 10px 0;}
+.extra-r a{ color: #e31e43;}
+.form .mt{ margin-bottom: 15px;}
+.form .captcha{width: 165px;}
+.form .item { position: relative; margin-top: 20px; background-color: white;}
+.form .form-control{ height: 30px; line-height: 30px; padding:0 0 0 10px; width: 100%; outline: 0 none; font-size: 14px; }
+.remeber .checkbox{    height: 10px;margin: 15px 0; }
+input::-moz-placeholder{
+color:#b4b4b4;
+}
+input::-webkit-placeholder{
+color:#b4b4b4;
+}
+
+input:-webkit-autofill{ background-color: white;}
+.login-btn input[type=submit]{ width: 100%; border-radius: 3px; font-size: 18px;}
+.form .field-msg{ left: 1%; top: -3%;}
+.msg-warn {
+display: none;
+background: #fff6d2 none repeat scroll 0 0;
+border: 1px solid #ffe57d;
+color: #666;
+height: 28px;
+line-height: 18px;
+padding: 3px 10px 3px 40px;
+position: relative;
+}
+.msg-warn b {
+background: rgba(0, 0, 0, 0) url("//miscssl.360buyimg.com/user/passport-2015/widget/login-form/i/pwd-icons-new.png") no-repeat scroll -104px -22px;
+display: block;
+height: 17px;
+left: 10px;
+margin-top: -9px;
+overflow: hidden;
+position: absolute;
+top: 50%;
+width: 16px;
+}
+/*其他登录方式*/
+.else_login{padding-top: 10px}
+.else_login img{padding-right: 5px}
+.else_login a{color: #8a8a8a;padding-right: 24px}
+.else_login a:last-child{padding-right: 0px}
+.else_login a:hover{color: #ff7e00}
+/*注册*/
+.form #ranks{width: 164px}
+.reanks-con .btn{height: 30px;border-radius: 0;padding-top:4px }

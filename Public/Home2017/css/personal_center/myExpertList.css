@@ -1,0 +1,57 @@
+/**
+ * myExpertlist of css
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2017-08-07
+**/
+
+.mainList{ padding:  10px 10px 10px;}
+.rec_right{ width: 660px;}
+.page-con .pagination .isTxtBig{ height: 23px;}
+
+/* expertApply */
+.applyTitle{ padding: 20px 16px; background: #fbfbfb; font-size: 22px; border-bottom: 1px dashed #e5e5e5;}
+.applyInfor{ padding: 20px 15px;}
+.applyName{ height: 34px; line-height: 34px; margin-left: 10px;}
+.reset-con .form .form-in,.reset-con .form .form-in input,.reset-con .form .checkbox label{ font-size: 14px;}
+.applyInfor .grtextarea{width: 560px; height: 60px; overflow: hidden; border: 1px solid #e5e5e5; line-height: 20px; resize: none; outline: none;}
+.applyInfor .notesP{ color: #999999;}
+.applyInfor .face,.applyInfor .uploadFace{ position: relative; width: 130px; height: 130px; background: #f7f7f7;}
+.applyInfor .face .upload-img,.applyInfor .face input[type=file]{ position: absolute; left: 0; bottom: 0; width: 130px; height: 40px; line-height: 40px; background:#f5f5f5; background: rgba(0,0,0,0.6); color: #ffffff; text-align: center;}
+.applyInfor .face input[type=file]{right/*\**/: 0px\9; margin-right/*\**/: 0px\9; width/*\**/: 10px\9; opacity: 0; filter: alpha(opacity=0); z-index: 2; cursor: pointer;}
+.applyInfor .uploadFace input[type=file]{ position: absolute; left: 0; top: 0; width: 130px; height: 130px; right/*\**/: 0px\9; margin-right/*\**/: 0px\9; width/*\**/: 10px\9; opacity: 0; filter: alpha(opacity=0); z-index: 2; cursor: pointer;}
+.applyInfor .reanks-con{ margin-left: 10px;}
+.reset-con .form .form-in{ margin-bottom: 15px;}
+.reg-btn{ text-align: center; padding-top: 20px;}
+.reg-btn .btn{ width: 140px; margin: 0 20px;}
+
+/* expertArticle */
+.applyArticle .form-control{ width: 520px;}
+.input-con .table{ margin-bottom: 0;}
+.input-con .table tr th{ background: #f5f5f5; font: 13px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;}
+.input-con .table tr td{ font: 13px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;}
+.input-con .table .selectOdd{ background: #ffffff; color: #666666; cursor: pointer;}
+.input-con .table .selectOdd.on{ background: #0094d5; color: #ffffff;}
+
+.modal{ margin-left: -374px;}
+.modal-header h4 a{ margin: 0 10px;}
+.modal-header h4 a:hover,.modal-header h4 a.cur{ color: #2e76c7;}
+.modal-body{ width: 748px; background: #f0f0f5; padding: 0;}
+.modal-content{ background:#f0f0f5;}
+.modal-body .menu_list{ max-height: 132px; overflow: auto; margin-bottom: 20px;}
+.modal-body .menu_list ul li{ float: left; width: 80px; overflow: hidden; border: 1px solid #e5e5e5; margin: 0 10px; margin-bottom: 10px;}
+.modal-body .menu_list ul li a{ display: block; height: 32px; line-height: 32px; text-align: center; background: #ffffff;}
+.modal-body .menu_list ul li.on a{ background: #3381d9; color: #ffffff;}
+.menu_select{ padding-top: 15px; border-top: 1px solid #e5e5e5; max-height: 400px; overflow: auto;}
+.menu_select ul li label{ display: block; padding: 10px 22px;}
+.menu_select ul li:hover{ background: #e1e1e6;}
+.menu_select ul li em{ color: #3381d9; margin-left: 10px;}
+.menu_select input[type=radio],.menu_select input[type=checkbox] { vertical-align: -2px;}
+.btn-con{ background: #e4e3e6; padding: 10px;}
+.btn-con input{ outline: none;width: 80px;}
+.btn-con .btn-blue {
+    color: #fff;
+    background-color: #2e76c7;
+    border-color: #2e76c7;
+}

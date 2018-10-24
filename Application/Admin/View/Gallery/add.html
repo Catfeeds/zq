@@ -1,0 +1,296 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,navTabAjaxDone);" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value="{$vo.id}" name="id" id="id">
+			<div class="unit">
+				<label>图库标题：</label>
+				<textarea maxlength="30" class="required" name="title"  rows="1" cols="47">{$vo.title}</textarea>
+			</div>
+			<div class="unit">
+				<label>短标题：</label>
+				<textarea maxlength="25" class="required" name="short_title"  rows="1" cols="47">{$vo.short_title}</textarea>
+			</div>
+			<div class="unit">
+				<label>选择分类：</label>
+				<select name="class_id" class="required">
+					<option value="">请选择</option>
+					<volist name="GalleryClass" id="item">
+						<option value="{$item.id}" <if condition="$item['id'] eq $vo['class_id']">selected</if> >{$item.name}</option>
+						<notempty name="item.childs">
+							<volist name="item.childs" id="item2">
+								<option value="{$item2.id}" <if condition="$item2['id'] eq $vo['class_id']">selected</if> >|_{$item2.name}</option>
+								<notempty name="item2.childs">
+									<volist name="item2.childs" id="item3">
+										<option value="{$item3.id}" <if condition="$item3['id'] eq $vo['class_id']">selected</if>>|__{$item3.name}</option>
+									</volist>
+								</notempty>
+							</volist>
+						</notempty>
+					</volist>
+				</select>
+			</div>
+			<div class="unit">
+				<label>关联赛事id：</label>
+				<input type="text" name="game_id" class="digit number" value="{$vo.game_id}" />
+			</div>
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft"  name="status">
+					<option value="1" <eq name="vo.status" value="1">selected</eq>>正常</option>
+					<option value="0" <eq name="vo.status" value="0">selected</eq>>待发布</option>
+				</select>
+			</div>
+			<div class="unit">
+				<label>首页推荐：</label>
+				<input type="radio" value="0" name="home_recommend" <eq name="vo.home_recommend" value="0">checked</eq>/>否
+				<input type="radio" value="1" name="home_recommend" <eq name="vo.home_recommend" value="1">checked</eq>/>是
+			</div>
+			<div class="unit">
+				<label>轮播推荐：</label>
+				<input type="radio" value="0" name="carousel_recommend" <eq name="vo.carousel_recommend" value="0">checked</eq>/>否
+				<input type="radio" value="1" name="carousel_recommend" <eq name="vo.carousel_recommend" value="1">checked</eq>/>大图推荐
+				<input type="radio" value="2" name="carousel_recommend" <eq name="vo.carousel_recommend" value="2">checked</eq>/>小图推荐
+			</div>
+			<div class="unit">
+				<label>发布时间：</label>
+				<input class="date textInput readonly valid" type="text" <notempty name="vo.add_time">value="{$vo.add_time|date='Y-m-d H:i:s',###}"</notempty> readonly datefmt="yyyy-MM-dd HH:mm:ss" name="add_time">
+				<a class="inputDateButton" href="javascript:;">选择</a>
+				<span class="info">yyyy-MM-dd HH:mm:ss</span>
+			</div>
+			<div class="unit">
+				<label>SEO标题：</label>
+				<textarea maxlength="255" class="large bLeft" name="seo_title"  rows="2" cols="70">{$vo.seo_title}</textarea>
+			</div>
+			<div class="unit">
+				<label>SEO关键字：</label>
+				<textarea maxlength="255" class="large bLeft" name="seo_keys"  rows="3" cols="70">{$vo.keys}</textarea>
+			</div>
+			<div class="unit">
+				<label>SEO描述：</label>
+				<textarea maxlength="255" class="large bLeft" name="seo_desc"  rows="4" cols="70">{$vo.desc}</textarea>
+			</div>
+
+			<div class="unit">
+				<label>说明：</label>
+				<textarea maxlength="255" class="large bLeft required" name="remark"  rows="2" cols="70">{$vo.remark}</textarea>
+			</div>
+			<div class="unit">
+				<label>&nbsp;</label>
+			</div>
+			<div class="unit">
+				<label>展示图上传：</label>
+				<ul class="tabImg">
+				<empty name="vo.img">
+					<for start="1" end="11">
+						<li>
+							<input id="viewUploadInput_{$i}" name="fileInput_{$i}" type="file" onChange="previewImage({$i})" style="display:none;" />
+							<a href="javascript:void(0);">
+								<span id="viewUploadDiv_{$i}">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_{$i}"/>
+								</span>
+							</a>
+							<div id="poiter_{$i}" class="poiter">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_{$i}')">添加图片</a>
+							</div>
+						</li>
+					</for>
+				<else/>
+					<volist name="vo.img" id="item" offset="0" length='10'>
+						<li>
+							<input id="viewUploadInput_{$i}" name="fileInput_{$i}" type="file" onChange="previewImage({$i})" style="display:none;" />
+							<a href="javascript:void(0);">
+								<span id="viewUploadDiv_{$i}">
+								<empty name="item.url">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_{$i}"/>
+									<else/>
+									<img src="{$item.url}" width="80" height="80" id="viewUploadImg_{$i}"/>
+								</empty>
+								</span>
+							</a>
+							<div id="poiter_{$i}" class="poiter">
+								<empty name="item.url">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_{$i}')">添加图片</a>
+								<else/>
+								<a title="删除" onclick="delPic({$i});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_{$i}')">重传</a>
+								</empty>
+							</div>
+						</li>
+					</volist>
+				</empty>
+				</ul>
+			</div>
+			<div class="unit">
+				<label>&nbsp;</label>
+				<empty name="vo.describe">
+					<for start="1" end="11">
+						<input type="text" name="describe[{$i}]"  style="margin-right: 16px;width:75px;" />
+					</for>
+				<else/>
+					<volist name="vo.describe" id="item" offset="0" length='10'>
+						<input type="text" name="describe[{$key}]" value="{$item}"  style="margin-right: 16px;width:75px;" />
+					</volist>
+				</empty>
+			</div>
+			<div class="unit">
+				<label>&nbsp;</label>
+				<ul class="tabImg">
+				<empty name="vo.img">
+					<for start="11" end="21">
+						<li>
+							<input id="viewUploadInput_{$i}" name="fileInput_{$i}" type="file" onChange="previewImage({$i})" style="display:none;" />
+							<a href="javascript:void(0);">
+								<span id="viewUploadDiv_{$i}">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_{$i}"/>
+								</span>
+							</a>
+							<div id="poiter_{$i}" class="poiter">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_{$i}')">添加图片</a>
+							</div>
+						</li>
+					</for>
+				<else/>
+					<volist name="vo.img" id="item" offset="10" length='10'>
+						<li>
+							<input id="viewUploadInput_{$key}" name="fileInput_{$key}" type="file" onChange="previewImage({$key})" style="display:none;" />
+							<a href="javascript:void(0);">
+								<span id="viewUploadDiv_{$key}">
+								<empty name="item.url">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_{$key}"/>
+									<else/>
+									<img src="{$item.url}" width="80" height="80" id="viewUploadImg_{$key}"/>
+								</empty>
+								</span>
+							</a>
+							<div id="poiter_{$key}" class="poiter">
+								<empty name="item.url">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_{$key}')">添加图片</a>
+								<else/>
+								<a title="删除" onclick="delPic({$key});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_{$key}')">重传</a>
+								</empty>
+							</div>
+						</li>
+					</volist>
+				</empty>
+				</ul>
+			</div>
+			<div class="unit">
+				<label>&nbsp;</label>
+				<empty name="vo.describe">
+					<for start="11" end="21">
+						<input type="text" name="describe[{$i}]"  style="margin-right: 16px;width:75px;" />
+					</for>
+				<else/>
+					<volist name="vo.describe" id="item" offset="10" length='10'>
+						<input type="text" name="describe[{$key}]" value="{$item}"  style="margin-right: 16px;width:75px;" />
+					</volist>
+				</empty>
+			</div>
+			<div class="unit">
+				<label>&nbsp;</label>
+				<ul class="tabImg">
+				<empty name="vo.img">
+					<for start="21" end="31">
+						<li>
+							<input id="viewUploadInput_{$i}" name="fileInput_{$i}" type="file" onChange="previewImage({$i})" style="display:none;" />
+							<a href="javascript:void(0);">
+								<span id="viewUploadDiv_{$i}">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_{$i}"/>
+								</span>
+							</a>
+							<div id="poiter_{$i}" class="poiter">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_{$i}')">添加图片</a>
+							</div>
+						</li>
+					</for>
+				<else/>
+					<volist name="vo.img" id="item" offset="20" length='10'>
+						<li>
+							<input id="viewUploadInput_{$key}" name="fileInput_{$key}" type="file" onChange="previewImage({$key})" style="display:none;" />
+							<a href="javascript:void(0);">
+								<span id="viewUploadDiv_{$key}">
+								<empty name="item.url">
+									<img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_{$key}"/>
+									<else/>
+									<img src="{$item.url}" width="80" height="80" id="viewUploadImg_{$key}"/>
+								</empty>
+								</span>
+							</a>
+							<div id="poiter_{$key}" class="poiter">
+								<empty name="item.url">
+								<a title="添加图片" onclick="selectViewUploadImg('#viewUploadInput_{$key}')">添加图片</a>
+								<else/>
+								<a title="删除" onclick="delPic({$key});">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_{$key}')">重传</a>
+								</empty>
+							</div>
+						</li>
+					</volist>
+				</empty>
+				</ul>
+			</div>
+			<div class="unit">
+				<label>&nbsp;</label>
+				<empty name="vo.describe">
+					<for start="21" end="31">
+						<input type="text" name="describe[{$i}]"  style="margin-right: 16px;width:75px;" />
+					</for>
+				<else/>
+					<volist name="vo.describe" id="item" offset="20" length='10'>
+						<input type="text" name="describe[{$key}]" value="{$item}"  style="margin-right: 16px;width:75px;" />
+					</volist>
+				</empty>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+<style type="text/css">
+	.tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+	.poiter a:hover{color:red;}
+	.tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+	.tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+	$(function(){
+		$('.tabImg li').hover(function(e) {
+			$(this).children('div').stop().animate({'top':'0'},300);
+		},function(){
+			$(this).children('div').stop().animate({'top':'80px'},300);
+		});
+	});
+	function delPic(number){
+		if(confirm("确认要删除吗？") == false){
+			return false;
+		}
+		//异步执行删除
+		var id = $("#id").val();
+		$.ajax({
+            type: "POST",
+            url: "__ADMIN__/Gallery/delPic.html",
+            data: {'id':id,'number':number},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                	$("#viewUploadInput_"+number+"").val("");
+					$("#viewUploadImg_"+number+"").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+					var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_"+number+"')\">添加图片</a>";
+					$("#poiter_"+number+"").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+	}
+</script>
+
+
+
+

@@ -1,0 +1,147 @@
+<include file="Public:pagerForm" />
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/index" method="post">
+
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>
+                <label>活动标题：</label>
+                <input type="text" name="title" value="{$_REQUEST.title}">
+            </li>
+        </ul>
+        <div class="subBar">
+
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="__URL__/add" target="dialog" mask="true" height="760" width="960"><span>新增活动</span></a></li>
+
+            <li>
+                <a title="请再次确认答案是否正确填写？如果答案有误或者结算有误，请勿去结算金币！需联系开发重新结算赛事" target="AjaxTodo" warn="请选择记录" target="dialog" href="__URL__/quiz_settle" class="icon">
+                    <span>赛事结算</span>
+                </a>
+            </li>
+
+            <!--<li>-->
+                <!--<a title="你确定结算这些活动的助力吗?" target="AjaxTodo" warn="请选择记录" target="dialog"  href="__URL__/help_settle" class="icon">-->
+                    <!--<span>助力结算</span>-->
+                <!--</a>-->
+            <!--</li>-->
+
+            <!--<li>-->
+                <!--<a title="该操作应该人工审核后谨慎操作！！确定执行全部发放金币吗？" target="AjaxTodo" warn="请选择记录" target="dialog" href="__URL__/coin_settle" class="delete">-->
+                    <!--<span>金币发放</span>-->
+                <!--</a>-->
+            <!--</li>-->
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="3%"><input type="checkbox" group="id[]" class="checkboxCtrl">ID</th>
+            <th width="12%">活动标题</th>
+            <th width="30%">赛事|玩法|选项</th>
+            <!--<th width="4%">总发起人</th>-->
+            <!--<th width="4%">最大发起人数</th>-->
+            <th width="7%">开始时间</th>
+            <th width="7%">结束时间</th>
+            <th width="4%">结束状态</th>
+            <th width="3%">赛事结算</th>
+            <th width="3%">状态</th>
+            <th width="7%">创建时间</th>
+            <th width="2%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <notempty name="list">
+            <volist id="vo" name="list">
+                <tr target="sid_record" rel="{$vo['id']}"  style="height: auto">
+                    <td><input name="id[]" value="{$vo['id']}" type="checkbox">{$vo['id']}</td>
+                    <td>{$vo['title']}</td>
+                    <td>
+                            <volist name="vo.activity_games" id="aVo" key="k">
+                                <ul style="padding: 2px">
+                                    <li style="display: inline;width: 20%">
+                                        <strong>（{$k}） </strong>
+                                        {$aVo.home_team_name}
+                                        <strong> VS </strong>
+                                        {$aVo.away_team_name}
+                                        <strong>&nbsp;&nbsp;|&nbsp;&nbsp;</strong>
+                                    </li>
+                                    <li style="display: inline"> {$play_types[$aVo["play_type"]]['name']} （）<strong>&nbsp;&nbsp;|&nbsp;&nbsp;</strong> </li>
+
+                                    <li style="display: inline">
+                                        <volist name='play_types[$aVo["play_type"]]["options"]' id="pVo">
+
+                                        <input readonly="readonly"  type="radio" disabled="false" name="answer{$aVo.game_id}{$aVo.play_type}" value="{$pVo[0]}"
+                                        <eq name="pVo[0]" value="$aVo.answer">checked</eq>/><strong>{$pVo[0]}.</strong>{$pVo[1]}
+                                        </volist>
+                                    </li>
+
+                                </ul>
+                            </volist>
+
+                    </td>
+                    <!--<td>{$vo['sponsor']}</td>-->
+                    <!--<td>{$vo['limit_num']}</td>-->
+                    <td>{$vo['start_time']|date="Y-m-d H:i:s",###}</td>
+                    <td>{$vo['end_time']|date="Y-m-d H:i:s",###}</td>
+                    <td>
+                        <switch name="vo.end_status">
+                            <case value="-1"><div style="color:red;">已结束</div></case>
+                            <case value="1"><div style="color:green;">进行中</div></case>
+                            <case value="0"><div style="color:green;">未开始</div></case>
+                        </switch>
+                    </td>
+                    <td>
+                        <switch name="vo.quize_settle">
+                            <case value="0"><div style="color:red;">未结算</div></case>
+                            <case value="1"><div style="color:green;">已结算</div></case>
+                        </switch>
+
+                    </td>
+                    <td>{$vo.status|getStatus}</td>
+                    <td>{$vo['add_time']|date="Y-m-d H:i:s",###}</td>
+                    <td>
+                        <a href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" height="700" width="960" title="{$vo.name}编辑" rel="editPage">编辑</a>
+
+                    </td>
+                </tr>
+            </volist>
+        </notempty>
+        </tbody>
+    </table>
+
+    <include file="Public:pagerNum" />
+
+</div>
+<script>
+    //隐藏和显示对应题目的选项
+    function show(id,obj){
+        var show = $(obj).attr("show");
+        if(show == 0){
+            $(".action-"+id).show();
+        }else{
+            $(".action-"+id).hide();
+        }
+        //记录是否已展开
+        var new_show = show == 0 ? 1 : 0;
+        $(obj).attr("show",new_show);
+    }
+</script>
+
+<style>
+    .grid .gridTbody td div {
+        height: auto;
+    }
+</style>

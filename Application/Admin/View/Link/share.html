@@ -1,0 +1,86 @@
+<!-- <include file="Public:pagerForm" /> -->
+
+<form action="__URL__/share" method="post" onsubmit="return iframeCallback(this);"enctype="multipart/form-data" target="callbackframe">
+<div class="pageFormContent" layoutH="58">
+        <div class="unit">
+            <label>标题：</label>
+            <textarea  name="shareTitle" rows="5" cols="57">{$config['shareTitle']}</textarea>
+        </div>
+        <div class="unit">
+            <label>&nbsp;</label>
+        </div>
+        <div class="unit">
+            <label>图片：</label>
+            <ul class="tabImg">
+                <li>
+                    <input id="viewUploadInput_77" name="fileInput" type="file" onChange="previewImage(77)" style="display:none;" />
+                    <a href="javascript:void(0);">
+                         <span id="viewUploadDiv_77">
+                            <empty name="titleimg">
+                                <img src="__PUBLIC__/Home/images/common/add_gray.png" width="80" height="80" id="viewUploadImg_77"/>
+                            <else/>
+                                <img id="viewUploadImg_77" width='80' height='80' border=0 src="{$titleimg}">
+                            </empty>
+                         </span>
+                    </a>
+                    <div id="poiter_77" class="poiter">
+                        <empty name="titleimg">
+                            <a title="添加图片" width='80' height='80'  onclick="selectViewUploadImg('#viewUploadInput_77')">添加图片</a>
+                        <else/>
+                            <a title="删除" onclick="delPic(1);">删除</a>|<a title="重传" onclick="selectViewUploadImg('#viewUploadInput_77')">重传</a>
+                        </empty>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="subBar">
+            <ul>
+                <li style="margin:90px 40px 40px 150px;"><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+            </ul>
+        </div>
+
+</div>
+</form>
+<style type="text/css">
+    .tabImg li{float: left;margin-right: 15px;position: relative;border:1px solid #f2f2f2;width:80px;height: 80px;overflow: hidden;cursor: pointer;}
+    .poiter a:hover{color:red;}
+    .tabImg li div{ position: absolute; left: 0; top:80px; width: 80px;  height: 80px; line-height: 80px; text-align: center; color: #fff; background: rgba(44, 170, 236, 1);font-size:12px;}
+    .tabImg li div a{ line-height: 80px;}
+</style>
+<!--引入本页js-->
+<script type="text/javascript" src="__PUBLIC__/Plugs/viewUploadImg.js"></script>
+<script>
+    $(function(){
+        $('.tabImg li').hover(function(e) {
+            $(this).children('div').stop().animate({'top':'0'},300);
+        },function(){
+            $(this).children('div').stop().animate({'top':'80px'},300);
+        });
+    });
+    function delPic(id){
+        if(confirm("确认要删除吗？") == false){
+            return false;
+        }
+        //异步执行删除
+        $.ajax({
+            type: "POST",
+            url: "__ADMIN__/Link/delPic.html",
+            data: {'id':id},
+            dataType: "json",
+            success: function(data){
+                if(data.status){
+                    $("#viewUploadInput_77").val("");
+                    $("#viewUploadImg_77").attr("src","__PUBLIC__/Home/images/common/add_gray.png").attr("style","width:80px;height:80px");
+                    var str = "<a title='添加图片' onclick=\"selectViewUploadImg('#viewUploadInput_77')\">添加图片</a>";
+                    $("#poiter_77").html(str);
+                    alert("删除成功！");
+                }else{
+                    alert("删除失败！");
+                }
+            }
+        });
+    }
+</script>
+
+
+

@@ -1,0 +1,198 @@
+<style>
+    .table2-config tr{
+        height: 35px;
+    }
+    .table2-config td{
+        text-align: center;
+        padding:12px;
+    }
+    .inputInfo2 {
+        line-height: 21px;
+    }
+</style>
+<div class="pageContent">
+    <form method="post" action="__URL__/bkRobotConfig" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,dialogAjaxDone);" target="callbackframe">
+        <h4>篮球普通赛事：</h4>
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>比赛前：</label>
+                <input type="text" name="rank0[before][time]" size="5" class="digits" value="{$robotConfig['rank0']['before']['time']}" ><label>分钟</label>
+                <label>数量：真实用户+</label>
+                <input type="text" name="rank0[before][addNum]" size="5" class="digits" value="{$robotConfig['rank0']['before']['addNum']}" >
+                <label>*</label>
+                <input type="text" name="rank0[before][multiNum]" size="5" class="digits" value="{$robotConfig['rank0']['before']['multiNum']}" >
+                <label>人</label>
+            </div>
+
+            <div class="unit">
+                <label>比赛中：</label>
+                <label>第一节：</label>
+                <label>数量：真实用户+</label>
+                <input type="text" name="rank0[middle][1][addNum]" size="5" class="digits" value="{$robotConfig['rank0']['middle'][1]['addNum']}" >
+                <label>*</label>
+                <input type="text" name="rank0[middle][1][multiNum]" size="5" class="digits" value="{$robotConfig['rank0']['middle'][1]['multiNum']}" >
+                <label>人</label>
+            </div>
+            <div class="unit">
+                <label>&nbsp;</label>
+                <label>第二节：</label>
+                <label>数量：真实用户+</label>
+                <input type="text" name="rank0[middle][2][addNum]" size="5" class="digits" value="{$robotConfig['rank0']['middle'][2]['addNum']}" >
+                <label>*</label>
+                <input type="text" name="rank0[middle][2][multiNum]" size="5" class="digits" value="{$robotConfig['rank0']['middle'][2]['multiNum']}" >
+                <label>人</label>
+            </div>
+            <div class="unit">
+                <label>&nbsp;</label>
+                <label>第三节：</label>
+                <label>数量：真实用户+</label>
+                <input type="text" name="rank0[middle][3][addNum]" size="5" class="digits" value="{$robotConfig['rank0']['middle'][3]['addNum']}" >
+                <label>*</label>
+                <input type="text" name="rank0[middle][3][multiNum]" size="5" class="digits" value="{$robotConfig['rank0']['middle'][3]['multiNum']}" >
+                <label>人</label>
+            </div>
+            <div class="unit">
+                <label>&nbsp;</label>
+                <label>第四节：</label>
+                <label>数量：真实用户+</label>
+                <input type="text" name="rank0[middle][4][addNum]" size="5" class="digits" value="{$robotConfig['rank0']['middle'][4]['addNum']}" >
+                <label>*</label>
+                <input type="text" name="rank0[middle][4][multiNum]" size="5" class="digits" value="{$robotConfig['rank0']['middle'][4]['multiNum']}" >
+                <label>人</label>
+            </div>
+            <div class="unit">
+                <label>&nbsp;</label>
+                <label>加时赛：</label>
+                <label>数量：真实用户+</label>
+                <input type="text" name="rank0[middle][5][addNum]" size="5" class="digits" value="{$robotConfig['rank0']['middle'][5]['addNum']}" >
+                <label>*</label>
+                <input type="text" name="rank0[middle][5][multiNum]" size="5" class="digits" value="{$robotConfig['rank0']['middle'][5]['multiNum']}" >
+                <label>人</label>
+            </div>
+
+
+            <div class="unit">
+                <label>比赛后：</label>
+                <input type="text" name="rank0[after][time]" size="5" class="digits" value="{$robotConfig['rank0']['after']['time']}" ><label>分钟</label>
+                <label>总机器人数量 / </label>
+                <input type="text" name="rank0[after][minusNum]" size="5" class="digits" value="{$robotConfig['rank0']['after']['minusNum']}" >
+               <label>人</label>
+            </div>
+
+            <div class="unit">
+                <label>比赛过程增加人数的间隔时间：</label>
+                <input type="text" name="rank0[addTime]" size="5" class="digits" value="{$robotConfig['rank0']['addTime']}" ><label>分钟</label>
+                <label>比赛结束减少人数的间隔时间：</label>
+                <input type="text" name="rank0[minusTime]" size="5" class="digits" value="{$robotConfig['rank0']['minusTime']}" ><label>分钟</label>
+            </div>
+
+            <div class="unit">
+                <h4>篮球一级赛事：</h4>
+            </div>
+            <div class="unit">
+                <label>比赛前：</label>
+                <input type="text" name="rank1[before][time]" size="5" class="digits" value="{$robotConfig['rank1']['before']['time']}" ><label>分钟</label>
+                <label>数量：真实用户+</label>
+                <input type="text" name="rank1[before][addNum]" size="5" class="digits" value="{$robotConfig['rank1']['before']['addNum']}" >
+                <label>*</label>
+                <input type="text" name="rank1[before][multiNum]" size="5" class="digits" value="{$robotConfig['rank1']['before']['multiNum']}" >
+                <label>人</label>
+            </div>
+
+            <div class="unit">
+                <label>比赛中：</label>
+                <label>第一节：</label>
+                <label>数量：真实用户+</label>
+                <input type="text" name="rank1[middle][1][addNum]" size="5" class="digits" value="{$robotConfig['rank1']['middle'][1]['addNum']}" >
+                <label>*</label>
+                <input type="text" name="rank1[middle][1][multiNum]" size="5" class="digits" value="{$robotConfig['rank1']['middle'][1]['multiNum']}" >
+                <label>人</label>
+            </div>
+            <div class="unit">
+                <label>&nbsp;</label>
+                <label>第二节：</label>
+                <label>数量：真实用户+</label>
+                <input type="text" name="rank1[middle][2][addNum]" size="5" class="digits" value="{$robotConfig['rank1']['middle'][2]['addNum']}" >
+                <label>*</label>
+                <input type="text" name="rank1[middle][2][multiNum]" size="5" class="digits" value="{$robotConfig['rank1']['middle'][2]['multiNum']}" >
+                <label>人</label>
+            </div>
+            <div class="unit">
+                <label>&nbsp;</label>
+                <label>第三节：</label>
+                <label>数量：真实用户+</label>
+                <input type="text" name="rank1[middle][3][addNum]" size="5" class="digits" value="{$robotConfig['rank1']['middle'][3]['addNum']}" >
+                <label>*</label>
+                <input type="text" name="rank1[middle][3][multiNum]" size="5" class="digits" value="{$robotConfig['rank1']['middle'][3]['multiNum']}" >
+                <label>人</label>
+            </div>
+            <div class="unit">
+                <label>&nbsp;</label>
+                <label>第四节：</label>
+                <label>数量：真实用户+</label>
+                <input type="text" name="rank1[middle][4][addNum]" size="5" class="digits" value="{$robotConfig['rank1']['middle'][4]['addNum']}" >
+                <label>*</label>
+                <input type="text" name="rank1[middle][4][multiNum]" size="5" class="digits" value="{$robotConfig['rank1']['middle'][4]['multiNum']}" >
+                <label>人</label>
+            </div>
+            <div class="unit">
+                <label>&nbsp;</label>
+                <label>加时赛：</label>
+                <label>数量：真实用户+</label>
+                <input type="text" name="rank1[middle][5][addNum]" size="5" class="digits" value="{$robotConfig['rank1']['middle'][5]['addNum']}" >
+                <label>*</label>
+                <input type="text" name="rank1[middle][5][multiNum]" size="5" class="digits" value="{$robotConfig['rank1']['middle'][5]['multiNum']}" >
+                <label>人</label>
+            </div>
+
+
+            <div class="unit">
+                <label>比赛后：</label>
+                <input type="text" name="rank1[after][time]" size="5" class="digits" value="{$robotConfig['rank1']['after']['time']}" ><label>分钟</label>
+                <label>总机器人数量 / </label>
+                <input type="text" name="rank1[after][minusNum]" size="5" class="digits" value="{$robotConfig['rank1']['after']['minusNum']}" >
+                <label>人</label>
+            </div>
+
+            <div class="unit">
+                <label>比赛过程增加人数的间隔时间：</label>
+                <input type="text" name="rank1[addTime]" size="5" class="digits" value="{$robotConfig['rank1']['addTime']}" ><label>分钟</label>
+                <label>比赛结束减少人数的间隔时间：</label>
+                <input type="text" name="rank1[minusTime]" size="5" class="digits" value="{$robotConfig['rank1']['minusTime']}" ><label>分钟</label>
+            </div>
+
+            <div class="unit">
+                <h4>聊天室人数默认值：</h4>
+            </div>
+            <div class="unit">
+                <label>一级：</label>
+                <input type="text" name="defaultNum[1][start]" size="5" class="digits" value="{$robotConfig['defaultNum']['1']['start']}" >
+                <label> - </label>
+                <input type="text" name="defaultNum[1][end]" size="5" class="digits" value="{$robotConfig['defaultNum']['1']['end']}" >
+            </div>
+            <div class="unit">
+                <label>二级：</label>
+                <input type="text" name="defaultNum[2][start]" size="5" class="digits" value="{$robotConfig['defaultNum']['2']['start']}" >
+                <label> - </label>
+                <input type="text" name="defaultNum[2][end]" size="5" class="digits" value="{$robotConfig['defaultNum']['2']['end']}" >
+            </div>
+            <div class="unit">
+                <label>三级：</label>
+                <input type="text" name="defaultNum[3][start]" size="5" class="digits" value="{$robotConfig['defaultNum']['3']['start']}" >
+                <label> - </label>
+                <input type="text" name="defaultNum[3][end]" size="5" class="digits" value="{$robotConfig['defaultNum']['3']['end']}" >
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+
+
+
+

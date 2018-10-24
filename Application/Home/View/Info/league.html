@@ -1,0 +1,502 @@
+<extend name="Public:layout"/>
+<block name='css'>
+    <link rel="stylesheet" href="__CSS__/info/dataDase.css?v20180601">
+    <link rel="stylesheet" href="__PUBLIC__/Plugs/myscroll/jquery.mCustomScrollbar.css">
+</block>
+<block name="content">
+    <!-- 顶部栏 -->
+    <div class="themeBox">
+    	<div class="topBanner"></div>
+        <div class="themeNavConBox">
+            <div class="themeNavCon">
+                <div class="themeNavBox">
+                    <div class="clearfix themeNavIn">
+                        <h1 class="pull-left themeLogo"><a href="{:U('/')}" title="全球体育首页" class="skewLeft"><img class="skewRight" src="__IMAGES__/special/theme-logo.png" width="142" height="35"></a></h1>
+                        <div class="pull-left themeNav skewLeft">
+                            <ul class="clearfix skewRight">
+                                <volist name="nav" id="vo">
+                                    <li class="pull-left"><a target="_blank" href="{$vo.url}" title="{$vo.name}"><span>{$vo.name}</span> </a></li>
+                                </volist>
+                            </ul>
+                        </div>
+                    </div> 
+                </div> 
+            </div>
+        </div>
+        <!-- main -->
+        <div class="main">
+            <!-- 当前位置 -->
+            <div class="position">
+                当前位置：<span class="now"><a href="{:U('/@data')}" >资料库</a></span>&gt;<span class="text-red">{$union.union_name}</span>
+            </div>
+        	<div class="hotMatch">
+           	  <div class="clearfix title">
+                  <h2 class="pull-left">热门赛事</h2>
+                  <!--<div class="col-lg-3 pull-right hotSearch">-->
+                      <!--<div class="input-group">-->
+                          <!--<input type="text" class="form-control" placeholder="搜索">-->
+                          <!--<span class="input-group-btn">-->
+                                <!--<button class="btn" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>-->
+                            <!--</span>-->
+                      <!--</div>-->
+                  <!--</div>-->
+              </div>
+                <div class="matchList">
+                	<ul class="clearfix">
+                        <volist name="hot_league" id="voHot">
+                            <li class="pull-left">
+                                <a href="{$voHot.jump_url}" title="{$voHot.name}">
+                                    <img src="{$voHot.logo}" width="30" height="20">{$voHot.name}
+                                </a>
+                            </li>
+                        </volist>
+                	</ul>
+                </div>
+            </div>
+            <if condition='$hasData eq "1"'>
+                <!-- content -->
+                <div class="content clearfix">
+                    <div class="pull-left dataLeft">
+                        <!-- typeMatch -->
+                        <div class="typeMatch clearfix">
+                            <div class="pull-left clearfix matBox">
+                                <div class="pull-left matLogo"><img class="img-circle" src="{$union.logo}" width="96" height="96"></div>
+                                <div class="pull-left matName ml20 pt10" style="width: 290px">
+                                    <h3>{$union.union_name}</h3>
+                                    <!-- Split button -->
+                                    <div class="btn-group">
+                                        <button type="button" class="btn butText">{$curSeason}</button>
+                                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <volist name="season" id="seasonVo">
+                                                <li><a href="/league/{$seasonVo}/{$union.union_id}.html">{$seasonVo}</a></li>
+                                            </volist>
+                                        </ul>
+                                    </div>
+                                    <if condition="$curSubLeague">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn butText" >{$curSubLeague.1}</button>
+                                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <volist name="arrSubLeague" id="arrSub">
+                                                    <li data-sub="{$arrSub.0}" data-round="{$arrSub.6}" class="arrsub"><a href="javascript:void (0);">{$arrSub.1}</a></li>
+                                                </volist>
+                                            </ul>
+                                        </div>
+                                    </if>
+                                    <!-- Split button -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- typeMatch -->
+                        <!-- tableData -->
+                        <div class="tableData tableData01">
+                            <div class="statTit clearfix">
+                                <h3 class="title text-fff pull-left" title="赛程统计"><span class="f18 mr10 strong">赛程统计</span> <span class="f12 text-uppercase">Game statistics</span></h3>
+                                <!-- Split button -->
+                                <div class="btn-group pull-right mr20">
+                                    <button type="button" class="btn rouNum">第{$curRound[0]}轮</button>
+                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="roundList">
+                                        <volist name="round" id="roundVo">
+                                            <li><a href="javascript:void(0);">{$roundVo}</a></li>
+                                        </volist>
+                                    </ul>
+                                </div>
+                                <!-- Split button -->
+                            </div>
+                            <table class="table" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr bgcolor="#cfd2dd">
+                                    <th width="76">时间</th>
+                                    <th width="82" class="text-r">主队</th>
+                                    <th width="60">比分</th>
+                                    <th width="82" class="text-l">客队</th>
+                                    <th width="166" colspan="3">全场（SB）</th>
+                                    <th width="166" colspan="3">半场（SB）</th>
+                                    <th width="60">资料</th>
+                                </tr>
+                                </thead>
+                                <tbody id="statistics">
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- tableData -->
+                        <!-- tableData -->
+                        <div class="tableData tableData02">
+                            <div class="statTit clearfix">
+                                <h3 class="title text-fff pull-left"><span class="f18 mr10 strong">积分榜</span> <span class="f12 text-uppercase">Scoreboard</span></h3>
+                                <ul class="clearfix pull-right scoreNav">
+                                    <li class="pull-left on" data-type="total_score"><a href="javascript:void(0);" >总积分</a></li>
+                                    <li class="pull-left"    data-type="home_score"><a href="javascript:void(0);" >主场积分</a></li>
+                                    <li class="pull-left"    data-type="guest_score"><a href="javascript:void(0);">客场积分</a></li>
+                                </ul>
+                            </div>
+                            <table class="table" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr bgcolor="#cfd2dd">
+                                    <th width="65">排名</th>
+                                    <th width="150" class="text-l">球队</th>
+                                    <th width="32">赛</th>
+                                    <th width="32">胜</th>
+                                    <th width="32">平</th>
+                                    <th width="32">负</th>
+                                    <th width="32">得</th>
+                                    <th width="32">失</th>
+                                    <th width="32">净</th>
+                                    <th width="64">胜率</th>
+                                    <th width="40">积分</th>
+                                    <th width="100" class="league_lastest_6">近6轮</th>
+                                </tr>
+                                </thead>
+                                <tbody id="scoreRank">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- tableData -->
+
+                        <!-- tableData -->
+                        <div class="tableData tableData03">
+                            <div class="bigStatTit clearfix">
+                                <ul class="clearfix tabNav">
+                                    <li class="pull-left on" data-type="letGoal"><a href="javascript:void(0);">让球盘</a></li>
+                                    <li class="pull-left" data-type="bigSmall"><a href="javascript:void(0);">大小球</a></li>
+                                </ul>
+                            </div>
+                            <div class="clearfix liTab">
+                                <a href="javascript:void(0);" class="on" title="总盘路榜" sub-data-type="0">总盘路榜</a>
+                                <a href="javascript:void(0);" title="主场路榜" sub-data-type="1">主场路榜</a>
+                                <a href="javascript:void(0);" title="客场路榜" sub-data-type="2">客场路榜</a>
+                                <a href="javascript:void(0);" title="半场盘路榜" sub-data-type="3">半场盘路榜</a>
+                                <a href="javascript:void(0);" title="半场主盘路榜" sub-data-type="4">半场主盘路榜</a>
+                                <a href="javascript:void(0);" title="半场客盘路榜"sub-data-type="5">半场客盘路榜</a>
+                            </div>
+                            <table class="table plrTable">
+                                <thead id="oddsNav">
+
+                                </thead>
+                                <tbody id="oddsRank">
+
+                                </tbody>
+                            </table>
+                            <table class="table plTable" id="oddsTech1">
+                                <thead>
+                                <tr bgcolor="#cfd2dd">
+                                    <th colspan="3" class="text-l title">全场让球盘路数据统计</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                            <table class="table plTable" id="oddsTech2">
+                                <thead>
+                                <tr bgcolor="#cfd2dd">
+                                    <th colspan="3" class="text-l title">半场让球盘路数据统计</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- tableData -->
+
+                        <!-- tableData -->
+                        <div class="tableData tableData04" id="goalsRank">
+                            <div class="statTit longStatTit clearfix">
+                                <h3 class="title text-fff pull-left" title="射手榜"><span class="f18 mr10 strong">射手榜</span> <span class="f12 text-uppercase">Shooter list</span></h3>
+                            </div>
+                        </div>
+                        <!-- tableData -->
+
+                        <!-- tableData -->
+                        <div class="tableData tableData05" id="passRank">
+                            <div class="statTit longStatTit clearfix">
+                                <h3 class="title text-fff pull-left" title="助攻榜"><span class="f18 mr10 strong">助攻榜</span> <span class="f12 text-uppercase">Assists list</span></h3>
+                            </div>
+                        </div>
+                        <!-- tableData -->
+                        <div class="tableData tableData06 btableData06">
+                            <div class="statTit longStatTit clearfix">
+                                <h3 class="title text-fff pull-left" title="最佳阵容"><span class="f18 mr10 strong">最佳阵容</span> <span class="f12 text-uppercase">Assists list</span></h3>
+                            </div>
+                            <div class="bestFor">
+                                <!--<ul>-->
+                                <!--<li>-->
+                                <!--<a href="javascript:;" class="playerBox" title="卡拉斯科">-->
+                                <!--<div class="plaImg plaImgDef">-->
+                                <!--<div class="face"><img src="__IMAGES__/info/player.png" width="58" height="58" alt="陈思忍"></div>-->
+                                <!--<p class="f12 text-fff text-center">8.7</p>-->
+                                <!--</div>-->
+                                <!--<p class="text-center text-fff text-hidden">卡拉斯科</p>-->
+                                <!--<p class="text-center text-fff text-hidden">马德里竞技</p>-->
+                                <!--</a>-->
+                                <!--</li>-->
+                                <!--</ul>-->
+                            </div>
+                        </div>
+                        <!-- tableData -->
+                        <div class="tableData tableData06">
+                            <div class="bigStatTit clearfix">
+                                <ul class="clearfix tabNav">
+                                    <li class="pull-left on"><a href="javascript:;">先入球/失球</a></li>
+                                    <li class="pull-left"><a href="javascript:;">无入球/失球</a></li>
+                                </ul>
+                            </div>
+                            <table class="table table-bordered" cellspacing="0" cellpadding="0" id="tableData06">
+                            </table>
+                        </div>
+                        <!-- tableData -->
+                        <!-- tableData -->
+                        <div class="tableData tableData07">
+                            <div class="statTit longStatTit clearfix">
+                                <h3 class="title text-fff pull-left" title="标准亚盘对照"><span class="f18 mr10 strong">标准亚盘对照</span> <span class="f12 text-uppercase">data statistics</span></h3>
+                            </div>
+                            <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr bgcolor="#f8f9fd">
+                                    <th width="126" rowspan="2" bgcolor="#cfd2dd">标准盘赔率</th>
+                                    <th width="82" colspan="3">赛果</th>
+                                    <th width="137" colspan="5">亚洲盘路</th>
+                                    <th width="126" rowspan="2" bgcolor="#cfd2dd">最先失球统计</th>
+                                    <th width="82" colspan="3">赛果</th>
+                                    <th width="137" colspan="5">亚洲盘路</th>
+                                </tr>
+                                <tr bgcolor="#f8f9fd">
+                                    <th width="28" class="no-b-r">赢</th>
+                                    <th width="28" class="no-b-r no-b-l">和</th>
+                                    <th width="28" class="no-b-r no-b-l">输</th>
+                                    <th width="28" class="no-b-r">赢</th>
+                                    <th width="28" class="no-b-r no-b-l">赢半</th>
+                                    <th width="28" class="no-b-r no-b-l">和</th>
+                                    <th width="28" class="no-b-r no-b-l">输</th>
+                                    <th width="28" class="no-b-r no-b-l">输半</th>
+                                    <th width="28" class="no-b-r">赢</th>
+                                    <th width="28" class="no-b-r no-b-l">和</th>
+                                    <th width="28" class="no-b-r no-b-l">输</th>
+                                    <th width="28" class="no-b-r">赢</th>
+                                    <th width="28" class="no-b-r no-b-l">赢半</th>
+                                    <th width="28" class="no-b-r no-b-l">和</th>
+                                    <th width="28" class="no-b-r no-b-l">输</th>
+                                    <th width="28" class="no-b-r no-b-l">输半</th>
+                                </tr>
+                                </thead>
+                                <tbody id="contrast">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- tableData -->
+                    </div>
+                    <div class="pull-right dataRight">
+                        <if condition="$news">
+                            <!-- leftNews -->
+                            <div class="leftNews">
+                                <div class="statTit clearfix">
+                                    <h3 class="title text-fff pull-left" title="联赛新闻"><span class="f18 mr10 strong">联赛新闻</span> <span class="f12 text-uppercase">League news</span></h3>
+                                </div>
+                                <ul>
+                                    <volist name="news" id="new">
+                                        <li>
+                                            <a href="{$new.href}" title="{$new.title}" target="_blank">
+                                                <h4>{$new.title}</h4>
+                                                <p>{$new.remark}<span>[详情]</span></p>
+                                            </a>
+                                        </li>
+                                    </volist>
+                                </ul>
+                            </div>
+                            <!-- leftNews -->
+                        </if>
+                        <!-- leftTra -->
+                        <div class="leftTra" style="display: none">
+                            <div class="navTab clearfix" id="zhuanhui">
+                                <a href="javascript:;" class="pull-left on">转会传闻</a>
+                                <a href="javascript:;" class="pull-right">近期转会</a>
+                            </div>
+                            <table class="table" id="zhuanhuiTab">
+                                <thead>
+                                <tr bgcolor="#f8f9fd">
+                                    <th  width="120" class="text-l">球员</th>
+                                    <th  width="188" class="text-r" colspan="3">转入队伍</th>
+                                </tr>
+                                </thead>
+                                <tbody id="rumor">
+
+                                </tbody>
+                                <tbody id="tran" style="display:none">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- leftTra -->
+
+                        <!-- leftBest -->
+                        <div class="rBest">
+                            <div class="statTit clearfix">
+                                <h3 class="title text-fff pull-left" title="最佳球员"><span class="f18 mr10 strong">最佳球员</span> <span class="f12 text-uppercase">The best player</span></h3>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr bgcolor="#f8f9fd">
+                                    <th width="40">排名</th>
+                                    <th width="160" class="text-l">球员</th>
+                                    <th width="60">场次</th>
+                                    <th width="54">评分</th>
+                                </tr>
+                                </thead>
+                                <tbody id="bestPlayer">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- leftBest -->
+
+                        <!-- leftBest -->
+                        <div class="rBest">
+                            <div class="statTit clearfix">
+                                <h3 class="title text-fff pull-left" title="最快进步"><span class="f18 mr10 strong">最快进步</span> <span class="f12 text-uppercase"> The fastest progress</span></h3>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr bgcolor="#f8f9fd">
+                                    <th width="40">排名</th>
+                                    <th width="160" class="text-l">球员</th>
+                                    <th width="54">评分</th>
+                                    <th width="54">提升</th>
+                                </tr>
+                                </thead>
+                                <tbody id="mipRank">
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- leftBest -->
+
+                        <!-- rBest -->
+                        <div class="rBest">
+                            <div class="statTit clearfix">
+                                <h3 class="title text-fff pull-left" title="状态火热"><span class="f18 mr10 strong">状态火热</span> <span class="f12 text-uppercase">Hot state</span></h3>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr bgcolor="#f8f9fd">
+                                    <th width="40">排名</th>
+                                    <th width="160" class="text-l">球员</th>
+                                    <th width="54">进球</th>
+                                    <th width="54">评分</th>
+                                </tr>
+                                </thead>
+                                <tbody id="hotRank">
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- leftBest -->
+
+                        <!-- teamWorth -->
+                        <div class="teamWorth">
+                            <div class="statTit clearfix">
+                                <h3 class="title text-fff pull-left" title="球队身价"><span class="f18 mr10 strong">球队身价</span> <span class="f12 text-uppercase">Team value</span></h3>
+                                <i class="pull-right top5">TOP6</i>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr bgcolor="#f8f9fd">
+                                    <th width="40">排名</th>
+                                    <th width="170" class="text-l">球队</th>
+                                    <th width="100">身价（英镑）</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <volist name="team_worth" id="tV">
+                                    <tr>
+                                        <td><i>{$key+1}</i></td>
+                                        <td class="text-l">
+                                            <a href="{:U('/team/' . $tV['team_id'] . '@data', '', 'html')}" target="_blank">
+                                                <img class="mr10" src="{$tV.img_url}" width="40" height="40"><strong>{$tV.team_name}</strong>
+                                            </a>
+                                        </td>
+                                        <td>{$tV.value}万</td>
+                                    </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- teamWorth -->
+                        <if condition="$player_worth neq null ">
+                        <div class="teamWorth">
+                            <div class="statTit clearfix">
+                                <h3 class="title text-fff pull-left"><span class="f18 mr10 strong">球员身价</span> <span class="f12 text-uppercase">Player value</span></h3>
+                                <i class="pull-right top5">TOP6</i>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr bgcolor="#f8f9fd">
+                                    <th width="40">排名</th>
+                                    <th width="170" class="text-l">球队</th>
+                                    <th width="100">身价（英镑）</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <volist name="player_worth" id="pV">
+                                    <tr>
+                                        <td><i>{$key+1}</i></td>
+                                        <td class="text-l"  width="80">
+                                            <a href="{:U('/player/' . $pV['player_id'] . '@data', '', 'html')}" target="_blank">
+                                                <div class="pull-left faceImg"><img class="lazy" style="display: inline;" data-original="{$pV.img_url}" alt="sunli10pm" original="{$pV.img_url}" src="{$pV.img_url}" width="40" height="40" ></div>
+                                                <div class="pull-left faceInf">
+                                                    <p class="mb5" title="{$pV.player_name}">{$pV.player_name}</p>
+                                                    <p class="f12 text-999 mb5">{$pV.position[0]}</p>
+                                                    <p class="f12 text-999"><img class="mr5" src="{$pV.team_img}" width="auto" height="12" >{$pV.team_name}</p>
+                                                </div>
+                                            </a>
+                                        </td>
+                                        <td>{$pV.value}万</td>
+                                    </tr>
+                                </volist>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        </if>
+                        <!-- teamWorth -->
+                    </div>
+                </div>
+                <!-- content -->
+                <else />
+                <div class="left-no-data"></div>
+            </if>
+
+        </div>
+        <!-- main -->
+    </div>
+</block>
+
+    <!-- elevator -->
+
+<block name="js">
+    <script>
+        var union_id = '{$union.union_id}';
+        var union = '{$union|json_encode}';
+        var teams = JSON.parse('{$teams|json_encode}');
+        var bestlineup = JSON.parse('{$bestlineup|json_encode}');
+        var team_logo = "{$union.logo}";
+        var curSubLeague =  JSON.parse('{$curSubLeague|json_encode}');
+        var arrSubLeague =  JSON.parse('{$arrSubLeague|json_encode}');
+        var curRound = '{$curRound[0]}';
+    </script>
+    <script type="text/javascript" src="__JS__/info/league.js?v=12"></script>
+    <script type="text/javascript" src="__PUBLIC__/Plugs/myscroll/jquery.mCustomScrollbar.concat.min.js"></script>
+
+</block>
+

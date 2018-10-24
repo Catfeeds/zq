@@ -1,0 +1,42 @@
+<div class="pageContent">
+
+	<form method="post" action="__URL__/add/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>消息标题：</label>
+				<input type="text" size="40" class="required" maxlength="30" name="title" />
+			</div>
+
+			<div class="unit">
+				<label>发件人：</label>
+				<input name="user.id" value="0" type="hidden"/>
+				<input type="text" size="30" name="user.nickname" value="系统消息" readonly/>
+				<a width="800" height='600' lookupgroup="user" href="{:U('__URL__/findUser')}" class="btnLook">选择发件人</a>
+			</div>
+
+			<div class="unit">
+				<label>收件人：</label>
+				<input name="FrontUser.id" class="required" type="hidden"/>
+				<textarea rows="5" cols="35" name="FrontUser.nick_name" readonly/></textarea>
+				<a width="800" height='600' lookupgroup="FrontUser" href="{:U('__ADMIN__/FrontUser/findFrontUser')}" class="btnLook">选择收件人</a>
+			</div>
+
+			<div class="unit">
+				<label>消息内容：</label>
+				<textarea class="large bLeft required" name="content" maxlength="255" rows="10" cols="57"></textarea>
+			</div>
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+
+

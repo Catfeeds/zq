@@ -1,0 +1,55 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/save/navTabId/__DWZ__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" value="{$vo.id}" name="id" />
+		<div class="pageFormContent" layoutH="58">
+			
+			<div class="unit">
+				<label>类型：</label>
+				<input type="text" class="required"  name="game_type" value="{$vo.game_type}" size="40"/>
+			</div>
+
+			<div class="unit">
+				<label>项目名称：</label>
+				<input type="text" class="required" name="game_name" value="{$vo.game_name}" size="40"/>
+			</div>
+
+			<div class="unit">
+				<label>赛事轮次：</label>
+				<input type="text" class="required" name="run_name" value="{$vo.run_name}" size="40" />
+			</div>
+
+			<div class="unit">
+				<label>日期：</label>
+				<input type="text" class="required" name="game_date" value="{$vo.game_date}" size="40" />
+				<span class="inputInfo">格式：yyyyMMdd</span>
+			</div>
+
+			<div class="unit">
+				<label>时间：</label>
+				<input type="text" class="" name="game_time" value="{$vo.game_time}" size="40"/>
+			</div>
+
+			<div class="unit">
+				<label>是否中国队：</label>
+				<input type="radio" name="is_china"  value="1" <eq name="vo.is_china" value="1">checked</eq> />是
+                <input type="radio" name="is_china"  value="0" <eq name="vo.is_china" value="0">checked</eq> />否
+			</div>
+
+			<div class="unit">
+				<label>状态：</label>
+				<select class="small bLeft"  name="status">
+					<option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+					<option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+				</select>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+

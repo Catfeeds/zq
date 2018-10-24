@@ -1,0 +1,45 @@
+/**
+ * 欧洲杯竞猜css样式文件
+ * 
+ * @author Chensiren <245017279@qq.com>
+ *
+ * @since  2016-06-04
+ *
+**/
+html,body{background: url(../../images/etc/etc-bg.jpg) repeat-y 0 0; background-size: 100% auto; padding-bottom: .1rem;}
+/* 竞猜内容 */
+.cai_con{ padding: 0 .26rem; padding-bottom: .1rem;}
+.cai_con .cai_title{ height: .52rem; width: 100%; margin-top: .3rem; margin-bottom: .12rem; background: #0054ae; -webkit-transform: skew(-20deg);-moz-transform: skew(-20deg); -o-transform: skew(-20deg); -ms-transform: skew(-20deg); transform: skew(-20deg);}
+.cai_title ul{height: .52rem; overflow:hidden;  -webkit-transform: skew(20deg);-moz-transform: skew(20deg); -o-transform: skew(20deg); -ms-transform: skew(20deg); transform: skew(20deg);}
+.cai_title ul li{ height: .52rem; line-height: .52rem; text-align: center; overflow:hidden;}
+.cai_con .cai_title a{ color: #fff; font-size: .24rem;}
+.cai_con .cai_title img{ width: .3rem;}
+
+.cai_list_con .prize_list{ margin-top: .3rem; padding: .3rem; background: #1948b4; border: 1px solid #0d448b; box-shadow: 0 0 .1rem #0b2c6b; margin-bottom: .2rem; border-radius: .1rem;}
+.cai_list_con .prize_list a{ display: block; width: 2.2rem; margin:0 auto; margin-top: .3rem; height: .56rem; line-height: .56rem; background: url(../../images/etc/prize-on-btn.png) no-repeat 0 0; background-size: 100% 100%; text-align: center; color: #fff; text-shadow: 1px 1px 1px #000;}
+.cai_list_con .prize_list a.dis{background: url(../../images/etc/prize-dis-btn.png) no-repeat 0 0; background-size: 100% 100%; cursor: not-allowed; pointer-events: none;  -webkit-box-shadow: none; box-shadow: none;}
+
+.cai_list_con .prize_list .title_p{ height: .46rem; line-height: .46rem; text-align: center; border-radius: .2rem; background: #fcff00; position: relative; margin-top: -.53rem; margin-bottom: .3rem;}
+.cai_list_con .prize_list figure img{ width: 2.4rem;}
+
+/*--------------------------------- 抽奖标头 ---------------------------------*/
+.inform_title{ height: .7rem; background: #07215d; padding: 0 .26rem;}
+.inform_title p{ color: #fff; line-height: .7rem; padding: 0 .1rem;}
+.inform_title span{ color: #ccc; font-size: .2rem;  padding-left:.2rem;}
+.inform_title h4{ font-weight: normal; line-height: .7rem; color: #fff; padding-left: .56rem; background: url(../../images/etc/icon-inform.png) no-repeat 0 center; background-size: .47rem auto;}
+.inform_title .right ul li{ float: left; margin-left: .2rem; line-height: .7rem;}
+.inform_title .right ul li a{ padding: .05rem .1rem; background: #1947b3; color: #fff; transition: ease-out 0.5s;}
+.inform_title .right ul li a:hover{ background: #2773cb;}
+.luck_list{ padding: .3rem .26rem;}
+.luck_list ul li{ width: 32%; float: left; margin-left: 2%; margin-bottom: .1rem; border-radius: .1rem;}
+.luck_list ul li img{border-radius: .1rem; box-shadow: 0 0 .1rem #0b2c6b;}
+.luck_list ul li:first-child{ margin-left: 0;}
+.luck_list ul li:nth-child(4){margin-left: 0;}
+.luck_list ul li p{color: #fff; text-align: center; text-shadow: 1px 1px 1px #000; padding-top: .1rem;}
+.do_task{ display: block; width: 4rem; margin:.2rem auto;}
+
+/*弹出框个人信息填写*/
+.form_div{ margin-bottom: .08rem;}
+.input-name{ width: 30%; height: .4rem; line-height: .4rem; text-align: right;}
+.input-con{ width: 70%; height: .4rem;}
+.input-con input{ width: 80%; height: .4rem; border: 1px solid #f1d7aa; background: #fffdf2; padding: 0 1%;}

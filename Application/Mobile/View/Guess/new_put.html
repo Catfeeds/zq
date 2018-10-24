@@ -1,0 +1,152 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <link rel="stylesheet" href="__CSS__/guess.css?v=2018060619">
+</block>
+<block name="header">
+    <include file="Guess:guess_head"/>
+</block>
+
+<!-- 导航 s-->
+<block name="nav">
+    <include file="Guess/nav"/>
+</block>
+<!-- 导航 e-->
+<block name="content">
+<!-- 内容 s -->
+<section class="new_put_con contentPt clearfix">
+    <div class="daka_nav_main">
+       <nav class="daka_nav clearfix">
+         <ul>
+           <li><a href="javascript:;" id="h_val1">亚盘<i></i></a></li>
+           <li><a href="javascript:;" id="h_val2">综合<i></i></a></li>
+           <li><a href="javascript:;" id="h_val5">等级<i></i></a></li>
+           <li><a href="javascript:;" id="h_val3">价格高<i></i></a></li>
+           <li id="unionNav"><a href="javascript:;" id="h_val4">赛事<i></i></a></li>
+         </ul>
+       </nav>
+       <div id="gambleType" class="nav_con">
+         <ul>
+           <li <if condition="$gambleType eq '1' OR $gambleType eq ''">class="on"</if>><a href="javascript:;" data-gambletype="1"><span>亚盘</span></a></li>
+           <li <if condition="$gambleType eq '2' ">class="on"</if>><a href="javascript:;" data-gambletype="2"><span>竞彩</span></a></li>
+         </ul>
+       </div>
+       <div id="victoryType" class="nav_con">
+         <ul>
+           <li <if condition="$victoryType eq '0' OR $victoryType eq ''">class="on"</if>><a href="javascript:;" data-victorytype="0"><span>综合</span></a></li>
+           <li <if condition="$victoryType eq '1' ">class="on"</if>><a href="javascript:;" data-victorytype="1"><span>周胜率</span></a></li>
+           <li <if condition="$victoryType eq '2' ">class="on"</if>><a href="javascript:;" data-victorytype="2"><span>高命中</span></a></li>
+           <li <if condition="$victoryType eq '3' ">class="on"</if>><a href="javascript:;" data-victorytype="3"><span>连胜多</span></a></li>
+           <li <if condition="$victoryType eq '4' ">class="on"</if>><a href="javascript:;" data-victorytype="4"><span>人气旺</span></a></li>
+           <li <if condition="$victoryType eq '5' ">class="on"</if>><a href="javascript:;" data-victorytype="5"><span>我的关注</span></a></li>
+         </ul>
+       </div>
+        <div id="lvType" class="nav_con">
+            <ul>
+                <li <if condition="$lvType eq '0' OR $lvType eq ''">class="on"</if>><a href="javascript:;" data-lvtype="0"><span>等级</span></a></li>
+                <li <if condition="$lvType eq '1' ">class="on"</if>><a href="javascript:;" data-lvtype="1"><span>LV1</span></a></li>
+                <li <if condition="$lvType eq '2' ">class="on"</if>><a href="javascript:;" data-lvtype="2"><span>LV2</span></a></li>
+                <li <if condition="$lvType eq '3' ">class="on"</if>><a href="javascript:;" data-lvtype="3"><span>LV3</span></a></li>
+                <li <if condition="$lvType eq '4' ">class="on"</if>><a href="javascript:;" data-lvtype="4"><span>LV4</span></a></li>
+                <li <if condition="$lvType eq '5' ">class="on"</if>><a href="javascript:;" data-lvtype="5"><span>LV5</span></a></li>
+                <li <if condition="$lvType eq '6' ">class="on"</if>><a href="javascript:;" data-lvtype="6"><span>LV6</span></a></li>
+                <li <if condition="$lvType eq '7' ">class="on"</if>><a href="javascript:;" data-lvtype="7"><span>LV7</span></a></li>
+                <li <if condition="$lvType eq '8' ">class="on"</if>><a href="javascript:;" data-lvtype="8"><span>LV8</span></a></li>
+                <li <if condition="$lvType eq '9' ">class="on"</if>><a href="javascript:;" data-lvtype="9"><span>LV9</span></a></li>
+            </ul>
+        </div>
+       <div id="priceType" class="nav_con">
+         <ul>
+           <li <if condition="$priceType eq '0' ">class="on"</if>><a href="javascript:;" data-pricetype="0"><span>价格</span></a></li>
+           <li <if condition="$priceType eq '1' OR $priceType eq '' ">class="on"</if>><a href="javascript:;" data-pricetype="1"><span>按价格从高到低</span></a></li>
+           <li <if condition="$priceType eq '2' ">class="on"</if>><a href="javascript:;" data-pricetype="2"><span>按价格从低到高</span></a></li>
+         </ul>
+       </div>
+       <div class="nav_con clearfix">
+         <nav id="unionNameList" class="subnav_list clearfix">
+         </nav>
+         <div class="sub_btn">
+           <a href="javascript:;" id="all_sele">全选</a>
+           <a href="javascript:;" id="back_sele">不全选</a>
+           <a href="javascript:;" id="subnavSubmit">确定</a>
+         </div>
+       </div>
+    </div>
+
+    <!-- 遮罩层 -->
+    <div class="maskLayer"></div>
+    <!-- 内容 s -->
+    <div id="gambleListLoad" class="paged boxs" style="display:none;">
+        <div class="load_gif fs24 text-999">
+            <span><img src="__IMAGES__/load.gif"></span>
+            <span>正在加载更多的数据...</span>
+        </div>
+    </div>
+    <div id="gambleList" class="new_tj com_dt clearfix" >
+         <ul class="posts"></ul>
+    </div>
+    <input type="hidden" id="page" value="2">
+    <div id="gambleListMore" class="paged boxs" style="display:block;">
+        <div class="load_gif fs24 text-999">
+            <span><img src="__IMAGES__/load.gif"></span>
+            <span>正在加载更多的数据...</span>
+        </div>
+    </div>
+
+    <div id="showLess" class="paged boxs" style="display:none;">
+        <div class="load_gif fs24 text-999">
+            <span>已经全部加载完毕</span>
+        </div>
+    </div>
+    <div class="bubbleTips"></div>
+</section>
+<!-- 内容 e -->
+
+<!-- 登录送积分 s -->
+<style>
+ body{position: relative;}
+ #login_score{display: none;}
+ /*遮罩层*/
+ .maskLayer{ width:100%; height: 100%; background-color:#000000; opacity:0.5; -moz-opacity:0.5; filter:alpha(opacity=50); position: fixed; top: 0; left: 0;z-index: 1;display: none;}
+</style>
+
+<section id="login_score">
+   <div id="close" onclick="close_fun()"></div>
+   <aside class="score"><span>100</span></aside>
+</section>
+    <div id="dailogFixBox" class="fixBox" style="display: none">
+        <div class="fixBoxIn clearfix">
+            <div class="tip" style="line-height: 0.8rem; "><span id="dailogContent" ></span></div>
+            <a id="yesDailog" href="javascript:;" class="tip_btn fs30" style="width: 100%;">确定</a>
+        </div>
+    </div>
+    <div id="payDailog" class="fixBox" style="display: none;">
+        <div class="fixBoxIn clearfix">
+            <div class="modal-header">
+                <h4 class="modal-title">温馨提示</h4>
+                <p>查看该场推荐需要<span style="color:red" id="payDailogContent"></span>金币，您的金币不足，请充值或者用积分兑换</p>
+            </div>
+            <div class="modal-body">
+                <ul class="modal_ul">
+                    <li><a href="{:U('Guess/exchange')}">兑换</a></li>
+                    <li><a href="{:U('Pay/index')}">充值</a></li>
+                    <li id="payClose"><a href="javascript:;">取消</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</block>
+
+
+<block name="scripts">
+    <script>
+        var DOMAIN = "m."+"__DOMAIN__";
+        var IMAGES = "__IMAGES__";
+
+    </script>
+<!--<script src="__JS__/guess.js"></script>-->
+<script src="__JS__/guess/new_put.js?d=20170520"></script>
+<script src="__JS__/common/trade.js"></script>
+
+
+</block>

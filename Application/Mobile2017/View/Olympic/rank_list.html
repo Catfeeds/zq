@@ -1,0 +1,40 @@
+<extend name="Public/Olympic/base" />
+<block name="seo">
+    <title>2016里约奥运会推荐_全球体育网</title>
+</block>
+    <!-- 二级头部 s -->
+        <block name="header">
+    <header id="other_header">
+    	<a href="guess.html"></a>榜单 
+    </header>
+        </block>
+    <!-- 二级头部 e --> 
+	<block name="nav"></block>
+    <!-- 列表 s -->
+    <block name="content">
+    <section class="topList_con">
+    	<div class="clearfix myList">
+        	<div class="fl text-666">我的奥运积分：<em style="color: #6bc45e;" class="fs32">{$pointCount|default='--'}</em></div>
+        	<div class="fr text-666">我的排名：<em class="red fs32">{$ranking|default='--'}</em></div>
+        </div>
+        <ul>  
+        <volist name="rank" id="item">      
+          	<li class="list clearfix">
+                <switch name="item.ranking">
+                    <case value="1|2|3"><div class="fl left1"><img src="__IMAGES__/Olympic/top-list0{$i}.png"></div></case>
+                    <default/><div class="fl left1 text-999 fs24">{$i}</div>
+                </switch>
+                <div class="fl left2">
+                	<span><img style="border-radius: 50%; height: 0.75rem; width: 0.75rem;" src="{$item.head}"></span>
+                    <span class="fs30">{$item.nick_name}</span>
+              	</div>
+                <div class="fr right">
+                	<span class="text-young fs32">{$item.pointCount}</span>
+                    <span class="text-666">积分</span>
+                </div>
+          	</li>
+        </volist>
+        </ul>    
+    </section>
+    <!-- 列表 e -->
+    </block>

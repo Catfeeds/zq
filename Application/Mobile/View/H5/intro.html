@@ -1,0 +1,169 @@
+<extend name="Public/base" />
+<block name="append">
+    <!-- 本页需要引用的css -->
+    <style type="text/css">
+        body{ background: #4778bc;}
+        /* app下载 */
+        .app-bar{ overflow: hidden; width:86%; padding: .15rem .3rem;  margin: 0 auto; background: rgba(0,0,0,0.1); font-family: "Microsoft Yahei"; cursor: pointer;}
+        .app-bar .app-logo{float:left; width: .8rem;}
+        .app-bar .app-title{ float: left; margin-left: .3rem;}
+        .app-bar .app-title .p1{ font-size: .32rem; color: #ffd457}
+        .app-bar02{ padding-top: .3rem; padding-bottom: .5rem;}
+        #load_btn{ display: block; width: 2.82rem; height: .9rem;  background: url(__IMAGES__/h5/loadApp.png); background-size: cover; margin: 0 auto;}
+        .footer{ padding: .3rem 0; background: #3162a5; text-align: center;}
+        .footer a{ color: #ff9555; font-size: .34rem; text-decoration: underline;}
+        .footer p{ color: #fff; margin-top: .15rem;}
+    </style>
+
+    <!-- 页面需要引进的js文件 -->
+    <script type="text/javascript" src="__PUBLIC__/Api/Home/picDetail/js/panDuan.js"></script>
+</block>
+<block name="header">
+</block>
+<block name="nav">
+</block>
+<block name="content">
+    <section>
+        <aside><img src="__IMAGES__/h5/aside01.jpg" alt=""></aside>
+        <aside><img src="__IMAGES__/h5/aside02.jpg" alt=""></aside>
+        <div id="app-bar" class="app-bar">
+            <div class="app-logo"><img src="__IMAGES__/app-logo.png"></div>
+            <div class="app-title">
+                <p class="p1">汇聚全球足彩高手，每日精准推<br>荐助您畅赢</p>
+            </div>
+        </div>
+        <div class="app-bar02">
+            <a href="javascript:;" id="load_btn"></a>
+        </div>
+        <aside><img src="__IMAGES__/h5/aside03.jpg" alt=""></aside>
+        <footer class="footer">
+            <a href="{$introUrl}">本期上榜专家名单已公布</a>
+            <p>*本活动最终解释权归全球体育所有</p>
+        </footer>
+        <img src="__PUBLIC__/Mobile/images/2.gif" width="100%">
+    </section>
+
+    <!-- 公共js -->
+    <script type="text/javascript" src="__JS__/common.js"></script>
+</block>
+<block name="footer">
+</block>
+<block name="scripts">
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+
+            appId: "{$appid}", // 必填，公众号的唯一标识
+
+            timestamp: {$time}, // 必填，生成签名的时间戳
+
+            nonceStr: "{$nonceStr}", // 必填，生成签名的随机串
+
+            signature: "{$signature}", // 必填，签名，见附录1
+
+            jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareQZone','onMenuShareQZone','onMenuShareWeibo'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+
+        });
+        wx.ready(function () {
+            wx.onMenuShareTimeline({
+                title: '招募足球分析师，月薪过万，上不封顶！', // 分享标题
+
+                link: "{$link}", // 分享链接
+
+                imgUrl: '__PUBLIC__/Mobile/images/h5/share_img.jpg', // 分享图标
+
+                success: function () {
+
+                    // 用户确认分享后执行的回调函数
+
+                },
+                cancel: function () {
+
+                    // 用户取消分享后执行的回调函数
+
+                }
+
+            });
+            wx.onMenuShareWeibo({
+                title: '全球体育高薪悬赏足彩高手', // 分享标题
+                desc: '招募足球分析师，月薪过万，上不封顶！', // 分享描述
+                link: "{$link}", // 分享链接
+                imgUrl: '__PUBLIC__/Mobile/images/h5/share_img.jpg', // 分享图标
+                success: function () { 
+                   // 用户确认分享后执行的回调函数
+                },
+                cancel: function () { 
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title: '全球体育高薪悬赏足彩高手', // 分享标题
+
+                desc: '招募足球分析师，月薪过万，上不封顶！', // 分享描述
+
+                link: "{$link}", // 分享链接
+
+                imgUrl: '__PUBLIC__/Mobile/images/h5/share_img.jpg', // 分享图标
+
+                type: '', // 分享类型,music、video或link，不填默认为link
+
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+
+                success: function () {
+
+                    // 用户确认分享后执行的回调函数
+
+                },
+                cancel: function () {
+
+                    // 用户取消分享后执行的回调函数
+
+                }
+            });
+            wx.onMenuShareQQ({
+                title: '全球体育高薪悬赏足彩高手', // 分享标题
+
+                desc: '招募足球分析师，月薪过万，上不封顶！', // 分享描述
+
+                link: "{$link}", // 分享链接
+
+                imgUrl: '__PUBLIC__/Mobile/images/h5/share_img.jpg', // 分享图标
+
+                success: function () {
+
+                    // 用户确认分享后执行的回调函数
+
+                },
+                cancel: function () {
+
+                    // 用户取消分享后执行的回调函数
+
+                }
+
+            });
+            wx.onMenuShareQZone({
+                title: '全球体育高薪悬赏足彩高手', // 分享标题
+
+                desc: '招募足球分析师，月薪过万，上不封顶！', // 分享描述
+
+                link: "{$link}", // 分享链接
+
+                imgUrl: '__PUBLIC__/Mobile/images/h5/share_img.jpg', // 分享图标
+
+                success: function () {
+
+                    // 用户确认分享后执行的回调函数
+
+                },
+                cancel: function () {
+
+                    // 用户取消分享后执行的回调函数
+
+                }
+
+            });
+        });
+
+    </script>
+</block>
